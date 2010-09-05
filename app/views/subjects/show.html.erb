@@ -1,0 +1,37 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">业务类型:</span>
+		<span class="value"><%= @subject.busitype_name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">费用类型:</span>
+		<span class="value"><%= @subject.fee_name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">部门:</span>
+		<span class="value"><%= @subject.dep_name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">U8费用科目:</span>
+		<span class="value"><%= @subject.u8_fee_subject %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">U8借款科目:</span>
+		<span class="value"><%= @subject.u8_borrow_subject %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">U8报销科目:</span>
+		<span class="value"><%= @subject.u8_reim_subject %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_subject_path(@subject) %> |
+<%= link_to '返回', subjects_path %> |
+<%= link_to '添加科目设置', new_subject_path %>

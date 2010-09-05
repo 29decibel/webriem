@@ -1,0 +1,22 @@
+<h3 class="form_title">项目详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">名称:</span>
+		<span class="value"><%= @project.name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">编码:</span>
+		<span class="value"><%= @project.code %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">对应U8项目:</span>
+		<span class="value"><%= @project.u8_project %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_project_path(@project) %> |
+<%= link_to '返回', projects_path %> |
+<%= link_to '添加项目', new_project_path %>

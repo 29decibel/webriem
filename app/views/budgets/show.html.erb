@@ -1,0 +1,82 @@
+<h3 class="form_title">预算数据详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">费用类型:</span>
+		<span class="value"><%= @budget.fee_name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">项目:</span>
+		<span class="value"><%= @budget.project_name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">部门:</span>
+		<span class="value"><%= @budget.dep_name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">1月:</span>
+		<span class="value"><%= @budget.jan %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">2月:</span>
+		<span class="value"><%= @budget.feb %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">3月:</span>
+		<span class="value"><%= @budget.mar %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">4月:</span>
+		<span class="value"><%= @budget.apr %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">5月:</span>
+		<span class="value"><%= @budget.may %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">6月:</span>
+		<span class="value"><%= @budget.jun %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">7月:</span>
+		<span class="value"><%= @budget.jul %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">8月:</span>
+		<span class="value"><%= @budget.aug %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">9月:</span>
+		<span class="value"><%= @budget.sep %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">10月:</span>
+		<span class="value"><%= @budget.oct %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">11月:</span>
+		<span class="value"><%= @budget.nov %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">12月:</span>
+		<span class="value"><%= @budget.dec %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_budget_path(@budget) %> |
+<%= link_to '返回', budgets_path %> |
+<%= link_to '添加预算数据', new_budget_path %>

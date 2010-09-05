@@ -1,0 +1,24 @@
+<h3 class="form_title">交通方式列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>名称</th>
+    <th>编码</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transportations.each do |transportation| %>
+  <tr class="<%= "odd" if transportation.id%2==0 %>">
+    <td><%= transportation.name %></td>
+    <td><%= transportation.code %></td>
+    <td><%= link_to '查看', transportation %></td>
+    <td><%= link_to '编辑', edit_transportation_path(transportation) %></td>
+    <td><%= link_to '删除', transportation, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加交通方式', new_transportation_path %>

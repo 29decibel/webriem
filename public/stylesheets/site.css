@@ -1,0 +1,122 @@
+/*clear some stuff*/
+*{margin:0px;padding:0px;}
+/*whole style*/
+body{
+	width:760px;
+	margin:auto;
+	font: 90% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+}
+a{
+	color:#369;
+	text-decoration: none;
+	font-size:14px;
+}
+a:hover{
+	background-color: #369;
+	color:white;
+}
+/*parts*/
+div#header{
+	height:120px;
+	position:relative;
+	background-image: url("../images/paid-stamp-small.jpg");
+	background-repeat:no-repeat;
+	border-bottom:1px dashed #DDD;
+}
+#header #menu{
+	float:right;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+div#header #title{
+	float:left;
+	display:block;
+	margin-left: 150px;
+	margin-top: 90px;
+}
+/*give the table a wear*/
+table.hor-zebra
+{
+	font-size: 12px;
+	margin: 45px;
+	text-align: left;
+	border-collapse: collapse;
+}
+table.hor-zebra th
+{
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 8px;
+	color: #039;
+}
+table.hor-zebra td
+{
+	padding: 8px;
+	color: #669;
+}
+table.hor-zebra .odd
+{
+	background: #e8edff; 
+}
+/*form styles*/
+form{
+	border:2px dashed #A5ACB2;
+}
+form h3.form_title{
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+form div.field{
+	margin-bottom: 25px;
+}
+form div .input_label{
+	width:120px;
+	display:inline-block;
+	margin-left: 20px;
+	font-size:14px;
+}
+form div.input_area{
+	display: inline-block;
+}
+form .basic_input{
+	font-size:14px;
+}
+/*footer*/
+div#footer{
+	height:60px;
+	border-top: 1px dashed #999;
+	border-bottom: 1px dashed #999;
+	margin-top: 50px;
+	position: relative;
+}
+div#footer img{
+	float:left;
+	margin-top: 5px;
+	margin-left: 300px;
+}
+div#footer #desc{
+	float:left;
+	margin-top: 25px;
+	margin-left: 10px;
+	font-weight: bold;
+}
+/*details form */
+#details{
+	margin-top: 20px;
+	border: 1px dashed #999;
+	padding: 20px 0px 20px 20px;
+}
+#details div.field{
+	margin-bottom: 10px;
+}
+#details div.field span{
+	display: inline-block;
+}
+#details div.field span.attr{
+	width:120px;
+	text-align: right;
+}
+#details div.field span.value{
+	text-align: left;
+}

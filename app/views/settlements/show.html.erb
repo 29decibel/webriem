@@ -1,0 +1,22 @@
+<h3 class="form_title">结算方式详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">编码:</span>
+		<span class="value"><%= @settlement.code %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">结算方式:</span>
+		<span class="value"><%= @settlement.name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">结算科目:</span>
+		<span class="value"><%= @settlement.subject %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_settlement_path(@settlement) %> |
+<%= link_to '返回', settlements_path %> |
+<%= link_to '添加结算方式', new_settlement_path %>

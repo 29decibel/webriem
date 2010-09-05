@@ -1,0 +1,156 @@
+<%= form_for(@budget) do |f| %>
+<h3 class="form_title"><%= @title%></h3>
+<div class="field">
+	<%= f.label "费用类型",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= collection_select(:budget, :fee_id, Fee.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@budget, :fee_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "项目",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= collection_select(:budget, :project_id, Project.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@budget, :project_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "部门",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= collection_select(:budget, :dep_id, Dep.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@budget, :dep_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "1月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :jan,:class=>"basic_input" %><%= mark_required(@budget, :jan) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "2月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :feb,:class=>"basic_input" %><%= mark_required(@budget, :feb) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "3月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :mar,:class=>"basic_input" %><%= mark_required(@budget, :mar) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "4月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :apr,:class=>"basic_input" %><%= mark_required(@budget, :apr) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "5月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :may,:class=>"basic_input" %><%= mark_required(@budget, :may) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "6月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :jun,:class=>"basic_input" %><%= mark_required(@budget, :jun) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "7月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :jul,:class=>"basic_input" %><%= mark_required(@budget, :jul) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "8月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :aug,:class=>"basic_input" %><%= mark_required(@budget, :aug) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "9月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :sep,:class=>"basic_input" %><%= mark_required(@budget, :sep) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "10月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :oct,:class=>"basic_input" %><%= mark_required(@budget, :oct) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "11月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :nov,:class=>"basic_input" %><%= mark_required(@budget, :nov) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "12月",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :dec,:class=>"basic_input" %><%= mark_required(@budget, :dec) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+  <div class="actions">
+    <%= f.submit "保存" %>
+  </div>
+<% end %>

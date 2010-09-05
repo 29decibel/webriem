@@ -1,0 +1,136 @@
+<%= form_for(@person) do |f| %>
+<h3 class="form_title"><%= @title%></h3>
+<div class="field">
+	<%= f.label "姓名",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@person, :name) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "员工编号",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@person, :code) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "性别",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.select :gender, Person::ENUMS_GENDER,:class=>"basic_input" %> <%= mark_required(@person, :gender) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "所在部门",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= collection_select(:person, :dep_id, Dep.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@person, :dep_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "职务",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= collection_select(:person, :duty_id, Duty.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@person, :duty_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "直属领导",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= collection_select(:person, :boss_id, Person.where("id!=? or ? is NULL",@person.id,@person.id), :id, :name, {:disabled=>lambda{|person| person.id==@person.id},:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@person, :boss) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "联系方式",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :phone,:class=>"basic_input" %><%= mark_required(@person, :phone) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :e_mail,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :e_mail,:class=>"basic_input" %><%= mark_required(@person, :e_mail) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "身份证号",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :ID_card,:class=>"basic_input" %><%= mark_required(@person, :ID_card) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "银行帐号",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :bank_no,:class=>"basic_input" %><%= mark_required(@person, :bank_no) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "开户行",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :bank,:class=>"basic_input" %><%= mark_required(@person, :bank) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "离职日期",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :end_date,:class=>"datepicker basic_input" %><%= mark_required(@person, :end_date) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "信用额度",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :credit_limit,:class=>"basic_input" %><%= mark_required(@person, :credit_limit) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+  <div class="actions">
+    <%= f.submit "保存" %>
+  </div>
+<% end %>

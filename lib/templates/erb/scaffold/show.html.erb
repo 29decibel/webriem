@@ -1,0 +1,14 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+	<% for attribute in attributes -%>
+	<!--=========================================-->
+	<div class="field">
+		<span class="attr"><%= attribute.human_name %>:</span>
+		<span class="value"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></span>	  
+	</div>
+	<% end -%>
+</div>
+
+<%%= link_to '编辑', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
+<%%= link_to '返回', <%= index_helper %>_path %> |
+<%%= link_to '添加 <%= human_name %>', new_<%= singular_table_name %>_path %>

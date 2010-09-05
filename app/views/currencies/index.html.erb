@@ -1,0 +1,24 @@
+<h3 class="form_title">币种列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>名称</th>
+    <th>编码</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @currencies.each do |currency| %>
+  <tr class="<%= "odd" if currency.id%2==0 %>">
+    <td><%= currency.name %></td>
+    <td><%= currency.code %></td>
+    <td><%= link_to '查看', currency %></td>
+    <td><%= link_to '编辑', edit_currency_path(currency) %></td>
+    <td><%= link_to '删除', currency, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加币种', new_currency_path %>

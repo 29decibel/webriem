@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>网上报销系统</title>
+  <%= stylesheet_link_tag :all,:recursive => true %>
+  <%= javascript_include_tag "jquery.js" %>
+  <%= javascript_include_tag "jquery-ui-1.8.4.custom.min.js" %>
+  <%= javascript_include_tag "datepicker_cn.js"%>
+  <%= javascript_include_tag "rails.js" %>
+  <%= javascript_include_tag "application.js" %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+	<div id="header">
+		<h2 id="title">网上报销系统</h2>
+		<ul id="menu">
+			<li><%= link_to "部门",:deps%></li>
+			<li><%= link_to "职务",:duties%></li>
+			<li><%= link_to "员工",:people%></li>
+			<li><%= link_to "费用类型",:fees%></li>
+			<li><%= link_to "地区",:regions%></li>
+			<li><%= link_to "交通方式",:transportations%></li>
+			<li><%= link_to "住宿方式",:lodgings%></li>
+			<li><%= link_to "结算方式",:settlements%></li>
+			<li><%= link_to "费用标准",:fee_standards%></li>
+			<li><%= link_to "项目",:projects%></li>
+			<li><%= link_to "预算数据",:budgets%></li>
+			<li><%= link_to "币种",:currencies%></li>
+			<li><%= link_to "科目设置",:subjects%></li>
+		</ul>
+	</div>
+	<br/>
+	<div id="main_content">
+		<%= yield %>
+	</div>
+	<div id="footer">
+		<img src="../images/29decibel.png"/>
+		<div id="desc">
+			<p id="en">29Decibel Studio</p>
+		</div>
+
+	</div> 
+</body>
+</html>

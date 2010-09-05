@@ -1,0 +1,26 @@
+<h3 class="form_title">项目列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>名称</th>
+    <th>编码</th>
+    <th>对应U8项目</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr class="<%= "odd" if project.id%2==0 %>">
+    <td><%= project.name %></td>
+    <td><%= project.code %></td>
+    <td><%= project.u8_project %></td>
+    <td><%= link_to '查看', project %></td>
+    <td><%= link_to '编辑', edit_project_path(project) %></td>
+    <td><%= link_to '删除', project, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加项目', new_project_path %>

@@ -1,0 +1,26 @@
+<h3 class="form_title">列表</h3>
+<table class="hor-zebra">
+  <tr>
+<% for attribute in attributes -%>
+    <th><%= attribute.human_name %></th>
+<% end -%>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <tr class="<%%= "odd" if <%= singular_table_name %>.id%2==0 %>">
+<% for attribute in attributes -%>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+    <td><%%= link_to '查看', <%= singular_table_name %> %></td>
+    <td><%%= link_to '编辑', edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
+    <td><%%= link_to '删除', <%= singular_table_name %>, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<%% end %>
+</table>
+
+<br />
+
+<%%= link_to '添加 <%= human_name %>', new_<%= singular_table_name %>_path %>

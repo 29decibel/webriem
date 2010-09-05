@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fee_id: 1
+  project_id: 1
+  dep_id: 1
+  jan: 9.99
+  feb: 9.99
+  mar: 9.99
+  apr: 9.99
+  may: 9.99
+  jun: 9.99
+  jul: 9.99
+  aug: 9.99
+  sep: 9.99
+  oct: 9.99
+  nov: 9.99
+  dec: 9.99
+
+two:
+  fee_id: 1
+  project_id: 1
+  dep_id: 1
+  jan: 9.99
+  feb: 9.99
+  mar: 9.99
+  apr: 9.99
+  may: 9.99
+  jun: 9.99
+  jul: 9.99
+  aug: 9.99
+  sep: 9.99
+  oct: 9.99
+  nov: 9.99
+  dec: 9.99

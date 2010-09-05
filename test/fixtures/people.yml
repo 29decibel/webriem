@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  code: MyString
+  gender: 
+  dep_id: 
+  duty_id: 
+  boss: 
+  phone: MyString
+  e-mail: MyString
+  ID-card: MyString
+  bank-no: MyString
+  bank: MyString
+  end_date: 2010-09-04
+  credit-limit: 
+
+two:
+  name: MyString
+  code: MyString
+  gender: 
+  dep_id: 
+  duty_id: 
+  boss: 
+  phone: MyString
+  e-mail: MyString
+  ID-card: MyString
+  bank-no: MyString
+  bank: MyString
+  end_date: 2010-09-04
+  credit-limit: 

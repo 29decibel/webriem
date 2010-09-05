@@ -1,0 +1,26 @@
+<h3 class="form_title">结算方式列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>编码</th>
+    <th>结算方式</th>
+    <th>结算科目</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @settlements.each do |settlement| %>
+  <tr class="<%= "odd" if settlement.id%2==0 %>">
+    <td><%= settlement.code %></td>
+    <td><%= settlement.name %></td>
+    <td><%= settlement.subject %></td>
+    <td><%= link_to '查看', settlement %></td>
+    <td><%= link_to '编辑', edit_settlement_path(settlement) %></td>
+    <td><%= link_to '删除', settlement, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加结算方式', new_settlement_path %>

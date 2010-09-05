@@ -1,0 +1,17 @@
+<h3 class="form_title">币种详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">名称:</span>
+		<span class="value"><%= @currency.name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">编码:</span>
+		<span class="value"><%= @currency.code %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_currency_path(@currency) %> |
+<%= link_to '返回', currencies_path %> |
+<%= link_to '添加币种', new_currency_path %>

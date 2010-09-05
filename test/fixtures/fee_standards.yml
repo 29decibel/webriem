@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  project_id: 1
+  region_id: 1
+  duty_id: 1
+  lodging_id: 1
+  transportation_id: 1
+  type: 1
+  amount: 9.99
+
+two:
+  project_id: 1
+  region_id: 1
+  duty_id: 1
+  lodging_id: 1
+  transportation_id: 1
+  type: 1
+  amount: 9.99
