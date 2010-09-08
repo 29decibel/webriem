@@ -23,16 +23,14 @@ div#header{
 	background-repeat:no-repeat;
 	border-bottom:1px dashed #DDD;
 }
-#header #menu li{
-	float:right;
-	margin-top: 5px;
-	margin-right: 20px;
-}
 div#header #title{
 	float:left;
 	display:block;
 	margin-left: 150px;
-	margin-top: 90px;
+	margin-top: 30px;
+}
+div#main_content{
+	height:600px;
 }
 /*give the table a wear*/
 table.hor-zebra
@@ -119,4 +117,53 @@ div#footer #desc{
 }
 #details div.field span.value{
 	text-align: left;
+}
+/*the menu's style goes here*/
+#menu{	
+	margin-top: 90px;
+	float: right;
+	padding:0;
+}
+	
+#menu li{
+	float: left;
+	list-style: none;
+	font: 12px Tahoma, Arial;
+}
+
+#menu li a{
+	display: block;
+	background: #20548E;
+	padding: 5px 12px;
+	text-decoration: none;
+	border-right: 1px solid white;
+	width: 70px;
+	color: #EAFFED;
+	white-space: nowrap;
+}
+
+#menu li a:hover{
+	background: #1A4473;
+}
+		
+#menu li ul{
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	visibility: hidden;
+	border-top: 1px solid white;
+}
+		
+#menu li ul li{
+	float: none;
+	display: inline;
+}
+		
+#menu li ul li a{
+	width: auto;
+	background: #20548E;
+}
+		
+#menu li ul li a:hover{
+	background: #1A4473;
 }

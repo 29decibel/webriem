@@ -14,19 +14,31 @@
 	<div id="header">
 		<h2 id="title">网上报销系统</h2>
 		<ul id="menu">
-			<li><%= link_to "部门",:deps%></li>
-			<li><%= link_to "职务",:duties%></li>
-			<li><%= link_to "员工",:people%></li>
-			<li><%= link_to "费用类型",:fees%></li>
-			<li><%= link_to "地区",:regions%></li>
-			<li><%= link_to "交通方式",:transportations%></li>
-			<li><%= link_to "住宿方式",:lodgings%></li>
-			<li><%= link_to "结算方式",:settlements%></li>
-			<li><%= link_to "费用标准",:fee_standards%></li>
-			<li><%= link_to "项目",:projects%></li>
-			<li><%= link_to "预算数据",:budgets%></li>
-			<li><%= link_to "币种",:currencies%></li>
-			<li><%= link_to "科目设置",:subjects%></li>
+		    <li><a href="#">档案管理</a>
+		        <ul>
+		            <li><%= link_to "部门",:deps%></li>
+					<li><%= link_to "职务",:duties%></li>
+					<li><%= link_to "员工",:people%></li>
+					<li><%= link_to "费用类型",:fees%></li>
+					<li><%= link_to "地区",:regions%></li>
+					<li><%= link_to "交通方式",:transportations%></li>
+					<li><%= link_to "住宿方式",:lodgings%></li>
+					<li><%= link_to "结算方式",:settlements%></li>
+					<li><%= link_to "费用标准",:fee_standards%></li>
+					<li><%= link_to "项目",:projects%></li>
+					<li><%= link_to "预算数据",:budgets%></li>
+					<li><%= link_to "币种",:currencies%></li>
+					<li><%= link_to "科目设置",:subjects%></li>
+		        </ul>
+		    </li>
+		    <li><a href="#">单据报销</a>
+		        <ul>
+		            <li><a href="#">借款单</a></li>
+		            <li><a href="#">报销单</a></li>
+		            <li><a href="#">付款单</a></li>
+		            <li><a href="#">其他申请</a></li>
+		        </ul>
+		    </li>
 		</ul>
 	</div>
 	<br/>
