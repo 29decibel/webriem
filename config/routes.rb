@@ -1,4 +1,6 @@
 Webreim::Application.routes.draw do
+  get "task/index"
+
   resources :subjects
 
   resources :currencies
@@ -24,6 +26,8 @@ Webreim::Application.routes.draw do
   resources :duties
 
   resources :deps
+  
+  root :to=>"task#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
