@@ -1,3 +1,4 @@
+#coding: utf-8
 class FeesController < ApplicationController
   # GET /fees
   # GET /fees.xml
@@ -44,7 +45,7 @@ class FeesController < ApplicationController
 
     respond_to do |format|
       if @fee.save
-        format.html { redirect_to(@fee, :notice => 'Fee was successfully created.') }
+        format.html { redirect_to(@fee, :notice => '费用添加成功') }
         format.xml  { render :xml => @fee, :status => :created, :location => @fee }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class FeesController < ApplicationController
 
     respond_to do |format|
       if @fee.update_attributes(params[:fee])
-        format.html { redirect_to(@fee, :notice => 'Fee was successfully updated.') }
+        format.html { redirect_to(@fee, :notice => '费用修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

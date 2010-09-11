@@ -1,3 +1,4 @@
+#coding: utf-8
 class TransportationsController < ApplicationController
   # GET /transportations
   # GET /transportations.xml
@@ -44,7 +45,7 @@ class TransportationsController < ApplicationController
 
     respond_to do |format|
       if @transportation.save
-        format.html { redirect_to(@transportation, :notice => 'Transportation was successfully created.') }
+        format.html { redirect_to(@transportation, :notice => '交通方式添加成功') }
         format.xml  { render :xml => @transportation, :status => :created, :location => @transportation }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class TransportationsController < ApplicationController
 
     respond_to do |format|
       if @transportation.update_attributes(params[:transportation])
-        format.html { redirect_to(@transportation, :notice => 'Transportation was successfully updated.') }
+        format.html { redirect_to(@transportation, :notice => '交通方式修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

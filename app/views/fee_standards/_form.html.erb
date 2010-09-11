@@ -4,7 +4,7 @@
 	<%= f.label "项目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:fee_standard, :project_id, Project.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :project_id) %>
+			<%= collection_select(:fee_standard, :project_id, Project.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input "+mark_required(@fee_standard, :project_id)})%>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "地区",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:fee_standard, :region_id, Region.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :region_id) %>
+			<%= collection_select(:fee_standard, :region_id, Region.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input "+mark_required(@fee_standard, :region_id)})%>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -24,7 +24,7 @@
 	<%= f.label "职务",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:fee_standard, :duty_id, Duty.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :duty_id) %>
+			<%= collection_select(:fee_standard, :duty_id, Duty.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input "+ mark_required(@fee_standard, :duty_id)})%>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -34,7 +34,7 @@
 	<%= f.label "住宿方式",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:fee_standard, :lodging_id, Lodging.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :lodging_id) %>
+			<%= collection_select(:fee_standard, :lodging_id, Lodging.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input "+ mark_required(@fee_standard, :lodging_id)})%>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -44,7 +44,7 @@
 	<%= f.label "交通方式",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:fee_standard, :transportation_id, Transportation.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :transportation_id) %>
+			<%= collection_select(:fee_standard, :transportation_id, Transportation.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input "+mark_required(@fee_standard, :transportation_id)})%>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -54,7 +54,7 @@
 	<%= f.label "业务类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :busitype, FeeStandard::ENUMS_BUSITYPE,:class=>"basic_input" %><%= mark_required(@fee_standard, :busitype) %>
+			<%= f.select :busitype, FeeStandard::ENUMS_BUSITYPE,:class=>"basic_input "+  mark_required(@fee_standard, :busitype) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -64,7 +64,7 @@
 	<%= f.label "金额",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :amount,:class=>"basic_input" %><%= mark_required(@fee_standard, :amount) %>
+			<%= f.text_field :amount,:class=>"basic_input "+ mark_required(@fee_standard, :amount) %>
 		</p>
 		<p class="tip"></p>
 	</div>

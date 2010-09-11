@@ -4,7 +4,7 @@
 	<%= f.label "姓名",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@person, :name) %>
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@person, :name) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "员工编号",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@person, :code) %>
+			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@person, :code) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -64,7 +64,7 @@
 	<%= f.label "联系方式",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :phone,:class=>"basic_input" %><%= mark_required(@person, :phone) %>
+			<%= f.text_field :phone,:class=>"basic_input "+ mark_required(@person, :phone) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -74,7 +74,7 @@
 	<%= f.label :e_mail,:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :e_mail,:class=>"basic_input" %><%= mark_required(@person, :e_mail) %>
+			<%= f.text_field :e_mail,:class=>"basic_input "+ mark_required(@person, :e_mail) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -84,7 +84,7 @@
 	<%= f.label "身份证号",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :ID_card,:class=>"basic_input" %><%= mark_required(@person, :ID_card) %>
+			<%= f.text_field :ID_card,:class=>"basic_input "+ mark_required(@person, :ID_card) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -94,7 +94,7 @@
 	<%= f.label "银行帐号",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :bank_no,:class=>"basic_input" %><%= mark_required(@person, :bank_no) %>
+			<%= f.text_field :bank_no,:class=>"basic_input "+ mark_required(@person, :bank_no) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -104,7 +104,7 @@
 	<%= f.label "开户行",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :bank,:class=>"basic_input" %><%= mark_required(@person, :bank) %>
+			<%= f.text_field :bank,:class=>"basic_input "+ mark_required(@person, :bank) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -114,7 +114,7 @@
 	<%= f.label "离职日期",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :end_date,:class=>"datepicker basic_input" %><%= mark_required(@person, :end_date) %>
+			<%= f.text_field :end_date,:class=>"datepicker basic_input "+ mark_required(@person, :end_date) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -124,7 +124,7 @@
 	<%= f.label "信用额度",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :credit_limit,:class=>"basic_input" %><%= mark_required(@person, :credit_limit) %>
+			<%= f.text_field :credit_limit,:class=>"basic_input "+ mark_required(@person, :credit_limit) %>
 		</p>
 		<p class="tip"></p>
 	</div>

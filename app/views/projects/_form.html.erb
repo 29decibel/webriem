@@ -4,7 +4,7 @@
 	<%= f.label "项目名称",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@project, :name) %>
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@project, :name) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "项目编码",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@project, :code) %>
+			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@project, :code) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -24,7 +24,7 @@
 	<%= f.label "对应U8项目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :u8_project,:class=>"basic_input" %><%= mark_required(@project, :u8_project) %>
+			<%= f.text_field :u8_project,:class=>"basic_input "+ mark_required(@project, :u8_project) %>
 		</p>
 		<p class="tip"></p>
 	</div>

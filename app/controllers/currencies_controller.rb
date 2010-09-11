@@ -1,3 +1,4 @@
+#coding: utf-8
 class CurrenciesController < ApplicationController
   # GET /currencies
   # GET /currencies.xml
@@ -44,7 +45,7 @@ class CurrenciesController < ApplicationController
 
     respond_to do |format|
       if @currency.save
-        format.html { redirect_to(@currency, :notice => 'Currency was successfully created.') }
+        format.html { redirect_to(@currency, :notice => '币种添加成功') }
         format.xml  { render :xml => @currency, :status => :created, :location => @currency }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class CurrenciesController < ApplicationController
 
     respond_to do |format|
       if @currency.update_attributes(params[:currency])
-        format.html { redirect_to(@currency, :notice => 'Currency was successfully updated.') }
+        format.html { redirect_to(@currency, :notice => '币种修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

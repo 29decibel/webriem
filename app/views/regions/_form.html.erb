@@ -4,7 +4,7 @@
 	<%= f.label "地区名称",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@region, :name) %>
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@region, :name) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "地区编码",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@region, :code) %>
+			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@region, :code) %>
 		</p>
 		<p class="tip"></p>
 	</div>

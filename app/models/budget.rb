@@ -6,6 +6,7 @@ class Budget < ActiveRecord::Base
     blongs_to_name_attr :fee
     blongs_to_name_attr :project
     blongs_to_name_attr :dep
+    validates_presence_of :fee,:project,:dep
     def all
       jan+feb+mar+apr+may+jun+jul+aug+sep+oct+nov+dec
     end

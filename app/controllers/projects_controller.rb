@@ -1,3 +1,4 @@
+#coding: utf-8
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
@@ -44,7 +45,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
+        format.html { redirect_to(@project, :notice => '项目添加成功') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
+        format.html { redirect_to(@project, :notice => '项目修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

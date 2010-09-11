@@ -35,7 +35,7 @@ div#header #user_nav{
 	margin-right: 5px;
 }
 div#main_content{
-	height:600px;
+	min-height:600px;
 }
 /*give the table a wear*/
 table.hor-zebra
@@ -198,4 +198,7 @@ span.error_message{
 	display: inline-block;
 	border: 2px solid #DDD;
 	padding: 2px;
+}
+input.required{
+	background: #FFF6BF;
 }

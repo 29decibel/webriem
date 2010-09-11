@@ -1,3 +1,4 @@
+#coding: utf-8
 class DutiesController < ApplicationController
   # GET /duties
   # GET /duties.xml
@@ -44,7 +45,7 @@ class DutiesController < ApplicationController
 
     respond_to do |format|
       if @duty.save
-        format.html { redirect_to(@duty, :notice => 'Duty was successfully created.') }
+        format.html { redirect_to(@duty, :notice => '职务添加成功') }
         format.xml  { render :xml => @duty, :status => :created, :location => @duty }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class DutiesController < ApplicationController
 
     respond_to do |format|
       if @duty.update_attributes(params[:duty])
-        format.html { redirect_to(@duty, :notice => 'Duty was successfully updated.') }
+        format.html { redirect_to(@duty, :notice => '职务修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

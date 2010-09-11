@@ -1,3 +1,4 @@
+#coding: utf-8
 class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.xml
@@ -44,7 +45,7 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.save
-        format.html { redirect_to(@subject, :notice => 'Subject was successfully created.') }
+        format.html { redirect_to(@subject, :notice => '科目设置添加成功') }
         format.xml  { render :xml => @subject, :status => :created, :location => @subject }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.update_attributes(params[:subject])
-        format.html { redirect_to(@subject, :notice => 'Subject was successfully updated.') }
+        format.html { redirect_to(@subject, :notice => '科目设置修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -4,7 +4,7 @@
 	<%= f.label "编码",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@fee, :code) %>
+			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@fee, :code) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "名称",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@fee, :name) %>
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@fee, :name) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -24,7 +24,7 @@
 	<%= f.label "费用属性",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :attr,Fee::ENUMS_ATTR,:class=>"basic_input" %><%= mark_required(@fee, :attr) %>
+			<%= f.select :attr,Fee::ENUMS_ATTR,:class=>"basic_input "+ mark_required(@fee, :attr) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -34,7 +34,7 @@
 	<%= f.label "停用日期",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :end_date,:class=>"datepicker basic_input" %><%= mark_required(@fee, :end_date) %>
+			<%= f.text_field :end_date,:class=>"datepicker basic_input "+ mark_required(@fee, :end_date) %>
 		</p>
 		<p class="tip"></p>
 	</div>

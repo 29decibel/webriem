@@ -1,3 +1,4 @@
+#coding: utf-8
 class RegionsController < ApplicationController
   # GET /regions
   # GET /regions.xml
@@ -44,7 +45,7 @@ class RegionsController < ApplicationController
 
     respond_to do |format|
       if @region.save
-        format.html { redirect_to(@region, :notice => 'Region was successfully created.') }
+        format.html { redirect_to(@region, :notice => '地区添加成功') }
         format.xml  { render :xml => @region, :status => :created, :location => @region }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class RegionsController < ApplicationController
 
     respond_to do |format|
       if @region.update_attributes(params[:region])
-        format.html { redirect_to(@region, :notice => 'Region was successfully updated.') }
+        format.html { redirect_to(@region, :notice => '地区修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

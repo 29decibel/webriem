@@ -4,7 +4,7 @@
 	<%= f.label "编码",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@settlement, :code) %>
+			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@settlement, :code) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "计算方式",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@settlement, :name) %>
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@settlement, :name) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -24,7 +24,7 @@
 	<%= f.label "结算科目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :subject,:class=>"basic_input" %><%= mark_required(@settlement, :subject) %>
+			<%= f.text_field :subject,:class=>"basic_input "+ mark_required(@settlement, :subject) %>
 		</p>
 		<p class="tip"></p>
 	</div>

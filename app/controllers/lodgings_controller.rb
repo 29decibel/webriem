@@ -1,3 +1,4 @@
+#coding: utf-8
 class LodgingsController < ApplicationController
   # GET /lodgings
   # GET /lodgings.xml
@@ -44,7 +45,7 @@ class LodgingsController < ApplicationController
 
     respond_to do |format|
       if @lodging.save
-        format.html { redirect_to(@lodging, :notice => 'Lodging was successfully created.') }
+        format.html { redirect_to(@lodging, :notice => '住宿信息添加成功') }
         format.xml  { render :xml => @lodging, :status => :created, :location => @lodging }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class LodgingsController < ApplicationController
 
     respond_to do |format|
       if @lodging.update_attributes(params[:lodging])
-        format.html { redirect_to(@lodging, :notice => 'Lodging was successfully updated.') }
+        format.html { redirect_to(@lodging, :notice => '住宿信息修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

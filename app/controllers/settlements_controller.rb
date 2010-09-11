@@ -1,3 +1,4 @@
+#coding: utf-8
 class SettlementsController < ApplicationController
   # GET /settlements
   # GET /settlements.xml
@@ -44,7 +45,7 @@ class SettlementsController < ApplicationController
 
     respond_to do |format|
       if @settlement.save
-        format.html { redirect_to(@settlement, :notice => 'Settlement was successfully created.') }
+        format.html { redirect_to(@settlement, :notice => '结算方式添加成功') }
         format.xml  { render :xml => @settlement, :status => :created, :location => @settlement }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class SettlementsController < ApplicationController
 
     respond_to do |format|
       if @settlement.update_attributes(params[:settlement])
-        format.html { redirect_to(@settlement, :notice => 'Settlement was successfully updated.') }
+        format.html { redirect_to(@settlement, :notice => '结算方式修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,3 +1,4 @@
+#coding: utf-8
 class FeeStandardsController < ApplicationController
   # GET /fee_standards
   # GET /fee_standards.xml
@@ -44,7 +45,7 @@ class FeeStandardsController < ApplicationController
 
     respond_to do |format|
       if @fee_standard.save
-        format.html { redirect_to(@fee_standard, :notice => 'Fee standard was successfully created.') }
+        format.html { redirect_to(@fee_standard, :notice => '费用标准添加成功') }
         format.xml  { render :xml => @fee_standard, :status => :created, :location => @fee_standard }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class FeeStandardsController < ApplicationController
 
     respond_to do |format|
       if @fee_standard.update_attributes(params[:fee_standard])
-        format.html { redirect_to(@fee_standard, :notice => 'Fee standard was successfully updated.') }
+        format.html { redirect_to(@fee_standard, :notice => '费用标准修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

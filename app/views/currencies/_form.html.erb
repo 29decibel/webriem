@@ -4,7 +4,7 @@
 	<%= f.label "名称",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@currency, :name) %>
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@currency, :name) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -14,7 +14,7 @@
 	<%= f.label "编码",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@currency, :code) %>
+			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@currency, :code) %>
 		</p>
 		<p class="tip"></p>
 	</div>

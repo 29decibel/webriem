@@ -52,7 +52,7 @@ class DepsController < ApplicationController
 
     respond_to do |format|
       if @dep.save
-        format.html { redirect_to(@dep, :notice => 'Dep was successfully created.') }
+        format.html { redirect_to(@dep, :notice => '部门添加成功') }
         format.xml  { render :xml => @dep, :status => :created, :location => @dep }
       else
         format.html { render :action => "new" }
@@ -68,7 +68,7 @@ class DepsController < ApplicationController
 
     respond_to do |format|
       if @dep.update_attributes(params[:dep])
-        format.html { redirect_to(@dep, :notice => 'Dep was successfully updated.') }
+        format.html { redirect_to(@dep, :notice => '部门修改成功') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

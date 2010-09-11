@@ -4,7 +4,7 @@
 	<%= f.label "业务类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :busitype, Subject::ENUMS_BUSITYPE,:class=>"basic_input" %><%= mark_required(@subject, :busitype) %>
+			<%= f.select :busitype, Subject::ENUMS_BUSITYPE,:class=>"basic_input "+ mark_required(@subject, :busitype) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -34,7 +34,7 @@
 	<%= f.label "u8费用科目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :u8_fee_subject,:class=>"basic_input" %><%= mark_required(@subject, :u8_fee_subject) %>
+			<%= f.text_field :u8_fee_subject,:class=>"basic_input "+ mark_required(@subject, :u8_fee_subject) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -44,7 +44,7 @@
 	<%= f.label "u8借款科目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :u8_borrow_subject,:class=>"basic_input" %><%= mark_required(@subject, :u8_borrow_subject) %>
+			<%= f.text_field :u8_borrow_subject,:class=>"basic_input "+ mark_required(@subject, :u8_borrow_subject) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -54,7 +54,7 @@
 	<%= f.label "u8报销科目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :u8_reim_subject,:class=>"basic_input" %><%= mark_required(@subject, :u8_reim_subject) %>
+			<%= f.text_field :u8_reim_subject,:class=>"basic_input "+ mark_required(@subject, :u8_reim_subject) %>
 		</p>
 		<p class="tip"></p>
 	</div>
