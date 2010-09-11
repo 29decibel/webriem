@@ -7,6 +7,20 @@ $(function(){
 		function(){
 			$(this).datepicker();
 			});
+	//set the error message span to none if it have no message
+	$("span.error_message").each(
+		function(){
+			var span=$(this);
+			if(span.text()=="")
+			{
+				span.css("display","none");
+			}
+			else
+			{
+				span.css("display","inline-block");
+			}
+		}
+		);
 });
 //here we bind the munu staff
 var timeout    = 500;
