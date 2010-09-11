@@ -46,4 +46,6 @@ Webreim::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  #set the mail config info
+  config.action_mailer.default_url_options = { :host => 'electric-fog-25.heroku.com' }
 end
