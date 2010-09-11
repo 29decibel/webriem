@@ -4,6 +4,7 @@
   <title>网上报销系统</title>
   <%= stylesheet_link_tag :all,:recursive => true %>
   <%= javascript_include_tag "jquery.js" %>
+  <%= javascript_include_tag "nested_form" %>
   <%= javascript_include_tag "jquery-ui-1.8.4.custom.min.js" %>
   <%= javascript_include_tag "datepicker_cn.js"%>
   <%= javascript_include_tag "rails.js" %>
@@ -34,7 +35,7 @@
 		    </li>
 			<li><a href="#">借付款单据</a>
 		        <ul>
-		            <li><a href="#">借款单</a></li>
+		            <li><%= link_to "借款单",:doc_heads%></a></li>
 		            <li><a href="#">付款单</a></li>
 		        </ul>
 		    </li>
@@ -60,7 +61,7 @@
 		<!--user log in info-->
 		<div id="user_nav">
 			<% if user_signed_in? %>  
-			    欢迎<%= current_user.user_name %>. <%= link_to "注销", destroy_user_session_path %>  
+			    欢迎<%= current_user.name %>. <%= link_to "注销", destroy_user_session_path %>  
 			<% else %>  
 			    <%= link_to "注册", new_user_registration_path %> | 
 			    <%= link_to "登录", new_user_session_path %>  

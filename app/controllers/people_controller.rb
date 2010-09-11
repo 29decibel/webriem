@@ -42,7 +42,7 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-
+    create_user_account(@person.code,@person.e_mail) if params[:add_account]
     respond_to do |format|
       if @person.save
         format.html { redirect_to(@person, :notice => '人员添加成功') }
@@ -53,6 +53,10 @@ class PeopleController < ApplicationController
       end
     end
   end
+  
+  def create_user_account(name,email)
+    User.create(:name => name, :email => email, :password => "123456",:password_confirmation=>"123456")
+  end
 
   # PUT /people/1
   # PUT /people/1.xml
@@ -61,6 +65,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
+        create_user_account(@person.code,@person.e_mail) if params[:add_account]
         format.html { redirect_to(@person, :notice => '人员修改成功') }
         format.xml  { head :ok }
       else
@@ -74,6 +79,9 @@ class PeopleController < ApplicationController
   # DELETE /people/1.xml
   def destroy
     @person = Person.find(params[:id])
+    #delete the user account
+    user=User.find_by_name(@person.code)
+    user.destroy
     @person.destroy
 
     respond_to do |format|

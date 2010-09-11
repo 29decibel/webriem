@@ -25,7 +25,8 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new.xml
   def new
     @doc_head = DocHead.new
-
+    3.times { @doc_head.recivers.build }
+    3.times { @doc_head.cp_doc_details.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @doc_head }

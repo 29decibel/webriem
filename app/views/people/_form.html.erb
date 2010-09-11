@@ -130,6 +130,20 @@
 	</div>
 	<span class="error_message"></span>    
   </div>
+<!--========================================================================-->
+<% if !User.find_by_name(@person.code)%>
+<div class="field">
+	<%= label_tag "add_count_label","增加相应帐号",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= check_box_tag "add_account"%>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<% end %>
+<!--========================================================================-->
   <div class="actions">
     <%= f.submit "保存" %>
   </div>

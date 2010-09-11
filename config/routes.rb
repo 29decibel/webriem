@@ -1,4 +1,8 @@
 Webreim::Application.routes.draw do
+  resources :cp_doc_details
+
+  resources :recivers
+
   resources :doc_heads
 
   get "task/index"

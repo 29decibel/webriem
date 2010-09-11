@@ -39,12 +39,19 @@ function jsddm_timer()
 {  closetimer = window.setTimeout(jsddm_close, timeout);}
 
 function jsddm_canceltimer()
-{  if(closetimer)
-   {  window.clearTimeout(closetimer);
-      closetimer = null;}}
+{  
+	if(closetimer){
+		window.clearTimeout(closetimer);
+		closetimer = null;}
+}
 
 $(document).ready(function()
 {  $('#menu > li').bind('mouseover', jsddm_open)
    $('#menu > li').bind('mouseout',  jsddm_timer)});
 
 document.onclick = jsddm_close;
+
+function remove_fields(link) {
+    $(link).previous("input[type=hidden]").value = "1";  
+    $(link).up(".fields").hide();  
+}

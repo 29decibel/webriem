@@ -1,75 +1,88 @@
-<%= form_for(@doc_head) do |f| %>
+<%= form_for @doc_head do |f| %>
 <h3 class="form_title"><%= @title%></h3>
 <div class="field">
-	<%= f.label :doc_no,:class=>"input_label" %>
+	<%= f.label "单号",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :doc_no,:class=>"basic_input" %><%= mark_required(@doc_head, :doc_no) %>
+			<%= f.text_field :doc_no,:class=>"basic_input "+ mark_required(@doc_head, :doc_no) %>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
 <div class="field">
-	<%= f.label :attach,:class=>"input_label" %>
+	<%= f.label "附件个数",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :attach,:class=>"basic_input" %><%= mark_required(@doc_head, :attach) %>
+			<%= f.text_field :attach,:class=>"basic_input "+ mark_required(@doc_head, :attach) %>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
 <div class="field">
-	<%= f.label :person_id,:class=>"input_label" %>
+	<%= f.label "申请人",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :person_id,:class=>"basic_input" %><%= mark_required(@doc_head, :person_id) %>
+			<%= collection_select(:doc_head, :person_id, Person.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
 <div class="field">
-	<%= f.label :note,:class=>"input_label" %>
+	<%= f.label "备注",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :note,:class=>"basic_input" %><%= mark_required(@doc_head, :note) %>
+			<%= f.text_field :note,:class=>"basic_input "+ mark_required(@doc_head, :note) %>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
 <div class="field">
-	<%= f.label :apply_date,:class=>"input_label" %>
+	<%= f.label "申请日期",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.date_select :apply_date,:class=>"basic_input" %><%= mark_required(@doc_head, :apply_date) %>
+			<%= f.text_field :apply_date,:class=>"datepicker basic_input" %>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
 <div class="field">
-	<%= f.label :dep_id,:class=>"input_label" %>
+	<%= f.label "部门",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :dep_id,:class=>"basic_input" %><%= mark_required(@doc_head, :dep_id) %>
+			<%= collection_select(:doc_head, :dep_id, Dep.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
 <div class="field">
-	<%= f.label :fee_id,:class=>"input_label" %>
+	<%= f.label "费用类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.text_field :fee_id,:class=>"basic_input" %><%= mark_required(@doc_head, :fee_id) %>
+			<%= collection_select(:doc_head, :fee_id, Fee.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%>
 		</p>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
+<hr/>
+<div id="details">
+	<div id="cp_details">
+		<% f.fields_for :cp_doc_details do |builder| %>  
+			<%= render :partial => 'cp_doc_detail',:locals => { :f => builder } %>
+		<% end %>
+	</div>
+	<div id="recivers">
+		<% f.fields_for :recivers do |builder| %>  
+			<%= render :partial => 'reciver',:locals => { :f => builder } %>
+		<% end %>
+	</div>
+</div>
   <div class="actions">
     <%= f.submit "保存" %>
   </div>

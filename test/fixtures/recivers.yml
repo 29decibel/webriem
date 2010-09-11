@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sequence: 
+  settlement_id: 1
+  company: MyString
+  bank: MyString
+  bank_no: MyString
+  amount: 9.99
+
+two:
+  sequence: 
+  settlement_id: 1
+  company: MyString
+  bank: MyString
+  bank_no: MyString
+  amount: 9.99

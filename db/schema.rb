@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100911054037) do
+ActiveRecord::Schema.define(:version => 20100911095452) do
 
   create_table "budgets", :force => true do |t|
     t.integer  "fee_id"
@@ -30,6 +30,22 @@ ActiveRecord::Schema.define(:version => 20100911054037) do
     t.decimal  "dec",        :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "cp_doc_details", :force => true do |t|
+    t.integer  "sequence"
+    t.date     "apply_date"
+    t.integer  "dep_id"
+    t.integer  "fee_id"
+    t.integer  "project_id"
+    t.string   "used_for"
+    t.integer  "currency_id"
+    t.decimal  "apply_amount", :precision => 10, :scale => 0
+    t.decimal  "ori_amount",   :precision => 10, :scale => 0
+    t.decimal  "rate",         :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doc_head_id"
   end
 
   create_table "currencies", :force => true do |t|
@@ -125,6 +141,18 @@ ActiveRecord::Schema.define(:version => 20100911054037) do
     t.datetime "updated_at"
   end
 
+  create_table "recivers", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "settlement_id"
+    t.string   "company"
+    t.string   "bank"
+    t.string   "bank_no"
+    t.decimal  "amount",        :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doc_head_id"
+  end
+
   create_table "regions", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -172,11 +200,11 @@ ActiveRecord::Schema.define(:version => 20100911054037) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_name"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["name"], :name => "index_users_on_user_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["user_name"], :name => "index_users_on_user_name", :unique => true
 
 end
