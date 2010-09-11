@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  doc_no: 1
+  attach: 1
+  person_id: 1
+  note: MyString
+  apply_date: 2010-09-11
+  dep_id: 1
+  fee_id: 1
+
+two:
+  doc_no: 1
+  attach: 1
+  person_id: 1
+  note: MyString
+  apply_date: 2010-09-11
+  dep_id: 1
+  fee_id: 1

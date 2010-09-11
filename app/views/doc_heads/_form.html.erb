@@ -1,0 +1,76 @@
+<%= form_for(@doc_head) do |f| %>
+<h3 class="form_title"><%= @title%></h3>
+<div class="field">
+	<%= f.label :doc_no,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :doc_no,:class=>"basic_input" %><%= mark_required(@doc_head, :doc_no) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :attach,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :attach,:class=>"basic_input" %><%= mark_required(@doc_head, :attach) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :person_id,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :person_id,:class=>"basic_input" %><%= mark_required(@doc_head, :person_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :note,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :note,:class=>"basic_input" %><%= mark_required(@doc_head, :note) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :apply_date,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.date_select :apply_date,:class=>"basic_input" %><%= mark_required(@doc_head, :apply_date) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :dep_id,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :dep_id,:class=>"basic_input" %><%= mark_required(@doc_head, :dep_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :fee_id,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :fee_id,:class=>"basic_input" %><%= mark_required(@doc_head, :fee_id) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+  <div class="actions">
+    <%= f.submit "保存" %>
+  </div>
+<% end %>

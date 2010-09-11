@@ -1,4 +1,6 @@
 Webreim::Application.routes.draw do
+  resources :doc_heads
+
   get "task/index"
   
   devise_for :users

@@ -1,0 +1,42 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Doc no:</span>
+		<span class="value"><%= @doc_head.doc_no %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Attach:</span>
+		<span class="value"><%= @doc_head.attach %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Person:</span>
+		<span class="value"><%= @doc_head.person_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Note:</span>
+		<span class="value"><%= @doc_head.note %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Apply date:</span>
+		<span class="value"><%= @doc_head.apply_date %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Dep:</span>
+		<span class="value"><%= @doc_head.dep_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Fee:</span>
+		<span class="value"><%= @doc_head.fee_id %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_doc_head_path(@doc_head) %> |
+<%= link_to '返回', doc_heads_path %> |
+<%= link_to '添加 Doc head', new_doc_head_path %>
