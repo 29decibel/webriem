@@ -29,3 +29,4 @@ gem 'mysql2'
 #   gem 'webrat'
 # end
 gem "jquery-rails"
+gem "devise"

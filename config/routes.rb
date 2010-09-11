@@ -1,31 +1,9 @@
 Webreim::Application.routes.draw do
   get "task/index"
+  
+  devise_for :users
 
-  resources :subjects
-
-  resources :currencies
-
-  resources :budgets
-
-  resources :fee_standards
-
-  resources :projects
-
-  resources :settlements
-
-  resources :lodgings
-
-  resources :transportations
-
-  resources :regions
-
-  resources :fees
-
-  resources :people
-
-  resources :duties
-
-  resources :deps
+  resources :subjects,:currencies,:budgets,:fee_standards,:projects,:settlements,:lodgings,:transportations,:regions,:fees,:people,:duties,:deps
   
   root :to=>"task#index"
 

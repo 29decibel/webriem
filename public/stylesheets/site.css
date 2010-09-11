@@ -29,6 +29,11 @@ div#header #title{
 	margin-left: 150px;
 	margin-top: 30px;
 }
+div#header #user_nav{
+	float:right;
+	margin-top: 5px;
+	margin-right: 5px;
+}
 div#main_content{
 	height:600px;
 }
