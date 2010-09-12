@@ -52,6 +52,13 @@ $(document).ready(function()
 document.onclick = jsddm_close;
 
 function remove_fields(link) {
-    $(link).previous("input[type=hidden]").value = "1";  
-    $(link).up(".fields").hide();  
+    $(link).prev("input[type=hidden]").val("true");  
+    $(link).closest(".fields").hide("slow"); 
+}
+
+function add_fields(link, association, content) {
+	debugger;
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $(link).parent().before(content.replace(regexp, new_id));
 }
