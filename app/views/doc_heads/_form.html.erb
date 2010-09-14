@@ -81,7 +81,7 @@
 		<% f.fields_for :recivers do |builder| %>  
 			<%= render :partial => 'reciver',:locals => { :f => builder } %>
 		<% end %>
-		<p><%= link_to_add_fields "增加收款人", f, :recivers %></p>
+		<p><a class="add_detail_form">添加详细</a></p>
 	</div>
 </div>
   <div class="actions">
