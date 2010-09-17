@@ -74,14 +74,15 @@
 <div id="details">
 	<div id="cp_details">
 		<% f.fields_for :cp_doc_details do |builder| %>  
-			<%= render :partial => 'cp_doc_detail',:locals => { :f => builder } %>
+			<%= render :partial => 'cp_doc_detail_fields',:locals => { :f => builder } %>
 		<% end %>
+		<%= link_to_add_fields "cool",f,:cp_doc_details %>
 	</div>
+	<hr/>
 	<div id="recivers">
 		<% f.fields_for :recivers do |builder| %>  
-			<%= render :partial => 'reciver',:locals => { :f => builder } %>
+			<%= render :partial => 'reciver_fields',:locals => { :f => builder } %>
 		<% end %>
-		<p><a class="add_detail_form">添加详细</a></p>
 	</div>
 </div>
   <div class="actions">

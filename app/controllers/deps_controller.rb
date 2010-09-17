@@ -37,6 +37,7 @@ class DepsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @dep }
+      format.js
     end
   end
 
@@ -52,6 +53,7 @@ class DepsController < ApplicationController
 
     respond_to do |format|
       if @dep.save
+        format.js
         format.html { redirect_to(@dep, :notice => '部门添加成功') }
         format.xml  { render :xml => @dep, :status => :created, :location => @dep }
       else

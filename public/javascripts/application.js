@@ -22,7 +22,7 @@ $(function(){
 		}
 		);
 });
-//here we bind the munu staff
+//=======================here we bind the munu staff===================================
 var timeout    = 500;
 var closetimer = 0;
 var ddmenuitem = 0;
@@ -50,14 +50,13 @@ $(document).ready(function()
    $('#menu > li').bind('mouseout',  jsddm_timer)});
 
 document.onclick = jsddm_close;
-
+//===================================================================================
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("true");  
     $(link).closest(".fields").hide("slow"); 
 }
 
 function add_fields(link, association, content) {
-	debugger;
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));

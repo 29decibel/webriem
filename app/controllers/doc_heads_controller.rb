@@ -81,4 +81,11 @@ class DocHeadsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  #this action is respond to the add reciver method
+  def add_reciver_remote
+    respond_to do |format|
+      format.js
+    end
+  end
 end
