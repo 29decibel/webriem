@@ -1,0 +1,14 @@
+<div class="fields">
+	<p>  
+		<%= f.label :sequence, "序号" %><br />  
+		<%= f.text_field :sequence %>  
+	</p> 
+	<p>  
+		<%= f.label :apply_date, "申请时间" %><br />
+		<%= f.text_field :apply_date,:class=>"datepicker basic_input" %>
+	</p>
+	<p>
+		<%= f.hidden_field(:_destroy) %>
+		<%= link_to_remove "remove", f %> 
+	</p>
+</div>
