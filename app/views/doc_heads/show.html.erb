@@ -35,7 +35,10 @@
 		<span class="attr">Fee:</span>
 		<span class="value"><%= @doc_head.fee_name %></span>	  
 	</div>
-	</div>
+	<% @doc_head.cp_doc_details.each do |cp| %>
+		<%= cp.sequence %>
+	<% end %>
+</div>
 
 <%= link_to '编辑', edit_doc_head_path(@doc_head) %> |
 <%= link_to '返回', doc_heads_path %> |

@@ -8,8 +8,7 @@ module ApplicationHelper
   end
   #function to remove a link
   def link_to_remove(name,f)
-    link_to_function(name,"$('#details').append('<p>asfdasdgasdgasdg</p>')")
-    #link_to_function(name,"remove_fields(this)")
+    link_to_function(name,"remove_fields(this)")
   end
   def link_to_add_fields(name, f, association)
     new_object = f.object.class.reflect_on_association(association).klass.new
