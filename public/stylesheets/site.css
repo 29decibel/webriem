@@ -110,17 +110,17 @@ div#footer #desc{
 	border: 1px dashed #999;
 	padding: 20px 0px 20px 20px;
 }
-#details div.field{
+#details div.fields{
 	margin-bottom: 10px;
 }
-#details div.field span{
+#details div.fields span{
 	display: inline-block;
 }
-#details div.field span.attr{
+#details div.fields span.attr{
 	width:120px;
 	text-align: right;
 }
-#details div.field span.value{
+#details div.fields span.value{
 	text-align: left;
 }
 /*the menu's style goes here*/

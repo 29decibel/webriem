@@ -1,3 +1,4 @@
+#coding: utf-8
 class DocHeadsController < ApplicationController
   # GET /doc_heads
   # GET /doc_heads.xml
@@ -25,8 +26,6 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new.xml
   def new
     @doc_head = DocHead.new
-    3.times { @doc_head.recivers.build }
-    3.times { @doc_head.cp_doc_details.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @doc_head }
@@ -45,7 +44,7 @@ class DocHeadsController < ApplicationController
 
     respond_to do |format|
       if @doc_head.save
-        format.html { redirect_to(@doc_head, :notice => 'Doc head was successfully created.') }
+        format.html { redirect_to(@doc_head, :notice => '单据添加成功') }
         format.xml  { render :xml => @doc_head, :status => :created, :location => @doc_head }
       else
         format.html { render :action => "new" }
@@ -61,7 +60,7 @@ class DocHeadsController < ApplicationController
 
     respond_to do |format|
       if @doc_head.update_attributes(params[:doc_head])
-        format.html { redirect_to(@doc_head, :notice => 'Doc head was successfully updated.') }
+        format.html { redirect_to(@doc_head, :notice => '单据修改成功.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

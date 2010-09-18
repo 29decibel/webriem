@@ -1,45 +1,53 @@
-<h3 class="form_title">详细信息</h3>
+<h3 class="form_title">收付款单据详细信息</h3>
 <div id="details">
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Doc no:</span>
+		<span class="attr">单据号:</span>
 		<span class="value"><%= @doc_head.doc_no %></span>	  
 	</div>
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Attach:</span>
+		<span class="attr">附件个数:</span>
 		<span class="value"><%= @doc_head.attach %></span>	  
 	</div>
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Person:</span>
+		<span class="attr">申请人:</span>
 		<span class="value"><%= @doc_head.person_name %></span>	  
 	</div>
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Note:</span>
+		<span class="attr">备注:</span>
 		<span class="value"><%= @doc_head.note %></span>	  
 	</div>
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Apply date:</span>
+		<span class="attr">申请日期:</span>
 		<span class="value"><%= @doc_head.apply_date %></span>	  
 	</div>
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Dep:</span>
+		<span class="attr">部门:</span>
 		<span class="value"><%= @doc_head.dep_name %></span>	  
 	</div>
 		<!--=========================================-->
 	<div class="field">
-		<span class="attr">Fee:</span>
+		<span class="attr">费用类型:</span>
 		<span class="value"><%= @doc_head.fee_name %></span>	  
 	</div>
+	<hr/>
+	<h4>单据详细信息</h4>
 	<% @doc_head.cp_doc_details.each do |cp| %>
-		<%= cp.sequence %>
+		单据号<%= cp.sequence %><br/>
 	<% end %>
+	<br/>
+	<h4>收款人详细信息</h4>
+	<% @doc_head.recivers.each do |rc| %>
+		单据号<%= rc.sequence %><br/>
+	<% end %>
+	
 </div>
 
 <%= link_to '编辑', edit_doc_head_path(@doc_head) %> |
 <%= link_to '返回', doc_heads_path %> |
-<%= link_to '添加 Doc head', new_doc_head_path %>
+<%= link_to '添加收付款', new_doc_head_path %>
