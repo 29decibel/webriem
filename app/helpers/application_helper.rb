@@ -1,3 +1,4 @@
+#coding: utf-8
 module ApplicationHelper
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
@@ -18,4 +19,8 @@ module ApplicationHelper
     #注意了兄弟们,在这里一定要去掉h()对整个文本的转义,否则就会js报错啦~~~~
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end
+  def doc_type_name(num)
+    DOC_TYPES[num]
+  end
+  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"报销单据",4=>"收款通知单",5=>"结汇申请单",6=>"现金提取申请单",7=>"购买理财产品申请单",8=>"赎回理财产品申请单"}
 end

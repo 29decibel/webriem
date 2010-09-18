@@ -1,5 +1,5 @@
-<% @title="修改单据信息"%>
+<% @title="修改#{doc_type_name(@doc_head.doc_type)}"%>
 <%= render 'form' %>
 
-<%= link_to '显示全部', @doc_head %> |
-<%= link_to '返回', doc_heads_path %>
+<%= link_to '取消修改', @doc_head %> |
+<%= link_to '返回', doc_heads_path(:doc_type=>@doc_head.doc_type) %>

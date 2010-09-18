@@ -35,14 +35,9 @@
 		    </li>
 			<li><a href="#">单据管理</a>
 		        <ul>
-					<li><%= link_to "借款单",:doc_heads%></li>
-		            <li><a href="#">付款单</a></li>
-			        <li><a href="#">报销单据</a></li>
-		            <li><a href="#">收款通知单</a></li>
-		            <li><a href="#">结汇申请单</a></li>
-		            <li><a href="#">现金提取申请单</a></li>
-		            <li><a href="#">购买理财产品申请单</a></li>
-					<li><a href="#">赎回理财产品申请单</a></li>
+					<% (1..8).each do |num| %>
+						<li><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></li>
+					<% end %>
 		        </ul>
 		    </li>
 		</ul>

@@ -1,13 +1,15 @@
-<h3 class="form_title">收付款单据列表</h3>
+<h3 class="form_title"><%= doc_type_name(@doc_type)%>列表</h3>
 <table class="hor-zebra">
   <tr>
     <th>单据号</th>
     <th>附件个数</th>
     <th>申请人</th>
     <th>备注</th>
+<% if @doc_type>4 %>
     <th>申请日期</th>
     <th>部门</th>
     <th>费用类型</th>
+<% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -19,9 +21,11 @@
     <td><%= doc_head.attach %></td>
     <td><%= doc_head.person_name %></td>
     <td><%= doc_head.note %></td>
+<% if @doc_type>4 %>
     <td><%= doc_head.apply_date %></td>
     <td><%= doc_head.dep_name %></td>
     <td><%= doc_head.fee_name %></td>
+<% end %>
     <td><%= link_to '查看', doc_head %></td>
     <td><%= link_to '编辑', edit_doc_head_path(doc_head) %></td>
     <td><%= link_to '删除', doc_head, :confirm => '是否真的要删除?', :method => :delete %></td>
@@ -31,4 +35,4 @@
 
 <br />
 
-<%= link_to '添加收付款', new_doc_head_path %>
+<%= link_to "添加#{doc_type_name(@doc_type)}", new_doc_head_path(:doc_type=>params[:doc_type]) %>

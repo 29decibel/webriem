@@ -1,4 +1,4 @@
-<h3 class="form_title">收付款单据详细信息</h3>
+<h3 class="form_title"><%= doc_type_name(@doc_head.doc_type)%>详细信息</h3>
 <div id="details">
 		<!--=========================================-->
 	<div class="field">
@@ -21,20 +21,22 @@
 		<span class="value"><%= @doc_head.note %></span>	  
 	</div>
 		<!--=========================================-->
-	<div class="field">
-		<span class="attr">申请日期:</span>
-		<span class="value"><%= @doc_head.apply_date %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">部门:</span>
-		<span class="value"><%= @doc_head.dep_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">费用类型:</span>
-		<span class="value"><%= @doc_head.fee_name %></span>	  
-	</div>
+	<% if @doc_head.doc_type>4 %>
+		<div class="field">
+			<span class="attr">申请日期:</span>
+			<span class="value"><%= @doc_head.apply_date %></span>	  
+		</div>
+			<!--=========================================-->
+		<div class="field">
+			<span class="attr">部门:</span>
+			<span class="value"><%= @doc_head.dep_name %></span>	  
+		</div>
+			<!--=========================================-->
+		<div class="field">
+			<span class="attr">费用类型:</span>
+			<span class="value"><%= @doc_head.fee_name %></span>	  
+		</div>
+	<% end %>
 	<hr/>
 	<h4>单据详细信息</h4>
 	<% @doc_head.cp_doc_details.each do |cp| %>
@@ -49,5 +51,5 @@
 </div>
 
 <%= link_to '编辑', edit_doc_head_path(@doc_head) %> |
-<%= link_to '返回', doc_heads_path %> |
-<%= link_to '添加收付款', new_doc_head_path %>
+<%= link_to '返回', doc_heads_path(:doc_type=>@doc_head.doc_type) %> |
+<%= link_to "添加#{doc_type_name(@doc_head.doc_type)}", new_doc_head_path(:doc_type=>@doc_head.doc_type) %>

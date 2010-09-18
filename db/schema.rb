@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100911095452) do
+ActiveRecord::Schema.define(:version => 20100918060759) do
 
   create_table "budgets", :force => true do |t|
     t.integer  "fee_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20100911095452) do
     t.integer  "fee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "doc_type"
   end
 
   create_table "duties", :force => true do |t|
@@ -158,6 +159,22 @@ ActiveRecord::Schema.define(:version => 20100911095452) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "reim_details", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "fee_id"
+    t.integer  "dep_id"
+    t.integer  "project_id"
+    t.string   "description"
+    t.decimal  "amount",      :precision => 10, :scale => 0
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",  :precision => 10, :scale => 0
+    t.decimal  "rate",        :precision => 10, :scale => 0
+    t.decimal  "real_amount", :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doc_head_id"
   end
 
   create_table "settlements", :force => true do |t|
