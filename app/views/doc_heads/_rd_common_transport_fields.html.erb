@@ -1,0 +1,51 @@
+<h3>业务交通费报销</h3>
+<div class="fields">
+	<p>  
+		<%= f.label :sequence, "序号" %><br />  
+		<%= f.text_field :sequence %>  
+	</p>
+	<p>  
+		<%= f.label :work_date, "日期" %><br />  
+		<%= f.text_field :work_date,:class=>"datepicker" %>  
+	</p>
+	<p>  
+		<%= f.label :start_place, "开始地点" %><br />  
+		<%= f.text_field :start_place %>  
+	</p>
+	<p>  
+		<%= f.label :end_place, "结束地点" %><br />  
+		<%= f.text_field :end_place %>  
+	</p>
+	<p>  
+		<%= f.label :start_time, "开始时间" %><br />  
+		<%= f.text_field :start_time,:class=>"datepicker" %>  
+	</p>
+	<p>  
+		<%= f.label :end_time, "结束时间" %><br />  
+		<%= f.text_field :end_time,:class=>"datepicker" %>  
+	</p>
+	<p>  
+		<%= f.label :reason, "事由" %><br />  
+		<%= f.text_field :reason %>  
+	</p>
+	<p>  
+		<%= f.label :note, "备注" %><br />  
+		<%= f.text_field :note %>  
+	</p>
+	<p>  
+		<%= f.label :apply_amount, "申请费用" %><br />  
+		<%= f.text_field :apply_amount %>  
+	</p>
+	<p>  
+		<%= f.label :hr_amount, "HR调整" %><br />  
+		<%= f.text_field :hr_amount %>  
+	</p>
+	<p>  
+		<%= f.label :fi_amount, "财务调整" %><br />  
+		<%= f.text_field :fi_amount %>  
+	</p>
+	<p>
+		<%= f.hidden_field(:_destroy) %>
+		<%= link_to_remove "删除业务交通费报销明细", f %> 
+	</p>
+</div>

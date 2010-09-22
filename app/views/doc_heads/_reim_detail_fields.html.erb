@@ -1,3 +1,4 @@
+<h3>报销明细</h3>
 <div class="fields">
 	<p>  
 		<%= f.label :sequence, "序号" %><br />  
@@ -43,4 +44,57 @@
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除明细", f %> 
 	</p>
+	<!--here is the detailed info for the specific reim type-->
+	<div id="reim_details_by_fee_type">
+		<div id="rd_travel">
+			<% f.fields_for :rd_travels do |builder|  %>
+				<%= render :partial => 'rd_travel_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加差旅费",f,:rd_travels %>
+		</div>	
+		<div id="rd_transport">
+			<% f.fields_for :rd_transports do |builder|  %>
+				<%= render :partial => 'rd_transport_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加交通费",f,:rd_transports %>
+		</div>
+		<div id="rd_loding">
+			<% f.fields_for :rd_lodgings do |builder|  %>
+				<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加住宿费",f,:rd_lodgings %>
+		</div>
+		<div id="rd_work_meal">
+			<% f.fields_for :rd_work_meals do |builder|  %>
+				<%= render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %>
+		</div>
+		++++++++++++++++++++++++++++++++
+		<div id="rd_extra_work_meal">
+			<% f.fields_for :rd_extra_work_meals do |builder|  %>
+				<%= render :partial => 'rd_extra_work_meal_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %>
+		</div>
+		<div id="rd_extra_work_car">
+			<% f.fields_for :rd_extra_work_cars do |builder|  %>
+				<%= render :partial => 'rd_extra_work_car_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %>
+		</div>
+		<div id="rd_common_transport">
+			<% f.fields_for :rd_common_transports do |builder|  %>
+				<%= render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %>
+		</div>
+		<div id="rd_benefit">
+			<% f.fields_for :rd_benefits do |builder|  %>
+				<%= render :partial => 'rd_benefit_fields',:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加福利费用",f,:rd_benefits %>
+		</div>
+	</div>
+	========================================================
 </div>

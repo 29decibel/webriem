@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922042424) do
+ActiveRecord::Schema.define(:version => 20100922081325) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -202,6 +202,135 @@ ActiveRecord::Schema.define(:version => 20100922042424) do
     t.string   "name"
     t.string   "code"
     t.string   "u8_project"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_benefits", :force => true do |t|
+    t.integer  "sequence"
+    t.date     "reim_date"
+    t.integer  "fee_time_span"
+    t.integer  "people_count"
+    t.decimal  "amount",         :precision => 10, :scale => 0
+    t.integer  "reim_detail_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_common_transports", :force => true do |t|
+    t.string   "note"
+    t.string   "start_place"
+    t.string   "end_place"
+    t.integer  "sequence"
+    t.date     "work_date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "reason"
+    t.integer  "reim_detail_id"
+    t.decimal  "apply_amount",   :precision => 10, :scale => 0
+    t.decimal  "hr_amount",      :precision => 10, :scale => 0
+    t.decimal  "fi_amount",      :precision => 10, :scale => 0
+    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_extra_work_cars", :force => true do |t|
+    t.string   "start_place"
+    t.string   "end_place"
+    t.integer  "sequence"
+    t.date     "work_date"
+    t.integer  "is_sunday"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "reason"
+    t.integer  "reim_detail_id"
+    t.decimal  "apply_amount",   :precision => 10, :scale => 0
+    t.decimal  "hr_amount",      :precision => 10, :scale => 0
+    t.decimal  "fi_amount",      :precision => 10, :scale => 0
+    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_extra_work_meals", :force => true do |t|
+    t.integer  "sequence"
+    t.date     "work_date"
+    t.integer  "is_sunday"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "reason"
+    t.integer  "reim_detail_id"
+    t.decimal  "apply_amount",   :precision => 10, :scale => 0
+    t.decimal  "hr_amount",      :precision => 10, :scale => 0
+    t.decimal  "fi_amount",      :precision => 10, :scale => 0
+    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_lodgings", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "reim_detail_id"
+    t.integer  "region_id"
+    t.date     "lodging_date"
+    t.integer  "days"
+    t.integer  "people_count"
+    t.string   "person_names"
+    t.decimal  "apply_amount",   :precision => 10, :scale => 0
+    t.decimal  "hr_amount",      :precision => 10, :scale => 0
+    t.decimal  "fi_amount",      :precision => 10, :scale => 0
+    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_transports", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "reim_detail_id"
+    t.time     "start_date"
+    t.time     "end_date"
+    t.string   "start_position"
+    t.string   "end_position"
+    t.integer  "transportation_id"
+    t.string   "reason"
+    t.decimal  "apply_amount",      :precision => 10, :scale => 0
+    t.decimal  "hr_amount",         :precision => 10, :scale => 0
+    t.decimal  "fi_amount",         :precision => 10, :scale => 0
+    t.decimal  "final_amount",      :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_travels", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "days"
+    t.integer  "region_id"
+    t.string   "reason"
+    t.integer  "fee_standard_id"
+    t.string   "other_fee"
+    t.string   "other_fee_description"
+    t.decimal  "apply_amount",          :precision => 10, :scale => 0
+    t.decimal  "hr_amount",             :precision => 10, :scale => 0
+    t.decimal  "fi_amount",             :precision => 10, :scale => 0
+    t.decimal  "final_amount",          :precision => 10, :scale => 0
+    t.integer  "reim_detail_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rd_work_meals", :force => true do |t|
+    t.integer  "sequence"
+    t.date     "meal_date"
+    t.string   "place"
+    t.integer  "people_count"
+    t.string   "person_names"
+    t.string   "reason"
+    t.integer  "reim_detail_id"
+    t.decimal  "apply_amount",   :precision => 10, :scale => 0
+    t.decimal  "hr_amount",      :precision => 10, :scale => 0
+    t.decimal  "fi_amount",      :precision => 10, :scale => 0
+    t.decimal  "final_amount",   :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

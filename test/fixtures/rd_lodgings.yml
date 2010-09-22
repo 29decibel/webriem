@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sequence: 1
+  reim_detail_id: 1
+  region_id: 1
+  lodging_date: 2010-09-22
+  days: 1
+  people_count: 1
+  person_names: MyString
+  apply_amount: 9.99
+  hr_amount: 9.99
+  fi_amount: 9.99
+  final_amount: 9.99
+
+two:
+  sequence: 1
+  reim_detail_id: 1
+  region_id: 1
+  lodging_date: 2010-09-22
+  days: 1
+  people_count: 1
+  person_names: MyString
+  apply_amount: 9.99
+  hr_amount: 9.99
+  fi_amount: 9.99
+  final_amount: 9.99
