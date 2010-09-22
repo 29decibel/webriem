@@ -8,6 +8,10 @@
 		<%= f.label :now_remain_amout, "目前账户金额" %><br />  
 		<%= f.text_field :now_remain_amout %>  
 	</p>
+	<p>  
+		<%= f.label :description, "申请原因" %><br />  
+		<%= f.text_area :description %>  
+	</p>
 	<p>
 		<div id="cash_draw_items">
 			<% f.fields_for :cash_draw_items do |builder|  %>

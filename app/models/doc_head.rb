@@ -14,6 +14,8 @@ class DocHead < ActiveRecord::Base
   has_many :inner_remittances, :class_name => "InnerRemittance", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :inner_transfers, :class_name => "InnerTransfer", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :inner_cash_draws, :class_name => "InnerCashDraw", :foreign_key => "doc_head_id",:dependent=>:destroy
+  has_many :buy_finance_products, :class_name => "BuyFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
+  has_many :redeem_finance_products, :class_name => "RedeemFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
   #======================================================================
   accepts_nested_attributes_for :recivers,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :cp_doc_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
@@ -23,4 +25,6 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :inner_remittances ,:reject_if => lambda { |a| a[:out_account].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :inner_transfers ,:reject_if => lambda { |a| a[:out_account].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :inner_cash_draws ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :buy_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :redeem_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
 end

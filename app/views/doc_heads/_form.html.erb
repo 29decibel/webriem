@@ -133,6 +133,22 @@
 		<% end %>
 	</div>
 	<% end %>
+	<!--购买理财产品-->
+	<% if @doc_head.doc_type==8%>
+	<div id="buy_finance_products">
+		<% f.fields_for :buy_finance_products do |builder|  %>
+			<%= render :partial => "buy_finance_products",:locals => { :f => builder }  %>
+		<% end %>
+	</div>
+	<% end %>
+	<!--赎回理财产品-->
+	<% if @doc_head.doc_type==9%>
+	<div id="redeem_finance_products">
+		<% f.fields_for :redeem_finance_products do |builder|  %>
+			<%= render :partial => "redeem_finance_products",:locals => { :f => builder }  %>
+		<% end %>
+	</div>
+	<% end %>
 </div>
   <div class="actions">
     <%= f.submit "保存" %>

@@ -44,6 +44,8 @@ class DocHeadsController < ApplicationController
     @doc_head.inner_remittances.build if @doc_head.doc_type==5
     @doc_head.inner_transfers.build if @doc_head.doc_type==6
     @doc_head.inner_cash_draws.build if @doc_head.doc_type==7
+    @doc_head.buy_finance_products.build if @doc_head.doc_type==8
+    @doc_head.redeem_finance_products.build if @doc_head.doc_type==9
     #render
     respond_to do |format|
       format.html # new.html.erb

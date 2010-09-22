@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922034040) do
+ActiveRecord::Schema.define(:version => 20100922042424) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(:version => 20100922034040) do
     t.decimal  "dec",        :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "buy_finance_products", :force => true do |t|
+    t.string   "name"
+    t.decimal  "rate",        :precision => 10, :scale => 0
+    t.integer  "account_id"
+    t.date     "buy_date"
+    t.date     "redeem_date"
+    t.text     "description"
+    t.decimal  "amount",      :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doc_head_id"
   end
 
   create_table "cash_draw_items", :force => true do |t|
@@ -216,6 +229,19 @@ ActiveRecord::Schema.define(:version => 20100922034040) do
     t.string   "bank"
     t.string   "bank_no"
     t.decimal  "amount",        :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doc_head_id"
+  end
+
+  create_table "redeem_finance_products", :force => true do |t|
+    t.string   "name"
+    t.decimal  "rate",        :precision => 10, :scale => 0
+    t.integer  "account_id"
+    t.date     "clear_date"
+    t.date     "redeem_date"
+    t.text     "description"
+    t.decimal  "amount",      :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_head_id"
