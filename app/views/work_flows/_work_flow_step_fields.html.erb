@@ -1,0 +1,14 @@
+<div class="fields">
+	<p>  
+		<%= f.label :dep_id, "部门" %><br />
+		<%= f.select(:dep_id,  Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+	</p> 
+	<p>  
+		<%= f.label :is_self_dep, "是否为本部门" %><br />  
+		<%= f.text_field :is_self_dep %>  
+	</p>
+	<p>  
+		<%= f.label :duty_id, "职务" %><br />
+		<%= f.select(:duty_id,  Duty.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+	</p>
+</div>

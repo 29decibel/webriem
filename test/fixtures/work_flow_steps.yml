@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  dep_id: 1
+  is_self_dep: 1
+  duty_id: 1
+
+two:
+  dep_id: 1
+  is_self_dep: 1
+  duty_id: 1

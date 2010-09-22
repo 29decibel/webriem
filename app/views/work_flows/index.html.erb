@@ -1,0 +1,24 @@
+<h3 class="form_title">列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>Name</th>
+    <th>Doc types</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @work_flows.each do |work_flow| %>
+  <tr class="<%= "odd" if work_flow.id%2==0 %>">
+    <td><%= work_flow.name %></td>
+    <td><%= work_flow.doc_types %></td>
+    <td><%= link_to '查看', work_flow %></td>
+    <td><%= link_to '编辑', edit_work_flow_path(work_flow) %></td>
+    <td><%= link_to '删除', work_flow, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加 Work flow', new_work_flow_path %>

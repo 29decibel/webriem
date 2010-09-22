@@ -1,0 +1,17 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Name:</span>
+		<span class="value"><%= @work_flow.name %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Doc types:</span>
+		<span class="value"><%= @work_flow.doc_types %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_work_flow_path(@work_flow) %> |
+<%= link_to '返回', work_flows_path %> |
+<%= link_to '添加 Work flow', new_work_flow_path %>

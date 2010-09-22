@@ -1,0 +1,32 @@
+<%= form_for(@work_flow) do |f| %>
+<h3 class="form_title"><%= @title%></h3>
+<div class="field">
+	<%= f.label "审批名称",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@work_flow, :name) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label "对应的单据类型",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :doc_types,:class=>"basic_input" %><%= mark_required(@work_flow, :doc_types) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div id="details">
+	<% f.fields_for :work_flow_steps do |builder|  %>
+		<%= render :partial => 'work_flow_step_fields',:locals => { :f => builder } %>
+	<% end %>
+	<%= link_to_add_fields "添加审批流程",f,:work_flow_steps %>
+</div>
+  <div class="actions">
+    <%= f.submit "保存" %>
+  </div>
+<% end %>
