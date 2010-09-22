@@ -24,5 +24,14 @@ Webreim::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   #set the mail config info
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.raise_delivery_errors = true
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :enable_starttls_auto => true,
+    :port => 587,
+    :authentication =>:plain,
+    :user_name => "mike.d.1984@gmail.com",
+    :password => 'allanldb1984'
+  }
 end
 

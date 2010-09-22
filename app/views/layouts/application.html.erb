@@ -31,11 +31,12 @@
 					<li><%= link_to "预算数据",:budgets%></li>
 					<li><%= link_to "币种",:currencies%></li>
 					<li><%= link_to "科目设置",:subjects%></li>
+					<li><%= link_to "帐号",:accounts%></li>
 		        </ul>
 		    </li>
 			<li><a href="#">单据管理</a>
 		        <ul>
-					<% (1..8).each do |num| %>
+					<% (1..9).each do |num| %>
 						<li><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></li>
 					<% end %>
 		        </ul>

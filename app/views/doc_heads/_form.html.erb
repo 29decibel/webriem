@@ -77,6 +77,7 @@
 <hr/>
 <!--根据不同的单据类型render不同的单据-->
 <div id="details">
+	<!---->
 	<% if @doc_head.doc_type<=2%>
 	<div id="cp_details">
 		<% f.fields_for :cp_doc_details do |builder|  %>
@@ -91,14 +92,47 @@
 		<% end %>
 		<%= link_to_add_fields "添加报销单明细",f,:reim_details %>
 	</div>
+	<% elsif @doc_head.doc_type==4%>
+	<div id="reim_details">
+		<% f.fields_for :rec_notice_details do |builder| %>
+			<%= render :partial => 'rec_notice_detail_fields',:locals => { :f => builder } %>
+		<% end %>
+		<%= link_to_add_fields "添加收款明细",f,:rec_notice_details %>
+	</div>
 	<% end %>
 	<hr/>
+	<% if @doc_head.doc_type<=4%>
 	<div id="recivers">
 		<% f.fields_for :recivers do |builder|  %>
 			<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
 		<% end %>
 		<%= link_to_add_fields "添加收款人",f,:recivers %>
-	</div>	
+	</div>
+	<% end %>	
+	<!--结汇申请单-->
+	<% if @doc_head.doc_type==5%>
+	<div id="inner_remittance">
+		<% f.fields_for :inner_remittances do |builder|  %>
+			<%= render :partial => 'inner_remittance',:locals => { :f => builder }  %>
+		<% end %>
+	</div>
+	<% end %>
+	<!--转帐申请单-->
+	<% if @doc_head.doc_type==6%>
+	<div id="inner_transfer">
+		<% f.fields_for :inner_transfers do |builder|  %>
+			<%= render :partial => "inner_transfer",:locals => { :f => builder }  %>
+		<% end %>
+	</div>
+	<% end %>
+	<!--现金提取申请单-->
+	<% if @doc_head.doc_type==7%>
+	<div id="inner_cash_draw">
+		<% f.fields_for :inner_cash_draws do |builder|  %>
+			<%= render :partial => "inner_cash_draw",:locals => { :f => builder }  %>
+		<% end %>
+	</div>
+	<% end %>
 </div>
   <div class="actions">
     <%= f.submit "保存" %>

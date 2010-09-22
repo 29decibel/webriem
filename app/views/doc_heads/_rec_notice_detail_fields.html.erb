@@ -1,0 +1,42 @@
+<div class="fields">
+	<p>  
+		<%= f.label :sequence, "序号" %><br />  
+		<%= f.text_field :sequence %>  
+	</p> 
+	<p>  
+		<%= f.label :apply_date, "申请时间" %><br />
+		<%= f.text_field :apply_date,:class=>"datepicker basic_input" %>
+	</p>
+	<p>  
+		<%= f.label :dep_id, "部门" %><br />
+		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+	</p>
+	<p>  
+		<%= f.label :project_id, "项目" %><br />
+		<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+	</p>
+	<p>  
+		<%= f.label :description, "收款内容" %><br />  
+		<%= f.text_field :description %>  
+	</p>
+	<p>  
+		<%= f.label :amount, "收款金额" %><br />  
+		<%= f.text_field :amount %>  
+	</p>
+	<p>  
+		<%= f.label :currency_id, "币种" %><br />  
+		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
+	</p>
+	<p>  
+		<%= f.label :rate, "汇率" %><br />  
+		<%= f.text_field :rate %>  
+	</p>
+	<p>  
+		<%= f.label :ori_amount, "原始金额" %><br />  
+		<%= f.text_field :ori_amount %>  
+	</p>
+	<p>
+		<%= f.hidden_field(:_destroy) %>
+		<%= link_to_remove "删除明细", f %> 
+	</p>
+</div>

@@ -39,7 +39,11 @@ class DocHeadsController < ApplicationController
     #build some new doc details
     @doc_head.reim_details.build if @doc_head.doc_type==3
     @doc_head.cp_doc_details.build if @doc_head.doc_type==1 or  @doc_head.doc_type==2
-    @doc_head.recivers.build
+    @doc_head.rec_notice_details.build if @doc_head.doc_type==4
+    @doc_head.recivers.build if @doc_head.doc_type<=4
+    @doc_head.inner_remittances.build if @doc_head.doc_type==5
+    @doc_head.inner_transfers.build if @doc_head.doc_type==6
+    @doc_head.inner_cash_draws.build if @doc_head.doc_type==7
     #render
     respond_to do |format|
       format.html # new.html.erb

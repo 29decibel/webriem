@@ -1,0 +1,19 @@
+<h3>现金提取信息</h3><br/>
+<div class="fields">
+	<p>  
+		<%= f.label :account_id, "现金提取转出账户" %><br />
+		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+	</p> 
+	<p>  
+		<%= f.label :now_remain_amout, "目前账户金额" %><br />  
+		<%= f.text_field :now_remain_amout %>  
+	</p>
+	<p>
+		<div id="cash_draw_items">
+			<% f.fields_for :cash_draw_items do |builder|  %>
+				<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
+			<% end %>
+		</div>
+	</p>
+	<%= link_to_add_fields "添加申请条目",f,:cash_draw_items %>
+</div>

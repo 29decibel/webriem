@@ -1,0 +1,24 @@
+<h3 class="form_title">帐号信息列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>名称</th>
+    <th>帐号</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @accounts.each do |account| %>
+  <tr class="<%= "odd" if account.id%2==0 %>">
+    <td><%= account.name %></td>
+    <td><%= account.account_no %></td>
+    <td><%= link_to '查看', account %></td>
+    <td><%= link_to '编辑', edit_account_path(account) %></td>
+    <td><%= link_to '删除', account, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加新的帐号', new_account_path %>

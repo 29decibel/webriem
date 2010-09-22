@@ -1,0 +1,31 @@
+<h3>转帐信息</h3><br/>
+<div class="fields">
+	<p>  
+		<%= f.label :out_account, "转出账户" %><br />
+		<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+	</p> 
+	<p>  
+		<%= f.label :out_amount_before, "转出账户转帐前余额" %><br />  
+		<%= f.text_field :out_amount_before %>  
+	</p>
+	<p>  
+		<%= f.label :in_account_name, "收款账户名称" %><br />  
+		<%= f.text_field :in_account_name %>  
+	</p>
+	<p>  
+		<%= f.label :in_account_no, "收款账户帐号" %><br />  
+		<%= f.text_field :in_account_no %>  
+	</p>
+	<p>  
+		<%= f.label :in_amount_before, "转入账户转帐前余额" %><br />  
+		<%= f.text_field :in_amount_before %>  
+	</p>
+	<p>  
+		<%= f.label :description, "转帐申请原因" %><br />  
+		<%= f.text_area :description %>  
+	</p>
+	<p>  
+		<%= f.label :amount, "申请金额" %><br />  
+		<%= f.text_field :amount %>  
+	</p>
+</div>

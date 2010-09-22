@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918060759) do
+ActiveRecord::Schema.define(:version => 20100922034040) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "name"
+    t.string   "account_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "budgets", :force => true do |t|
     t.integer  "fee_id"
@@ -28,6 +35,15 @@ ActiveRecord::Schema.define(:version => 20100918060759) do
     t.decimal  "oct",        :precision => 10, :scale => 0
     t.decimal  "nov",        :precision => 10, :scale => 0
     t.decimal  "dec",        :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cash_draw_items", :force => true do |t|
+    t.integer  "sequence"
+    t.string   "used_for"
+    t.decimal  "apply_amount",       :precision => 10, :scale => 0
+    t.integer  "inner_cash_draw_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,6 +125,41 @@ ActiveRecord::Schema.define(:version => 20100918060759) do
     t.integer  "parent_fee_id"
   end
 
+  create_table "inner_cash_draws", :force => true do |t|
+    t.integer  "account_id"
+    t.decimal  "now_remain_amout", :precision => 10, :scale => 0
+    t.text     "description"
+    t.integer  "doc_head_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inner_remittances", :force => true do |t|
+    t.integer  "out_account"
+    t.string   "in_account_name"
+    t.string   "in_account_no"
+    t.decimal  "amount",          :precision => 10, :scale => 0
+    t.text     "description"
+    t.decimal  "remain_amount",   :precision => 10, :scale => 0
+    t.decimal  "now_rate_price",  :precision => 10, :scale => 0
+    t.integer  "doc_head_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inner_transfers", :force => true do |t|
+    t.integer  "out_account"
+    t.decimal  "out_amount_before", :precision => 10, :scale => 0
+    t.decimal  "in_amount_before",  :precision => 10, :scale => 0
+    t.decimal  "amount",            :precision => 10, :scale => 0
+    t.text     "description"
+    t.integer  "doc_head_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "in_account_name"
+    t.string   "in_account_no"
+  end
+
   create_table "lodgings", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -138,6 +189,22 @@ ActiveRecord::Schema.define(:version => 20100918060759) do
     t.string   "name"
     t.string   "code"
     t.string   "u8_project"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rec_notice_details", :force => true do |t|
+    t.integer  "sequence"
+    t.date     "apply_date"
+    t.string   "company"
+    t.integer  "dep_id"
+    t.integer  "project_id"
+    t.string   "description"
+    t.decimal  "amount",      :precision => 10, :scale => 0
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",  :precision => 10, :scale => 0
+    t.decimal  "rate",        :precision => 10, :scale => 0
+    t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

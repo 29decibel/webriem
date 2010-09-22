@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :accounts
+
   resources :recivers
 
   resources :doc_heads  
