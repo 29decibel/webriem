@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reim_detail_id: 1
+  dep_id: 1
+  project_id: 1
+  fee_id: 1
+  percent: 9.99
+
+two:
+  reim_detail_id: 1
+  dep_id: 1
+  project_id: 1
+  fee_id: 1
+  percent: 9.99

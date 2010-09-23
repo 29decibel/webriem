@@ -5,7 +5,7 @@
 	</p> 
 	<p>  
 		<%= f.label :is_self_dep, "是否为本部门" %><br />  
-		<%= f.text_field :is_self_dep %>  
+		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,:class=>"basic_input" %>
 	</p>
 	<p>  
 		<%= f.label :duty_id, "职务" %><br />

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922102909) do
+ActiveRecord::Schema.define(:version => 20100923034052) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -107,6 +107,8 @@ ActiveRecord::Schema.define(:version => 20100922102909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_type"
+    t.integer  "doc_state"
+    t.integer  "work_flow_step_id"
   end
 
   create_table "duties", :force => true do |t|
@@ -397,6 +399,17 @@ ActiveRecord::Schema.define(:version => 20100922102909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_head_id"
+    t.integer  "is_split"
+  end
+
+  create_table "reim_split_details", :force => true do |t|
+    t.integer  "reim_detail_id"
+    t.integer  "dep_id"
+    t.integer  "project_id"
+    t.integer  "fee_id"
+    t.decimal  "percent",        :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settlements", :force => true do |t|
@@ -445,6 +458,15 @@ ActiveRecord::Schema.define(:version => 20100922102909) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_user_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "work_flow_infos", :force => true do |t|
+    t.integer  "doc_head_id"
+    t.integer  "is_ok"
+    t.integer  "people_id"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "work_flow_steps", :force => true do |t|
     t.integer  "dep_id"

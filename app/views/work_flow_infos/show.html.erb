@@ -1,0 +1,27 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Doc head:</span>
+		<span class="value"><%= @work_flow_info.doc_head_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Is ok:</span>
+		<span class="value"><%= @work_flow_info.is_ok %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">People:</span>
+		<span class="value"><%= @work_flow_info.people_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Comments:</span>
+		<span class="value"><%= @work_flow_info.comments %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_work_flow_info_path(@work_flow_info) %> |
+<%= link_to '返回', work_flow_infos_path %> |
+<%= link_to '添加 Work flow info', new_work_flow_info_path %>
