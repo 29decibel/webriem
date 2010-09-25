@@ -16,6 +16,8 @@ class DocHead < ActiveRecord::Base
   has_many :inner_cash_draws, :class_name => "InnerCashDraw", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :buy_finance_products, :class_name => "BuyFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :redeem_finance_products, :class_name => "RedeemFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
+  #审批流
+  has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
   #======================================================================
   accepts_nested_attributes_for :recivers,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :cp_doc_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
@@ -27,4 +29,6 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :inner_cash_draws ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :buy_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :redeem_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
+  #审批流
+  accepts_nested_attributes_for :work_flow_infos ,:reject_if => lambda { |a| a[:is_ok].blank? }, :allow_destroy => true
 end

@@ -1,49 +1,41 @@
-<h3>报销明细</h3>
-<div class="fields">
-	<p>  
-		<%= f.label :sequence, "序号" %><br />  
-		<%= f.text_field :sequence %>  
-	</p>
-	<p>  
-		<%= f.label :dep_id, "部门" %><br />
-		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
-	</p>
-	<p>  
-		<%= f.label :fee_id, "费用类型" %><br />
-		<%= f.select :fee_id,Fee.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
-	</p>
-	<p>  
-		<%= f.label :project_id, "项目" %><br />
-		<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
-	</p>
-	<p>  
-		<%= f.label :description, "费用描述" %><br />  
-		<%= f.text_field :description %>  
-	</p>
-	<p>  
-		<%= f.label :currency_id, "币种" %><br />  
-		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
-	</p>
-	<p>  
-		<%= f.label :amount, "报销金额" %><br />  
-		<%= f.text_field :amount %>  
-	</p>
-	<p>  
-		<%= f.label :rate, "汇率" %><br />  
-		<%= f.text_field :rate %>  
-	</p>
-	<p>  
-		<%= f.label :ori_amount, "原始金额" %><br />  
-		<%= f.text_field :ori_amount %>  
-	</p>
-	<p>  
-		<%= f.label :real_amount, "实际金额" %><br />  
-		<%= f.text_field :real_amount %>  
-	</p>
-	<p>
+<tr class="fields">
+	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除明细", f %> 
-	</p>
+	</td>
+	<td>  
+		<%= f.text_field :sequence,:class=>"small" %>  
+	</td>
+	<td>  
+		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+	</td>
+	<td>  
+		<%= f.select :fee_id,Fee.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+	</td>
+	<td>  
+		<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+	</td>
+	<td>
+		<%= f.text_field :description,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
+	</td>
+	<td>
+		<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,:class=>"basic_input" %>
+	</td>
+	<td>
+		<%= f.text_field :amount,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :rate,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :ori_amount,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :real_amount,:class=>"normal" %>  
+	</td>
 	<!--here is the detailed info for the specific reim type-->
 	<div id="reim_details_by_fee_type">
 		<div id="rd_travel">
@@ -95,6 +87,12 @@
 			<% end %>
 			<%= link_to_add_fields "添加福利费用",f,:rd_benefits %>
 		</div>
+		<!--分摊明细动态显示-->
+		<div id="reim_split_details">
+			<% f.fields_for :reim_split_details do |builder|  %>
+				<%= render :partial => "reim_split_detail_fields",:locals => { :f => builder }  %>
+			<% end %>
+			<%= link_to_add_fields "添加分摊明细",f,:reim_split_details %>
+		</div>
 	</div>
-	========================================================
-</div>
+</tr>

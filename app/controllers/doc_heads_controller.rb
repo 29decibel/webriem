@@ -46,6 +46,8 @@ class DocHeadsController < ApplicationController
     @doc_head.inner_cash_draws.build if @doc_head.doc_type==7
     @doc_head.buy_finance_products.build if @doc_head.doc_type==8
     @doc_head.redeem_finance_products.build if @doc_head.doc_type==9
+    #暂时每次都创建一个审批流填写信息
+    @doc_head.work_flow_infos.build
     #render
     respond_to do |format|
       format.html # new.html.erb

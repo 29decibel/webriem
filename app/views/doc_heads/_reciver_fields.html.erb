@@ -1,30 +1,24 @@
-<div class="fields">
-	<p>  
-		<%= f.label :sequence, "序号" %><br />  
-		<%= f.text_field :sequence %>  
-	</p> 
-	<p>  
-		<%= f.label :settlement_id, "结算方式" %><br />
-		<%= f.select(:settlement_id,  Settlement.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
-	</p> 
-	<p>  
-		<%= f.label :company, "收款单位" %><br />  
-		<%= f.text_field :company %>  
-	</p>
-	<p>  
-		<%= f.label :bank, "银行" %><br />  
-		<%= f.text_field :bank %>  
-	</p>
-	<p>  
-		<%= f.label :bank_no, "银行帐号" %><br />  
-		<%= f.text_field :bank_no %>  
-	</p>
-	<p>  
-		<%= f.label :amount, "金额" %><br />  
-		<%= f.text_field :amount %>  
-	</p>
-	<p>
+<tr class="fields">
+	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除收款人", f %> 
-	</p>
-</div>
+	</td>
+	<td>  
+		<%= f.text_field :sequence,:class=>"small" %>  
+	</td> 
+	<td>  
+		<%= f.select(:settlement_id,  Settlement.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+	</td>
+	<td>  
+		<%= f.text_field :company,:class=>"normal" %>  
+	</td>
+	<td>  
+		<%= f.text_field :bank,:class=>"normal" %>  
+	</td>
+	<td>  
+		<%= f.text_field :bank_no ,:class=>"normal"%>  
+	</td>
+	<td>  
+		<%= f.text_field :amount,:class=>"normal" %>  
+	</td>	
+</tr>

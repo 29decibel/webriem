@@ -1,0 +1,14 @@
+<h3>现在已经存在的审批流</h3>
+<div id="work_flow_info">
+	<p>
+		<%= f.label :is_ok,"是否通过"%>
+		<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK %>
+	</p>
+	<p>
+		<%= f.label :comments,"是否通过"%>
+		<%= f.text_area :comments %>
+	</p>
+	<p>
+		<%= f.hidden_field :people_id%>
+	</p>
+</div>

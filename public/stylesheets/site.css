@@ -37,13 +37,16 @@ div#header #user_nav{
 div#main_content{
 	min-height:600px;
 }
-/*give the table a wear*/
+/*give the table a wear==========================================================*/
 table.hor-zebra
 {
 	font-size: 12px;
 	margin: 45px;
 	text-align: left;
 	border-collapse: collapse;
+}
+table tr{
+	overflow: scroll;
 }
 table.hor-zebra th
 {
@@ -61,6 +64,7 @@ table.hor-zebra .odd
 {
 	background: #e8edff; 
 }
+/*=================================================================================*/
 /*form styles*/
 form{
 	border:2px dashed #A5ACB2;
@@ -190,6 +194,13 @@ div.alert{
 	color: #8A1F11;
 }
 /***********************************************************************************************/
+.d_fields{
+	position: relative;
+	margin-bottom: 20px;
+}
+.d_field{
+	float:left;
+}
 /*********************************** error messages in the form ***************************/
 span.error_message{
 	background: #FBE3E4;
@@ -201,4 +212,29 @@ span.error_message{
 }
 input.required{
 	background: #FFF6BF;
+}
+/*++++++++++++++++++++++++++++++++here is my own table made by pure divs*/
+table.form_input{
+	margin:0px;
+	padding:0px;
+	cellspacing:5px;
+}
+table.form_input input.normal{
+	width:80px;
+}
+table.form_input input.small{
+	width:25px;
+}
+table.form_input th{
+}
+table.form_input td a{
+	width:75px;
+	display: inline-block;
+}
+/*+++++++++++++++++++++++++++++++*/
+div.table_details{
+	overflow: auto;
+}
+div#reim_details_by_fee_type{
+	display: none;
 }

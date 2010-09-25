@@ -75,40 +75,129 @@
 <% end %>
 <%= f.hidden_field :doc_type%>
 <hr/>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!--根据不同的单据类型render不同的单据-->
 <div id="details">
 	<!---->
 	<% if @doc_head.doc_type<=2%>
-	<div id="cp_details">
-		<% f.fields_for :cp_doc_details do |builder|  %>
-			<%= render :partial => 'cp_doc_detail_fields',:locals => { :f => builder } %>
-		<% end %>
-		<%= link_to_add_fields "添加明细",f,:cp_doc_details %>
-	</div>
+	<div class="table_details">
+		<table class="form_input">
+			<caption>借款单/付款单</caption>
+			<thead>
+				<tr>
+					<th></th><!--给删除的-->
+					<th>序号</th>
+				    <th>申请时间</th>
+				    <th>部门</th>
+				    <th>费用类型</th>
+				    <th>项目</th>
+				    <th>费用用途</th>
+				    <th>币种</th>
+					<th>汇率</th>
+					<th>原始金额</th>
+					<th>申请金额</th>
+			    </tr>
+		    <thead>
+			<tbody>
+				<% f.fields_for :cp_doc_details do |builder|  %>
+					<%= render :partial => 'cp_doc_detail_fields',:locals => { :f => builder } %>
+				<% end %>
+			</tbody>
+			<tr>
+				<td col-span="11"><%= link_to_add_fields "添加明细",f,:cp_doc_details %></td>
+			</tr>		
+		</table>
+	</div>	
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% elsif @doc_head.doc_type==3%>
-	<div id="reim_details">
-		<% f.fields_for :reim_details do |builder| %>
-			<%= render :partial => 'reim_detail_fields',:locals => { :f => builder } %>
-		<% end %>
-		<%= link_to_add_fields "添加报销单明细",f,:reim_details %>
+	<div class="table_details">
+		<table class="form_input">
+			<caption>报销单据明细</caption>
+			<thead>
+				<tr>
+					<th></th><!--给删除的-->
+					<th>序号</th>
+				    <th>部门</th>
+				    <th>费用类型</th>
+				    <th>项目</th>
+				    <th>费用描述</th>
+					<th>是否分摊</th>
+				    <th>币种</th>
+					<th>汇率</th>
+					<th>原始金额</th>
+					<th>实际金额</th>
+					<th>申请金额</th>
+			    </tr>
+		    <thead>
+			<tbody>
+				<% f.fields_for :reim_details do |builder| %>
+					<%= render :partial => 'reim_detail_fields',:locals => { :f => builder } %>
+				<% end %>				
+			</tbody>
+			<tr>
+				<td col-span="11"><%= link_to_add_fields "添加报销单明细",f,:reim_details %></td>
+			</tr>		
+		</table>
 	</div>
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% elsif @doc_head.doc_type==4%>
-	<div id="reim_details">
-		<% f.fields_for :rec_notice_details do |builder| %>
-			<%= render :partial => 'rec_notice_detail_fields',:locals => { :f => builder } %>
-		<% end %>
-		<%= link_to_add_fields "添加收款明细",f,:rec_notice_details %>
+	<div class="table_details">
+		<table class="form_input">
+			<caption>收款明细</caption>
+			<thead>
+				<tr>
+					<th></th><!--给删除的-->
+					<th>序号</th>
+				    <th>申请时间</th>
+				    <th>部门</th>
+				    <th>项目</th>
+				    <th>收款内容</th>
+					<th>收款金额</th>
+				    <th>币种</th>
+					<th>汇率</th>
+					<th>原始金额</th>
+			    </tr>
+		    <thead>
+			<tbody>
+				<% f.fields_for :rec_notice_details do |builder| %>
+					<%= render :partial => 'rec_notice_detail_fields',:locals => { :f => builder } %>
+				<% end %>				
+			</tbody>
+			<tr>
+				<td col-span="10"><%= link_to_add_fields "添加收款明细",f,:rec_notice_details %></td>
+			</tr>		
+		</table>		
 	</div>
 	<% end %>
 	<hr/>
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type<=4%>
-	<div id="recivers">
-		<% f.fields_for :recivers do |builder|  %>
-			<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
-		<% end %>
-		<%= link_to_add_fields "添加收款人",f,:recivers %>
-	</div>
-	<% end %>	
+	<div class="table_details">
+		<table class="form_input">
+			<caption>收款人</caption>
+			<thead>
+				<tr>
+					<th></th><!--给删除的-->
+					<th>序号</th>
+				    <th>结算方式</th>
+				    <th>收款单位</th>
+				    <th>银行</th>
+				    <th>银行帐号</th>
+				    <th>金额</th>			    
+			    </tr>
+		    <thead>
+			<tbody>
+				<% f.fields_for :recivers do |builder|  %>
+					<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
+				<% end %>
+			</tbody>
+			<tr>
+				<td col-span="8"><%= link_to_add_fields "添加收款人",f,:recivers %></td>
+			</tr>		
+		</table>
+	</div>	
+	<% end %>
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
 	<!--结汇申请单-->
 	<% if @doc_head.doc_type==5%>
 	<div id="inner_remittance">
@@ -149,6 +238,21 @@
 		<% end %>
 	</div>
 	<% end %>
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	<!--审批流++++++++根据当前单据状态以及当前审批人显示下面内容-->
+	<hr/>
+	<div id="work_flow_info">
+		<!--目前已经存在的审批信息-->
+		<% @doc_head.work_flow_infos.each do |wf| %>
+			<p>
+				<span><%= wf.is_ok%></span><span><%= wf.people_id%></span><span><%= wf.comments%></span>
+			</p>
+		<% end %>
+		<!--填写审批信息-->
+		<% f.fields_for :work_flow_infos do |builder|  %>
+			<%= render :partial => "work_flow_info",:locals => { :f => builder }  %>
+		<% end %>
+	</div>
 </div>
   <div class="actions">
     <%= f.submit "保存" %>
