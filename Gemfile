@@ -30,4 +30,4 @@ gem 'mysql2'
 # end
 gem "jquery-rails"
 gem "devise"
-gem "ruby-debug19"
+# gem "ruby-debug19"
