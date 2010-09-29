@@ -1,5 +1,7 @@
 <%= form_for(@work_flow,:remote=>true) do |f| %>
-<h3 class="form_title"><%= @title%></h3>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
 <div class="field">
 	<%= f.label "审批名称",:class=>"input_label" %>
 	<div class="input_area">
@@ -21,12 +23,28 @@
 	<span class="error_message"></span>    
   </div>
 <div id="details">
-	<% f.fields_for :work_flow_steps do |builder|  %>
-		<%= render :partial => 'work_flow_step_fields',:locals => { :f => builder } %>
-	<% end %>
-	<%= link_to_add_fields "添加审批流程",f,:work_flow_steps %>
+	<div class="table_details">
+		<table class="form_input">
+			<thead>
+				<tr>					
+					<th>部门</th>
+				    <th>是否为本部门</th>
+				    <th>职务</th>
+					<th></th><!--给删除的-->		    
+			    </tr>
+		    <thead>
+			<tbody>
+				<%= f.fields_for :work_flow_steps do |builder|  %>
+					<%= render :partial => 'work_flow_step_fields',:locals => { :f => builder } %>
+				<% end %>
+			</tbody>
+			<tr>
+				<th colspan="4"><%= link_to_add_fields "添加审批流程",f,:work_flow_steps %></th>
+			</tr>		
+		</table>
+	</div>	
 </div>
   <div class="actions">
-    <%= f.submit "保存" %>
+    <%= f.submit "保存",:class=>"button2" %>
   </div>
 <% end %>

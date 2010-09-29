@@ -1,5 +1,7 @@
 <%= form_for(@person,:remote=>true) do |f| %>
-<h3 class="form_title"><%= @title%></h3>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
 <div class="field">
 	<%= f.label "姓名",:class=>"input_label" %>
 	<div class="input_area">
@@ -24,7 +26,7 @@
 	<%= f.label "性别",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :gender, Person::ENUMS_GENDER,:class=>"basic_input" %> <%= mark_required(@person, :gender) %>
+			<%= f.select :gender, Person::ENUMS_GENDER,{},{:class=>"basic_input "} %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -145,6 +147,6 @@
 <% end %>
 <!--========================================================================-->
   <div class="actions">
-    <%= f.submit "保存" %>
+    <%= f.submit "保存",:class=>"button2" %>
   </div>
 <% end %>

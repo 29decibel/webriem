@@ -1,3 +1,4 @@
+require "ruby-debug"
 class DocHead < ActiveRecord::Base
   belongs_to :fee
   belongs_to :dep
@@ -31,4 +32,9 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :redeem_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
   #审批流
   accepts_nested_attributes_for :work_flow_infos ,:reject_if => lambda { |a| a[:is_ok].blank? }, :allow_destroy => true
+  #获得所有的审批流程
+  def work_flows
+    wf=WorkFlow.where("doc_types like '%?%'",doc_type).first
+    wf==nil ? []:wf.work_flow_steps
+  end
 end

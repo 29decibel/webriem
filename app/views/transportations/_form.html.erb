@@ -1,5 +1,7 @@
 <%= form_for(@transportation,:remote=>true) do |f| %>
-<h3 class="form_title"><%= @title%></h3>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
 <div class="field">
 	<%= f.label "名称",:class=>"input_label" %>
 	<div class="input_area">
@@ -21,6 +23,6 @@
 	<span class="error_message"></span>    
   </div>
   <div class="actions">
-    <%= f.submit "保存" %>
+    <%= f.submit "保存",:class=>"button2" %>
   </div>
 <% end %>

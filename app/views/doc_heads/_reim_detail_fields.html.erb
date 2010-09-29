@@ -15,10 +15,10 @@
 		<%= f.text_field :description,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
+		<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"basic_input "} %>
 	</td>
 	<td>
-		<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,:class=>"basic_input" %>
+		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
 	</td>
 	<td>
 		<%= f.text_field :amount,:class=>"normal" %>  

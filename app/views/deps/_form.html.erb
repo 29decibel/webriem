@@ -1,8 +1,7 @@
 <%= form_for @dep,:remote=>true do |f| %>
-<div class="actions">
-	<%= f.submit "保存",:action=>new_dep_path%>
+<div class="form_title">
+	<h3><%= @title%></h3>
 </div>
-  <h3 class="form_title"><%= @title%></h3>
   <div class="field">
     <%= f.label "编码",:class=>"input_label" %>
 	<div class="input_area">
@@ -79,4 +78,7 @@
 	</div>
 	<span class="error_message"></span>	
   </div>
+<div class="actions">
+	<%= f.submit "保存",:action=>new_dep_path,:class=>"button2" %>
+</div>
 <% end %>

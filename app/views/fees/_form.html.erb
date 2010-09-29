@@ -1,5 +1,7 @@
 <%= form_for(@fee,:remote=>true) do |f| %>
-<h3 class="form_title"><%= @title%></h3>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
 <div class="field">
 	<%= f.label "编码",:class=>"input_label" %>
 	<div class="input_area">
@@ -24,7 +26,7 @@
 	<%= f.label "费用属性",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :attr,Fee::ENUMS_ATTR,:class=>"basic_input "+ mark_required(@fee, :attr) %>
+			<%= f.select :attr,Fee::ENUMS_ATTR,{:include_blank => 'None'},{:class=>"basic_input "} %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -51,6 +53,6 @@
 	<span class="error_message"></span>	
   </div>
   <div class="actions">
-    <%= f.submit "保存" %>
+    <%= f.submit "保存",:class=>"button2" %>
   </div>
 <% end %>
