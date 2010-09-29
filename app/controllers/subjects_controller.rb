@@ -33,24 +33,16 @@ class SubjectsController < ApplicationController
     end
   end
 
-  # GET /subjects/1/edit
-  def edit
-    @subject = Subject.find(params[:id])
-  end
-
   # POST /subjects
   # POST /subjects.xml
   def create
     @subject = Subject.new(params[:subject])
-
-    respond_to do |format|
-      if @subject.save
-        format.html { redirect_to(@subject, :notice => '科目设置添加成功') }
-        format.xml  { render :xml => @subject, :status => :created, :location => @subject }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @subject.errors, :status => :unprocessable_entity }
-      end
+    if @subject.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@subject)}
     end
   end
 
@@ -58,15 +50,12 @@ class SubjectsController < ApplicationController
   # PUT /subjects/1.xml
   def update
     @subject = Subject.find(params[:id])
-
-    respond_to do |format|
-      if @subject.update_attributes(params[:subject])
-        format.html { redirect_to(@subject, :notice => '科目设置修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @subject.errors, :status => :unprocessable_entity }
-      end
+    if @subject.update_attributes(params[:subject])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@subject)}
     end
   end
 

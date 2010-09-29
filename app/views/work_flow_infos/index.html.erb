@@ -7,7 +7,6 @@
     <th>Comments</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @work_flow_infos.each do |work_flow_info| %>
@@ -17,7 +16,6 @@
     <td><%= work_flow_info.people_id %></td>
     <td><%= work_flow_info.comments %></td>
     <td><%= link_to '查看', work_flow_info %></td>
-    <td><%= link_to '编辑', edit_work_flow_info_path(work_flow_info) %></td>
     <td><%= link_to '删除', work_flow_info, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -1,17 +1,5 @@
-<h3 class="form_title">住宿方式详细信息</h3>
-<div id="details">
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">名称:</span>
-		<span class="value"><%= @lodging.name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">编码:</span>
-		<span class="value"><%= @lodging.code %></span>	  
-	</div>
-	</div>
+<% @title="填写住宿方式信息"%>
 
-<%= link_to '编辑', edit_lodging_path(@lodging) %> |
-<%= link_to '返回', lodgings_path %> |
-<%= link_to '添加住宿方式', new_lodging_path %>
+<%= render 'form' %>
+
+<%= link_to '返回', lodgings_path %>

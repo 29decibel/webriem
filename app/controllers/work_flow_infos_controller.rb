@@ -32,24 +32,16 @@ class WorkFlowInfosController < ApplicationController
     end
   end
 
-  # GET /work_flow_infos/1/edit
-  def edit
-    @work_flow_info = WorkFlowInfo.find(params[:id])
-  end
-
   # POST /work_flow_infos
   # POST /work_flow_infos.xml
   def create
     @work_flow_info = WorkFlowInfo.new(params[:work_flow_info])
-
-    respond_to do |format|
-      if @work_flow_info.save
-        format.html { redirect_to(@work_flow_info, :notice => 'Work flow info was successfully created.') }
-        format.xml  { render :xml => @work_flow_info, :status => :created, :location => @work_flow_info }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @work_flow_info.errors, :status => :unprocessable_entity }
-      end
+    if @work_flow_info.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@work_flow_info)}
     end
   end
 
@@ -57,15 +49,12 @@ class WorkFlowInfosController < ApplicationController
   # PUT /work_flow_infos/1.xml
   def update
     @work_flow_info = WorkFlowInfo.find(params[:id])
-
-    respond_to do |format|
-      if @work_flow_info.update_attributes(params[:work_flow_info])
-        format.html { redirect_to(@work_flow_info, :notice => 'Work flow info was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @work_flow_info.errors, :status => :unprocessable_entity }
-      end
+    if @work_flow_info.update_attributes(params[:work_flow_info])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@work_flow_info)}
     end
   end
 

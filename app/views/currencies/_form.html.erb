@@ -1,4 +1,4 @@
-<%= form_for(@currency) do |f| %>
+<%= form_for(@currency,:remote=>true) do |f| %>
 <h3 class="form_title"><%= @title%></h3>
 <div class="field">
 	<%= f.label "名称",:class=>"input_label" %>

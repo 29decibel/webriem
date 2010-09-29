@@ -33,24 +33,16 @@ class FeesController < ApplicationController
     end
   end
 
-  # GET /fees/1/edit
-  def edit
-    @fee = Fee.find(params[:id])
-  end
-
   # POST /fees
   # POST /fees.xml
   def create
     @fee = Fee.new(params[:fee])
-
-    respond_to do |format|
-      if @fee.save
-        format.html { redirect_to(@fee, :notice => '费用添加成功') }
-        format.xml  { render :xml => @fee, :status => :created, :location => @fee }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @fee.errors, :status => :unprocessable_entity }
-      end
+    if @fee.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee)}
     end
   end
 
@@ -58,15 +50,12 @@ class FeesController < ApplicationController
   # PUT /fees/1.xml
   def update
     @fee = Fee.find(params[:id])
-
-    respond_to do |format|
-      if @fee.update_attributes(params[:fee])
-        format.html { redirect_to(@fee, :notice => '费用修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @fee.errors, :status => :unprocessable_entity }
-      end
+    if @fee.update_attributes(params[:fee])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee)}
     end
   end
 

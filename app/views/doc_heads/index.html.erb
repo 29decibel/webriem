@@ -12,7 +12,6 @@
 <% end %>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @doc_heads.each do |doc_head| %>
@@ -27,7 +26,6 @@
     <td><%= doc_head.fee_name %></td>
 <% end %>
     <td><%= link_to '查看', doc_head %></td>
-    <td><%= link_to '编辑', edit_doc_head_path(doc_head) %></td>
     <td><%= link_to '删除', doc_head, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

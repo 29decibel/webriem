@@ -33,24 +33,16 @@ class RegionsController < ApplicationController
     end
   end
 
-  # GET /regions/1/edit
-  def edit
-    @region = Region.find(params[:id])
-  end
-
   # POST /regions
   # POST /regions.xml
   def create
     @region = Region.new(params[:region])
-
-    respond_to do |format|
-      if @region.save
-        format.html { redirect_to(@region, :notice => '地区添加成功') }
-        format.xml  { render :xml => @region, :status => :created, :location => @region }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @region.errors, :status => :unprocessable_entity }
-      end
+    if @region.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@region)}
     end
   end
 
@@ -58,15 +50,12 @@ class RegionsController < ApplicationController
   # PUT /regions/1.xml
   def update
     @region = Region.find(params[:id])
-
-    respond_to do |format|
-      if @region.update_attributes(params[:region])
-        format.html { redirect_to(@region, :notice => '地区修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @region.errors, :status => :unprocessable_entity }
-      end
+    if @region.update_attributes(params[:region])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@region)}
     end
   end
 

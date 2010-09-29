@@ -5,4 +5,6 @@ class Person < ActiveRecord::Base
   belongs_to :boss, :class_name => "Person", :foreign_key => "boss_id"
   validates_presence_of :duty
   enum_attr :gender, [['男', 0], ['女', 1]]
+  blongs_to_name_attr :dep
+  blongs_to_name_attr :duty
 end

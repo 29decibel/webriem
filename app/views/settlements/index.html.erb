@@ -6,7 +6,6 @@
     <th>结算科目</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @settlements.each do |settlement| %>
@@ -15,7 +14,6 @@
     <td><%= settlement.name %></td>
     <td><%= settlement.subject %></td>
     <td><%= link_to '查看', settlement %></td>
-    <td><%= link_to '编辑', edit_settlement_path(settlement) %></td>
     <td><%= link_to '删除', settlement, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -1,5 +1,11 @@
-<%= form_for @doc_head do |f| %>
+<%= form_for @doc_head,:remote=>true do |f| %>
 <h3 class="form_title"><%= @title%></h3>
+<div class="actions">
+  <%= f.submit "保存" %>
+	<% if @doc_head.id %>
+		<%= link_to "提交审批",begin_work_path(@doc_head.id),:remote=>true%>
+	<% end %>
+</div>
 <div class="field">
 	<%= f.label "单号",:class=>"input_label" %>
 	<div class="input_area">
@@ -84,8 +90,7 @@
 		<table class="form_input">
 			<caption>借款单/付款单</caption>
 			<thead>
-				<tr>
-					<th></th><!--给删除的-->
+				<tr>					
 					<th>序号</th>
 				    <th>申请时间</th>
 				    <th>部门</th>
@@ -96,6 +101,7 @@
 					<th>汇率</th>
 					<th>原始金额</th>
 					<th>申请金额</th>
+					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
 			<tbody>
@@ -114,8 +120,7 @@
 		<table class="form_input">
 			<caption>报销单据明细</caption>
 			<thead>
-				<tr>
-					<th></th><!--给删除的-->
+				<tr>					
 					<th>序号</th>
 				    <th>部门</th>
 				    <th>费用类型</th>
@@ -127,6 +132,7 @@
 					<th>原始金额</th>
 					<th>实际金额</th>
 					<th>申请金额</th>
+					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
 			<tbody>
@@ -145,8 +151,7 @@
 		<table class="form_input">
 			<caption>收款明细</caption>
 			<thead>
-				<tr>
-					<th></th><!--给删除的-->
+				<tr>					
 					<th>序号</th>
 				    <th>申请时间</th>
 				    <th>部门</th>
@@ -156,6 +161,7 @@
 				    <th>币种</th>
 					<th>汇率</th>
 					<th>原始金额</th>
+					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
 			<tbody>
@@ -176,14 +182,14 @@
 		<table class="form_input">
 			<caption>收款人</caption>
 			<thead>
-				<tr>
-					<th></th><!--给删除的-->
+				<tr>					
 					<th>序号</th>
 				    <th>结算方式</th>
 				    <th>收款单位</th>
 				    <th>银行</th>
 				    <th>银行帐号</th>
-				    <th>金额</th>			    
+				    <th>金额</th>	
+					<th></th><!--给删除的-->		    
 			    </tr>
 		    <thead>
 			<tbody>
@@ -254,7 +260,4 @@
 		<% end %>
 	</div>
 </div>
-  <div class="actions">
-    <%= f.submit "保存" %>
-  </div>
 <% end %>

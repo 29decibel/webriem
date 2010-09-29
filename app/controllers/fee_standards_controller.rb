@@ -33,24 +33,16 @@ class FeeStandardsController < ApplicationController
     end
   end
 
-  # GET /fee_standards/1/edit
-  def edit
-    @fee_standard = FeeStandard.find(params[:id])
-  end
-
   # POST /fee_standards
   # POST /fee_standards.xml
   def create
     @fee_standard = FeeStandard.new(params[:fee_standard])
-
-    respond_to do |format|
-      if @fee_standard.save
-        format.html { redirect_to(@fee_standard, :notice => '费用标准添加成功') }
-        format.xml  { render :xml => @fee_standard, :status => :created, :location => @fee_standard }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @fee_standard.errors, :status => :unprocessable_entity }
-      end
+    if @fee_standard.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee_standard)}
     end
   end
 
@@ -58,15 +50,12 @@ class FeeStandardsController < ApplicationController
   # PUT /fee_standards/1.xml
   def update
     @fee_standard = FeeStandard.find(params[:id])
-
-    respond_to do |format|
-      if @fee_standard.update_attributes(params[:fee_standard])
-        format.html { redirect_to(@fee_standard, :notice => '费用标准修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @fee_standard.errors, :status => :unprocessable_entity }
-      end
+    if @fee_standard.update_attributes(params[:fee_standard])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee_standard)}
     end
   end
 

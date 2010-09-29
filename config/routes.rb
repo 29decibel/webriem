@@ -10,7 +10,9 @@ Webreim::Application.routes.draw do
 
   resources :doc_heads  
 
-  get "task/index"
+  match "task/index",:as=>:home_page
+  
+  match "doc_heads/begin_work/:id"=>'docHeads#begin_work',:as=>:begin_work
   
   devise_for :users
 

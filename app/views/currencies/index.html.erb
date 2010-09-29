@@ -5,7 +5,6 @@
     <th>编码</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @currencies.each do |currency| %>
@@ -13,7 +12,6 @@
     <td><%= currency.name %></td>
     <td><%= currency.code %></td>
     <td><%= link_to '查看', currency %></td>
-    <td><%= link_to '编辑', edit_currency_path(currency) %></td>
     <td><%= link_to '删除', currency, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

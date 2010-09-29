@@ -6,7 +6,6 @@
     <th>对应U8项目</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -15,7 +14,6 @@
     <td><%= project.code %></td>
     <td><%= project.u8_project %></td>
     <td><%= link_to '查看', project %></td>
-    <td><%= link_to '编辑', edit_project_path(project) %></td>
     <td><%= link_to '删除', project, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

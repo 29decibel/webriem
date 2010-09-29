@@ -33,24 +33,18 @@ class PeopleController < ApplicationController
     end
   end
 
-  # GET /people/1/edit
-  def edit
-    @person = Person.find(params[:id])
-  end
 
   # POST /people
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
     create_user_account(@person.code,@person.e_mail) if params[:add_account]
-    respond_to do |format|
-      if @person.save
-        format.html { redirect_to(@person, :notice => '人员添加成功') }
-        format.xml  { render :xml => @person, :status => :created, :location => @person }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
-      end
+    if @person.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@person)}
     end
   end
   
@@ -62,16 +56,13 @@ class PeopleController < ApplicationController
   # PUT /people/1.xml
   def update
     @person = Person.find(params[:id])
-
-    respond_to do |format|
-      if @person.update_attributes(params[:person])
-        create_user_account(@person.code,@person.e_mail) if params[:add_account]
-        format.html { redirect_to(@person, :notice => '人员修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
-      end
+    if @person.update_attributes(params[:person])
+      create_user_account(@person.code,@person.e_mail) if params[:add_account]
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@person)}
     end
   end
 

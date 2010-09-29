@@ -33,24 +33,17 @@ class BudgetsController < ApplicationController
     end
   end
 
-  # GET /budgets/1/edit
-  def edit
-    @budget = Budget.find(params[:id])
-  end
 
   # POST /budgets
   # POST /budgets.xml
   def create
     @budget = Budget.new(params[:budget])
-
-    respond_to do |format|
-      if @budget.save
-        format.html { redirect_to(@budget, :notice => '预算数据添加成功') }
-        format.xml  { render :xml => @budget, :status => :created, :location => @budget }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @budget.errors, :status => :unprocessable_entity }
-      end
+    if @budget.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@budget)}
     end
   end
 
@@ -58,15 +51,12 @@ class BudgetsController < ApplicationController
   # PUT /budgets/1.xml
   def update
     @budget = Budget.find(params[:id])
-
-    respond_to do |format|
-      if @budget.update_attributes(params[:budget])
-        format.html { redirect_to(@budget, :notice => '预算数据更新成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @budget.errors, :status => :unprocessable_entity }
-      end
+    if @budget.update_attributes(params[:budget])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@budget)}
     end
   end
 

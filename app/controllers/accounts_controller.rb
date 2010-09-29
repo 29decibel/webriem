@@ -1,3 +1,4 @@
+#coding: utf-8
 class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
@@ -32,24 +33,16 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET /accounts/1/edit
-  def edit
-    @account = Account.find(params[:id])
-  end
-
   # POST /accounts
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
-
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
-        format.xml  { render :xml => @account, :status => :created, :location => @account }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
-      end
+    if @account.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@account)}
     end
   end
 
@@ -57,15 +50,12 @@ class AccountsController < ApplicationController
   # PUT /accounts/1.xml
   def update
     @account = Account.find(params[:id])
-
-    respond_to do |format|
-      if @account.update_attributes(params[:account])
-        format.html { redirect_to(@account, :notice => 'Account was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
-      end
+    if @account.update_attributes(params[:account])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@account)}
     end
   end
 

@@ -9,7 +9,6 @@
     <th>直属领导</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @people.each do |person| %>
@@ -17,11 +16,10 @@
     <td><%= person.name %></td>
     <td><%= person.code %></td>
     <td><%= person.gender_name %></td>
-    <td><%= person.dep.name %></td>
-    <td><%= person.duty.name %></td>
+    <td><%= person.dep_name %></td>
+    <td><%= person.duty_name %></td>
     <td><%= person.boss==nil ? "":person.boss.name %></td>
     <td><%= link_to '查看', person %></td>
-    <td><%= link_to '编辑', edit_person_path(person) %></td>
     <td><%= link_to '删除', person, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

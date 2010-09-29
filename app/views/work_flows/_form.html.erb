@@ -1,4 +1,4 @@
-<%= form_for(@work_flow) do |f| %>
+<%= form_for(@work_flow,:remote=>true) do |f| %>
 <h3 class="form_title"><%= @title%></h3>
 <div class="field">
 	<%= f.label "审批名称",:class=>"input_label" %>

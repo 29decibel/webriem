@@ -107,6 +107,12 @@
       prompt: "请选择"
   
   activerecord:
+    #这里加入model的中文名称
+    models:
+      dep:"部门"
+    attributes:
+      dep:
+        name:"名称"  
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
@@ -137,6 +143,11 @@
         record_invalid: "校验失败: %{errors}"
   
   activemodel:
+    models:
+      dep:"部门"
+    attributes:
+      dep:
+        name:"名称"
     errors:
       template:
         header:

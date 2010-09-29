@@ -9,7 +9,6 @@
     <th>U8对应编码</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @deps.each do |dep| %>
@@ -21,12 +20,10 @@
     <td><%= dep.end_date.to_date %></td>
     <td><%= dep.u8dep_code %></td>
     <td><%= link_to '查看', dep %></td>
-    <td><%= link_to '编辑', edit_dep_path(dep) %></td>
     <td><%= link_to '删除', dep, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-<%= link_to 'test', new_dep_path, :remote=>true %>
 <%= link_to '增加部门', new_dep_path %>

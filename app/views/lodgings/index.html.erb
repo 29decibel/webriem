@@ -5,7 +5,6 @@
     <th>编码</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @lodgings.each do |lodging| %>
@@ -13,7 +12,6 @@
     <td><%= lodging.name %></td>
     <td><%= lodging.code %></td>
     <td><%= link_to '查看', lodging %></td>
-    <td><%= link_to '编辑', edit_lodging_path(lodging) %></td>
     <td><%= link_to '删除', lodging, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

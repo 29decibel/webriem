@@ -55,23 +55,17 @@ class DocHeadsController < ApplicationController
     end
   end
 
-  # GET /doc_heads/1/edit
-  def edit
-    @doc_head = DocHead.find(params[:id])
-  end
 
   # POST /doc_heads
   # POST /doc_heads.xml
   def create
     @doc_head = DocHead.new(params[:doc_head])
-    respond_to do |format|
-      if @doc_head.save
-        format.html { redirect_to(@doc_head, :notice => '单据添加成功') }
-        format.xml  { render :xml => @doc_head, :status => :created, :location => @doc_head }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @doc_head.errors, :status => :unprocessable_entity }
-      end
+    if @doc_head.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc_head)}
     end
   end
 
@@ -79,15 +73,12 @@ class DocHeadsController < ApplicationController
   # PUT /doc_heads/1.xml
   def update
     @doc_head = DocHead.find(params[:id])
-
-    respond_to do |format|
-      if @doc_head.update_attributes(params[:doc_head])
-        format.html { redirect_to(@doc_head, :notice => '单据修改成功.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @doc_head.errors, :status => :unprocessable_entity }
-      end
+    if @doc_head.update_attributes(params[:doc_head])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc_head)}
     end
   end
 
@@ -102,11 +93,14 @@ class DocHeadsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  #this action is respond to the add reciver method
-  def add_reciver_remote
+  #将单据进入审批阶段
+  def begin_work
+    @doc_head = DocHead.find(params[:id])
+    @doc_head.doc_state=1
+    @doc_head.save
+    @message="开始进入审批环节，审批期间单据不能修改"
     respond_to do |format|
-      format.js
+      format.js { render "show_result"}
     end
   end
 end

@@ -5,7 +5,6 @@
     <th>编码</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @transportations.each do |transportation| %>
@@ -13,7 +12,6 @@
     <td><%= transportation.name %></td>
     <td><%= transportation.code %></td>
     <td><%= link_to '查看', transportation %></td>
-    <td><%= link_to '编辑', edit_transportation_path(transportation) %></td>
     <td><%= link_to '删除', transportation, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -33,24 +33,16 @@ class SettlementsController < ApplicationController
     end
   end
 
-  # GET /settlements/1/edit
-  def edit
-    @settlement = Settlement.find(params[:id])
-  end
-
   # POST /settlements
   # POST /settlements.xml
   def create
     @settlement = Settlement.new(params[:settlement])
-
-    respond_to do |format|
-      if @settlement.save
-        format.html { redirect_to(@settlement, :notice => '结算方式添加成功') }
-        format.xml  { render :xml => @settlement, :status => :created, :location => @settlement }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @settlement.errors, :status => :unprocessable_entity }
-      end
+    if @settlement.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@settlement)}
     end
   end
 
@@ -58,15 +50,12 @@ class SettlementsController < ApplicationController
   # PUT /settlements/1.xml
   def update
     @settlement = Settlement.find(params[:id])
-
-    respond_to do |format|
-      if @settlement.update_attributes(params[:settlement])
-        format.html { redirect_to(@settlement, :notice => '结算方式修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @settlement.errors, :status => :unprocessable_entity }
-      end
+    if @settlement.update_attributes(params[:settlement])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@settlement)}
     end
   end
 

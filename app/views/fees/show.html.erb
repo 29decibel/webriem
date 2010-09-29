@@ -1,31 +1,5 @@
-<h3 class="form_title">费用类型详细信息</h3>
-<div id="details">
-	<!--=========================================-->
-	<div class="field">
-		<span class="attr">编码:</span>
-		<span class="value"><%= @fee.code %></span>
-    </div>
-	<!--=========================================-->
-	<div class="field">
-		<span class="attr">名称:</span>
-		<span class="value"><%= @fee.name %></span>
-    </div>
-	<!--=========================================-->
-	<div class="field">
-		<span class="attr">费用属性:</span>
-		<span class="value"><%= @fee.attr_name %></span>
-    </div>
-	<!--=========================================-->
-	<div class="field">
-		<span class="attr">停用日期:</span>
-		<span class="value"><%= @fee.end_date.to_date %></span>
-    </div>
-	<!--=========================================-->
-	<div class="field">
-		<span class="attr">所属费用类型:</span>
-		<span class="value"><%= @fee.parent_fee==nil ? "": @fee.parent_fee.name%></span>
-    </div>
-</div>
-<%= link_to '编辑', edit_fee_path(@fee) %> |
-<%= link_to '返回', fees_path %> |
-<%= link_to '添加费用类型', new_fee_path %>
+<% @title="填写费用类型信息"%>
+
+<%= render 'form' %>
+
+<%= link_to '返回', fees_path %>

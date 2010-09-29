@@ -9,7 +9,6 @@
     <th>U8报销科目</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @subjects.each do |subject| %>
@@ -21,7 +20,6 @@
     <td><%= subject.u8_borrow_subject %></td>
     <td><%= subject.u8_reim_subject %></td>
     <td><%= link_to '查看', subject %></td>
-    <td><%= link_to '编辑', edit_subject_path(subject) %></td>
     <td><%= link_to '删除', subject, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

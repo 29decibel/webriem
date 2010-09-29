@@ -1,17 +1,5 @@
-<h3 class="form_title">详细信息</h3>
-<div id="details">
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">帐号名称:</span>
-		<span class="value"><%= @account.name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">帐号:</span>
-		<span class="value"><%= @account.account_no %></span>	  
-	</div>
-	</div>
+<% @title="添加帐号信息"%>
 
-<%= link_to '编辑', edit_account_path(@account) %> |
-<%= link_to '返回', accounts_path %> |
-<%= link_to '添加帐号', new_account_path %>
+<%= render 'form' %>
+
+<%= link_to '返回', accounts_path %>

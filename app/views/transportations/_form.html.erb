@@ -1,4 +1,4 @@
-<%= form_for(@transportation) do |f| %>
+<%= form_for(@transportation,:remote=>true) do |f| %>
 <h3 class="form_title"><%= @title%></h3>
 <div class="field">
 	<%= f.label "名称",:class=>"input_label" %>

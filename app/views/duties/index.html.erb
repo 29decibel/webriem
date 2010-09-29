@@ -5,7 +5,6 @@
     <th>编码</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @duties.each do |duty| %>
@@ -13,7 +12,6 @@
     <td><%= duty.name %></td>
     <td><%= duty.code %></td>
     <td><%= link_to '查看', duty %></td>
-    <td><%= link_to '编辑', edit_duty_path(duty) %></td>
     <td><%= link_to '删除', duty, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -7,7 +7,6 @@
 	<th>全年预算</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @budgets.each do |budget| %>
@@ -17,7 +16,6 @@
     <td><%= budget.dep_name %></td>
 	<td><%= budget.all %></td>
     <td><%= link_to '查看', budget %></td>
-    <td><%= link_to '编辑', edit_budget_path(budget) %></td>
     <td><%= link_to '删除', budget, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

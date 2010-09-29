@@ -1,42 +1,5 @@
-<h3 class="form_title">费用标准详细信息</h3>
-<div id="details">
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">项目:</span>
-		<span class="value"><%= @fee_standard.project_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">地图:</span>
-		<span class="value"><%= @fee_standard.region_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">职务:</span>
-		<span class="value"><%= @fee_standard.duty_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">住宿方式:</span>
-		<span class="value"><%= @fee_standard.lodging_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">交通方式:</span>
-		<span class="value"><%= @fee_standard.transportation_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">业务类型:</span>
-		<span class="value"><%= @fee_standard.busitype_name %></span>	  
-	</div>
-		<!--=========================================-->
-	<div class="field">
-		<span class="attr">金额:</span>
-		<span class="value"><%= @fee_standard.amount %></span>	  
-	</div>
-	</div>
+<% @title="填写费用标准信息"%>
 
-<%= link_to '编辑', edit_fee_standard_path(@fee_standard) %> |
-<%= link_to '返回', fee_standards_path %> |
-<%= link_to '添加费用标准', new_fee_standard_path %>
+<%= render 'form' %>
+
+<%= link_to '返回', fee_standards_path %>

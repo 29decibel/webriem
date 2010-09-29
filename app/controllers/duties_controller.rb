@@ -26,31 +26,18 @@ class DutiesController < ApplicationController
   # GET /duties/new.xml
   def new
     @duty = Duty.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @duty }
-    end
-  end
-
-  # GET /duties/1/edit
-  def edit
-    @duty = Duty.find(params[:id])
   end
 
   # POST /duties
   # POST /duties.xml
   def create
     @duty = Duty.new(params[:duty])
-
-    respond_to do |format|
-      if @duty.save
-        format.html { redirect_to(@duty, :notice => '职务添加成功') }
-        format.xml  { render :xml => @duty, :status => :created, :location => @duty }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @duty.errors, :status => :unprocessable_entity }
-      end
+    if @duty.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@duty)}
     end
   end
 
@@ -58,15 +45,12 @@ class DutiesController < ApplicationController
   # PUT /duties/1.xml
   def update
     @duty = Duty.find(params[:id])
-
-    respond_to do |format|
-      if @duty.update_attributes(params[:duty])
-        format.html { redirect_to(@duty, :notice => '职务修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @duty.errors, :status => :unprocessable_entity }
-      end
+    if @duty.update_attributes(params[:duty])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@duty)}
     end
   end
 

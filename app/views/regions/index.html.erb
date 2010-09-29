@@ -5,7 +5,6 @@
     <th>地区编码</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @regions.each do |region| %>
@@ -13,7 +12,6 @@
     <td><%= region.name %></td>
     <td><%= region.code %></td>
     <td><%= link_to '查看', region %></td>
-    <td><%= link_to '编辑', edit_region_path(region) %></td>
     <td><%= link_to '删除', region, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

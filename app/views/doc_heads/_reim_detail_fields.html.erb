@@ -1,8 +1,4 @@
 <tr class="fields">
-	<td>
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "删除明细", f %> 
-	</td>
 	<td>  
 		<%= f.text_field :sequence,:class=>"small" %>  
 	</td>
@@ -35,6 +31,10 @@
 	</td>
 	<td>
 		<%= f.text_field :real_amount,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.hidden_field(:_destroy) %>
+		<%= link_to_remove "删除明细", f %> 
 	</td>
 	<!--here is the detailed info for the specific reim type-->
 	<div id="reim_details_by_fee_type">

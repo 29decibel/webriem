@@ -10,7 +10,6 @@
     <th>金额</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @fee_standards.each do |fee_standard| %>
@@ -23,7 +22,6 @@
     <td><%= fee_standard.busitype_name %></td>
     <td><%= fee_standard.amount %></td>
     <td><%= link_to '查看', fee_standard %></td>
-    <td><%= link_to '编辑', edit_fee_standard_path(fee_standard) %></td>
     <td><%= link_to '删除', fee_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -33,24 +33,16 @@ class LodgingsController < ApplicationController
     end
   end
 
-  # GET /lodgings/1/edit
-  def edit
-    @lodging = Lodging.find(params[:id])
-  end
-
   # POST /lodgings
   # POST /lodgings.xml
   def create
     @lodging = Lodging.new(params[:lodging])
-
-    respond_to do |format|
-      if @lodging.save
-        format.html { redirect_to(@lodging, :notice => '住宿信息添加成功') }
-        format.xml  { render :xml => @lodging, :status => :created, :location => @lodging }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @lodging.errors, :status => :unprocessable_entity }
-      end
+    if @lodging.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@lodging)}
     end
   end
 
@@ -58,15 +50,12 @@ class LodgingsController < ApplicationController
   # PUT /lodgings/1.xml
   def update
     @lodging = Lodging.find(params[:id])
-
-    respond_to do |format|
-      if @lodging.update_attributes(params[:lodging])
-        format.html { redirect_to(@lodging, :notice => '住宿信息修改成功') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @lodging.errors, :status => :unprocessable_entity }
-      end
+    if @lodging.update_attributes(params[:lodging])
+      @message="更新成功"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@lodging)}
     end
   end
 

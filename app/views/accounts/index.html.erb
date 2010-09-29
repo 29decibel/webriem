@@ -5,7 +5,6 @@
     <th>帐号</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @accounts.each do |account| %>
@@ -13,7 +12,6 @@
     <td><%= account.name %></td>
     <td><%= account.account_no %></td>
     <td><%= link_to '查看', account %></td>
-    <td><%= link_to '编辑', edit_account_path(account) %></td>
     <td><%= link_to '删除', account, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>

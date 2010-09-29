@@ -1,9 +1,5 @@
 <tr class="fields">
 	<td>
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "删除明细", f %> 
-	</td>
-	<td>
 		<%= f.text_field :sequence,:class=>"small" %>  
 	</td> 
 	<td>
@@ -32,5 +28,9 @@
 	</td>
 	<td>
 		<%= f.text_field :apply_amount,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.hidden_field(:_destroy) %>
+		<%= link_to_remove "删除明细", f %> 
 	</td>
 </tr>

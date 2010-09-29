@@ -1,4 +1,4 @@
-<%= form_for(@region) do |f| %>
+<%= form_for(@region,:remote=>true) do |f| %>
 <h3 class="form_title"><%= @title%></h3>
 <div class="field">
 	<%= f.label "地区名称",:class=>"input_label" %>
