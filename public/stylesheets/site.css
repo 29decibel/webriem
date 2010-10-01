@@ -165,6 +165,7 @@ div#footer #desc{
 	position: absolute;
 	visibility: hidden;
 	border-top: 1px solid white;
+	z-index:100;
 }
 		
 #menu li ul li{
@@ -283,4 +284,23 @@ cursor: pointer;
 a.button2:hover,input.button2:hover;{
 background: -moz-linear-gradient(19% 75% 90deg,#C6E5FA, #e2f2ff);
 background: -webkit-gradient(linear, left top, left bottom, from(#e2f2ff), to(#C6E5FA));
+}
+
+/*=================================work flow goes here==================================*/
+div#work_flow_progress{
+	position: relative;
+	padding: 5px;
+	margin: 0 15px 15px 15px;
+	height:35px;
+	background-color: #D6E5F4;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+div#work_flow_progress span{
+	display: inline-block;
+	float: left;
+	margin-top: 5px;
+}
+div.work_flow_step{
+	float: left;
 }

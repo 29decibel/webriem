@@ -1,3 +1,8 @@
-<% doc.work_flows.each do |w| %>
-	<%= w.dep_id %>
-<% end %>
+<div id="work_flow_progress">
+	<span>单据状态</span>
+	<% doc.work_flows.each do |w| %>
+		<div class="work_flow_step">
+			<%= w.dep_id %>
+		</div>		
+	<% end %>
+</div>
