@@ -1,6 +1,6 @@
 <tr class="fields">
 	<td>  
-		<%= f.text_field :sequence,:class=>"small" %>  
+		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>  
 		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>

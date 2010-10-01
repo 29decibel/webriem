@@ -21,6 +21,10 @@ $(function(){
 			}
 		}
 		);
+		//set all sequence stuff readonly
+		$("table.form_input").each(function(){
+			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
+		});
 });
 //=======================here we bind the munu staff===================================
 var timeout    = 500;
@@ -54,15 +58,26 @@ document.onclick = jsddm_close;
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("true");  
     $(link).closest("tr.fields").hide(); 
+		set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
 }
 
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g");
   $(link).parent().parent().before(content.replace(regexp, new_id));
+//debugger
+	set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
 	//wrap the datatime picker
 	$(".datepicker").each(
 		function(){
 			$(this).datepicker();
 			});
+}
+//找到所有的table,只要他有sequence列,set the number to a sequence number
+function set_unique_sequence_num(sequences){
+	//设置他们的序号
+	sequences.each(function(index,ele){
+		$(this).val(index);
+		$(this).attr("disabled","disabled");
+	});
 }

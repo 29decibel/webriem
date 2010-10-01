@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :feed_backs
+
   resources :work_flow_infos
 
   resources :work_flows

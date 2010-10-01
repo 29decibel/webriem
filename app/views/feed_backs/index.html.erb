@@ -1,0 +1,22 @@
+<h3 class="form_title">反馈列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>内容</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @feed_backs.each do |feed_back| %>
+  <tr class="<%= "odd" if feed_back.id%2==0 %>">
+    <td><%= feed_back.content %></td>
+    <td><%= link_to '查看', feed_back %></td>
+    <td><%= link_to '编辑', edit_feed_back_path(feed_back) %></td>
+    <td><%= link_to '删除', feed_back, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加反馈', new_feed_back_path %>

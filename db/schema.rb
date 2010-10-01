@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100923134235) do
+ActiveRecord::Schema.define(:version => 20101001033335) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -126,6 +126,12 @@ ActiveRecord::Schema.define(:version => 20100923134235) do
     t.integer  "transportation_id"
     t.integer  "busitype"
     t.decimal  "amount",            :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feed_backs", :force => true do |t|
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

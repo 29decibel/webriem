@@ -24,11 +24,11 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :reim_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rec_notice_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   #here is the samn reason for 
-  accepts_nested_attributes_for :inner_remittances ,:reject_if => lambda { |a| a[:out_account].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :inner_transfers ,:reject_if => lambda { |a| a[:out_account].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :inner_cash_draws ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :buy_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :redeem_finance_products ,:reject_if => lambda { |a| a[:account_id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :inner_remittances , :allow_destroy => true
+  accepts_nested_attributes_for :inner_transfers , :allow_destroy => true
+  accepts_nested_attributes_for :inner_cash_draws , :allow_destroy => true
+  accepts_nested_attributes_for :buy_finance_products ,:allow_destroy => true
+  accepts_nested_attributes_for :redeem_finance_products , :allow_destroy => true
   #审批流
   accepts_nested_attributes_for :work_flow_infos ,:reject_if => lambda { |a| a[:is_ok].blank? }, :allow_destroy => true
   #获得所有的审批流程

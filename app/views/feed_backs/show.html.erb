@@ -1,0 +1,12 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">意见:</span>
+		<span class="value"><%= @feed_back.content %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_feed_back_path(@feed_back) %> |
+<%= link_to '返回', feed_backs_path %> |
+<%= link_to '添加反馈', new_feed_back_path %>
