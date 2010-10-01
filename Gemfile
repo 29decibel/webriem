@@ -30,7 +30,7 @@ gem 'mysql2'
 # end
 gem "jquery-rails"
 gem "devise"
-group :development, :test do
-  gem 'ruby-debug19'
-end
+#group :development, :test do
+#  gem 'ruby-debug19'
+#end
 #gem "ruby-debug19"
