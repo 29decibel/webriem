@@ -2,3 +2,6 @@ alert("<%= @message %>");
 //$('input').attr('disabled', true);
 //$('a').hide();
 //$('select').attr('disabled','disabled');
+<% if doc_head %>
+	$("#doc_state_process").html("<%= escape_javascript(render :partial=>'doc_state_process',:locals=>{:doc=>doc_head}) %>");
+<% end %>

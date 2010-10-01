@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name
   validates_presence_of :password_confirmation
+  #get the true person
+  def person
+    Person.find_by_code(self.name)
+  end
 end

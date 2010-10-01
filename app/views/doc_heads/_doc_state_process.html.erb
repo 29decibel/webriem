@@ -1,8 +1,14 @@
-<div id="work_flow_progress">
+<div id='work_flow_progress'>
 	<span>单据状态</span>
+	<div class='work_flow_step <%= "current_flow" if doc.doc_state==0%>'>
+		未提交 ====>
+	</div>
 	<% doc.work_flows.each do |w| %>
-		<div class="work_flow_step">
-			<%= w.dep_id %>
-		</div>		
+		<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
+			<%= get_person_from_wfs(w,current_user).name %> ====>				
+		</div>
 	<% end %>
+	<div class='work_flow_step'>
+		审批通过
+	</div>
 </div>

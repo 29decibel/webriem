@@ -291,16 +291,19 @@ div#work_flow_progress{
 	position: relative;
 	padding: 5px;
 	margin: 0 15px 15px 15px;
-	height:35px;
 	background-color: #D6E5F4;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 }
 div#work_flow_progress span{
-	display: inline-block;
-	float: left;
-	margin-top: 5px;
+	display: inline-block;	
+	margin-top: 7px;
 }
-div.work_flow_step{
-	float: left;
+div.work_flow_step{	
+	display: inline-block;
+	margin-top: 7px;
+	margin-left: 20px;
+}
+div.current_flow{
+	background-color: green;
 }

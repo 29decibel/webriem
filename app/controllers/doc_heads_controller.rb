@@ -32,6 +32,7 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new.xml
   def new
     @doc_head = DocHead.new
+    @doc_head.doc_state = 0
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
     #set the apply person to the current login user
@@ -60,6 +61,7 @@ class DocHeadsController < ApplicationController
   # POST /doc_heads.xml
   def create
     @doc_head = DocHead.new(params[:doc_head])
+    @doc_head.doc_state = 0
     if @doc_head.save
       @message="创建成功"
       render "shared/show_result"
@@ -97,10 +99,12 @@ class DocHeadsController < ApplicationController
   def begin_work
     @doc_head = DocHead.find(params[:id])
     @doc_head.doc_state=1
+    #找到当前单据类型对应的审批流，然后取第一个流程中的那个step_id
+    @doc_head.work_flow_step_id=@doc_head.work_flows.first.id
     @doc_head.save
     @message="开始进入审批环节，审批期间单据不能修改"
     respond_to do |format|
-      format.js { render "show_result"}
+      format.js { render "shared/show_result",:locals=>{:doc_head=>@doc_head}}
     end
   end
 end
