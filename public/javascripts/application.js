@@ -21,6 +21,7 @@ $(function(){
 			}
 		}
 		);
+		//$("input.table_row_sequence").attr("readonly","readonly");
 		//set all sequence stuff readonly
 		$("table.form_input").each(function(){
 			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
@@ -78,6 +79,6 @@ function set_unique_sequence_num(sequences){
 	//设置他们的序号
 	sequences.each(function(index,ele){
 		$(this).val(index);
-		$(this).attr("disabled","disabled");
+		$(this).attr("readonly","readonly");
 	});
 }
