@@ -21,7 +21,12 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/1.xml
   def show
     @doc_head = DocHead.find(params[:id])
-
+    #if the doc is current needed to be approved by current person,then new a @work_flow_info
+    if @doc_head.doc_state==1
+      if get_person_from_wfs(@doc_head.current_work_flow_step,current_user).id==current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @doc_head }
@@ -104,7 +109,7 @@ class DocHeadsController < ApplicationController
     @doc_head.save
     @message="开始进入审批环节，审批期间单据不能修改"
     respond_to do |format|
-      format.js { render "shared/show_result",:locals=>{:doc_head=>@doc_head}}
+      format.js { render "shared/show_result"}
     end
   end
 end

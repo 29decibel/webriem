@@ -2,6 +2,9 @@ alert("<%= @message %>");
 //$('input').attr('disabled', true);
 //$('a').hide();
 //$('select').attr('disabled','disabled');
-<% if doc_head %>
-	$("#doc_state_process").html("<%= escape_javascript(render :partial=>'doc_state_process',:locals=>{:doc=>doc_head}) %>");
+//rerender the doc state bar
+<% if @doc_head %>
+	$("#doc_state_process").html("<%= escape_javascript(render :partial=>'doc_heads/doc_state_process',:locals=>{:doc=>@doc_head}) %>");
+	//rerender the work_flow_info area
+	$("#work_flow_info").html("<%= escape_javascript(render :partial=>'doc_heads/work_flow_info',:locals=>{:doc_head=>@doc_head,:work_flow_info=>@work_flow_info}) %>");
 <% end %>

@@ -1,0 +1,21 @@
+<table class="hor-zebra">
+  <tr>
+    <th>单据号</th>
+    <th>附件个数</th>
+    <th>申请人</th>
+    <th>备注</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% my_docs.each do |my_doc| %>
+  <tr class="<%= "odd" if my_doc.id%2==0 %>">
+    <td><%= my_doc.doc_no %></td>
+    <td><%= my_doc.attach %></td>
+    <td><%= my_doc.person_name %></td>
+    <td><%= my_doc.note %></td>
+    <td><%= link_to '查看', my_doc %></td>
+    <td><%= link_to '删除', my_doc, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

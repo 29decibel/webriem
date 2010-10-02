@@ -34,6 +34,34 @@ class DocHead < ActiveRecord::Base
   #获得所有的审批流程
   def work_flows
     wf=WorkFlow.where("doc_types like '%?%'",doc_type).first
-    wf==nil ? []:wf.work_flow_steps
+    wf==nil ? []:wf.work_flow_steps.to_a
+  end
+  def current_work_flow_step
+    WorkFlowStep.find(self.work_flow_step_id)
+  end
+  #next step
+  def next_work_flow_step
+    wfs=nil
+    if self.doc_state==0
+      self.work_flow_step_id=work_flows[0].id
+      self.doc_state=1
+    elsif self.doc_state==2
+      nil
+    elsif current_work_flow_step && work_flows
+      current_index=work_flows.index(current_work_flow_step)
+      if current_index<work_flows.count-1
+        wfs=work_flows[current_index+1]
+        self.work_flow_step_id=wfs.id
+      else
+        self.doc_state=2
+        self.work_flow_step_id=-1
+      end
+    end
+  end
+  #decline
+  def decline
+    #终止单据
+    self.doc_state=0
+    self.work_flow_step_id=-1
   end
 end

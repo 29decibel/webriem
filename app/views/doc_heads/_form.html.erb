@@ -271,22 +271,10 @@
 		<% end %>
 	</div>
 	<% end %>
-	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<!--审批流++++++++根据当前单据状态以及当前审批人显示下面内容-->
-	<div class="form_title">
-		<h3>审批信息</h3>
-	</div>
-	<div id="work_flow_info">
-		<!--目前已经存在的审批信息-->
-		<% @doc_head.work_flow_infos.each do |wf| %>
-			<p>
-				<span><%= wf.is_ok%></span><span><%= wf.people_id%></span><span><%= wf.comments%></span>
-			</p>
-		<% end %>
-		<!--填写审批信息-->
-		<% f.fields_for :work_flow_infos do |builder|  %>
-			<%= render :partial => "work_flow_info",:locals => { :f => builder }  %>
-		<% end %>
-	</div>
 </div>
 <% end %>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!--审批流++++++++根据当前单据状态以及当前审批人显示下面内容-->
+<div id="work_flow_info">
+	<%= render(:partial=>"work_flow_info",:locals=>{:work_flow_info=>@work_flow_info,:doc_head=>@doc_head})%>
+</div>

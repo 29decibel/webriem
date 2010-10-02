@@ -1,3 +1,4 @@
+#coding: utf-8
 class WorkFlowInfosController < ApplicationController
   # GET /work_flow_infos
   # GET /work_flow_infos.xml
@@ -36,8 +37,14 @@ class WorkFlowInfosController < ApplicationController
   # POST /work_flow_infos.xml
   def create
     @work_flow_info = WorkFlowInfo.new(params[:work_flow_info])
-    if @work_flow_info.save
-      @message="创建成功"
+    if @work_flow_info.is_ok==1
+      @work_flow_info.doc_head.next_work_flow_step
+    else
+      @work_flow_info.doc_head.decline
+    end
+    @doc_head=@work_flow_info.doc_head
+    if @work_flow_info.save && @doc_head.save
+      @message="审批完成"
       render "shared/show_result"
     else
       #write some codes

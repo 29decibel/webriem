@@ -1,14 +1,42 @@
-<h3>现在已经存在的审批流</h3>
-<div id="work_flow_info">
-	<p>
-		<%= f.label :is_ok,"是否通过"%>
-		<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK %>
-	</p>
-	<p>
-		<%= f.label :comments,"批语"%>
-		<%= f.text_area :comments %>
-	</p>
-	<p>
-		<%= f.hidden_field :people_id%>
-	</p>
+<div class="form_title">
+	<h3>审批信息</h3>
 </div>
+<!--目前已经存在的审批信息-->
+<table class="hor-zebra">
+  <tr>
+    <th>是否通过</th>
+    <th>审批人</th>
+    <th>备注</th>
+  </tr>
+
+<% doc_head.work_flow_infos.each do |wf| %>
+  <tr >
+    <td><%= wf.is_ok %></td>
+    <td><%= wf.people_id %></td>
+    <td><%= wf.comments %></td>
+  </tr>
+<% end %>
+</table>
+<% if work_flow_info %>
+	<% form_for work_flow_info,:remote=>true do |f| %>
+		<div id="work_flow_info_form">
+			<p>
+				<%= f.label :is_ok,"是否通过"%>
+				<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK %>
+			</p>
+			<p>
+				<%= f.label :comments,"批语"%>
+				<%= f.text_area :comments %>
+			</p>
+			<p>
+				<%= f.hidden_field :people_id,:value=>current_user.person.id%>
+				<%= f.hidden_field :doc_head_id,:value=>@doc_head.id%>
+			</p>
+		</div>
+		<div class="actions">
+			<%= f.submit "确定",:class=>"button2" %>
+		</div>
+	<% end %>
+<% end %>
+
+

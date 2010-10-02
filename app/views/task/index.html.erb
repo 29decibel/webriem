@@ -1,1 +1,13 @@
-目前没有待审批的单据.....
+<div id="my_doc">
+	<div class="form_title">
+		我的单据
+	</div>
+	<%= render :partial=>"my_doc_list",:locals=>{:my_docs=>@my_docs}%>
+</div>
+<div id="docs_to_approve">
+	<div class="form_title">
+		待审批的单据
+	</div>
+	<%= render :partial=>"my_doc_list",:locals=>{:my_docs=>@docs_to_approve}%>
+</div>
+
