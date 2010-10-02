@@ -14,7 +14,7 @@
 			 ====>
 		</div>
 	<% end %>
-	<div class='work_flow_step'>
+	<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 %>'>
 		审批通过
 	</div>
 </div>
