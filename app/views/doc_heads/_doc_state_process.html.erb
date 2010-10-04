@@ -8,7 +8,7 @@
 	</div>
 	<% doc.work_flows.each do |w| %>
 		<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
-			<%= get_person_from_wfs(w,current_user).name %>
+			<%= get_person_from_wfs(w,doc.person).name %>
 		</div>
 		<div class='work_flow_step'>
 			 ====>

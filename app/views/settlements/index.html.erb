@@ -9,7 +9,7 @@
   </tr>
 
 <% @settlements.each do |settlement| %>
-  <tr class="<%= "odd" if settlement.id%2==0 %>">
+  <tr>
     <td><%= settlement.code %></td>
     <td><%= settlement.name %></td>
     <td><%= settlement.subject %></td>

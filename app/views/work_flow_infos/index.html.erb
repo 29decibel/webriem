@@ -10,7 +10,7 @@
   </tr>
 
 <% @work_flow_infos.each do |work_flow_info| %>
-  <tr class="<%= "odd" if work_flow_info.id%2==0 %>">
+  <tr>
     <td><%= work_flow_info.doc_head_id %></td>
     <td><%= work_flow_info.is_ok %></td>
     <td><%= work_flow_info.people_id %></td>

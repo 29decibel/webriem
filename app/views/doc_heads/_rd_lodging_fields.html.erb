@@ -1,47 +1,36 @@
-<h3>住宿费报销</h3>
-<div class="fields">
-	<p>  
-		<%= f.label :sequence, "序号" %><br />  
+<tr class="fields">
+	<td>
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
-	</p>
-	<p>  
-		<%= f.label :days, "住宿天数" %><br />  
-		<%= f.text_field :days %>  
-	</p>
-	<p>  
-		<%= f.label :region, "城市" %><br />  
+	</td>
+	<td>
+		<%= f.text_field :days,:class=>"normal" %>  
+	</td>
+	<td>
 		<%= f.select(:region_id,  Region.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
-	</p>
-	<p>  
-		<%= f.label :lodging_date, "住宿日期" %><br />  
-		<%= f.text_field :lodging_date,:class=>"datepicker" %>  
-	</p>
-	<p>  
-		<%= f.label :fee_standard, "费用标准" %><br /> 
+	</td>
+	<td>
+		<%= f.text_field :lodging_date,:class=>"datepicker normal" %>  
+	</td>
+	<td>
 		//todo 这里按照一定的规则带出来 
-	</p>
-	<p>  
-		<%= f.label :people_count, "人数" %><br />  
-		<%= f.text_field :people_count %>  
-	</p>
-	<p>  
-		<%= f.label :person_names, "合住人" %><br />  
-		<%= f.text_field :person_names %>  
-	</p>
-	<p>  
-		<%= f.label :apply_amount, "申请费用" %><br />  
-		<%= f.text_field :apply_amount %>  
-	</p>
-	<p>  
-		<%= f.label :hr_amount, "HR调整" %><br />  
-		<%= f.text_field :hr_amount %>  
-	</p>
-	<p>  
-		<%= f.label :fi_amount, "财务调整" %><br />  
-		<%= f.text_field :fi_amount %>  
-	</p>
-	<p>
+	</td>
+	<td>
+		<%= f.text_field :people_count,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :person_names,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :apply_amount,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :hr_amount,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :fi_amount,:class=>"normal" %>  
+	</td>
+	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除住宿费报销明细", f %> 
-	</p>
-</div>
+	</td>
+</tr>

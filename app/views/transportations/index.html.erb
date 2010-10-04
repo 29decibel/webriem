@@ -8,7 +8,7 @@
   </tr>
 
 <% @transportations.each do |transportation| %>
-  <tr class="<%= "odd" if transportation.id%2==0 %>">
+  <tr>
     <td><%= transportation.name %></td>
     <td><%= transportation.code %></td>
     <td><%= link_to '查看', transportation %></td>

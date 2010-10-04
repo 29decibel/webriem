@@ -37,7 +37,11 @@ class DocHead < ActiveRecord::Base
     wf==nil ? []:wf.work_flow_steps.to_a
   end
   def current_work_flow_step
-    WorkFlowStep.find(self.work_flow_step_id)
+    wfs=nil
+    if self.work_flow_step_id
+      wfs=WorkFlowStep.find(self.work_flow_step_id)
+    end
+    wfs
   end
   #next step
   def next_work_flow_step

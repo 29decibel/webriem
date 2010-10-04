@@ -7,4 +7,6 @@ alert("<%= @message %>");
 	$("#doc_state_process").html("<%= escape_javascript(render :partial=>'doc_heads/doc_state_process',:locals=>{:doc=>@doc_head}) %>");
 	//rerender the work_flow_info area
 	$("#work_flow_info").html("<%= escape_javascript(render :partial=>'doc_heads/work_flow_info',:locals=>{:doc_head=>@doc_head,:work_flow_info=>@work_flow_info}) %>");
+	//replace the doc_heads
+	$("#doc_head_actions").html("<%= escape_javascript(render :partial=>'doc_heads/doc_head_actions',:locals=>{:doc_head=>@doc_head}) %>");
 <% end %>

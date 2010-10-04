@@ -8,7 +8,7 @@
   </tr>
 
 <% @work_flows.each do |work_flow| %>
-  <tr class="<%= "odd" if work_flow.id%2==0 %>">
+  <tr>
     <td><%= work_flow.name %></td>
     <td><%= work_flow.doc_types %></td>
     <td><%= link_to '查看', work_flow %></td>

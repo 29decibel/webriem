@@ -1,43 +1,33 @@
-<h3>加班餐费报销</h3>
-<div class="fields">
-	<p>  
-		<%= f.label :sequence, "序号" %><br />  
+<tr class="fields">
+	<td>
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
-	</p>
-	<p>  
-		<%= f.label :work_date, "日期" %><br />  
-		<%= f.text_field :work_date,:class=>"datepicker" %>  
-	</p>
-	<p>  
-		<%= f.label :is_sunday, "是否休息日" %><br />  
-		<%= f.text_field :is_sunday %>  
-	</p>
-	<p>  
-		<%= f.label :start_time, "开始时间" %><br />  
-		<%= f.text_field :start_time,:class=>"datepicker" %>  
-	</p>
-	<p>  
-		<%= f.label :end_time, "结束时间" %><br />  
-		<%= f.text_field :end_time,:class=>"datepicker" %>  
-	</p>
-	<p>  
-		<%= f.label :reason, "事由" %><br />  
-		<%= f.text_field :reason %>  
-	</p>
-	<p>  
-		<%= f.label :apply_amount, "申请费用" %><br />  
-		<%= f.text_field :apply_amount %>  
-	</p>
-	<p>  
-		<%= f.label :hr_amount, "HR调整" %><br />  
-		<%= f.text_field :hr_amount %>  
-	</p>
-	<p>  
-		<%= f.label :fi_amount, "财务调整" %><br />  
-		<%= f.text_field :fi_amount %>  
-	</p>
-	<p>
+	</td>
+	<td>
+		<%= f.text_field :work_date,:class=>"datepicker normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :is_sunday,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :start_time,:class=>"datepicker normal" %>  
+	</td>
+	<td> 
+		<%= f.text_field :end_time,:class=>"datepicker normal" %>  
+	</td>
+	<td> 
+		<%= f.text_field :reason,:class=>"normal" %>  
+	</td>
+	<td>  
+		<%= f.text_field :apply_amount,:class=>"normal" %>  
+	</td>
+	<td> 
+		<%= f.text_field :hr_amount,:class=>"normal" %>  
+	</td>
+	<td>  
+		<%= f.text_field :fi_amount,:class=>"normal" %>  
+	</td>
+	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除加班餐费明细", f %> 
-	</p>
-</div>
+	</td>
+</tr>

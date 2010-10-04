@@ -10,7 +10,7 @@
   </tr>
 
 <% @budgets.each do |budget| %>
-  <tr class="<%= "odd" if budget.id%2==0 %>">
+  <tr>
     <td><%= budget.fee_name %></td>
     <td><%= budget.project_name %></td>
     <td><%= budget.dep_name %></td>

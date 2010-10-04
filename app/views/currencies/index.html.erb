@@ -8,7 +8,7 @@
   </tr>
 
 <% @currencies.each do |currency| %>
-  <tr class="<%= "odd" if currency.id%2==0 %>">
+  <tr>
     <td><%= currency.name %></td>
     <td><%= currency.code %></td>
     <td><%= link_to '查看', currency %></td>

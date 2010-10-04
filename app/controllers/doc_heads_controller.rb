@@ -23,7 +23,7 @@ class DocHeadsController < ApplicationController
     @doc_head = DocHead.find(params[:id])
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
-      if get_person_from_wfs(@doc_head.current_work_flow_step,current_user).id==current_user.person.id
+      if get_person_from_wfs(@doc_head.current_work_flow_step,@doc_head.person).id==current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
     end
@@ -108,6 +108,7 @@ class DocHeadsController < ApplicationController
     @doc_head.work_flow_step_id=@doc_head.work_flows.first.id
     @doc_head.save
     @message="开始进入审批环节，审批期间单据不能修改"
+    @work_flow_info=WorkFlowInfo.new
     respond_to do |format|
       format.js { render "shared/show_result"}
     end

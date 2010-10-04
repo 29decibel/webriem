@@ -1,4 +1,7 @@
 <tr class="fields">
+	<td>
+		<a class="check_details" href="#">明细</a>
+	</td>
 	<td>  
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
@@ -6,7 +9,7 @@
 		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
 	</td>
 	<td>  
-		<%= f.select :fee_id,Fee.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+		<%= f.select :fee_id,Fee.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input fee_type"}%>
 	</td>
 	<td>  
 		<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
@@ -36,63 +39,252 @@
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除明细", f %> 
 	</td>
-	<!--here is the detailed info for the specific reim type-->
-	<div id="reim_details_by_fee_type">
-		<div id="rd_travel">
-			<% f.fields_for :rd_travels do |builder|  %>
-				<%= render :partial => 'rd_travel_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加差旅费",f,:rd_travels %>
-		</div>	
-		<div id="rd_transport">
-			<% f.fields_for :rd_transports do |builder|  %>
-				<%= render :partial => 'rd_transport_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加交通费",f,:rd_transports %>
+</tr>
+<tr>
+	<td colspan="11">
+		<div class="reim_details_by_fee_type ">
+			<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_travel rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>	
+								<th>序号</th>
+							    <th>出差天数</th>
+							    <th>出差地点</th>
+							    <th>出差事由</th>
+							    <th>费用标准</th>
+								<th>其他费用</th>
+							    <th>其他费用说明</th>
+								<th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_travels do |builder| %>
+								<%= render :partial => 'rd_travel_fields',:locals => { :f => builder } %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加差旅费",f,:rd_travels %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
+				<div id="rd_transport rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>开始时间</th>
+							    <th>到达时间</th>
+							    <th>出发地</th>
+							    <th>目的地</th>
+								<th>出差事由</th>
+							    <th>交通工具</th>
+								<th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_transports do |builder|  %>
+								<%= render :partial => 'rd_transport_fields',:locals => { :f => builder }  %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
+						</tr>		
+					</table>					
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_loding rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>住宿天数</th>
+							    <th>城市</th>
+							    <th>住宿日期</th>
+							    <th>费用标准</th>
+								<th>人数</th>
+							    <th>合住人</th>
+								<th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_lodgings do |builder|  %>
+								<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_work_meal rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>地点</th>
+							    <th>日期</th>
+							    <th>人数</th>
+							    <th>参与人姓名</th>
+								<th>事由</th>
+							    <th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_work_meals do |builder|  %>
+								<%= render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_extra_work_meal rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>日期</th>
+							    <th>是否休息日</th>
+								<th>开始时间</th>
+							    <th>结束时间</th>
+								<th>事由</th>
+								<th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_extra_work_meals do |builder|  %>
+								<%= render :partial => 'rd_extra_work_meal_fields',:locals => { :f => builder }  %>
+							<% end %>			
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_extra_work_car rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>日期</th>
+							    <th>是否休息日</th>
+							    <th>开始地点</th>
+							    <th>结束地点</th>
+								<th>开始时间</th>
+							    <th>结束时间</th>
+								<th>事由</th>
+								<th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_extra_work_cars do |builder|  %>
+								<%= render :partial => 'rd_extra_work_car_fields',:locals => { :f => builder }  %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_common_transport rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>日期</th>
+							    <th>开始地点</th>
+							    <th>结束地点</th>
+								<th>开始时间</th>
+							    <th>结束时间</th>
+								<th>事由</th>
+								<th>申请费用</th>
+								<th>HR调整</th>
+								<th>财务调整</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_common_transports do |builder|  %>
+								<%= render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<div id="rd_benefit rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>报销日期</th>
+							    <th>人数</th>
+							    <th>费用期间</th>
+							    <th>申请费用</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :rd_benefits do |builder|  %>
+								<%= render :partial => 'rd_benefit_fields',:locals => { :f => builder }  %>
+							<% end %>			
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
+						</tr>		
+					</table>
+				</div>
+				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				<!--分摊明细动态显示-->
+				<div id="reim_split_details rdd_details">
+					<table class="form_input">
+						<thead>
+							<tr>					
+								<th>序号</th>
+							    <th>部门</th>							    
+							    <th>项目</th>
+								<th>费用类型</th>
+							    <th>百分比</th>
+								<th></th><!--给删除的-->
+						    </tr>
+					    <thead>
+						<tbody>
+							<% f.fields_for :reim_split_details do |builder|  %>
+								<%= render :partial => "reim_split_detail_fields",:locals => { :f => builder }  %>
+							<% end %>				
+						</tbody>
+						<tr>
+							<th colspan="11"><%= link_to_add_fields "添加分摊明细",f,:reim_split_details %></th>
+						</tr>		
+					</table>
+				</div>
 		</div>
-		<div id="rd_loding">
-			<% f.fields_for :rd_lodgings do |builder|  %>
-				<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加住宿费",f,:rd_lodgings %>
-		</div>
-		<div id="rd_work_meal">
-			<% f.fields_for :rd_work_meals do |builder|  %>
-				<%= render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %>
-		</div>
-		++++++++++++++++++++++++++++++++
-		<div id="rd_extra_work_meal">
-			<% f.fields_for :rd_extra_work_meals do |builder|  %>
-				<%= render :partial => 'rd_extra_work_meal_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %>
-		</div>
-		<div id="rd_extra_work_car">
-			<% f.fields_for :rd_extra_work_cars do |builder|  %>
-				<%= render :partial => 'rd_extra_work_car_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %>
-		</div>
-		<div id="rd_common_transport">
-			<% f.fields_for :rd_common_transports do |builder|  %>
-				<%= render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %>
-		</div>
-		<div id="rd_benefit">
-			<% f.fields_for :rd_benefits do |builder|  %>
-				<%= render :partial => 'rd_benefit_fields',:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加福利费用",f,:rd_benefits %>
-		</div>
-		<!--分摊明细动态显示-->
-		<div id="reim_split_details">
-			<% f.fields_for :reim_split_details do |builder|  %>
-				<%= render :partial => "reim_split_detail_fields",:locals => { :f => builder }  %>
-			<% end %>
-			<%= link_to_add_fields "添加分摊明细",f,:reim_split_details %>
-		</div>
-	</div>
+	</td>
 </tr>

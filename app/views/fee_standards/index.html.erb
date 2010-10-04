@@ -13,7 +13,7 @@
   </tr>
 
 <% @fee_standards.each do |fee_standard| %>
-  <tr class="<%= "odd" if fee_standard.id%2==0 %>">
+  <tr>
     <td><%= fee_standard.project_name %></td>
     <td><%= fee_standard.region_name %></td>
     <td><%= fee_standard.duty_name %></td>

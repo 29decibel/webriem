@@ -26,13 +26,13 @@ module ApplicationHelper
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"报销单据",4=>"收款通知单",5=>"结汇申请单",6=>"转账申请",7=>"现金提取申请单",8=>"购买理财产品申请单",9=>"赎回理财产品申请单"}
   
   #这个step对应的那个人是谁
-  def get_person_from_wfs(work_flow_step,cu)
+  def get_person_from_wfs(work_flow_step,apply_person)
     person=nil
     #不是本部门的直接找
     if work_flow_step.is_self_dep==0
       person=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id).first
     else
-      dep=cu.person.dep
+      dep=apply_person.dep
       while dep
         person=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id).first
         break if person

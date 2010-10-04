@@ -60,8 +60,8 @@ table.hor-zebra td
 	padding: 8px;
 	color: #669;
 }
-table.hor-zebra .odd
-{
+table.hor-zebra tr:nth-child(odd)
+{ 
 	background: #e8edff; 
 }
 /*=================================================================================*/
@@ -243,9 +243,6 @@ div.table_details{
 	margin: 15px;
 	padding: 0px;
 }
-div#reim_details_by_fee_type{
-	display: none;
-}
 /*==============================================================*/
 /*actions area*/
 div.actions{
@@ -306,4 +303,10 @@ div.work_flow_step{
 }
 div.current_flow{
 	background-color: green;
+}
+
+/*the styles for the reim details by dropdownlist*/
+div.reim_details_by_fee_type{
+	display: inline=block;
+	background-color: #e9eef2;
 }

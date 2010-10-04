@@ -8,7 +8,7 @@
   </tr>
 
 <% @feed_backs.each do |feed_back| %>
-  <tr class="<%= "odd" if feed_back.id%2==0 %>">
+  <tr>
     <td><%= feed_back.content %></td>
     <td><%= link_to '查看', feed_back %></td>
     <td><%= link_to '编辑', edit_feed_back_path(feed_back) %></td>

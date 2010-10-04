@@ -45,6 +45,7 @@ class WorkFlowInfosController < ApplicationController
     @doc_head=@work_flow_info.doc_head
     if @work_flow_info.save && @doc_head.save
       @message="审批完成"
+      @work_flow_info=nil
       render "shared/show_result"
     else
       #write some codes

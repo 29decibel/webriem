@@ -2,13 +2,7 @@
 <div class="form_title">
 	<h3><%= @title%></h3>
 </div>
-<div class="actions">
-	<%= f.submit "保存",:class=>"button2" %>
-	<% if @doc_head.id %>
-		<%= link_to "提交审批",begin_work_path(@doc_head.id),:remote=>true,:class=>"button2"%>
-	<% end %>
-	<%= link_to '返回', doc_heads_path(:doc_type=>@doc_head.doc_type),:class=>"button2" %>
-</div>
+<%= render :partial=>"doc_head_actions",:locals=>{:doc_head=>@doc_head}%>
 <div id="doc_state_process">
 	<%= render :partial=>"doc_state_process",:locals=>{:doc=>@doc_head}%>
 </div>
@@ -129,7 +123,8 @@
 	<div class="table_details">
 		<table class="form_input">
 			<thead>
-				<tr>					
+				<tr>
+					<th></th>
 					<th>序号</th>
 				    <th>部门</th>
 				    <th>费用类型</th>

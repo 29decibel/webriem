@@ -8,7 +8,7 @@
   </tr>
 
 <% @regions.each do |region| %>
-  <tr class="<%= "odd" if region.id%2==0 %>">
+  <tr>
     <td><%= region.name %></td>
     <td><%= region.code %></td>
     <td><%= link_to '查看', region %></td>

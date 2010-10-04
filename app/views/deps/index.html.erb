@@ -12,7 +12,7 @@
   </tr>
 
 <% @deps.each do |dep| %>
-  <tr class="<%= "odd" if dep.id%2==0 %>">
+  <tr>
     <td><%= dep.code %></td>
     <td><%= dep.name %></td>
     <td><%= dep.version %></td>

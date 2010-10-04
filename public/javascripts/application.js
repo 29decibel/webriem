@@ -26,6 +26,18 @@ $(function(){
 		$("table.form_input").each(function(){
 			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
 		});
+		//bind the check details event
+		$("a.check_details").click(function(){
+			alert("test");
+			//expand or collapse the details
+			
+			return false;
+		});
+		//bind the fee type
+		$("select.fee_type").change(function(){
+			alert($(this).val());
+			$(this).parent
+		});
 });
 //=======================here we bind the munu staff===================================
 var timeout    = 500;

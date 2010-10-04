@@ -12,7 +12,7 @@
   </tr>
 
 <% @people.each do |person| %>
-  <tr class="<%= "odd" if person.id%2==0 %>">
+  <tr>
     <td><%= person.name %></td>
     <td><%= person.code %></td>
     <td><%= person.gender_name %></td>

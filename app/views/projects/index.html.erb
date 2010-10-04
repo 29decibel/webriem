@@ -9,7 +9,7 @@
   </tr>
 
 <% @projects.each do |project| %>
-  <tr class="<%= "odd" if project.id%2==0 %>">
+  <tr>
     <td><%= project.name %></td>
     <td><%= project.code %></td>
     <td><%= project.u8_project %></td>

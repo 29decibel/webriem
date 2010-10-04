@@ -10,7 +10,7 @@
   </tr>
 
 <% @fees.each do |fee| %>
-  <tr class="<%= "odd" if fee.id%2==0 %>">
+  <tr>
     <td><%= fee.code %></td>
     <td><%= fee.name %></td>
     <td><%= fee.attr_name %></td>

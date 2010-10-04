@@ -8,7 +8,7 @@
   </tr>
 
 <% @accounts.each do |account| %>
-  <tr class="<%= "odd" if account.id%2==0 %>">
+  <tr>
     <td><%= account.name %></td>
     <td><%= account.account_no %></td>
     <td><%= link_to '查看', account %></td>
