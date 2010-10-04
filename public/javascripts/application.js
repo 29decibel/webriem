@@ -27,18 +27,57 @@ $(function(){
 			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
 		});
 		//bind the check details event
-		$("a.check_details").click(function(){
-			alert("test");
+		$("a.check_details").live("click",function(){
+			//change the words
+			if($(this).text()=="展开明细")
+			{
+				$(this).text("折叠明细");
+			}			
+			else
+			{
+				$(this).text("展开明细");
+			}
 			//expand or collapse the details
-			
+			$(this).closest("tr").next("tr").toggle();
 			return false;
 		});
 		//bind the fee type
-		$("select.fee_type").change(function(){
-			alert($(this).val());
-			$(this).parent
-		});
+		bind_change_events();
+		//fire it once
+		$("select.fee_type").change();
 });
+
+//bind the change events
+function bind_change_events()
+{
+	$("select.fee_type").change(function(){
+		//alert($(this).children("option:selected").text());
+		//$(this).parent
+		var selected_text=$(this).children("option:selected").text();
+		var children=$(this).closest("tr").next("tr").find("div.rdd_details");
+		children.show();
+		//children.find("table tr.fields td:last input").val("false");
+		//here is the delete operation
+		//children.find("table tr.fields").hide().find("td:last input").val("true");
+		switch(selected_text)
+		{
+			case "交际费":
+			//children.has("div.rd_travel").show().end();
+				children.not("div.rd_travel").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_travel").hide().end();				
+				break;
+			case "城际交通费":
+			//children.has("div.rd_transport").show().end();
+				children.not("div.rd_transport").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_transport").hide().end();				
+				break;
+			default:
+				children.find("table tr.fields").hide().find("td:last input").val("true");
+				children.hide();
+		}
+	});
+}
+
 //=======================here we bind the munu staff===================================
 var timeout    = 500;
 var closetimer = 0;
@@ -85,12 +124,16 @@ function add_fields(link, association, content) {
 		function(){
 			$(this).datepicker();
 			});
+	//bind the change events
+	bind_change_events();
+	$("select.fee_type").change();
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){
 	//设置他们的序号
 	sequences.each(function(index,ele){
 		$(this).val(index);
+		//fire it once
 		$(this).attr("readonly","readonly");
 	});
 }
