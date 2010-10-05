@@ -1,3 +1,4 @@
+#coding: utf-8
 class DocHead < ActiveRecord::Base
   belongs_to :fee
   belongs_to :dep
@@ -5,6 +6,7 @@ class DocHead < ActiveRecord::Base
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
   blongs_to_name_attr :person
+  validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
   #has many recivers and cp_doc_details
   has_many :recivers, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :cp_doc_details, :class_name => "CpDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
