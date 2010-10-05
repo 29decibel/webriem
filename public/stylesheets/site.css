@@ -44,6 +44,8 @@ table.hor-zebra
 	margin: 45px;
 	text-align: left;
 	border-collapse: collapse;
+	border: 1px solid #999;
+	padding: 10px;
 }
 table tr{
 	overflow: scroll;

@@ -25,7 +25,8 @@ Webreim::Application.configure do
   #set the mail config info
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.raise_delivery_errors = true
-  ActionMailer::Base.smtp_settings = {
+  #this settings is a must
+  config.action_mailer.smtp_settings = {
     :address => "smtp.gmail.com",
     :enable_starttls_auto => true,
     :port => 587,

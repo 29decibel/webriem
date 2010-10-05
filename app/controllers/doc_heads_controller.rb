@@ -23,7 +23,7 @@ class DocHeadsController < ApplicationController
     @doc_head = DocHead.find(params[:id])
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
-      if get_person_from_wfs(@doc_head.current_work_flow_step,@doc_head.person).id==current_user.person.id
+      if @doc_head.approver.id==current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
     end
@@ -107,6 +107,8 @@ class DocHeadsController < ApplicationController
     #找到当前单据类型对应的审批流，然后取第一个流程中的那个step_id
     @doc_head.work_flow_step_id=@doc_head.work_flows.first.id
     @doc_head.save
+    #notice the person who need to approve this doc
+    WorkFlowMailer.notice_need_approve(@doc_head.approver,@doc_head).deliver
     @message="开始进入审批环节，审批期间单据不能修改"
     @work_flow_info=WorkFlowInfo.new
     respond_to do |format|

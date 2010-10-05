@@ -1,11 +1,14 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
+gem 'mysql2'
+gem "jquery-rails"
+gem "devise"
+gem 'delayed_job'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -28,9 +31,9 @@ gem 'mysql2'
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem "jquery-rails"
-gem "devise"
+
 #group :development, :test do
 #  gem 'ruby-debug19'
 #end
 #gem "ruby-debug19"
+
