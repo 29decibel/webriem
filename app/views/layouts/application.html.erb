@@ -14,38 +14,6 @@
 <body>
 	<div id="header">
 		<h2 id="title">网上报销系统</h2>
-		<% if user_signed_in? %>
-		<ul id="menu">
-			<li><%= link_to "首页",home_page_path%></li>
-		    <li><a href="#">档案管理</a>
-		        <ul>
-		            <li><%= link_to "部门",:deps%></li>
-					<li><%= link_to "职务",:duties%></li>
-					<li><%= link_to "员工",:people%></li>
-					<li><%= link_to "费用类型",:fees%></li>
-					<li><%= link_to "地区",:regions%></li>
-					<li><%= link_to "交通方式",:transportations%></li>
-					<li><%= link_to "住宿方式",:lodgings%></li>
-					<li><%= link_to "结算方式",:settlements%></li>
-					<li><%= link_to "费用标准",:fee_standards%></li>
-					<li><%= link_to "项目",:projects%></li>
-					<li><%= link_to "预算数据",:budgets%></li>
-					<li><%= link_to "币种",:currencies%></li>
-					<li><%= link_to "科目设置",:subjects%></li>
-					<li><%= link_to "帐号",:accounts%></li>
-					<li><%= link_to "审批流设置",:work_flows%></li>
-		        </ul>
-		    </li>
-			<li><a href="#">单据管理</a>
-		        <ul>
-					<% (1..9).each do |num| %>
-						<li><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></li>
-					<% end %>
-		        </ul>
-		    </li>
-			<li><%= link_to "反馈",feed_backs_path%></li>
-		</ul>
-		<% end %>
 		<!--user log in info-->
 		<div id="user_nav">
 			<% if user_signed_in? %>  
@@ -55,17 +23,59 @@
 			<% end %>
 		</div>		
 	</div>
-	<br/>
-	<div id="main_content">
-		<div id="info">
-			<% if notice %>
-			<div class="info notice"><%= notice %></div>
-			<% end %>
-			<% if alert %>
-			<div class="info alert"><%= alert %></div>
-			<% end %>
-		</div>	
-		<%= yield %>
+	<div id="main_area">
+		<% if user_signed_in? %>
+		<div id="menu">
+			<div class="menu">
+				<div class="menu_header">
+					<%= link_to "我的任务",home_page_path%>
+				</div>				
+			</div>
+			<div class="menu">
+				<div class="menu_header">
+					<%= link_to "基础档案",{},:href=>"#"%>
+				</div>
+				<div class="menu_item"><%= link_to "部门",:deps%></div>
+				<div class="menu_item"><%= link_to "职务",:duties%></div>
+				<div class="menu_item"><%= link_to "员工",:people%></div>
+				<div class="menu_item"><%= link_to "费用类型",:fees%></div>
+				<div class="menu_item"><%= link_to "地区",:regions%></div>
+				<div class="menu_item"><%= link_to "交通方式",:transportations%></div>
+				<div class="menu_item"><%= link_to "住宿方式",:lodgings%></div>
+				<div class="menu_item"><%= link_to "结算方式",:settlements%></div>
+				<div class="menu_item"><%= link_to "费用标准",:fee_standards%></div>
+				<div class="menu_item"><%= link_to "项目",:projects%></div>
+				<div class="menu_item"><%= link_to "预算数据",:budgets%></div>
+				<div class="menu_item"><%= link_to "币种",:currencies%></div>
+				<div class="menu_item"><%= link_to "科目设置",:subjects%></div>
+				<div class="menu_item"><%= link_to "帐号",:accounts%></div>
+				<div class="menu_item"><%= link_to "审批流设置",:work_flows%></div>
+			</div>
+			<div class="menu">
+				<div class="menu_header">
+					<%= link_to "单据",{},:href=>"#"%>
+				</div>
+				<% (1..9).each do |num| %>
+					<div class="menu_item"><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></div>
+				<% end %>
+			</div>
+			<div class="menu">
+				<%= link_to "反馈",feed_backs_path%>
+			</div>			
+		</div>
+		<% end %>
+		<!--++++++++++++++++++++++++++++++++++contents goes here++++++++++++++++-->
+		<div id="content">
+			<div id="info">
+				<% if notice %>
+				<div class="info notice"><%= notice %></div>
+				<% end %>
+				<% if alert %>
+				<div class="info alert"><%= alert %></div>
+				<% end %>
+			</div>	
+			<%= yield %>
+		</div>		
 	</div>
 	<div id="footer">
 		<%= image_tag "29decibel.png"%>

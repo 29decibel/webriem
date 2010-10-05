@@ -2,7 +2,7 @@
 *{margin:0px;padding:0px;}
 /*whole style*/
 body{
-	width:760px;
+	width:80%;
 	margin:auto;
 	font: 90% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
 }
@@ -17,11 +17,10 @@ a:hover{
 }
 /*parts*/
 div#header{
-	height:120px;
+	height:100px;
 	position:relative;
 	background-image: url("../images/paid-stamp-small.jpg");
 	background-repeat:no-repeat;
-	border-bottom:1px dashed #DDD;
 }
 div#header #title{
 	float:left;
@@ -30,21 +29,41 @@ div#header #title{
 	margin-top: 30px;
 }
 div#header #user_nav{
-	position: absolute;
-	margin-left: 620px;
+	float: right;
 	margin-top: 10px;
+	margin-right: 20px;
 }
-div#main_content{
-	min-height:600px;
+div#main_area{
+	min-height:800px;
+	position: relative;
+}
+div#menu{
+	float:left;
+	width:120px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+div#menu div.menu{
+	border-bottom: 1px solid #999;
+}
+div#menu div.menu_item{
+	padding: 2px 0px 2px 5px;
+}
+div#menu div.menu_item:hover{
+	background-color: #dde5ff;
+}
+div#content{
+	margin: 0px 5px 20px 140px;
+	border: 5px solid #bcf;
 }
 /*give the table a wear==========================================================*/
+
 table.hor-zebra
 {
 	font-size: 12px;
-	margin: 45px;
+	margin: 5px;
 	text-align: left;
 	border-collapse: collapse;
-	border: 2px solid #bcf;
 	padding: 10px;
 }
 table tr{
@@ -72,8 +91,6 @@ form{
 	margin:0 0 15px 0; 
 	padding:5px;   
 	background: none;
-	border: 5px solid #e1e1e1;
-	background-color: #f6f7f2;
 }
 
 form div.field{
@@ -132,56 +149,6 @@ div#footer #desc{
 }
 #details div.fields span.value{
 	text-align: left;
-}
-/*the menu's style goes here*/
-#menu{	
-	margin-top: 90px;
-	float: right;
-	padding:0;
-}
-	
-#menu li{
-	float: left;
-	list-style: none;
-	font: 12px Tahoma, Arial;
-}
-
-#menu li a{
-	display: block;
-	background: #20548E;
-	padding: 5px 12px;
-	text-decoration: none;
-	border-right: 1px solid white;
-	width: 70px;
-	color: #EAFFED;
-	white-space: nowrap;
-}
-
-#menu li a:hover{
-	background: #1A4473;
-}
-		
-#menu li ul{
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	visibility: hidden;
-	border-top: 1px solid white;
-	z-index:100;
-}
-		
-#menu li ul li{
-	float: none;
-	display: inline;
-}
-		
-#menu li ul li a{
-	width: auto;
-	background: #20548E;
-}
-		
-#menu li ul li a:hover{
-	background: #1A4473;
 }
 /***********************************info notice and alert goes here***************************/
 div.info{
