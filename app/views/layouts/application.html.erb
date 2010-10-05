@@ -32,7 +32,6 @@
 				</div>				
 			</div>
 			<div class="menu">
-				<h4>基础档案</h4>
 				<div class="menu_item <%= 'selected' if current_uri.include?('deps/')%>"><%= link_to "部门",:deps%></div>
 				<div class="menu_item <%= 'selected' if current_uri.include?('dut')%>"><%= link_to "职务",:duties%></div>
 				<div class="menu_item <%= 'selected' if current_uri.include?('people')%>"><%= link_to "员工",:people%></div>
@@ -50,7 +49,6 @@
 				<div class="menu_item <%= 'selected' if current_uri.include?('work')%>"><%= link_to "审批流设置",:work_flows%></div>
 			</div>
 			<div class="menu">
-				<h4>单据</h4>
 				<% (1..9).each do |num| %>
 					<div class="menu_item"><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></div>
 				<% end %>

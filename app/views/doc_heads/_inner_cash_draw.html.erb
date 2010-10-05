@@ -1,7 +1,7 @@
 <div class="fields">
 	<p>  
 		<%= f.label :account_id, "现金提取转出账户" %><br />
-		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</p> 
 	<p>  
 		<%= f.label :now_remain_amout, "目前账户金额" %><br />  

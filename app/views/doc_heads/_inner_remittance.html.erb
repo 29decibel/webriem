@@ -1,7 +1,7 @@
 <div class="fields">
 	<p>  
 		<%= f.label :out_account, "结汇账户" %><br />
-		<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</p> 
 	<p>  
 		<%= f.label :in_account_name, "收款账户名称" %><br />  

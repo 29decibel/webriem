@@ -6,10 +6,10 @@
 		<%= f.text_field :apply_date,:class=>"datepicker normal" %>
 	</td>
 	<td>
-		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+		<%= f.select :dep_id,Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"}%>
 	</td>
 	<td>
-		<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"}%>
+		<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"}%>
 	</td>
 	<td>
 		<%= f.text_field :description,:class=>"normal" %>  

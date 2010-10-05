@@ -18,7 +18,7 @@
 		<%= f.text_field :reason,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.select(:transportation_id,  Transportation.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:transportation_id,  Transportation.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</td>
 	<td>
 		<%= f.text_field :apply_amount,:class=>"normal" %>  

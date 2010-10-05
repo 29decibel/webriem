@@ -72,7 +72,7 @@
   	<%=f.label "上级部门",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:dep, :parent_dep_id, Dep.where("id!=? or ? is NULL",@dep.id,@dep.id), :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%>
+			<%= collection_select(:dep, :parent_dep_id, Dep.where("id!=? or ? is NULL",@dep.id,@dep.id), :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
 		</p>
 		<p class="tip"></p>
 	</div>

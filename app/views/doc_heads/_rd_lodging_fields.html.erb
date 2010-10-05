@@ -6,7 +6,7 @@
 		<%= f.text_field :days,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.select(:region_id,  Region.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:region_id,  Region.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</td>
 	<td>
 		<%= f.text_field :lodging_date,:class=>"datepicker normal" %>  

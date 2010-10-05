@@ -6,7 +6,7 @@
 	<%= f.label "费用类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:budget, :fee_id, Fee.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@budget, :fee_id) %>
+			<%= collection_select(:budget, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@budget, :fee_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -16,7 +16,7 @@
 	<%= f.label "项目",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:budget, :project_id, Project.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@budget, :project_id) %>
+			<%= collection_select(:budget, :project_id, Project.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@budget, :project_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -26,7 +26,7 @@
 	<%= f.label "部门",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:budget, :dep_id, Dep.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@budget, :dep_id) %>
+			<%= collection_select(:budget, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@budget, :dep_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>

@@ -3,7 +3,7 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td> 
 	<td>  
-		<%= f.select(:settlement_id,  Settlement.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:settlement_id,  Settlement.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</td>
 	<td>  
 		<%= f.text_field :company,:class=>"normal" %>  

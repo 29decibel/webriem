@@ -26,7 +26,7 @@
 	<%= f.label "费用属性",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :attr,Fee::ENUMS_ATTR,{:include_blank => 'None'},{:class=>"basic_input "} %>
+			<%= f.select :attr,Fee::ENUMS_ATTR,{:include_blank => '无'},{:class=>"basic_input "} %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -46,7 +46,7 @@
   	<%=f.label "所属费用类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:fee, :parent_fee_id, Fee.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%>
+			<%= collection_select(:fee, :parent_fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
 		</p>
 		<p class="tip"></p>
 	</div>

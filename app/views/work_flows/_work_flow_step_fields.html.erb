@@ -1,12 +1,12 @@
 <tr class="fields">
 	<td>
-		<%= f.select(:dep_id,  Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:dep_id,  Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</td> 
 	<td>
-		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{:include_blank => 'None'},{:class=>"basic_input "} %>
+		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input "} %>
 	</td>
 	<td>
-		<%= f.select(:duty_id,  Duty.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:duty_id,  Duty.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>

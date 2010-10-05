@@ -6,7 +6,7 @@
 	</p>
 	<p>  
 		<%= f.label :account_id, "赎回理财产品账户" %><br />
-		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => 'None'},{:class=>"basic_input"})%>
+		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</p> 
 	<p>  
 		<%= f.label :rate, "理财产品利率" %><br />  

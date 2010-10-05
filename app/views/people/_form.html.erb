@@ -36,7 +36,7 @@
 	<%= f.label "所在部门",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:person, :dep_id, Dep.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@person, :dep_id) %>
+			<%= collection_select(:person, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :dep_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -46,7 +46,7 @@
 	<%= f.label "职务",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:person, :duty_id, Duty.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@person, :duty_id) %>
+			<%= collection_select(:person, :duty_id, Duty.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :duty_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -56,7 +56,7 @@
 	<%= f.label "直属领导",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:person, :boss_id, Person.where("id!=? or ? is NULL",@person.id,@person.id), :id, :name, {:disabled=>lambda{|person| person.id==@person.id},:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@person, :boss) %>
+			<%= collection_select(:person, :boss_id, Person.where("id!=? or ? is NULL",@person.id,@person.id), :id, :name, {:disabled=>lambda{|person| person.id==@person.id},:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :boss) %>
 		</p>
 		<p class="tip"></p>
 	</div>

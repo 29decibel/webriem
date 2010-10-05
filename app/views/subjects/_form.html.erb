@@ -6,7 +6,7 @@
 	<%= f.label "业务类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= f.select :busitype, Subject::ENUMS_BUSITYPE,{:include_blank => 'None'},{:class=>"basic_input "}%>
+			<%= f.select :busitype, Subject::ENUMS_BUSITYPE,{:include_blank => '无'},{:class=>"basic_input "}%>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -16,7 +16,7 @@
 	<%= f.label "费用类型",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:subject, :fee_id, Fee.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@subject, :fee_id) %>
+			<%= collection_select(:subject, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@subject, :fee_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>
@@ -26,7 +26,7 @@
 	<%= f.label "部门",:class=>"input_label" %>
 	<div class="input_area">
 		<p class="input">
-			<%= collection_select(:subject, :dep_id, Dep.all, :id, :name, {:include_blank => 'None'},{:class=>"basic_input"})%><%= mark_required(@subject, :dep_id) %>
+			<%= collection_select(:subject, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@subject, :dep_id) %>
 		</p>
 		<p class="tip"></p>
 	</div>
