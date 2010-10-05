@@ -72,31 +72,77 @@ $(function(){
 //bind the change events
 function bind_change_events()
 {
-	$("select.fee_type").change(function(){
+	$("select.fee_type,select.is_split_reim").change(function(){
 		//alert($(this).children("option:selected").text());
 		//$(this).parent
-		var selected_text=$(this).children("option:selected").text();
+		var fee_type;
+		var is_split;
+		if($(this).attr("class")=="basic_input fee_type")
+		{
+			fee_type=$(this).children("option:selected").text();
+			is_split=$(this).closest("tr").find("select.is_split_reim").children("option:selected").val();
+		}
+		else
+		{
+			is_split=$(this).children("option:selected").val();
+			fee_type=$(this).closest("tr").find("select.fee_type").children("option:selected").text();			
+		}
+		//var fee_type=$(this).closest("select.fee_type").children("option:selected").text();
+		//var is_split=$(this).closest("select.is_split_reim").children("option:selected").text();
+		//alert(fee_type);
+		//alert(is_split);
+		//var selected_text=$(this).children("option:selected").text();
 		var children=$(this).closest("tr").next("tr").find("div.rdd_details");
 		children.show();
 		//children.find("table tr.fields td:last input").val("false");
 		//here is the delete operation
 		//children.find("table tr.fields").hide().find("td:last input").val("true");
-		switch(selected_text)
+		if(is_split==1)
 		{
-			case "交际费":
-			//children.has("div.rd_travel").show().end();
-				children.not("div.rd_travel").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_travel").hide().end();				
-				break;
-			case "城际交通费":
-			//children.has("div.rd_transport").show().end();
-				children.not("div.rd_transport").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_transport").hide().end();				
-				break;
-			default:
-				children.find("table tr.fields").hide().find("td:last input").val("true");
-				children.hide();
+			children.not("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
+			children.not("div.reim_split_details").hide().end();
 		}
+		else
+		{
+			switch(fee_type)
+			{				
+				case "差旅费":
+					children.not("div.rd_travel").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_travel").hide().end();				
+					break;
+				case "交通费":
+					children.not("div.rd_transport").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_transport").hide().end();				
+					break;
+				case "住宿费":
+					children.not("div.rd_loding").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_loding").hide().end();
+					break;
+				case "工作餐费":
+					children.not("div.rd_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_work_meal").hide().end();
+					break;
+				case "加班餐费":
+					children.not("div.rd_extra_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_extra_work_meal").hide().end();				
+					break;
+				case "加班交通费":
+					children.not("div.rd_extra_work_car").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_extra_work_car").hide().end();				
+					break;
+				case "业务交通费":
+					children.not("div.rd_common_transport").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_common_transport").hide().end();				
+					break;
+				case "福利费用":
+					children.not("div.rd_benefit").find("table tr.fields").hide().find("td:last input").val("true");
+					children.not("div.rd_benefit").hide().end();				
+					break;
+				default:
+					children.find("table tr.fields").hide().find("td:last input").val("true");
+					children.hide();
+			}
+		}		
 	});
 }
 
