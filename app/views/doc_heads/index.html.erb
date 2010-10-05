@@ -1,4 +1,9 @@
-<h3 class="form_title"><%= doc_type_name(@doc_type)%>列表</h3>
+<div class="form_title">
+	<h3><%= doc_type_name(@doc_type)%>列表</h3>
+</div>
+<div class="actions">
+	<%= link_to "添加#{doc_type_name(@doc_type)}",  new_doc_head_path(:doc_type=>params[:doc_type]),:class=>"button2" %>
+</div>
 <table class="hor-zebra">
   <tr>
     <th>单据号</th>
@@ -30,7 +35,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to "添加#{doc_type_name(@doc_type)}", new_doc_head_path(:doc_type=>params[:doc_type]) %>

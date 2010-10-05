@@ -1,4 +1,9 @@
-<h3 class="form_title">科目设置列表</h3>
+<div class="form_title">
+	<h3>科目设置列表</h3>
+</div>
+	<div class="actions">
+		<%= link_to '添加科目设置', new_subject_path,:class=>"button2" %>
+	</div>
 <table class="hor-zebra">
   <tr>
     <th>业务类型</th>
@@ -24,7 +29,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to '添加科目设置', new_subject_path %>

@@ -21,6 +21,7 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/1.xml
   def show
     @doc_head = DocHead.find(params[:id])
+    @doc_type = @doc_head.doc_type
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
       if @doc_head.approver.id==current_user.person.id
@@ -40,6 +41,7 @@ class DocHeadsController < ApplicationController
     @doc_head.doc_state = 0
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
+    @doc_type = @doc_head.doc_type
     #set the apply person to the current login user
     @doc_head.person=current_person
     #build some new doc details

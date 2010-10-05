@@ -1,31 +1,32 @@
-<div class="table_cover">
-	<h3 class="form_title">部门列表</h3><br/>
-	<table class="hor-zebra">
-	  <tr>
-	    <th>部门编码</th>
-	    <th>部门名称</th>
-	    <th>所属组织结构</th>
-	    <th>启用日期</th>
-	    <th>停用日期</th>
-	    <th>U8对应编码</th>
-	    <th></th>
-	    <th></th>
-	  </tr>
-	<% @deps.each do |dep| %>
-	  <tr>
-	    <td><%= dep.code %></td>
-	    <td><%= dep.name %></td>
-	    <td><%= dep.version %></td>
-	    <td><%= dep.start_date.to_date %></td>
-	    <td><%= dep.end_date.to_date %></td>
-	    <td><%= dep.u8dep_code %></td>
-	    <td><%= link_to '查看', dep %></td>
-	    <td><%= link_to '删除', dep, :confirm => '是否真的要删除?', :method => :delete %></td>
-	  </tr>
-	<% end %>
-	</table>
-	<div id="table_action">
-		<%= link_to '增加部门', new_dep_path %>
-	</div>
+<div class="form_title">
+	<h3>部门列表</h3>
 </div>
+<div class="actions">
+	<%= link_to '增加部门', new_dep_path,{:class=>"button2"}%>	
+</div>
+<table class="hor-zebra">
+  <tr>
+    <th>部门编码</th>
+    <th>部门名称</th>
+    <th>所属组织结构</th>
+    <th>启用日期</th>
+    <th>停用日期</th>
+    <th>U8对应编码</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @deps.each do |dep| %>
+  <tr>
+    <td><%= dep.code %></td>
+    <td><%= dep.name %></td>
+    <td><%= dep.version %></td>
+    <td><%= dep.start_date.to_date %></td>
+    <td><%= dep.end_date.to_date %></td>
+    <td><%= dep.u8dep_code %></td>
+    <td><%= link_to '查看', dep %></td>
+    <td><%= link_to '删除', dep, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
 

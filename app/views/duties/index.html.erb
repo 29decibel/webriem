@@ -1,4 +1,9 @@
-<h3 class="form_title">职务列表</h3>
+<div class="form_title">
+	<h3>职务列表</h3>
+</div>
+<div class="actions">
+	<%= link_to '添加职务', new_duty_path,:class=>"button2" %>
+</div>
 <table class="hor-zebra">
   <tr>
     <th>名称</th>
@@ -16,7 +21,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to '添加职务', new_duty_path %>

@@ -8,7 +8,7 @@
 	</div>
 	<% doc.work_flows.each do |w| %>
 		<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
-			<%= doc.approver(w) ? doc.approver(w).name : "请检查审批流#{w.work_flow.name}，找不到审批流程中#{w.dep.name}部门中有职务#{w.duty.name}的人" %>
+			<%= doc.approver(w) ? doc.approver(w).name : "请检查审批流#{w.work_flow.name}，其中的审批流程#{w.id}找不到对应的人员" %>
 		</div>
 		<div class='work_flow_step'>
 			 ====>

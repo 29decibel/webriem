@@ -1,7 +1,5 @@
-<div id="doc_head_actions" class="actions">
-	<%= submit_tag "保存", :class => "button2"%>
-	<% if doc_head.id %>
-		<%= link_to "提交审批",begin_work_path(doc_head.id),:remote=>true,:class=>"button2"%>
-	<% end %>
-	<%= link_to '返回', doc_heads_path(:doc_type=>doc_head.doc_type),:class=>"button2" %>
-</div>
+<%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
+<% if doc_head.id %>
+	<%= link_to "提交审批",begin_work_path(doc_head.id),:remote=>true,:class=>"button2"%>
+<% end %>
+<%= link_to '返回', doc_heads_path(:doc_type=>doc_head.doc_type),:class=>"button2" %>

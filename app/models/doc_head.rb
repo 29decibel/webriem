@@ -52,6 +52,7 @@ class DocHead < ActiveRecord::Base
     if work_flow_step.is_self_dep==0
       person=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id).first
     else
+      return nil if self.person==nil
       dep=self.person.dep
       while dep
         person=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id).first

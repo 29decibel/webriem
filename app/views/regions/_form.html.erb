@@ -2,6 +2,10 @@
 <div class="form_title">
 	<h3><%= @title%></h3>
 </div>
+<div class="actions">
+  <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to '返回', regions_path,:class=>"button2" %>
+</div>
 <div class="field">
 	<%= f.label "地区名称",:class=>"input_label" %>
 	<div class="input_area">
@@ -22,8 +26,5 @@
 	</div>
 	<span class="error_message"></span>    
   </div>
-  <div class="actions">
-    <%= f.submit "保存",:class=>"button2" %>
-	<%= link_to '返回', regions_path,:class=>"button2" %>
-  </div>
+
 <% end %>

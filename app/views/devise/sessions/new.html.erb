@@ -36,7 +36,7 @@
   </div>
   <% end -%>
 
-  <p><%= f.submit "登录" %></p>
+  <p><%= link_to "登录",{:href=>"#"},:class=>"submit button2" %></p>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

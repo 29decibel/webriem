@@ -1,4 +1,9 @@
-<h3 class="form_title">帐号信息列表</h3>
+<div class="form_title">
+	<h3>帐号信息列表</h3>
+</div>
+<div class="actions">
+	<%= link_to '添加新的帐号', new_account_path,:class=>"button2" %>
+</div>
 <table class="hor-zebra">
   <tr>
     <th>名称</th>
@@ -17,6 +22,3 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to '添加新的帐号', new_account_path %>

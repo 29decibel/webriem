@@ -62,6 +62,11 @@ $(function(){
 		                    return false;
 		                }
 		            });
+		//bind the submit link
+		$("a.submit").live("click",function(){
+			$(this).closest("form").submit();
+			return false;
+		});
 });
 
 //bind the change events
@@ -149,7 +154,7 @@ function add_fields(link, association, content) {
 function set_unique_sequence_num(sequences){
 	//设置他们的序号
 	sequences.each(function(index,ele){
-		$(this).val(index);
+		$(this).val(index+1);
 		//fire it once
 		$(this).attr("readonly","readonly");
 	});

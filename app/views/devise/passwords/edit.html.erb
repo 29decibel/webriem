@@ -10,7 +10,7 @@
   <p><%= f.label "确认新密码" %><br />
   <%= f.password_field :password_confirmation %></p>
 
-  <p><%= f.submit "更改密码" %></p>
+  <p><%= link_to "更改密码",{:href=>"#"},:class=>"submit button2" %></p>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

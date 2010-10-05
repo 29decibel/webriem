@@ -27,7 +27,7 @@
 		<% if user_signed_in? %>
 		<div id="menu">
 			<div class="menu">
-				<%= link_to "我的任务",home_page_path,{:class=>"menu_item"}%>
+				<%= link_to "我的任务",home_page_path,{:class=>"menu_item #{'selected' if controller.controller_name=="task"}"}%>
 			</div>
 			<div class="menu">
 				<%= link_to "部门",:deps,{:class=>"menu_item #{'selected' if controller.controller_name=="deps"}"}%>
@@ -48,7 +48,7 @@
 			</div>
 			<div class="menu">
 				<% (1..9).each do |num| %>
-					<%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num),{:class=>"menu_item #{'selected' if controller.controller_name=="doc_heads" and current_uri.include?(num.to_s)}"}%>
+					<%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num),{:class=>"menu_item #{'selected' if controller.controller_name=="doc_heads" and @doc_type and @doc_type==num}"}%>
 				<% end %>
 			</div>
 			<div class="menu">
