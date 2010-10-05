@@ -2,6 +2,10 @@
 <div class="form_title">
 	<h3><%= @title%></h3>
 </div>
+<div class="actions">
+	<%= f.submit "保存",:action=>new_dep_path,:class=>"button2" %>
+	<%= link_to '返回', deps_path,:class=>"button2" %>
+</div>
   <div class="field">
     <%= f.label "编码",:class=>"input_label" %>
 	<div class="input_area">
@@ -78,8 +82,4 @@
 	</div>
 	<span class="error_message"></span>	
   </div>
-<div class="actions">
-	<%= f.submit "保存",:action=>new_dep_path,:class=>"button2" %>
-	<%= link_to '返回', deps_path,:class=>"button2" %>
-</div>
 <% end %>

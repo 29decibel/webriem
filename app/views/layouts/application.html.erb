@@ -27,34 +27,32 @@
 		<% if user_signed_in? %>
 		<div id="menu">
 			<div class="menu">
-				<div class="menu_item <%= 'selected' if current_uri.include?('task')%>">
-					<%= link_to "我的任务",home_page_path%>
-				</div>				
+				<%= link_to "我的任务",home_page_path,{:class=>"menu_item"}%>
 			</div>
 			<div class="menu">
-				<div class="menu_item <%= 'selected' if current_uri.include?('deps/')%>"><%= link_to "部门",:deps%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('dut')%>"><%= link_to "职务",:duties%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('people')%>"><%= link_to "员工",:people%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('fees')%>"><%= link_to "费用类型",:fees%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('region')%>"><%= link_to "地区",:regions%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('transport')%>"><%= link_to "交通方式",:transportations%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('lodg')%>"><%= link_to "住宿方式",:lodgings%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('settle')%>"><%= link_to "结算方式",:settlements%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('fee_standard')%>"><%= link_to "费用标准",:fee_standards%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('project')%>"><%= link_to "项目",:projects%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('dep')%>"><%= link_to "预算数据",:budgets%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('curren')%>"><%= link_to "币种",:currencies%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('subject')%>"><%= link_to "科目设置",:subjects%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('account')%>"><%= link_to "帐号",:accounts%></div>
-				<div class="menu_item <%= 'selected' if current_uri.include?('work')%>"><%= link_to "审批流设置",:work_flows%></div>
+				<%= link_to "部门",:deps,{:class=>"menu_item #{'selected' if controller.controller_name=="deps"}"}%>
+				<%= link_to "职务",:duties,{:class=>"menu_item #{'selected' if controller.controller_name=="duties"}"}%>
+				<%= link_to "员工",:people,{:class=>"menu_item #{'selected' if controller.controller_name=="people"}"}%>
+				<%= link_to "费用类型",:fees,{:class=>"menu_item #{'selected' if controller.controller_name=="fees"}"}%>
+				<%= link_to "地区",:regions,{:class=>"menu_item #{'selected' if controller.controller_name=="regions"}"}%>
+				<%= link_to "交通方式",:transportations,{:class=>"menu_item #{'selected' if controller.controller_name=="transportations"}"}%>
+				<%= link_to "住宿方式",:lodgings,{:class=>"menu_item #{'selected' if controller.controller_name=="lodgings"}"}%>
+				<%= link_to "结算方式",:settlements,{:class=>"menu_item #{'selected' if controller.controller_name=="settlements"}"}%>
+				<%= link_to "费用标准",:fee_standards,{:class=>"menu_item #{'selected' if controller.controller_name=="fee_standards"}"}%>
+				<%= link_to "项目",:projects,{:class=>"menu_item #{'selected' if controller.controller_name=="projects"}"}%>
+				<%= link_to "预算数据",:budgets,{:class=>"menu_item #{'selected' if controller.controller_name=="budgets"}"}%>
+				<%= link_to "币种",:currencies,{:class=>"menu_item #{'selected' if controller.controller_name=="currencies"}"}%>
+				<%= link_to "科目设置",:subjects,{:class=>"menu_item #{'selected' if controller.controller_name=="subjects"}"}%>
+				<%= link_to "帐号",:accounts,{:class=>"menu_item #{'selected' if controller.controller_name=="accounts"}"}%>
+				<%= link_to "审批流设置",:work_flows,{:class=>"menu_item #{'selected' if controller.controller_name=="work_flows"}"}%>
 			</div>
 			<div class="menu">
 				<% (1..9).each do |num| %>
-					<div class="menu_item"><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></div>
+					<%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num),{:class=>"menu_item #{'selected' if controller.controller_name=="doc_heads" and current_uri.include?(num.to_s)}"}%>
 				<% end %>
 			</div>
 			<div class="menu">
-				<div class="menu_item"><%= link_to "反馈",feed_backs_path%></div>				
+				<%= link_to "反馈",feed_backs_path,{:class=>"menu_item #{'selected' if controller.controller_name=="feed_backs"}"}%>
 			</div>			
 		</div>
 		<% end %>
@@ -72,7 +70,6 @@
 		</div>		
 	</div>
 	<div id="footer">
-		<%= image_tag "29decibel.png"%>
 		<div id="desc">
 			<p id="en">29Decibel Studio</p>
 		</div>
