@@ -27,40 +27,36 @@
 		<% if user_signed_in? %>
 		<div id="menu">
 			<div class="menu">
-				<div class="menu_header">
+				<div class="menu_item <%= 'selected' if current_uri.include?('task')%>">
 					<%= link_to "我的任务",home_page_path%>
 				</div>				
 			</div>
 			<div class="menu">
-				<div class="menu_header">
-					<%= link_to "基础档案",{},:href=>"#"%>
-				</div>
-				<div class="menu_item"><%= link_to "部门",:deps%></div>
-				<div class="menu_item"><%= link_to "职务",:duties%></div>
-				<div class="menu_item"><%= link_to "员工",:people%></div>
-				<div class="menu_item"><%= link_to "费用类型",:fees%></div>
-				<div class="menu_item"><%= link_to "地区",:regions%></div>
-				<div class="menu_item"><%= link_to "交通方式",:transportations%></div>
-				<div class="menu_item"><%= link_to "住宿方式",:lodgings%></div>
-				<div class="menu_item"><%= link_to "结算方式",:settlements%></div>
-				<div class="menu_item"><%= link_to "费用标准",:fee_standards%></div>
-				<div class="menu_item"><%= link_to "项目",:projects%></div>
-				<div class="menu_item"><%= link_to "预算数据",:budgets%></div>
-				<div class="menu_item"><%= link_to "币种",:currencies%></div>
-				<div class="menu_item"><%= link_to "科目设置",:subjects%></div>
-				<div class="menu_item"><%= link_to "帐号",:accounts%></div>
-				<div class="menu_item"><%= link_to "审批流设置",:work_flows%></div>
+				<h4>基础档案</h4>
+				<div class="menu_item <%= 'selected' if current_uri.include?('deps/')%>"><%= link_to "部门",:deps%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('dut')%>"><%= link_to "职务",:duties%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('people')%>"><%= link_to "员工",:people%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('fees')%>"><%= link_to "费用类型",:fees%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('region')%>"><%= link_to "地区",:regions%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('transport')%>"><%= link_to "交通方式",:transportations%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('lodg')%>"><%= link_to "住宿方式",:lodgings%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('settle')%>"><%= link_to "结算方式",:settlements%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('fee_standard')%>"><%= link_to "费用标准",:fee_standards%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('project')%>"><%= link_to "项目",:projects%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('dep')%>"><%= link_to "预算数据",:budgets%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('curren')%>"><%= link_to "币种",:currencies%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('subject')%>"><%= link_to "科目设置",:subjects%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('account')%>"><%= link_to "帐号",:accounts%></div>
+				<div class="menu_item <%= 'selected' if current_uri.include?('work')%>"><%= link_to "审批流设置",:work_flows%></div>
 			</div>
 			<div class="menu">
-				<div class="menu_header">
-					<%= link_to "单据",{},:href=>"#"%>
-				</div>
+				<h4>单据</h4>
 				<% (1..9).each do |num| %>
 					<div class="menu_item"><%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num)%></div>
 				<% end %>
 			</div>
 			<div class="menu">
-				<%= link_to "反馈",feed_backs_path%>
+				<div class="menu_item"><%= link_to "反馈",feed_backs_path%></div>				
 			</div>			
 		</div>
 		<% end %>

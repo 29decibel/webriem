@@ -40,7 +40,7 @@ div#main_area{
 div#menu{
 	float:left;
 	width:120px;
-	padding-top: 50px;
+	padding-top: 20px;
 	padding-bottom: 50px;
 }
 div#menu div.menu{
@@ -49,12 +49,16 @@ div#menu div.menu{
 div#menu div.menu_item{
 	padding: 2px 0px 2px 5px;
 }
+div#menu div.selected{
+	background-color: #bcf;
+}
 div#menu div.menu_item:hover{
 	background-color: #dde5ff;
 }
 div#content{
-	margin: 0px 5px 20px 140px;
+	margin: 0px 5px 20px 120px;
 	border: 5px solid #bcf;
+	min-height:600px;
 }
 /*give the table a wear==========================================================*/
 
