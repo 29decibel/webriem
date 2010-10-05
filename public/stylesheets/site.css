@@ -18,15 +18,17 @@ a:hover{
 /*parts*/
 div#header{
 	height:100px;
+	margin-top: 10px;
+	margin-left: 5px;
 	position:relative;
-	background-image: url("../images/paid-stamp-small.jpg");
+	background-image: url("../images/img_logo.gif");
 	background-repeat:no-repeat;
 }
 div#header #title{
 	float:left;
 	display:block;
-	margin-left: 150px;
-	margin-top: 30px;
+	margin-left: 5px;
+	margin-top: 57px;
 }
 div#header #user_nav{
 	float: right;
