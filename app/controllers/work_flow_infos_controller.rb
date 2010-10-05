@@ -42,6 +42,9 @@ class WorkFlowInfosController < ApplicationController
     else
       @work_flow_info.doc_head.decline
     end
+    #send two emails
+    WorkFlowMailer.notice_need_approve(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
+    WorkFlowMailer.notice_aaplyer(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
     @doc_head=@work_flow_info.doc_head
     if @work_flow_info.save && @doc_head.save
       @message="审批完成"
