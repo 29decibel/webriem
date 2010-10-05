@@ -23,8 +23,8 @@
     <td><%= dep.start_date.to_date %></td>
     <td><%= dep.end_date.to_date %></td>
     <td><%= dep.u8dep_code %></td>
-    <td><%= link_to '查看', dep %></td>
-    <td><%= link_to '删除', dep, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', dep %></td>
+    <td class="action"><%= link_to '删除', dep, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

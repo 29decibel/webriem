@@ -26,8 +26,8 @@
     <td><%= fee_standard.transportation_name %></td>
     <td><%= fee_standard.busitype_name %></td>
     <td><%= fee_standard.amount %></td>
-    <td><%= link_to '查看', fee_standard %></td>
-    <td><%= link_to '删除', fee_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', fee_standard %></td>
+    <td class="action"><%= link_to '删除', fee_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -13,7 +13,7 @@
 		<%= f.label "转出账户转帐前余额",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.text_field :out_amount_before %>  
+				<%= f.text_field :out_amount_before,:class=>"basic_input " %>  
 			</p>
 			<p class="tip"></p>
 		</div>
@@ -23,7 +23,7 @@
 		<%= f.label "收款账户名称",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.text_field :in_account_name %>  
+				<%= f.text_field :in_account_name,:class=>"basic_input " %>  
 			</p>
 			<p class="tip"></p>
 		</div>
@@ -33,7 +33,7 @@
 		<%= f.label "收款账户帐号",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.text_field :in_account_no %>  
+				<%= f.text_field :in_account_no,:class=>"basic_input " %>  
 			</p>
 			<p class="tip"></p>
 		</div>
@@ -43,7 +43,7 @@
 		<%= f.label "转入账户转帐前余额",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.text_field :in_amount_before %>  
+				<%= f.text_field :in_amount_before,:class=>"basic_input " %>  
 			</p>
 			<p class="tip"></p>
 		</div>
@@ -53,7 +53,7 @@
 		<%= f.label "转帐申请原因",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.text_area :description %>  
+				<%= f.text_area :description,:class=>"basic_input " %>  
 			</p>
 			<p class="tip"></p>
 		</div>
@@ -63,7 +63,7 @@
 		<%= f.label "申请金额",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.text_field :amount %>  
+				<%= f.text_field :amount,:class=>"basic_input " %>  
 			</p>
 			<p class="tip"></p>
 		</div>

@@ -1,31 +1,72 @@
-<h3>赎回理财产品</h3><br/>
 <div class="fields">
-	<p>  
-		<%= f.label :name, "理财产品名称" %><br />  
-		<%= f.text_field :name %>  
-	</p>
-	<p>  
-		<%= f.label :account_id, "赎回理财产品账户" %><br />
-		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
-	</p> 
-	<p>  
-		<%= f.label :rate, "理财产品利率" %><br />  
-		<%= f.text_field :rate %>  
-	</p>
-	<p>  
-		<%= f.label :clear_date, "申请赎回日期" %><br />  
-		<%= f.text_field :clear_date,:class=>"datepicker basic_input"  %>  
-	</p>
-	<p>  
-		<%= f.label :redeem_date, "预计赎回日期" %><br />  
-		<%= f.text_field :redeem_date,:class=>"datepicker basic_input"  %>  
-	</p>
-	<p>  
-		<%= f.label :description, "申请赎回原因" %><br />  
-		<%= f.text_area :description %>  
-	</p>
-	<p>  
-		<%= f.label :amount, "申请金额" %><br />  
-		<%= f.text_field :amount %>  
-	</p>
+	<div class="field">
+		<%= f.label "理财产品名称",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :name,:class=>"basic_input" %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "赎回理财产品账户",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "理财产品利率",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :rate,:class=>"basic_input" %> 
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "申请赎回日期",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :clear_date,:class=>"datepicker basic_input"  %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "预计赎回日期",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :redeem_date,:class=>"datepicker basic_input"  %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "申请赎回原因",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_area :description,:class=>"basic_input" %>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "申请金额",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :amount,:class=>"basic_input" %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
 </div>

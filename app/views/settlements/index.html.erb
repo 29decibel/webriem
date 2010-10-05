@@ -18,8 +18,8 @@
     <td><%= settlement.code %></td>
     <td><%= settlement.name %></td>
     <td><%= settlement.subject %></td>
-    <td><%= link_to '查看', settlement %></td>
-    <td><%= link_to '删除', settlement, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', settlement %></td>
+    <td class="action"><%= link_to '删除', settlement, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

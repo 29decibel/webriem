@@ -16,8 +16,8 @@
   <tr>
     <td><%= currency.name %></td>
     <td><%= currency.code %></td>
-    <td><%= link_to '查看', currency %></td>
-    <td><%= link_to '删除', currency, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', currency %></td>
+    <td class="action"><%= link_to '删除', currency, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -18,8 +18,8 @@
     <td><%= project.name %></td>
     <td><%= project.code %></td>
     <td><%= project.u8_project %></td>
-    <td><%= link_to '查看', project %></td>
-    <td><%= link_to '删除', project, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', project %></td>
+    <td class="action"><%= link_to '删除', project, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

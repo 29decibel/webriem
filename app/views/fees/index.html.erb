@@ -20,8 +20,8 @@
     <td><%= fee.name %></td>
     <td><%= fee.attr_name %></td>
     <td><%= fee.end_date %></td>
-    <td><%= link_to '查看', fee %></td>
-    <td><%= link_to '删除', fee, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', fee %></td>
+    <td class="action"><%= link_to '删除', fee, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

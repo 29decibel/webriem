@@ -73,7 +73,7 @@ table.hor-zebra
 	margin-left: 15px;
 	text-align: left;
 	border-collapse: collapse;
-	padding: 10px;
+	width:95%;
 }
 table tr{
 	overflow: scroll;
@@ -87,10 +87,14 @@ table.hor-zebra th
 }
 table.hor-zebra td
 {
-	padding: 8px;
+	padding: 3px;
 	color: #669;
 }
-table.hor-zebra tr:nth-child(odd)
+table.hor-zebra td.action
+{
+	width:30px;
+}
+table.hor-zebra tr:nth-child(even)
 { 
 	background: #e8edff; 
 }

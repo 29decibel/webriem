@@ -1,22 +1,54 @@
 <div class="fields">
-	<p>  
-		<%= f.label :account_id, "现金提取转出账户" %><br />
-		<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
-	</p> 
-	<p>  
-		<%= f.label :now_remain_amout, "目前账户金额" %><br />  
-		<%= f.text_field :now_remain_amout %>  
-	</p>
-	<p>  
-		<%= f.label :description, "申请原因" %><br />  
-		<%= f.text_area :description %>  
-	</p>
+	<div class="field">
+		<%= f.label "现金提取转出账户",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.select(:account_id,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div> 
+	<div class="field">
+		<%= f.label "目前账户金额",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :now_remain_amout,:class=>"basic_input "%>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "申请原因",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_area :description,:class=>"basic_input " %>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
 	<p>
 		<div id="cash_draw_items">
-			<% f.fields_for :cash_draw_items do |builder|  %>
-				<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
-			<% end %>
+			<table class="form_input">
+				<thead>
+					<tr>	
+						<th>序号</th>
+					    <th>用途</th>
+					    <th>申请金额</th>
+						<th></th><!--给删除的-->
+				    </tr>
+			    <thead>
+				<tbody>
+					<% f.fields_for :cash_draw_items do |builder|  %>
+						<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
+					<% end %>				
+				</tbody>
+				<tr>
+					<th colspan="4"><%= link_to_add_fields "添加申请条目",f,:cash_draw_items %></th>
+				</tr>		
+			</table>
 		</div>
-	</p>
-	<%= link_to_add_fields "添加申请条目",f,:cash_draw_items %>
+	</p>	
 </div>

@@ -16,8 +16,8 @@
   <tr>
     <td><%= transportation.name %></td>
     <td><%= transportation.code %></td>
-    <td><%= link_to '查看', transportation %></td>
-    <td><%= link_to '删除', transportation, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', transportation %></td>
+    <td class="action"><%= link_to '删除', transportation, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

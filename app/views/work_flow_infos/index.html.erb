@@ -17,8 +17,8 @@
     <td><%= work_flow_info.is_ok %></td>
     <td><%= work_flow_info.people_id %></td>
     <td><%= work_flow_info.comments %></td>
-    <td><%= link_to '查看', work_flow_info %></td>
-    <td><%= link_to '删除', work_flow_info, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', work_flow_info %></td>
+    <td class="action"><%= link_to '删除', work_flow_info, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

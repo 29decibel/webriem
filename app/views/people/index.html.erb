@@ -24,8 +24,8 @@
     <td><%= person.dep_name %></td>
     <td><%= person.duty_name %></td>
     <td><%= person.boss==nil ? "":person.boss.name %></td>
-    <td><%= link_to '查看', person %></td>
-    <td><%= link_to '删除', person, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', person %></td>
+    <td class="action"><%= link_to '删除', person, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

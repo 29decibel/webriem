@@ -16,8 +16,8 @@
   <tr>
     <td><%= work_flow.name %></td>
     <td><%= work_flow.doc_types %></td>
-    <td><%= link_to '查看', work_flow %></td>
-    <td><%= link_to '删除', work_flow, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', work_flow %></td>
+    <td class="action"><%= link_to '删除', work_flow, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -16,8 +16,8 @@
   <tr>
     <td><%= region.name %></td>
     <td><%= region.code %></td>
-    <td><%= link_to '查看', region %></td>
-    <td><%= link_to '删除', region, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', region %></td>
+    <td class="action"><%= link_to '删除', region, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

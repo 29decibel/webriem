@@ -16,8 +16,8 @@
   <tr>
     <td><%= account.name %></td>
     <td><%= account.account_no %></td>
-    <td><%= link_to '查看', account %></td>
-    <td><%= link_to '删除', account, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', account %></td>
+    <td class="action"><%= link_to '删除', account, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

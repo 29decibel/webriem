@@ -20,8 +20,8 @@
     <td><%= budget.project_name %></td>
     <td><%= budget.dep_name %></td>
 	<td><%= budget.all %></td>
-    <td><%= link_to '查看', budget %></td>
-    <td><%= link_to '删除', budget, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', budget %></td>
+    <td class="action"><%= link_to '删除', budget, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

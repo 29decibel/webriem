@@ -14,8 +14,8 @@
     <td><%= my_doc.attach %></td>
     <td><%= my_doc.person_name %></td>
     <td><%= my_doc.note %></td>
-    <td><%= link_to '查看', my_doc %></td>
-    <td><%= link_to '删除', my_doc, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action"><%= link_to '查看', my_doc %></td>
+    <td class="action"><%= link_to '删除', my_doc, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

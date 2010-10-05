@@ -1,30 +1,72 @@
 <div class="fields">
-	<p>  
-		<%= f.label :out_account, "结汇账户" %><br />
-		<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
-	</p> 
-	<p>  
-		<%= f.label :in_account_name, "收款账户名称" %><br />  
-		<%= f.text_field :in_account_name %>  
-	</p>
-	<p>  
-		<%= f.label :in_account_no, "收款账户帐号" %><br />  
-		<%= f.text_field :in_account_no %>  
-	</p>
-	<p>  
-		<%= f.label :description, "申请原因" %><br />  
-		<%= f.text_area :description %>  
-	</p>
-	<p>  
-		<%= f.label :amount, "申请金额" %><br />  
-		<%= f.text_field :amount %>  
-	</p>
-	<p>  
-		<%= f.label :remain_amount, "余额" %><br />  
-		<%= f.text_field :remain_amount %>  
-	</p>
-	<p>  
-		<%= f.label :now_rate_price, "当日汇中间价" %><br />  
-		<%= f.text_field :now_rate_price %>  
-	</p>
+	<div class="field">
+		<%= f.label "结汇账户",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "收款账户名称",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :in_account_name,:class=>"basic_input " %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "收款账户帐号",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :in_account_no,:class=>"basic_input " %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "申请原因",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_area :description,:class=>"basic_input " %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "申请金额",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :amount,:class=>"basic_input " %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "余额",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :remain_amount,:class=>"basic_input " %> 
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="field">
+		<%= f.label "当日汇中间价",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :now_rate_price,:class=>"basic_input " %>  
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
 </div>
