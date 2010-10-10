@@ -1,4 +1,5 @@
 #coding: utf-8
+require "mailing_job"
 class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
@@ -39,6 +40,7 @@ class DocHeadsController < ApplicationController
   def new
     @doc_head = DocHead.new
     @doc_head.doc_state = 0
+    @doc_head.doc_no=Time.now.strftime("%Y%d%m").to_i*1000+DocHead.all.count+1
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
     @doc_type = @doc_head.doc_type
@@ -110,7 +112,9 @@ class DocHeadsController < ApplicationController
     @doc_head.work_flow_step_id=@doc_head.work_flows.first.id
     @doc_head.save
     #notice the person who need to approve this doc
-    WorkFlowMailer.notice_need_approve(@doc_head.approver,@doc_head).deliver
+    #WorkFlowMailer.notice_need_approve(@doc_head.approver,@doc_head).deliver
+    #now i am using the delayed job to do this
+    Delayed::Job.enqueue MyJob::MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
     @message="开始进入审批环节，审批期间单据不能修改"
     @work_flow_info=WorkFlowInfo.new
     respond_to do |format|

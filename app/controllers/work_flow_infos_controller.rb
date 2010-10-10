@@ -1,4 +1,5 @@
 #coding: utf-8
+require 'mailing_job'
 class WorkFlowInfosController < ApplicationController
   # GET /work_flow_infos
   # GET /work_flow_infos.xml
@@ -43,8 +44,11 @@ class WorkFlowInfosController < ApplicationController
       @work_flow_info.doc_head.decline
     end
     #send two emails
-    WorkFlowMailer.notice_need_approve(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
-    WorkFlowMailer.notice_aaplyer(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
+    #here we change the send email job to a background task
+    #WorkFlowMailer.notice_need_approve(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
+    #WorkFlowMailer.notice_aaplyer(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
+    Delayed::Job.enqueue MyJob::MailingJob.new(:notice_need_approve, @work_flow_info.doc_head.approver,@work_flow_info.doc_head) 
+    Delayed::Job.enqueue MyJob::MailingJob.new(:notice_approver, @work_flow_info.doc_head.approver,@work_flow_info.doc_head) 
     @doc_head=@work_flow_info.doc_head
     if @work_flow_info.save && @doc_head.save
       @message="审批完成"

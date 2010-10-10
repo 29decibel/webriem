@@ -4,7 +4,7 @@
 body{
 	width:80%;
 	margin:auto;
-	font: 90% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+	font: 80% "黑体", "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
 }
 a{
 	color:#369;
@@ -53,16 +53,17 @@ div#menu a.menu_item{
 	display: block;
 }
 div#menu a.menu_item:hover{
-	background-color: #dde5ff;
+	background-color: #E4F0F2;
 }
 
 div#menu a.selected{
-	background-color: #bcf;
+	color:white;
+	background-color: #70A99F;
 }
 
 div#content{
 	margin: 0px 5px 20px 120px;
-	border: 5px solid #bcf;
+	border: 5px solid #70A99F;
 	min-height:600px;
 }
 /*give the table a wear==========================================================*/
@@ -83,7 +84,7 @@ table.hor-zebra th
 	font-size: 14px;
 	font-weight: normal;
 	padding: 10px 8px;
-	color: #039;
+	color: #006173;
 }
 table.hor-zebra td
 {
@@ -96,7 +97,7 @@ table.hor-zebra td.action
 }
 table.hor-zebra tr:nth-child(even)
 { 
-	background: #e8edff; 
+	background: #E4F0F2; 
 }
 /*=================================================================================*/
 /*form styles*/
