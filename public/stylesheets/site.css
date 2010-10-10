@@ -25,11 +25,13 @@ div#header{
 	background-repeat:no-repeat;
 }
 div#header #title{
+	padding:0px;
 	float:left;
 	display:block;
 	margin-left: 5px;
 	margin-top: 57px;
 }
+
 div#header #user_nav{
 	float: right;
 	margin-top: 10px;
@@ -114,18 +116,17 @@ form div .input_label{
 	width:120px;
 	display:inline-block;
 	margin-left: 20px;
-	font-size:14px;
 }
 form div.input_area{
 	display: inline-block;
 }
 form .basic_input{
-	font-size:14px;
+
 }
 div.form_title{
 	margin: 0px 15px 7px 15px;
 	padding: 5px;
-	border-bottom: 1px solid #999;
+	border-bottom: 1px solid #E4F0F2;
 }
 /*footer*/
 div#footer{
