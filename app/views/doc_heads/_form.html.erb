@@ -8,80 +8,85 @@
 <div id="doc_state_process">
 	<%= render :partial=>"doc_state_process",:locals=>{:doc=>@doc_head}%>
 </div>
-<div class="field">
-	<%= f.label "单号",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :doc_no,:class=>"basic_input "+ mark_required(@doc_head, :doc_no) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "附件个数",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :attach,:class=>"basic_input "+ mark_required(@doc_head, :attach) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "申请人",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.hidden_field :person_id %>
-			<span><%= @doc_head.person_name%></span>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "备注",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :note,:class=>"basic_input "+ mark_required(@doc_head, :note) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<% if @doc_head.doc_type>4 %>
-<div class="field">
-	<%= f.label "申请日期",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :apply_date,:class=>"datepicker basic_input" %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "部门",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:doc_head, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "费用类型",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:doc_head, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
- </div>
-<% end %>
-<%= f.hidden_field :doc_type%>
+<div class="form_title">
+	<h3>基本信息</h3>
+</div>
+<div id="doc_head">
+	<div class="doc_head_field">
+		<%= f.label "单号",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :doc_no,:class=>"basic_input "+ mark_required(@doc_head, :doc_no) %>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="doc_head_field">
+		<%= f.label "附件个数",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :attach,:class=>"basic_input "+ mark_required(@doc_head, :attach) %>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="doc_head_field">
+		<%= f.label "申请人",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.hidden_field :person_id %>
+				<span><%= @doc_head.person_name%></span>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="doc_head_field">
+		<%= f.label "备注",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :note,:class=>"basic_input "+ mark_required(@doc_head, :note) %>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<% if @doc_head.doc_type>4 %>
+	<div class="doc_head_field">
+		<%= f.label "申请日期",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= f.text_field :apply_date,:class=>"datepicker basic_input" %>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="doc_head_field">
+		<%= f.label "部门",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= collection_select(:doc_head, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	  </div>
+	<div class="doc_head_field">
+		<%= f.label "费用类型",:class=>"input_label" %>
+		<div class="input_area">
+			<p class="input">
+				<%= collection_select(:doc_head, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
+			</p>
+			<p class="tip"></p>
+		</div>
+		<span class="error_message"></span>    
+	 </div>
+	<% end %>
+	<%= f.hidden_field :doc_type%>
+</div>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!--根据不同的单据类型render不同的单据-->
 <div id="details">
@@ -120,7 +125,7 @@
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% elsif @doc_head.doc_type==3%>
 	<div class="form_title">
-		<h3>报销单</h3>
+		<h3>报销单明细</h3>
 	</div>
 	<div class="table_details">
 		<table class="form_input">

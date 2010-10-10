@@ -1,5 +1,7 @@
 #coding: utf-8
 require "mailing_job"
+#借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
+DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"BX",4=>"SK",5=>"JH",6=>"ZH",7=>"XJ",8=>"GL",9=>"SL"}
 class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
@@ -40,9 +42,9 @@ class DocHeadsController < ApplicationController
   def new
     @doc_head = DocHead.new
     @doc_head.doc_state = 0
-    @doc_head.doc_no=Time.now.strftime("%Y%d%m").to_i*1000+DocHead.all.count+1
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
+    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%d%m")+DocHead.all.count.to_s.rjust(4,"0")
     @doc_type = @doc_head.doc_type
     #set the apply person to the current login user
     @doc_head.person=current_person

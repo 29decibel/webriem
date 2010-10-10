@@ -107,12 +107,28 @@ form{
 	margin:0 0 15px 0; 
 	padding:5px;   
 	background: none;
-}
 
+}
+form div#doc_head{
+	margin: 0px 15px 15px 15px;
+	padding: 10px;
+	background-color: #E4F0F2;	
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
 form div.field{
 	margin-bottom: 25px;
 }
-form div .input_label{
+form div.doc_head_field{
+	
+	display: inline-block;
+}
+form div.doc_head_field .input_label{
+	width:80px;
+	display:inline-block;
+	text-align: right;
+}
+form div.field .input_label{
 	width:120px;
 	display:inline-block;
 	margin-left: 20px;
@@ -148,7 +164,7 @@ div#footer #desc{
 /*details form */
 #details{
 	margin-top: 0 0 15px 0;
-	padding: 5px;
+	padding: 0px;
 }
 #details div.fields{
 	margin-bottom: 10px;
@@ -223,7 +239,10 @@ table.form_input td a{
 div.table_details,div.rdd_details{
 	overflow: auto;
 	margin: 15px;
-	padding: 0px;
+	padding: 5px;
+	background-color: #E4F0F2;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
 }
 /*==============================================================*/
 /*actions area*/
@@ -232,7 +251,7 @@ div.actions{
 	margin-left: 15px;
 	margin-right: 15px;
 	padding-bottom: 7px;
-	border-bottom: 1px solid #999;
+	border-bottom: 1px solid #E4F0F2;
 }
 
 /* Button2 */
@@ -274,7 +293,7 @@ div#work_flow_progress{
 	position: relative;
 	padding: 5px;
 	margin: 0 15px 15px 15px;
-	background-color: #D6E5F4;
+	background-color: #E4F0F2;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 }

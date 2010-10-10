@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101006112749) do
+ActiveRecord::Schema.define(:version => 20101010034050) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20101006112749) do
   end
 
   create_table "doc_heads", :force => true do |t|
-    t.integer  "doc_no"
+    t.string   "doc_no"
     t.integer  "attach"
     t.integer  "person_id"
     t.string   "note"
