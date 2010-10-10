@@ -45,6 +45,8 @@ class DocHeadsController < ApplicationController
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
     @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%d%m")+DocHead.all.count.to_s.rjust(4,"0")
+    @doc_head.apply_date=Time.now
+    @doc_head.dep=current_person.dep
     @doc_type = @doc_head.doc_type
     #set the apply person to the current login user
     @doc_head.person=current_person

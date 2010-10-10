@@ -21,13 +21,13 @@
 		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
 	</td>
 	<td>
-		<%= f.text_field :rate,:class=>"normal" %>  
+		<%= f.text_field :rate,:class=>"normal rate" %>  
 	</td>
 	<td>
-		<%= f.text_field :ori_amount,:class=>"normal" %>  
+		<%= f.text_field :ori_amount,:class=>"normal ori_amount" %>  
 	</td>
 	<td>
-		<%= f.text_field :apply_amount,:class=>"normal" %>  
+		<%= f.text_field :apply_amount,:class=>"normal amount" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>

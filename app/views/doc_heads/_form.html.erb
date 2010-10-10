@@ -93,7 +93,7 @@
 	<!---->
 	<% if @doc_head.doc_type<=2%>
 	<div class="form_title">
-		<h3><%= @doc_head.doc_type==1 ? "借款单据":"付款单据" %></h3>
+		<h3><%= @doc_head.doc_type==1 ? "借款单据明细":"付款单据明细" %></h3>
 	</div>
 	<div class="table_details">
 		<table class="form_input">
@@ -118,7 +118,10 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<th colspan="11"><%= link_to_add_fields "添加明细",f,:cp_doc_details %></th>
+				<td colspan="8"><%= link_to_add_fields "添加明细",f,:cp_doc_details %></td>
+				<td>申请金额合计</td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td></td>
 			</tr>		
 		</table>
 	</div>	
@@ -141,8 +144,8 @@
 				    <th>币种</th>
 					<th>汇率</th>
 					<th>原币金额</th>
-					<th>实际金额</th>
 					<th>申请金额</th>
+					<th>实际金额</th>					
 					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
@@ -152,7 +155,10 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="11"><%= link_to_add_fields "添加报销单明细",f,:reim_details %></th>
+				<th colspan="10"><%= link_to_add_fields "添加报销单明细",f,:reim_details %></th>
+				<td>申请金额合计</td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td></td>
 			</tr>		
 		</table>
 	</div>
@@ -183,7 +189,10 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="10"><%= link_to_add_fields "添加收款明细",f,:rec_notice_details %></th>
+				<th colspan="7"><%= link_to_add_fields "添加收款明细",f,:rec_notice_details %></th>
+				<td>申请金额合计</td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td></td>
 			</tr>		
 		</table>		
 	</div>
@@ -191,7 +200,7 @@
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type<=4%>
 	<div class="form_title">
-		<h3>收款人</h3>
+		<h3>收款人明细</h3>
 	</div>
 	<div class="table_details">
 		<table class="form_input">

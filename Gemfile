@@ -5,6 +5,7 @@ gem 'mysql2'
 gem "jquery-rails"
 gem "devise"
 gem 'delayed_job'
+gem "pdfkit"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

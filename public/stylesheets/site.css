@@ -236,7 +236,7 @@ table.form_input td a{
 	display: inline-block;
 }
 /*+++++++++++++++++++++++++++++++*/
-div.table_details,div.rdd_details{
+div.table_details,div.rdd_details,div.reim_split_details{
 	overflow: auto;
 	margin: 15px;
 	padding: 5px;

@@ -67,7 +67,17 @@ $(function(){
 			$(this).closest("form").submit();
 			return false;
 		});
+		//bind the amount and rate event
+		$("input.rate").live("change",adapt_apply_amount_by_rate);
+		$("input.ori_amount").live("change",adapt_apply_amount_by_rate);
 });
+function adapt_apply_amount_by_rate()
+{
+	var tr= $(this).closest("tr");
+	var rate=tr.find("input.rate").val();
+	var ori_amount=tr.find("input.ori_amount").val();
+	tr.find("input.amount").val(rate*ori_amount);
+}
 
 //bind the change events
 function bind_change_events()
@@ -87,94 +97,61 @@ function bind_change_events()
 			is_split=$(this).children("option:selected").val();
 			fee_type=$(this).closest("tr").find("select.fee_type").children("option:selected").text();			
 		}
-		//var fee_type=$(this).closest("select.fee_type").children("option:selected").text();
-		//var is_split=$(this).closest("select.is_split_reim").children("option:selected").text();
-		//alert(fee_type);
-		//alert(is_split);
-		//var selected_text=$(this).children("option:selected").text();
+		//find all and show it
 		var children=$(this).closest("tr").next("tr").find("div.rdd_details");
 		children.show();
-		//children.find("table tr.fields td:last input").val("false");
-		//here is the delete operation
-		//children.find("table tr.fields").hide().find("td:last input").val("true");
+		//hide others
+		switch(fee_type)
+		{				
+			case "差旅费":
+				children.not("div.rd_travel").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_travel").hide().end();				
+				break;
+			case "交通费":
+				children.not("div.rd_transport").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_transport").hide().end();				
+				break;
+			case "住宿费":
+				children.not("div.rd_loding").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_loding").hide().end();
+				break;
+			case "工作餐费":
+				children.not("div.rd_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_work_meal").hide().end();
+				break;
+			case "加班餐费":
+				children.not("div.rd_extra_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_extra_work_meal").hide().end();				
+				break;
+			case "加班交通费":
+				children.not("div.rd_extra_work_car").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_extra_work_car").hide().end();				
+				break;
+			case "业务交通费":
+				children.not("div.rd_common_transport").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_common_transport").hide().end();				
+				break;
+			case "福利费用":
+				children.not("div.rd_benefit").find("table tr.fields").hide().find("td:last input").val("true");
+				children.not("div.rd_benefit").hide().end();				
+				break;
+			default:
+				children.find("table tr.fields").hide().find("td:last input").val("true");
+				children.hide();
+		}
 		if(is_split==1)
 		{
-			children.not("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
-			children.not("div.reim_split_details").hide().end();
+			//children.not("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
+			$("div.reim_split_details").show();		
 		}
 		else
 		{
-			switch(fee_type)
-			{				
-				case "差旅费":
-					children.not("div.rd_travel").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_travel").hide().end();				
-					break;
-				case "交通费":
-					children.not("div.rd_transport").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_transport").hide().end();				
-					break;
-				case "住宿费":
-					children.not("div.rd_loding").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_loding").hide().end();
-					break;
-				case "工作餐费":
-					children.not("div.rd_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_work_meal").hide().end();
-					break;
-				case "加班餐费":
-					children.not("div.rd_extra_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_extra_work_meal").hide().end();				
-					break;
-				case "加班交通费":
-					children.not("div.rd_extra_work_car").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_extra_work_car").hide().end();				
-					break;
-				case "业务交通费":
-					children.not("div.rd_common_transport").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_common_transport").hide().end();				
-					break;
-				case "福利费用":
-					children.not("div.rd_benefit").find("table tr.fields").hide().find("td:last input").val("true");
-					children.not("div.rd_benefit").hide().end();				
-					break;
-				default:
-					children.find("table tr.fields").hide().find("td:last input").val("true");
-					children.hide();
-			}
-		}		
+			$("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
+			$("div.reim_split_details").hide();		
+		}
 	});
 }
 
-//=======================here we bind the munu staff===================================
-var timeout    = 500;
-var closetimer = 0;
-var ddmenuitem = 0;
-
-function jsddm_open()
-{  jsddm_canceltimer();
-   jsddm_close();
-   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
-
-function jsddm_close()
-{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
-
-function jsddm_timer()
-{  closetimer = window.setTimeout(jsddm_close, timeout);}
-
-function jsddm_canceltimer()
-{  
-	if(closetimer){
-		window.clearTimeout(closetimer);
-		closetimer = null;}
-}
-
-$(document).ready(function()
-{  $('#menu > li').bind('mouseover', jsddm_open)
-   $('#menu > li').bind('mouseout',  jsddm_timer)});
-
-document.onclick = jsddm_close;
-//===================================================================================
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("true");  
     $(link).closest("tr.fields").hide(); 

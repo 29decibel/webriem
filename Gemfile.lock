@@ -49,6 +49,7 @@ GEM
       treetop (>= 1.4.5)
     mime-types (1.16)
     mysql2 (0.2.3)
+    pdfkit (0.4.6)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.12)
@@ -84,4 +85,5 @@ DEPENDENCIES
   devise
   jquery-rails
   mysql2
+  pdfkit
   rails (= 3.0.0)

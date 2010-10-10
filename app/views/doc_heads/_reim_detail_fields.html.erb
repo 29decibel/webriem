@@ -24,14 +24,14 @@
 		<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
 	</td>
 	<td>
-		<%= f.text_field :amount,:class=>"normal" %>  
+		<%= f.text_field :rate,:class=>"normal rate" %>  
 	</td>
 	<td>
-		<%= f.text_field :rate,:class=>"normal" %>  
+		<%= f.text_field :ori_amount,:class=>"normal ori_amount" %>  
 	</td>
 	<td>
-		<%= f.text_field :ori_amount,:class=>"normal" %>  
-	</td>
+		<%= f.text_field :amount,:class=>"normal amount" %>  
+	</td>	
 	<td>
 		<%= f.text_field :real_amount,:class=>"normal" %>  
 	</td>
@@ -67,7 +67,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加差旅费",f,:rd_travels %></th>
+							<th colspan="8"><%= link_to_add_fields "添加差旅费",f,:rd_travels %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
@@ -95,7 +98,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
+							<th colspan="8"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>					
 				</div>
@@ -123,7 +129,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
+							<th colspan="8"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
@@ -150,7 +159,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %></th>
+							<th colspan="8"><%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
@@ -177,7 +189,10 @@
 							<% end %>			
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
+							<th colspan="8"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
@@ -206,7 +221,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
+							<th colspan="9"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
@@ -234,7 +252,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
+							<th colspan="8"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
@@ -257,13 +278,16 @@
 							<% end %>			
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
+							<th colspan="8"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
 				<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				<!--分摊明细动态显示-->
-				<div class="reim_split_details rdd_details">
+				<div class="reim_split_details">
 					<table class="form_input">
 						<thead>
 							<tr>					
@@ -281,7 +305,10 @@
 							<% end %>				
 						</tbody>
 						<tr>
-							<th colspan="11"><%= link_to_add_fields "添加分摊明细",f,:reim_split_details %></th>
+							<th colspan="8"><%= link_to_add_fields "添加分摊明细",f,:reim_split_details %></th>
+							<td>申请金额合计</td>
+							<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+							<td></td>
 						</tr>		
 					</table>
 				</div>
