@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
     end
     error_msg
   end
+  layout :layout_by_resource
+  def layout_by_resource
+    if devise_controller?
+      "devise_layout"
+    else
+      "application"
+    end
+  end
 end

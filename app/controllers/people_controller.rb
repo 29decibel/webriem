@@ -38,7 +38,7 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-    create_user_account(@person.code,@person.e_mail) if params[:add_account]
+    create_or_update_user_account(@person.code,@person.e_mail)
     if @person.save
       @message="创建成功"
       render "shared/show_result"
@@ -48,8 +48,13 @@ class PeopleController < ApplicationController
     end
   end
   
-  def create_user_account(name,email)
-    User.create(:name => name, :email => email, :password => "123456",:password_confirmation=>"123456")
+  def create_or_update_user_account(name,email)
+    user=User.find_by_name(name)
+    if user
+      user.update_attributes :name=>name,:email=>email
+    else
+      User.create(:name => name, :email => email, :password => "123456",:password_confirmation=>"123456")
+    end
   end
 
   # PUT /people/1
@@ -57,7 +62,7 @@ class PeopleController < ApplicationController
   def update
     @person = Person.find(params[:id])
     if @person.update_attributes(params[:person])
-      create_user_account(@person.code,@person.e_mail) if params[:add_account]
+      create_or_update_user_account(@person.code,@person.e_mail)
       @message="更新成功"
       render "shared/show_result"
     else

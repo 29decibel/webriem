@@ -1,45 +1,40 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-<div class="form_title">
-	<h3>登录</h3>
-</div>
 <!--==================================================================-->
-  <div class="field">
+  <div class="login_field">
     <%= f.label "用户名",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %>
+	<div class="login_input_area">
+		<p class="login_input">
+			<%= f.text_field :name,:class=>"normal" %>
 		</p>
-		<p class="tip"></p>
 	</div>
-	<span class="error_message"></span>    
   </div>
 <!--==================================================================-->
-  <div class="field">
+  <div class="login_field">
     <%= f.label "密码",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.password_field :password,:class=>"basic_input" %>
+	<div class="login_input_area">
+		<p class="login_input">
+			<%= f.password_field :password,:class=>"normal" %>
 		</p>
 		<p class="tip"></p>
 	</div>
-	<span class="error_message"></span>    
   </div>
 <!--==================================================================-->
   <% if devise_mapping.rememberable? -%>
-  <div class="field">
+  <div class="login_field">
     <%= f.label "记住我吧",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.check_box :remember_me,:class=>"basic_input" %>
+	<div class="login_input_area">
+		<p class="login_input">
+			<%= f.check_box :remember_me,:class=>"normal" %>
 		</p>
-		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    
   </div>
   <% end -%>
-<div class="actions">
-	<%= link_to "登录",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to "忘记密码?", new_password_path(resource_name),:class=>"button2" %>
+<div class="login_actions">
+	<%= f.submit "登录" %>
+	<% if alert %>
+		<spna id="error"><%= alert %></span>
+	<% end %>
 </div>
 <% end %>
 

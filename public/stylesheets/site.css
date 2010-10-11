@@ -315,3 +315,32 @@ div.reim_details_by_fee_type{
 	display: inline=block;
 	background-color: #e9eef2;
 }
+/*===========================================devise relate staff=================*/
+div#login{
+	background-image: url("../images/login.png");
+	background-repeat: no-repeat;
+	width:700px;
+	position: relative;
+	margin: auto;
+	margin-top: 100px;
+	height:500px;
+}
+div.login_input_area{
+	display:inline-block;	
+}
+div.login_field label{
+	display:inline-block;
+	width:90px;
+}
+div.login_input_area input{
+	width:90px;
+}
+div#login form{
+	position: absolute;
+	left:350px;
+	top:95px;
+}
+div.login_actions{
+	display:inline-block;
+	margin-top: 15px;
+}
