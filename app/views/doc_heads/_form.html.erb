@@ -11,79 +11,51 @@
 <div class="form_title">
 	<h3>基本信息</h3>
 </div>
-<div id="doc_head">
-	<div class="doc_head_field">
+<div class="flow_area">
+	<div class="flow_area_field">
 		<%= f.label "单号",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :doc_no,:class=>"basic_input "+ mark_required(@doc_head, :doc_no) %>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="doc_head_field">
+			<%= f.text_field :doc_no,:class=>"basic_input "+ mark_required(@doc_head, :doc_no) %>
+		</div> 
+	</div>
+	<div class="flow_area_field">
 		<%= f.label "附件个数",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :attach,:class=>"basic_input "+ mark_required(@doc_head, :attach) %>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="doc_head_field">
+			<%= f.text_field :attach,:class=>"basic_input "+ mark_required(@doc_head, :attach) %>  
+	    </div>
+	</div>
+	<div class="flow_area_field">
 		<%= f.label "申请人",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
-				<%= f.hidden_field :person_id %>
-				<span><%= @doc_head.person_name%></span>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="doc_head_field">
+			<%= f.hidden_field :person_id %>
+			<span><%= @doc_head.person_name%></span>
+		</div>  
+	</div>
+	<div class="flow_area_field">
 		<%= f.label "备注",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
 				<%= f.text_field :note,:class=>"basic_input "+ mark_required(@doc_head, :note) %>
-			</p>
-			<p class="tip"></p>
 		</div>
-		<span class="error_message"></span>    
-	  </div>
+	</div>
 	<% if @doc_head.doc_type>4 %>
-	<div class="doc_head_field">
+	<div class="flow_area_field">
 		<%= f.label "申请日期",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
 				<%= f.text_field :apply_date,:class=>"datepicker basic_input" %>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="doc_head_field">
+		</div> 
+	</div>
+	<div class="flow_area_field">
 		<%= f.label "部门",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
 				<%= collection_select(:doc_head, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="doc_head_field">
+		</div> 
+	</div>
+	<div class="flow_area_field">
 		<%= f.label "费用类型",:class=>"input_label" %>
 		<div class="input_area">
-			<p class="input">
 				<%= collection_select(:doc_head, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%>
-			</p>
-			<p class="tip"></p>
 		</div>
-		<span class="error_message"></span>    
-	 </div>
+	</div>
 	<% end %>
 	<%= f.hidden_field :doc_type%>
 </div>
@@ -125,45 +97,21 @@
 			</tr>		
 		</table>
 	</div>	
+	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% elsif @doc_head.doc_type==3%>
+	<!--all reim doc have a detail info-->
+	<% if @doc_head.doc_type>=9%>
 	<div class="form_title">
 		<h3>报销单明细</h3>
 	</div>
-	<div class="table_details">
-		<table class="form_input">
-			<thead>
-				<tr>
-					<th></th>
-					<th>序号</th>
-				    <th>部门</th>
-				    <th>费用类型</th>
-				    <th>项目</th>
-				    <th>费用描述</th>
-					<th>是否分摊</th>
-				    <th>币种</th>
-					<th>汇率</th>
-					<th>原币金额</th>
-					<th>申请金额</th>
-					<th>实际金额</th>					
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<% f.fields_for :reim_details do |builder| %>
-					<%= render :partial => 'reim_detail_fields',:locals => { :f => builder } %>
-				<% end %>				
-			</tbody>
-			<tr>
-				<th colspan="10"><%= link_to_add_fields "添加报销单明细",f,:reim_details %></th>
-				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+	<div id="reim_detail">
+		<%= f.fields_for :reim_detail do |builder| %>
+			<%= render :partial => 'reim_detail_fields',:locals => { :f => builder } %>
+		<% end %>
 	</div>
+	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% elsif @doc_head.doc_type==4%>
+	<% if @doc_head.doc_type==3%>
 	<div class="form_title">
 		<h3>收款明细</h3>
 	</div>
@@ -198,7 +146,7 @@
 	</div>
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type<=4%>
+	<% if @doc_head.doc_type<=3%>
 	<div class="form_title">
 		<h3>收款人明细</h3>
 	</div>
@@ -216,7 +164,7 @@
 			    </tr>
 		    <thead>
 			<tbody>
-				<% f.fields_for :recivers do |builder|  %>
+				<%= f.fields_for :recivers do |builder|  %>
 					<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
 				<% end %>
 			</tbody>
@@ -228,56 +176,56 @@
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
 	<!--结汇申请单-->
-	<% if @doc_head.doc_type==5%>
+	<% if @doc_head.doc_type==4%>
 	<div class="form_title">
 		<h3>结汇申请详细</h3>
 	</div>
 	<div id="inner_remittance">
-		<% f.fields_for :inner_remittances do |builder|  %>
+		<%= f.fields_for :inner_remittances do |builder|  %>
 			<%= render :partial => 'inner_remittance',:locals => { :f => builder }  %>
 		<% end %>
 	</div>
 	<% end %>
 	<!--转帐申请单-->
-	<% if @doc_head.doc_type==6%>
+	<% if @doc_head.doc_type==5%>
 	<div class="form_title">
 		<h3>转帐申请详细</h3>
 	</div>
 	<div id="inner_transfer">
-		<% f.fields_for :inner_transfers do |builder|  %>
+		<%= f.fields_for :inner_transfer do |builder|  %>
 			<%= render :partial => "inner_transfer",:locals => { :f => builder }  %>
 		<% end %>
 	</div>
 	<% end %>
 	<!--现金提取申请单-->
-	<% if @doc_head.doc_type==7%>
+	<% if @doc_head.doc_type==6%>
 	<div class="form_title">
 		<h3>现金提取申请详细</h3>
 	</div>
 	<div id="inner_cash_draw">
-		<% f.fields_for :inner_cash_draws do |builder|  %>
+		<%= f.fields_for :inner_cash_draw do |builder|  %>
 			<%= render :partial => "inner_cash_draw",:locals => { :f => builder }  %>
 		<% end %>
 	</div>
 	<% end %>
 	<!--购买理财产品-->
-	<% if @doc_head.doc_type==8%>
+	<% if @doc_head.doc_type==7%>
 	<div class="form_title">
 		<h3>购买理财产品详细</h3>
 	</div>
 	<div id="buy_finance_products">
-		<% f.fields_for :buy_finance_products do |builder|  %>
+		<%= f.fields_for :buy_finance_products do |builder|  %>
 			<%= render :partial => "buy_finance_products",:locals => { :f => builder }  %>
 		<% end %>
 	</div>
 	<% end %>
 	<!--赎回理财产品-->
-	<% if @doc_head.doc_type==9%>
+	<% if @doc_head.doc_type==8%>
 	<div class="form_title">
 		<h3>赎回理财产品详细</h3>
 	</div>
 	<div id="redeem_finance_products">
-		<% f.fields_for :redeem_finance_products do |builder|  %>
+		<%= f.fields_for :redeem_finance_products do |builder|  %>
 			<%= render :partial => "redeem_finance_products",:locals => { :f => builder }  %>
 		<% end %>
 	</div>

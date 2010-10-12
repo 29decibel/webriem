@@ -34,6 +34,7 @@
 					<th>部门</th>
 				    <th>是否为本部门</th>
 				    <th>职务</th>
+					<th>审批金额超过</th>
 					<th></th><!--给删除的-->		    
 			    </tr>
 		    <thead>
@@ -43,7 +44,7 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<th colspan="4"><%= link_to_add_fields "添加审批流程",f,:work_flow_steps %></th>
+				<th colspan="4"><%= link_to_add_fields "添加一个审批环节",f,:work_flow_steps %></th>
 			</tr>		
 		</table>
 	</div>	

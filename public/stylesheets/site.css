@@ -2,7 +2,7 @@
 *{margin:0px;padding:0px;}
 /*whole style*/
 body{
-	width:80%;
+	width:97%;
 	margin:auto;
 	font: 80% "黑体", "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
 }
@@ -109,35 +109,19 @@ form{
 	background: none;
 
 }
-form div#doc_head{
+form div.flow_area{
 	margin: 0px 15px 15px 15px;
 	padding: 10px;
 	background-color: #E4F0F2;	
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 }
-form div.field{
-	margin-bottom: 25px;
-}
-form div.doc_head_field{
-	
+form div.flow_area_field{	
 	display: inline-block;
-}
-form div.doc_head_field .input_label{
-	width:80px;
-	display:inline-block;
-	text-align: right;
-}
-form div.field .input_label{
-	width:120px;
-	display:inline-block;
-	margin-left: 20px;
+	margin:2px;
 }
 form div.input_area{
 	display: inline-block;
-}
-form .basic_input{
-
 }
 div.form_title{
 	margin: 0px 15px 7px 15px;

@@ -8,4 +8,6 @@ class Person < ActiveRecord::Base
   enum_attr :gender, [['未知',0],['男', 1], ['女', 2]]
   blongs_to_name_attr :dep
   blongs_to_name_attr :duty
+  cattr_reader :per_page
+  @@per_page = 10
 end

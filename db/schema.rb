@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101010034050) do
+ActiveRecord::Schema.define(:version => 20101012112153) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -495,6 +495,7 @@ ActiveRecord::Schema.define(:version => 20101010034050) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "work_flow_id"
+    t.decimal  "max_amount",   :precision => 8, :scale => 2
   end
 
   create_table "work_flows", :force => true do |t|

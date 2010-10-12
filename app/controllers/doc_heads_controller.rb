@@ -1,7 +1,8 @@
 #coding: utf-8
 require "mailing_job"
 #借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
-DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"BX",4=>"SK",5=>"JH",6=>"ZH",7=>"XJ",8=>"GL",9=>"SL"}
+#9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
+DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJT",11=>"BXZS",12=>"BXGZ",13=>"BXJBC",14=>"BXJBJ",15=>"BXYW",16=>"BXFL"}
 class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
@@ -51,15 +52,16 @@ class DocHeadsController < ApplicationController
     #set the apply person to the current login user
     @doc_head.person=current_person
     #build some new doc details
-    @doc_head.reim_details.build if @doc_head.doc_type==3
     @doc_head.cp_doc_details.build if @doc_head.doc_type==1 or  @doc_head.doc_type==2
-    @doc_head.rec_notice_details.build if @doc_head.doc_type==4
-    @doc_head.recivers.build if @doc_head.doc_type<=4
-    @doc_head.inner_remittances.build if @doc_head.doc_type==5
-    @doc_head.inner_transfers.build if @doc_head.doc_type==6
-    @doc_head.inner_cash_draws.build if @doc_head.doc_type==7
-    @doc_head.buy_finance_products.build if @doc_head.doc_type==8
-    @doc_head.redeem_finance_products.build if @doc_head.doc_type==9
+    @doc_head.rec_notice_details.build if @doc_head.doc_type==3
+    @doc_head.recivers.build if @doc_head.doc_type<=3
+    #build one related stuff
+    @doc_head.build_reim_detail if @doc_head.doc_type>=9
+    @doc_head.build_inner_remittance if @doc_head.doc_type==4
+    @doc_head.build_inner_transfer if @doc_head.doc_type==5
+    @doc_head.build_inner_cash_draw if @doc_head.doc_type==6
+    @doc_head.build_buy_finance_product if @doc_head.doc_type==7
+    @doc_head.build_redeem_finance_product if @doc_head.doc_type==8
     #暂时每次都创建一个审批流填写信息
     @doc_head.work_flow_infos.build
     #render

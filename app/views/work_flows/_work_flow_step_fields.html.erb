@@ -9,6 +9,9 @@
 		<%= f.select(:duty_id,  Duty.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
 	</td>
 	<td>
+		<%= f.text_field :max_amount,:class=>"basic_input" %>元
+	</td>
+	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除明细", f %> 
 	</td>

@@ -6,6 +6,7 @@ gem "jquery-rails"
 gem "devise"
 gem 'delayed_job'
 gem "pdfkit"
+gem "will_paginate", "~> 3.0.pre2"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
