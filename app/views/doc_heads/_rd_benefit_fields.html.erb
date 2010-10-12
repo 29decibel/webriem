@@ -15,6 +15,9 @@
 		<%= f.text_field :amount,:class=>"normal" %>  
 	</td>
 	<td>
+		<%= f.file_field :details,:class=>"normal" %>  
+	</td>	
+	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除", f %> 
 	</td>

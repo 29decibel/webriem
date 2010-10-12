@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012112153) do
+ActiveRecord::Schema.define(:version => 20101012152524) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -232,10 +232,14 @@ ActiveRecord::Schema.define(:version => 20101012112153) do
     t.date     "reim_date"
     t.integer  "fee_time_span"
     t.integer  "people_count"
-    t.decimal  "amount",         :precision => 10, :scale => 0
+    t.decimal  "amount",               :precision => 10, :scale => 0
     t.integer  "reim_detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "details_file_name"
+    t.string   "details_content_type"
+    t.integer  "details_file_size"
+    t.datetime "details_updated_at"
   end
 
   create_table "rd_common_transports", :force => true do |t|
