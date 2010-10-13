@@ -16,12 +16,14 @@
 	</div>
 	<span class="error_message"></span>    
   </div>
-<div class="field">
-	<%= f.label "对应的单据类型",:class=>"input_label" %>
+<%= f.label "对应的单据类型",:class=>"input_label" %>
+<div class="field">	
 	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :doc_types,:class=>"basic_input" %><%= mark_required(@work_flow, :doc_types) %>
-		</p>
+		<% (1..16).each do |num| %>
+			<div id="doc_type_check">
+				<%= check_box_tag("doc_types[]",num,@work_flow.doc_types.include?(num.to_s))%><%= f.label doc_type_name(num)%>
+			</div>			
+		<% end %>
 		<p class="tip"></p>
 	</div>
 	<span class="error_message"></span>    

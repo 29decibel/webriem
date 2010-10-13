@@ -26,7 +26,7 @@ class WorkFlowsController < ApplicationController
   # GET /work_flows/new.xml
   def new
     @work_flow = WorkFlow.new
-
+    @work_flow.doc_types="0"
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @work_flow }

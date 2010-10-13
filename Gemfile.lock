@@ -33,7 +33,8 @@ GEM
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
     daemons (1.1.0)
-    delayed_job (2.0.3)
+    delayed_job (2.1.0.pre2)
+      activesupport (~> 3.0)
       daemons
     devise (1.1.2)
       bcrypt-ruby (~> 2.1.2)
@@ -85,7 +86,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  delayed_job
+  delayed_job (= 2.1.0.pre2)
   devise
   jquery-rails
   mysql2

@@ -50,7 +50,7 @@
 				<%= link_to "审批流设置",:work_flows,{:class=>"menu_item #{'selected' if controller.controller_name=="work_flows"}"}%>
 			</div>
 			<div class="menu">
-				<% (1..16).each do |num| %>
+				<% (1..14).each do |num| %>
 					<%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num),{:class=>"menu_item #{'selected' if controller.controller_name=="doc_heads" and @doc_type and @doc_type==num}"}%>
 				<% end %>
 			</div>

@@ -92,7 +92,67 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加差旅费",f,:rd_travels %></th>
+				<th colspan="8"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
+				<td>申请金额合计</td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td></td>
+			</tr>		
+		</table>
+	</div>
+	<div class="rd_transport rdd_details">
+		<table class="form_input">
+			<thead>
+				<tr>					
+					<th>序号</th>
+				    <th>开始时间</th>
+				    <th>到达时间</th>
+				    <th>出发地</th>
+				    <th>目的地</th>
+					<th>出差事由</th>
+				    <th>交通工具</th>
+					<th>申请费用</th>
+					<th>HR调整</th>
+					<th>财务调整</th>
+					<th></th><!--给删除的-->
+			    </tr>
+		    <thead>
+			<tbody>
+				<%= f.fields_for :rd_transports do |builder|  %>
+					<%= render :partial => 'rd_transport_fields',:locals => { :f => builder }  %>
+				<% end %>				
+			</tbody>
+			<tr>
+				<th colspan="8"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
+				<td>申请金额合计</td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td></td>
+			</tr>		
+		</table>					
+	</div>
+	<div class="rd_loding rdd_details">
+		<table class="form_input">
+			<thead>
+				<tr>					
+					<th>序号</th>
+				    <th>住宿天数</th>
+				    <th>城市</th>
+				    <th>住宿日期</th>
+				    <th>费用标准</th>
+					<th>人数</th>
+				    <th>合住人</th>
+					<th>申请费用</th>
+					<th>HR调整</th>
+					<th>财务调整</th>
+					<th></th><!--给删除的-->
+			    </tr>
+		    <thead>
+			<tbody>
+				<%= f.fields_for :rd_lodgings do |builder|  %>
+					<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
+				<% end %>				
+			</tbody>
+			<tr>
+				<th colspan="8"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
 				<td></td>
@@ -101,73 +161,7 @@
 	</div>
 <% end %>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==10%>	
-<div class="rd_transport rdd_details">
-	<table class="form_input">
-		<thead>
-			<tr>					
-				<th>序号</th>
-			    <th>开始时间</th>
-			    <th>到达时间</th>
-			    <th>出发地</th>
-			    <th>目的地</th>
-				<th>出差事由</th>
-			    <th>交通工具</th>
-				<th>申请费用</th>
-				<th>HR调整</th>
-				<th>财务调整</th>
-				<th></th><!--给删除的-->
-		    </tr>
-	    <thead>
-		<tbody>
-			<%= f.fields_for :rd_transports do |builder|  %>
-				<%= render :partial => 'rd_transport_fields',:locals => { :f => builder }  %>
-			<% end %>				
-		</tbody>
-		<tr>
-			<th colspan="8"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
-			<td>申请金额合计</td>
-			<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
-			<td></td>
-		</tr>		
-	</table>					
-</div>
-<% end %>
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==11%>
-<div class="rd_loding rdd_details">
-	<table class="form_input">
-		<thead>
-			<tr>					
-				<th>序号</th>
-			    <th>住宿天数</th>
-			    <th>城市</th>
-			    <th>住宿日期</th>
-			    <th>费用标准</th>
-				<th>人数</th>
-			    <th>合住人</th>
-				<th>申请费用</th>
-				<th>HR调整</th>
-				<th>财务调整</th>
-				<th></th><!--给删除的-->
-		    </tr>
-	    <thead>
-		<tbody>
-			<%= f.fields_for :rd_lodgings do |builder|  %>
-				<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
-			<% end %>				
-		</tbody>
-		<tr>
-			<th colspan="8"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
-			<td>申请金额合计</td>
-			<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
-			<td></td>
-		</tr>		
-	</table>
-</div>
-<% end %>
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==12%>
+<% if @doc_head.doc_type==10%>
 <div class="rd_work_meal rdd_details">
 	<table class="form_input">
 		<thead>
@@ -199,7 +193,7 @@
 </div>
 <% end %>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==13%>
+<% if @doc_head.doc_type==11%>
 <div class="rd_extra_work_meal rdd_details">
 	<table class="form_input">
 		<thead>
@@ -231,7 +225,7 @@
 </div>
 <% end %>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==14%>
+<% if @doc_head.doc_type==12%>
 <div class="rd_extra_work_car rdd_details">
 	<table class="form_input">
 		<thead>
@@ -265,7 +259,7 @@
 </div>
 <% end %>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==15%>
+<% if @doc_head.doc_type==13%>
 <div class="rd_common_transport rdd_details">
 	<table class="form_input">
 		<thead>
@@ -298,7 +292,7 @@
 </div>
 <% end %>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<% if @doc_head.doc_type==16%>
+<% if @doc_head.doc_type==14%>
 <div class="rd_benefit rdd_details">
 	<table class="form_input">
 		<thead>
