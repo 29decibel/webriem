@@ -119,6 +119,7 @@ form div.form_area{
 form div.form_field{
 	display:inline-block;
 	margin-bottom: 5px;
+	min-width:290px;
 }
 form div.form_field label{
 	display:inline-block;
