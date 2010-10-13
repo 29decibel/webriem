@@ -56,7 +56,6 @@ class DocHeadsController < ApplicationController
     @doc_head.rec_notice_details.build if @doc_head.doc_type==3
     @doc_head.recivers.build if @doc_head.doc_type<=3
     #build one related stuff
-    @doc_head.build_reim_detail if @doc_head.doc_type>=9
     @doc_head.build_inner_remittance if @doc_head.doc_type==4
     @doc_head.build_inner_transfer if @doc_head.doc_type==5
     @doc_head.build_inner_cash_draw if @doc_head.doc_type==6

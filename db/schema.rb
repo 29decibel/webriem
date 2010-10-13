@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101013114320) do
+ActiveRecord::Schema.define(:version => 20101013172308) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -124,6 +124,14 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.integer  "doc_type"
     t.integer  "doc_state"
     t.integer  "work_flow_step_id"
+    t.integer  "project_id"
+    t.text     "reim_description"
+    t.integer  "is_split"
+    t.decimal  "rate",              :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "apply_amount",      :precision => 8, :scale => 2
+    t.decimal  "ori_amount",        :precision => 8, :scale => 2
+    t.decimal  "real_amount",       :precision => 8, :scale => 2
   end
 
   create_table "duties", :force => true do |t|
@@ -181,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "currency_id"
   end
 
   create_table "inner_transfers", :force => true do |t|
@@ -235,7 +244,7 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.integer  "fee_time_span"
     t.integer  "people_count"
     t.decimal  "amount",               :precision => 10, :scale => 0
-    t.integer  "reim_detail_id"
+    t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "details_file_name"
@@ -253,11 +262,11 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.time     "start_time"
     t.time     "end_time"
     t.string   "reason"
-    t.integer  "reim_detail_id"
-    t.decimal  "apply_amount",   :precision => 10, :scale => 0
-    t.decimal  "hr_amount",      :precision => 10, :scale => 0
-    t.decimal  "fi_amount",      :precision => 10, :scale => 0
-    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.integer  "doc_head_id"
+    t.decimal  "apply_amount", :precision => 10, :scale => 0
+    t.decimal  "hr_amount",    :precision => 10, :scale => 0
+    t.decimal  "fi_amount",    :precision => 10, :scale => 0
+    t.decimal  "final_amount", :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -271,11 +280,11 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.time     "start_time"
     t.time     "end_time"
     t.string   "reason"
-    t.integer  "reim_detail_id"
-    t.decimal  "apply_amount",   :precision => 10, :scale => 0
-    t.decimal  "hr_amount",      :precision => 10, :scale => 0
-    t.decimal  "fi_amount",      :precision => 10, :scale => 0
-    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.integer  "doc_head_id"
+    t.decimal  "apply_amount", :precision => 10, :scale => 0
+    t.decimal  "hr_amount",    :precision => 10, :scale => 0
+    t.decimal  "fi_amount",    :precision => 10, :scale => 0
+    t.decimal  "final_amount", :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -287,34 +296,34 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.time     "start_time"
     t.time     "end_time"
     t.string   "reason"
-    t.integer  "reim_detail_id"
-    t.decimal  "apply_amount",   :precision => 10, :scale => 0
-    t.decimal  "hr_amount",      :precision => 10, :scale => 0
-    t.decimal  "fi_amount",      :precision => 10, :scale => 0
-    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.integer  "doc_head_id"
+    t.decimal  "apply_amount", :precision => 10, :scale => 0
+    t.decimal  "hr_amount",    :precision => 10, :scale => 0
+    t.decimal  "fi_amount",    :precision => 10, :scale => 0
+    t.decimal  "final_amount", :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "rd_lodgings", :force => true do |t|
     t.integer  "sequence"
-    t.integer  "reim_detail_id"
+    t.integer  "doc_head_id"
     t.integer  "region_id"
     t.date     "lodging_date"
     t.integer  "days"
     t.integer  "people_count"
     t.string   "person_names"
-    t.decimal  "apply_amount",   :precision => 10, :scale => 0
-    t.decimal  "hr_amount",      :precision => 10, :scale => 0
-    t.decimal  "fi_amount",      :precision => 10, :scale => 0
-    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.decimal  "apply_amount", :precision => 10, :scale => 0
+    t.decimal  "hr_amount",    :precision => 10, :scale => 0
+    t.decimal  "fi_amount",    :precision => 10, :scale => 0
+    t.decimal  "final_amount", :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "rd_transports", :force => true do |t|
     t.integer  "sequence"
-    t.integer  "reim_detail_id"
+    t.integer  "doc_head_id"
     t.time     "start_date"
     t.time     "end_date"
     t.string   "start_position"
@@ -341,7 +350,7 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.decimal  "hr_amount",             :precision => 10, :scale => 0
     t.decimal  "fi_amount",             :precision => 10, :scale => 0
     t.decimal  "final_amount",          :precision => 10, :scale => 0
-    t.integer  "reim_detail_id"
+    t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -353,11 +362,11 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
     t.integer  "people_count"
     t.string   "person_names"
     t.string   "reason"
-    t.integer  "reim_detail_id"
-    t.decimal  "apply_amount",   :precision => 10, :scale => 0
-    t.decimal  "hr_amount",      :precision => 10, :scale => 0
-    t.decimal  "fi_amount",      :precision => 10, :scale => 0
-    t.decimal  "final_amount",   :precision => 10, :scale => 0
+    t.integer  "doc_head_id"
+    t.decimal  "apply_amount", :precision => 10, :scale => 0
+    t.decimal  "hr_amount",    :precision => 10, :scale => 0
+    t.decimal  "fi_amount",    :precision => 10, :scale => 0
+    t.decimal  "final_amount", :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -428,11 +437,11 @@ ActiveRecord::Schema.define(:version => 20101013114320) do
   end
 
   create_table "reim_split_details", :force => true do |t|
-    t.integer  "reim_detail_id"
+    t.integer  "doc_head_id"
     t.integer  "dep_id"
     t.integer  "project_id"
     t.integer  "fee_id"
-    t.decimal  "percent",        :precision => 10, :scale => 0
+    t.decimal  "percent",     :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sequence"
