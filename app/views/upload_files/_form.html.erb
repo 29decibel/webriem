@@ -1,0 +1,23 @@
+<h3 class="form_title"><%= @title%></h3>
+<%= stylesheet_link_tag :all,:recursive => true %>
+<% @upload_files.each do |uf|%>
+	<div class="upload_item">
+		<%= uf.upload.original_filename %>
+		<div class="delete_upload">
+			<%= link_to "删除"%>
+		</div>
+		<div class="download">
+			<%= link_to "下载",uf.upload.url %>
+		</div>
+	</div>	
+<% end %>
+<div id="add_uload_file">
+	<% form_for(@upload_file,:html=>{:multipart=>true}) do |f| %>
+		<div class="upload_area">
+			<%= f.file_field :upload%>
+		</div>	
+		<div class="actions">
+		  <%= f.submit "上传" %>
+		</div>
+	<% end %>
+</div>

@@ -3,9 +3,12 @@ class DocHead < ActiveRecord::Base
   belongs_to :fee
   belongs_to :dep
   belongs_to :person
+  belongs_to :currency
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
   blongs_to_name_attr :person
+  blongs_to_name_attr :project
+  blongs_to_name_attr :currency
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
   #has many recivers and cp_doc_details
   has_many :recivers, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
@@ -65,8 +68,8 @@ class DocHead < ActiveRecord::Base
   end
   #获得所有的审批流程
   def work_flows
-    wf=WorkFlow.where("doc_types like '%?%'",doc_type).first
-    wf==nil ? []:wf.work_flow_steps.to_a
+    wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s }
+    wf==nil ? []:wf.first.work_flow_steps.to_a
   end
   def current_work_flow_step
     wfs=nil
@@ -116,5 +119,24 @@ class DocHead < ActiveRecord::Base
     #终止单据
     self.doc_state=0
     self.work_flow_step_id=-1
+  end
+  #==================================about filter================================
+  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split']
+  def self.not_display
+    NOT_DISPLAY
+  end
+  CUSTOM_QUERY={
+      'person_id'=>{:include=>:person,:conditions=>'people.name like ?'},
+      'fee_id'=>{:include=>:fee,:conditions=>'fees.name like ?'},
+      'dep_id'=>{:include=>:dep,:conditions=>'deps.name like ?'},
+      'project_id'=>{:include=>:project,:conditions=>'projects.name like ?'},
+      'currency_id'=>{:include=>:currency,:conditions=>'currencies.name like ?'},
+  }
+  def self.custom_query(column_name,filter_text)
+    if CUSTOM_QUERY.has_key? column_name
+      CUSTOM_QUERY[column_name]
+    else
+      nil
+    end
   end
 end

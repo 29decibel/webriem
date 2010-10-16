@@ -15,7 +15,9 @@
 		<%= f.text_field :amount,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.file_field :details,:class=>"normal" %>  
+		<%= f.label :uploads,:class=>"normal" %>
+		<%= f.hidden_field :id%>
+		<%= link_to_function("添加附件","add_upload_files(this,'#{upload_files_path}')")%>
 	</td>	
 	<td>
 		<%= f.hidden_field(:_destroy) %>

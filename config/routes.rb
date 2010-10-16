@@ -1,5 +1,15 @@
 Webreim::Application.routes.draw do
 
+  resources :roles
+
+  post "model_search/with"
+  
+  get "model_search/index"
+
+  resources :upload_files
+
+  get "ref_form/index"
+
   resources :feed_backs
 
   resources :work_flow_infos

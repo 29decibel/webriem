@@ -1,4 +1,4 @@
-<%= form_for @doc_head,:remote=>true,:html => { :multipart => true } do |f| %>
+<%= form_for @doc_head,:remote=>true do |f| %>
 <div class="form_title">
 	<h3><%= @title%></h3>
 </div>
@@ -47,8 +47,12 @@
 	<% end %>
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "项目" %>
-			<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"input1"}%>
+			<%= f.label "项目" %>			
+			<div class="reference">
+				<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
+				<%= f.text_field :project_id,:class=>"input0" %><a href="#" class-data="Project"><span class="reference"></span></a>			
+			</div>
+			<!--<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"input1"}%>-->
 		</div>
 		<div class="form_field">
 			<%= f.label "是否分摊" %>

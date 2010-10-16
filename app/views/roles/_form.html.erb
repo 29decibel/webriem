@@ -1,0 +1,36 @@
+<%= form_for @role,:remote=>true do |f| %>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
+<div class="actions">
+	<%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to '返回', roles_path,:class=>"button2" %>
+</div>
+<div class="field">
+    <%= f.label "角色名称",:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@role, :code) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+ </div>
+	<div id="seleted_person">
+		<div class="form_title">
+			<h3>该角色下的人员</h3>
+			<%= select(@role,:people,@role.people.map{|p| [p.name,p.id]},{},{:multiple=>true,:class=>"selected"})%>
+			<%= link_to_function "删除选中的员工","removeSelected(this);"%>
+		</div>
+	</div>
+	<div id="seleted_menu">
+		<div class="form_title">
+			<h3>可访问的菜单</h3>
+			<%= select(@role,:menus,@role.menus.map{|m| [m.title,m.id]},{},{:multiple=>true,:class=>"selected"})%>
+			<%= link_to_function "删除选中的菜单项","removeSelected(this);"%>
+		</div>
+	</div>
+	<div id="select_person">
+		
+	</div>
+
+<% end %>

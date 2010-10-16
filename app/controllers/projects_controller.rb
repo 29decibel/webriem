@@ -3,12 +3,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @projects }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Project"
   end
 
   # GET /projects/1

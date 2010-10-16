@@ -70,6 +70,11 @@ $(function(){
 		//bind the amount and rate event
 		$("input.rate").live("change",adapt_apply_amount_by_rate);
 		$("input.ori_amount").live("change",adapt_apply_amount_by_rate);
+		//bind all references
+		//pop up reference window
+		$("div.reference a").live("click",pop_up_reference_window);
+		//close window and back to the input
+		$("div.reference_window_action a").live("click",back_to_the_reference);
 });
 function adapt_apply_amount_by_rate()
 {
@@ -181,4 +186,37 @@ function set_unique_sequence_num(sequences){
 		//fire it once
 		$(this).attr("readonly","readonly");
 	});
+}
+
+function add_upload_files(current,path)
+{
+	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
+	window.showModalDialog(path,'',sFeatures);
+}
+function removeSelected(remove_link)
+{
+	$(remove_link).parent().find("select :selected").remove();
+}
+//=======================================pop up references...........
+function pop_up_reference_window()
+{
+	path="/model_search/index?bare=true&class_name="+$(this).attr('class-data');
+	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
+	//pop up a dialog
+	var returnValue=window.showModalDialog(path,'',sFeatures);
+	//get the window value and set to the textbox and hiddenfield
+	//set the display info
+	$(this).siblings("input[type=text]").val(returnValue);
+	//set the id
+	$(this).siblings("input[type=hidden]").val("hidden"+returnValue);
+	return false;
+}
+//set the selected value the result
+//close the window
+function back_to_the_reference()
+{
+	//set the return value
+	window.returnValue="test";
+	//close the window
+	window.close();
 }

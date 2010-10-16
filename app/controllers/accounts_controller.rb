@@ -3,12 +3,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Account"
   end
 
   # GET /accounts/1

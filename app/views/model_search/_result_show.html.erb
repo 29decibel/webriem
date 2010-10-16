@@ -1,0 +1,20 @@
+<table class="hor-zebra">
+  <tr>
+	<th><%= check_box_tag "selected_all"%></th>
+	<% searchable_columns(@class).each do |c|%>
+    <th><%= @class.human_attribute_name(c.name)%></th>
+	<% end %>
+	<th></th>
+    <th></th>
+  </tr>
+
+<% @results.each do |result| %>
+  <tr>
+	<td><%= check_box_tag "selected"%></td>
+	<% searchable_columns(@class).each do |c|%>
+		<td><%= get_display_value(result,c)%></td>
+	<% end %>
+    <td class="action"><%= link_to '查看', result %></td>
+    <td class="action"><%= link_to '删除', result, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>

@@ -21,6 +21,7 @@
 		<div id="user_nav">
 			<% if user_signed_in? %>  
 			    欢迎<%= current_user.name %>. <%= link_to "注销", destroy_user_session_path %>  
+				<%= link_to "修改密码",edit_password_path(current_user)%>
 			<% else %>  
 			    <%= link_to "登录", new_user_session_path %>  
 			<% end %>
@@ -33,25 +34,8 @@
 				<%= link_to "我的任务",home_page_path,{:class=>"menu_item #{'selected' if controller.controller_name=="task"}"}%>
 			</div>
 			<div class="menu">
-				<%= link_to "部门",:deps,{:class=>"menu_item #{'selected' if controller.controller_name=="deps"}"}%>
-				<%= link_to "职务",:duties,{:class=>"menu_item #{'selected' if controller.controller_name=="duties"}"}%>
-				<%= link_to "员工",:people,{:class=>"menu_item #{'selected' if controller.controller_name=="people"}"}%>
-				<%= link_to "费用类型",:fees,{:class=>"menu_item #{'selected' if controller.controller_name=="fees"}"}%>
-				<%= link_to "地区级别",:regions,{:class=>"menu_item #{'selected' if controller.controller_name=="regions"}"}%>
-				<%= link_to "交通方式",:transportations,{:class=>"menu_item #{'selected' if controller.controller_name=="transportations"}"}%>
-				<%= link_to "住宿方式",:lodgings,{:class=>"menu_item #{'selected' if controller.controller_name=="lodgings"}"}%>
-				<%= link_to "结算方式",:settlements,{:class=>"menu_item #{'selected' if controller.controller_name=="settlements"}"}%>
-				<%= link_to "费用标准",:fee_standards,{:class=>"menu_item #{'selected' if controller.controller_name=="fee_standards"}"}%>
-				<%= link_to "项目",:projects,{:class=>"menu_item #{'selected' if controller.controller_name=="projects"}"}%>
-				<%= link_to "预算数据",:budgets,{:class=>"menu_item #{'selected' if controller.controller_name=="budgets"}"}%>
-				<%= link_to "币种",:currencies,{:class=>"menu_item #{'selected' if controller.controller_name=="currencies"}"}%>
-				<%= link_to "科目设置",:subjects,{:class=>"menu_item #{'selected' if controller.controller_name=="subjects"}"}%>
-				<%= link_to "帐号",:accounts,{:class=>"menu_item #{'selected' if controller.controller_name=="accounts"}"}%>
-				<%= link_to "审批流设置",:work_flows,{:class=>"menu_item #{'selected' if controller.controller_name=="work_flows"}"}%>
-			</div>
-			<div class="menu">
-				<% (1..13).each do |num| %>
-					<%= link_to doc_type_name(num),doc_heads_path(:doc_type=>num),{:class=>"menu_item #{'selected' if controller.controller_name=="doc_heads" and @doc_type and @doc_type==num}"}%>
+				<% Menu.all.each do |m|%>
+					<%= link_to m.title,m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
 				<% end %>
 			</div>
 			<div class="menu">
@@ -72,11 +56,5 @@
 			<%= yield %>
 		</div>		
 	</div>
-	<div id="footer">
-		<div id="desc">
-			<p id="en">29Decibel Studio</p>
-		</div>
-
-	</div> 
 </body>
 </html>

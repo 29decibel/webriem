@@ -3,12 +3,7 @@ class DutiesController < ApplicationController
   # GET /duties
   # GET /duties.xml
   def index
-    @duties = Duty.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @duties }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Duty"
   end
 
   # GET /duties/1

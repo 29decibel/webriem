@@ -19,9 +19,9 @@
 <%= f.label "对应的单据类型",:class=>"input_label" %>
 <div class="field">	
 	<div class="input_area">
-		<% (1..16).each do |num| %>
+		<% (1..13).each do |num| %>
 			<div id="doc_type_check">
-				<%= check_box_tag("doc_types[]",num,@work_flow.doc_types.include?(num.to_s))%><%= f.label doc_type_name(num)%>
+				<%= check_box_tag("doc_types[]",num,@work_flow.doc_types.split(';').include?(num.to_s))%><%= f.label doc_type_name(num)%>
 			</div>			
 		<% end %>
 		<p class="tip"></p>

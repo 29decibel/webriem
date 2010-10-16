@@ -126,6 +126,10 @@ form div.form_field label{
 	width:80px;
 	text-align: right;
 }
+form div.form_field .input0{
+	display:inline-block;
+	width:160px;
+}
 form div.form_field .input1{
 	display:inline-block;
 	width:200px;
@@ -143,7 +147,7 @@ form div.input_area{
 	display: inline-block;
 }
 div.form_title{
-	margin: 0px 15px 7px 15px;
+	margin: 0px 15px 0px 15px;
 	padding: 5px;
 	border-bottom: 1px solid #E4F0F2;
 }
@@ -346,4 +350,61 @@ div#login form{
 div.login_actions{
 	display:inline-block;
 	margin-top: 15px;
+}
+/*+++++++++++++++++++++++++++*/
+div.upload_item,div#add_uload_file{
+	background-color: #E4F0F2;
+	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	position: relative;
+}
+div.delete_upload{
+	display:inline-block;
+	float:right;
+	margin-right: 3px;
+}
+div.download{
+	display:inline-block;
+	float:right;
+	margin-right: 3px;
+}
+/*doc============*/
+div#my_doc{
+	width:49%;
+	display:inline-block;
+}
+div#docs_to_approve{
+	width:49%;
+	display:inline-block;
+}
+div.filter{
+	margin: 0px 15px 0px 15px;
+	padding: 0px;
+	border-bottom: 1px solid #E4F0F2;
+	position: relative;
+}
+div.filter form{
+	margin:0px;
+}
+div a.new_object{
+	margin-left: 20px;
+}
+div.reference{
+	position:relative;
+	display:inline-block;
+}
+div.reference input{
+	display:inline-block;
+	float: left;
+}
+/*about reference*/
+span.reference{
+	background-image: url("../images/reference_icon.png");
+	background-repeat: no-repeat;
+	display:inline-block;
+	margin: 0px;
+	width:16px;
+	height:16px;
+	float: left;
 }

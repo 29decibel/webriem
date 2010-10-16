@@ -3,12 +3,7 @@ class FeesController < ApplicationController
   # GET /fees
   # GET /fees.xml
   def index
-    @fees = Fee.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @fees }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Fee"
   end
 
   # GET /fees/1

@@ -8,6 +8,8 @@ class Budget < ActiveRecord::Base
     blongs_to_name_attr :dep
     validates_presence_of :fee,:project,:dep
     validates_numericality_of :jan,:feb,:mar,:apr,:may,:jun,:jul,:aug,:sep,:oct,:nov,:dec
+    cattr_reader :per_page
+    @@per_page = 10
     def all
       jan+feb+mar+apr+may+jun+jul+aug+sep+oct+nov+dec
     end

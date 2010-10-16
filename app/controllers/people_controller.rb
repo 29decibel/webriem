@@ -3,11 +3,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.paginate :page => params[:page], :order => 'created_at DESC'
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @people }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Person"
   end
 
   # GET /people/1

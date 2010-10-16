@@ -1,0 +1,2 @@
+module ModelSearchHelper
+end

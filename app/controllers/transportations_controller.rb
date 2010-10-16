@@ -3,12 +3,7 @@ class TransportationsController < ApplicationController
   # GET /transportations
   # GET /transportations.xml
   def index
-    @transportations = Transportation.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @transportations }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Transportation"
   end
 
   # GET /transportations/1

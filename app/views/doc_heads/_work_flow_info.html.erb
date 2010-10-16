@@ -18,14 +18,14 @@
 <% end %>
 </table>
 <% if work_flow_info %>
-	<% form_for work_flow_info,:remote=>true do |f| %>
+	<%= form_for work_flow_info,:remote=>true do |f| %>
 		<div id="work_flow_info_form">
 			<p>
 				<%= f.label :is_ok,"是否通过"%>
 				<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK %>
 			</p>
 			<p>
-				<%= f.label :comments,"批语"%>
+				<%= f.label :comments,"审批意见"%>
 				<%= f.text_area :comments %>
 			</p>
 			<p>

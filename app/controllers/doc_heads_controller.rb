@@ -1,5 +1,5 @@
 #coding: utf-8
-require 'mailing_job'
+require "ruby-debug"
 #借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
 #9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
 DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJT",11=>"BXZS",12=>"BXGZ",13=>"BXJBC",14=>"BXJBJ",15=>"BXYW",16=>"BXFL"}
@@ -121,7 +121,9 @@ class DocHeadsController < ApplicationController
     #now i am using the delayed job to do this
     Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
     @message="开始进入审批环节，审批期间单据不能修改"
-    @work_flow_info=WorkFlowInfo.new
+    if @doc_head.approver.id==current_user.person.id
+      @work_flow_info=WorkFlowInfo.new
+    end
     respond_to do |format|
       format.js { render "shared/show_result"}
     end

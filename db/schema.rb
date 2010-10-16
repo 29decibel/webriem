@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101013172308) do
+ActiveRecord::Schema.define(:version => 20101016043612) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -212,6 +212,21 @@ ActiveRecord::Schema.define(:version => 20101013172308) do
     t.datetime "updated_at"
   end
 
+  create_table "menu_rights", :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "menu_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menus", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -228,6 +243,7 @@ ActiveRecord::Schema.define(:version => 20101013172308) do
     t.integer  "credit_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -447,6 +463,12 @@ ActiveRecord::Schema.define(:version => 20101013172308) do
     t.integer  "sequence"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "settlements", :force => true do |t|
     t.string   "code"
     t.string   "name"
@@ -471,6 +493,16 @@ ActiveRecord::Schema.define(:version => 20101013172308) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "upload_files", :force => true do |t|
+    t.integer  "p_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
   end
 
   create_table "users", :force => true do |t|

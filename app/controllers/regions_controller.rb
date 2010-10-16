@@ -3,12 +3,7 @@ class RegionsController < ApplicationController
   # GET /regions
   # GET /regions.xml
   def index
-    @regions = Region.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @regions }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Region"
   end
 
   # GET /regions/1

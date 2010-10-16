@@ -110,12 +110,88 @@
     #这里加入model的中文名称
     models:
       dep: "部门"
-    attributes:      
+      duty: "职务"
+      person: "人员"
+      fee: "费用类型"
+      region: "地区级别"
+      transportation: "交通方式"
+      lodging: "住宿方式"
+      settlement: "结算方式"
+      fee_standard: "费用标准"
+      project: "项目"
+      budget: "预算数据"
+      currency: "币种"
+      subject: "科目设置"
+      account: "账户设置"
+      work_flow: "审批流设置"
+    attributes: 
+      work_flow:
+        name: "名称"
+        doc_types: "对应的单据类型"
+      account:
+        name: "名称"  
+        account_no: "帐号"
+      currency:
+        name: "名称"  
+        code: "编码"
+      budget:
+        fee_id: "费用类型"
+        project_id: "项目"
+        dep_id: "部门"
+        jan: "一月"      
+        feb: "二月"      
+        mar: "三月"      
+        apr: "四月"      
+        may: "五月"      
+        jun: "六月"      
+        jul: "七月"      
+        aug: "八月"      
+        sep: "九月"      
+        oct: "十月"      
+        nov: "十一月"      
+        dec: "十二月"      
+      project:
+        name: "名称"  
+        code: "编码"
+        u8_project: "对应U8项目"
+      fee_standard:
+        project_id: "项目"
+        region_id: "地区级别"
+        duty_id: "职务"
+        lodging_id: "住宿方式"
+        transportation_id: "交通方式"
+        busitype: "业务类型"
+        amount: "金额"      
+      settlement:
+        name: "名称"  
+        code: "编码"
+        subject: "结算科目"
+      lodging:
+        name: "名称"  
+        code: "编码"
+      region:
+        name: "名称"  
+        code: "编码"
+      transportation:
+        name: "名称"  
+        code: "编码"
+      fee:
+        name: "名称"  
+        code: "编码"
+        end_date: "停用日期"
+        attr: "费用属性"
+        parent_fee_id: "父费用类型"
       dep:
         name: "名称"  
         code: "编码"
         start_date: "启用时间"
         end_date: "停止使用时间"
+        version: "组织结构"
+        parent_dep_id: "上级部门"
+        u8dep_code: "对应U8部门编码"
+      duty:
+        code: "编码"
+        name: "名称"
       person:
         name: "姓名"
         code: "编码"
@@ -130,6 +206,7 @@
         bank: "开户行"
         end_date: "离职日期"
         credit_limit: "信用额度"
+        role_id: "角色"
       region:
         name: "名称"
         code: "编码"
@@ -137,9 +214,29 @@
         busitype: "业务类型"
         fee_id: "费用类型"
         dep_id: "部门"
-        u8_fee_subject: ""
-        u8_borrow_subject: ""
-        u8_reim_subject: ""
+        u8_fee_subject: "u8其他"
+        u8_borrow_subject: "u8借款项目"
+        u8_reim_subject: "u8报销科目"
+      doc_head:
+        doc_no: "单据号"
+        attach: "附件个数"
+        person_id: "员工ID"
+        note: "备注"
+        apply_date: "申请日期"
+        dep_id: "部门"
+        fee_id: "费用类型"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        doc_type: "单据类型"
+        doc_state: "单据状态"
+        project_id: "项目"
+        reim_description: "费用描述"
+        is_split: "是否分摊"
+        rate: "汇率"
+        currency_id: "币种"
+        apply_amount: "申请金额"
+        ori_amount: "原始金额"
+        real_amount: "实际金额"
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
@@ -171,10 +268,10 @@
   
   activemodel:
     models:
-      dep:"部门"
+      dep: "部门"
     attributes:
       dep:
-        name:"名称"
+        name: "名称"
     errors:
       template:
         header:

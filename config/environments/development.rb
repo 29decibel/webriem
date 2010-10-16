@@ -34,5 +34,8 @@ Webreim::Application.configure do
     :user_name => "mike.d.1984@gmail.com",
     :password => 'allanldb1984'
   }
+  #here is my delayed jobs
+  config.autoload_paths << "#{Rails.root}/app/jobs"
+  config.autoload_paths << File.join(config.root, "lib")
 end
 

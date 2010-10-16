@@ -15,7 +15,7 @@
 <% @work_flows.each do |work_flow| %>
   <tr>
     <td><%= work_flow.name %></td>
-    <td><%= work_flow.doc_types %></td>
+    <td><%= (work_flow.doc_types.split(';').collect {|doc_type| doc_type_name(doc_type)}).join(';') %></td>
     <td class="action"><%= link_to '查看', work_flow %></td>
     <td class="action"><%= link_to '删除', work_flow, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>

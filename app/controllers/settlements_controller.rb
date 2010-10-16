@@ -3,12 +3,7 @@ class SettlementsController < ApplicationController
   # GET /settlements
   # GET /settlements.xml
   def index
-    @settlements = Settlement.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @settlements }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Settlement"
   end
 
   # GET /settlements/1

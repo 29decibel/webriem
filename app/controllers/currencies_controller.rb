@@ -3,12 +3,7 @@ class CurrenciesController < ApplicationController
   # GET /currencies
   # GET /currencies.xml
   def index
-    @currencies = Currency.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @currencies }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Currency"
   end
 
   # GET /currencies/1
