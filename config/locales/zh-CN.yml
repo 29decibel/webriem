@@ -113,7 +113,7 @@
       duty: "职务"
       person: "人员"
       fee: "费用类型"
-      region: "地区级别"
+      region: "地区"
       transportation: "交通方式"
       lodging: "住宿方式"
       settlement: "结算方式"
@@ -124,7 +124,10 @@
       subject: "科目设置"
       account: "账户设置"
       work_flow: "审批流设置"
+      region_type: "地区级次"
     attributes: 
+      region_type:
+        name: "名称"
       work_flow:
         name: "名称"
         doc_types: "对应的单据类型"
@@ -156,7 +159,7 @@
         u8_project: "对应U8项目"
       fee_standard:
         project_id: "项目"
-        region_id: "地区级别"
+        region_type_id: "地区级次"
         duty_id: "职务"
         lodging_id: "住宿方式"
         transportation_id: "交通方式"
@@ -210,6 +213,7 @@
       region:
         name: "名称"
         code: "编码"
+        region_type_id: "地区级次"
       subject:
         business_type_id: "业务类型"
         fee_id: "费用类型"

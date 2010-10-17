@@ -1,58 +1,43 @@
-<div class="fields">
-	<div class="field">
-		<%= f.label "现金提取转出账户",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<div class="reference">
-					<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
-					<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
-					<a href="#" class-data="Account"><span class="reference"></span></a>			
-				</div>
-			</p>
-			<p class="tip"></p>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "转出账户" %>
+		<div class="reference">
+			<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
+			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
-		<span class="error_message"></span>    
-	  </div> 
-	<div class="field">
+	</div>
+	<div class="form_field">
 		<%= f.label "目前账户金额",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :now_remain_amout,:class=>"basic_input "%>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "申请原因",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_area :description,:class=>"basic_input " %>
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<p>
-		<div id="cash_draw_items">
-			<table class="form_input">
-				<thead>
-					<tr>	
-						<th>序号</th>
-					    <th>用途</th>
-					    <th>申请金额</th>
-						<th></th><!--给删除的-->
-				    </tr>
-			    <thead>
-				<tbody>
-					<% f.fields_for :cash_draw_items do |builder|  %>
-						<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
-					<% end %>				
-				</tbody>
-				<tr>
-					<th colspan="4"><%= link_to_add_fields "添加申请条目",f,:cash_draw_items %></th>
-				</tr>		
-			</table>
-		</div>
-	</p>	
+		<%= f.text_field :now_remain_amout,:class=>"input1 "%>
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "申请原因" %>
+		<%= f.text_area :description,:class=>"input2 " %>
+	</div>
+</div>
+<div class="form_title">
+	<h3>添加申请条目</h3>
+</div>
+<div id="cash_draw_items">
+	<table class="form_input">
+		<thead>
+			<tr>	
+				<th>序号</th>
+			    <th>用途</th>
+			    <th>申请金额</th>
+				<th></th><!--给删除的-->
+		    </tr>
+	    <thead>
+		<tbody>
+			<% f.fields_for :cash_draw_items do |builder|  %>
+				<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
+			<% end %>				
+		</tbody>
+		<tr>
+			<th colspan="4"><%= link_to_add_fields "点击添加",f,:cash_draw_items %></th>
+		</tr>		
+	</table>
 </div>

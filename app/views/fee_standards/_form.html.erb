@@ -16,16 +16,16 @@
 	</div>
 	<span class="error_message"></span>    
   </div>
-<div class="field">
-	<%= f.label "地区",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:fee_standard, :region_id, Region.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input "+mark_required(@fee_standard, :region_id)})%>
-		</p>
-		<p class="tip"></p>
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "地区级次" %>
+			<div class="reference">
+				<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
+				<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
+				<a href="#" class-data="RegionType"><span class="reference"></span></a>			
+			</div>
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
 <div class="field">
 	<%= f.label "职务",:class=>"input_label" %>
 	<div class="input_area">

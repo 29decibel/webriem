@@ -1,5 +1,7 @@
 #coding: utf-8
 class WorkFlowInfo < ActiveRecord::Base
   belongs_to :doc_head
-  enum_attr :is_ok, [['否', 0], ['是', 1]]
+  belongs_to :person, :class_name => "Person", :foreign_key => "people_id"
+  blongs_to_name_attr :person
+  enum_attr :is_ok, [['否',0],['是', 1]]
 end

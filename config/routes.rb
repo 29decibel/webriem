@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  get "ajax_service/getfee"
+
   resources :roles
 
   post "model_search/with"

@@ -1,40 +1,48 @@
 <div class="form_title">
 	<h3>审批信息</h3>
 </div>
-<!--目前已经存在的审批信息-->
-<table class="hor-zebra">
-  <tr>
-    <th>是否通过</th>
-    <th>审批人</th>
-    <th>备注</th>
-  </tr>
+<div class="form_area">
+	<!--目前已经存在的审批信息-->
+	<table class="hor-zebra">
+	  <tr>
+	    <th>是否通过</th>
+	    <th>审批人</th>
+	    <th>备注</th>
+	  </tr>
 
-<% doc_head.work_flow_infos.each do |wf| %>
-  <tr >
-    <td><%= wf.is_ok %></td>
-    <td><%= wf.people_id %></td>
-    <td><%= wf.comments %></td>
-  </tr>
-<% end %>
-</table>
+	<% doc_head.work_flow_infos.each do |wf| %>
+	  <tr >
+	    <td><%= wf.is_ok_name %></td>
+	    <td><%= wf.person_name %></td>
+	    <td><%= wf.comments %></td>
+	  </tr>
+	<% end %>
+	</table>
+</div>
 <% if work_flow_info %>
+	<div class="form_title">
+		<h3>填写审批意见</h3>
+	</div>
 	<%= form_for work_flow_info,:remote=>true do |f| %>
-		<div id="work_flow_info_form">
-			<p>
+	<div class="form_area">
+		<div class="form_block">
+			<div class="form_field">
 				<%= f.label :is_ok,"是否通过"%>
-				<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK %>
-			</p>
-			<p>
+				<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK,:class=>"input1" %>
+			</div>
+		</div>
+		<div class="form_block">
+			<div class="form_field">
 				<%= f.label :comments,"审批意见"%>
-				<%= f.text_area :comments %>
-			</p>
-			<p>
+				<%= f.text_area :comments,:class=>"input2" %>
+			</div>
+		</div>
+		<div class="form_block">
+			<div class="form_field">
+				<%= f.submit "确定",:class=>"button2" %>
 				<%= f.hidden_field :people_id,:value=>current_user.person.id%>
 				<%= f.hidden_field :doc_head_id,:value=>@doc_head.id%>
-			</p>
-		</div>
-		<div class="actions">
-			<%= f.submit "确定",:class=>"button2" %>
+			</div>
 		</div>
 	<% end %>
 <% end %>

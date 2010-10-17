@@ -11,3 +11,5 @@ alert("<%= @message %>");
 	//replace the doc_heads
 	$("#doc_head_actions").html("<%= escape_javascript(render :partial=>'doc_heads/doc_head_actions',:locals=>{:doc_head=>@doc_head}) %>");
 <% end %>
+set_form_state();
+$.unblockUI();

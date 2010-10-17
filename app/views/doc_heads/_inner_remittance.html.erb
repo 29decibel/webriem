@@ -1,90 +1,54 @@
-<div class="fields">
-	<div class="field">
-		<%= f.label "结汇账户",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<div class="reference">
-					<%= f.hidden_field :out_account,{:class=>"ref_hidden_field"}%>
-					<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
-					<a href="#" class-data="Account"><span class="reference"></span></a>			
-				</div>
-			</p>
-			<p class="tip"></p>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "申请金额" %>
+		<%= f.text_field :amount,:class=>"input1 " %>  
+	</div>
+	<div class="form_field">
+		<%= f.label "当日汇率" %>
+		<%= f.text_field :now_rate_price,:class=>"input1 " %>
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "收款账户名称" %>
+		<%= f.text_field :in_account_name,:class=>"input1 " %>  
+	</div>
+	<div class="form_field">
+		<%= f.label "收款账户帐号" %>
+		<%= f.text_field :in_account_no,:class=>"input1 " %>  
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "结汇账户" %>
+		<div class="reference">
+			<%= f.hidden_field :out_account,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
+			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "收款账户名称",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :in_account_name,:class=>"basic_input " %>  
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "收款账户帐号",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :in_account_no,:class=>"basic_input " %>  
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "申请原因",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_area :description,:class=>"basic_input " %>  
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "币种",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<div class="reference">
-					<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
-					<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
-					<a href="#" class-data="Currency"><span class="reference"></span></a>			
-				</div> 
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "申请金额",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :amount,:class=>"basic_input " %>  
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "余额",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :remain_amount,:class=>"basic_input " %> 
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
-	<div class="field">
-		<%= f.label "当日汇率中间价",:class=>"input_label" %>
-		<div class="input_area">
-			<p class="input">
-				<%= f.text_field :now_rate_price,:class=>"basic_input " %>  
-			</p>
-			<p class="tip"></p>
-		</div>
-		<span class="error_message"></span>    
-	  </div>
+	</div>
+	<div class="form_field">
+		<%= f.label "收款账户帐号" %>
+		<%= f.text_field :in_account_no,:class=>"input1 " %>  
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "币种" %>
+		<div class="reference">
+			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
+			<a href="#" class-data="Currency"><span class="reference"></span></a>			
+		</div> 
+	</div>
+	<div class="form_field">
+		<%= f.label "余额" %>
+		<%= f.text_field :remain_amount,:class=>"input1 " %> 
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "申请原因"%>
+		<%= f.text_area :description,:class=>"input2 " %>
+	</div>
 </div>

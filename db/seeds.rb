@@ -13,7 +13,7 @@ Menu.create(:name=>'deps',:title=>'部门',:path=>'/model_search/index?class_nam
 Menu.create(:name=>'duties',:title=>'职务',:path=>'/model_search/index?class_name=Duty')
 Menu.create(:name=>'people',:title=>'员工',:path=>'/model_search/index?class_name=Person')
 Menu.create(:name=>'fees',:title=>'费用类型',:path=>'/model_search/index?class_name=Fee')
-Menu.create(:name=>'regions',:title=>'地区级别',:path=>'/model_search/index?class_name=Region')
+Menu.create(:name=>'regions',:title=>'地区',:path=>'/model_search/index?class_name=Region')
 Menu.create(:name=>'transportations',:title=>'交通方式',:path=>'/model_search/index?class_name=Transportation')
 Menu.create(:name=>'lodgings',:title=>'住宿方式',:path=>'/model_search/index?class_name=Lodging')
 Menu.create(:name=>'settlements',:title=>'结算方式',:path=>'/model_search/index?class_name=Settlement')
@@ -33,5 +33,9 @@ end
 BusinessType.create(:name=>"借款");
 BusinessType.create(:name=>"报销");
 BusinessType.create(:name=>"其他");
+#region types
+RegionType.create(:name=>"一级地区");
+RegionType.create(:name=>"二级地区");
+RegionType.create(:name=>"其他");
 #the default user
 

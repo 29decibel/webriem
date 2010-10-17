@@ -1,4 +1,5 @@
 <div id='work_flow_progress'>
+	<%= hidden_field_tag "form_state",doc.doc_state%>
 	<% if doc.work_flows %>
 		<span>单据状态</span>
 		<div class='work_flow_step <%= "current_flow" if doc.doc_state==0 %>'>

@@ -1,14 +1,14 @@
 #coding: utf-8
 class FeeStandard < ActiveRecord::Base
   belongs_to :project
-  belongs_to :region
+  belongs_to :region_type
   belongs_to :duty
   belongs_to :lodging
   belongs_to :transportation
   belongs_to :business_type
   blongs_to_name_attr :business_type
   blongs_to_name_attr :project
-  blongs_to_name_attr :region
+  blongs_to_name_attr :region_type
   blongs_to_name_attr :duty
   blongs_to_name_attr :lodging
   blongs_to_name_attr :transportation
@@ -16,7 +16,7 @@ class FeeStandard < ActiveRecord::Base
   #===================================================================================
   CUSTOM_QUERY={
       'project_id'=>{:include=>:project,:conditions=>'projects.name like ?'},
-      'region_id'=>{:include=>:region,:conditions=>'regions.name like ?'},
+      'region_type_id'=>{:include=>:region_type,:conditions=>'region_types.name like ?'},
       'duty_id'=>{:include=>:duty,:conditions=>'duties.name like ?'},
       'lodging_id'=>{:include=>:lodging,:conditions=>'lodgings.name like ?'},
       'transportation_id'=>{:include=>:transportation,:conditions=>'transportations.name like ?'},

@@ -26,25 +26,10 @@ $(function(){
 		$("table.form_input").each(function(){
 			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
 		});
-		//bind the check details event
-		//$("a.check_details").live("click",function(){
-		//	//change the words
-		//	if($(this).text()=="展开明细")
-		//	{
-		//		$(this).text("折叠明细");
-		//	}			
-		//	else
-		//	{
-		//		$(this).text("展开明细");
-		//	}
-		//	//expand or collapse the details
-		//	$(this).closest("tr").next("tr").toggle();
-		//	return false;
-		//});
-		//bind the fee type
-		//bind_change_events();
+		//bind the is_split change events
+		bind_is_split_change_events();
 		//fire it once
-		//$("select.fee_type").change();
+		$("select.is_split_reim").change();
 		//change the enter key to tab
 		$('input').live("keypress", function(e) {
 		                /* ENTER PRESSED*/
@@ -61,7 +46,7 @@ $(function(){
 		                    }
 		                    return false;
 		                }
-		            });
+		            });		
 		//bind ajax event 
 		$("form").live("ajax:before",function(){
 			//var link_position=$("div.filter a.filter").offset();
@@ -100,7 +85,35 @@ $(function(){
 		$("#selected_all").live("change",function(){
 			$(".ref_select").attr("checked",$(this).is(':checked'));
 		});
+		//observe the region change so to calculate the fee standard
+		$("input.get_fee").live("change",function(){
+			//get the duty id 
+			var duty_id=$("#duty_for_fee_standard").val();
+			var region_id=$(this).siblings("input.ref_hidden_field").val();
+			//this can be a very good find stuff pattern
+			//when you want to find something another cell
+			//first go up until find the table row and then find stuff you want within it 
+			var fee_standard_control=$(this).closest("tr").find("input.fee_standard");
+			//make a ajax call and get the fee
+			$.ajax({
+			  type: "GET",
+			  url: "/ajax_service/getfee",
+			  data: "region_id="+region_id+"&duty_id="+duty_id,
+			  beforeSend: function(){
+					fee_standard_control.val("正在获取...");
+			  },
+			  success: function(msg){
+			    fee_standard_control.val(msg);
+			  },
+				error: function(){
+					fee_standard_control.val("暂无*");
+				}
+			});
+		});
+		//fire the region change event
+		$("input.get_fee").change();
 });
+
 function adapt_apply_amount_by_rate()
 {
 	var tr= $(this).closest("tr");
@@ -110,74 +123,21 @@ function adapt_apply_amount_by_rate()
 }
 
 //bind the change events
-function bind_change_events()
+function bind_is_split_change_events()
 {
-	$("select.fee_type,select.is_split_reim").change(function(){
+	$("select.is_split_reim").change(function(){
 		//alert($(this).children("option:selected").text());
 		//$(this).parent
-		var fee_type;
-		var is_split;
-		if($(this).attr("class")=="basic_input fee_type")
-		{
-			fee_type=$(this).children("option:selected").text();
-			is_split=$(this).closest("tr").find("select.is_split_reim").children("option:selected").val();
-		}
-		else
-		{
-			is_split=$(this).children("option:selected").val();
-			fee_type=$(this).closest("tr").find("select.fee_type").children("option:selected").text();			
-		}
-		//find all and show it
-		var children=$(this).closest("tr").next("tr").find("div.rdd_details");
-		children.show();
-		//hide others
-		switch(fee_type)
-		{				
-			case "差旅费":
-				children.not("div.rd_travel").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_travel").hide().end();				
-				break;
-			case "交通费":
-				children.not("div.rd_transport").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_transport").hide().end();				
-				break;
-			case "住宿费":
-				children.not("div.rd_loding").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_loding").hide().end();
-				break;
-			case "工作餐费":
-				children.not("div.rd_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_work_meal").hide().end();
-				break;
-			case "加班餐费":
-				children.not("div.rd_extra_work_meal").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_extra_work_meal").hide().end();				
-				break;
-			case "加班交通费":
-				children.not("div.rd_extra_work_car").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_extra_work_car").hide().end();				
-				break;
-			case "业务交通费":
-				children.not("div.rd_common_transport").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_common_transport").hide().end();				
-				break;
-			case "福利费用":
-				children.not("div.rd_benefit").find("table tr.fields").hide().find("td:last input").val("true");
-				children.not("div.rd_benefit").hide().end();				
-				break;
-			default:
-				children.find("table tr.fields").hide().find("td:last input").val("true");
-				children.hide();
-		}
+		is_split=$("select.is_split_reim").children("option:selected").val();
 		if(is_split==1)
 		{
 			//children.not("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
-			$("div.reim_split_details").show();		
+			$("div.is_split_reim").show("slow");		
 		}
 		else
 		{
-			$("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
-			$("div.reim_split_details").hide();		
+			$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
+			$("div.is_split_reim").hide("slow");		
 		}
 	});
 }
@@ -199,9 +159,6 @@ function add_fields(link, association, content) {
 		function(){
 			$(this).datepicker();
 			});
-	//bind the change events
-	bind_change_events();
-	$("select.fee_type").change();
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){
@@ -239,6 +196,8 @@ function pop_up_reference_window()
 		$(this).siblings("input[type=text]").val(returnValue.displays);
 		//set the id
 		$(this).siblings("input[type=hidden]").val(returnValue.ids);
+		//fire the change event so now you can get the fee standard
+		$(this).siblings("input[type=text]").change();
 	}
 	return false;
 }

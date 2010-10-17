@@ -8,7 +8,7 @@
 	<td>
 		<div class="reference">
 			<%= f.hidden_field :region_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "region_info",f.object.region.to_s,:class=>"ref" %>
+			<%= text_field_tag "region_info",f.object.region.to_s,:class=>"ref get_fee" %>
 			<a href="#" class-data="Region"><span class="reference"></span></a>			
 		</div>
 	</td>
@@ -16,7 +16,7 @@
 		<%= f.text_field :lodging_date,:class=>"datepicker normal" %>  
 	</td>
 	<td>
-		//todo 这里按照一定的规则带出来 
+		<%= text_field_tag "fee_standard","暂无",:class=>"normal fee_standard" %>
 	</td>
 	<td>
 		<%= f.text_field :people_count,:class=>"normal" %>  
