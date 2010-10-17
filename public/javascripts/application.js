@@ -96,6 +96,10 @@ $(function(){
 		$("div.reference a").live("click",pop_up_reference_window);
 		//close window and back to the input
 		$("div.filter a.back_to_reference").live("click",back_to_the_reference);
+		//control the reference window's check box
+		$("#selected_all").live("change",function(){
+			$(".ref_select").attr("checked",$(this).is(':checked'));
+		});
 });
 function adapt_apply_amount_by_rate()
 {

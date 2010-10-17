@@ -3,7 +3,11 @@
 		<%= f.label "结汇账户",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+				<div class="reference">
+					<%= f.hidden_field :out_account,{:class=>"ref_hidden_field"}%>
+					<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
+					<a href="#" class-data="Account"><span class="reference"></span></a>			
+				</div>
 			</p>
 			<p class="tip"></p>
 		</div>
@@ -43,7 +47,11 @@
 		<%= f.label "币种",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"basic_input"}%>  
+				<div class="reference">
+					<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
+					<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
+					<a href="#" class-data="Currency"><span class="reference"></span></a>			
+				</div> 
 			</p>
 			<p class="tip"></p>
 		</div>

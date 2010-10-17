@@ -9,7 +9,7 @@ module ApplicationHelper
   end
   #function to remove a link
   def link_to_remove(name,f)
-    link_to_function(name,"remove_fields(this)")
+    link_to_function(name,"remove_fields(this)",:class=>"detail_link")
   end
   #add fields to current form
   def link_to_add_fields(name, f, association)
@@ -29,6 +29,10 @@ module ApplicationHelper
     request.request_uri
   end
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"工作餐费报销",11=>"加班费报销",12=>"业务交通费报销",13=>"福利费用报销"}
+  #to display a nice format date
+  def display_date(input_date)
+    input_date.strftime("%Y-%m-%d")
+  end
   #used for search engine
   def searchable_columns(class_object)
     class_object.columns.select{|c| !(%w[id created_at updated_at].include? c.name) and !(class_object.respond_to?(:not_display) and class_object.not_display.include?(c.name))}
@@ -44,7 +48,12 @@ module ApplicationHelper
       if result_obj.respond_to? :custom_display and result_obj.custom_display(column)
         result_obj.custom_display(column)
       else
-        result_obj.send(column.name)
+        result=result_obj.send(column.name)
+        #deal with the date
+        if column.sql_type=="datetime"
+          result=display_date(result)
+        end
+        result
       end
     end
   end

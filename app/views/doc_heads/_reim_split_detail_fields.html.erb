@@ -3,13 +3,25 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>
-		<%= f.select(:dep_id,  Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+		<div class="reference">
+			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref" %>
+			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+		</div>
 	</td> 
 	<td>
-		<%= f.select(:project_id,  Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+		<div class="reference">
+			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref" %>
+			<a href="#" class-data="Project"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
-		<%= f.select(:fee_id,  Fee.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+		<div class="reference">
+			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
+			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
 		<%= f.text_field :percent,:class=>"normal" %>  

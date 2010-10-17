@@ -37,11 +37,19 @@
 	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "部门" %>
-			<%= collection_select(:doc_head, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"input1"})%>
+			<div class="reference">
+				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+				<%= text_field_tag "dep_info",@doc_head.dep.to_s,:class=>"ref" %>
+				<a href="#" class-data="Dep"><span class="reference"></span></a>			
+			</div>
 		</div>
 		<div class="form_field">
 			<%= f.label "费用类型" %>
-			<%= collection_select(:doc_head, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"input1"})%>
+			<div class="reference">
+				<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+				<%= text_field_tag "fee_info",@doc_head.fee.to_s,:class=>"ref" %>
+				<a href="#" class-data="Fee"><span class="reference"></span></a>			
+			</div>
 		</div>
 	</div>	
 	<% end %>
@@ -50,9 +58,9 @@
 			<%= f.label "项目" %>			
 			<div class="reference">
 				<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
-				<%= f.text_field :project_id,:class=>"input0" %><a href="#" class-data="Project"><span class="reference"></span></a>			
+				<%= text_field_tag "project_info",@doc_head.project.to_s,:class=>"ref" %>
+				<a href="#" class-data="Project"><span class="reference"></span></a>			
 			</div>
-			<!--<%= f.select :project_id,Project.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"input1"}%>-->
 		</div>
 		<div class="form_field">
 			<%= f.label "是否分摊" %>
@@ -62,7 +70,11 @@
 	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "币种"%>
-			<%= f.select :currency_id ,Currency.all.collect{|c|[c.name,c.id]},{},{:class=>"input1"}%>  
+			<div class="reference">
+				<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
+				<%= text_field_tag "currency_info",@doc_head.currency.to_s,:class=>"ref" %>
+				<a href="#" class-data="Currency"><span class="reference"></span></a>			
+			</div>
 		</div>
 		<div class="form_field">
 			<%= f.label "汇率"%>
@@ -212,7 +224,7 @@
 	</div>
 	<div id="inner_remittance" class="form_area">
 		<%= f.fields_for :inner_remittance do |builder|  %>
-			<%= render :partial => 'inner_remittance',:locals => { :f => builder }  %>
+			<%= render :partial => 'inner_remittance',:locals => { :f => builder,:detail_doc=>@doc_head.inner_remittance }  %>
 		<% end %>
 	</div>
 	<% end %>
@@ -223,7 +235,7 @@
 	</div>
 	<div id="inner_transfer" class="form_area">
 		<%= f.fields_for :inner_transfer do |builder|  %>
-			<%= render :partial => "inner_transfer",:locals => { :f => builder }  %>
+			<%= render :partial => "inner_transfer",:locals => { :f => builder,:detail_doc=>@doc_head.inner_transfer }  %>
 		<% end %>
 	</div>
 	<% end %>
@@ -234,7 +246,7 @@
 	</div>
 	<div id="inner_cash_draw" class="form_area">
 		<%= f.fields_for :inner_cash_draw do |builder|  %>
-			<%= render :partial => "inner_cash_draw",:locals => { :f => builder }  %>
+			<%= render :partial => "inner_cash_draw",:locals => { :f => builder,:detail_doc=>@doc_head.inner_cash_draw }  %>
 		<% end %>
 	</div>
 	<% end %>
@@ -245,7 +257,7 @@
 	</div>
 	<div id="buy_finance_products" class="form_area">
 		<%= f.fields_for :buy_finance_product do |builder|  %>
-			<%= render :partial => "buy_finance_products",:locals => { :f => builder }  %>
+			<%= render :partial => "buy_finance_products",:locals => { :f => builder,:detail_doc=>@doc_head.buy_finance_product }  %>
 		<% end %>
 	</div>
 	<% end %>
@@ -256,7 +268,7 @@
 	</div>
 	<div id="redeem_finance_products" class="form_area">
 		<%= f.fields_for :redeem_finance_product do |builder|  %>
-			<%= render :partial => "redeem_finance_products",:locals => { :f => builder }  %>
+			<%= render :partial => "redeem_finance_products",:locals => { :f => builder,:detail_doc=>@doc_head.redeem_finance_product }  %>
 		<% end %>
 	</div>
 	<% end %>

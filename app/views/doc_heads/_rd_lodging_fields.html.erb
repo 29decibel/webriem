@@ -6,7 +6,11 @@
 		<%= f.text_field :days,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.select(:region_id,  Region.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+		<div class="reference">
+			<%= f.hidden_field :region_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "region_info",f.object.region.to_s,:class=>"ref" %>
+			<a href="#" class-data="Region"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
 		<%= f.text_field :lodging_date,:class=>"datepicker normal" %>  

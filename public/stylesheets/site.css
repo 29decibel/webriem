@@ -115,6 +115,7 @@ form div.form_area{
 	background-color: #E4F0F2;	
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
+	overflow: auto;
 }
 form div.form_field{
 	display:inline-block;
@@ -238,7 +239,7 @@ table.form_input input.small{
 table.form_input th{
 	text-align: left;
 }
-table.form_input td a{
+table.form_input td a.detail_link{
 	width:75px;
 	display: inline-block;
 }
@@ -390,15 +391,22 @@ div.filter form{
 div a.new_object{
 	margin-left: 30px;
 }
+/*=======================reference*/
 div.reference{
 	position:relative;
 	display:inline-block;
 }
 div.reference input{
 	display:inline-block;
-	float: left;
+	margin-right: 16px;
+	width:80px;
 }
-/*about reference*/
+div.reference a{
+	display:inline-block;
+	position: absolute;
+	right:-1px;
+	top:0px;
+}
 span.reference{
 	background-image: url("../images/reference_icon.png");
 	background-repeat: no-repeat;
@@ -406,5 +414,12 @@ span.reference{
 	margin: 0px;
 	width:16px;
 	height:16px;
-	float: left;
+}
+/*=================================disabled link style============================*/
+a.disable{
+	cursor: text;
+	color: grey;
+}
+a:active.disable {
+
 }

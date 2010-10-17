@@ -1,20 +1,24 @@
 <div id='work_flow_progress'>
-	<span>单据状态</span>
-	<div class='work_flow_step <%= "current_flow" if doc.doc_state==0 %>'>
-		未提交
-	</div>
-	<div class='work_flow_step'>
-		 ====>
-	</div>
-	<% doc.work_flows.each do |w| %>
-		<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
-			<%= doc.approver(w) ? doc.approver(w).name : "请检查审批流#{w.work_flow.name}，其中的审批流程#{w.id}找不到对应的人员" %>
+	<% if doc.work_flows %>
+		<span>单据状态</span>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==0 %>'>
+			未提交
 		</div>
 		<div class='work_flow_step'>
 			 ====>
 		</div>
+		<% doc.work_flows.each do |w| %>
+			<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
+				<%= doc.approver(w) ? doc.approver(w).name : "请检查审批流#{w.work_flow.name}，其中的审批流程#{w.id}找不到对应的人员" %>
+			</div>
+			<div class='work_flow_step'>
+				 ====>
+			</div>
+		<% end %>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 %>'>
+			审批通过
+		</div>
+	<% else %>
+		该单据没有对应的审批流，设置后才能提交审批
 	<% end %>
-	<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 %>'>
-		审批通过
-	</div>
 </div>

@@ -69,6 +69,7 @@ class DocHead < ActiveRecord::Base
   #获得所有的审批流程
   def work_flows
     wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s }
+    return nil if wf.count==0
     wf==nil ? []:wf.first.work_flow_steps.to_a
   end
   def current_work_flow_step

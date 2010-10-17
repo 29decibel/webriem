@@ -3,7 +3,11 @@
 		<%= f.label "转出账户",:class=>"input_label" %>
 		<div class="input_area">
 			<p class="input">
-				<%= f.select(:out_account,  Account.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+				<div class="reference">
+					<%= f.hidden_field :out_account,{:class=>"ref_hidden_field"}%>
+					<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
+					<a href="#" class-data="Account"><span class="reference"></span></a>			
+				</div>
 			</p>
 			<p class="tip"></p>
 		</div>

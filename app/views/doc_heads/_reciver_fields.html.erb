@@ -2,8 +2,12 @@
 	<td>  
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td> 
-	<td>  
-		<%= f.select(:settlement_id,  Settlement.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+	<td>
+		<div class="reference">
+			<%= f.hidden_field :settlement_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "settlement_info",f.object.settlement.to_s,:class=>"ref" %>
+			<a href="#" class-data="Settlement"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>  
 		<%= f.text_field :company,:class=>"normal" %>  

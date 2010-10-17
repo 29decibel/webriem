@@ -18,7 +18,11 @@
 		<%= f.text_field :reason,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.select(:transportation_id,  Transportation.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+		<div class="reference">
+			<%= f.hidden_field :transportation_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "transportation_info",f.object.transportation.to_s,:class=>"ref" %>
+			<a href="#" class-data="Transportation"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
 		<%= f.text_field :apply_amount,:class=>"normal" %>  
