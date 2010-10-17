@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016043612) do
+ActiveRecord::Schema.define(:version => 20101017022844) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,12 @@ ActiveRecord::Schema.define(:version => 20101016043612) do
     t.decimal  "oct",        :precision => 10, :scale => 0
     t.decimal  "nov",        :precision => 10, :scale => 0
     t.decimal  "dec",        :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "business_types", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -147,10 +153,10 @@ ActiveRecord::Schema.define(:version => 20101016043612) do
     t.integer  "duty_id"
     t.integer  "lodging_id"
     t.integer  "transportation_id"
-    t.integer  "busitype"
     t.decimal  "amount",            :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "business_type_id"
   end
 
   create_table "feed_backs", :force => true do |t|
@@ -478,7 +484,6 @@ ActiveRecord::Schema.define(:version => 20101016043612) do
   end
 
   create_table "subjects", :force => true do |t|
-    t.integer  "busitype"
     t.integer  "fee_id"
     t.integer  "dep_id"
     t.string   "u8_fee_subject"
@@ -486,6 +491,7 @@ ActiveRecord::Schema.define(:version => 20101016043612) do
     t.string   "u8_reim_subject"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "business_type_id"
   end
 
   create_table "transportations", :force => true do |t|

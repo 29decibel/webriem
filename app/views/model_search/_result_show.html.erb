@@ -1,20 +1,33 @@
 <table class="hor-zebra">
   <tr>
-	<th><%= check_box_tag "selected_all"%></th>
+	<% if params[:bare]%>
+		<th><%= check_box_tag "selected_all"%></th>
+	<% end %>
 	<% searchable_columns(@class).each do |c|%>
     <th><%= @class.human_attribute_name(c.name)%></th>
 	<% end %>
-	<th></th>
-    <th></th>
+	<% if !params[:bare]%>
+		<th></th>
+	    <th></th>
+	<% end %>
   </tr>
 
 <% @results.each do |result| %>
   <tr>
-	<td><%= check_box_tag "selected"%></td>
+	<% if params[:bare]%>
+		<td>
+			<%= check_box_tag 'selected', 'yes', params[:values].split('_').include?(result.id.to_s), :class => 'ref_select'%>
+			<!--hidden row store the reference info-->
+			<%= hidden_field_tag "hidden_id[#{result.id}]",result.id,{:class=>"hidden_id"} %>
+			<%= hidden_field_tag "hidden_display[#{result.id}]",result.to_s,{:class=>"hidden_display"} %>
+		</td>
+	<% end %>
 	<% searchable_columns(@class).each do |c|%>
 		<td><%= get_display_value(result,c)%></td>
 	<% end %>
-    <td class="action"><%= link_to '查看', result %></td>
-    <td class="action"><%= link_to '删除', result, :confirm => '是否真的要删除?', :method => :delete %></td>
+	<% if !params[:bare]%>
+	    <td class="action"><%= link_to '查看', result %></td>
+	    <td class="action"><%= link_to '删除', result, :confirm => '是否真的要删除?', :method => :delete %></td>
+	<% end %>
   </tr>
 <% end %>

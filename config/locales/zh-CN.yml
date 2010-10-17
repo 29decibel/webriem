@@ -160,7 +160,7 @@
         duty_id: "职务"
         lodging_id: "住宿方式"
         transportation_id: "交通方式"
-        busitype: "业务类型"
+        business_type_id: "业务类型"
         amount: "金额"      
       settlement:
         name: "名称"  
@@ -211,7 +211,7 @@
         name: "名称"
         code: "编码"
       subject:
-        busitype: "业务类型"
+        business_type_id: "业务类型"
         fee_id: "费用类型"
         dep_id: "部门"
         u8_fee_subject: "u8其他"

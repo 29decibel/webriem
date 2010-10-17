@@ -11,4 +11,22 @@ class Person < ActiveRecord::Base
   blongs_to_name_attr :duty
   blongs_to_name_attr :role
   blongs_to_name_attr :boss
+  #===================================================================================
+  CUSTOM_QUERY={
+      'dep_id'=>{:include=>:dep,:conditions=>'deps.name like ?'},
+      'duty_id'=>{:include=>:duty,:conditions=>'duties.name like ?'},
+      'boss_id'=>{:include=>:boss,:conditions=>'bosses_people.name like ?'},
+      'role_id'=>{:include=>:role,:conditions=>'roles.name like ?'},
+  }
+  def self.custom_query(column_name,filter_text)
+    if CUSTOM_QUERY.has_key? column_name
+      CUSTOM_QUERY[column_name]
+    else
+      nil
+    end
+  end
+  #===================================================================================
+  def to_s
+    "#{name};#{code}"
+  end
 end

@@ -27,24 +27,24 @@ $(function(){
 			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
 		});
 		//bind the check details event
-		$("a.check_details").live("click",function(){
-			//change the words
-			if($(this).text()=="展开明细")
-			{
-				$(this).text("折叠明细");
-			}			
-			else
-			{
-				$(this).text("展开明细");
-			}
-			//expand or collapse the details
-			$(this).closest("tr").next("tr").toggle();
-			return false;
-		});
+		//$("a.check_details").live("click",function(){
+		//	//change the words
+		//	if($(this).text()=="展开明细")
+		//	{
+		//		$(this).text("折叠明细");
+		//	}			
+		//	else
+		//	{
+		//		$(this).text("展开明细");
+		//	}
+		//	//expand or collapse the details
+		//	$(this).closest("tr").next("tr").toggle();
+		//	return false;
+		//});
 		//bind the fee type
-		bind_change_events();
+		//bind_change_events();
 		//fire it once
-		$("select.fee_type").change();
+		//$("select.fee_type").change();
 		//change the enter key to tab
 		$('input').live("keypress", function(e) {
 		                /* ENTER PRESSED*/
@@ -62,6 +62,27 @@ $(function(){
 		                    return false;
 		                }
 		            });
+		//bind ajax event 
+		$("form").live("ajax:before",function(){
+			//var link_position=$("div.filter a.filter").offset();
+			//$('span#spinner').css({ top: link_position.top , left: link_position.left }).fadeIn();
+			//$("span#spinner").fadeIn();
+			$.blockUI({ css: { 
+          border: 'none', 
+          padding: '15px', 
+          backgroundColor: '#000', 
+          '-webkit-border-radius': '10px', 
+          '-moz-border-radius': '10px', 
+          opacity: .5, 
+          color: '#fff'
+      },message:'请稍等' }); 
+
+      //setTimeout($.unblockUI, 2000);
+		});
+		$("form").live("ajax:complete",function(){
+			//$("span#spinner").fadeOut();
+			$.unblockUI();
+		});
 		//bind the submit link
 		$("a.submit").live("click",function(){
 			$(this).closest("form").submit();
@@ -74,7 +95,7 @@ $(function(){
 		//pop up reference window
 		$("div.reference a").live("click",pop_up_reference_window);
 		//close window and back to the input
-		$("div.reference_window_action a").live("click",back_to_the_reference);
+		$("div.filter a.back_to_reference").live("click",back_to_the_reference);
 });
 function adapt_apply_amount_by_rate()
 {
@@ -200,23 +221,51 @@ function removeSelected(remove_link)
 //=======================================pop up references...........
 function pop_up_reference_window()
 {
-	path="/model_search/index?bare=true&class_name="+$(this).attr('class-data');
+	value_now=$(this).siblings("input[type=hidden]").val() || "null";
+	path="/model_search/index?bare=true&class_name="+$(this).attr('class-data')+"&values="+value_now;
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
+
 	//pop up a dialog
 	var returnValue=window.showModalDialog(path,'',sFeatures);
 	//get the window value and set to the textbox and hiddenfield
 	//set the display info
-	$(this).siblings("input[type=text]").val(returnValue);
-	//set the id
-	$(this).siblings("input[type=hidden]").val("hidden"+returnValue);
+	if(returnValue)
+	{
+		//set displayinfo
+		$(this).siblings("input[type=text]").val(returnValue.displays);
+		//set the id
+		$(this).siblings("input[type=hidden]").val(returnValue.ids);
+	}
 	return false;
 }
 //set the selected value the result
 //close the window
 function back_to_the_reference()
 {
+	var ids="";
+	var displays="";
+	$("input:checked.ref_select").each(function(){
+		ids += $(this).siblings("input.hidden_id").val() + "_";
+		displays += $(this).siblings("input.hidden_display").val() + ";";
+	});
+	//trim the ;
+	if(ids.length>0)
+	{
+		ids=ids.substring(ids.length-1,"");
+	}
+	if(displays.length>0)
+	{
+		displays=displays.substring(displays.length-1,"");
+	}
+	
+	//alert($("input:checked.ref_select").size());
+	var returnInfo=new Object();
+	returnInfo.ids=ids;
+	returnInfo.displays=displays;
+	//returnInfo.id=
+	//$()
 	//set the return value
-	window.returnValue="test";
+	window.returnValue=returnInfo;
 	//close the window
 	window.close();
 }

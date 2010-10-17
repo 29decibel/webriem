@@ -29,5 +29,9 @@ DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"
 (1..13).each do |num|
   Menu.create(:name=>num.to_s,:title=>DOC_TYPES[num],:path=>"/doc_heads/new?doc_type=#{num}")
 end
+#the default business_types
+BusinessType.create(:name=>"借款");
+BusinessType.create(:name=>"报销");
+BusinessType.create(:name=>"其他");
 #the default user
 

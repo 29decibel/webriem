@@ -6,6 +6,7 @@ class Dep < ActiveRecord::Base
   validates_presence_of :name,:code,:start_date
   validates_uniqueness_of :name,:code
   has_many :people, :class_name => "Person", :foreign_key => "dep_id"
+  #===================================================================================
   CUSTOM_QUERY={
       'parent_dep_id'=>{:include=>:parent_dep,:conditions=>'parent_deps_deps.name like ?'},
   }
@@ -15,5 +16,9 @@ class Dep < ActiveRecord::Base
     else
       nil
     end
+  end
+  #===================================================================================
+  def to_s
+    "#{name};#{code}"
   end
 end

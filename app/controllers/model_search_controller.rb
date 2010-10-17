@@ -15,13 +15,21 @@ class ModelSearchController < ApplicationController
       if @class.respond_to? :custom_query
         condition_hash=@class.custom_query(column,filter_text)
       end
+      #get the result from the custom query
       if condition_hash
         @results=@class.all(:include=>condition_hash[:include],:conditions=>[condition_hash[:conditions],"%#{filter_text}%"])
       else
-        @results=@class.where("#{column} like ?",'%'+filter_text+'%')
+        if @class.respond_to? :custom_select
+          @results=@class.all
+        else
+          @results=@class.where("#{column} like ?",'%'+filter_text+'%')
+        end
+      end
+      #add another logic that custom filter,this is in use when the query has completed
+      if @class.respond_to? :custom_select
+        @results=@class.custom_select(@results,filter_text)
       end
     end
-    render "with"
   end
 
 end

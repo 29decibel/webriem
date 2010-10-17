@@ -35,11 +35,17 @@ module ApplicationHelper
   end
   #get the column value of the object
   def get_display_value(result_obj,column)
+    #check whether it is a belongs_to relation
     ass=result_obj.class.reflect_on_all_associations.select{|a| a.primary_key_name==column.name and a.macro==:belongs_to}
     if ass and ass.count>0
       eval("result_obj.#{ass.first.name}_name")
     else
-      result_obj.send(column.name)
+      #check whether is has it's own custom display logic
+      if result_obj.respond_to? :custom_display and result_obj.custom_display(column)
+        result_obj.custom_display(column)
+      else
+        result_obj.send(column.name)
+      end
     end
   end
 end
