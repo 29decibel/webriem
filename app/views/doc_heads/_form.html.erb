@@ -1,4 +1,4 @@
-<%= form_for @doc_head,:remote=>true,:class=>"submitting" do |f| %>
+<%= form_for @doc_head,:remote=>true,:html => {:class=>:doc_head} do |f| %>
 <div class="form_title">
 	<h3><%= @title%></h3>
 </div>
@@ -70,42 +70,6 @@
 	</div>
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "币种"%>
-			<div class="reference">
-				<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
-				<%= text_field_tag "currency_info",@doc_head.currency.to_s,:class=>"ref" %>
-				<a href="#" class-data="Currency"><span class="reference"></span></a>			
-			</div>
-		</div>
-		<div class="form_field">
-			<%= f.label "汇率"%>
-			<%= f.text_field :rate,:class=>"input1 rate" %>  
-		</div>
-	</div>
-	<div class="form_block">
-		<div class="form_field">
-			<%= f.label "原币金额" %>
-			<%= f.text_field :ori_amount,:class=>"input1 ori_amount" %>  
-		</div>
-		<div class="form_field">
-			<%= f.label "申请金额" %>
-			<%= f.text_field :apply_amount,:class=>"input1 amount" %>  
-		</div>
-	</div>
-	<div class="form_block">
-		<div class="form_field">
-			<%= f.label "实际金额" %>
-			<%= f.text_field :real_amount,:class=>"input1" %>  
-		</div>
-	</div>
-	<div class="form_block">
-		<div class="form_field">
-			<%= f.label "费用描述" %>
-			<%= f.text_area :reim_description,:class=>"input2" %>  
-		</div>
-	</div>
-	<div class="form_block">
-		<div class="form_field">
 			<%= f.label "备注" %>
 			<%= f.text_area :note,:class=>"input2"+ mark_required(@doc_head, :note) %>
 		</div>
@@ -146,7 +110,7 @@
 			<tr>
 				<td colspan="8"><%= link_to_add_fields "添加明细",f,:cp_doc_details %></td>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
@@ -182,7 +146,7 @@
 			<tr>
 				<th colspan="7"><%= link_to_add_fields "添加收款明细",f,:rec_notice_details %></th>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>		
@@ -290,7 +254,10 @@
 					    <th>费用标准</th>
 						<th>其他费用</th>
 					    <th>其他费用说明</th>
-						<th>申请费用</th>
+						<th>币种</th>
+						<th>汇率</th>
+						<th>原币金额</th>
+						<th>本币金额</th>
 						<th>HR调整</th>
 						<th>财务调整</th>
 						<th></th><!--给删除的-->
@@ -302,9 +269,9 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="8"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
+					<th colspan="11"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
 					<td>申请金额合计</td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
 				</tr>		
 			</table>
@@ -323,7 +290,10 @@
 					    <th>目的地</th>
 						<th>出差事由</th>
 					    <th>交通工具</th>
-						<th>申请费用</th>
+						<th>币种</th>
+						<th>汇率</th>
+						<th>原币金额</th>
+						<th>本币金额</th>
 						<th>HR调整</th>
 						<th>财务调整</th>
 						<th></th><!--给删除的-->
@@ -335,9 +305,9 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="8"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
+					<th colspan="11"><%= link_to_add_fields "添加交通费",f,:rd_transports %></th>
 					<td>申请金额合计</td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
 				</tr>		
 			</table>					
@@ -356,7 +326,10 @@
 					    <th>费用标准</th>
 						<th>人数</th>
 					    <th>合住人</th>
-						<th>申请费用</th>
+						<th>币种</th>
+						<th>汇率</th>
+						<th>原币金额</th>
+						<th>本币金额</th>
 						<th>HR调整</th>
 						<th>财务调整</th>
 						<th></th><!--给删除的-->
@@ -368,9 +341,9 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="8"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
+					<th colspan="11"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
 					<td>申请金额合计</td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
 				</tr>		
 			</table>
@@ -391,7 +364,10 @@
 				    <th>人数</th>
 				    <th>参与人姓名</th>
 					<th>事由</th>
-				    <th>申请费用</th>
+					<th>币种</th>
+					<th>汇率</th>
+					<th>原币金额</th>
+					<th>本币金额</th>
 					<th>HR调整</th>
 					<th>财务调整</th>
 					<th></th><!--给删除的-->
@@ -403,9 +379,9 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %></th>
+				<th colspan="10"><%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %></th>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
@@ -426,7 +402,10 @@
 					<th>开始时间</th>
 				    <th>结束时间</th>
 					<th>事由</th>
-					<th>申请费用</th>
+					<th>币种</th>
+					<th>汇率</th>
+					<th>原币金额</th>
+					<th>本币金额</th>
 					<th>HR调整</th>
 					<th>财务调整</th>
 					<th></th><!--给删除的-->
@@ -438,9 +417,9 @@
 				<% end %>			
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
+				<th colspan="10"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
@@ -460,7 +439,10 @@
 					<th>开始时间</th>
 				    <th>结束时间</th>
 					<th>事由</th>
-					<th>申请费用</th>
+					<th>币种</th>
+					<th>汇率</th>
+					<th>原币金额</th>
+					<th>本币金额</th>
 					<th>HR调整</th>
 					<th>财务调整</th>
 					<th></th><!--给删除的-->
@@ -472,9 +454,9 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="9"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
+				<th colspan="12"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
@@ -496,7 +478,11 @@
 					<th>开始时间</th>
 				    <th>结束时间</th>
 					<th>事由</th>
-					<th>申请费用</th>
+					<th>备注</th>
+					<th>币种</th>
+					<th>汇率</th>
+					<th>原币金额</th>
+					<th>本币金额</th>
 					<th>HR调整</th>
 					<th>财务调整</th>
 					<th></th><!--给删除的-->
@@ -508,9 +494,9 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
+				<th colspan="12"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
@@ -542,7 +528,7 @@
 			<tr>
 				<th colspan="8"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
 				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
@@ -572,9 +558,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加分摊明细",f,:reim_split_details %></th>
-				<td>申请金额合计</td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'total_amount normal'%></td>
+				<th colspan="10"><%= link_to_add_fields "添加分摊明细",f,:reim_split_details %></th>
 				<td></td>
 			</tr>		
 		</table>

@@ -74,7 +74,7 @@ class DocHead < ActiveRecord::Base
   end
   def current_work_flow_step
     wfs=nil
-    if self.work_flow_step_id>=0
+    if self.work_flow_step_id and self.work_flow_step_id>=0
       wfs=WorkFlowStep.find(self.work_flow_step_id)
     end
     wfs

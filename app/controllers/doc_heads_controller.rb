@@ -28,7 +28,7 @@ class DocHeadsController < ApplicationController
     @doc_type = @doc_head.doc_type
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
-      if @doc_head.approver.id==current_user.person.id
+      if @doc_head.approver==current_user.person
         @work_flow_info=WorkFlowInfo.new
       end
     end
@@ -91,6 +91,9 @@ class DocHeadsController < ApplicationController
     @doc_head = DocHead.find(params[:id])
     if @doc_head.update_attributes(params[:doc_head])
       @message="更新成功"
+      if @doc_head.approver==current_user.person
+        @work_flow_info=WorkFlowInfo.new
+      end
       render "shared/show_result"
     else
       #写一些校验出错信息
@@ -121,7 +124,7 @@ class DocHeadsController < ApplicationController
     #now i am using the delayed job to do this
     Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
     @message="开始进入审批环节，审批期间单据不能修改"
-    if @doc_head.approver.id==current_user.person.id
+    if @doc_head.approver==current_user.person
       @work_flow_info=WorkFlowInfo.new
     end
     respond_to do |format|

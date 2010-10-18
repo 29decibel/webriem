@@ -210,6 +210,7 @@
         end_date: "离职日期"
         credit_limit: "信用额度"
         role_id: "角色"
+        person_type_id: "人员属性"
       region:
         name: "名称"
         code: "编码"

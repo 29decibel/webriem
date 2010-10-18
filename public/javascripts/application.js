@@ -112,6 +112,8 @@ $(function(){
 		});
 		//fire the region change event
 		$("input.get_fee").change();
+		//set reference readonly
+		$("input.ref").attr("readonly",true);
 });
 
 function adapt_apply_amount_by_rate()
@@ -159,6 +161,10 @@ function add_fields(link, association, content) {
 		function(){
 			$(this).datepicker();
 			});
+	//set the doc state
+	set_form_state();
+	//set reference readonly
+	$("input.ref").attr("readonly",true);
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){

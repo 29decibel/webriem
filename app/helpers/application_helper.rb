@@ -35,7 +35,11 @@ module ApplicationHelper
   end
   #used for search engine
   def searchable_columns(class_object)
-    class_object.columns.select{|c| !(%w[id created_at updated_at].include? c.name) and !(class_object.respond_to?(:not_display) and class_object.not_display.include?(c.name))}
+    filtered_columns_by class_object,:not_search
+  end
+  #used for search engine, this is  for display columns
+  def display_columns(class_object)
+    filtered_columns_by class_object,:not_display
   end
   #get the column value of the object
   def get_display_value(result_obj,column)
@@ -56,5 +60,10 @@ module ApplicationHelper
         result
       end
     end
+  end
+  #here is some privats
+  private
+  def filtered_columns_by(class_object,filter_type)
+    class_object.columns.select{|c| !(%w[id created_at updated_at].include? c.name) and !(class_object.respond_to?(filter_type) and class_object.send(filter_type).include?(c.name))}
   end
 end

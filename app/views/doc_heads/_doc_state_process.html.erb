@@ -1,5 +1,9 @@
 <div id='work_flow_progress'>
 	<%= hidden_field_tag "form_state",doc.doc_state%>
+	<!--hidden field to store the current looker of this doc mainly is HR or FI -->
+	<% if doc.approver ==current_user.person %>
+		<%= hidden_field_tag "looker",current_user.person.person_type_name%>
+	<% end %>
 	<% if doc.work_flows %>
 		<span>单据状态</span>
 		<div class='work_flow_step <%= "current_flow" if doc.doc_state==0 %>'>

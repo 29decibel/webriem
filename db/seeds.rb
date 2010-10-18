@@ -30,12 +30,18 @@ DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"
   Menu.create(:name=>num.to_s,:title=>DOC_TYPES[num],:path=>"/doc_heads/new?doc_type=#{num}")
 end
 #the default business_types
+BusinessType.delete_all
 BusinessType.create(:name=>"借款");
 BusinessType.create(:name=>"报销");
 BusinessType.create(:name=>"其他");
 #region types
+RegionType.delete_all
 RegionType.create(:name=>"一级地区");
 RegionType.create(:name=>"二级地区");
 RegionType.create(:name=>"其他");
+#the default person type
+PersonType.delete_all
+PersonType.create(:name=>"HR")
+PersonType.create(:name=>"出纳")
 #the default user
 

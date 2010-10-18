@@ -3,7 +3,7 @@
 	<% if params[:bare]%>
 		<th><%= check_box_tag "selected_all"%></th>
 	<% end %>
-	<% searchable_columns(@class).each do |c|%>
+	<% display_columns(@class).each do |c|%>
     <th><%= @class.human_attribute_name(c.name)%></th>
 	<% end %>
 	<% if !params[:bare]%>
@@ -22,7 +22,7 @@
 			<%= hidden_field_tag "hidden_display[#{result.id}]",result.to_s,{:class=>"hidden_display"} %>
 		</td>
 	<% end %>
-	<% searchable_columns(@class).each do |c|%>
+	<% display_columns(@class).each do |c|%>
 		<td><%= get_display_value(result,c)%></td>
 	<% end %>
 	<% if !params[:bare]%>

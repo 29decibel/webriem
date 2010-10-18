@@ -9,7 +9,6 @@ function set_form_state()
 	if(form_state==undefined) return;
 	if(form_state==0)
 	{
-		alert("ok");
 		//do nothing
 		enable_all_inputs();
 	}
@@ -20,31 +19,49 @@ function set_form_state()
 	else
 	{
 		disable_all_inputs();
-		//control some rows,like hr amount and caiwu amount is ok
-		$("input.ok").attr("readonly","false");
 	}
+	//set hr or fi editable
+	if($("#looker").size()>0)
+	{
+		if($("#looker").val()=="HR")
+		{
+			$("input.doc_HR_amount").removeAttr("readonly");
+		}
+		else if($("#looker").val()=="FI")
+		{
+			$("input.doc_FI_amount").removeAttr("readonly");
+		}
+	}
+	else
+	{
+		$("input.doc_FI_amount").attr("readonly","true");
+		$("input.doc_HR_amount").attr("readonly","true");
+	}
+	//set total amount always false
+	$("input.doc_apply_amount").attr("readonly","true");
+	$("input.doc_total_amount").attr("readonly","true");
+	//set number stuff
+	$("input.number").numeric();
 }
 
 function disable_all_inputs()
 {
-	alert("disable");
 	//inputs
-	$("form.edit_doc_head input").attr("readonly","true");
-	$("form.edit_doc_head textarea").attr("readonly","true");
-	$("form.edit_doc_head select").attr("disabled","disabled");
+	$("form.doc_head input").attr("readonly","true");
+	$("form.doc_head textarea").attr("readonly","true");
+	$("form.doc_head select").attr("disabled","disabled");
 	//disable link and reference
-	$('form.edit_doc_head a.detail_link').hide();
-	$('form.edit_doc_head span.reference').closest('a').hide();
+	$('form.doc_head a.detail_link').hide();
+	$('form.doc_head span.reference').closest('a').hide();
 }
 
 function enable_all_inputs()
 {
-	display("enabled");
 	//inputs
-	$("form.edit_doc_head input").attr("readonly","false");
-	$("form.edit_doc_head textarea").attr("readonly","false");
-	$("form.edit_doc_head select").attr("disabled","false");
+	$("form.doc_head input").removeAttr("readonly");
+	$("form.doc_head textarea").removeAttr("readonly");
+	$("form.doc_head select").removeAttr("disabled");
 	//disable link and reference
-	$('form.edit_doc_head a.detail_link').show();
-	$('form.edit_doc_head span.reference').closest('a').show();
+	$('form.doc_head a.detail_link').show();
+	$('form.doc_head span.reference').closest('a').show();
 }

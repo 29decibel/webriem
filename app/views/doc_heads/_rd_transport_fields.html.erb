@@ -25,13 +25,26 @@
 		</div>
 	</td>
 	<td>
-		<%= f.text_field :apply_amount,:class=>"normal" %>  
+		<div class="reference">
+			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "currency_info",f.object.currency.to_s,:class=>"ref" %>
+			<a href="#" class-data="Currency"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
-		<%= f.text_field :hr_amount,:class=>"normal" %>  
+		<%= f.text_field :rate,:class=>"normal doc_rate number" %>  
 	</td>
 	<td>
-		<%= f.text_field :fi_amount,:class=>"normal" %>  
+		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  
+	</td>
+	<td>
+		<%= f.text_field :apply_amount,:class=>"doc_apply_amount normal number" %>  
+	</td>
+	<td>
+		<%= f.text_field :hr_amount,:class=>"doc_HR_amount normal number" %>  
+	</td>
+	<td>
+		<%= f.text_field :fi_amount,:class=>"doc_FI_amount normal number" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>

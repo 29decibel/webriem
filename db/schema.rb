@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101017142236) do
+ActiveRecord::Schema.define(:version => 20101018141517) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -131,13 +131,7 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.integer  "doc_state"
     t.integer  "work_flow_step_id"
     t.integer  "project_id"
-    t.text     "reim_description"
     t.integer  "is_split"
-    t.decimal  "rate",              :precision => 8, :scale => 2
-    t.integer  "currency_id"
-    t.decimal  "apply_amount",      :precision => 8, :scale => 2
-    t.decimal  "ori_amount",        :precision => 8, :scale => 2
-    t.decimal  "real_amount",       :precision => 8, :scale => 2
   end
 
   create_table "duties", :force => true do |t|
@@ -250,6 +244,13 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "role_id"
+    t.integer  "person_type_id"
+  end
+
+  create_table "person_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|
@@ -285,12 +286,14 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.time     "end_time"
     t.string   "reason"
     t.integer  "doc_head_id"
-    t.decimal  "apply_amount", :precision => 10, :scale => 0
-    t.decimal  "hr_amount",    :precision => 10, :scale => 0
-    t.decimal  "fi_amount",    :precision => 10, :scale => 0
-    t.decimal  "final_amount", :precision => 10, :scale => 0
+    t.decimal  "apply_amount", :precision => 8, :scale => 2
+    t.decimal  "hr_amount",    :precision => 8, :scale => 2
+    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",   :precision => 8, :scale => 2
   end
 
   create_table "rd_extra_work_cars", :force => true do |t|
@@ -303,12 +306,14 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.time     "end_time"
     t.string   "reason"
     t.integer  "doc_head_id"
-    t.decimal  "apply_amount", :precision => 10, :scale => 0
-    t.decimal  "hr_amount",    :precision => 10, :scale => 0
-    t.decimal  "fi_amount",    :precision => 10, :scale => 0
-    t.decimal  "final_amount", :precision => 10, :scale => 0
+    t.decimal  "apply_amount", :precision => 8, :scale => 2
+    t.decimal  "hr_amount",    :precision => 8, :scale => 2
+    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",   :precision => 8, :scale => 2
   end
 
   create_table "rd_extra_work_meals", :force => true do |t|
@@ -319,12 +324,14 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.time     "end_time"
     t.string   "reason"
     t.integer  "doc_head_id"
-    t.decimal  "apply_amount", :precision => 10, :scale => 0
-    t.decimal  "hr_amount",    :precision => 10, :scale => 0
-    t.decimal  "fi_amount",    :precision => 10, :scale => 0
-    t.decimal  "final_amount", :precision => 10, :scale => 0
+    t.decimal  "apply_amount", :precision => 8, :scale => 2
+    t.decimal  "hr_amount",    :precision => 8, :scale => 2
+    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",   :precision => 8, :scale => 2
   end
 
   create_table "rd_lodgings", :force => true do |t|
@@ -335,12 +342,14 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.integer  "days"
     t.integer  "people_count"
     t.string   "person_names"
-    t.decimal  "apply_amount", :precision => 10, :scale => 0
-    t.decimal  "hr_amount",    :precision => 10, :scale => 0
-    t.decimal  "fi_amount",    :precision => 10, :scale => 0
-    t.decimal  "final_amount", :precision => 10, :scale => 0
+    t.decimal  "apply_amount", :precision => 8, :scale => 2
+    t.decimal  "hr_amount",    :precision => 8, :scale => 2
+    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",   :precision => 8, :scale => 2
   end
 
   create_table "rd_transports", :force => true do |t|
@@ -352,12 +361,14 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.string   "end_position"
     t.integer  "transportation_id"
     t.string   "reason"
-    t.decimal  "apply_amount",      :precision => 10, :scale => 0
-    t.decimal  "hr_amount",         :precision => 10, :scale => 0
-    t.decimal  "fi_amount",         :precision => 10, :scale => 0
-    t.decimal  "final_amount",      :precision => 10, :scale => 0
+    t.decimal  "apply_amount",      :precision => 8, :scale => 2
+    t.decimal  "hr_amount",         :precision => 8, :scale => 2
+    t.decimal  "fi_amount",         :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",              :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",        :precision => 8, :scale => 2
   end
 
   create_table "rd_travels", :force => true do |t|
@@ -368,13 +379,15 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.integer  "fee_standard_id"
     t.string   "other_fee"
     t.string   "other_fee_description"
-    t.decimal  "apply_amount",          :precision => 10, :scale => 0
-    t.decimal  "hr_amount",             :precision => 10, :scale => 0
-    t.decimal  "fi_amount",             :precision => 10, :scale => 0
-    t.decimal  "final_amount",          :precision => 10, :scale => 0
+    t.decimal  "apply_amount",          :precision => 8, :scale => 2
+    t.decimal  "hr_amount",             :precision => 8, :scale => 2
+    t.decimal  "fi_amount",             :precision => 8, :scale => 2
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",                  :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",            :precision => 8, :scale => 2
   end
 
   create_table "rd_work_meals", :force => true do |t|
@@ -385,12 +398,14 @@ ActiveRecord::Schema.define(:version => 20101017142236) do
     t.string   "person_names"
     t.string   "reason"
     t.integer  "doc_head_id"
-    t.decimal  "apply_amount", :precision => 10, :scale => 0
-    t.decimal  "hr_amount",    :precision => 10, :scale => 0
-    t.decimal  "fi_amount",    :precision => 10, :scale => 0
-    t.decimal  "final_amount", :precision => 10, :scale => 0
+    t.decimal  "apply_amount", :precision => 8, :scale => 2
+    t.decimal  "hr_amount",    :precision => 8, :scale => 2
+    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",   :precision => 8, :scale => 2
   end
 
   create_table "rec_notice_details", :force => true do |t|
