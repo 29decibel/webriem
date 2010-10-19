@@ -17,16 +17,19 @@
  </div>
 	<div id="seleted_person">
 		<div class="form_title">
-			<h3>该角色下的人员</h3>
-			<%= select(@role,:people,@role.people.map{|p| [p.name,p.id]},{},{:multiple=>true,:class=>"selected"})%>
-			<%= link_to_function "删除选中的员工","removeSelected(this);"%>
+			<h3>该角色下的人员</h3>			
+			<div class="reference">
+				<%= f.hidden_field :people,{:class=>"ref_hidden_field"}%>
+				<%= text_area_tag "people_info",@role.people,:class=>"ref" %>
+				<a href="#" class-data="Person" check-behavior="multi"><span class="reference"></span></a>			
+			</div>
 		</div>
 	</div>
 	<div id="seleted_menu">
-		<div class="form_title">
-			<h3>可访问的菜单</h3>
-			<%= select(@role,:menus,@role.menus.map{|m| [m.title,m.id]},{},{:multiple=>true,:class=>"selected"})%>
-			<%= link_to_function "删除选中的菜单项","removeSelected(this);"%>
+		<div class="reference">
+			<%= f.hidden_field :menus,{:class=>"ref_hidden_field"}%>
+			<%= text_area_tag "menu_info",@role.menus,:class=>"ref" %>
+			<a href="#" class-data="Menu" check-behavior="multi"><span class="reference"></span></a>			
 		</div>
 	</div>
 	<div id="select_person">

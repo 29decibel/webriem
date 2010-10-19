@@ -125,6 +125,7 @@
       account: "账户设置"
       work_flow: "审批流设置"
       region_type: "地区级次"
+      menu: "菜单设置"
     attributes: 
       region_type:
         name: "名称"
@@ -211,6 +212,10 @@
         credit_limit: "信用额度"
         role_id: "角色"
         person_type_id: "人员属性"
+      menu:
+        name: "名称"
+        title: "标题"
+        path: "地址"
       region:
         name: "名称"
         code: "编码"

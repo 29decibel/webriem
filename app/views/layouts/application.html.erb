@@ -35,9 +35,6 @@
 		<% if user_signed_in? %>
 		<div id="menu">
 			<div class="menu">
-				<%= link_to "我的任务",home_page_path,{:class=>"menu_item #{'selected' if controller.controller_name=="task"}"}%>
-			</div>
-			<div class="menu">
 				<% Menu.all.each do |m|%>
 					<%= link_to m.title,m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
 				<% end %>

@@ -1,8 +1,10 @@
 <table class="hor-zebra">
   <tr>
-	<% if params[:bare]%>
-		<th><%= check_box_tag "selected_all"%></th>
-	<% end %>
+	<th>
+		<% if params[:check_behavior]%>
+			<%= check_box_tag "selected_all"%>
+		<% end %>
+	</th>
 	<% display_columns(@class).each do |c|%>
     <th><%= @class.human_attribute_name(c.name)%></th>
 	<% end %>

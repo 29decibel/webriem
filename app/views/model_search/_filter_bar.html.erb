@@ -5,6 +5,9 @@
 		<%= text_field_tag "filter_text"%>
 		<%= hidden_field_tag "class_name",@class.name%>
 		<%= link_to "过滤",{:href=>"#"},:class=>"submit button2 filter" %>
+		<% if params[:check_behavior]%>
+			<%= hidden_field_tag "multi_check"%>
+		<% end %>
 		<% if !params[:bare]%>
 			<%= link_to "增加#{@class.human_name}", eval("new_#{@class.name.underscore}_path"),{:class=>"button2 new_object"}%>
 		<% else %>

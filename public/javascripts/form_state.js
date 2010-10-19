@@ -58,7 +58,7 @@ function disable_all_inputs()
 function enable_all_inputs()
 {
 	//inputs
-	$("form.doc_head input").removeAttr("readonly");
+	$("form.doc_head input").not("input.ref").removeAttr("readonly");
 	$("form.doc_head textarea").removeAttr("readonly");
 	$("form.doc_head select").removeAttr("disabled");
 	//disable link and reference

@@ -85,6 +85,14 @@ $(function(){
 		$("#selected_all").live("change",function(){
 			$(".ref_select").attr("checked",$(this).is(':checked'));
 		});
+		//register the ref select change events
+		$("input.ref_select").live("change",function(){
+			//select one only
+			if($("#selected_all").size()==0)
+			{
+				$(".ref_select").not($(this)).attr("checked",!$(this).is(':checked'));
+			}
+		});
 		//observe the region change so to calculate the fee standard
 		$("input.get_fee").live("change",function(){
 			//get the duty id 
@@ -159,7 +167,7 @@ function add_fields(link, association, content) {
 	//wrap the datatime picker
 	$(".datepicker").each(
 		function(){
-			$(this).datepicker();
+			$(this).datepicker({dateFormat: 'yy-mm-dd'});
 			});
 	//set the doc state
 	set_form_state();
@@ -190,6 +198,10 @@ function pop_up_reference_window()
 {
 	value_now=$(this).siblings("input[type=hidden]").val() || "null";
 	path="/model_search/index?bare=true&class_name="+$(this).attr('class-data')+"&values="+value_now;
+	if($(this).attr('check-behavior'))
+	{
+		path+="&check_behavior="+$(this).attr('check-behavior');
+	}
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
 
 	//pop up a dialog
@@ -199,11 +211,11 @@ function pop_up_reference_window()
 	if(returnValue)
 	{
 		//set displayinfo
-		$(this).siblings("input[type=text]").val(returnValue.displays);
+		$(this).siblings(".ref").val(returnValue.displays);
 		//set the id
-		$(this).siblings("input[type=hidden]").val(returnValue.ids);
+		$(this).siblings(".ref_hidden_field").val(returnValue.ids);
 		//fire the change event so now you can get the fee standard
-		$(this).siblings("input[type=text]").change();
+		$(this).siblings("ref").change();
 	}
 	return false;
 }

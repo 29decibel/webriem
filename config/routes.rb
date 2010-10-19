@@ -23,8 +23,10 @@ Webreim::Application.routes.draw do
   resources :recivers
 
   resources :doc_heads  
-
-  match "task/index",:as=>:home_page
+  
+  get "task/my_docs",:as=>:my_docs
+  
+  get "task/docs_to_approve"
   
   match "doc_heads/begin_work/:id"=>'docHeads#begin_work',:as=>:begin_work
   
@@ -32,7 +34,7 @@ Webreim::Application.routes.draw do
 
   resources :subjects,:currencies,:budgets,:fee_standards,:projects,:settlements,:lodgings,:transportations,:regions,:fees,:people,:duties,:deps
   
-  root :to=>"task#index"
+  root :to=>"task#my_docs"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

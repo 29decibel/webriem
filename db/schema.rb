@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101018141517) do
+ActiveRecord::Schema.define(:version => 20101019113533) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20101018141517) do
     t.integer  "work_flow_step_id"
     t.integer  "project_id"
     t.integer  "is_split"
+    t.decimal  "cp_doc_remain_amount", :precision => 10, :scale => 0
   end
 
   create_table "duties", :force => true do |t|
@@ -489,6 +490,14 @@ ActiveRecord::Schema.define(:version => 20101018141517) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sequence"
+  end
+
+  create_table "riem_cp_offsets", :force => true do |t|
+    t.integer  "reim_doc_head_id"
+    t.integer  "cp_doc_head_id"
+    t.decimal  "amount",           :precision => 8, :scale => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|

@@ -54,6 +54,14 @@
 		</div>
 	</div>	
 	<% end %>
+	<% if @doc_head.doc_type==1 %>
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "剩余冲抵金额" %>
+			<%= f.text_field :cp_doc_remain_amount,:class=>"number input1",:readonly=>"readonly" %>
+		</div>
+	</div>	
+	<% end %>
 	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "项目" %>			
@@ -151,35 +159,6 @@
 			</tr>		
 		</table>		
 	</div>
-	<% end %>
-	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type<=3%>
-	<div class="form_title">
-		<h3>收款人明细</h3>
-	</div>
-	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th>序号</th>
-				    <th>结算方式</th>
-				    <th>收款单位</th>
-				    <th>银行</th>
-				    <th>银行帐号</th>
-				    <th>金额</th>	
-					<th></th><!--给删除的-->		    
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :recivers do |builder|  %>
-					<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
-				<% end %>
-			</tbody>
-			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加收款人",f,:recivers %></th>
-			</tr>		
-		</table>
-	</div>	
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
 	<!--结汇申请单-->
@@ -563,6 +542,58 @@
 			</tr>		
 		</table>
 	</div>
+	<% end %>
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	<% if @doc_head.doc_type>=9%>
+	<div class="form_title">
+		<h3>现有的借款单</h3>
+	</div>
+	<div class="form_area">
+		<table class="form_input">
+			<thead>
+				<tr>					
+					<th></th>
+				    <th>单号</th>
+				    <th>申请时间</th>
+				    <th>项目</th>
+					<th>剩余冲抵金额</th>				
+				    <th>冲抵金额</th>	    
+			    </tr>
+		    <thead>
+			<tbody>
+				<%= render :partial => 'reim_cp_doc_details',:locals => { :f => f }  %>				
+			</tbody>	
+		</table>
+	</div>
+	<% end %>
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	<% if @doc_head.doc_type<=3 or @doc_head.doc_type>=9%>
+	<div class="form_title">
+		<h3><%= @doc_head.doc_type==2?"收款单位":"收款人"%>明细</h3>
+	</div>
+	<div class="form_area">
+		<table class="form_input">
+			<thead>
+				<tr>					
+					<th>序号</th>
+				    <th>结算方式</th>
+				    <th><%= @doc_head.doc_type==2?"收款单位":"收款人"%></th>
+				    <th>银行</th>
+				    <th>银行帐号</th>
+				    <th>金额</th>	
+					<th></th><!--给删除的-->		    
+			    </tr>
+		    <thead>
+			<tbody>
+				<%= f.fields_for :recivers do |builder|  %>
+					<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
+				<% end %>
+			</tbody>
+			<tr>
+				<th colspan="8"><%= link_to_add_fields "添加收款人",f,:recivers %></th>
+			</tr>		
+		</table>
+	</div>	
 	<% end %>
 </div>
 <% end %>

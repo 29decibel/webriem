@@ -1,0 +1,10 @@
+<% DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0",current_user.person.id).each do |doc|%>
+	<tr>
+		<td><%= hidden_field_tag "doc_id",doc.id%></td>
+		<td><%= doc.doc_no%></td>
+		<td><%= doc.apply_date%></td>
+		<td><%= doc.project_name%></td>
+		<td><%= doc.cp_doc_remain_amount%></td>
+		<td><%= text_field_tag "cp_amount",0 %></td>
+	</tr>
+<% end %>

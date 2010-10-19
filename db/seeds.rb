@@ -8,6 +8,8 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 #the menus
 Menu.delete_all
+Menu.create(:name=>'my_docs',:title=>'我的单据',:path=>'/task/my_docs')
+Menu.create(:name=>'my_docs',:title=>'需要审批单据',:path=>'/task/docs_to_approve')
 Menu.create(:name=>'roles',:title=>'权限设置',:path=>'/roles')
 Menu.create(:name=>'deps',:title=>'部门',:path=>'/model_search/index?class_name=Dep')
 Menu.create(:name=>'duties',:title=>'职务',:path=>'/model_search/index?class_name=Duty')

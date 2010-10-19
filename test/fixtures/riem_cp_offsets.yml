@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reim_doc_head_id: 1
+  cp_doc_head_id: 1
+  amount: 9.99
+
+two:
+  reim_doc_head_id: 1
+  cp_doc_head_id: 1
+  amount: 9.99

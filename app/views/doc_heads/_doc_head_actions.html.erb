@@ -1,12 +1,10 @@
+<%= link_to '新增', new_doc_head_path(:doc_type=>doc_head.doc_type),:class=>"button2" %>
 <%= link_to '编辑', "#",:class=>"button2" %>
 <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
-<% if doc_head.id %>
+<% if !doc_head.new_record? and doc_head.doc_state==0 %>
 	<%= link_to "提交审批",begin_work_path(doc_head.id),:remote=>true,:class=>"button2"%>
 <% end %>
 <%= link_to '撤销', "#",:class=>"button2" %>
-<%= link_to '列表', "#",:class=>"button2" %>
-<%= link_to '上一张', "#",:class=>"button2" %>
-<%= link_to '下一张', "#",:class=>"button2" %>
 <%= link_to '打印', "#",:class=>"button2" %>
-<%= link_to '预览', "#",:class=>"button2" %>
-<%= link_to '返回', doc_heads_path(:doc_type=>doc_head.doc_type),:class=>"button2" %>
+<%= link_to '输出', "#",:class=>"button2" %>
+<%= link_to '我的单据', my_docs_path,:class=>"button2" %>
