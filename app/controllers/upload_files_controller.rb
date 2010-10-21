@@ -1,4 +1,4 @@
-require 'ruby-debug'
+#require 'ruby-debug'
 class UploadFilesController < ApplicationController
   # GET /upload_files
   # GET /upload_files.xml

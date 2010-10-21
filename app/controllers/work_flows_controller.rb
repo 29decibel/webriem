@@ -1,5 +1,5 @@
 #coding: utf-8
-require "ruby-debug"
+#require "ruby-debug"
 class WorkFlowsController < ApplicationController
   # GET /work_flows
   # GET /work_flows.xml
