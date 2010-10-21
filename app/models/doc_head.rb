@@ -65,6 +65,7 @@ class DocHead < ActiveRecord::Base
   validate :must_equal
   def must_equal
     errors.add(:base, "报销总金额#{total_apply_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_apply_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
+    errors.add(:base,"借款总金额#{total_apply_amount} 不等于 收款总金额#{reciver_amount}") if total_apply_amount!=reciver_amount and doc_type<=2
   end
   #the total apply amount
   def total_apply_amount
