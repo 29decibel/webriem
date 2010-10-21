@@ -46,4 +46,6 @@ PersonType.delete_all
 PersonType.create(:name=>"HR")
 PersonType.create(:name=>"出纳")
 #the default user
-User.create(:name=>"admin",:email=>"mike.d.1984@gmail.com",:password=>"admin",:password_confirmation=>"admin")
+if !User.find_by_name("admin")
+  User.create(:name=>"admin",:email=>"mike.d.1984@gmail.com",:password=>"admin",:password_confirmation=>"admin")
+end
