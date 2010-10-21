@@ -9,18 +9,18 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "编码" %>			
-		<%= f.text_field :code,:class=>"input1 "+ mark_required(@settlement, :code) %>
+		<%= f.label "编码#{mark_required(f.object,:code)}" %>			
+		<%= f.text_field :code,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "结算方式" %>
-		<%= f.text_field :name,:class=>"input1 "+ mark_required(@settlement, :name) %>
+		<%= f.label "结算方式#{mark_required(f.object,:name)}" %>
+		<%= f.text_field :name,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "结算科目" %>			
-		<%= f.text_field :subject,:class=>"input1 "+ mark_required(@settlement, :subject) %>
+		<%= f.label "结算科目#{mark_required(f.object,:subject)}" %>			
+		<%= f.text_field :subject,:class=>"input1 "%>
 	</div>
 </div>
 </div>

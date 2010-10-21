@@ -9,7 +9,7 @@
 <div class="form_area">
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "审批名称" %>		
+			<%= f.label "审批名称#{mark_required(f.object,:name)}" %>		
 			<%= f.text_field :name,:class=>"input1" %><%= mark_required(@work_flow, :name) %>
 		</div>
 	</div>

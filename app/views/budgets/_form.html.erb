@@ -9,7 +9,7 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "费用类型" %>	
+		<%= f.label "费用类型#{mark_required(f.object,:fee)}" %>	
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@budget.fee.to_s,:class=>"ref" %>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "项目",:class=>"input_label" %>
+		<%= f.label "项目#{mark_required(f.object,:project)}",:class=>"input_label" %>
 		<div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",@budget.project.to_s,:class=>"ref" %>
@@ -27,7 +27,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "部门" %>
+		<%= f.label "部门#{mark_required(f.object,:dep)}" %>
 		<div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",@budget.dep.to_s,:class=>"ref" %>
@@ -37,61 +37,61 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "1月" %>			
+		<%= f.label "1月#{mark_required(f.object,:jan)}" %>			
 		<%= f.text_field :jan,:class=>"input1 "+ mark_required(@budget, :jan) %>
 	</div>
 	<div class="form_field">
-		<%= f.label "2月" %>
+		<%= f.label "2月#{mark_required(f.object,:feb)}" %>
 		<%= f.text_field :feb,:class=>"input1 "+ mark_required(@budget, :feb) %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "3月" %>			
+		<%= f.label "3月#{mark_required(f.object,:mar)}" %>			
 		<%= f.text_field :mar,:class=>"input1 "+ mark_required(@budget, :mar) %>
 	</div>
 	<div class="form_field">
-		<%= f.label "4月" %>
+		<%= f.label "4月#{mark_required(f.object,:apr)}" %>
 		<%= f.text_field :apr,:class=>"input1 "+ mark_required(@budget, :apr) %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "5月" %>			
+		<%= f.label "5月#{mark_required(f.object,:may)}" %>			
 		<%= f.text_field :may,:class=>"input1 "+ mark_required(@budget, :may) %>
 	</div>
 	<div class="form_field">
-		<%= f.label "6月" %>
+		<%= f.label "6月#{mark_required(f.object,:jun)}" %>
 		<%= f.text_field :jun,:class=>"input1 "+ mark_required(@budget, :jun) %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "7月" %>			
+		<%= f.label "7月#{mark_required(f.object,:jul)}" %>			
 		<%= f.text_field :jul,:class=>"input1 "+ mark_required(@budget, :jul) %>
 	</div>
 	<div class="form_field">
-		<%= f.label "8月" %>
+		<%= f.label "8月#{mark_required(f.object,:aug)}" %>
 		<%= f.text_field :aug,:class=>"input1 "+ mark_required(@budget, :aug) %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "9月" %>			
+		<%= f.label "9月#{mark_required(f.object,:sep)}" %>			
 		<%= f.text_field :sep,:class=>"input1 "+ mark_required(@budget, :sep) %>
 	</div>
 	<div class="form_field">
-		<%= f.label "10月" %>
+		<%= f.label "10月#{mark_required(f.object,:oct)}" %>
 		<%= f.text_field :oct,:class=>"input1 "+ mark_required(@budget, :oct) %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "11月" %>			
+		<%= f.label "11月#{mark_required(f.object,:nov)}" %>			
 		<%= f.text_field :nov,:class=>"input1 "+ mark_required(@budget, :nov) %>
 	</div>
 	<div class="form_field">
-		<%= f.label "12月" %>
+		<%= f.label "12月#{mark_required(f.object,:dec)}" %>
 		<%= f.text_field :dec,:class=>"input1 "+ mark_required(@budget, :dec) %>
 	</div>
 </div>

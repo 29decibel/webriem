@@ -9,11 +9,11 @@
 <div class="form_area">
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "帐号名称" %>		
+			<%= f.label "帐号名称#{mark_required(f.object,:name)}" %>		
 			<%= f.text_field :name,:class=>"input1" %>
 		</div>
 		<div class="form_field">
-			<%= f.label "帐号" %>
+			<%= f.label "帐号#{mark_required(f.object,:account_no)}" %>
 			<%= f.text_field :account_no,:class=>"input1" %>
 		</div>
 	</div>

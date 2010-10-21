@@ -9,27 +9,27 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "编码" %>			
-		<%= f.text_field :code,:class=>"input1 "+ mark_required(@fee, :code) %>
+		<%= f.label "编码#{mark_required(f.object,:code)}" %>			
+		<%= f.text_field :code,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "名称" %>
-		<%= f.text_field :name,:class=>"input1 "+ mark_required(@fee, :name) %>
+		<%= f.label "名称#{mark_required(f.object,:name)}" %>
+		<%= f.text_field :name,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "费用属性" %>			
+		<%= f.label "费用属性#{mark_required(f.object,:attr)}" %>			
 		<%= f.select :attr,Fee::ENUMS_ATTR,{:include_blank => '无'},{:class=>"input1 "} %>
 	</div>
 	<div class="form_field">
-		<%= f.label "停用日期" %>
-		<%= f.text_field :end_date,:class=>"datepicker input1 "+ mark_required(@fee, :end_date) %>
+		<%= f.label "停用日期#{mark_required(f.object,:end_date)}" %>
+		<%= f.text_field :end_date,:class=>"datepicker input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "所属费用类型" %>			
+		<%= f.label "所属费用类型#{mark_required(f.object,:parent_fee_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :parent_fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@fee.parent_fee.to_s,:class=>"ref" %>

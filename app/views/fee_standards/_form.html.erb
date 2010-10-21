@@ -9,7 +9,7 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "项目" %>			
+		<%= f.label "项目#{mark_required(f.object,:project_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",@fee_standard.project.to_s,:class=>"ref" %>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "地区级次" %>
+		<%= f.label "地区级次#{mark_required(f.object,:region_type_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
@@ -27,7 +27,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "职务" %>			
+		<%= f.label "职务#{mark_required(f.object,:duty_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "duty_info",@fee_standard.duty.to_s,:class=>"ref" %>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "住宿方式" %>
+		<%= f.label "住宿方式#{mark_required(f.object,:lodging_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :lodging_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "lodging_info",f.object.lodging.to_s,:class=>"ref" %>
@@ -45,7 +45,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "交通方式" %>			
+		<%= f.label "交通方式#{mark_required(f.object,:transportation_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :transportation_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "transportation_info",@fee_standard.transportation.to_s,:class=>"ref" %>
@@ -53,7 +53,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "业务类型" %>
+		<%= f.label "业务类型#{mark_required(f.object,:business_type_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "business_type_info",f.object.business_type.to_s,:class=>"ref" %>
@@ -63,8 +63,8 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "金额" %>			
-		<%= f.text_field :amount,:class=>"input1 "+ mark_required(@fee_standard, :amount) %>
+		<%= f.label "金额#{mark_required(f.object,:amount)}" %>			
+		<%= f.text_field :amount,:class=>"input1 " %>
 	</div>
 </div>
 </div>

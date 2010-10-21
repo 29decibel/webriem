@@ -9,7 +9,7 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "业务类型" %>			
+		<%= f.label "业务类型#{mark_required(f.object,:business_type)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "business_type_info",@subject.business_type.to_s,:class=>"ref" %>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "费用类型" %>
+		<%= f.label "费用类型#{mark_required(f.object,:fee)}" %>
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@subject.fee.to_s,:class=>"ref" %>
@@ -27,7 +27,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "部门" %>			
+		<%= f.label "部门#{mark_required(f.object,:dep)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",@subject.dep.to_s,:class=>"ref" %>
@@ -35,18 +35,18 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "u8费用科目" %>
-		<%= f.text_field :u8_fee_subject,:class=>"input1 "+ mark_required(@subject, :u8_fee_subject) %>
+		<%= f.label "u8费用科目#{mark_required(f.object,:u8_fee_subject)}" %>
+		<%= f.text_field :u8_fee_subject,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "u8借款科目" %>			
-		<%= f.text_field :u8_borrow_subject,:class=>"input1 "+ mark_required(@subject, :u8_borrow_subject) %>
+		<%= f.label "u8借款科目#{mark_required(f.object,:u8_borrow_subject)}" %>			
+		<%= f.text_field :u8_borrow_subject,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "u8报销科目" %>
-		<%= f.text_field :u8_reim_subject,:class=>"input1 "+ mark_required(@subject, :u8_reim_subject) %>
+		<%= f.label "u8报销科目#{mark_required(f.object,:u8_reim_subject)}" %>
+		<%= f.text_field :u8_reim_subject,:class=>"input1 " %>
 	</div>
 </div>
 </div>

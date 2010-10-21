@@ -9,27 +9,27 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "姓名" %>			
-		<%= f.text_field :name,:class=>"input1 "+ mark_required(@person, :name) %>
+		<%= f.label "姓名#{mark_required(f.object,:name)}" %>			
+		<%= f.text_field :name,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "员工编号" %>
-		<%= f.text_field :code,:class=>"input1 "+ mark_required(@person, :code) %>
+		<%= f.label "员工编号#{mark_required(f.object,:code)}" %>
+		<%= f.text_field :code,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "性别" %>			
+		<%= f.label "性别#{mark_required(f.object,:gender)}" %>			
 		<%= f.select :gender, Person::ENUMS_GENDER,{},{:class=>"basic_input "} %>
 	</div>
 	<div class="form_field">
-		<%= f.label "人员属性" %>
+		<%= f.label "人员属性#{mark_required(f.object,:person_type)}" %>
 		<%= collection_select(:person, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :person_type_id) %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "所在部门" %>			
+		<%= f.label "所在部门#{mark_required(f.object,:dep_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",@person.dep.to_s,:class=>"ref" %>
@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "职务" %>
+		<%= f.label "职务#{mark_required(f.object,:duty_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "duty_info",@person.duty.to_s,:class=>"ref" %>
@@ -47,7 +47,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "直属领导" %>			
+		<%= f.label "直属领导#{mark_required(f.object,:boss_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :boss_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "boss_info",@person.boss.to_s,:class=>"ref" %>
@@ -55,38 +55,38 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "联系方式" %>
-		<%= f.text_field :phone,:class=>"input1 "+ mark_required(@person, :phone) %>
+		<%= f.label "联系方式#{mark_required(f.object,:phone)}" %>
+		<%= f.text_field :phone,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "电子邮件" %>			
-		<%= f.text_field :e_mail,:class=>"input1 "+ mark_required(@person, :e_mail) %>
+		<%= f.label "电子邮件#{mark_required(f.object,:e_mail)}" %>			
+		<%= f.text_field :e_mail,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "身份证号" %>
-		<%= f.text_field :ID_card,:class=>"input1 "+ mark_required(@person, :ID_card) %>
-	</div>
-</div>
-<div class="form_block">
-	<div class="form_field">
-		<%= f.label "银行帐号" %>			
-		<%= f.text_field :bank_no,:class=>"input1 "+ mark_required(@person, :bank_no) %>
-	</div>
-	<div class="form_field">
-		<%= f.label "开户行" %>
-		<%= f.text_field :bank,:class=>"input1 "+ mark_required(@person, :bank) %>
+		<%= f.label "身份证号#{mark_required(f.object,:ID_card)}" %>
+		<%= f.text_field :ID_card,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "离职日期" %>			
-		<%= f.text_field :end_date,:class=>"datepicker input1 "+ mark_required(@person, :end_date) %>
+		<%= f.label "银行帐号#{mark_required(f.object,:bank_no)}" %>			
+		<%= f.text_field :bank_no,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "信用额度" %>
-		<%= f.text_field :credit_limit,:class=>"input1 "+ mark_required(@person, :credit_limit) %>
+		<%= f.label "开户行#{mark_required(f.object,:bank)}" %>
+		<%= f.text_field :bank,:class=>"input1 " %>
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "离职日期#{mark_required(f.object,:end_date)}" %>			
+		<%= f.text_field :end_date,:class=>"datepicker input1 " %>
+	</div>
+	<div class="form_field">
+		<%= f.label "信用额度#{mark_required(f.object,:credit_limit)}" %>
+		<%= f.text_field :credit_limit,:class=>"input1 " %>
 	</div>
 </div>
 </div>

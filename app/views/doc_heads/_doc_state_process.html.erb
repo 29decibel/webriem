@@ -2,7 +2,7 @@
 	<%= hidden_field_tag "form_state",doc.doc_state%>
 	<!--hidden field to store the current looker of this doc mainly is HR or FI -->
 	<% if doc.approver ==current_user.person %>
-		<%= hidden_field_tag "looker",current_user.person.person_type_name%>
+		<%= hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""%>
 	<% end %>
 	<% if doc.work_flows %>
 		<span>单据状态</span>
