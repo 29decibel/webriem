@@ -423,3 +423,10 @@ a.disable{
 a:active.disable {
 
 }
+/*4work flow*/
+div.form_field_4_work_flow{
+	margin-left: 32px;
+}
+div.doc_type_check{
+	display:inline-block;
+}

@@ -6,65 +6,48 @@
     <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', subjects_path,:class=>"button2" %>
  </div>
-<div class="field">
-	<%= f.label "业务类型",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:subject, :business_type_id, BusinessType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@subject, :business_type_id) %>
-		</p>
-		<p class="tip"></p>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "业务类型" %>			
+		<div class="reference">
+			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "business_type_info",@subject.business_type.to_s,:class=>"ref" %>
+			<a href="#" class-data="BusinessType"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "费用类型",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:subject, :fee_id, Fee.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@subject, :fee_id) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "费用类型" %>
+		<div class="reference">
+			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "fee_info",@subject.fee.to_s,:class=>"ref" %>
+			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "部门",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:subject, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@subject, :dep_id) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "部门" %>			
+		<div class="reference">
+			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",@subject.dep.to_s,:class=>"ref" %>
+			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "u8费用科目",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :u8_fee_subject,:class=>"basic_input "+ mark_required(@subject, :u8_fee_subject) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "u8费用科目" %>
+		<%= f.text_field :u8_fee_subject,:class=>"input1 "+ mark_required(@subject, :u8_fee_subject) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "u8借款科目",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :u8_borrow_subject,:class=>"basic_input "+ mark_required(@subject, :u8_borrow_subject) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "u8借款科目" %>			
+		<%= f.text_field :u8_borrow_subject,:class=>"input1 "+ mark_required(@subject, :u8_borrow_subject) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "u8报销科目",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :u8_reim_subject,:class=>"basic_input "+ mark_required(@subject, :u8_reim_subject) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "u8报销科目" %>
+		<%= f.text_field :u8_reim_subject,:class=>"input1 "+ mark_required(@subject, :u8_reim_subject) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-
+</div>
+</div>
 <% end %>

@@ -10,6 +10,8 @@ alert("<%= @message %>");
 	$("#work_flow_info").html("<%= escape_javascript(render :partial=>'doc_heads/work_flow_info',:locals=>{:doc_head=>@doc_head,:work_flow_info=>@work_flow_info}) %>");
 	//replace the doc_heads
 	$("#doc_head_actions").html("<%= escape_javascript(render :partial=>'doc_heads/doc_head_actions',:locals=>{:doc_head=>@doc_head}) %>");
+	//replace the reim_cp_doc_offset
+	$("#reim_cp_doc_offset").html("<%= escape_javascript(render :partial=>'doc_heads/reim_cp_doc_offset',:locals=>{:doc_head=>@doc_head}) %>");
 <% end %>
 set_form_state();
 $.unblockUI();

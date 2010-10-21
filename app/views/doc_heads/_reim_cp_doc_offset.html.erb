@@ -1,0 +1,41 @@
+<div id="reim_cp_doc_offset" class="form_area">
+	<table class="form_input">
+		<thead>
+			<tr>				
+			    <th>单号</th>
+			    <th>申请时间</th>
+			    <th>项目</th>
+				<th>申请总金额</th>
+				<th>剩余冲抵金额</th>				
+			    <th>冲抵金额</th>
+				<th></th>	    
+		    </tr>
+	    <thead>
+		<tbody>
+			<% DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0 and doc_state=2 and paid=1",current_user.person.id).each_with_index do |doc,index|%>
+			<% doc_offset=doc.offset_info(doc_head.id)%>
+				<tr>
+					<td><%= doc.doc_no%></td>
+					<td><%= doc.apply_date%></td>
+					<td><%= doc.project_name%></td>
+					<td><%= doc.total_apply_amount%></td>
+					<td><%= doc.cp_doc_remain_amount%></td>
+					<td>
+						<% if doc_offset %>
+							<%= label_tag "offset_info[#{index}][amount]",doc_offset.amount%>
+						<% else %>
+							<%= text_field_tag "offset_info[#{index}][amount]",0 %>
+						<% end %>
+					</td>
+					<td>
+						<% if doc_offset %>
+							<%= link_to "删除原有冲抵记录",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true%>
+						<% else %>
+							<%= hidden_field_tag "offset_info[#{index}][cp_doc_head_id]",doc.id%>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>			
+		</tbody>	
+	</table>
+</div>

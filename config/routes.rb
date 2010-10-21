@@ -1,6 +1,10 @@
 Webreim::Application.routes.draw do
 
   get "ajax_service/getfee"
+  
+  get "ajax_service/remove_offset",:as=>:remove_offset
+  
+  get "doc_heads/pay"
 
   resources :roles
 
@@ -33,7 +37,7 @@ Webreim::Application.routes.draw do
   devise_for :users
 
   resources :subjects,:currencies,:budgets,:fee_standards,:projects,:settlements,:lodgings,:transportations,:regions,:fees,:people,:duties,:deps
-  
+    
   root :to=>"task#my_docs"
 
   # The priority is based upon order of creation:

@@ -8,3 +8,6 @@
 <%= link_to '打印', "#",:class=>"button2" %>
 <%= link_to '输出', "#",:class=>"button2" %>
 <%= link_to '我的单据', my_docs_path,:class=>"button2" %>
+<% if doc_head.paid==0 and doc_head.doc_state==2%>
+	<%= link_to "确认付款",{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"button2"%>
+<% end %>

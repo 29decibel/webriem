@@ -57,7 +57,69 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_lodgings ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_travels ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+  #the great offset info here
+  has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
+  has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
   enum_attr :is_split, [['否', 0], ['是', 1]]
+  #validate the amout is ok
+  validate :must_equal
+  def must_equal
+    errors.add(:base, "报销总金额#{total_apply_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_apply_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
+  end
+  #the total apply amount
+  def total_apply_amount
+    total=0
+    if doc_type==1 or doc_type==2
+      cp_doc_details.each do |cp|
+        total+=cp.apply_amount
+      end
+    end
+    if doc_type==9
+      [rd_travels,rd_transports,rd_lodgings].each do |rd|
+        rd.each do |rd_detail|
+          total+=rd_detail.fi_amount         
+        end
+      end
+    end
+    if doc_type==10
+      rd_work_meals.each do |rd|
+        total+=rd.fi_amount
+      end
+    end
+    if doc_type==11
+      [rd_extra_work_cars,rd_extra_work_meals].each do |rd|
+        rd.each do |rd_detail|
+          total+=rd_detail.fi_amount         
+        end
+      end
+    end
+    if doc_type==12
+      rd_common_transports.each do |rd|
+        total+=rd.fi_amount
+      end
+    end
+    total
+  end
+  #offset info record am i hava offset
+  def offset_info(reim_doc_id)
+    #debugger
+    RiemCpOffset.where("reim_doc_head_id=? and cp_doc_head_id=#{self.id}",reim_doc_id).first
+  end
+  def offset_amount
+    total=0
+    reim_cp_offsets.each do |offset|
+      total+=offset.amount
+    end
+    total
+  end
+  #reciver total amount
+  def reciver_amount
+    total=0
+    recivers.each do |r|
+      r.direction==0 ? total+=r.amount : total-=r.amount
+    end
+    total
+  end
   #=====================================================
   #pages
   cattr_reader :per_page

@@ -33,22 +33,15 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-    create_or_update_user_account(@person.code,@person.e_mail)
-    if @person.save
+    user=User.new(:name => @person.code, :email => @person.e_mail, :password => "123456",:password_confirmation=>"123456")
+    if user.valid? and @person.valid?
+      user.save
+      @person.save
       @message="创建成功"
       render "shared/show_result"
     else
       #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@person)}
-    end
-  end
-  
-  def create_or_update_user_account(name,email)
-    user=User.find_by_name(name)
-    if user
-      user.update_attributes :name=>name,:email=>email
-    else
-      User.create(:name => name, :email => email, :password => "123456",:password_confirmation=>"123456")
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@person)+get_error_messages(user)}
     end
   end
 
@@ -56,13 +49,17 @@ class PeopleController < ApplicationController
   # PUT /people/1.xml
   def update
     @person = Person.find(params[:id])
-    if @person.update_attributes(params[:person])
-      create_or_update_user_account(@person.code,@person.e_mail)
+    @person.attributes=params[:person]
+    #user=User.find_by_name(@person.code)
+    #user.attributes={:name=>@person.code,:e_mail=>@person.e_mail,:password_confirmation=>user.password}
+    if @person.valid?
+      #user.update_attributes :name=>@person.code,:e_mail=>@person.e_mail
+      @person.update_attributes params[:person]
       @message="更新成功"
       render "shared/show_result"
     else
       #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@person)}
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(user)+get_error_messages(@person)}
     end
   end
 
@@ -72,7 +69,9 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     #delete the user account
     user=User.find_by_name(@person.code)
-    user.destroy
+    if user
+      user.destroy
+    end
     @person.destroy
 
     respond_to do |format|

@@ -126,9 +126,12 @@
       work_flow: "审批流设置"
       region_type: "地区级次"
       menu: "菜单设置"
+      role: "角色"
     attributes: 
       region_type:
         name: "名称"
+      role:
+        name: "角色名称"
       work_flow:
         name: "名称"
         doc_types: "对应的单据类型"

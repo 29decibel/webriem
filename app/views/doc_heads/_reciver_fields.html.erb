@@ -3,6 +3,9 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td> 
 	<td>
+		<%= f.select :direction, Reciver::ENUMS_DIRECTION,{},{:class=>"input1 "} %>
+	</td>
+	<td>
 		<div class="reference">
 			<%= f.hidden_field :settlement_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "settlement_info",f.object.settlement.to_s,:class=>"ref" %>

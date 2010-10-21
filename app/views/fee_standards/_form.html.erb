@@ -6,75 +6,66 @@
   <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', fee_standards_path,:class=>"button2" %>
 </div>
-<div class="field">
-	<%= f.label "项目",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:fee_standard, :project_id, Project.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input "+mark_required(@fee_standard, :project_id)})%>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-	<div class="form_block">
-		<div class="form_field">
-			<%= f.label "地区级次" %>
-			<div class="reference">
-				<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
-				<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
-				<a href="#" class-data="RegionType"><span class="reference"></span></a>			
-			</div>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "项目" %>			
+		<div class="reference">
+			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "project_info",@fee_standard.project.to_s,:class=>"ref" %>
+			<a href="#" class-data="Project"><span class="reference"></span></a>			
 		</div>
 	</div>
-<div class="field">
-	<%= f.label "职务",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:fee_standard, :duty_id, Duty.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input "+ mark_required(@fee_standard, :duty_id)})%>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "地区级次" %>
+		<div class="reference">
+			<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
+			<a href="#" class-data="RegionType"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "住宿方式",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:fee_standard, :lodging_id, Lodging.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input "+ mark_required(@fee_standard, :lodging_id)})%>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "职务" %>			
+		<div class="reference">
+			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "duty_info",@fee_standard.duty.to_s,:class=>"ref" %>
+			<a href="#" class-data="Duty"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "交通方式",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:fee_standard, :transportation_id, Transportation.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input "+mark_required(@fee_standard, :transportation_id)})%>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "住宿方式" %>
+		<div class="reference">
+			<%= f.hidden_field :lodging_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "lodging_info",f.object.lodging.to_s,:class=>"ref" %>
+			<a href="#" class-data="Lodging"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "业务类型",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:fee_standard, :business_type_id, BusinessType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :business_type_id) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "交通方式" %>			
+		<div class="reference">
+			<%= f.hidden_field :transportation_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "transportation_info",@fee_standard.transportation.to_s,:class=>"ref" %>
+			<a href="#" class-data="Transportation"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "金额",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :amount,:class=>"basic_input "+ mark_required(@fee_standard, :amount) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "业务类型" %>
+		<div class="reference">
+			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "business_type_info",f.object.business_type.to_s,:class=>"ref" %>
+			<a href="#" class-data="BusinessType"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "金额" %>			
+		<%= f.text_field :amount,:class=>"input1 "+ mark_required(@fee_standard, :amount) %>
+	</div>
+</div>
+</div>
 <% end %>

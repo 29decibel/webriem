@@ -20,8 +20,14 @@
 				 ====>
 			</div>
 		<% end %>
-		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 %>'>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==0 %>'>
 			审批通过
+		</div>
+		<div class='work_flow_step'>
+			 ====>
+		</div>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==1 %>'>
+			已经付款
 		</div>
 	<% else %>
 		该单据没有对应的审批流，设置后才能提交审批

@@ -1,13 +1,9 @@
+#coding: utf-8
 class RolesController < ApplicationController
   # GET /roles
   # GET /roles.xml
   def index
-    @roles = Role.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @roles }
-    end
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Role"
   end
 
   # GET /roles/1
@@ -41,32 +37,47 @@ class RolesController < ApplicationController
   # POST /roles.xml
   def create
     @role = Role.new(params[:role])
-
-    respond_to do |format|
-      if @role.save
-        format.html { redirect_to(@role, :notice => 'Role was successfully created.') }
-        format.xml  { render :xml => @role, :status => :created, :location => @role }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
-      end
+    #set the person have such a role
+    params[:people_ids].split('_').each do |person_id|
+      person=Person.find(person_id.to_i)
+      person.update_attribute(:role_id,@role.id)
+    end
+    #build the menu rights
+    params[:menu_ids].split('_').each do |menu_id|
+      @role.menu_rights.build(:menu_id=>menu_id)
+    end
+    if @role.save
+      @message="创建成功"
+      render "shared/show_result"
+    else
+      #write some codes
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@role)}
     end
   end
 
   # PUT /roles/1
   # PUT /roles/1.xml
   def update
-    @role = Role.find(params[:id])
-
-    respond_to do |format|
+     @role = Role.find(params[:id])
+     #update the people info
+     @role.people.clear
+     #set the person have such a role
+     params[:people_ids].split('_').each do |person_id|
+       person=Person.find(person_id.to_i)
+       person.update_attribute(:role_id,@role.id)
+     end
+     @role.menu_rights.clear
+     #build the menu rights
+     params[:menu_ids].split('_').each do |menu_id|
+       @role.menu_rights.build(:menu_id=>menu_id)
+     end
       if @role.update_attributes(params[:role])
-        format.html { redirect_to(@role, :notice => 'Role was successfully updated.') }
-        format.xml  { head :ok }
+        @message="更新成功"
+        render "shared/show_result"
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
+        #写一些校验出错信息
+        render "shared/errors",:locals=>{:error_msg=>get_error_messages(@role)}
       end
-    end
   end
 
   # DELETE /roles/1

@@ -6,35 +6,22 @@
   <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', projects_path,:class=>"button2" %>
 </div>
-<div class="field">
-	<%= f.label "项目名称",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@project, :name) %>
-		</p>
-		<p class="tip"></p>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "项目名称" %>			
+		<%= f.text_field :name,:class=>"input1 "+ mark_required(@project, :name) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "项目编码",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@project, :code) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "项目编码" %>
+		<%= f.text_field :code,:class=>"input1 "+ mark_required(@project, :code) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "对应U8项目",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :u8_project,:class=>"basic_input "+ mark_required(@project, :u8_project) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "对应U8项目" %>			
+		<%= f.text_field :u8_project,:class=>"input1 "+ mark_required(@project, :u8_project) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-
+</div>
+</div>
 <% end %>

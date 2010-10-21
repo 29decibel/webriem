@@ -6,28 +6,22 @@
   <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', work_flows_path,:class=>"button2" %>
 </div>
-<div class="field">
-	<%= f.label "审批名称",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@work_flow, :name) %>
-		</p>
-		<p class="tip"></p>
+<div class="form_area">
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "审批名称" %>		
+			<%= f.text_field :name,:class=>"input1" %><%= mark_required(@work_flow, :name) %>
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<%= f.label "对应的单据类型",:class=>"input_label" %>
-<div class="field">	
-	<div class="input_area">
+	<div class="form_field_4_work_flow">		
+		<h4><%= f.label "对应的单据类型:" %></h4><br/>
 		<% (1..13).each do |num| %>
-			<div id="doc_type_check">
+			<div class="doc_type_check">
 				<%= check_box_tag("doc_types[]",num,@work_flow.doc_types.split(';').include?(num.to_s))%><%= f.label doc_type_name(num)%>
 			</div>			
 		<% end %>
-		<p class="tip"></p>
 	</div>
-	<span class="error_message"></span>    
-  </div>
+</div>
 <div id="details">
 	<div class="table_details">
 		<table class="form_input">

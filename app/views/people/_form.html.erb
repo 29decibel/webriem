@@ -6,159 +6,88 @@
   <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', people_path,:class=>"button2" %>
 </div>
-<div class="field">
-	<%= f.label "姓名",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@person, :name) %>
-		</p>
-		<p class="tip"></p>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "姓名" %>			
+		<%= f.text_field :name,:class=>"input1 "+ mark_required(@person, :name) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "员工编号",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@person, :code) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "员工编号" %>
+		<%= f.text_field :code,:class=>"input1 "+ mark_required(@person, :code) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "性别",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.select :gender, Person::ENUMS_GENDER,{},{:class=>"basic_input "} %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "性别" %>			
+		<%= f.select :gender, Person::ENUMS_GENDER,{},{:class=>"basic_input "} %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "人员属性",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:person, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :person_type_id) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "人员属性" %>
+		<%= collection_select(:person, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :person_type_id) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "所在部门",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:person, :dep_id, Dep.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :dep_id) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "所在部门" %>			
+		<div class="reference">
+			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",@person.dep.to_s,:class=>"ref" %>
+			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "职务",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:person, :duty_id, Duty.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :duty_id) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "职务" %>
+		<div class="reference">
+			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "duty_info",@person.duty.to_s,:class=>"ref" %>
+			<a href="#" class-data="Duty"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "直属领导",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= collection_select(:person, :boss_id, Person.where("id!=? or ? is NULL",@person.id,@person.id), :id, :name, {:disabled=>lambda{|person| person.id==@person.id},:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@person, :boss) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "直属领导" %>			
+		<div class="reference">
+			<%= f.hidden_field :boss_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "boss_info",@person.boss.to_s,:class=>"ref" %>
+			<a href="#" class-data="Person"><span class="reference"></span></a>			
+		</div>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "联系方式",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :phone,:class=>"basic_input "+ mark_required(@person, :phone) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "联系方式" %>
+		<%= f.text_field :phone,:class=>"input1 "+ mark_required(@person, :phone) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label :e_mail,:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :e_mail,:class=>"basic_input "+ mark_required(@person, :e_mail) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "电子邮件" %>			
+		<%= f.text_field :e_mail,:class=>"input1 "+ mark_required(@person, :e_mail) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "身份证号",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :ID_card,:class=>"basic_input "+ mark_required(@person, :ID_card) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "身份证号" %>
+		<%= f.text_field :ID_card,:class=>"input1 "+ mark_required(@person, :ID_card) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "银行帐号",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :bank_no,:class=>"basic_input "+ mark_required(@person, :bank_no) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "银行帐号" %>			
+		<%= f.text_field :bank_no,:class=>"input1 "+ mark_required(@person, :bank_no) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "开户行",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :bank,:class=>"basic_input "+ mark_required(@person, :bank) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "开户行" %>
+		<%= f.text_field :bank,:class=>"input1 "+ mark_required(@person, :bank) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "离职日期",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :end_date,:class=>"datepicker basic_input "+ mark_required(@person, :end_date) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "离职日期" %>			
+		<%= f.text_field :end_date,:class=>"datepicker input1 "+ mark_required(@person, :end_date) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "信用额度",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :credit_limit,:class=>"basic_input "+ mark_required(@person, :credit_limit) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "信用额度" %>
+		<%= f.text_field :credit_limit,:class=>"input1 "+ mark_required(@person, :credit_limit) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<!--========================================================================-->
-<% if !User.find_by_name(@person.code)%>
-<div class="field">
-	<%= label_tag "add_count_label","增加相应帐号",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= check_box_tag "add_account"%>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<% end %>
-<!--========================================================================-->
-
+</div>
+</div>
 <% end %>

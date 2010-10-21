@@ -6,34 +6,32 @@
 	<%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', roles_path,:class=>"button2" %>
 </div>
-<div class="field">
-    <%= f.label "角色名称",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@role, :code) %>
-		</p>
-		<p class="tip"></p>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "角色名称" %>			
+		<%= f.text_field :name,:class=>"input1 "+ mark_required(@role, :code) %>
 	</div>
- </div>
-	<div id="seleted_person">
-		<div class="form_title">
-			<h3>该角色下的人员</h3>			
-			<div class="reference">
-				<%= f.hidden_field :people,{:class=>"ref_hidden_field"}%>
-				<%= text_area_tag "people_info",@role.people,:class=>"ref" %>
-				<a href="#" class-data="Person" check-behavior="multi"><span class="reference"></span></a>			
-			</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "该角色下的人员" %>			
+		<div class="reference">
+			<%= hidden_field_tag "people_ids",(@role.people.map{|p| p.id}).join("_"),{:class=>"ref_hidden_field"}%>
+			<%= text_area_tag "people_info",(@role.people.map{|p| p.to_s}).join(";"),:class=>"ref input2" %>
+			<a href="#" class-data="Person" check-behavior="multi"><span class="reference"></span></a>			
 		</div>
 	</div>
-	<div id="seleted_menu">
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "该角色下的菜单" %>			
 		<div class="reference">
-			<%= f.hidden_field :menus,{:class=>"ref_hidden_field"}%>
-			<%= text_area_tag "menu_info",@role.menus,:class=>"ref" %>
+			<%= hidden_field_tag "menu_ids",(@role.menus.map{|m| m.id}).join("_"),{:class=>"ref_hidden_field"}%>
+			<%= text_area_tag "menu_info",(@role.menus.map{|m| m.to_s}).join(";"),:class=>"ref input2" %>
 			<a href="#" class-data="Menu" check-behavior="multi"><span class="reference"></span></a>			
 		</div>
 	</div>
-	<div id="select_person">
-		
-	</div>
-
+</div>
+</div>
 <% end %>

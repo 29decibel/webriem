@@ -76,6 +76,13 @@ class DocHeadsController < ApplicationController
   def create
     @doc_head = DocHead.new(params[:doc_head])
     @doc_head.doc_state = 0
+    @doc_head.cp_doc_remain_amount=@doc_head.total_apply_amount
+    #add the offset info
+    if params[:offset_info]
+      params[:offset_info].each_value do |value|
+        @doc_head.reim_cp_offsets.build(value)
+      end
+    end
     if @doc_head.save
       @message="创建成功"
       render "shared/show_result"
@@ -89,7 +96,14 @@ class DocHeadsController < ApplicationController
   # PUT /doc_heads/1.xml
   def update
     @doc_head = DocHead.find(params[:id])
+    #add the offset info
+    if params[:offset_info]
+      params[:offset_info].each_value do |value|
+        @doc_head.reim_cp_offsets.build(value)
+      end
+    end
     if @doc_head.update_attributes(params[:doc_head])
+      @doc_head.update_attribute(:cp_doc_remain_amount,@doc_head.total_apply_amount)
       @message="更新成功"
       if @doc_head.approver==current_user.person
         @work_flow_info=WorkFlowInfo.new
@@ -130,5 +144,14 @@ class DocHeadsController < ApplicationController
     respond_to do |format|
       format.js { render "shared/show_result"}
     end
+  end
+  #付款
+  def pay
+    #debugger
+    @doc_head=DocHead.find(params[:doc_id].to_i)
+    @doc_head.update_attribute(:paid,1)
+    #debugger
+    @message="付款成功"
+    render "shared/show_result"
   end
 end

@@ -16,14 +16,16 @@
 
 <% @results.each do |result| %>
   <tr>
-	<% if params[:bare]%>
+	
 		<td>
+			<% if params[:bare]%>
 			<%= check_box_tag 'selected', 'yes', params[:values].split('_').include?(result.id.to_s), :class => 'ref_select'%>
 			<!--hidden row store the reference info-->
 			<%= hidden_field_tag "hidden_id[#{result.id}]",result.id,{:class=>"hidden_id"} %>
 			<%= hidden_field_tag "hidden_display[#{result.id}]",result.to_s,{:class=>"hidden_display"} %>
+			<% end %>
 		</td>
-	<% end %>
+	
 	<% display_columns(@class).each do |c|%>
 		<td><%= get_display_value(result,c)%></td>
 	<% end %>

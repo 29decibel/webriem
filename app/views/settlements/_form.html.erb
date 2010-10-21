@@ -6,35 +6,22 @@
   <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', settlements_path,:class=>"button2" %>
 </div>
-<div class="field">
-	<%= f.label "编码",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :code,:class=>"basic_input "+ mark_required(@settlement, :code) %>
-		</p>
-		<p class="tip"></p>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "编码" %>			
+		<%= f.text_field :code,:class=>"input1 "+ mark_required(@settlement, :code) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "结算方式",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :name,:class=>"basic_input "+ mark_required(@settlement, :name) %>
-		</p>
-		<p class="tip"></p>
+	<div class="form_field">
+		<%= f.label "结算方式" %>
+		<%= f.text_field :name,:class=>"input1 "+ mark_required(@settlement, :name) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label "结算科目",:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :subject,:class=>"basic_input "+ mark_required(@settlement, :subject) %>
-		</p>
-		<p class="tip"></p>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "结算科目" %>			
+		<%= f.text_field :subject,:class=>"input1 "+ mark_required(@settlement, :subject) %>
 	</div>
-	<span class="error_message"></span>    
-  </div>
-
+</div>
+</div>
 <% end %>
