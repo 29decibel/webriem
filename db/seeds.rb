@@ -47,5 +47,5 @@ PersonType.create(:name=>"HR")
 PersonType.create(:name=>"出纳")
 #the default user
 if !User.find_by_name("admin")
-  User.create(:name=>"admin",:email=>"mike.d.1984@gmail.com",:password=>"admin",:password_confirmation=>"admin")
+  User.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"adminadmin",:password_confirmation=>"adminadmin")
 end
