@@ -122,6 +122,8 @@ $(function(){
 		$("input.get_fee").change();
 		//set reference readonly
 		$("input.ref").attr("readonly",true);
+		//set the fee standard readonly
+		$("input.fee_standard").attr("readonly",true);
 });
 
 function adapt_apply_amount_by_rate()
@@ -173,6 +175,8 @@ function add_fields(link, association, content) {
 	set_form_state();
 	//set reference readonly
 	$("input.ref").attr("readonly",true);
+	//set the fee standard readonly
+	$("input.fee_standard").attr("readonly",true);
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){
@@ -215,7 +219,7 @@ function pop_up_reference_window()
 		//set the id
 		$(this).siblings(".ref_hidden_field").val(returnValue.ids);
 		//fire the change event so now you can get the fee standard
-		$(this).siblings("ref").change();
+		$(this).siblings(".ref").change();
 	}
 	return false;
 }
