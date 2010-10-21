@@ -13,7 +13,11 @@ class TaskController < ApplicationController
     #where("doc_state=1 and work_flow_step_id is not null")
     #.select {|doc| doc.approver.id==current_user.person.id}
     if current_user.person
-      @docs_to_approve=DocHead.where("doc_state=1 and work_flow_step_id is not null").select {|doc| doc.approver==current_user.person}
+      if current_user.person.person_type and current_user.person.person_type.code=="CA"
+        @docs_to_approve=DocHead.where("doc_state=2 and paid is null")
+      else
+        @docs_to_approve=DocHead.where("doc_state=1 and work_flow_step_id is not null").select {|doc| doc.approver==current_user.person}
+      end
     else
       @docs_to_approve=[]
     end    

@@ -20,7 +20,7 @@
 				 ====>
 			</div>
 		<% end %>
-		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==0 %>'>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==nil %>'>
 			审批通过
 		</div>
 		<div class='work_flow_step'>
