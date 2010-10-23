@@ -47,16 +47,8 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "直属领导#{mark_required(f.object,:boss_id)}" %>			
-		<div class="reference">
-			<%= f.hidden_field :boss_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "boss_info",@person.boss.to_s,:class=>"ref" %>
-			<a href="#" class-data="Person"><span class="reference"></span></a>			
-		</div>
-	</div>
-	<div class="form_field">
 		<%= f.label "联系方式#{mark_required(f.object,:phone)}" %>
-		<%= f.text_field :phone,:class=>"input1 " %>
+		<%= f.text_field :phone,:class=>"input1 number" %>
 	</div>
 </div>
 <div class="form_block">
@@ -66,13 +58,13 @@
 	</div>
 	<div class="form_field">
 		<%= f.label "身份证号#{mark_required(f.object,:ID_card)}" %>
-		<%= f.text_field :ID_card,:class=>"input1 " %>
+		<%= f.text_field :ID_card,:class=>"input1 number" %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
 		<%= f.label "银行帐号#{mark_required(f.object,:bank_no)}" %>			
-		<%= f.text_field :bank_no,:class=>"input1 " %>
+		<%= f.text_field :bank_no,:class=>"input1 number" %>
 	</div>
 	<div class="form_field">
 		<%= f.label "开户行#{mark_required(f.object,:bank)}" %>
@@ -86,7 +78,7 @@
 	</div>
 	<div class="form_field">
 		<%= f.label "信用额度#{mark_required(f.object,:credit_limit)}" %>
-		<%= f.text_field :credit_limit,:class=>"input1 " %>
+		<%= f.text_field :credit_limit,:class=>"input1 number" %>
 	</div>
 </div>
 </div>

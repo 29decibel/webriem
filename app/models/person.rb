@@ -2,17 +2,16 @@
 class Person < ActiveRecord::Base
   belongs_to :dep, :class_name => "Dep", :foreign_key => "dep_id"
   belongs_to :duty, :class_name => "Duty", :foreign_key => "duty_id"
-  belongs_to :boss, :class_name => "Person", :foreign_key => "boss_id"
   belongs_to :role, :class_name => "Role", :foreign_key => "role_id"
   belongs_to :person_type, :class_name => "PersonType", :foreign_key => "person_type_id"
   validates_presence_of :duty_id,:name,:code,:phone,:e_mail,:ID_card,:bank_no,:bank
   validates_uniqueness_of :name,:code,:phone,:e_mail,:ID_card,:bank_no
+  validates_numericality_of :ID_card
   enum_attr :gender, [['未知',0],['男', 1], ['女', 2]]
   GENDER_HASH={0=>"未知",1=>"男",2=>"女"}
   blongs_to_name_attr :dep
   blongs_to_name_attr :duty
   blongs_to_name_attr :role
-  blongs_to_name_attr :boss
   blongs_to_name_attr :person_type
   #===================================================================================
   def self.not_display
@@ -24,7 +23,6 @@ class Person < ActiveRecord::Base
   CUSTOM_QUERY={
       'dep_id'=>{:include=>:dep,:conditions=>'deps.name like ?'},
       'duty_id'=>{:include=>:duty,:conditions=>'duties.name like ?'},
-      'boss_id'=>{:include=>:boss,:conditions=>'bosses_people.name like ?'},
       'role_id'=>{:include=>:role,:conditions=>'roles.name like ?'},
       'person_type_id'=>{:include=>:person_type,:conditions=>'person_types.name like ?'},
   }
