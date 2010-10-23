@@ -142,23 +142,39 @@ class DocHead < ActiveRecord::Base
     end
     wfs
   end
-  #这个step对应的那个人是谁
-  def approver(work_flow_step=current_work_flow_step)
-    person=nil
+  #may be one more person get back
+  def approvers(work_flow_step=current_work_flow_step)
+    persons=nil
     return nil if work_flow_step == nil
     #不是本部门的直接找
     if work_flow_step.is_self_dep==0
-      person=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id).first
+      persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
     else
       return nil if self.person==nil
       dep=self.person.dep
       while dep
-        person=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id).first
-        break if person
+        persons=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
+        break if persons
         dep=dep.parent_dep
       end
     end
-    person
+    persons
+  end
+  #the specific person if there are more than one person ,check the approver_id
+  def approver(work_flow_step=current_work_flow_step)
+    persons=approvers(work_flow_step)
+    return nil if persons==nil
+    #already apply a approver
+    if approver_id and persons.count>1
+      ap=persons.select {|p| p.id==approver_id}
+      if ap and ap.count==1
+        ap.first
+      else
+        persons.first
+      end
+    else
+      persons.first
+    end
   end
   #next step
   def next_work_flow_step

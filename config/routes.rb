@@ -11,6 +11,8 @@ Webreim::Application.routes.draw do
   post "model_search/with"
   
   get "model_search/index"
+  
+  get "doc_heads/begin_work"
 
   resources :upload_files
 
@@ -31,8 +33,6 @@ Webreim::Application.routes.draw do
   get "task/my_docs",:as=>:my_docs
   
   get "task/docs_to_approve"
-  
-  match "doc_heads/begin_work/:id"=>'docHeads#begin_work',:as=>:begin_work
   
   devise_for :users
 

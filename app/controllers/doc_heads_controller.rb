@@ -128,8 +128,9 @@ class DocHeadsController < ApplicationController
   end
   #将单据进入审批阶段
   def begin_work
-    @doc_head = DocHead.find(params[:id])
+    @doc_head = DocHead.find(params[:doc_id])
     @doc_head.doc_state=1
+    @doc_head.approver_id=params[:approver_id]
     #找到当前单据类型对应的审批流，然后取第一个流程中的那个step_id
     @doc_head.work_flow_step_id=@doc_head.work_flows.first.id
     @doc_head.save

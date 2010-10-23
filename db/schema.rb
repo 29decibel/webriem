@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101021154542) do
+ActiveRecord::Schema.define(:version => 20101023003405) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20101021154542) do
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 10, :scale => 0
     t.integer  "paid"
+    t.integer  "approver_id"
   end
 
   create_table "duties", :force => true do |t|

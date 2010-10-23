@@ -430,3 +430,7 @@ div.form_field_4_work_flow{
 div.doc_type_check{
 	display:inline-block;
 }
+/*set the approvers margin to the larger size*/
+div#approvers{
+	margin: 30px;
+}

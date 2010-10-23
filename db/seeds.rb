@@ -10,7 +10,7 @@
 Menu.delete_all
 Menu.create(:name=>'my_docs',:title=>'我的单据',:path=>'/task/my_docs',:menu_type=>1)
 Menu.create(:name=>'my_docs',:title=>'需要审批单据',:path=>'/task/docs_to_approve',:menu_type=>1)
-Menu.create(:name=>'roles',:title=>'权限设置',:path=>'/roles',:menu_type=>0)
+Menu.create(:name=>'roles',:title=>'权限设置',:path=>'/model_search/index?class_name=Role',:menu_type=>0)
 Menu.create(:name=>'deps',:title=>'部门',:path=>'/model_search/index?class_name=Dep',:menu_type=>0)
 Menu.create(:name=>'duties',:title=>'职务',:path=>'/model_search/index?class_name=Duty',:menu_type=>0)
 Menu.create(:name=>'people',:title=>'员工',:path=>'/model_search/index?class_name=Person',:menu_type=>0)

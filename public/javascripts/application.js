@@ -124,6 +124,8 @@ $(function(){
 		$("input.ref").attr("readonly",true);
 		//set the fee standard readonly
 		$("input.fee_standard").attr("readonly",true);
+		//always set the approvers not display
+		$("#approvers").css("display","none");
 });
 
 function adapt_apply_amount_by_rate()
@@ -196,6 +198,34 @@ function add_upload_files(current,path)
 function removeSelected(remove_link)
 {
 	$(remove_link).parent().find("select :selected").remove();
+}
+//=================================select the approver when in the workflow someone begin apply approve
+function select_approver_or_begin_work_flow()
+{
+	$.blockUI({ message: $('#approvers') }); 
+}
+//make a ajax request to begin the work flow
+function begin_work_flow(link)
+{
+	approver_id=$("input:checked.ref_select").siblings("#approver").val();
+	if(approver_id)
+	{
+		$.ajax({
+		  type: "GET",
+		  url: "/doc_heads/begin_work",
+		  data: "doc_id="+$("#doc_id").val()+"&approver_id="+approver_id,
+		  beforeSend: function(){
+				//fee_standard_control.val("正在获取...");
+		  },
+		  success: function(msg){
+		    //fee_standard_control.val(msg);
+		  },
+			error: function(){
+				//fee_standard_control.val("暂无*");
+			}
+		});
+	}
+	$.unblockUI();
 }
 //=======================================pop up references...........
 function pop_up_reference_window()
