@@ -54,6 +54,7 @@ function disable_all_inputs()
 	$("form.doc_head select").attr("disabled","disabled");
 	//disable link and reference
 	$('form.doc_head a.detail_link').hide();
+	$('a.cp_offset_link').hide();
 	$('form.doc_head span.reference').closest('a').hide();
 }
 
@@ -65,5 +66,6 @@ function enable_all_inputs()
 	$("form.doc_head select").removeAttr("disabled");
 	//disable link and reference
 	$('form.doc_head a.detail_link').show();
+	$('a.cp_offset_link').show();
 	$('form.doc_head span.reference').closest('a').show();
 }

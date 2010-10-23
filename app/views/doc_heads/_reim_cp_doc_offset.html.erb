@@ -29,7 +29,7 @@
 					</td>
 					<td>
 						<% if doc_offset %>
-							<%= link_to "删除原有冲抵记录",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true%>
+							<%= link_to "删除原有冲抵记录",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true,:class=>"cp_offset_link"%>
 						<% else %>
 							<%= hidden_field_tag "offset_info[#{index}][cp_doc_head_id]",doc.id%>
 						<% end %>
