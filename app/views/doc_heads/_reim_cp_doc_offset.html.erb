@@ -12,7 +12,7 @@
 		    </tr>
 	    <thead>
 		<tbody>
-			<% DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0 and doc_state=2 and paid=1",current_user.person.id).each_with_index do |doc,index|%>
+			<% doc_head.available_offset_cp_docs(current_user.person.id).each_with_index do |doc,index|%>
 			<% doc_offset=doc.offset_info(doc_head.id)%>
 				<tr>
 					<td><%= doc.doc_no%></td>

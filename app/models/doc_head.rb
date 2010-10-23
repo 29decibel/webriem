@@ -113,6 +113,10 @@ class DocHead < ActiveRecord::Base
     end
     total
   end
+  def available_offset_cp_docs(current_person_id)
+    cp_offset_docs=DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0 and doc_state=2 and paid=1",current_person_id).all
+    (cp_offset_docs+cp_docs.all).uniq
+  end
   #reciver total amount
   def reciver_amount
     total=0
