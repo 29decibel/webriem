@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101023055105) do
+ActiveRecord::Schema.define(:version => 20101024135120) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20101023055105) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "default_rate", :precision => 8, :scale => 2
   end
 
   create_table "delayed_jobs", :force => true do |t|

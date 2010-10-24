@@ -7,6 +7,7 @@
 	  <tr>
 	    <th>是否通过</th>
 	    <th>审批人</th>
+		<th>审批时间</th>
 	    <th>备注</th>
 	  </tr>
 
@@ -14,6 +15,7 @@
 	  <tr >
 	    <td><%= wf.is_ok_name %></td>
 	    <td><%= wf.person_name %></td>
+		<td><%= wf.created_at %></td>
 	    <td><%= wf.comments %></td>
 	  </tr>
 	<% end %>

@@ -19,6 +19,6 @@ class Dep < ActiveRecord::Base
   end
   #===================================================================================
   def to_s
-    "#{name};#{code}"
+    "#{code};#{name}"
   end
 end

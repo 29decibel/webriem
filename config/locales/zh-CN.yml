@@ -141,6 +141,7 @@
       currency:
         name: "名称"  
         code: "编码"
+        default_rate: "对本币默认汇率"
       budget:
         fee_id: "费用类型"
         project_id: "项目"
@@ -236,7 +237,7 @@
         person_id: "员工ID"
         note: "备注"
         apply_date: "申请日期"
-        dep_id: "部门"
+        dep_id: "申请部门"
         fee_id: "费用类型"
         created_at: "创建时间"
         updated_at: "修改时间"

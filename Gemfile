@@ -38,5 +38,5 @@ gem "paperclip"
 #group :development, :test do
 #  gem 'ruby-debug19'
 #end
-#gem "ruby-debug19"
+gem "ruby-debug19"
 

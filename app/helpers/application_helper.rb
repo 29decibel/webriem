@@ -12,8 +12,12 @@ module ApplicationHelper
     link_to_function(name,"remove_fields(this)",:class=>"detail_link")
   end
   #add fields to current form
-  def link_to_add_fields(name, f, association)
+  def link_to_add_fields(name, f, association,default_values=[])
     new_object = f.object.class.reflect_on_association(association).klass.new
+    #set the default values
+    default_values.each do |default_attr|
+      new_object.send("#{default_attr}=",f.object.send("#{default_attr}")) if f.object.respond_to? default_attr and new_object.respond_to? default_attr
+    end
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end

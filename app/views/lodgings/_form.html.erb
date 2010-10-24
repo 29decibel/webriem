@@ -3,6 +3,7 @@
 	<h3><%= @title%></h3>
 </div>
 <div class="actions">
+		<%= link_to '新增', new_lodging_path,:class=>"button2" %>
   <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to '返回', lodgings_path,:class=>"button2" %>
 </div>

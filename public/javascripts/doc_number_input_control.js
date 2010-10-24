@@ -1,5 +1,5 @@
 $(function(){
-		$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount").live("change",adjust_amount);
+	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount").live("change",adjust_amount);
 	$("input.number").numeric();
 	init_total_amount();
 	//set all apply amount readonly
@@ -18,15 +18,15 @@ function adjust_amount()
 	var current_style_class=$(this).attr("class");
 	if(current_style_class.indexOf("doc_rate")>=0)
 	{
-		$(this).closest("tr").find("input.doc_apply_amount").val(doc_rate*doc_ori_amount);
-		$(this).closest("tr").find("input.doc_HR_amount").val(doc_rate*doc_ori_amount);
-		$(this).closest("tr").find("input.doc_FI_amount").val(doc_rate*doc_ori_amount);
+		$(this).closest("tr").find("input.doc_apply_amount").val(doc_ori_amount/doc_rate);
+		$(this).closest("tr").find("input.doc_HR_amount").val(doc_ori_amount/doc_rate);
+		$(this).closest("tr").find("input.doc_FI_amount").val(doc_ori_amount/doc_rate);
 	}
 	if(current_style_class.indexOf("doc_ori_amount")>=0)
 	{
-		$(this).closest("tr").find("input.doc_apply_amount").val(doc_rate*doc_ori_amount);
-		$(this).closest("tr").find("input.doc_HR_amount").val(doc_rate*doc_ori_amount);
-		$(this).closest("tr").find("input.doc_FI_amount").val(doc_rate*doc_ori_amount);
+		$(this).closest("tr").find("input.doc_apply_amount").val(doc_ori_amount/doc_rate);
+		$(this).closest("tr").find("input.doc_HR_amount").val(doc_ori_amount/doc_rate);
+		$(this).closest("tr").find("input.doc_FI_amount").val(doc_ori_amount/doc_rate);
 	}
 	if(current_style_class.indexOf("doc_HR_amount")>=0)
 	{

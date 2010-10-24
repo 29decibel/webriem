@@ -9,9 +9,9 @@ class ModelSearchController < ApplicationController
     @class=eval(params[:class_name])
     column=params[:filter][:column_name]
     filter_text=params[:filter_text]
-    if filter_text.blank?
-      @results=@class.all
-    else
+    #filter by the pre sql para
+    @result=@class.where(params[:pre_sql]) if params[:pre_sql]
+    if !filter_text.blank?
       if @class.respond_to? :custom_query
         condition_hash=@class.custom_query(column,filter_text)
       end
@@ -31,5 +31,4 @@ class ModelSearchController < ApplicationController
       end
     end
   end
-
 end

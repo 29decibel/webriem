@@ -33,17 +33,17 @@
 			<%= f.label "附件个数" %>
 			<%= f.text_field :attach,:class=>"input1"+ mark_required(@doc_head, :attach) %>  
 		</div>
-	</div>
-	<% if @doc_head.doc_type>4 %>
+	</div>	
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "部门" %>
+			<%= f.label "申请部门" %>
 			<div class="reference">
 				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 				<%= text_field_tag "dep_info",@doc_head.dep.to_s,:class=>"ref" %>
 				<a href="#" class-data="Dep"><span class="reference"></span></a>			
 			</div>
 		</div>
+	<% if @doc_head.doc_type>4 %>
 		<div class="form_field">
 			<%= f.label "费用类型" %>
 			<div class="reference">
@@ -99,7 +99,7 @@
 				<tr>					
 					<th>序号</th>
 				    <th>申请时间</th>
-				    <th>部门</th>
+				    <th>费用承担部门</th>
 				    <th>费用类型</th>
 				    <th>项目</th>
 				    <th>费用用途</th>
@@ -116,7 +116,7 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<td colspan="8"><%= link_to_add_fields "添加明细",f,:cp_doc_details %></td>
+				<td colspan="8"><%= link_to_add_fields "添加明细",f,:cp_doc_details,[:dep] %></td>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -136,7 +136,7 @@
 				<tr>					
 					<th>序号</th>
 				    <th>申请时间</th>
-				    <th>部门</th>
+				    <th>费用承担部门</th>
 				    <th>项目</th>
 				    <th>收款内容</th>
 					<th>收款金额</th>
