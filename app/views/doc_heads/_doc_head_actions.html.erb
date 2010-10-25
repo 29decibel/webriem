@@ -4,7 +4,7 @@
 <% if !doc_head.new_record? and doc_head.doc_state==0 %>
 	<%= link_to_function "提交审批","select_approver_or_begin_work_flow()",:class=>"button2"%>
 <% end %>
-<%= link_to '撤销', "#",:class=>"button2" %>
+<%= link_to '撤销', {:controller=>"doc_heads",:action=>"giveup",:doc_id=>doc_head.id},:remote=>true,:class=>"button2" %>
 <%= link_to '打印', "#",:class=>"button2" %>
 <%= link_to '输出', "#",:class=>"button2" %>
 <%= link_to '我的单据', my_docs_path,:class=>"button2" %>
