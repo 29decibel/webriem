@@ -6,13 +6,15 @@ Webreim::Application.routes.draw do
   
   get "doc_heads/pay"
 
+  get "doc_heads/giveup"
+  
+  get "doc_heads/begin_work"
+
   resources :roles
 
   post "model_search/with"
   
   get "model_search/index"
-  
-  get "doc_heads/begin_work"
 
   resources :upload_files
 
