@@ -61,6 +61,8 @@ class DocHead < ActiveRecord::Base
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
   enum_attr :is_split, [['否', 0], ['是', 1]]
+  Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过"}
+  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"工作餐费报销",11=>"加班费报销",12=>"业务交通费报销",13=>"福利费用报销"}
   #validate the amout is ok
   validate :must_equal
   def must_equal
@@ -206,7 +208,7 @@ class DocHead < ActiveRecord::Base
     self.work_flow_step_id=-1
   end
   #==================================about filter================================
-  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split']
+  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','person_id','attach','approver_id']
   def self.not_display
     NOT_DISPLAY
   end
@@ -223,5 +225,24 @@ class DocHead < ActiveRecord::Base
     else
       nil
     end
+  end
+  def custom_display(column)
+    column_name=column.class==String ? column:column.name
+    if column_name=="doc_state"
+      return Doc_State[doc_state]
+    end
+    if column_name=="doc_type"
+      return DOC_TYPES[doc_type]
+    end
+    if column_name=="paid"
+      if paid==1
+        "已付款"
+      else
+        "未支付"
+      end
+    end
+  end
+  def self.not_search
+    ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id']
   end
 end

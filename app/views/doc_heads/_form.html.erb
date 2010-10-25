@@ -37,12 +37,9 @@
 	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "申请部门" %>
-			<div class="reference">
-				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
-			<%= f.label "部门" %>
-                        <!--样例参照-->
+            <!--样例参照-->
 			<div class="reference" data-ref-id="dep">
-				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field",:data-condition=>"dep_id="}%>
+				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 				<%= text_field_tag "dep_info",@doc_head.dep.to_s,:class=>"ref" %>
 				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
 			</div>
@@ -75,10 +72,12 @@
 				<a href="#" class-data="Project"><span class="reference"></span></a>			
 			</div>
 		</div>
-		<div class="form_field">
-			<%= f.label "是否分摊" %>
-			<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
-		</div>
+		<% if @doc_head.doc_type!=13 and @doc_head.doc_type!=1 and @doc_head.doc_type!=3 and @doc_head.doc_type!=5%>
+			<div class="form_field">
+				<%= f.label "是否分摊" %>
+				<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
+			</div>
+		<% end %>
 	</div>
 	<div class="form_block">
 		<div class="form_field">
@@ -555,7 +554,7 @@
 		<%= render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>@doc_head }  %>
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type<=3 or @doc_head.doc_type>=9 and @doc_head.doc_type<13%>
+	<% if @doc_head.doc_type<3 or @doc_head.doc_type>=9 and @doc_head.doc_type<13%>
 	<div class="form_title">
 		<h3><%= @doc_head.doc_type==2?"收款单位":"收款人"%>明细</h3>
 	</div>

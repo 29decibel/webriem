@@ -2,7 +2,7 @@ class ModelSearchController < ApplicationController
   def index
     #get the class name
     @class=eval(params[:class_name])
-    @results=params[:pre_condition]?@class.where(params[:pre_condition]): @class.scoped
+    @results=params[:pre_condition] ? @class.where(params[:pre_condition]): @class.scoped
     render :layout=>false if params[:bare]=="true"
   end
   def with

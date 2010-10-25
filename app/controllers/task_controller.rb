@@ -1,12 +1,11 @@
 #coding: utf-8
 class TaskController < ApplicationController
   def my_docs
-    #我的所有单据，可以按照状态进行过滤
-    #where("person_id=?",current_user.person.id)
     if current_user.person
-      @my_docs=DocHead.where("person_id=?",current_user.person.id)
+      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"person_id=#{current_user.person.id}",:lookup=>true,:title=>"我的单据"
+    else
+      @my_docs=[]
     end
-    @my_docs||@my_docs=[]    
   end
   def docs_to_approve
     #我的审批单据，也可以进行过滤，我作为审批角色的单据

@@ -6,12 +6,16 @@ class FeeStandard < ActiveRecord::Base
   belongs_to :lodging
   belongs_to :transportation
   belongs_to :business_type
+  belongs_to :currency
+  belongs_to :fee
   blongs_to_name_attr :business_type
   blongs_to_name_attr :project
   blongs_to_name_attr :region_type
   blongs_to_name_attr :duty
   blongs_to_name_attr :lodging
   blongs_to_name_attr :transportation
+  blongs_to_name_attr :currency
+  blongs_to_name_attr :fee
   #enum_attr :busitype,[['借款',0],['报销',1],['其他',2]]
   #===================================================================================
   CUSTOM_QUERY={
@@ -21,6 +25,8 @@ class FeeStandard < ActiveRecord::Base
       'lodging_id'=>{:include=>:lodging,:conditions=>'lodgings.name like ?'},
       'transportation_id'=>{:include=>:transportation,:conditions=>'transportations.name like ?'},
       'business_type_id'=>{:include=>:business_type,:conditions=>'business_types.name like ?'},
+      'currency_id'=>{:include=>:currency,:conditions=>'currencies.name like ?'},
+      'fee_id'=>{:include=>:fee,:conditions=>'fees.name like ?'},
   }
   def self.custom_query(column_name,filter_text)
     if CUSTOM_QUERY.has_key? column_name

@@ -64,6 +64,24 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
+		<%= f.label "币种#{mark_required(f.object,:currency_id)}" %>
+		<div class="reference">
+			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "currency_info",f.object.currency.to_s,:class=>"ref" %>
+			<a href="#" class-data="Currency"><span class="reference"></span></a>			
+		</div>
+	</div>
+	<div class="form_field">
+		<%= f.label "费用类型#{mark_required(f.object,:fee)}" %>			
+		<div class="reference">
+			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
+			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+		</div>
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
 		<%= f.label "金额#{mark_required(f.object,:amount)}" %>			
 		<%= f.text_field :amount,:class=>"input1 " %>
 	</div>

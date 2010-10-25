@@ -8,7 +8,6 @@
 	<td>
 		<div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
-			<%= debug f.object%>
 			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref" %>
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
 		</div>

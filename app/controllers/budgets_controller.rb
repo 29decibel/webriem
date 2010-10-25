@@ -3,7 +3,7 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Budget"
+    #redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Budget",:lookup=>truedfgsdfgsdfgssgsdfg
   end
 
   # GET /budgets/1

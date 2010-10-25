@@ -3,16 +3,17 @@
 		<span>过滤条件：</span>
 		<%= select("filter", "column_name", searchable_columns(@class).map {|c| [@class.human_attribute_name(c.name),c.name] } )%>
 		<%= text_field_tag "filter_text"%>
+		<!--here is the params to show the staff-->
 		<%= hidden_field_tag "class_name",@class.name%>
-		<%= link_to "过滤",{:href=>"#"},:class=>"submit button2 filter" %>
-		<% if params[:check_behavior]%>
-			<%= hidden_field_tag "multi_check"%>
+		<% params.each_key do |p|%>
+			<%= hidden_field_tag p,params[p]%>
 		<% end %>
-		<% if !params[:bare]%>
+		<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+		<%= link_to "过滤",{:href=>"#"},:class=>"submit button2 filter" %>
+		<% if params[:addable]%>
 			<%= link_to "增加#{@class.human_name}", eval("new_#{@class.name.underscore}_path"),{:class=>"button2 new_object"}%>
-		<% else %>
+		<% end %>
+		<% if params[:bare]%>
 			<%= link_to "确定",{:href=>"#"},:class=>"button2 back_to_reference" %>
-			<%= hidden_field_tag "bare"%>
-			<%= hidden_field_tag "values",params[:values]%>
 		<% end %>
 </div>

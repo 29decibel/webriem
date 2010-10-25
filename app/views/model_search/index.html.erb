@@ -10,7 +10,7 @@
 	<%= csrf_meta_tag %>
 <% end %>
 <div class="form_title">
-	<h3><%= @class.human_name %></h3>
+	<h3><%= params[:title] || @class.human_name %></h3>
 </div>
 <%= render "filter_bar",:partial=>true%>
 <div id="search_result">

@@ -127,6 +127,7 @@
       region_type: "地区级次"
       menu: "菜单设置"
       role: "角色"
+      rd_lodging: "住宿费用报销"
     attributes: 
       region_type:
         name: "名称"
@@ -169,7 +170,9 @@
         lodging_id: "住宿方式"
         transportation_id: "交通方式"
         business_type_id: "业务类型"
-        amount: "金额"      
+        amount: "金额"     
+        currency_id: "币种" 
+        fee_id: "费用类型"
       settlement:
         name: "名称"  
         code: "编码"
@@ -251,6 +254,7 @@
         apply_amount: "申请金额"
         ori_amount: "原始金额"
         real_amount: "实际金额"
+        paid: "付款状态"
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
