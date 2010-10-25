@@ -146,6 +146,17 @@ class DocHeadsController < ApplicationController
       format.js { render "shared/show_result"}
     end
   end
+  #撤销单据的审批
+  def giveup
+  	@doc_head = DocHead.find(params[:doc_id])
+  	@doc_head.doc_state=0
+  	@doc_head.approver_id=nil
+  	@doc_head.save
+  	@message="单据已经撤回，现在可以进行修改"
+    respond_to do |format|
+      format.js { render "shared/show_result"}
+    end
+  end
   #付款
   def pay
     #debugger
