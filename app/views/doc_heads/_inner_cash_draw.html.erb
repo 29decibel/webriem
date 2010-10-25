@@ -1,6 +1,6 @@
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "转出账户" %>
+		<%= f.label "提现账户" %>
 		<div class="reference">
 			<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
@@ -8,14 +8,8 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "目前账户金额",:class=>"input_label" %>
+		<%= f.label "现金余额",:class=>"input_label" %>
 		<%= f.text_field :now_remain_amout,:class=>"input1 "%>
-	</div>
-</div>
-<div class="form_block">
-	<div class="form_field">
-		<%= f.label "申请原因" %>
-		<%= f.text_area :description,:class=>"input2 " %>
 	</div>
 </div>
 <div class="form_title">
@@ -37,7 +31,10 @@
 			<% end %>				
 		</tbody>
 		<tr>
-			<th colspan="4"><%= link_to_add_fields "点击添加",f,:cash_draw_items %></th>
+			<th colspan="2"><%= link_to_add_fields "点击添加",f,:cash_draw_items %></th>
+			<td>申请金额合计</td>
+			<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
+			<td></td>
 		</tr>		
 	</table>
 </div>

@@ -39,8 +39,12 @@
 			<%= f.label "申请部门" %>
 			<div class="reference">
 				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= f.label "部门" %>
+                        <!--样例参照-->
+			<div class="reference" data-ref-id="dep">
+				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field",:data-condition=>"dep_id="}%>
 				<%= text_field_tag "dep_info",@doc_head.dep.to_s,:class=>"ref" %>
-				<a href="#" class-data="Dep"><span class="reference"></span></a>			
+				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
 			</div>
 		</div>
 	<% if @doc_head.doc_type>4 %>
