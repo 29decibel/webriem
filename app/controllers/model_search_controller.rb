@@ -20,7 +20,7 @@ class ModelSearchController < ApplicationController
         @results=@results.all(:include=>condition_hash[:include],:conditions=>[condition_hash[:conditions],"%#{filter_text}%"])
       else
         if !@class.respond_to? :custom_select
-          @results=@class.where("#{column} like ?",'%'+filter_text+'%')
+          @results=@results.where("#{column} like ?",'%'+filter_text+'%')
         end
       end
       #add another logic that custom filter,this is in use when the query has completed
