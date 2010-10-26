@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101025144730) do
+ActiveRecord::Schema.define(:version => 20101026144821) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,23 @@ ActiveRecord::Schema.define(:version => 20101025144730) do
     t.string   "used_for"
     t.decimal  "apply_amount",       :precision => 10, :scale => 0
     t.integer  "inner_cash_draw_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "common_riems", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "fee_id"
+    t.integer  "dep_id"
+    t.integer  "project_id"
+    t.string   "description"
+    t.integer  "currency_id"
+    t.decimal  "apply_amount", :precision => 8, :scale => 2
+    t.decimal  "hr_amount",    :precision => 8, :scale => 2
+    t.decimal  "fi_amount",    :precision => 8, :scale => 2
+    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.decimal  "ori_amount",   :precision => 8, :scale => 2
+    t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

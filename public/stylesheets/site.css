@@ -236,6 +236,9 @@ table.form_input input.normal{
 table.form_input input.small{
 	width:25px;
 }
+table.form_input input.large{
+	width:200px;
+}
 table.form_input th{
 	text-align: left;
 }
@@ -399,7 +402,10 @@ div.reference{
 div.reference input{
 	display:inline-block;
 	margin-right: 16px;
-	width:80px;
+	width:184px;
+}
+table div.reference input{
+	width:84px;
 }
 div.reference a{
 	display:inline-block;

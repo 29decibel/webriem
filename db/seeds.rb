@@ -27,7 +27,7 @@ Menu.create(:name=>'subjects',:title=>'科目设置',:path=>'/model_search/index
 Menu.create(:name=>'accounts',:title=>'账户设置',:path=>'/model_search/index?class_name=Account&lookup=true&addable=true&deletable=true',:menu_type=>0)
 Menu.create(:name=>'work_flows',:title=>'审批流设置',:path=>'/model_search/index?class_name=WorkFlow&lookup=true&addable=true&deletable=true',:menu_type=>0)
 #docs menu goes here
-DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"业务交通费报销",13=>"福利费用报销"}
+DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
 (1..13).each do |num|
   Menu.create(:name=>num.to_s,:title=>DOC_TYPES[num],:path=>"/doc_heads/new?doc_type=#{num}",:menu_type=>1)
 end
@@ -40,6 +40,8 @@ BusinessType.create(:name=>"其他");
 RegionType.delete_all
 RegionType.create(:name=>"一级地区");
 RegionType.create(:name=>"二级地区");
+RegionType.create(:name=>"韩国");
+RegionType.create(:name=>"海外");
 RegionType.create(:name=>"其他");
 #the default person type
 PersonType.delete_all

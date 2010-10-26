@@ -7,5 +7,6 @@ class CpDocDetail < ActiveRecord::Base
   belongs_to :currency
   def after_initialize
     self.currency=Currency.find_by_code("001")
+    self.rate=Currency.find_by_code("001").default_rate
   end
 end

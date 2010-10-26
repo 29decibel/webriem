@@ -36,6 +36,8 @@ Webreim::Application.routes.draw do
   
   get "task/docs_to_approve"
   
+  get "task/import_person"
+  
   devise_for :users
 
   resources :subjects,:currencies,:budgets,:fee_standards,:projects,:settlements,:lodgings,:transportations,:regions,:fees,:people,:duties,:deps

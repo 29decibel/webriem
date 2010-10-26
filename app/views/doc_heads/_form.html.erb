@@ -14,8 +14,8 @@
 <div class="form_area">
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "单号" %>
-			<%= f.text_field :doc_no,:class=>"input1"+ mark_required(@doc_head, :doc_no) %>
+			<%= f.label "单据号#{mark_required(f.object,:doc_no)}" %>
+			<%= f.text_field :doc_no,:class=>"input1" %>
 		</div>
 		<div class="form_field">
 			<%= f.label "申请人" %>
@@ -26,7 +26,7 @@
 	</div>
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "申请日期" %>
+			<%= f.label "申请日期#{mark_required(f.object,:apply_date)}" %>
 			<%= f.text_field :apply_date,:class=>"datepicker input1" %>
 		</div>
 		<div class="form_field">
@@ -44,26 +44,25 @@
 				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
 			</div>
 		</div>
-	<% if @doc_head.doc_type>4 %>
-		<div class="form_field">
+		<!--<div class="form_field">
 			<%= f.label "费用类型" %>
 			<div class="reference">
 				<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 				<%= text_field_tag "fee_info",@doc_head.fee.to_s,:class=>"ref" %>
 				<a href="#" class-data="Fee"><span class="reference"></span></a>			
 			</div>
-		</div>
+		</div>-->
 	</div>	
-	<% end %>
 	<% if @doc_head.doc_type==1 %>
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "剩余冲抵金额" %>
+			<%= f.label "未报账金额" %>
 			<%= f.text_field :cp_doc_remain_amount,:class=>"number input1",:readonly=>"readonly" %>
 		</div>
 	</div>	
 	<% end %>
 	<div class="form_block">
+		<% if (@doc_head.doc_type>=9 and @doc_head.doc_type<=13) or @doc_head.doc_type<=2%>
 		<div class="form_field">
 			<%= f.label "项目" %>			
 			<div class="reference">
@@ -72,7 +71,8 @@
 				<a href="#" class-data="Project"><span class="reference"></span></a>			
 			</div>
 		</div>
-		<% if @doc_head.doc_type!=13 and @doc_head.doc_type!=1 and @doc_head.doc_type!=3 and @doc_head.doc_type!=5%>
+		<% end %>
+		<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=13 %>
 			<div class="form_field">
 				<%= f.label "是否分摊" %>
 				<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
@@ -103,13 +103,11 @@
 					<th>序号</th>
 				    <th>申请时间</th>
 				    <th>费用承担部门</th>
-				    <th>费用类型</th>
-				    <th>项目</th>
 				    <th>费用用途</th>
 				    <th>币种</th>
 					<th>汇率</th>
-					<th>原币金额</th>
-					<th>申请金额</th>
+					<th>原币借款金额</th>
+					<th>本币借款金额</th>
 					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
@@ -119,7 +117,7 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<td colspan="8"><%= link_to_add_fields "添加明细",f,:cp_doc_details,[:dep] %></td>
+				<td colspan="6"><%= link_to_add_fields "添加明细",f,:cp_doc_details,[:dep] %></td>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -332,7 +330,43 @@
 		</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type==10%>
+	<% if @doc_head.doc_type==12%>
+	<div class="form_title">
+		<h3>普通费用报销明细</h3>
+	</div>
+		<div class="form_area">
+			<table class="form_input">
+				<thead>
+					<tr>	
+						<th>序号</th>
+					    <th>费用类型</th>
+					    <th>费用部门</th>
+					    <th>项目</th>
+					    <th>费用描述</th>
+						<th>币种</th>
+						<th>汇率</th>
+						<th>原币金额</th>
+						<th>本币金额</th>
+						<th>HR调整</th>
+						<th>财务调整</th>
+						<th></th><!--给删除的-->
+				    </tr>
+			    <thead>
+				<tbody>
+					<%= f.fields_for :common_riems do |builder| %>
+						<%= render :partial => 'common_riem_fields',:locals => { :f => builder } %>
+					<% end %>				
+				</tbody>
+				<tr>
+					<th colspan="9"><%= link_to_add_fields "添加普通费用报销明细",f,:common_riems %></th>
+					<td>申请金额合计</td>
+					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
+					<td></td>
+				</tr>		
+			</table>
+		</div>
+	<% end %>
+	<% if @doc_head.doc_type==10 or @doc_head.doc_type==12%>
 	<div class="form_title">
 		<h3>工作餐费明细</h3>
 	</div>
@@ -563,7 +597,9 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
+					<% if @doc_head.doc_type>=9 %>
 					<th>方向</th>
+					<% end %>
 				    <th>结算方式</th>
 				    <th><%= @doc_head.doc_type==2?"收款单位":"收款人"%></th>
 				    <th>银行</th>

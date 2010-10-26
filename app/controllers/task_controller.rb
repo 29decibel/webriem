@@ -1,4 +1,6 @@
 #coding: utf-8
+require 'rubygems'
+require 'excelsior'
 class TaskController < ApplicationController
   def my_docs
     if current_user.person
@@ -20,5 +22,11 @@ class TaskController < ApplicationController
     else
       @docs_to_approve=[]
     end    
+  end
+  def import_person
+    @rows=[]
+    Excelsior::Reader.rows(File.open("#{RAILS_ROOT}/doc/skdocs/person-Table.csv", 'rb')) do |row|
+      Person.create(:name=>row[0],:code=>row[1])
+    end
   end
 end

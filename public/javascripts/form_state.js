@@ -41,9 +41,12 @@ function set_form_state()
 	$("input.doc_apply_amount").attr("readonly","true");
 	$("input.doc_total_amount").attr("readonly","true");
 	//set number stuff
-	$("input.number").numeric();
+	$("input.number").numeric(".");
 	//always set the approvers not display
 	$("#approvers").css("display","none");
+	$('.number').change(function(){
+	  $(this).val(Number($(this).val()).toFixed(2));
+	});
 }
 
 function disable_all_inputs()

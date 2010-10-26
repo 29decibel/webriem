@@ -8,6 +8,8 @@ gem 'delayed_job','2.1.0.pre2'
 gem "pdfkit"
 # gem "will_paginate", "~> 3.0.pre2"
 gem "paperclip"
+gem "parseexcel"
+gem "excelsior"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
