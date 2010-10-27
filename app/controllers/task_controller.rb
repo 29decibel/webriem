@@ -25,8 +25,11 @@ class TaskController < ApplicationController
     @errors=[]
     #dep here------------------------------------------------------------
     Dep.delete_all
+    logger.info "#{RAILS_ROOT}/doc/skdocs/sk_dep.csv"
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_dep.csv").each_line do |line|
+  	  logger.info line
   		parts=line.split(",")
+  		logger.info line
   		#here is create a dep
   		dep= Dep.new(:u8dep_code=>parts[0].strip,:code=>parts[1].strip,:name=>parts[2].strip,:start_date=>Time.now,:end_date=>Time.new("2999-12-31"))
   		dep.parent_dep=Dep.find_by_code(parts[3].strip)
@@ -74,21 +77,18 @@ class TaskController < ApplicationController
   	Account.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_account.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		Account.create(:name=>parts[0].strip,:account_no=>parts[1].strip)
   	end
   	#create the currency
   	Currency.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_currency.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		Currency.create(:code=>parts[0].strip,:name=>parts[1].strip,:default_rate=>parts[2])
   	end
   	#create the fee
   	Fee.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_fee.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		fee=Fee.new(:code=>parts[0].strip,:name=>parts[1].strip)
   		fee.parent_fee=Fee.find_by_name(parts[3])
   		fee.save
@@ -97,14 +97,12 @@ class TaskController < ApplicationController
   	Transportation.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_transportation.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		Transportation.create(:code=>parts[0].strip,:name=>parts[1].strip)
   	end
   	#create the region type
   	RegionType.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_region_type.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		RegionType.create(:code=>parts[0].strip,:name=>parts[1].strip)
   	end
   	#create the region
