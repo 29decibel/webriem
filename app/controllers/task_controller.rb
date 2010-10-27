@@ -1,5 +1,4 @@
 #coding: utf-8
-require 'time'
 class TaskController < ApplicationController
   def my_docs
     if current_user.person
@@ -33,11 +32,11 @@ class TaskController < ApplicationController
   		logger.info line
   		#here is create a dep  		
   		dep= Dep.new
-  		dep.u8dep_code=>parts[0].strip
-  		dep.code=>parts[1].strip
-  		dep.name=>parts[2].strip
-  		dep.start_date=>Time.now
-  		dep.end_date=>Time.new("2999-12-31"))
+  		dep.u8dep_code=parts[0].strip
+  		dep.code=parts[1].strip
+  		dep.name=parts[2].strip
+  		dep.start_date=Time.now
+  		dep.end_date=Time.new("2999-12-31")
   		dep.parent_dep=Dep.find_by_code(parts[3].strip)
   		dep.save
   	end
