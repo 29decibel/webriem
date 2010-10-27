@@ -3,7 +3,7 @@ class DutiesController < ApplicationController
   # GET /duties
   # GET /duties.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Duty"
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Duty",:lookup=>true,:addable=>true,:deletable=>true
   end
 
   # GET /duties/1

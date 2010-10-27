@@ -3,7 +3,7 @@ class SettlementsController < ApplicationController
   # GET /settlements
   # GET /settlements.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Settlement"
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Settlement",:lookup=>true,:addable=>true,:deletable=>true
   end
 
   # GET /settlements/1

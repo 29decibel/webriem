@@ -2,7 +2,7 @@
 class DepsController < ApplicationController
   # GET /deps
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Dep"
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Dep",:lookup=>true,:addable=>true,:deletable=>true
   end
   
   # GET /currencies/new

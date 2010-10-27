@@ -3,7 +3,7 @@ class CurrenciesController < ApplicationController
   # GET /currencies
   # GET /currencies.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Currency"
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Currency",:lookup=>true,:addable=>true,:deletable=>true
   end
 
   # GET /currencies/1
