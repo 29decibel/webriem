@@ -28,8 +28,8 @@ class TaskController < ApplicationController
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_dep.csv").each_line do |line|
   		parts=line.split(",")
   		#here is create a dep
-  		dep= Dep.new(:u8dep_code=>parts[0],:code=>parts[1],:name=>parts[2],:start_date=>Time.now,:end_date=>Time.new("2999-12-31"))
-  		dep.parent_dep=Dep.find_by_code(parts[3])
+  		dep= Dep.new(:u8dep_code=>parts[0].strip,:code=>parts[1].strip,:name=>parts[2].strip,:start_date=>Time.now,:end_date=>Time.new("2999-12-31"))
+  		dep.parent_dep=Dep.find_by_code(parts[3].strip)
   		dep.save
   	end
   	#duty here-------------------------------------------------------
@@ -37,14 +37,14 @@ class TaskController < ApplicationController
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_duty.csv").each_line do |line|
   		parts=line.split(",")
   		#here is create a duty
-  		Duty.create(:name=>parts[1],:code=>parts[0])
+  		Duty.create(:name=>parts[1].strip,:code=>parts[0].strip)
   	end
   	#person here---------------------------------------------------
   	Person.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_person.csv").each_line do |line|
   		parts=line.split(",")
   		#here is create a person
-  		person=Person.new(:code=>parts[0],:name=>parts[1])
+  		person=Person.new(:code=>parts[0].strip,:name=>parts[1].strip)
   		#set the gender
   		if parts[2]=="男" or parts[2]=="M"
   			person.gender=1
@@ -54,13 +54,13 @@ class TaskController < ApplicationController
   			person.gender=0
   		end
   		#set the dep
-  		person.dep=Dep.find_by_code(parts[3])
-  		person.duty=Duty.find_by_code(parts[6])
-  		person.phone=parts[7]
-  		person.e_mail=parts[8]
-  		person.ID_card=parts[9]
-  		person.bank_no=parts[10]
-  		person.bank=parts[11]
+  		person.dep=Dep.find_by_code(parts[3].strip)
+  		person.duty=Duty.find_by_code(parts[6].strip)
+  		person.phone=parts[7].strip
+  		person.e_mail=parts[8].strip
+  		person.ID_card=parts[9].strip
+  		person.bank_no=parts[10].strip
+  		person.bank=parts[11].strip
   		person.save
   		@errors<<person.errors
   		#create a user
@@ -75,21 +75,21 @@ class TaskController < ApplicationController
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_account.csv").each_line do |line|
   		parts=line.split(",")
   		puts line
-  		Account.create(:name=>parts[0],:account_no=>parts[1])
+  		Account.create(:name=>parts[0].strip,:account_no=>parts[1].strip)
   	end
   	#create the currency
   	Currency.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_currency.csv").each_line do |line|
   		parts=line.split(",")
   		puts line
-  		Currency.create(:code=>parts[0],:name=>parts[1],:default_rate=>parts[2])
+  		Currency.create(:code=>parts[0].strip,:name=>parts[1].strip,:default_rate=>parts[2])
   	end
   	#create the fee
   	Fee.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_fee.csv").each_line do |line|
   		parts=line.split(",")
   		puts line
-  		fee=Fee.new(:code=>parts[0],:name=>parts[1])
+  		fee=Fee.new(:code=>parts[0].strip,:name=>parts[1].strip)
   		fee.parent_fee=Fee.find_by_name(parts[3])
   		fee.save
   	end
@@ -98,20 +98,20 @@ class TaskController < ApplicationController
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_transportation.csv").each_line do |line|
   		parts=line.split(",")
   		puts line
-  		Transportation.create(:code=>parts[0],:name=>parts[1])
+  		Transportation.create(:code=>parts[0].strip,:name=>parts[1].strip)
   	end
   	#create the region type
   	RegionType.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_region_type.csv").each_line do |line|
   		parts=line.split(",")
   		puts line
-  		RegionType.create(:code=>parts[0],:name=>parts[1])
+  		RegionType.create(:code=>parts[0].strip,:name=>parts[1].strip)
   	end
   	#create the region
   	Region.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_region.csv").each_line do |line|
   		parts=line.split(",")
-  		region=Region.new(:code=>parts[0],:name=>parts[1])
+  		region=Region.new(:code=>parts[0].strip,:name=>parts[1].strip)
   		region.region_type=RegionType.find_by_code(parts[2])
   		region.save
   	end
@@ -119,7 +119,18 @@ class TaskController < ApplicationController
   	Project.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_project.csv").each_line do |line|
   		parts=line.split(",")
-  		Project.create(:code=>parts[0],:name=>parts[1])
+  		Project.create(:code=>parts[0].strip,:name=>parts[1].strip)
   	end
+  	#create the fee standard
+  	FeeStandard.delete_all
+  	File.open("#{RAILS_ROOT}/doc/skdocs/sk_fee_standard.csv").each_line do |line|
+  		parts=line.split(",")
+  		fs=FeeStandard.new(:amount=>parts[4].to_f)
+  		fs.duty=Duty.find_by_name(parts[0].strip)
+  		fs.fee=Fee.find_by_name(parts[1].strip)
+  		fs.region_type=RegionType.find_by_name(parts[2].strip)
+  		fs.currency=Currency.find_by_code(parts[3].strip)
+  		fs.save
+  	end  	
   end
 end
