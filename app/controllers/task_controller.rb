@@ -1,6 +1,4 @@
 #coding: utf-8
-require 'rubygems'
-require 'excelsior'
 class TaskController < ApplicationController
   def my_docs
     if current_user.person
