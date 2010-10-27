@@ -6,7 +6,6 @@ class Person < ActiveRecord::Base
   belongs_to :person_type, :class_name => "PersonType", :foreign_key => "person_type_id"
   validates_presence_of :duty_id,:name,:code,:phone,:e_mail,:ID_card,:bank_no,:bank
   validates_uniqueness_of :name,:code,:phone,:e_mail,:ID_card,:bank_no
-  validates_numericality_of :ID_card
   enum_attr :gender, [['未知',0],['男', 1], ['女', 2]]
   GENDER_HASH={0=>"未知",1=>"男",2=>"女"}
   blongs_to_name_attr :dep

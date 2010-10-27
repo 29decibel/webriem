@@ -40,7 +40,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "上级部门#{mark_required(f.object,:name)}" %>			
+		<%= f.label "上级部门}" %>			
 		<div class="reference">
 			<%= f.hidden_field :parent_dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.parent_dep.to_s,:class=>"ref" %>

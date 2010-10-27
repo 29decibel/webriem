@@ -36,7 +36,7 @@ Webreim::Application.routes.draw do
   
   get "task/docs_to_approve"
   
-  get "task/import_person"
+  get "task/import"
   
   devise_for :users
 
