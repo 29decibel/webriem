@@ -28,20 +28,14 @@ class TaskController < ApplicationController
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_dep.csv").each_line do |line|
   		parts=line.split(",")
   		#here is create a dep
-  		puts line  		
   		dep= Dep.new(:u8dep_code=>parts[0],:code=>parts[1],:name=>parts[2],:start_date=>Time.now,:end_date=>Time.new("2999-12-31"))
   		dep.parent_dep=Dep.find_by_code(parts[3])
-  		if dep.save
-  		  puts "save ok..."
-		  else
-		    puts dep.errors
-	    end
+  		dep.save
   	end
   	#duty here-------------------------------------------------------
   	Duty.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_duty.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		#here is create a duty
   		Duty.create(:name=>parts[1],:code=>parts[0])
   	end
@@ -49,7 +43,6 @@ class TaskController < ApplicationController
   	Person.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_person.csv").each_line do |line|
   		parts=line.split(",")
-  		puts line
   		#here is create a person
   		person=Person.new(:code=>parts[0],:name=>parts[1])
   		#set the gender
