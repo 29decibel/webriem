@@ -31,12 +31,7 @@ class TaskController < ApplicationController
   		parts=line.split(",")
   		logger.info line
   		#here is create a dep  		
-  		dep= Dep.new
-  		dep.u8dep_code=parts[0].strip
-  		dep.code=parts[1].strip
-  		dep.name=parts[2].strip
-  		dep.start_date=Time.now
-  		dep.end_date=Time.new("2999-12-31")
+  		dep= Dep.new(:u8dep_code=>parts[0].strip,:code=>parts[1].strip,:name=>parts[2].strip,:start_date=>Time.now,:end_date=>"2999-12-31".to_date)
   		dep.parent_dep=Dep.find_by_code(parts[3].strip)
   		dep.save
   	end
