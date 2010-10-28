@@ -66,16 +66,16 @@ class TaskController < ApplicationController
   		person.bank=parts[11].strip
   		if person.valid?
   			person.save
+  			#create a user
+	  		u=User.find_by_name(person.code)
+	  		if u
+	  		  u.destroy
+			  end
+	  		User.create(:name => person.code, :email => person.e_mail, :password => "123456",:password_confirmation=>"123456")		
   		else
   			@errors<<line
   			logger.info line
   		end
-  		#create a user
-  		u=User.find_by_name(person.code)
-  		if u
-  		  u.destroy
-		  end
-  		User.create(:name => person.code, :email => person.e_mail, :password => "123456",:password_confirmation=>"123456")		
   	end
   	#create account here
   	Account.delete_all
