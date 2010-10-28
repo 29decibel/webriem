@@ -127,6 +127,11 @@ form div.form_field label{
 	width:84px;
 	text-align: right;
 }
+form div.form_field label.large{
+	display:inline-block;
+	width:120px;
+	text-align: right;
+}
 form div.form_field .input0{
 	display:inline-block;
 	width:160px;
@@ -236,8 +241,14 @@ table.form_input input.normal{
 table.form_input input.small{
 	width:25px;
 }
+table.form_input input.middle{
+	width:150px;
+}
 table.form_input input.large{
 	width:200px;
+}
+table.form_input input.large_x{
+	width:250px;
 }
 table.form_input th{
 	text-align: left;

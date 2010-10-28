@@ -17,7 +17,7 @@
 <div class="form_title">
 	<h3>添加申请条目</h3>
 </div>
-<div id="cash_draw_items">
+<div id="cash_draw_items form_block">
 	<table class="form_input">
 		<thead>
 			<tr>	
@@ -33,7 +33,7 @@
 			<% end %>				
 		</tbody>
 		<tr>
-			<th colspan="2"><%= link_to_add_fields "点击添加",f,:cash_draw_items %></th>
+			<th colspan="1"><%= link_to_add_fields "点击添加",f,:cash_draw_items %></th>
 			<td>申请金额合计</td>
 			<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 			<td></td>

@@ -6,7 +6,7 @@
 		<%= f.text_field :work_date,:class=>"datepicker normal" %>  
 	</td>
 	<td>
-		<%= f.text_field :is_sunday,:class=>"normal" %>  
+		<%= f.select :is_sunday, RdExtraWorkMeal::ENUMS_IS_SUNDAY,{},{:class=>"normal "} %>
 	</td>
 	<td>
 		<%= f.text_field :start_time,:class=>"datepicker normal" %>  

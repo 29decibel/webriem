@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101027134044) do
+ActiveRecord::Schema.define(:version => 20101028155705) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -202,9 +202,7 @@ ActiveRecord::Schema.define(:version => 20101027134044) do
   end
 
   create_table "inner_remittances", :force => true do |t|
-    t.integer  "out_account"
-    t.string   "in_account_name"
-    t.string   "in_account_no"
+    t.integer  "out_account_id"
     t.decimal  "amount",          :precision => 10, :scale => 0
     t.text     "description"
     t.decimal  "remain_amount",   :precision => 10, :scale => 0
@@ -213,10 +211,12 @@ ActiveRecord::Schema.define(:version => 20101027134044) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "currency_id"
+    t.integer  "in_account_id"
+    t.decimal  "in_amount_after", :precision => 8,  :scale => 2
   end
 
   create_table "inner_transfers", :force => true do |t|
-    t.integer  "out_account"
+    t.integer  "out_account_id"
     t.decimal  "out_amount_before", :precision => 10, :scale => 0
     t.decimal  "in_amount_before",  :precision => 10, :scale => 0
     t.decimal  "amount",            :precision => 10, :scale => 0
@@ -224,8 +224,8 @@ ActiveRecord::Schema.define(:version => 20101027134044) do
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "in_account_name"
-    t.string   "in_account_no"
+    t.integer  "in_account_id"
+    t.decimal  "in_amount_after",   :precision => 8,  :scale => 2
   end
 
   create_table "lodgings", :force => true do |t|
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(:version => 20101027134044) do
     t.decimal  "rate",         :precision => 8, :scale => 2
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 8, :scale => 2
+    t.string   "custom_place"
   end
 
   create_table "rd_transports", :force => true do |t|
@@ -412,6 +413,7 @@ ActiveRecord::Schema.define(:version => 20101027134044) do
     t.decimal  "rate",                  :precision => 8, :scale => 2
     t.integer  "currency_id"
     t.decimal  "ori_amount",            :precision => 8, :scale => 2
+    t.string   "custom_place"
   end
 
   create_table "rd_work_meals", :force => true do |t|

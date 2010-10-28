@@ -1,42 +1,44 @@
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "申请金额" %>
+		<%= f.label "申请金额" ,:class=>"large"%>
 		<%= f.text_field :amount,:class=>"input1 " %>  
 	</div>
 </div>
 <div class="form_block">
-		<div class="form_field">
-		<%= f.label "转出账户" %>
+	<div class="form_field">
+		<%= f.label "转出账户" ,:class=>"large"%>
 		<div class="reference">
-			<%= f.hidden_field :out_account,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref large" %>
+			<%= f.hidden_field :out_account_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "out_account_info",detail_doc.out_account.to_s,:class=>"ref large" %>
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "转出账户转帐前余额" %>
-		<%= f.text_field :out_amount_before,:class=>"input1 " %>  
+		<%= f.label "转出账户转帐前余额" ,:class=>"large"%>
+		<%= f.text_field :out_amount_before,:class=>"input1 number" %>  
 	</div>
-	<div class="form_field">
-		<%= f.label "转入账户转帐前余额" %>
-		<%= f.text_field :in_amount_before,:class=>"input1 " %>  
+</div>
+<div class="form_block">
+		<div class="form_field">
+		<%= f.label "转入账户" ,:class=>"large"%>
+		<div class="reference">
+			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "in_account_info",detail_doc.in_account.to_s,:class=>"ref large" %>
+			<a href="#" class-data="Account"><span class="reference"></span></a>			
+		</div>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "收款账户名称" %>
-		<%= f.text_field :in_account_name,:class=>"input1 " %>  
-	</div>
-	<div class="form_field">
-		<%= f.label "收款账户帐号" %>
-		<%= f.text_field :in_account_no,:class=>"input1 " %>
+		<%= f.label "转入账户转帐后余额" ,:class=>"large"%>
+		<%= f.text_field :in_amount_before,:class=>"input1 number" %>  
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "转帐申请原因" %>
+		<%= f.label "转帐申请原因" ,:class=>"large"%>
 		<%= f.text_area :description,:class=>"input2 " %>
 	</div>
 </div>

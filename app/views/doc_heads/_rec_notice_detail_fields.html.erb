@@ -15,7 +15,7 @@
 	<td>
 		<div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref" %>
+			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref middle" %>
 			<a href="#" class-data="Project"><span class="reference"></span></a>			
 		</div>
 	</td>
@@ -33,7 +33,7 @@
 		</div>
 	</td>
 	<td>
-		<%= f.text_field :rate,:class=>"normal" %>  
+		<%= f.text_field :rate,:class=>"small" %>  
 	</td>
 	<td>
 		<%= f.text_field :ori_amount,:class=>"normal" %>  
