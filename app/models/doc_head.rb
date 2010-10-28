@@ -164,7 +164,7 @@ class DocHead < ActiveRecord::Base
       dep=self.person.dep
       while dep
         persons=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
-        break if persons
+        break if persons.count>0
         dep=dep.parent_dep
       end
     end
