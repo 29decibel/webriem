@@ -3,11 +3,13 @@
 		<%= f.label "理财产品名称" %>
 		<%= f.text_field :name,:class=>"input1" %>  
 	</div>
+</div>
+<div class="form_block">
 	<div class="form_field">
 		<%= f.label "赎回账户" %>
 		<div class="reference">
 			<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
+			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref large" %>
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>
