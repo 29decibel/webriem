@@ -57,7 +57,7 @@ class DocHeadsController < ApplicationController
     reciver=@doc_head.recivers.build
     #init the reciver's info to current person
     reciver.bank=current_person.bank
-    reciver.ban_no=current_person.bank_no
+    reciver.bank_no=current_person.bank_no
     reciver.company=current_person.name
     if @doc_head.doc_type==1
     	reciver.direction=0
