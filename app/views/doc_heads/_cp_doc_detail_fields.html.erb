@@ -13,6 +13,13 @@
 		</div>
 	</td>
 	<td>
+		<div class="reference">
+			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref" %>
+			<a href="#" class-data="Project"><span class="reference"></span></a>			
+		</div>
+	</td>
+	<td>
 		<%= f.text_field :used_for,:class=>"normal" %>  
 	</td>
 	<td>

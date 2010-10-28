@@ -6,6 +6,10 @@
 	<td>
 		<%= f.select :direction, Reciver::ENUMS_DIRECTION,{},{:class=>"input1 "} %>
 	</td>
+	<% else %>
+	<td>
+		<%= f.hidden_field :direction %>
+	</td>
 	<% end %>
 	<td>
 		<div class="reference">
