@@ -13,7 +13,7 @@ class Person < ActiveRecord::Base
   blongs_to_name_attr :person_type
   #===================================================================================
   def self.not_display
-    ['']
+    ['end_date','credit_limit']
   end
   def self.not_search
     []
