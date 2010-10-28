@@ -3,11 +3,13 @@
 		<%= f.label "申请金额" %>
 		<%= f.text_field :amount,:class=>"input1 " %>  
 	</div>
-	<div class="form_field">
+</div>
+<div class="form_block">
+		<div class="form_field">
 		<%= f.label "转出账户" %>
 		<div class="reference">
 			<%= f.hidden_field :out_account,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref" %>
+			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref large" %>
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>

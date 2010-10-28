@@ -404,6 +404,11 @@ div.reference input{
 	margin-right: 16px;
 	width:184px;
 }
+div.reference input.large{
+	display:inline-block;
+	margin-right: 16px;
+	width:400px;
+}
 table div.reference input{
 	width:84px;
 }
