@@ -64,6 +64,7 @@ class DocHeadsController < ApplicationController
 	elsif @doc_head.doc_type==2
 		reciver.direction=1
 	end
+	reciver.settlement=Settlement.find_by_name("银行转帐")
     #build one related stuff
     @doc_head.build_inner_remittance if @doc_head.doc_type==4
     @doc_head.build_inner_transfer if @doc_head.doc_type==5
