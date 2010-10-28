@@ -27,7 +27,7 @@ class TaskController < ApplicationController
     Dep.delete_all
     logger.info "#{RAILS_ROOT}/doc/skdocs/sk_dep.csv"
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_dep.csv").each_line do |line|
-  	  logger.info line
+  	  #logger.info line
   		parts=line.split(",")
   		#here is create a dep  		
   		dep= Dep.new(:u8dep_code=>parts[0].strip,:code=>parts[1].strip,:name=>parts[2].strip,:start_date=>Time.now,:end_date=>"2999-12-31".to_date)
@@ -74,7 +74,7 @@ class TaskController < ApplicationController
 	  		User.create(:name => person.code, :email => person.e_mail, :password => "123456",:password_confirmation=>"123456")		
   		else
   			@errors<<"#{person.code}==#{person.name}==#{person.errors}"
-  			logger.info line
+  			logger.info "#{person.code}==#{person.name}==#{person.errors}"
   		end
   	end
   	#create account here
