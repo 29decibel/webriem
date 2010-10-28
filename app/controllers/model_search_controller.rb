@@ -30,7 +30,7 @@ class ModelSearchController < ApplicationController
       #add another logic that custom filter,this is in use when the query has completed
       if @class.respond_to? :custom_select
         @results=@class.custom_select(@results,filter_text)
-        logger.info "custom selcted .. result count is #{@results.count}"
+        logger.info "#{@class} custom selcted .. result count is #{@results.count}"
       end
     end
   end
