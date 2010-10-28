@@ -73,7 +73,7 @@ class TaskController < ApplicationController
 			  end
 	  		User.create(:name => person.code, :email => person.e_mail, :password => "123456",:password_confirmation=>"123456")		
   		else
-  			@errors<<line
+  			@errors<<"#{person.code}==#{person.name}==#{person.errors}"
   			logger.info line
   		end
   	end
