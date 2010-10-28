@@ -21,6 +21,7 @@ class ModelSearchController < ApplicationController
       #get the result from the custom query
       if condition_hash
         @results=@results.all(:include=>condition_hash[:include],:conditions=>[condition_hash[:conditions],"%#{filter_text}%"])
+        logger.info "now the result count is #{@results.count}"
       else
         if !@class.respond_to? :custom_select
           @results=@results.where("#{column} like ?",'%'+filter_text+'%')
@@ -29,6 +30,7 @@ class ModelSearchController < ApplicationController
       #add another logic that custom filter,this is in use when the query has completed
       if @class.respond_to? :custom_select
         @results=@class.custom_select(@results,filter_text)
+        logger.info "custom selcted .. result count is #{@results.count}"
       end
     end
   end
