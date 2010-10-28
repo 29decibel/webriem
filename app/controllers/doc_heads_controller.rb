@@ -54,7 +54,16 @@ class DocHeadsController < ApplicationController
     #build some new doc details
     @doc_head.cp_doc_details.build if @doc_head.doc_type==1 or  @doc_head.doc_type==2
     @doc_head.rec_notice_details.build if @doc_head.doc_type==3
-    @doc_head.recivers.build if @doc_head.doc_type<=3
+    reciver=@doc_head.recivers.build
+    #init the reciver's info to current person
+    reciver.bank=current_person.bank
+    reciver.ban_no=current_person.bank_no
+    reciver.company=current_person.name
+    if @doc_head.doc_type==1
+    	reciver.direction=0
+	elsif @doc_head.doc_type==2
+		reciver.direction=1
+	end
     #build one related stuff
     @doc_head.build_inner_remittance if @doc_head.doc_type==4
     @doc_head.build_inner_transfer if @doc_head.doc_type==5
