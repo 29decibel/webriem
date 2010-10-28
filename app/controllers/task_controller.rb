@@ -29,7 +29,6 @@ class TaskController < ApplicationController
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_dep.csv").each_line do |line|
   	  logger.info line
   		parts=line.split(",")
-  		logger.info line
   		#here is create a dep  		
   		dep= Dep.new(:u8dep_code=>parts[0].strip,:code=>parts[1].strip,:name=>parts[2].strip,:start_date=>Time.now,:end_date=>"2999-12-31".to_date)
   		dep.parent_dep=Dep.find_by_code(parts[3].strip)
@@ -43,6 +42,7 @@ class TaskController < ApplicationController
   		Duty.create(:name=>parts[1].strip,:code=>parts[0].strip)
   	end
   	#person here---------------------------------------------------
+  	logger.info "#{RAILS_ROOT}/doc/skdocs/sk_person.csv"
   	Person.delete_all
   	File.open("#{RAILS_ROOT}/doc/skdocs/sk_person.csv").each_line do |line|
   		parts=line.split(",")
