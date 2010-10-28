@@ -8,6 +8,12 @@
 	<% display_columns(@class).each do |c|%>
     <th><%= @class.human_attribute_name(c.name)%></th>
 	<% end %>
+	<!--here is the custom display columns-->
+	<% if @class.respond_to? "custom_display_columns"%>
+		<% @class.custom_display_columns.each_key do |key|%>
+			<th><%= key%></th>
+		<% end %>
+	<% end %>
 	<% if !params[:bare]%>
 		<th></th>
 	    <th></th>
@@ -28,6 +34,12 @@
 	
 	<% display_columns(@class).each do |c|%>
 		<td><%= get_display_value(result,c)%></td>
+	<% end %>
+	<!--here is the custom display columns-->
+	<% if @class.respond_to? "custom_display_columns"%>
+		<% @class.custom_display_columns.each do |key,value|%>
+			<th><%= @class.send(value)%></th>
+		<% end %>
 	<% end %>
 	<% if params[:lookup]%>
 	    <td class="action"><%= link_to '查看', result %></td>
