@@ -7,7 +7,6 @@ class Person < ActiveRecord::Base
   validates_presence_of :duty_id,:name,:code,:phone,:e_mail,:ID_card,:bank_no,:bank
   validates_uniqueness_of :name,:code,:phone,:e_mail,:ID_card,:bank_no
   enum_attr :gender, [['未知',0],['男', 1], ['女', 2]]
-  GENDER_HASH={0=>"未知",1=>"男",2=>"女"}
   blongs_to_name_attr :dep
   blongs_to_name_attr :duty
   blongs_to_name_attr :role
@@ -38,8 +37,12 @@ class Person < ActiveRecord::Base
       return (Person::ENUMS_GENDER.select {|g| g[1]==gender}).first[0]
     end
   end
-  def self.custom_select(results,filter_text)
-    results.select {|person| GENDER_HASH[person.gender].include? filter_text}
+  def self.custom_select(results,column_name,filter_text)
+  	if column=="gender"
+    	results.select {|person| person.custom_display.include? filter_text}
+	else
+		results
+	end
   end
   #===================================================================================
   def to_s

@@ -9,7 +9,11 @@ class WorkFlow < ActiveRecord::Base
       doc_type_names_a.join(",")
     end
   end
-  def self.custom_select(results,filter_text)
-    results.select {|work_flow| work_flow.custom_display("doc_types").include? filter_text}
+  def self.custom_select(results,column_name,filter_text)
+  	if column_name=="doc_types"
+    	results.select {|work_flow| work_flow.custom_display("doc_types").include? filter_text}
+    else
+    	results
+	end
   end
 end
