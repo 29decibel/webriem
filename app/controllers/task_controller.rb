@@ -64,8 +64,11 @@ class TaskController < ApplicationController
   		person.ID_card=parts[9].strip
   		person.bank_no=parts[10].strip
   		person.bank=parts[11].strip
-  		person.save
-  		@errors<<person.errors
+  		if person.valid?
+  			person.save
+  		else
+  			@errors<<line
+  		end
   		#create a user
   		u=User.find_by_name(person.code)
   		if u
