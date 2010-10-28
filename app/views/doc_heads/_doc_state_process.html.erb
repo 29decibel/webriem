@@ -46,7 +46,6 @@
 				<% if doc.approvers(w) %>
 					<% if doc.approver_id %>
 						<%= doc.approver(w) ? doc.approver(w).name : "请检查审批流#{w.work_flow.name}，其中的审批流程#{w.id}找不到对应的人员" %>
-						<%= debug doc.approvers(w)%>
 					<% else %>
 						<%= (doc.approvers(w).map {|a| a.name}).join("/") %>
 					<% end %>
