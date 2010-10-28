@@ -38,7 +38,7 @@ class Person < ActiveRecord::Base
     end
   end
   def self.custom_select(results,column_name,filter_text)
-  	if column=="gender"
+  	if column_name=="gender"
     	results.select {|person| person.custom_display.include? filter_text}
 	else
 		results
