@@ -16,6 +16,7 @@ class ModelSearchController < ApplicationController
     if !filter_text.blank?
       if @class.respond_to? :custom_query
         condition_hash=@class.custom_query(column,filter_text)
+        logger.info condition_hash
       end
       #get the result from the custom query
       if condition_hash
