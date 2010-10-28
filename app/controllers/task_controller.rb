@@ -68,6 +68,7 @@ class TaskController < ApplicationController
   			person.save
   		else
   			@errors<<line
+  			logger.info line
   		end
   		#create a user
   		u=User.find_by_name(person.code)
