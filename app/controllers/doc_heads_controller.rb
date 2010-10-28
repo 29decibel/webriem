@@ -59,6 +59,7 @@ class DocHeadsController < ApplicationController
     reciver.bank=current_person.bank
     reciver.bank_no=current_person.bank_no
     reciver.company=current_person.name
+    reciver.direction=0
     if @doc_head.doc_type==1
     	reciver.direction=1
 	elsif @doc_head.doc_type==2
