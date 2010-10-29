@@ -135,4 +135,9 @@ class TaskController < ApplicationController
   		fs.save
   	end  	
   end
+	#
+  def private_cmd
+  	PersonType.create(:name=>"MTA",:code=>"MTA")
+	PersonType.create(:name=>"管理担当",:code=>"MN")
+  end
 end

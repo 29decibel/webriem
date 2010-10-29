@@ -4,8 +4,12 @@
     <dict>
         <key>fileTriggers</key>
         <dict>
+            <key>routes</key>
+            <string>config\routes.rb</string>
             <key>sche</key>
             <string>db\schema.rb</string>
+            <key>seed</key>
+            <string>db\seeds.rb</string>
             <key>site</key>
             <string>public\stylesheets\site.css</string>
         </dict>

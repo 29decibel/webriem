@@ -48,6 +48,8 @@ PersonType.delete_all
 PersonType.create(:name=>"HR",:code=>"HR")
 PersonType.create(:name=>"财务主管",:code=>"FI")
 PersonType.create(:name=>"出纳",:code=>"CA")
+PersonType.create(:name=>"MTA",:code=>"MTA")
+PersonType.create(:name=>"管理担当",:code=>"MN")
 #the default user
 if !User.find_by_name("admin")
   User.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"adminadmin",:password_confirmation=>"adminadmin")

@@ -38,6 +38,8 @@ Webreim::Application.routes.draw do
   
   get "task/import"
   
+  get "task/private_cmd"
+  
   devise_for :users
 
   resources :subjects,:currencies,:budgets,:fee_standards,:projects,:settlements,:lodgings,:transportations,:regions,:fees,:people,:duties,:deps
