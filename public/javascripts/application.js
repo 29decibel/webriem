@@ -159,7 +159,9 @@ function bind_is_split_change_events()
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("true");  
     $(link).closest("tr.fields").hide(); 
-		set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
+	set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
+	//invoke the calcalate number
+	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount").change();
 }
 
 function add_fields(link, association, content) {
