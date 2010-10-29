@@ -327,7 +327,11 @@ div.work_flow_step{
 	display: inline-block;
 	margin-top: 7px;
 	margin-left: 20px;
+	padding:0px;
 }
+div.work_flow_step span{
+	margin:0px;
+}	
 div.current_flow{
 	background-color: #1F8AEE;
 	color:white;
