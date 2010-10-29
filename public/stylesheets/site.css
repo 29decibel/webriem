@@ -325,8 +325,8 @@ div#work_flow_progress span{
 }
 div.work_flow_step{	
 	display: inline-block;
-	margin-top: 7px;
-	margin-left: 15px;
+	margin-top: 0px;
+	margin-left: 7px;
 	padding:0px;
 }
 div.work_flow_step span{
@@ -340,7 +340,7 @@ div.go_to{
 	background-image: url("../images/arrow.png");
 	background-repeat:no-repeat;
 	width:30px;
-	height:20px;
+	height:13px;
 }
 /*the styles for the reim details by dropdownlist*/
 div.reim_details_by_fee_type{
