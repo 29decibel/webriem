@@ -7,7 +7,7 @@
 		<%= f.select :direction, Reciver::ENUMS_DIRECTION,{},{:class=>"input1 "} %>
 	</td>
 	<% else %>
-		<%= f.hidden_field :direction,@doc_head.doc_type<=2 ? 0:1 %>
+		<%= f.hidden_field :direction,@doc_head.doc_type<=2 ? "0" : "1" %>
 	<% end %>
 	<td>
 		<div class="reference">
