@@ -18,7 +18,7 @@
 					    </tr>
 				    <thead>
 					<tbody>
-							<% doc.approvers(doc.work_flows.first).each do |approver|%>
+							<% Person.where('duty_id=?',Duty.find_by_name("part长").id).each do |approver|%>
 								<tr>
 									<td>
 										<%= check_box_tag 'selected', 'yes', false, :class => 'ref_select'%>
