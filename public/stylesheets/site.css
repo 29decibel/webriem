@@ -329,7 +329,8 @@ div.work_flow_step{
 	margin-left: 20px;
 }
 div.current_flow{
-	background-color: green;
+	background-color: #1F8AEE;
+	color:white;
 }
 
 /*the styles for the reim details by dropdownlist*/
