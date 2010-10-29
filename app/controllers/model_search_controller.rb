@@ -37,5 +37,9 @@ class ModelSearchController < ApplicationController
         logger.info "#{@class} custom selcted .. result count is #{@results.count}"
       end
     end
+    #final filter
+    if params[:filter_method] and @class.respond_to?(params[:filter_method])
+    	@results=@class.send(params[:filter_method],@results,current_user.person)
+    end
   end
 end
