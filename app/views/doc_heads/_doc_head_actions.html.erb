@@ -1,4 +1,4 @@
-<%= link_to '新增', new_doc_head_path(:doc_type=>doc_head.doc_type),:class=>"button2" %>
+<%= link_to '新增', new_doc_head_path(:doc_type=>doc_head.doc_type),:class=>"medium button blue" %>
 <%= link_to '编辑', "#",:class=>"button2" %>
 <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 <% if !doc_head.new_record? and doc_head.doc_state==0 %>
