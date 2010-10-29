@@ -3,6 +3,10 @@ class ModelSearchController < ApplicationController
     #get the class name
     @class=eval(params[:class_name])
     @results=params[:pre_condition] ? @class.where(params[:pre_condition]): @class.scoped
+    #final filter
+    if params[:filter_method] and @class.respond_to? params[:filter_method]
+    	@results=@class.send(params[:filter_method],@results,current_user.person))
+    end
     render :layout=>false if params[:bare]=="true"
   end
   def with
@@ -31,10 +35,6 @@ class ModelSearchController < ApplicationController
       if @class.respond_to? :custom_select
         @results=@class.custom_select(@results,column,filter_text)
         logger.info "#{@class} custom selcted .. result count is #{@results.count}"
-      end
-      #final filter
-      if params[:filter_method] and @class.respond_to? params[:filter_method]
-      	@results=@class.send(params[:filter_method],@results,current_user.person))
       end
     end
   end
