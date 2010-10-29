@@ -45,12 +45,12 @@
 			<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
 				<% if doc.approvers(w) %>
 					<% if doc.approver_id %>
-						<%= doc.approver(w) ? doc.approver(w).name : "请检查审批流#{w.work_flow.name}，其中的审批流程#{w.id}找不到对应的人员" %>
+						<%= doc.approver(w) ? doc.approver(w).name : "未能确定审批人" %>
 					<% else %>
 						<%= (doc.approvers(w).map {|a| a.name}).join("/") %>
 					<% end %>
 				<% else %>
-					<%= "请检查审批流#{w.work_flow.name}，其中的审批流程#{w.id}找不到对应的人员"%>
+					<%= "未能确定审批人"%>
 				<% end %>
 			</div>
 			<div class='work_flow_step'>
