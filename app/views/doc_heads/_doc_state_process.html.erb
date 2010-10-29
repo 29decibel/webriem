@@ -39,7 +39,6 @@
 			未提交
 		</div>
 		<div class='work_flow_step go_to'>
-			 ====>
 		</div>
 		<% doc.work_flows.each do |w| %>
 			<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
@@ -54,7 +53,6 @@
 				<% end %>
 			</div>
 			<div class='work_flow_step go_to'>
-				 ====>
 			</div>
 		<% end %>
 		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==nil %>'>
