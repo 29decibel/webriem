@@ -13,9 +13,11 @@ class TaskController < ApplicationController
     #.select {|doc| doc.approver.id==current_user.person.id}
     if current_user.person
       if current_user.person.person_type and current_user.person.person_type.code=="CA"
-        @docs_to_approve=DocHead.where("doc_state=2 and paid is null")
+        #@docs_to_approve=DocHead.where("doc_state=2 and paid is null")
+        redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"doc_state=2 and paid is null",:lookup=>true,:title=>"需要付款的单据"
       else
-        @docs_to_approve=DocHead.where("doc_state=1 and work_flow_step_id is not null").select {|doc| doc.approver==current_user.person}
+      	redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"doc_state=1 and work_flow_step_id is not null",:filter_method=>"docs_to_approve",:lookup=>true,:title=>"需要审批的单据"
+        #@docs_to_approve=DocHead.where("doc_state=1 and work_flow_step_id is not null").select {|doc| doc.approver==current_user.person}
       end
     else
       @docs_to_approve=[]

@@ -254,4 +254,7 @@ class DocHead < ActiveRecord::Base
   def self.not_search
     ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id']
   end
+  def self.docs_to_approve(result,current_person)
+  	result=result.select {|doc| doc.approver==current_person}
+  end
 end
