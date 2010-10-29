@@ -36,7 +36,7 @@ function adjust_amount()
 	{}
 	//cal all amount
 	var total=0;
-	$(this).closest("table").find("input.doc_FI_amount").each(function(){
+	$(this).closest("table").find("tr").not(":hidden").find("input.doc_FI_amount").each(function(){
 		total+=parseFloat($(this).val());
 	});
 	$(this).closest("table").find("input.doc_total_amount").val(total);
