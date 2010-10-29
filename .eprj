@@ -6,6 +6,8 @@
         <dict>
             <key>sche</key>
             <string>db\schema.rb</string>
+            <key>site</key>
+            <string>public\stylesheets\site.css</string>
         </dict>
     </dict>
 </plist>
