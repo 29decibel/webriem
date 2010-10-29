@@ -1,6 +1,6 @@
 <%= link_to '新增', new_doc_head_path(:doc_type=>doc_head.doc_type),:class=>"medium button blue" %>
-<%= link_to '编辑', "#",:class=>"button2" %>
-<%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
+<%= link_to '编辑', "#",:class=>"medium button blue" %>
+<%= link_to "保存",{:href=>"#"},:class=>"submit medium button green" %>
 <% if !doc_head.new_record? and doc_head.doc_state==0 %>
 	<%= link_to_function "提交审批","select_approver_or_begin_work_flow()",:class=>"button2"%>
 <% end %>
