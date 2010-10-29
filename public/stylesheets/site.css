@@ -339,8 +339,10 @@ div.current_flow{
 div.go_to{
 	background-image: url("../images/arrow.png");
 	background-repeat:no-repeat;
-	width:30px;
+	width:16px;
 	height:13px;
+	margin-left:3px;
+	margin-right:3px;
 }
 /*the styles for the reim details by dropdownlist*/
 div.reim_details_by_fee_type{
