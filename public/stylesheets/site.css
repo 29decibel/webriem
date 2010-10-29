@@ -313,6 +313,7 @@ a:active.button2 {
 /*=================================work flow goes here==================================*/
 div#work_flow_progress{
 	position: relative;
+	float:left;
 	padding: 5px;
 	margin: 0 15px 15px 15px;
 	background-color: #E4F0F2;
@@ -328,6 +329,7 @@ div.work_flow_step{
 	margin-top: 7px;
 	margin-left: 20px;
 	padding:0px;
+	float:left;
 }
 div.work_flow_step span{
 	margin:0px;
