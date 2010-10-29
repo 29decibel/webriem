@@ -326,9 +326,8 @@ div#work_flow_progress span{
 div.work_flow_step{	
 	display: inline-block;
 	margin-top: 7px;
-	margin-left: 20px;
+	margin-left: 15px;
 	padding:0px;
-	float:left;
 }
 div.work_flow_step span{
 	margin:0px;
