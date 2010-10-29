@@ -311,12 +311,8 @@ a:active.button2 {
 	}
 
 /*=================================work flow goes here==================================*/
-div#doc_state_process{
-	position:relative;
-}
 div#work_flow_progress{
 	position: relative;
-	float:left;
 	padding: 5px;
 	margin: 0 15px 15px 15px;
 	background-color: #E4F0F2;
