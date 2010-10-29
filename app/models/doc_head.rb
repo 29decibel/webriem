@@ -164,7 +164,7 @@ class DocHead < ActiveRecord::Base
       persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
     else
       return nil if self.approver_id==nil
-      approver_person=Person.find(self.approver_id)
+      approver_person=Person.find_by_id(self.approver_id)
       return nil if approver_person==nil
       while dep
         persons=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
