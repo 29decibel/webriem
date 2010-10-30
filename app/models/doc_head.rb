@@ -130,14 +130,16 @@ class DocHead < ActiveRecord::Base
   def reciver_amount
     total=0
     recivers.each do |r|
-      r.direction==0 ? total+=r.amount : total-=r.amount
+      if doc_type>=9 and doc_type<=12
+        final_amount=r.fi_amount
+      else
+        final_amount=r.amount
+      end
+      r.direction==0 ? total+=final_amount : total-=final_amount
     end
     total
   end
   #=====================================================
-  #pages
-  cattr_reader :per_page
-  @@per_page = 5
   #校验单据必须有一个单体
   def before_save
     errors.add(:base,"aaa")

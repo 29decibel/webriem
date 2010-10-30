@@ -26,8 +26,17 @@
 		<%= f.text_field :bank_no ,:class=>"normal"%>  
 	</td>
 	<td>  
-		<%= f.text_field :amount,:class=>"normal" %>  
+		<%= f.text_field :amount,:class=>"normal doc_ori_amount" %>  
+	</td>
+	<!--riem need the hr amount and finance amount-->
+	<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=12%>
+	<td>  
+		<%= f.text_field :hr_amount,:class=>"normal number doc_HR_amount" %>  
+	</td>
+	<td>  
+		<%= f.text_field :fi_amount,:class=>"normal number doc_FI_amount" %>  
 	</td>	
+	<% end %>
 	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除", f %> 

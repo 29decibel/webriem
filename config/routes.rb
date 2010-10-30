@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :extra_work_standards
+
   get "ajax_service/getfee"
   
   get "ajax_service/remove_offset",:as=>:remove_offset
@@ -7,6 +9,10 @@ Webreim::Application.routes.draw do
   get "doc_heads/pay"
 
   get "doc_heads/giveup"
+  
+  get "doc_heads/batch_pay"
+  
+  get "doc_heads/batch_approve"
   
   get "doc_heads/begin_work"
 
@@ -35,6 +41,12 @@ Webreim::Application.routes.draw do
   get "task/my_docs",:as=>:my_docs
   
   get "task/docs_to_approve"
+  
+  get "task/docs_approved"
+  
+  get "task/docs_to_pay"
+  
+  get "task/docs_paid"
   
   get "task/import"
   

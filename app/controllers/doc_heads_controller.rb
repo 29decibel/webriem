@@ -160,6 +160,7 @@ class DocHeadsController < ApplicationController
   	@doc_head = DocHead.find(params[:doc_id])
   	@doc_head.doc_state=0
   	@doc_head.approver_id=nil
+  	@doc_head.work_flow_step_id=nil
   	@doc_head.save
   	@message="单据已经撤回，现在可以进行修改"
     respond_to do |format|
@@ -174,5 +175,37 @@ class DocHeadsController < ApplicationController
     #debugger
     @message="付款成功"
     render "shared/show_result"
+  end
+  #batch pay
+  def batch_pay
+    #get the doc ids and pay it
+    params[:doc_ids].split("_").each do |doc_id|
+      if !doc_id.blank?
+        doc_head=DocHead.find(doc_id.to_i)
+        doc_head.update_attribute(:paid,1)
+      end
+    end
+    render :json=>"批量付款成功"
+    #redirect_to :controller=>:tasks,:action=>:docs_to_pay,:notice=>"批量付款成功",:status => 301
+  end
+  #batch approve docs
+  def batch_approve
+    #create a work_flow
+    params[:doc_ids].split("_").each do |doc_id|
+      if !doc_id.blank?
+        wf=WorkFlowInfo.create(:is_ok=>params[:is_ok]=="true",:comments=>params[:comments],:doc_head_id=>doc_id,:people_id=>current_user.person.id)
+        if wf.is_ok==1
+          wf.doc_head.next_work_flow_step
+        else
+          wf.doc_head.decline
+        end
+        wf.doc_head.save
+        #send two emails
+        Delayed::Job.enqueue MailingJob.new(:notice_need_approve, wf.doc_head.approver,wf.doc_head) 
+        Delayed::Job.enqueue MailingJob.new(:notice_approver, wf.doc_head.approver,wf.doc_head)
+      end
+    end
+    render :json=>"批量审批完成"
+    #redirect_to :controller=>:tasks,:action=>:docs_to_approve,:notice=>"批量审批完成",:status => 301
   end
 end

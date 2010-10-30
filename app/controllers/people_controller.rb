@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Person",:lookup=>true,:addable=>true,:deletable=>true
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Person",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
   # GET /people/1

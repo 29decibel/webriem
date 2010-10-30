@@ -1,9 +1,16 @@
 #coding: utf-8
 class AjaxServiceController < ApplicationController
   def getfee
-    region_type_id=Region.find(params[:region_id]).region_type_id
-    fee_standard=FeeStandard.where("region_type_id=? and duty_id=?",region_type_id,params[:duty_id]).first
-    render :json=>fee_standard==nil ? "暂时没有":fee_standard.amount
+    #travel relate
+    fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and person_type_id=? and duty_id=?",params[:region_type_id],params[:fee_code],params[:pt],params[:duty_id])
+    if fee_standard.count==0
+      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and (person_type_id=? or duty_id=?)",params[:region_type_id],params[:fee_code],params[:pt],params[:duty_id])
+      if fee_standard.count==0
+        fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=?",params[:region_type_id],params[:fee_code])
+      end
+    end    
+    render :json=>fee_standard.count==0 ? "暂时没有".to_json : "#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}".to_json
+    #"#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}"
   end
   def remove_offset
     @doc_head=DocHead.find(params[:reim_doc_head_id].to_i)

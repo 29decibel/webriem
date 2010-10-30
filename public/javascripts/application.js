@@ -90,14 +90,25 @@ $(function(){
 			//select one only
 			if($("#selected_all").size()==0)
 			{
-				$(".ref_select").not($(this)).attr("checked",!$(this).is(':checked'));
+				$(".ref_select").not($(this)).attr("checked",false);
 			}
 		});
+		//observe the region type select 
+		$(".region_type_select").live("change",function(){
+			region_type= $(this).val();
+			//alert(region_type);
+			//set neib region id info
+			$(this).closest("tr").find("input#region_info").next("a").attr("pre_condition","region_type_id="+region_type);
+		});
 		//observe the region change so to calculate the fee standard
-		$("input.get_fee").live("change",function(){
+		$("input.get_fee,.region_type_select").live("change",function(){
 			//get the duty id 
 			var duty_id=$("#duty_for_fee_standard").val();
-			var region_id=$(this).siblings("input.ref_hidden_field").val();
+			//var region_id=$(this).siblings("input.ref_hidden_field").val();
+			var region_type_id=$(this).closest("tr").find(".region_type_select").val();
+			var fee_code=$(this).closest("tr").attr("fee_code");
+			//person type
+			var pt=$("#pt_for_fee_standard").val();
 			//this can be a very good find stuff pattern
 			//when you want to find something another cell
 			//first go up until find the table row and then find stuff you want within it 
@@ -106,18 +117,27 @@ $(function(){
 			$.ajax({
 			  type: "GET",
 			  url: "/ajax_service/getfee",
-			  data: "region_id="+region_id+"&duty_id="+duty_id,
+			  data: "region_type_id="+region_type_id+"&duty_id="+duty_id+"&fee_code="+fee_code+"&pt="+pt,
 			  beforeSend: function(){
 					fee_standard_control.val("正在获取...");
 			  },
 			  success: function(msg){
-			    fee_standard_control.val(msg);
+					var values=msg.split(",");
+					//set fees
+			    fee_standard_control.val(values[0]);
+					fee_standard_control.change();
+					//set currency					
+					fee_standard_control.closest("tr").find("input#currency_info").val(values[2]);
+					fee_standard_control.closest("tr").find("input#currency_info").prev().val(values[1]);
+					fee_standard_control.closest("tr").find(".doc_rate").val(values[3]);
 			  },
 				error: function(){
 					fee_standard_control.val("暂无*");
 				}
 			});
 		});
+		//fire the region type change
+		$(".region_type_select").change();
 		//fire the region change event
 		$("input.get_fee").change();
 		//set reference readonly
@@ -126,6 +146,8 @@ $(function(){
 		$("input.fee_standard").attr("readonly",true);
 		//always set the approvers not display
 		$("#approvers").css("display","none");
+		//always set the approve info form not display
+		$("#approve_info").css("display","none");
 });
 
 function adapt_apply_amount_by_rate()
@@ -233,10 +255,14 @@ function begin_work_flow(link)
 function pop_up_reference_window()
 {
 	value_now=$(this).siblings("input[type=hidden]").val() || "null";
-	path="/model_search/index?bare=true&class_name="+$(this).attr('class-data')+"&values="+value_now;
-	if($(this).attr('check-behavior'))
+	path="/model_search/index?checkable=true&ref=true&confirmable=true&class_name="+$(this).attr('class-data')+"&values="+value_now;
+	if($(this).attr('multicheck'))
 	{
-		path+="&check_behavior="+$(this).attr('check-behavior');
+		path+="&multicheck="+$(this).attr('multicheck');
+	}
+	if($(this).attr('pre_condition'))
+	{
+		path+="&pre_condition="+$(this).attr('pre_condition');
 	}
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
 
@@ -285,4 +311,75 @@ function back_to_the_reference()
 	window.returnValue=returnInfo;
 	//close the window
 	window.close();
+}
+function batch_pay()
+{
+	if($("input:checked.ref_select").size()!=0)
+	{
+		//get all doc id and invoke a ajax call
+		var doc_ids="";
+		$("input:checked.ref_select").each(function(){
+			doc_ids += $(this).siblings("input.hidden_id").val() + "_";
+		});
+		$.ajax({
+		  type: "GET",
+		  url: "/doc_heads/batch_pay",
+		  data: "doc_ids="+doc_ids,
+		  beforeSend: function(){
+				//fee_standard_control.val("正在获取...");
+				$.blockUI({ message:"付款中，请稍后..." }); 
+		  },
+		  success: function(msg){
+		    //fee_standard_control.val(msg);
+				$("a.filter").submit();
+				$.unblockUI(); 
+		  },
+			error: function(){
+				//fee_standard_control.val("暂无*");
+				$("a.filter").submit();
+				$.unblockUI();
+			}
+		});	
+	}
+}
+function batch_approve()
+{
+	if($("input:checked.ref_select").size()!=0)
+	{
+		//clear previsou value
+		$("#is_ok").attr("checked",false);
+		$("#comments").val("");
+		$.blockUI({ message: $('#approve_info') });
+	}
+}
+function batch_approve_confirm()
+{
+	//get all doc id and invoke a ajax call
+	var doc_ids="";
+	$("input:checked.ref_select").each(function(){
+		doc_ids += $(this).siblings("input.hidden_id").val() + "_";
+	});
+	var is_ok=$("#is_ok").is(':checked');
+	var comments=$("#comments").val();
+	//make a ajax call
+	$.ajax({
+	  type: "GET",
+	  url: "/doc_heads/batch_approve",
+	  data: "doc_ids="+doc_ids+"&is_ok="+is_ok+"&comments="+comments,
+	  beforeSend: function(){
+			//fee_standard_control.val("正在获取...");
+			$.blockUI({ message:"审批中，请稍后..." }); 
+	  },
+	  success: function(msg){
+	    //fee_standard_control.val(msg);
+			$("a.filter").submit();
+			$.unblockUI();
+	  },
+		error: function(){
+			//fee_standard_control.val("暂无*");
+			$("a.filter").submit();
+			$.unblockUI();
+		}
+	});
+	
 }

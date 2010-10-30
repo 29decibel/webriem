@@ -4,6 +4,7 @@ class RdTravel < ActiveRecord::Base
   belongs_to :fee_standard
   belongs_to :region
   belongs_to :currency
+  belongs_to :region_type
    def after_initialize
     self.currency=Currency.find_by_code("RMB")
     if self.currency

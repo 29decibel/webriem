@@ -13,7 +13,38 @@
 		<% if params[:addable]%>
 			<%= link_to "增加#{@class.human_name}", eval("new_#{@class.name.underscore}_path"),{:class=>"button2 new_object"}%>
 		<% end %>
-		<% if params[:bare]%>
+		<% if params[:confirmable]%>
 			<%= link_to "确定",{:href=>"#"},:class=>"button2 back_to_reference" %>
+		<% end %>
+		<% if params[:batch_pay]%>
+			<%= link_to_function "批量付款","batch_pay()",:class=>"button2" %>
+		<% end %>
+		<% if params[:batch_approve]%>
+			<%= link_to_function "批量审批","batch_approve()",:class=>"button2" %>
+			<div id="approve_info">
+				<div class="form_title">
+					<h3>填写审批意见</h3>
+				</div>
+				<div class="form_area">
+					<div class="form_block">
+						<div class="form_field">
+							<%= label_tag "是否通过"%>
+							<%= check_box_tag :is_ok,:class=>"input1" %>
+						</div>
+					</div>
+					<div class="form_block">
+						<div class="form_field">
+							<%= label_tag "审批意见"%>
+							<%= text_area_tag :comments,nil,:class=>"input2" %>
+						</div>
+					</div>
+					<div class="form_block">
+						<div class="form_field">
+							<%= link_to_function "确定","batch_approve_confirm()",:class=>"button2" %>
+							<%= link_to_function "取消","$.unblockUI()",:class=>"button2" %>
+							<%= hidden_field_tag :people_id,:value=>current_user.person.id%>
+						</div>
+					</div>
+				</div>
 		<% end %>
 </div>

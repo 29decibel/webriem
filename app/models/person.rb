@@ -13,7 +13,7 @@ class Person < ActiveRecord::Base
   blongs_to_name_attr :person_type
   #===================================================================================
   def self.not_display
-    ['end_date','credit_limit']
+    ['end_date','credit_limit','ID_card','bank_no','role_id']
   end
   def self.not_search
     []
@@ -40,9 +40,9 @@ class Person < ActiveRecord::Base
   def self.custom_select(results,column_name,filter_text)
   	if column_name=="gender"
     	results.select {|person| person.custom_display.include? filter_text}
-	else
-		results
-	end
+	  else
+		  results
+	  end
   end
   #===================================================================================
   def to_s

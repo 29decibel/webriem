@@ -3,7 +3,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Role",:lookup=>true,:addable=>true,:deletable=>true
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Role",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
   # GET /roles/1

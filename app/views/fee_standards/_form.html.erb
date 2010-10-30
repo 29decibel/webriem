@@ -85,6 +85,10 @@
 		<%= f.label "金额#{mark_required(f.object,:amount)}" %>			
 		<%= f.text_field :amount,:class=>"input1 " %>
 	</div>
+	<div class="form_field">
+		<%= f.label "人员属性#{mark_required(f.object,:person_type)}" %>
+		<%= collection_select(:fee_standard, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :person_type_id) %>
+	</div>
 </div>
 </div>
 <% end %>

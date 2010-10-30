@@ -1,9 +1,12 @@
-<tr class="fields">
+<tr class="fields" fee_code="0303">
 	<td>  
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>  
-		<%= f.text_field :days,:class=>"normal" %>  
+		<%= f.text_field :days,:class=>"normal travel_days number" %>  
+	</td>
+	<td>
+		<%= f.select :region_type_id, RegionType.all.collect{|rt|[rt.name,rt.id]},{},{:class=>"normal region_type_select "} %>
 	</td>
 	<td>  
 		<div class="reference">
@@ -22,7 +25,7 @@
 		<%= text_field_tag "fee_standard","暂无",:class=>"normal fee_standard" %>
 	</td>
 	<td>  
-		<%= f.text_field :other_fee,:class=>"normal" %>  
+		<%= f.text_field :other_fee,:class=>"normal number" %>  
 	</td>
 	<td>  
 		<%= f.text_field :other_fee_description,:class=>"normal" %>  

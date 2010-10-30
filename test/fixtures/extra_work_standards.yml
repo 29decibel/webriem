@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  larger_than_hours: 1
+  late_than_time: 1
+  is_sunday: false
+
+two:
+  larger_than_hours: 1
+  late_than_time: 1
+  is_sunday: false

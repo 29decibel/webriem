@@ -2,12 +2,20 @@ class ModelSearchController < ApplicationController
   def index
     #get the class name
     @class=eval(params[:class_name])
-    @results=params[:pre_condition] ? @class.where(params[:pre_condition]): @class.scoped
+    if params[:pre_condition]
+      if params[:joins]
+        @results=@class.joins(params[:joins].to_sym).where(params[:pre_condition])
+      else
+         @results=@class.where(params[:pre_condition])
+      end      
+    else
+      @results=@class.scoped
+    end
     #final filter
     if params[:filter_method] and @class.respond_to?(params[:filter_method])
     	@results=@class.send(params[:filter_method],@results,current_user.person)
     end
-    render :layout=>false if params[:bare]=="true"
+    render :layout=>false if !params[:layout]
   end
   def with
     @class=eval(params[:class_name])
@@ -15,8 +23,15 @@ class ModelSearchController < ApplicationController
     filter_text=params[:filter_text]
     #filter by the pre sql para
     @result=@class.where(params[:pre_sql]) if params[:pre_sql]
-    pre_condition=params[:pre_condition]
-    @results=params[:pre_condition] ? @class.where(params[:pre_condition]) : @class.scoped
+    if params[:pre_condition]
+      if params[:joins]
+        @results=@class.joins(params[:joins].to_sym).where(params[:pre_condition])
+      else
+         @results=@class.where(params[:pre_condition])
+      end      
+    else
+      @results=@class.scoped
+    end
     if !filter_text.blank?
       if @class.respond_to? :custom_query
         condition_hash=@class.custom_query(column,filter_text)

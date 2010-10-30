@@ -4,7 +4,7 @@ class WorkFlowsController < ApplicationController
   # GET /work_flows
   # GET /work_flows.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"WorkFlow",:lookup=>true,:addable=>true,:deletable=>true
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"WorkFlow",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
   # GET /work_flows/1

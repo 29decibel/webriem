@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101028155705) do
+ActiveRecord::Schema.define(:version => 20101030063454) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -162,6 +162,14 @@ ActiveRecord::Schema.define(:version => 20101028155705) do
     t.datetime "updated_at"
   end
 
+  create_table "extra_work_standards", :force => true do |t|
+    t.integer  "larger_than_hours"
+    t.integer  "late_than_time"
+    t.boolean  "is_sunday",         :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fee_standards", :force => true do |t|
     t.integer  "project_id"
     t.integer  "duty_id"
@@ -174,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20101028155705) do
     t.integer  "region_type_id"
     t.integer  "currency_id"
     t.integer  "fee_id"
+    t.integer  "person_type_id"
   end
 
   create_table "feed_backs", :force => true do |t|
@@ -366,15 +375,16 @@ ActiveRecord::Schema.define(:version => 20101028155705) do
     t.integer  "days"
     t.integer  "people_count"
     t.string   "person_names"
-    t.decimal  "apply_amount", :precision => 8, :scale => 2
-    t.decimal  "hr_amount",    :precision => 8, :scale => 2
-    t.decimal  "fi_amount",    :precision => 8, :scale => 2
+    t.decimal  "apply_amount",   :precision => 8, :scale => 2
+    t.decimal  "hr_amount",      :precision => 8, :scale => 2
+    t.decimal  "fi_amount",      :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",         :precision => 8, :scale => 2
+    t.decimal  "rate",           :precision => 8, :scale => 2
     t.integer  "currency_id"
-    t.decimal  "ori_amount",   :precision => 8, :scale => 2
+    t.decimal  "ori_amount",     :precision => 8, :scale => 2
     t.string   "custom_place"
+    t.integer  "region_type_id"
   end
 
   create_table "rd_transports", :force => true do |t|
@@ -414,6 +424,7 @@ ActiveRecord::Schema.define(:version => 20101028155705) do
     t.integer  "currency_id"
     t.decimal  "ori_amount",            :precision => 8, :scale => 2
     t.string   "custom_place"
+    t.integer  "region_type_id"
   end
 
   create_table "rd_work_meals", :force => true do |t|
@@ -461,6 +472,8 @@ ActiveRecord::Schema.define(:version => 20101028155705) do
     t.datetime "updated_at"
     t.integer  "doc_head_id"
     t.integer  "direction"
+    t.decimal  "hr_amount",     :precision => 8,  :scale => 2
+    t.decimal  "fi_amount",     :precision => 8,  :scale => 2
   end
 
   create_table "redeem_finance_products", :force => true do |t|

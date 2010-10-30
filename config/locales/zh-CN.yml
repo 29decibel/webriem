@@ -128,7 +128,12 @@
       menu: "菜单设置"
       role: "角色"
       rd_lodging: "住宿费用报销"
+      extra_work_standard: "加班费标准"
     attributes: 
+      extra_work_standard:
+        larger_than_hours: "加班时长大于"
+        late_than_time: "加班结束时间晚于"
+        is_sunday: "是否周末"
       region_type:
         name: "名称"
       role:
@@ -173,6 +178,7 @@
         amount: "金额"     
         currency_id: "币种" 
         fee_id: "费用类型"
+        person_type_id: "人员属性"
       settlement:
         name: "名称"  
         code: "编码"

@@ -22,6 +22,7 @@
 			<%= f.hidden_field :person_id %>
 			<%= @doc_head.person_name%>
 			<%= hidden_field_tag "duty_for_fee_standard",@doc_head.person.duty_id%>
+			<%= hidden_field_tag "pt_for_fee_standard",@doc_head.person.person_type_id%>
 		</div>
 	</div>
 	<div class="form_block">
@@ -230,6 +231,7 @@
 					<tr>	
 						<th>序号</th>
 					    <th>出差天数</th>
+						<th>地区级次</th>
 					    <th>出差地点</th>
 					    <th>其他地点</th>
 					    <th>出差事由</th>
@@ -251,7 +253,7 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="12"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
+					<th colspan="13"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
 					<td>申请金额合计</td>
 					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
@@ -303,6 +305,7 @@
 					<tr>					
 						<th>序号</th>
 					    <th>住宿天数</th>
+						<th>地区级次</th>
 					    <th>城市</th>
 						<th>其他城市</th>
 					    <th>住宿日期</th>
@@ -324,7 +327,7 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="12"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
+					<th colspan="13"><%= link_to_add_fields "添加住宿费",f,:rd_lodgings %></th>
 					<td>申请金额合计</td>
 					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
@@ -607,7 +610,11 @@
 				    <th><%= @doc_head.doc_type==2?"收款单位":"收款人"%></th>
 				    <th>银行</th>
 				    <th>银行帐号</th>
-				    <th>金额</th>	
+				    <th>金额</th>
+					<% if @doc_head.doc_type >=9 and @doc_head.doc_type <=12%>
+					<th>HR调整</th>
+					<th>财务调整</th>
+					<% end %>	
 					<th></th><!--给删除的-->		    
 			    </tr>
 		    <thead>

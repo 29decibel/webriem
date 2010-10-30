@@ -3,7 +3,7 @@ class LodgingsController < ApplicationController
   # GET /lodgings
   # GET /lodgings.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Lodging",:lookup=>true,:addable=>true,:deletable=>true
+    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Lodging",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
   # GET /lodgings/1

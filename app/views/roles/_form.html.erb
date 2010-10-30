@@ -20,7 +20,7 @@
 		<div class="reference">
 			<%= hidden_field_tag "people_ids",(@role.people.map{|p| p.id}).join("_"),{:class=>"ref_hidden_field"}%>
 			<%= text_area_tag "people_info",(@role.people.map{|p| p.to_s}).join(";"),:class=>"ref input2" %>
-			<a href="#" class-data="Person" check-behavior="multi"><span class="reference"></span></a>			
+			<a href="#" class-data="Person" multicheck="true"><span class="reference"></span></a>			
 		</div>
 	</div>
 </div>
@@ -30,7 +30,7 @@
 		<div class="reference">
 			<%= hidden_field_tag "menu_ids",(@role.menus.map{|m| m.id}).join("_"),{:class=>"ref_hidden_field"}%>
 			<%= text_area_tag "menu_info",(@role.menus.map{|m| m.to_s}).join(";"),:class=>"ref input2" %>
-			<a href="#" class-data="Menu" check-behavior="multi"><span class="reference"></span></a>			
+			<a href="#" class-data="Menu" multicheck="true"><span class="reference"></span></a>			
 		</div>
 	</div>
 </div>

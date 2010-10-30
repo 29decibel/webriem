@@ -1,0 +1,28 @@
+<%= form_for(@extra_work_standard,:remote=>true) do |f| %>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
+<div class="actions">
+	<%= link_to '新增', new_extra_work_standard_path,:class=>"button2" %>
+	<%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to '返回', extra_work_standards_path,:class=>"button2" %>
+</div>
+<div class="form_area">
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "加班时长大于#{mark_required(f.object,:larger_than_hours)}" %>			
+			<%= f.text_field :larger_than_hours,:class=>"input1 " %>
+		</div>
+		<div class="form_field">
+			<%= f.label "加班时间晚于#{mark_required(f.object,:late_than_time)}" %>
+			<%= f.text_field :late_than_time,:class=>"input1 " %> 
+		</div>
+	</div>
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "是否周末#{mark_required(f.object,:is_sunday)}" %>	
+			<%= f.check_box :is_sunday,:class=>"input1" %>		
+		</div>
+	</div>
+</div>
+<% end %>

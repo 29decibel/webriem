@@ -1,7 +1,7 @@
 <table class="hor-zebra">
   <tr>
 	<th>
-		<% if params[:check_behavior]%>
+		<% if params[:multicheck]%>
 			<%= check_box_tag "selected_all"%>
 		<% end %>
 	</th>
@@ -24,8 +24,8 @@
   <tr>
 	
 		<td>
-			<% if params[:bare]%>
-			<%= check_box_tag 'selected', 'yes', params[:values].split('_').include?(result.id.to_s), :class => 'ref_select'%>
+			<% if params[:checkable]%>
+			<%= check_box_tag 'selected', 'yes', params[:values] ? params[:values].split('_').include?(result.id.to_s) : false, :class => 'ref_select'%>
 			<!--hidden row store the reference info-->
 			<%= hidden_field_tag "hidden_id[#{result.id}]",result.id,{:class=>"hidden_id"} %>
 			<%= hidden_field_tag "hidden_display[#{result.id}]",result.to_s,{:class=>"hidden_display"} %>
