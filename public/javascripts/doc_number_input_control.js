@@ -2,7 +2,7 @@ $(function(){
 	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount").live("change",adjust_amount);
 	$("input.number").numeric();
 	init_total_amount();
-	$("input.travel_days,input.fee_standard").live("change",calculate_ori_amount);
+	$("input.travel_days,input.fee_standard,input.other_fee").live("change",calculate_ori_amount);
 	//set all apply amount readonly
 	//$("input.doc_apply_amount").attr("readonly",true);
 });
@@ -66,9 +66,10 @@ function init_total_amount()
 
 function calculate_ori_amount()
 {
-	var days= $(this).closest("tr").find("input.travel_days").val();
-	var fee_standard=$(this).closest("tr").find("input.fee_standard").val();
-	//alert(days+"======"+fee_standard);
-	$(this).closest("tr").find("input.doc_ori_amount").val(days*fee_standard);
+	var days= parseInt($(this).closest("tr").find("input.travel_days").val());
+	var fee_standard=parseFloat($(this).closest("tr").find("input.fee_standard").val());
+	var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
+	var total=(days*fee_standard+other_fee).toFixed(2);
+	$(this).closest("tr").find("input.doc_ori_amount").val(total);
 	$(this).closest("tr").find("input.doc_ori_amount").change();
 }
