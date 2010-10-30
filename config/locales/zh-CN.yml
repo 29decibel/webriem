@@ -134,6 +134,8 @@
         larger_than_hours: "加班时长大于"
         late_than_time: "加班结束时间晚于"
         is_sunday: "是否周末"
+        amount: "标准金额"
+        fee_id: "费用类型"
       region_type:
         name: "名称"
       role:

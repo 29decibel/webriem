@@ -3,10 +3,8 @@
 //here we bind the data picker control
 $(function(){
 	//wrap the datatime picker
-	$(".datepicker").each(
-		function(){
-			$(this).datepicker();
-			});
+	$(".datepicker").datepicker();
+	$(".datetimepicker").datetimepicker();
 	//set the error message span to none if it have no message
 	$("span.error_message").each(
 		function(){
@@ -136,6 +134,33 @@ $(function(){
 				}
 			});
 		});
+		//observe the time and get the extra work time fee
+		$(".is_sunday,.ew_b_time,.ew_e_time").live("change",function(){
+			var is_sunday=$(this).closest("tr").find(".is_sunday").val()==0;
+			var start_time=$(this).closest("tr").find(".ew_b_time").val();
+			var end_time=$(this).closest("tr").find(".ew_e_time").val();
+			var fee_code=$(this).closest("tr").attr("fee_code");
+			var extra_st_control=$(this).closest("tr").find(".extra_st");
+			if(start_time!="" && end_time!="")
+			{
+				//make a ajax call and get the fee
+				$.ajax({
+				  type: "GET",
+				  url: "/ajax_service/get_extrafee",
+				  data: "is_sunday="+is_sunday+"&start_time="+start_time+"&end_time="+end_time+"&fee_code="+fee_code,
+				  beforeSend: function(){
+						extra_st_control.val("正在获取...");
+				  },
+				  success: function(msg){
+						//set fees
+						extra_st_control.val(msg);
+				  },
+					error: function(){
+						extra_st_control.val("暂无*");
+					}
+				});
+			}
+		});
 		//fire the region type change
 		$(".region_type_select").change();
 		//fire the region change event
@@ -193,10 +218,8 @@ function add_fields(link, association, content) {
 //debugger
 	set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
 	//wrap the datatime picker
-	$(".datepicker").each(
-		function(){
-			$(this).datepicker({dateFormat: 'yy-mm-dd'});
-			});
+	$(".datepicker").datepicker();
+	$(".datetimepicker").datetimepicker();
 	//set the doc state
 	set_form_state();
 	//set reference readonly
@@ -263,6 +286,11 @@ function pop_up_reference_window()
 	if($(this).attr('pre_condition'))
 	{
 		path+="&pre_condition="+$(this).attr('pre_condition');
+	}
+	//能否在录入所有单据 参照选择“费用类型”档案时，不允许选择非末级费用类型。
+	if($(this).attr('class-data')=="Fee" && $(this).attr("self")!="true")
+	{
+		path+="&pre_condition=Length(code)>2";
 	}
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
 

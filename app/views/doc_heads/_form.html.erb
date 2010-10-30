@@ -424,6 +424,7 @@
 					<th>开始时间</th>
 				    <th>结束时间</th>
 					<th>事由</th>
+					<th>加班费标准</th>
 					<th>币种</th>
 					<th>汇率</th>
 					<th>原币金额</th>
@@ -439,7 +440,7 @@
 				<% end %>			
 			</tbody>
 			<tr>
-				<th colspan="10"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
+				<th colspan="11"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -461,6 +462,7 @@
 					<th>开始时间</th>
 				    <th>结束时间</th>
 					<th>事由</th>
+					<th>加班费标准</th>
 					<th>币种</th>
 					<th>汇率</th>
 					<th>原币金额</th>
@@ -476,7 +478,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="12"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
+				<th colspan="13"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>

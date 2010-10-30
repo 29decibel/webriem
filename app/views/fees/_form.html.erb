@@ -34,7 +34,7 @@
 		<div class="reference">
 			<%= f.hidden_field :parent_fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@fee.parent_fee.to_s,:class=>"ref" %>
-			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+			<a href="#" class-data="Fee" self="true"><span class="reference"></span></a>			
 		</div>
 	</div>
 </div>

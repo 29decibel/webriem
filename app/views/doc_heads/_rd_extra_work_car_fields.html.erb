@@ -1,4 +1,4 @@
-<tr class="fields">
+<tr class="fields" fee_code="0602">
 	<td>
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
@@ -6,7 +6,7 @@
 		<%= f.text_field :work_date,:class=>"datepicker normal" %>  
 	</td>
 	<td>
-		<%= f.select :is_sunday, RdExtraWorkCar::ENUMS_IS_SUNDAY,{},{:class=>"normal "} %>
+		<%= f.select :is_sunday, RdExtraWorkCar::ENUMS_IS_SUNDAY,{},{:class=>"normal is_sunday"} %>
 	</td>
 	<td>
 		<%= f.text_field :start_place,:class=>"normal" %>  
@@ -15,13 +15,16 @@
 		<%= f.text_field :end_place,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.text_field :start_time,:class=>"datepicker normal" %>  
+		<%= f.text_field :start_time,:class=>"datetimepicker middle ew_b_time" %>  
 	</td>
 	<td>
-		<%= f.text_field :end_time,:class=>"datepicker normal" %>  
+		<%= f.text_field :end_time,:class=>"datetimepicker middle ew_e_time" %>  
 	</td>
 	<td>
 		<%= f.text_field :reason,:class=>"normal" %>  
+	</td>
+	<td>
+		<%= text_field_tag "extra_st",nil,:class=>"normal extra_st" %>  
 	</td>
 	<td>
 		<div class="reference">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101030063454) do
+ActiveRecord::Schema.define(:version => 20101030100425) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -165,7 +165,16 @@ ActiveRecord::Schema.define(:version => 20101030063454) do
   create_table "extra_work_standards", :force => true do |t|
     t.integer  "larger_than_hours"
     t.integer  "late_than_time"
-    t.boolean  "is_sunday",         :default => false
+    t.boolean  "is_sunday",                                       :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "amount",            :precision => 8, :scale => 2
+    t.integer  "fee_id"
+  end
+
+  create_table "extra_work_types", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
