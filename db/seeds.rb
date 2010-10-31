@@ -58,19 +58,115 @@ PersonType.create(:name=>"管理担当",:code=>"MN")
 if !User.find_by_name("admin")
   User.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"adminadmin",:password_confirmation=>"adminadmin")
 end
-#set up the duty and dep
-#Duty.create(:name=>"part长1",:code=>"d001")
-#Duty.create(:name=>"part长2",:code=>"d002")
-#Duty.create(:name=>"team长1",:code=>"d003")
-#Duty.create(:name=>"team长2",:code=>"d004")
-#Duty.create(:name=>"HR",:code=>"d005")
-#Duty.create(:name=>"出纳",:code=>"d006")
-#Duty.create(:name=>"部门经理",:code=>"d007")
-#Duty.create(:name=>"研发经理",:code=>"d008")
-#set up the dep
-#Dep.create(:name=>"研发1部",:code=>"dep001")
-#Dep.create(:name=>"研发2部",:code=>"dep002")
-#Dep.create(:name=>"研发3部",:code=>"dep003")
-#Dep.create(:name=>"研发4部",:code=>"dep004")
-#Dep.create(:name=>"财务部门",:code=>"dep005")
-#Dep.create(:name=>"HR部门",:code=>"dep006")
+#import docs
+#dep here------------------------------------------------------------
+Dep.delete_all
+Rails.logger.info "#{RAILS_ROOT}/doc/skdocs/sk_dep.csv"
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_dep.csv").each_line do |line|
+  #logger.info line
+	parts=line.split(",")
+	#here is create a dep  		
+	dep= Dep.new(:u8dep_code=>parts[0].strip,:code=>parts[1].strip,:name=>parts[2].strip,:start_date=>Time.now,:end_date=>"2999-12-31".to_date)
+	dep.parent_dep=Dep.find_by_code(parts[3].strip)
+	dep.save
+end
+#duty here-------------------------------------------------------
+Duty.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_duty.csv").each_line do |line|
+	parts=line.split(",")
+	#here is create a duty
+	Duty.create(:name=>parts[1].strip,:code=>parts[0].strip)
+end
+#person here---------------------------------------------------
+Rails.logger.info "#{RAILS_ROOT}/doc/skdocs/sk_person.csv"
+Person.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_person.csv").each_line do |line|
+	parts=line.split(",")
+	#here is create a person
+	person=Person.new(:code=>parts[0].strip,:name=>parts[1].strip)
+	#set the gender
+	if parts[2]=="男" or parts[2]=="M"
+		person.gender=1
+	elsif parts[2]=="女" or parts[2]=="F"
+		person.gender=2
+	else
+		person.gender=0
+	end
+	#set the dep
+	person.dep=Dep.find_by_code(parts[3].strip)
+	person.duty=Duty.find_by_code(parts[6].strip)
+	person.phone=parts[7].strip
+	person.e_mail=parts[8].strip
+	person.ID_card=parts[9].strip
+	person.bank_no=parts[10].strip
+	person.bank=parts[11].strip
+	if person.valid?
+		person.save
+		#create a user
+		u=User.find_by_name(person.code)
+		if u
+		  u.destroy
+	  end
+		User.create(:name => person.code, :email => person.e_mail, :password => "123456",:password_confirmation=>"123456")		
+	else
+		Rails.logger.info "#{person.code}==#{person.name}==#{person.errors}"
+	end
+end
+#create account here
+Account.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_account.csv").each_line do |line|
+	parts=line.split(",")
+	Account.create(:name=>parts[0].strip,:account_no=>parts[1].strip)
+end
+#create the currency
+Currency.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_currency.csv").each_line do |line|
+	parts=line.split(",")
+	Currency.create(:code=>parts[0].strip,:name=>parts[1].strip,:default_rate=>parts[2])
+end
+#create the fee
+Fee.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_fee.csv").each_line do |line|
+	parts=line.split(",")
+	fee=Fee.new(:code=>parts[0].strip,:name=>parts[1].strip)
+	fee.parent_fee=Fee.find_by_name(parts[3])
+	fee.save
+end
+#create the transportation
+Transportation.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_transportation.csv").each_line do |line|
+	parts=line.split(",")
+	Transportation.create(:code=>parts[0].strip,:name=>parts[1].strip)
+end
+#create the region type
+RegionType.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_region_type.csv").each_line do |line|
+	parts=line.split(",")
+	RegionType.create(:code=>parts[0].strip,:name=>parts[1].strip)
+end
+#create the region
+Region.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_region.csv").each_line do |line|
+	parts=line.split(",")
+	region=Region.new(:code=>parts[0].strip,:name=>parts[1].strip)
+	region.region_type=RegionType.find_by_code(parts[2])
+	region.save
+end
+#create the project
+Project.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_project.csv").each_line do |line|
+	parts=line.split(",")
+	Project.create(:code=>parts[0].strip,:name=>parts[1].strip)
+end
+#create the fee standard
+FeeStandard.delete_all
+File.open("#{RAILS_ROOT}/doc/skdocs/sk_fee_standard.csv").each_line do |line|
+	parts=line.split(",")
+	fs=FeeStandard.new(:amount=>parts[4].to_f)
+	fs.duty=Duty.find_by_name(parts[0].strip)
+	fs.fee=Fee.find_by_name(parts[1].strip)
+	fs.region_type=RegionType.find_by_name(parts[2].strip)
+	fs.currency=Currency.find_by_code(parts[3].strip)
+	fs.save
+end
+DocHead.delete_all
