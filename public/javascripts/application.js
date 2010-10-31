@@ -80,7 +80,6 @@ $(function(){
 		//close window and back to the input
 		$("div.filter a.back_to_reference").live("click",back_to_the_reference);
 		//control the reference window's check box
-					alert("aaa");
 		$("#selected_all").live("change",function(){
 			$(".ref_select").attr("checked",$(this).is(':checked'));
 		});
