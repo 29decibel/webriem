@@ -35,5 +35,5 @@ production:
   database: webreim_production
   pool: 5
   username: root
-  password:
-  socket: /tmp/mysql.sock
+  password: china123!
+  socket: /var/run/mysqld/mysqld.sock
