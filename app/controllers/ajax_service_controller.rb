@@ -1,14 +1,19 @@
 #coding: utf-8
 class AjaxServiceController < ApplicationController
   def getfee
+    fee_standard=nil
     #travel relate
-    fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and person_type_id=? and duty_id=?",params[:region_type_id],params[:fee_code],params[:pt],params[:duty_id])
-    if fee_standard.count==0
-      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and (person_type_id=? or duty_id=?)",params[:region_type_id],params[:fee_code],params[:pt],params[:duty_id])
-      if fee_standard.count==0
-        fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and person_type_id is null and duty_id is null",params[:region_type_id],params[:fee_code])
-      end
-    end    
+    if !params[:pt].blank?
+      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and person_type_id=?",params[:region_type_id],params[:fee_code],params[:pt])
+    else
+      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and duty_id=?",params[:region_type_id],params[:fee_code],params[:duty_id])
+    end
+     #if fee_standard.count==0
+     #  fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and (person_type_id=? or duty_id=?)",params[:region_type_id],params[:fee_code],params[:pt],params[:duty_id])
+     #  if fee_standard.count==0
+     #    fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and person_type_id is null and duty_id is null",params[:region_type_id],params[:fee_code])
+     #  end
+     #end    
     render :json=>fee_standard.count==0 ? "暂时没有".to_json : "#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}".to_json
     #"#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}"
   end
