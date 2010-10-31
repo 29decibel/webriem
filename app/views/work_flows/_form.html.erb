@@ -22,6 +22,17 @@
 			</div>			
 		<% end %>
 	</div>
+	<br/>
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "申请人的职务#{mark_required(f.object,:duties)}" %>			
+			<div class="reference">
+				<%= hidden_field_tag "duty_ids",(@work_flow.duties.map{|p| p.id}).join("_"),{:class=>"ref_hidden_field"}%>
+				<%= text_area_tag "duty_info",(@work_flow.duties.map{|p| p.to_s}).join(";"),:class=>"ref input2" %>
+				<a href="#" class-data="Duty" multicheck="true"><span class="reference"></span></a>			
+			</div>
+		</div>
+	</div>
 </div>
 <div id="details">
 	<div class="table_details">

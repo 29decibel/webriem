@@ -140,13 +140,9 @@ class DocHead < ActiveRecord::Base
     total
   end
   #=====================================================
-  #校验单据必须有一个单体
-  def before_save
-    errors.add(:base,"aaa")
-  end
   #获得所有的审批流程
   def work_flows
-    wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s }
+    wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s and w.duties.include? person.duty }
     return nil if wf.count==0
     wf==nil ? []:wf.first.work_flow_steps.to_a
   end
@@ -157,41 +153,52 @@ class DocHead < ActiveRecord::Base
     end
     wfs
   end
-  #may be one more person get back
-  def approvers(work_flow_step=current_work_flow_step)
+   ##may be one more person get back
+   #def approvers(work_flow_step=current_work_flow_step)
+   #  persons=nil
+   #  return nil if work_flow_step == nil
+   #  #不是本部门的直接找
+   #  if work_flow_step.is_self_dep==0
+   #    persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
+   #  else
+   #    return nil if self.approver_id==nil
+   #    approver_person=Person.find_by_id(self.approver_id)
+   #    return nil if approver_person==nil
+   #    dep=approver_person.dep
+   #    while dep
+   #      persons=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
+   #      break if persons.count>0
+   #      dep=dep.parent_dep
+   #    end
+   #  end
+   #  persons
+   #end
+  #the specific person if there are more than one person ,check the approver_id
+  def approver(work_flow_step=current_work_flow_step)
+    return nil if work_flow_step==nil
     persons=nil
-    return nil if work_flow_step == nil
-    #不是本部门的直接找
+    dep_to_find=nil
+    #decide the dep to look for
+    if self.person.duty.code=="001" and work_flow_step.work_flow.work_flow_steps.first.duty.code=="003"
+      return nil if approver_id==nil
+      approver_person=Person.find_by_id(self.approver_id)
+      return nil if approver_person==nil
+      dep_to_find=approver_person.dep
+    else
+      dep_to_find=self.person.dep
+    end
+    #ok now we start to find that person
     if work_flow_step.is_self_dep==0
       persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
     else
-      return nil if self.approver_id==nil
-      approver_person=Person.find_by_id(self.approver_id)
-      return nil if approver_person==nil
-      dep=approver_person.dep
-      while dep
-        persons=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
+      while dep_to_find
+        persons=Person.where("dep_id=? and duty_id=?",dep_to_find.id,work_flow_step.duty_id)
         break if persons.count>0
-        dep=dep.parent_dep
+        dep_to_find=dep_to_find.parent_dep
       end
     end
-    persons
-  end
-  #the specific person if there are more than one person ,check the approver_id
-  def approver(work_flow_step=current_work_flow_step)
-    persons=approvers(work_flow_step)
-    return nil if persons==nil
-    #already apply a approver
-    if approver_id and persons.count>1
-      ap=persons.select {|p| p.id==approver_id}
-      if ap and ap.count==1
-        ap.first
-      else
-        persons.first
-      end
-    else
-      persons.first
-    end
+    #here we must find a person
+    persons.first
   end
   #next step
   def next_work_flow_step

@@ -249,12 +249,26 @@ function removeSelected(remove_link)
 //=================================select the approver when in the workflow someone begin apply approve
 function select_approver_or_begin_work_flow()
 {
-	$.blockUI({ message: $('#approvers') }); 
+	if($('#approvers').size()==0)
+	{
+		make_bwf_request(-1);
+	}
+	else
+	{
+		//decide whether should choose a person to 
+		$.blockUI({ message: $('#approvers') });
+	}
+
 }
-//make a ajax request to begin the work flow
 function begin_work_flow(link)
 {
 	approver_id=$("input:checked.ref_select").siblings("#approver").val();
+	make_bwf_request(approver_id);
+}
+
+//make a ajax request to begin the work flow
+function make_bwf_request(approver_id)
+{
 	if(approver_id)
 	{
 		$.ajax({

@@ -5,10 +5,10 @@
 		<%= hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""%>
 	<% end %>
 	<% if doc.work_flows %>
-		<% if doc.doc_state==0 %>
+		<%= hidden_field_tag "doc_id",doc.id%>
+		<% if doc.doc_state==0 and doc.person.duty.code=="001" and doc.work_flows and doc.work_flows.first and doc.work_flows.first.duty.code=="003"%>
 			<div id="approvers" class="form_area">
 				<h3>选择审批人</h3>
-				<%= hidden_field_tag "doc_id",doc.id%>
 				<table class="form_input">
 					<thead>
 						<tr>					
@@ -44,12 +44,8 @@
 		</div>
 		<% doc.work_flows.each do |w| %>
 			<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
-				<% if doc.approvers(w) %>
-					<% if doc.approver_id %>
-						<span><%= doc.approver(w) ? doc.approver(w).name : "未能确定审批人" %></span>
-					<% else %>
-						<span><%= (doc.approvers(w).map {|a| a.name}).join("/") %></span>
-					<% end %>
+				<% if doc.approver(w) %>
+					<span><%= doc.approver(w).name %></span>
 				<% else %>
 					<span><%= "未能确定审批人"%></span>
 				<% end %>

@@ -1,6 +1,7 @@
 class WorkFlow < ActiveRecord::Base
   include ApplicationHelper
   has_many :work_flow_steps, :class_name => "WorkFlowStep", :foreign_key => "work_flow_id"
+  has_and_belongs_to_many :duties
   accepts_nested_attributes_for :work_flow_steps ,:reject_if => lambda { |a| a[:duty_id].blank? }, :allow_destroy => true
   def custom_display(column)
     column_name=column.class==String ? column:column.name

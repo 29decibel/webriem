@@ -35,6 +35,10 @@ class WorkFlowsController < ApplicationController
   def create
     @work_flow = WorkFlow.new(params[:work_flow])
     update_doc_types(params[:doc_types])
+    #set the person have such a role
+    params[:duty_ids].split('_').each do |duty_id|
+      @work_flow.duties<<Duty.find(duty_id.to_i)
+    end
     #debugger
     if @work_flow.save
       @message="创建成功"
@@ -54,6 +58,11 @@ class WorkFlowsController < ApplicationController
   def update
     @work_flow = WorkFlow.find(params[:id])
     update_doc_types(params[:doc_types])
+    #set the person have such a role
+    @work_flow.duties.clear
+    params[:duty_ids].split('_').each do |duty_id|
+      @work_flow.duties<<Duty.find(duty_id.to_i)
+    end
     if @work_flow.update_attributes(params[:work_flow])
       @message="更新成功"
       render "shared/show_result"

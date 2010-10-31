@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101030100425) do
+ActiveRecord::Schema.define(:version => 20101031034015) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -158,6 +158,13 @@ ActiveRecord::Schema.define(:version => 20101030100425) do
   create_table "duties", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "duties_work_flows", :id => false, :force => true do |t|
+    t.integer  "work_flow_id"
+    t.integer  "duty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -611,6 +618,13 @@ ActiveRecord::Schema.define(:version => 20101030100425) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_user_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "work_flow_duties", :force => true do |t|
+    t.integer  "work_flow_id"
+    t.integer  "duty_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
