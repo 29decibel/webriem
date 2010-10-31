@@ -69,6 +69,8 @@ function calculate_ori_amount()
 	var days= parseInt($(this).closest("tr").find("input.travel_days").val());
 	var fee_standard=parseFloat($(this).closest("tr").find("input.fee_standard").val());
 	var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
+	if(other_fee==undefined)
+		other_fee=0;
 	var total=(days*fee_standard+other_fee).toFixed(2);
 	$(this).closest("tr").find("input.doc_ori_amount").val(total);
 	$(this).closest("tr").find("input.doc_ori_amount").change();
