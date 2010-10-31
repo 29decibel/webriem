@@ -1,5 +1,9 @@
 Webreim::Application.routes.draw do
 
+  post "common/reset_p"
+  
+  get "common/new_reset_p"
+
   resources :extra_work_standards
 
   get "ajax_service/getfee"
