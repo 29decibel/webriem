@@ -26,37 +26,43 @@ function adjust_amount()
 	{
 		setting_value=(doc_ori_amount/1).toFixed(2);
 	}
-	if(current_style_class.indexOf("doc_rate")>=0)
+	if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 	{
 		$(this).closest("tr").find("input.doc_apply_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_HR_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_FI_amount").val(setting_value);
 	}
-	if(current_style_class.indexOf("doc_ori_amount")>=0)
-	{
-			$(this).closest("tr").find("input.doc_apply_amount").val(setting_value);
-			$(this).closest("tr").find("input.doc_HR_amount").val(setting_value);
-			$(this).closest("tr").find("input.doc_FI_amount").val(setting_value);
-	}
 	if(current_style_class.indexOf("doc_HR_amount")>=0)
 	{
 		$(this).closest("tr").find("input.doc_FI_amount").val(doc_HR_amount);
 	}
-	if(current_style_class.indexOf("doc_FI_amount")>=0)
-	{}
 	//cal all amount
 	var total=0;
 	$(this).closest("table").find("tr").not(":hidden").find("input.doc_FI_amount").each(function(){
 		total+=parseFloat($(this).val());
 	});
 	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
-	//set the reciver amount
+	//set the reciver amount==============================================================
 	total_riem=0.00;
 	$("input.doc_total_amount").each(function(){
 		total_riem+=parseFloat($(this).val());
 	});
-	$("tr.reciver").find("input.doc_ori_amount").first().val(total_riem);
-	$("tr.reciver").find("input.doc_ori_amount").first().change();
+	if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
+	{
+		$("tr.reciver").find("input.doc_ori_amount").first().val(total_riem);
+		$("tr.reciver").find("input.doc_HR_amount").first().val(total_riem);
+		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);
+	}
+	if(current_style_class.indexOf("doc_HR_amount")>=0)
+	{
+		$("tr.reciver").find("input.doc_HR_amount").first().val(total_riem);
+		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);
+	}
+	if(current_style_class.indexOf("doc_FI_amount")>=0)
+	{
+		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);		
+	}
+	//======================================================================================
 }
 
 //init total amount
