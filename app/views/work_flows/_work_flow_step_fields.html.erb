@@ -1,12 +1,19 @@
 <tr class="fields">
 	<td>
-		<%= f.select(:dep_id,  Dep.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
-	</td> 
-	<td>
-		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input "} %>
+		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input is_self_dep"} %>
 	</td>
 	<td>
-		<%= f.select(:duty_id,  Duty.all.collect {|s| [ s.name, s.id ] },{:include_blank => '无'},{:class=>"basic_input"})%>
+		<div class="reference dep">
+			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref" %>
+			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+		</div>
+	<td>		
+		<div class="reference">
+			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "duty_info",f.object.duty.to_s,:class=>"ref" %>
+			<a href="#" class-data="Duty"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
 		<%= f.text_field :max_amount,:class=>"basic_input" %>元

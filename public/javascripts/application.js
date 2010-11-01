@@ -173,6 +173,19 @@ $(function(){
 		$("#approvers").css("display","none");
 		//always set the approve info form not display
 		$("#approve_info").css("display","none");
+		//for the work flow page
+		$("input.is_self_dep").live("change",function(){
+			if($(this).val()==0)
+			{
+				$(this).closest("tr").find("div.dep input").removeAttr("disabled");
+				$(this).closest("tr").find("div.dep a").show();
+			}
+			else
+			{
+				$(this).closest("tr").find("div.dep input").attr("readonly","true");
+				$(this).closest("tr").find("div.dep a").hide();
+			}
+		});
 });
 
 function adapt_apply_amount_by_rate()
