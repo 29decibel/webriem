@@ -56,6 +56,7 @@ function adjust_amount()
 		total_riem+=parseFloat($(this).val());
 	});
 	$("tr.reciver").find("input.doc_ori_amount").first().val(total_riem);
+	$("tr.reciver").find("input.doc_ori_amount").first().change();
 }
 
 //init total amount
