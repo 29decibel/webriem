@@ -21,7 +21,7 @@
 	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "加班时长大于#{mark_required(f.object,:larger_than_hours)}" %>			
-			<%= f.text_field :larger_than_hours,:class=>"input1 " %>
+			<%= f.text_field :larger_than_hours,:class=>"input1 number" %>
 		</div>
 		<div class="form_field">
 			<%= f.label "加班时间晚于#{mark_required(f.object,:late_than_time)}" %>

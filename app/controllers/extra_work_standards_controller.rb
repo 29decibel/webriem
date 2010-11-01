@@ -38,7 +38,7 @@ class ExtraWorkStandardsController < ApplicationController
       render "shared/show_result"
     else
       #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@duty)}
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@extra_work_standard)}
     end
   end
 

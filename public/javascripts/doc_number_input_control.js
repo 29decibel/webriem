@@ -5,6 +5,8 @@ $(function(){
 	$("input.travel_days,input.fee_standard,input.other_fee").live("change",calculate_ori_amount);
 	//set all apply amount readonly
 	//$("input.doc_apply_amount").attr("readonly",true);
+	$("input.split_percent").live("change",set_split_percent_amount);
+	$("input.split_percent").change();
 });
 //$("input.doc_apply_amount").attr("readonly","readonly");
 function adjust_amount()
@@ -63,6 +65,22 @@ function adjust_amount()
 		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);		
 	}
 	//======================================================================================
+	if($("div.is_split_reim").size()==1)
+	{
+		set_split_percent_amount();
+	}
+}
+
+function set_split_percent_amount()
+{
+	//get total amount
+	total_riem=0.00;
+	$("input.doc_total_amount").each(function(){
+		total_riem+=parseFloat($(this).val());
+	});
+	$("div.is_split_reim table tr").not(":hidden").find("input.split_percent").each(function(){
+		$(this).closest("tr").find("input.percent_amount").val($(this).val()*total_riem/100);
+	});
 }
 
 //init total amount

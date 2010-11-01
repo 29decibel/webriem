@@ -24,7 +24,10 @@
 		</div>
 	</td>
 	<td>
-		<%= f.text_field :percent,:class=>"normal" %>  
+		<%= f.text_field :percent,:class=>"normal split_percent" %>%  
+	</td>
+	<td>
+		<%= text_field_tag "percent_amount",0,:class=>"normal percent_amount" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>

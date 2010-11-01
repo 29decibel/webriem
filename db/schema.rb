@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101031034015) do
+ActiveRecord::Schema.define(:version => 20101101144708) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -170,13 +170,13 @@ ActiveRecord::Schema.define(:version => 20101031034015) do
   end
 
   create_table "extra_work_standards", :force => true do |t|
-    t.integer  "larger_than_hours"
     t.integer  "late_than_time"
     t.boolean  "is_sunday",                                       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "amount",            :precision => 8, :scale => 2
     t.integer  "fee_id"
+    t.decimal  "larger_than_hours", :precision => 8, :scale => 2
   end
 
   create_table "extra_work_types", :force => true do |t|
@@ -387,7 +387,6 @@ ActiveRecord::Schema.define(:version => 20101031034015) do
     t.integer  "sequence"
     t.integer  "doc_head_id"
     t.integer  "region_id"
-    t.date     "lodging_date"
     t.integer  "days"
     t.integer  "people_count"
     t.string   "person_names"
@@ -401,6 +400,9 @@ ActiveRecord::Schema.define(:version => 20101031034015) do
     t.decimal  "ori_amount",     :precision => 8, :scale => 2
     t.string   "custom_place"
     t.integer  "region_type_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.decimal  "st_amount",      :precision => 8, :scale => 2
   end
 
   create_table "rd_transports", :force => true do |t|
@@ -427,7 +429,6 @@ ActiveRecord::Schema.define(:version => 20101031034015) do
     t.integer  "days"
     t.integer  "region_id"
     t.string   "reason"
-    t.integer  "fee_standard_id"
     t.string   "other_fee"
     t.string   "other_fee_description"
     t.decimal  "apply_amount",          :precision => 8, :scale => 2
@@ -441,6 +442,7 @@ ActiveRecord::Schema.define(:version => 20101031034015) do
     t.decimal  "ori_amount",            :precision => 8, :scale => 2
     t.string   "custom_place"
     t.integer  "region_type_id"
+    t.decimal  "st_amount",             :precision => 8, :scale => 2
   end
 
   create_table "rd_work_meals", :force => true do |t|

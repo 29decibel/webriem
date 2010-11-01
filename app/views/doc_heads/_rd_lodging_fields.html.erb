@@ -3,6 +3,12 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>
+		<%= f.text_field :start_date,:class=>"datepicker normal" %>  
+	</td>
+	<td>
+		<%= f.text_field :end_date,:class=>"datepicker normal" %>  
+	</td>
+	<td>
 		<%= f.text_field :days,:class=>"normal number" %>  
 	</td>
 	<td>
@@ -19,10 +25,7 @@
 		<%= f.text_field :custom_place,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.text_field :lodging_date,:class=>"datepicker normal" %>  
-	</td>
-	<td>
-		<%= text_field_tag "fee_standard","暂无",:class=>"normal fee_standard" %>
+		<%= f.text_field :st_amount,:class=>"normal fee_standard" %>
 	</td>
 	<td>
 		<%= f.text_field :people_count,:class=>"normal" %>  

@@ -16,6 +16,12 @@
 		<% if params[:confirmable]%>
 			<%= link_to "确定",{:href=>"#"},:class=>"button2 back_to_reference" %>
 		<% end %>
+		<% if params[:outputable]%>
+			<%= link_to "输出",{:href=>"#"},:class=>"button2" %>
+		<% end %>
+		<% if params[:printable]%>
+			<%= link_to "打印",{:href=>"#"},:class=>"button2" %>
+		<% end %>		
 		<% if params[:batch_pay]%>
 			<%= link_to_function "批量付款","batch_pay()",:class=>"button2" %>
 		<% end %>
