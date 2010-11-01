@@ -66,7 +66,7 @@
 		<% if (@doc_head.doc_type>=9 and @doc_head.doc_type<=13)%>
 		<div class="form_field">
 			<%= f.label "项目" %>			
-			<div class="reference">
+			<div class="reference project">
 				<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 				<%= text_field_tag "project_info",@doc_head.project.to_s,:class=>"ref" %>
 				<a href="#" class-data="Project"><span class="reference"></span></a>			
