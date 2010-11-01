@@ -57,13 +57,13 @@
 	<% if @doc_head.doc_type==1 %>
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "未报销金额" %>
+			<%= f.label "借款余额" %>
 			<%= f.text_field :cp_doc_remain_amount,:class=>"number input1",:readonly=>"readonly" %>
 		</div>
 	</div>	
 	<% end %>
 	<div class="form_block">
-		<% if (@doc_head.doc_type>=9 and @doc_head.doc_type<=13) or @doc_head.doc_type<=2%>
+		<% if (@doc_head.doc_type>=9 and @doc_head.doc_type<=13)%>
 		<div class="form_field">
 			<%= f.label "项目" %>			
 			<div class="reference">

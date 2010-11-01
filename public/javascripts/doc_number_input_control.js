@@ -50,6 +50,12 @@ function adjust_amount()
 		total+=parseFloat($(this).val());
 	});
 	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
+	//set the reciver amount
+	total_riem=0.00;
+	$("input.doc_total_amount").each(function(){
+		total_riem+=parseFloat($(this).val());
+	});
+	$("tr.reciver").find("input.doc_ori_amount").first().val(total_riem);
 }
 
 //init total amount
