@@ -188,6 +188,7 @@ $(function(){
 			}
 		});
 		$("select.is_self_dep").change();
+
 });
 
 function adapt_apply_amount_by_rate()
@@ -214,6 +215,18 @@ function bind_is_split_change_events()
 		{
 			$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
 			$("div.is_split_reim").hide("slow");		
+		}
+		//set the doc head's project readonly 
+		if($(this).val()==0)
+		{
+			$(this).closest("div.form_block").find("div.project input").removeAttr("disabled");
+			$(this).closest("div.form_block").find("div.project a").show();
+		}
+		else
+		{
+			$(this).closest("div.form_block").find("div.project input").val("");
+			$(this).closest("div.form_block").find("div.project input").attr("readonly","true");
+			$(this).closest("div.form_block").find("div.project a").hide();
 		}
 	});
 }
