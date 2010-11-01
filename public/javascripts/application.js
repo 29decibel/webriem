@@ -182,6 +182,7 @@ $(function(){
 			}
 			else
 			{
+				$(this).closest("tr").find("div.dep input").val("");
 				$(this).closest("tr").find("div.dep input").attr("readonly","true");
 				$(this).closest("tr").find("div.dep a").hide();
 			}
