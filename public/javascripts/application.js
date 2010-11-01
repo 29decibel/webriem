@@ -174,7 +174,7 @@ $(function(){
 		//always set the approve info form not display
 		$("#approve_info").css("display","none");
 		//for the work flow page
-		$("input.is_self_dep").live("change",function(){
+		$("select.is_self_dep").live("change",function(){
 			if($(this).val()==0)
 			{
 				$(this).closest("tr").find("div.dep input").removeAttr("disabled");
@@ -186,6 +186,7 @@ $(function(){
 				$(this).closest("tr").find("div.dep a").hide();
 			}
 		});
+		$("select.is_self_dep").change();
 });
 
 function adapt_apply_amount_by_rate()
