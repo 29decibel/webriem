@@ -33,7 +33,7 @@
 		</td>
 	
 	<% display_columns(@class).each do |c|%>
-		<td><%= get_display_value(result,c)%></td>
+		<td><%= truncate(get_display_value(result,c),:length => 11, :omission => '... ')%></td>
 	<% end %>
 	<!--here is the custom display columns-->
 	<% if @class.respond_to? "custom_display_columns"%>
