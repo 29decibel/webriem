@@ -247,6 +247,8 @@ function add_upload_files(current,path)
 function removeSelected(remove_link)
 {
 	$(remove_link).parent().find("select :selected").remove();
+	set_form_state();
+	return false;
 }
 //=================================select the approver when in the workflow someone begin apply approve
 function select_approver_or_begin_work_flow()
