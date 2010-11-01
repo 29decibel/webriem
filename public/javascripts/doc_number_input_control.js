@@ -40,7 +40,7 @@ function adjust_amount()
 	}
 	if(current_style_class.indexOf("doc_HR_amount")>=0)
 	{
-		$(this).closest("tr").find("input.doc_FI_amount").val(doc_HR_amount.toFixed(2));
+		$(this).closest("tr").find("input.doc_FI_amount").val(doc_HR_amount);
 	}
 	if(current_style_class.indexOf("doc_FI_amount")>=0)
 	{}
