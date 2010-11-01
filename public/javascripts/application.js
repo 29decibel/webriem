@@ -225,9 +225,9 @@ function add_fields(link, association, content) {
 	//set reference readonly
 	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
-	$("input.fee_standard").attr("readonly",true);
+	$(link).closest("tr").prev().find("input.fee_standard").attr("readonly",true);
 	//fire get fee
-	$(".region_type_select").change();
+	$(link).closest("tr").prev().find(".region_type_select").change();
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){
