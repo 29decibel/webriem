@@ -81,30 +81,35 @@ class DocHead < ActiveRecord::Base
     total=0
     if doc_type==1 or doc_type==2
       cp_doc_details.each do |cp|
+        next if cp.apply_amount==nil
         total+=cp.apply_amount
       end
     end
     if doc_type==9
       [rd_travels,rd_transports,rd_lodgings].each do |rd|
         rd.each do |rd_detail|
+          next if rd_detail.fi_amount==nil
           total+=rd_detail.fi_amount         
         end
       end
     end
     if doc_type==10
       rd_work_meals.each do |rd|
+        next if rd.fi_amount==nil
         total+=rd.fi_amount
       end
     end
     if doc_type==11
       [rd_extra_work_cars,rd_extra_work_meals].each do |rd|
         rd.each do |rd_detail|
+          next if rd_detail.fi_amount==nil
           total+=rd_detail.fi_amount         
         end
       end
     end
     if doc_type==12
       rd_common_transports.each do |rd|
+        next if rd.fi_amount==nil
         total+=rd.fi_amount
       end
     end
@@ -131,8 +136,10 @@ class DocHead < ActiveRecord::Base
     total=0
     recivers.each do |r|
       if doc_type>=9 and doc_type<=12
+        next if r.fi_amount==nil
         final_amount=r.fi_amount
       else
+        next if r.amount==nil
         final_amount=r.amount
       end
       r.direction==0 ? total+=final_amount : total-=final_amount

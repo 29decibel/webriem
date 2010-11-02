@@ -5,6 +5,7 @@ class CpDocDetail < ActiveRecord::Base
   belongs_to :fee
   belongs_to :project
   belongs_to :currency
+  validates_presence_of :ori_amount
   def after_initialize
     self.currency=Currency.find_by_code("RMB")
     if self.currency
