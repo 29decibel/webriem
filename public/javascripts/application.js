@@ -83,6 +83,7 @@ $(function(){
 		$("#selected_all").live("change",function(){
 			$(".ref_select").attr("checked",$(this).is(':checked'));
 		});
+		alert("init...");
 		//register the ref select change events
 		$("input.ref_select").live("change",function(){
 			alert("aaa");
