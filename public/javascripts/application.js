@@ -95,7 +95,6 @@ $(function(){
 		if($.browser.msie)
 		{
 			$('input.ref_select,#selected_all').live('click', function(){
-				alert("sb");
 		    	$(this).trigger('change');
 			});
 		}
