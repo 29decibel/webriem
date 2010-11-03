@@ -85,6 +85,7 @@ $(function(){
 		});
 		//register the ref select change events
 		$("input.ref_select").live("change",function(){
+			alert("aaa");
 			//select one only
 			if($("#selected_all").size()==0)
 			{
