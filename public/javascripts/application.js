@@ -83,16 +83,23 @@ $(function(){
 		$("#selected_all").live("change",function(){
 			$(".ref_select").attr("checked",$(this).is(':checked'));
 		});
-		alert("init...");
 		//register the ref select change events
 		$("input.ref_select").live("change",function(){
-			alert("aaa");
 			//select one only
 			if($("#selected_all").size()==0)
 			{
 				$(".ref_select").not($(this)).attr("checked",false);
 			}
 		});
+		//for the damn ie
+		if($.browser.msie)
+		{
+			$('input.ref_select,#selected_all').live('click', function(){
+				alert("sb");
+		    	$(this).trigger('change');
+			});
+		}
+
 		//observe the region type select 
 		$(".region_type_select").live("change",function(){
 			region_type= $(this).val();
