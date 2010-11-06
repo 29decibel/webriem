@@ -9,7 +9,7 @@ class Budget < ActiveRecord::Base
     validates_presence_of :fee,:project,:dep
     validates_numericality_of :jan,:feb,:mar,:apr,:may,:jun,:jul,:aug,:sep,:oct,:nov,:dec
     def to_s
-      "#{name};#{code}"
+      "#{name}"
     end
     def all
       jan+feb+mar+apr+may+jun+jul+aug+sep+oct+nov+dec

@@ -40,6 +40,6 @@ class FeeStandard < ActiveRecord::Base
     end
   end
   def to_s
-    "#{name};#{code}"
+    "#{name}"
   end
 end
