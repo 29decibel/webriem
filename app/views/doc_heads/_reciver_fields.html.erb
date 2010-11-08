@@ -23,13 +23,13 @@
 		<%= f.text_field :bank,:class=>"normal" %>  
 	</td>
 	<td>  
-		<%= f.text_field :bank_no ,:class=>"normal"%>  
+		<%= f.text_field :bank_no ,:class=>"large"%>  
 	</td>
 	<td>  
 		<%= f.text_field :amount,:class=>"normal doc_ori_amount" %>  
 	</td>
 	<!--riem need the hr amount and finance amount-->
-	<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=12%>
+	<% if [9,11,13].include? @doc_head.doc_type%>
 	<td>  
 		<%= f.text_field :hr_amount,:class=>"normal number doc_HR_amount" %>  
 	</td>

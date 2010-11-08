@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101101144708) do
+ActiveRecord::Schema.define(:version => 20101108161136) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(:version => 20101101144708) do
 
   create_table "cp_doc_details", :force => true do |t|
     t.integer  "sequence"
-    t.date     "apply_date"
     t.integer  "dep_id"
     t.integer  "fee_id"
     t.integer  "project_id"
@@ -150,9 +149,10 @@ ActiveRecord::Schema.define(:version => 20101101144708) do
     t.integer  "work_flow_step_id"
     t.integer  "project_id"
     t.integer  "is_split"
-    t.decimal  "cp_doc_remain_amount", :precision => 10, :scale => 0
+    t.decimal  "cp_doc_remain_amount", :precision => 8, :scale => 2
     t.integer  "paid"
     t.integer  "approver_id"
+    t.integer  "afford_dep_id"
   end
 
   create_table "duties", :force => true do |t|
@@ -323,6 +323,8 @@ ActiveRecord::Schema.define(:version => 20101101144708) do
     t.string   "details_content_type"
     t.integer  "details_file_size"
     t.datetime "details_updated_at"
+    t.decimal  "hr_amount",            :precision => 8,  :scale => 2
+    t.decimal  "fi_amount",            :precision => 8,  :scale => 2
   end
 
   create_table "rd_common_transports", :force => true do |t|
@@ -343,6 +345,8 @@ ActiveRecord::Schema.define(:version => 20101101144708) do
     t.decimal  "rate",         :precision => 8, :scale => 2
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 8, :scale => 2
+    t.integer  "dep_id"
+    t.integer  "project_id"
   end
 
   create_table "rd_extra_work_cars", :force => true do |t|
@@ -426,7 +430,7 @@ ActiveRecord::Schema.define(:version => 20101101144708) do
 
   create_table "rd_travels", :force => true do |t|
     t.integer  "sequence"
-    t.integer  "days"
+    t.decimal  "days",                  :precision => 8, :scale => 2
     t.integer  "region_id"
     t.string   "reason"
     t.string   "other_fee"
@@ -454,13 +458,13 @@ ActiveRecord::Schema.define(:version => 20101101144708) do
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 8, :scale => 2
-    t.decimal  "hr_amount",    :precision => 8, :scale => 2
-    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "rate",         :precision => 8, :scale => 2
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 8, :scale => 2
+    t.integer  "dep_id"
+    t.integer  "project_id"
   end
 
   create_table "rec_notice_details", :force => true do |t|

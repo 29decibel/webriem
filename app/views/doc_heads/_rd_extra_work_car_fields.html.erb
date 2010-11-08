@@ -3,9 +3,6 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>
-		<%= f.text_field :work_date,:class=>"datepicker normal" %>  
-	</td>
-	<td>
 		<%= f.select :is_sunday, RdExtraWorkCar::ENUMS_IS_SUNDAY,{},{:class=>"normal"} %>
 	</td>
 	<td>
@@ -21,7 +18,7 @@
 		<%= f.text_field :end_time,:class=>"datetimepicker middle" %>  
 	</td>
 	<td>
-		<%= f.text_field :reason,:class=>"normal" %>  
+		<%= f.text_field :reason,:class=>"xlarge" %>  
 	</td>
 	<td>
 		<div class="reference">

@@ -4,8 +4,10 @@ class DocHead < ActiveRecord::Base
   belongs_to :dep
   belongs_to :person
   belongs_to :currency
+  belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
+  blongs_to_name_attr :afford_dep
   blongs_to_name_attr :person
   blongs_to_name_attr :project
   blongs_to_name_attr :currency
@@ -95,8 +97,8 @@ class DocHead < ActiveRecord::Base
     end
     if doc_type==10
       rd_work_meals.each do |rd|
-        next if rd.fi_amount==nil
-        total+=rd.fi_amount
+        next if rd.apply_amount==nil
+        total+=rd.apply_amount
       end
     end
     if doc_type==11

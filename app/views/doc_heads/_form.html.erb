@@ -45,6 +45,17 @@
 				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
 			</div>
 		</div>
+		<% if @doc_head.doc_type==9 or @doc_head.doc_type==11%>
+		<div class="form_field">
+			<%= f.label "费用承担部门" %>
+            <!--样例参照-->
+			<div class="reference" data-ref-id="dep">
+				<%= f.hidden_field :afford_dep_id,{:class=>"ref_hidden_field"}%>
+				<%= text_field_tag "dep_info",@doc_head.afford_dep.to_s,:class=>"ref" %>
+				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
+			</div>
+		</div>
+		<% end %>
 		<!--<div class="form_field">
 			<%= f.label "费用类型" %>
 			<div class="reference">
@@ -57,8 +68,7 @@
 	<% if @doc_head.doc_type==1 %>
 	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "借款余额" %>
-			<%= f.text_field :cp_doc_remain_amount,:class=>"number input1",:readonly=>"readonly" %>
+			<%= f.label "借款余额" %><span><%= @doc_head.cp_doc_remain_amount%></span>
 		</div>
 	</div>	
 	<% end %>
@@ -73,7 +83,7 @@
 			</div>
 		</div>
 		<% end %>
-		<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=13 %>
+		<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=13 and @doc_head.doc_type!=10 %>
 			<div class="form_field">
 				<%= f.label "是否分摊" %>
 				<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
@@ -102,14 +112,13 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>申请时间</th>
-				    <th>费用承担部门</th>
+				    <th>费用承担部门*</th>
 				    <th>项目</th>
-				    <th>费用用途</th>
-				    <th>币种</th>
-					<th>汇率</th>
-					<th>原币借款金额*</th>
-					<th>本币借款金额</th>
+				    <th>费用用途*</th>
+				    <th>币种*</th>
+					<th>汇率*</th>
+					<th>原币<%= @doc_head.doc_type==1 ? "借款":"付款" %>金额*</th>
+					<th>本币<%= @doc_head.doc_type==1 ? "借款":"付款" %>金额*</th>
 					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
@@ -119,7 +128,7 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<td colspan="7"><%= link_to_add_fields "添加明细",f,:cp_doc_details,[:dep] %></td>
+				<td colspan="6"><%= link_to_add_fields "添加明细",f,:cp_doc_details,[:dep] %></td>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -347,7 +356,7 @@
 					<tr>	
 						<th>序号</th>
 					    <th>费用类型</th>
-					    <th>费用部门</th>
+					    <th>费用承担部门</th>
 					    <th>项目</th>
 					    <th>费用描述</th>
 						<th>币种</th>
@@ -375,24 +384,22 @@
 	<% end %>
 	<% if @doc_head.doc_type==10 or @doc_head.doc_type==12%>
 	<div class="form_title">
-		<h3>交际费明细</h3>
+		<h3><%= @doc_head.doc_type==10 ? "交际费" : "工作餐费"%>明细</h3>
 	</div>
 	<div class="form_area">
 		<table class="form_input">
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>地点</th>
-				    <th>日期</th>
-				    <th>人数</th>
-				    <th>参与人姓名</th>
-					<th>事由</th>
-					<th>币种</th>
-					<th>汇率</th>
+				    <th>地点*</th>
+				    <th>日期*</th>
+				    <th>人数*</th>
+				    <th>参与人姓名*</th>
+					<th>事由*</th>
+					<th>币种*</th>
+					<th>汇率*</th>
 					<th>原币金额*</th>
-					<th>本币金额</th>
-					<th>HR调整</th>
-					<th>财务调整</th>
+					<th>本币金额*</th>
 					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
@@ -402,7 +409,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="10"><%= link_to_add_fields "添加工作餐费",f,:rd_work_meals %></th>
+				<th colspan="8"><%= link_to_add_fields "添加交际费",f,:rd_work_meals %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -420,7 +427,6 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>日期</th>
 				    <th>是否休息日</th>
 					<th>开始时间</th>
 				    <th>结束时间</th>
@@ -441,7 +447,7 @@
 				<% end %>			
 			</tbody>
 			<tr>
-				<th colspan="11"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
+				<th colspan="10"><%= link_to_add_fields "添加加班餐费",f,:rd_extra_work_meals %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -456,7 +462,6 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>日期</th>
 				    <th>是否休息日</th>
 				    <th>开始地点</th>
 				    <th>结束地点</th>
@@ -478,7 +483,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="12"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
+				<th colspan="11"><%= link_to_add_fields "添加加班交通费",f,:rd_extra_work_cars %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -540,6 +545,8 @@
 				    <th>人数</th>
 				    <th>费用期间</th>
 				    <th>申请费用</th>
+					<th>HR调整</th>
+					<th>财务调整</th>
 					<th>附件</th>
 					<th></th><!--给删除的-->
 			    </tr>
@@ -550,7 +557,7 @@
 				<% end %>			
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
+				<th colspan="5"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -559,7 +566,7 @@
 	</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type>=9%>
+	<% if @doc_head.doc_type>=9 and @doc_head.doc_type!=10%>
 	<!--分摊明细动态显示-->
 	<div class="form_title is_split_reim">
 		<h3>分摊明细</h3>
@@ -569,7 +576,7 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>部门</th>							    
+				    <th>费用承担部门</th>							    
 				    <th>项目</th>
 					<th>费用类型</th>
 				    <th>百分比</th>
@@ -614,7 +621,7 @@
 				    <th>银行</th>
 				    <th>银行帐号</th>
 				    <th>金额*</th>
-					<% if @doc_head.doc_type >=9 and @doc_head.doc_type <=12%>
+					<% if [9,11,13].include? @doc_head.doc_type%>
 					<th>HR调整</th>
 					<th>财务调整</th>
 					<% end %>	

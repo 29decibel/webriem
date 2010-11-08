@@ -265,8 +265,16 @@
         paid: "付款状态"
         cp_doc_details:
           ori_amount: "原币金额"
+          dep_id: "费用承担部门"
+          currency_id: "币种"
+          rate: "汇率"
+          used_for: "费用用途"
         recivers:
           amount: "收款人明细 收款金额"
+          bank: "银行名称"
+          settlement_id: "结算方式"
+          bank_no: "银行帐号"
+          company: "收款人"
         rec_notice_details:
           ori_amount: "收款明细 原币金额"
         rd_extra_work_meals:
@@ -275,6 +283,13 @@
           ori_amount: "加班车费明细 原币金额"
         rd_work_meals:
           ori_amount: "交际费用明细 原币金额"
+          person_names: "参与人姓名"
+          place: "地点"
+          meal_date: "日期"
+          people_count: "人数"
+          reason: "事由"
+          currency_id: "币种"
+          rate: "汇率"
         rd_travels:
           ori_amount: "差旅费补助明细 原币金额"
         rd_transports:
