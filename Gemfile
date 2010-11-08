@@ -10,6 +10,7 @@ gem "pdfkit"
 gem "paperclip"
 gem "parseexcel"
 gem "excelsior"
+gem "prawn"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

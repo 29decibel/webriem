@@ -210,4 +210,9 @@ class DocHeadsController < ApplicationController
     render :json=>"批量审批完成"
     #redirect_to :controller=>:tasks,:action=>:docs_to_approve,:notice=>"批量审批完成",:status => 301
   end
+  #print goes here
+  def print
+    output = HelloTest.new.to_pdf
+    send_data output, :filename => "hello.pdf",:type => "application/pdf"
+  end
 end
