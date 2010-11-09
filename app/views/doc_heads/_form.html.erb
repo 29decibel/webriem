@@ -83,7 +83,7 @@
 			</div>
 		</div>
 		<% end %>
-		<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=13 and @doc_head.doc_type!=10 %>
+		<% if @doc_head.doc_type>=9 and @doc_head.doc_type<13 and @doc_head.doc_type!=10 %>
 			<div class="form_field">
 				<%= f.label "是否分摊" %>
 				<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
@@ -239,16 +239,14 @@
 				<thead>
 					<tr>	
 						<th>序号</th>
-					    <th>出差天数</th>
+					    <th>出差天数*</th>
 						<th>地区级次</th>
-					    <th>出差地点</th>
-					    <th>其他地点</th>
-					    <th>出差事由</th>
+					    <th>出差地点*</th>
+					    <th>其他地点*</th>
+					    <th>出差事由*</th>
 					    <th>费用标准</th>
-						<th>其他费用</th>
-					    <th>其他费用说明</th>
-						<th>币种</th>
-						<th>汇率</th>
+						<th>币种*</th>
+						<th>汇率*</th>
 						<th>原币金额*</th>
 						<th>本币金额</th>
 						<th>HR调整</th>
@@ -262,7 +260,7 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="13"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
+					<th colspan="11"><%= link_to_add_fields "添加差旅补助费用",f,:rd_travels %></th>
 					<td>申请金额合计</td>
 					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
@@ -277,14 +275,14 @@
 				<thead>
 					<tr>					
 						<th>序号</th>
-					    <th>开始时间</th>
-					    <th>到达时间</th>
-					    <th>出发地</th>
-					    <th>目的地</th>
-						<th>出差事由</th>
-					    <th>交通工具</th>
-						<th>币种</th>
-						<th>汇率</th>
+					    <th>开始时间*</th>
+					    <th>到达时间*</th>
+					    <th>出发地*</th>
+					    <th>目的地*</th>
+						<th>出差事由*</th>
+					    <th>交通工具*</th>
+						<th>币种*</th>
+						<th>汇率*</th>
 						<th>原币金额*</th>
 						<th>本币金额</th>
 						<th>HR调整</th>
@@ -313,17 +311,17 @@
 				<thead>
 					<tr>					
 						<th>序号</th>
-						<th>开始日期</th>
-						<th>结束日期</th>
+						<th>开始日期*</th>
+						<th>结束日期*</th>
 					    <th>住宿天数</th>
 						<th>地区级次</th>
-					    <th>城市</th>
-						<th>其他城市</th>
+					    <th>城市*</th>
+						<th>其他城市*</th>
 					    <th>费用标准</th>
 						<th>人数</th>
 					    <th>合住人</th>
-						<th>币种</th>
-						<th>汇率</th>
+						<th>币种*</th>
+						<th>汇率*</th>
 						<th>原币金额*</th>
 						<th>本币金额</th>
 						<th>HR调整</th>
@@ -344,6 +342,37 @@
 				</tr>		
 			</table>
 		</div>
+		<div class="form_title">
+			<h3>其他费用明细</h3>
+		</div>
+		<div class="form_area">
+			<table class="form_input">
+				<thead>
+					<tr>					
+						<th>序号</th>
+					    <th>费用说明*</th>
+						<th>币种*</th>
+						<th>汇率*</th>
+						<th>原币金额*</th>
+						<th>本币金额</th>
+						<th>HR调整</th>
+						<th>财务调整</th>
+						<th></th><!--给删除的-->
+				    </tr>
+			    <thead>
+				<tbody>
+					<%= f.fields_for :other_riems do |builder|  %>
+						<%= render :partial => 'other_riem_fields',:locals => { :f => builder }  %>
+					<% end %>				
+				</tbody>
+				<tr>
+					<th colspan="6"><%= link_to_add_fields "添加其他费用",f,:other_riems %></th>
+					<td>申请金额合计</td>
+					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
+					<td></td>
+				</tr>		
+			</table>
+		</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==12%>
@@ -355,12 +384,12 @@
 				<thead>
 					<tr>	
 						<th>序号</th>
-					    <th>费用类型</th>
-					    <th>费用承担部门</th>
-					    <th>项目</th>
-					    <th>费用描述</th>
-						<th>币种</th>
-						<th>汇率</th>
+					    <th>费用类型*</th>
+					    <th>费用承担部门*</th>
+					    <th>项目*</th>
+					    <th>费用描述*</th>
+						<th>币种*</th>
+						<th>汇率*</th>
 						<th>原币金额*</th>
 						<th>本币金额</th>
 						<th>HR调整</th>
@@ -501,15 +530,13 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>日期</th>
-				    <th>开始地点</th>
-				    <th>结束地点</th>
-					<th>开始时间</th>
-				    <th>结束时间</th>
-					<th>事由</th>
-					<th>备注</th>
-					<th>币种</th>
-					<th>汇率</th>
+				    <th>开始地点*</th>
+				    <th>结束地点*</th>
+					<th>开始时间*</th>
+				    <th>结束时间*</th>
+					<th>事由*</th>
+					<th>币种*</th>
+					<th>汇率*</th>
 					<th>原币金额*</th>
 					<th>本币金额</th>
 					<th>HR调整</th>
@@ -523,7 +550,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="12"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
+				<th colspan="10"><%= link_to_add_fields "添加业务交通费",f,:rd_common_transports %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -566,7 +593,7 @@
 	</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type>=9 and @doc_head.doc_type!=10%>
+	<% if @doc_head.doc_type>=9 and @doc_head.doc_type!=10 and @doc_head.doc_type!=13%>
 	<!--分摊明细动态显示-->
 	<div class="form_title is_split_reim">
 		<h3>分摊明细</h3>
@@ -616,10 +643,10 @@
 					<% if @doc_head.doc_type>=9 %>
 					<th>方向</th>
 					<% end %>
-				    <th>结算方式</th>
-				    <th><%= @doc_head.doc_type==2?"收款单位":"收款人"%></th>
-				    <th>银行</th>
-				    <th>银行帐号</th>
+				    <th>结算方式*</th>
+				    <th><%= @doc_head.doc_type==2?"收款单位*":"收款人*"%></th>
+				    <th>银行*</th>
+				    <th>银行帐号*</th>
 				    <th>金额*</th>
 					<% if [9,11,13].include? @doc_head.doc_type%>
 					<th>HR调整</th>

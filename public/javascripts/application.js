@@ -162,6 +162,7 @@ $(function(){
 				  success: function(msg){
 						//set fees
 						extra_st_control.val(msg);
+						//alert(msg);
 						extra_st_control.closest("tr").find("input.doc_ori_amount").val(msg);
 						extra_st_control.closest("tr").find("input.doc_ori_amount").change();
 				  },

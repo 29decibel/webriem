@@ -1,24 +1,9 @@
 <tr class="fields">
 	<td>
-		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
+		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>
 	</td>
 	<td>
-		<%= f.select :is_sunday, RdExtraWorkCar::ENUMS_IS_SUNDAY,{},{:class=>"normal"} %>
-	</td>
-	<td>
-		<%= f.text_field :start_place,:class=>"normal" %>  
-	</td>
-	<td>
-		<%= f.text_field :end_place,:class=>"normal" %>  
-	</td>
-	<td>
-		<%= f.text_field :start_time,:class=>"datetimepicker middle" %>  
-	</td>
-	<td>
-		<%= f.text_field :end_time,:class=>"datetimepicker middle" %>  
-	</td>
-	<td>
-		<%= f.text_field :reason,:class=>"xlarge" %>  
+		<%= f.text_field :description,:class=>"xlarge" %>  
 	</td>
 	<td>
 		<div class="reference">
@@ -34,7 +19,7 @@
 		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  
 	</td>
 	<td>
-		<%= f.text_field :apply_amount,:class=>"doc_apply_amount normal number" %>  
+		<%= f.text_field :apply_amount ,:class=>"doc_apply_amount normal number"%>  
 	</td>
 	<td>
 		<%= f.text_field :hr_amount,:class=>"doc_HR_amount normal number" %>  

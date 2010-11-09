@@ -53,6 +53,7 @@ class DocHead < ActiveRecord::Base
   has_many :rd_common_transports, :class_name => "RdCommonTransport",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :reim_split_details, :class_name => "ReimSplitDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :common_riems, :class_name => "CommonRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
+  has_many :other_riems, :class_name => "OtherRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
   accepts_nested_attributes_for :reim_split_details ,:reject_if => lambda { |a| a[:dep_id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_benefits ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
@@ -63,6 +64,8 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_travels ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :common_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :other_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+
   #the great offset info here
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
@@ -88,7 +91,7 @@ class DocHead < ActiveRecord::Base
       end
     end
     if doc_type==9
-      [rd_travels,rd_transports,rd_lodgings].each do |rd|
+      [rd_travels,rd_transports,rd_lodgings,other_riems].each do |rd|
         rd.each do |rd_detail|
           next if rd_detail.fi_amount==nil
           total+=rd_detail.fi_amount         

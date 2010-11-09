@@ -246,6 +246,9 @@ table.form_input input.normal{
 table.form_input input.small{
 	width:25px;
 }
+table.form_input input.xsmall{
+	width:40px;
+}
 table.form_input input.middle{
 	width:150px;
 }

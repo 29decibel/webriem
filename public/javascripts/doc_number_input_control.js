@@ -12,12 +12,21 @@ $(function(){
 function adjust_amount()
 {
 	//alert($(this).attr("class"));
-	var doc_rate=$(this).closest("tr").find("input.doc_rate").val();
-	var doc_ori_amount=$(this).closest("tr").find("input.doc_ori_amount").val();
+	var doc_rate=parseFloat($(this).closest("tr").find("input.doc_rate").val());
+	var doc_ori_amount=parseFloat($(this).closest("tr").find("input.doc_ori_amount").val());
 	//var doc_apply_amount=$(this).closest("tr").find("input.doc_apply_amount").val();
-	var doc_HR_amount=$(this).closest("tr").find("input.doc_HR_amount").val();
-	var doc_FI_amount=$(this).closest("tr").find("input.doc_FI_amount").val();
-	
+	var doc_HR_amount=parseFloat($(this).closest("tr").find("input.doc_HR_amount").val());
+	var doc_FI_amount=parseFloat($(this).closest("tr").find("input.doc_FI_amount").val());
+	//=====================+++++++++++++++++++++++++++++++++
+	if(isNaN(doc_rate))
+		doc_rate=0.0;
+	if(isNaN(doc_ori_amount))
+		doc_ori_amount=0.0;
+	if(isNaN(doc_HR_amount))
+		doc_HR_amount=0.0;
+	if(isNaN(doc_FI_amount))
+		doc_FI_amount=0.0;
+	//=====================+++++++++++++++++++++++++++++++++
 	var current_style_class=$(this).attr("class");
 	var setting_value=0.00;
 	if(doc_rate)
@@ -30,6 +39,7 @@ function adjust_amount()
 	}
 	if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 	{
+		$(this).closest("tr").find("input.doc_ori_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_apply_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_HR_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_FI_amount").val(setting_value);
@@ -99,10 +109,18 @@ function calculate_ori_amount()
 {
 	var days= parseInt($(this).closest("tr").find("input.travel_days").val());
 	var fee_standard=parseFloat($(this).closest("tr").find("input.fee_standard").val());
-	var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
-	if(isNaN(other_fee))
-		other_fee=0;
-	var total=(days*fee_standard+other_fee).toFixed(2);
+	//var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
+	//if(isNaN(other_fee))
+	//	other_fee=0;
+	if(isNaN(days))
+	{
+		days=0;
+	}
+	if(isNaN(fee_standard))
+	{
+		fee_standard=0.0;
+	}
+	var total=(days*fee_standard).toFixed(2);
 	$(this).closest("tr").find("input.doc_ori_amount").val(total);
 	$(this).closest("tr").find("input.doc_ori_amount").change();
 }

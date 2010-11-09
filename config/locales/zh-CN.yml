@@ -271,16 +271,45 @@
           used_for: "费用用途"
         recivers:
           amount: "收款人明细 收款金额"
-          bank: "银行名称"
-          settlement_id: "结算方式"
-          bank_no: "银行帐号"
-          company: "收款人"
+          bank: "收款人明细 银行名称"
+          settlement_id: "收款人明细 结算方式"
+          bank_no: "收款人明细 银行帐号"
+          company: "收款人明细 收款人"
+        rd_common_transports:
+          ori_amount: "业务交通费明细 原币金额"
+          start_place: "业务交通费明细 开始地点"
+          end_place: "业务交通费明细 结束地点"
+          start_time: "业务交通费明细 开始时间"
+          end_time: "业务交通费明细 结束时间"
+          reason: "业务交通费明细 事由"
+          currency_id: "业务交通费明细 币种"
+          rate: "业务交通费明细 汇率"
+        common_riems:
+          fee_id: "普通费用报销明细 费用类型"
+          dep_id: "普通费用报销明细 费用承担部门"
+          project_id: "普通费用报销明细 项目"
+          description: "普通费用报销明细 费用描述"
+          ori_amount: "普通费用报销明细 原币金额"
+          rate: "普通费用报销明细 汇率"
+          currency_id: "普通费用报销明细 币种"
         rec_notice_details:
           ori_amount: "收款明细 原币金额"
         rd_extra_work_meals:
           ori_amount: "加班餐费明细 原币金额"
+          start_time: "加班餐费明细 开始时间"
+          end_time: "加班餐费明细 结束时间"
+          reason: "加班餐费明细 事由"
+          currency_id: "加班餐费明细 币种"
+          rate: "加班餐费明细 汇率"
         rd_extra_work_cars:
           ori_amount: "加班车费明细 原币金额"
+          start_place: "加班车费明细 开始地点"
+          end_place: "加班车费明细 结束地点"
+          start_time: "加班车费明细 开始时间"
+          end_time: "加班车费明细 结束时间"
+          reason: "加班车费明细 事由"
+          currency_id: "加班车费明细 币种"
+          rate: "加班车费明细 汇率"
         rd_work_meals:
           ori_amount: "交际费用明细 原币金额"
           person_names: "参与人姓名"
@@ -291,11 +320,31 @@
           currency_id: "币种"
           rate: "汇率"
         rd_travels:
+          days: "差旅费补助明细 出差天数"
+          reason: "差旅费补助明细 出差事由"
           ori_amount: "差旅费补助明细 原币金额"
+          base: "差旅费补助明细 "
         rd_transports:
           ori_amount: "交通费明细 原币金额"
+          currency_id: "交通费明细 币种"
+          rate: "交通费明细 汇率"   
+          transportation_id: "交通费明细 交通工具"
+          reason: "交通费明细 出差事由"
+          start_position: "交通费明细 出发地"
+          end_position: "交通费明细 目的地"
+          start_date: "交通费明细 开始时间"
+          end_date: "交通费明细 到达时间"       
         rd_lodgings:
           ori_amount: "住宿费明细 原币金额"
+          currency_id: "住宿费明细 币种"
+          rate: "住宿费明细 汇率"
+          base: "住宿费明细 "
+          start_date: "住宿费明细 开始日期"
+          end_date: "住宿费明细 结束日期"
+        other_riems:
+          currency_id: "其他费用明细 币种"
+          rate: "其他费用明细 汇率"
+          description: "其他费用明细 费用描述"
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
