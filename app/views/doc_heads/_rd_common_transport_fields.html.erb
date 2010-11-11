@@ -3,6 +3,20 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>
+		<div class="reference">
+			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref middle" %>
+			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+		</div>
+	</td> 
+	<td>
+		<div class="reference">
+			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref middle" %>
+			<a href="#" class-data="Project"><span class="reference"></span></a>			
+		</div>
+	</td>
+	<td>
 		<%= f.text_field :start_place,:class=>"normal" %>  
 	</td>
 	<td>
@@ -32,12 +46,6 @@
 	</td>
 	<td>
 		<%= f.text_field :apply_amount,:class=>"doc_apply_amount normal number" %>  
-	</td>
-	<td>
-		<%= f.text_field :hr_amount,:class=>"doc_HR_amount normal number" %>  
-	</td>
-	<td>
-		<%= f.text_field :fi_amount,:class=>"doc_FI_amount normal number" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101109140235) do
+ActiveRecord::Schema.define(:version => 20101111163010) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -75,8 +75,6 @@ ActiveRecord::Schema.define(:version => 20101109140235) do
     t.string   "description"
     t.integer  "currency_id"
     t.decimal  "apply_amount", :precision => 8, :scale => 2
-    t.decimal  "hr_amount",    :precision => 8, :scale => 2
-    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.decimal  "rate",         :precision => 8, :scale => 2
     t.decimal  "ori_amount",   :precision => 8, :scale => 2
     t.integer  "doc_head_id"
@@ -342,7 +340,6 @@ ActiveRecord::Schema.define(:version => 20101109140235) do
   end
 
   create_table "rd_common_transports", :force => true do |t|
-    t.string   "note"
     t.string   "start_place"
     t.string   "end_place"
     t.integer  "sequence"
@@ -352,8 +349,6 @@ ActiveRecord::Schema.define(:version => 20101109140235) do
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 8, :scale => 2
-    t.decimal  "hr_amount",    :precision => 8, :scale => 2
-    t.decimal  "fi_amount",    :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "rate",         :precision => 8, :scale => 2
@@ -562,10 +557,11 @@ ActiveRecord::Schema.define(:version => 20101109140235) do
     t.integer  "dep_id"
     t.integer  "project_id"
     t.integer  "fee_id"
-    t.decimal  "percent",     :precision => 10, :scale => 0
+    t.decimal  "percent",        :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sequence"
+    t.decimal  "percent_amount", :precision => 8,  :scale => 2
   end
 
   create_table "riem_cp_offsets", :force => true do |t|

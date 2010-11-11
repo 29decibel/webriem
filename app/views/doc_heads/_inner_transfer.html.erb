@@ -13,15 +13,13 @@
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
 		<%= f.label "转出账户转帐前余额" ,:class=>"large"%>
 		<%= f.text_field :out_amount_before,:class=>"input1 number" %>  
 	</div>
 </div>
 <div class="form_block">
-		<div class="form_field">
+	<div class="form_field">
 		<%= f.label "转入账户" ,:class=>"large"%>
 		<div class="reference">
 			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
@@ -29,8 +27,6 @@
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
 		<%= f.label "转入账户转帐后余额" ,:class=>"large"%>
 		<%= f.text_field :in_amount_before,:class=>"input1 number" %>  

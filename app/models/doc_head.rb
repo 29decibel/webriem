@@ -54,7 +54,8 @@ class DocHead < ActiveRecord::Base
   has_many :reim_split_details, :class_name => "ReimSplitDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :common_riems, :class_name => "CommonRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :other_riems, :class_name => "OtherRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
-  accepts_nested_attributes_for :reim_split_details ,:reject_if => lambda { |a| a[:dep_id].blank? }, :allow_destroy => true
+  #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
+  accepts_nested_attributes_for :reim_split_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_benefits ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_common_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
@@ -77,6 +78,8 @@ class DocHead < ActiveRecord::Base
   def must_equal
     errors.add(:base, "报销总金额#{total_apply_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_apply_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
     errors.add(:base,"借款总金额#{total_apply_amount} 不等于 收款总金额#{reciver_amount}") if total_apply_amount!=reciver_amount and doc_type<=2
+    #the amount of issplit should be equal to total_apply_amount
+    errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_apply_amount}") if is_split==1 and split_total_amount!=total_apply_amount
   end
   def self.custom_display_columns
   	{"申请金额"=>:total_apply_amount}
@@ -113,10 +116,19 @@ class DocHead < ActiveRecord::Base
       end
     end
     if doc_type==12
-      rd_common_transports.each do |rd|
-        next if rd.fi_amount==nil
-        total+=rd.fi_amount
+      [rd_common_transports,rd_work_meals,common_riems].each do |rd|
+        rd.each do |rd_detail|
+          next if rd_detail.apply_amount==nil
+          total+=rd_detail.apply_amount
+        end
       end
+    end
+    total
+  end
+  def split_total_amount
+    total=0
+    reim_split_details.each do |split|
+      total+=split.percent_amount
     end
     total
   end
@@ -140,7 +152,7 @@ class DocHead < ActiveRecord::Base
   def reciver_amount
     total=0
     recivers.each do |r|
-      if doc_type>=9 and doc_type<=12
+      if doc_type>=9 and doc_type<12
         next if r.fi_amount==nil
         final_amount=r.fi_amount
       else

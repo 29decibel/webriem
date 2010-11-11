@@ -116,11 +116,20 @@ form div.form_area{
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	overflow: auto;
+	position: relative;
+}
+form div.form_block{
+	float: left;
+	clear: both;
 }
 form div.form_field{
 	display:inline-block;
 	margin-bottom: 5px;
 	min-width:290px;
+	float:left;
+}
+form div.form_field.large{
+	min-width:547px;
 }
 form div.form_field label{
 	display:inline-block;

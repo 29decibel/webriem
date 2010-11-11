@@ -264,6 +264,8 @@
         real_amount: "实际金额"
         paid: "付款状态"
         afford_dep_id: "费用承担部门"
+        reim_split_details:
+          dep_id: "分摊详细信息 费用承担部门"
         cp_doc_details:
           ori_amount: "原币金额"
           dep_id: "费用承担部门"
@@ -285,6 +287,7 @@
           reason: "业务交通费明细 事由"
           currency_id: "业务交通费明细 币种"
           rate: "业务交通费明细 汇率"
+          dep_id: "业务交通费明细 费用承担部门"
         common_riems:
           fee_id: "普通费用报销明细 费用类型"
           dep_id: "普通费用报销明细 费用承担部门"
@@ -312,7 +315,7 @@
           currency_id: "加班车费明细 币种"
           rate: "加班车费明细 汇率"
         rd_work_meals:
-          ori_amount: "交际费用明细 原币金额"
+          ori_amount: "原币金额"
           person_names: "参与人姓名"
           place: "地点"
           meal_date: "日期"
@@ -320,6 +323,8 @@
           reason: "事由"
           currency_id: "币种"
           rate: "汇率"
+          dep_id: "费用承担部门"
+          project_id: "项目"
         rd_travels:
           days: "差旅费补助明细 出差天数"
           reason: "差旅费补助明细 出差事由"
@@ -342,6 +347,8 @@
           base: "住宿费明细 "
           start_date: "住宿费明细 开始日期"
           end_date: "住宿费明细 结束日期"
+          days: "住宿费明细 住宿天数"
+          people_count: "住宿费明细 住宿人数"
         other_riems:
           currency_id: "其他费用明细 币种"
           rate: "其他费用明细 汇率"

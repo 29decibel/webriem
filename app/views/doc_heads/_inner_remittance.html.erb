@@ -1,11 +1,15 @@
 <div class="form_block">
-	<div class="form_field">
+	<div class="form_field large">
 		<%= f.label "申请金额" ,:class=>"large"%>
-		<%= f.text_field :amount,:class=>"input1 " %>  
+		<%= f.text_field :amount,:class=>"input1 large" %>  
 	</div>
 	<div class="form_field">
-		<%= f.label "当日汇率" %>
-		<%= f.text_field :now_rate_price,:class=>"input1 " %>
+		<%= f.label "币种" ,:class=>"large"%>
+		<div class="reference">
+			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
+			<a href="#" class-data="Currency"><span class="reference"></span></a>			
+		</div> 
 	</div>
 </div>
 <div class="form_block">
@@ -17,8 +21,6 @@
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
 		<%= f.label "收款账户结汇后余额",:class=>"large" %>
 		<%= f.text_field :remain_amount,:class=>"input1 " %> 
@@ -33,8 +35,6 @@
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
 		</div>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
 		<%= f.label "结汇账户结汇后余额",:class=>"large" %>
 		<%= f.text_field :in_amount_after,:class=>"input1 " %> 
@@ -42,12 +42,8 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "币种" ,:class=>"large"%>
-		<div class="reference">
-			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
-			<a href="#" class-data="Currency"><span class="reference"></span></a>			
-		</div> 
+		<%= f.label "当日汇率",:class=>"large" %>
+		<%= f.text_field :now_rate_price,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">

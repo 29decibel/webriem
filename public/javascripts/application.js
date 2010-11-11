@@ -227,17 +227,26 @@ function bind_is_split_change_events()
 			$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
 			$("div.is_split_reim").hide("slow");		
 		}
-		//set the doc head's project readonly 
+		//set the doc head's project and afford dep readonly 
 		if($(this).val()==0)
 		{
+			//set project
 			$(this).closest("div.form_block").find("div.project input").removeAttr("disabled");
 			$(this).closest("div.form_block").find("div.project a").show();
+			//set afford dep 
+			$("div.afford_dep input").removeAttr("disabled");
+			$("div.afford_dep a").show();			
 		}
 		else
 		{
+			//set project
 			$(this).closest("div.form_block").find("div.project input").val("");
 			$(this).closest("div.form_block").find("div.project input").attr("readonly","true");
 			$(this).closest("div.form_block").find("div.project a").hide();
+			//set afford dep
+			$("div.afford_dep input").val("");
+			$("div.afford_dep input").attr("readonly","true");
+			$("div.afford_dep a").hide();			
 		}
 	});
 }

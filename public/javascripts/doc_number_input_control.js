@@ -1,6 +1,6 @@
 $(function(){
 	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount").live("change",adjust_amount);
-	$("input.number").numeric();
+	$("input.number").numeric(".");
 	init_total_amount();
 	$("input.travel_days,input.fee_standard,input.other_fee").live("change",calculate_ori_amount);
 	//set all apply amount readonly
@@ -50,29 +50,37 @@ function adjust_amount()
 	}
 	//cal all amount
 	var total=0;
-	$(this).closest("table").find("tr").not(":hidden").find("input.doc_FI_amount").each(function(){
+	var control_to_calculate=find_control_cal_by_tr_wrapper($(this).closest("table").find("tr.fields").not(":hidden"));
+	//alert($(this).closest("table").find("tr.fields").not(":hidden").size());
+	control_to_calculate.each(function(){
+		//debugger;
+		//alert(this);
 		total+=parseFloat($(this).val());
 	});
 	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
 	//set the reciver amount==============================================================
-	total_riem=0.00;
-	$("input.doc_total_amount").each(function(){
-		total_riem+=parseFloat($(this).val());
-	});
-	if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
+	//只有一个收款人的时候进行total的设置
+	if($("tr.reciver").not(":hidden").size()==1)
 	{
-		$("tr.reciver").find("input.doc_ori_amount").first().val(total_riem);
-		$("tr.reciver").find("input.doc_HR_amount").first().val(total_riem);
-		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);
-	}
-	if(current_style_class.indexOf("doc_HR_amount")>=0)
-	{
-		$("tr.reciver").find("input.doc_HR_amount").first().val(total_riem);
-		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);
-	}
-	if(current_style_class.indexOf("doc_FI_amount")>=0)
-	{
-		$("tr.reciver").find("input.doc_FI_amount").first().val(total_riem);		
+		total_riem=0.00;
+		$("input.doc_total_amount").each(function(){
+			total_riem+=parseFloat($(this).val());
+		});
+		if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
+		{
+			$("tr.reciver").not(":hidden").find("input.doc_ori_amount").first().val(total_riem);
+			$("tr.reciver").not(":hidden").find("input.doc_HR_amount").first().val(total_riem);
+			$("tr.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);
+		}
+		if(current_style_class.indexOf("doc_HR_amount")>=0)
+		{
+			$("tr.reciver").not(":hidden").find("input.doc_HR_amount").first().val(total_riem);
+			$("tr.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);
+		}
+		if(current_style_class.indexOf("doc_FI_amount")>=0)
+		{
+			$("tr.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);		
+		}
 	}
 	//======================================================================================
 	if($("div.is_split_reim").size()==1)
@@ -80,7 +88,16 @@ function adjust_amount()
 		set_split_percent_amount();
 	}
 }
-
+//寻找该用那个控件进行total value的计算
+function find_control_cal_by_tr_wrapper(tr_wrapper)
+{
+	if(tr_wrapper.find("input.doc_FI_amount").size()>0)
+		return tr_wrapper.find("input.doc_FI_amount");
+	if(tr_wrapper.find("input.doc_apply_amount").size()>0)
+		return tr_wrapper.find("input.doc_apply_amount");
+	if(tr_wrapper.find("input.doc_ori_amount").size()>0)
+		return tr_wrapper.find("input.doc_ori_amount");
+}
 function set_split_percent_amount()
 {
 	//get total amount

@@ -16,6 +16,7 @@
 			<a href="#" class-data="Project"><span class="reference"></span></a>			
 		</div>
 	</td>
+	<% if @doc_head.doc_type!=9 %>
 	<td>
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
@@ -23,11 +24,12 @@
 			<a href="#" class-data="Fee"><span class="reference"></span></a>			
 		</div>
 	</td>
+	<% end %>
 	<td>
 		<%= f.text_field :percent,:class=>"normal split_percent" %>%  
 	</td>
 	<td>
-		<%= text_field_tag "percent_amount",0,:class=>"normal percent_amount" %>  
+		<%= f.text_field :percent_amount,:value=>0,:class=>"normal percent_amount" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>
