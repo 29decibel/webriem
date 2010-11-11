@@ -39,7 +39,7 @@ function adjust_amount()
 	}
 	if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 	{
-		$(this).closest("tr").find("input.doc_ori_amount").val(setting_value);
+		$(this).closest("tr").find("input.doc_ori_amount").val(doc_ori_amount);
 		$(this).closest("tr").find("input.doc_apply_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_HR_amount").val(setting_value);
 		$(this).closest("tr").find("input.doc_FI_amount").val(setting_value);

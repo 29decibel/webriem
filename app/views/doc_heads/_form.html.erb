@@ -15,7 +15,7 @@
 	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "单据号#{mark_required(f.object,:doc_no)}" %>
-			<%= f.text_field :doc_no,:class=>"input1" %>
+			<span><%= @doc_head.doc_no%></span>
 		</div>
 		<div class="form_field">
 			<%= f.label "申请人" %>

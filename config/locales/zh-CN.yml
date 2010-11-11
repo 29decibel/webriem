@@ -263,6 +263,7 @@
         ori_amount: "原始金额"
         real_amount: "实际金额"
         paid: "付款状态"
+        afford_dep_id: "费用承担部门"
         cp_doc_details:
           ori_amount: "原币金额"
           dep_id: "费用承担部门"
