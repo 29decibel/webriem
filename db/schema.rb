@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101111163010) do
+ActiveRecord::Schema.define(:version => 20101113011402) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20101111163010) do
     t.integer  "paid"
     t.integer  "approver_id"
     t.integer  "afford_dep_id"
+    t.integer  "upload_file_id"
   end
 
   create_table "duties", :force => true do |t|
@@ -327,16 +328,14 @@ ActiveRecord::Schema.define(:version => 20101111163010) do
     t.date     "reim_date"
     t.integer  "fee_time_span"
     t.integer  "people_count"
-    t.decimal  "amount",               :precision => 10, :scale => 0
+    t.decimal  "amount",        :precision => 10, :scale => 0
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "details_file_name"
-    t.string   "details_content_type"
-    t.integer  "details_file_size"
-    t.datetime "details_updated_at"
-    t.decimal  "hr_amount",            :precision => 8,  :scale => 2
-    t.decimal  "fi_amount",            :precision => 8,  :scale => 2
+    t.decimal  "hr_amount",     :precision => 8,  :scale => 2
+    t.decimal  "fi_amount",     :precision => 8,  :scale => 2
+    t.integer  "dep_id"
+    t.integer  "fee_id"
   end
 
   create_table "rd_common_transports", :force => true do |t|

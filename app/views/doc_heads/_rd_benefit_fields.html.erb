@@ -4,6 +4,20 @@
 	</td>
 	<td>
 		<%= f.text_field :reim_date,:class=>"datepicker normal" %>  
+  </td>
+  <td>
+		<div class="reference">
+			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref large_x" %>
+			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+		</div>
+  </td>
+  <td>
+		<div class="reference">
+			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
+			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+		</div>
 	</td>
 	<td>
 		<%= f.text_field :people_count,:class=>"normal" %>  
@@ -20,11 +34,6 @@
 	<td>
 		<%= f.text_field :fi_amount,:class=>"doc_FI_amount normal number" %>  
 	</td>
-	<td>
-		<%= f.label :uploads,:class=>"normal" %>
-		<%= f.hidden_field :id%>
-		<%= link_to_function("添加附件","add_upload_files(this,'#{upload_files_path}')")%>
-	</td>	
 	<td>
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "删除", f %> 

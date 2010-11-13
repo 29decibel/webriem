@@ -5,6 +5,7 @@ class DocHead < ActiveRecord::Base
   belongs_to :person
   belongs_to :currency
   belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
+  belongs_to :upload_file
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
   blongs_to_name_attr :afford_dep

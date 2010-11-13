@@ -383,7 +383,6 @@
 				<thead>
 					<tr>	
 						<th>序号</th>
-					    <th>费用类型*</th>
 					    <th>费用承担部门*</th>
 					    <th>项目*</th>
 					    <th>费用描述*</th>
@@ -400,7 +399,7 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="7"><%= link_to_add_fields "添加普通费用报销明细",f,:common_riems %></th>
+					<th colspan="6"><%= link_to_add_fields "添加普通费用报销明细",f,:common_riems %></th>
 					<td>申请金额合计</td>
 					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
@@ -568,12 +567,13 @@
 				<tr>					
 					<th>序号</th>
 				    <th>报销日期</th>
+            <th>费用承担部门</th>
+            <th>费用类型</th>
 				    <th>人数</th>
 				    <th>费用期间</th>
 				    <th>申请费用</th>
 					<th>HR调整</th>
 					<th>财务调整</th>
-					<th>附件</th>
 					<th></th><!--给删除的-->
 			    </tr>
 		    <thead>
@@ -583,7 +583,7 @@
 				<% end %>			
 			</tbody>
 			<tr>
-				<th colspan="5"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
+				<th colspan="7"><%= link_to_add_fields "添加福利费用",f,:rd_benefits %></th>
 				<td>申请金额合计</td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
