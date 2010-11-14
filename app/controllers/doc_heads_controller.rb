@@ -148,7 +148,7 @@ class DocHeadsController < ApplicationController
     #notice the person who need to approve this doc
     #WorkFlowMailer.notice_need_approve(@doc_head.approver,@doc_head).deliver
     #now i am using the delayed job to do this
-    Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
+    #Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
     @message="开始进入审批环节，审批期间单据不能修改"
     if @doc_head.approver==current_user.person
       @work_flow_info=WorkFlowInfo.new
@@ -202,9 +202,9 @@ class DocHeadsController < ApplicationController
           wf.doc_head.decline
         end
         wf.doc_head.save
-        #send two emails
-        Delayed::Job.enqueue MailingJob.new(:notice_need_approve, wf.doc_head.approver,wf.doc_head) 
-        Delayed::Job.enqueue MailingJob.new(:notice_approver, wf.doc_head.approver,wf.doc_head)
+        #send two emails 这里不处理邮件了
+        #Delayed::Job.enqueue MailingJob.new(:notice_need_approve, wf.doc_head.approver,wf.doc_head) 
+        #Delayed::Job.enqueue MailingJob.new(:notice_approver, wf.doc_head.approver,wf.doc_head)
       end
     end
     render :json=>"批量审批完成"
@@ -214,5 +214,18 @@ class DocHeadsController < ApplicationController
   def print
     output = HelloTest.new.to_pdf
     send_data output, :filename => "hello.pdf",:type => "application/pdf"
+  end
+  #==================================output to txt========================================
+  def output_to_txt
+    #send_data Person.first, :filename => "hello.txt",:type => "application/txt"
+    @recivers=[]
+    params[:ids].split('_').each do |id|
+      doc_head=DocHead.find_by_id(id)
+      if doc_head
+        doc_head.recivers.each do |r|
+          @recivers<<{:bank_no=>r.bank_no,:name=>r.company,:amount=>r.amount}
+        end
+      end
+    end
   end
 end

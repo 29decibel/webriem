@@ -26,7 +26,7 @@
 		<!--user log in info-->
 		<div id="user_nav">
 			<% if user_signed_in? %>  
-			    欢迎<%= current_user.name %>. <%= link_to "注销", destroy_user_session_path %>  
+			    欢迎 <%= current_user.name %>. <%= link_to "注销", destroy_user_session_path %>  
 				<%= link_to "修改密码","/common/new_reset_p"%>
 			<% else %>  
 			    <%= link_to "登录", new_user_session_path %>  

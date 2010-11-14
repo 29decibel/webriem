@@ -21,7 +21,7 @@ div#header{
 	margin-top: 10px;
 	margin-left: 5px;
 	position:relative;
-	background-image: url("../images/img_logo.gif");
+	background-image: url("../images/logo.png");
 	background-repeat:no-repeat;
 }
 div#header #title{
@@ -34,7 +34,7 @@ div#header #title{
 
 div#header #user_nav{
 	float: right;
-	margin-top: 10px;
+	margin-top: 60px;
 	margin-right: 20px;
 }
 div#main_area{
@@ -55,17 +55,17 @@ div#menu a.menu_item{
 	display: block;
 }
 div#menu a.menu_item:hover{
-	background-color: #E4F0F2;
+	background-color: #FFF9E5;
 }
 
 div#menu a.selected{
-	color:white;
-	background-color: #70A99F;
+	color:black;
+	background-color: #FBCC7F;
 }
 
 div#content{
 	margin: 0px 5px 20px 120px;
-	border: 5px solid #70A99F;
+	border: 5px solid #FBCC7F;
 	min-height:600px;
 }
 /*give the table a wear==========================================================*/
@@ -86,7 +86,7 @@ table.hor-zebra th
 	font-size: 14px;
 	font-weight: normal;
 	padding: 10px 8px;
-	color: #006173;
+	color: #655B04;
 }
 table.hor-zebra td
 {
@@ -99,7 +99,7 @@ table.hor-zebra td.action
 }
 table.hor-zebra tr:nth-child(even)
 { 
-	background: #E4F0F2; 
+	background: #FFF9E5; 
 }
 /*=================================================================================*/
 /*form styles*/
@@ -112,7 +112,7 @@ form{
 form div.form_area{
 	margin: 0px 15px 15px 15px;
 	padding: 10px;
-	background-color: #E4F0F2;	
+	background-color: #FFF9E5;	
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	overflow: auto;
@@ -256,7 +256,7 @@ table.form_input input.small{
 	width:25px;
 }
 table.form_input input.xsmall{
-	width:40px;
+	width:45px;
 }
 table.form_input input.middle{
 	width:184px;
@@ -335,7 +335,7 @@ div#work_flow_progress{
 	position: relative;
 	padding: 5px;
 	margin: 0 15px 15px 15px;
-	background-color: #E4F0F2;
+	background-color: #FFF9E5;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 }
@@ -353,8 +353,8 @@ div.work_flow_step span{
 	margin:0px;
 }	
 div.current_flow{
-	background-color: #1F8AEE;
-	color:white;
+	background-color: #FBCC7F;
+	color:black;
 }
 div.go_to{
 	background-image: url("../images/arrow.png");

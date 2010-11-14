@@ -178,26 +178,6 @@ class DocHead < ActiveRecord::Base
     end
     wfs
   end
-   ##may be one more person get back
-   #def approvers(work_flow_step=current_work_flow_step)
-   #  persons=nil
-   #  return nil if work_flow_step == nil
-   #  #不是本部门的直接找
-   #  if work_flow_step.is_self_dep==0
-   #    persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
-   #  else
-   #    return nil if self.approver_id==nil
-   #    approver_person=Person.find_by_id(self.approver_id)
-   #    return nil if approver_person==nil
-   #    dep=approver_person.dep
-   #    while dep
-   #      persons=Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
-   #      break if persons.count>0
-   #      dep=dep.parent_dep
-   #    end
-   #  end
-   #  persons
-   #end
   #the specific person if there are more than one person ,check the approver_id
   def approver(work_flow_step=current_work_flow_step)
     return nil if work_flow_step==nil
@@ -284,6 +264,13 @@ class DocHead < ActiveRecord::Base
         "未支付"
       end
     end
+  end
+  #here is the total custom display column names
+  def self.my_doc_display_columns
+    ["doc_no","person","apply_date","fee_id","doc_state","amount"]
+  end
+  def self.doc_to_approve_display_columns
+    ["doc_no","person","apply_date","fee_id","amount","doc_state"]
   end
   def self.not_search
     ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id']

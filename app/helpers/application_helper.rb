@@ -42,8 +42,12 @@ module ApplicationHelper
     filtered_columns_by class_object,:not_search
   end
   #used for search engine, this is  for display columns
-  def display_columns(class_object)
-    filtered_columns_by class_object,:not_display
+  def display_columns(class_object,user_display_array=[])
+    if user_display_array.size>0
+      get_columns_by_user_columns class_object,user_display_array
+    else
+      filtered_columns_by class_object,:not_display
+    end
   end
   #get the column value of the object
   def get_display_value(result_obj,column)
@@ -69,5 +73,13 @@ module ApplicationHelper
   private
   def filtered_columns_by(class_object,filter_type)
     class_object.columns.select{|c| !(%w[id created_at updated_at].include? c.name) and !(class_object.respond_to?(filter_type) and class_object.send(filter_type).include?(c.name))}
+  end
+  def get_columns_by_user_columns(class_object,user_display_array)
+    cols=[]
+    user_display_array.each do |u_d|
+      cols<<class_object.columns.select {|c| c.name==u_d}
+    end 
+    puts cols
+    cols.flatten
   end
 end

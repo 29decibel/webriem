@@ -24,7 +24,7 @@
 						<% if doc_offset %>
 							<%= label_tag "offset_info[#{index}][amount]",doc_offset.amount%>
 						<% else %>
-							<%= text_field_tag "offset_info[#{index}][amount]",0 %>
+							<%= text_field_tag "offset_info[#{index}][amount]",0,:class=>"offset_amount" %>
 						<% end %>
 					</td>
 					<td>

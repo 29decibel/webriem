@@ -23,9 +23,6 @@
 		<%= f.text_field :description,:class=>"large" %>  
 	</td>
 	<td>
-		<%= f.text_field :amount,:class=>"normal" %>  
-	</td>
-	<td>
 		<div class="reference">
 			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "currency_info",f.object.currency.to_s,:class=>"ref" %>
@@ -36,7 +33,10 @@
 		<%= f.text_field :rate,:class=>"small" %>  
 	</td>
 	<td>
-		<%= f.text_field :ori_amount,:class=>"normal" %>  
+		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  
+	</td>
+	<td>
+		<%= f.text_field :amount,:class=>"normal doc_apply_amount number" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>

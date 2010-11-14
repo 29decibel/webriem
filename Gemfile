@@ -11,6 +11,7 @@ gem "paperclip"
 gem "parseexcel"
 gem "excelsior"
 gem "prawn"
+gem "rufus-scheduler"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

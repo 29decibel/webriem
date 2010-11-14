@@ -7,6 +7,7 @@ $(function(){
 	//$("input.doc_apply_amount").attr("readonly",true);
 	$("input.split_percent").live("change",set_split_percent_amount);
 	$("input.split_percent").change();
+	$("input.offset_amount").live("change",offset_amount_change);
 });
 //$("input.doc_apply_amount").attr("readonly","readonly");
 function adjust_amount()
@@ -58,14 +59,26 @@ function adjust_amount()
 		total+=parseFloat($(this).val());
 	});
 	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
+	//whole page's total amount
+	total_riem=0.00;
+	$("input.doc_total_amount").each(function(){
+		total_riem+=parseFloat($(this).val());
+	});
+	//set page's amount
+	$("#total_riem").text(total_riem.toFixed(2));
 	//set the reciver amount==============================================================
 	//只有一个收款人的时候进行total的设置
 	if($("tr.reciver").not(":hidden").size()==1)
 	{
-		total_riem=0.00;
-		$("input.doc_total_amount").each(function(){
-			total_riem+=parseFloat($(this).val());
-		});
+		//whether there is a cp doc exist
+		if($("input.offset_amount").size()>0)
+		{
+			$("input.offset_amount").each(function(){
+				var current_amount=parseFloat($(this).val());
+				if(!isNaN(current_amount))
+					total_riem-=current_amount;
+			});
+		}
 		if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 		{
 			$("tr.reciver").not(":hidden").find("input.doc_ori_amount").first().val(total_riem);
@@ -88,6 +101,7 @@ function adjust_amount()
 		set_split_percent_amount();
 	}
 }
+
 //寻找该用那个控件进行total value的计算
 function find_control_cal_by_tr_wrapper(tr_wrapper)
 {
@@ -110,6 +124,13 @@ function set_split_percent_amount()
 	});
 }
 
+function offset_amount_change()
+{
+	//alert($("tr.reciver").not(":hidden").first().find("input.doc_ori_amount").val());
+	$("tr.reciver").not(":hidden").first().find("input.doc_ori_amount").change();
+	return false;
+}
+
 //init total amount
 function init_total_amount()
 {
@@ -129,15 +150,10 @@ function calculate_ori_amount()
 	//var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
 	//if(isNaN(other_fee))
 	//	other_fee=0;
-	if(isNaN(days))
+	if(!isNaN(days) && !isNaN(fee_standard))
 	{
-		days=0;
+		var total=(days*fee_standard).toFixed(2);
+		$(this).closest("tr").find("input.doc_ori_amount").val(total);
+		$(this).closest("tr").find("input.doc_ori_amount").change();
 	}
-	if(isNaN(fee_standard))
-	{
-		fee_standard=0.0;
-	}
-	var total=(days*fee_standard).toFixed(2);
-	$(this).closest("tr").find("input.doc_ori_amount").val(total);
-	$(this).closest("tr").find("input.doc_ori_amount").change();
 }

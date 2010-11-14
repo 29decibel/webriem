@@ -11,6 +11,8 @@ Webreim::Application.routes.draw do
   get "ajax_service/remove_offset",:as=>:remove_offset
   
   get "ajax_service/get_extrafee"
+    
+  get "doc_heads/output_to_txt(.:format)"
   
   get "doc_heads/pay"
   

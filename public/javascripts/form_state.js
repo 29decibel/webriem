@@ -44,9 +44,13 @@ function set_form_state()
 	$("input.number").numeric(".");
 	//always set the approvers not display
 	$("#approvers").css("display","none");
-	$('.number').change(function(){
+	$('.number').not(".doc_rate").change(function(){
 	  $(this).val(Number($(this).val()).toFixed(2));
 	});
+	$('.doc_rate').change(function(){
+	  $(this).val(Number($(this).val()).toFixed(4));
+	});
+	
 }
 
 function disable_all_inputs()

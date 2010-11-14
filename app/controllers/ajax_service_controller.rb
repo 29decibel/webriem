@@ -18,10 +18,18 @@ class AjaxServiceController < ApplicationController
     #"#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}"
   end
   def get_extrafee
-    hours=(Time.parse(params[:end_time])-Time.parse(params[:start_time]))/3600
-    end_time_hour=Time.parse(params[:end_time]).hour
+    #now i only care about the end time
+    end_time=Time.parse(params[:end_time])
+    puts params[:end_time]
+    puts end_time
+    #hours=(Time.parse(params[:end_time])-Time.parse(params[:start_time]))/3600
+    #end_time_hour=Time.parse(params[:end_time]).hour
     is_sunday=params[:is_sunday]=="true"
-    ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? and larger_than_hours<?",is_sunday,params[:fee_code],hours)
+    if is_sunday
+      ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? ",is_sunday,params[:fee_code])
+    else
+      ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? and timediff(time(?),time(late_than_time))>0",is_sunday,params[:fee_code],end_time.to_s)
+    end
    #if ex_st.count==0
    #  ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? and (late_than_time<=? or larger_than_hours<?)",is_sunday,params[:fee_code],end_time_hour,hours)
    #  if ex_st.count==0
@@ -40,5 +48,8 @@ class AjaxServiceController < ApplicationController
     @message="成功去除"
     render "shared/show_result"
   end
-
+  #==================================output to txt========================================
+  def output_to_txt
+    send_data Person.first, :filename => "hello.txt",:type => "application/txt"
+  end
 end

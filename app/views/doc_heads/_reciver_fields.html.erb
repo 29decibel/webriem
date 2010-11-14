@@ -17,10 +17,10 @@
 		</div>
 	</td>
 	<td>  
-		<%= f.text_field :company,:class=>"normal" %>  
+		<%= f.text_field :company,:class=> @doc_head.doc_type==2 ? "large" : "normal" %>  
 	</td>
 	<td>  
-		<%= f.text_field :bank,:class=>"normal" %>  
+		<%= f.text_field :bank,:class=>@doc_head.doc_type==2 ? "large" : "normal" %>  
 	</td>
 	<td>  
 		<%= f.text_field :bank_no ,:class=>"large"%>  

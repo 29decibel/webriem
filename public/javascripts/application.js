@@ -119,7 +119,8 @@ $(function(){
 			//when you want to find something another cell
 			//first go up until find the table row and then find stuff you want within it 
 			var fee_standard_control=$(this).closest("tr").find("input.fee_standard");
-			//make a ajax call and get the fee
+			//make a ajax call and get the fee[ not all the time ]
+			//if($("#form_state"))
 			$.ajax({
 			  type: "GET",
 			  url: "/ajax_service/getfee",
@@ -163,8 +164,11 @@ $(function(){
 						//set fees
 						extra_st_control.val(msg);
 						//alert(msg);
-						extra_st_control.closest("tr").find("input.doc_ori_amount").val(msg);
-						extra_st_control.closest("tr").find("input.doc_ori_amount").change();
+						var amount=parseFloat(msg);
+						if(!isNaN(amount)){
+							extra_st_control.closest("tr").find("input.doc_ori_amount").val(amount);
+							extra_st_control.closest("tr").find("input.doc_ori_amount").change();
+						}
 				  },
 					error: function(){
 						extra_st_control.val("暂无*");
@@ -173,9 +177,9 @@ $(function(){
 			}
 		});
 		//fire the region type change
-		$(".region_type_select").change();
+		//$(".region_type_select").change();
 		//fire the region change event
-		$("input.get_fee").change();
+		//$("input.get_fee").change();
 		//set reference readonly
 		$("input.ref").attr("readonly",true);
 		//set the fee standard readonly
@@ -474,6 +478,33 @@ function batch_approve_confirm()
 			$("a.filter").submit();
 			$.unblockUI();
 		}
+	});	
+}
+function output_to_txt()
+{
+	//now get all ids
+	var ids="";
+	$("input:checked.ref_select").each(function(){
+		ids += $(this).siblings("input.hidden_id").val() + "_";
 	});
-	
+	//trim the ;
+	if(ids.length>0)
+	{
+		ids=ids.substring(ids.length-1,"");
+		document.location.href = "/doc_heads/output_to_txt.txt?ids="+ids;
+	}
+}
+function output_to_pdf()
+{
+	//now get all ids
+	var ids="";
+	$("input:checked.ref_select").each(function(){
+		ids += $(this).siblings("input.hidden_id").val() + "_";
+	});
+	//trim the ;
+	if(ids.length>0)
+	{
+		ids=ids.substring(ids.length-1,"");
+		document.location.href = "/doc_heads/output_to_txt.pdf?ids="+ids;
+	}
 }

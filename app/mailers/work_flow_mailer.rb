@@ -1,6 +1,6 @@
 #coding: utf-8
 class WorkFlowMailer < ActionMailer::Base
-  default :from => "mike.d.1984@gmail.com"
+  default :from => "eos@skccsystems.cn"
   #the notice of approving 
   def notice_need_approve(approver,doc_head)
     @approver=approver

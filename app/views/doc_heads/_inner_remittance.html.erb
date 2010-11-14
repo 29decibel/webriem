@@ -14,20 +14,6 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "收款账户",:class=>"large" %>
-		<div class="reference">
-			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "in_account_info",detail_doc.in_account.to_s,:class=>"ref large" %>
-			<a href="#" class-data="Account"><span class="reference"></span></a>			
-		</div>
-	</div>
-	<div class="form_field">
-		<%= f.label "收款账户结汇后余额",:class=>"large" %>
-		<%= f.text_field :remain_amount,:class=>"input1 " %> 
-	</div>
-</div>
-<div class="form_block">
-	<div class="form_field">
 		<%= f.label "结汇账户" ,:class=>"large"%>
 		<div class="reference">
 			<%= f.hidden_field :out_account_id,{:class=>"ref_hidden_field"}%>
@@ -38,6 +24,20 @@
 	<div class="form_field">
 		<%= f.label "结汇账户结汇后余额",:class=>"large" %>
 		<%= f.text_field :in_amount_after,:class=>"input1 " %> 
+	</div>
+</div>
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "收款账户",:class=>"large" %>
+		<div class="reference">
+			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "in_account_info",detail_doc.in_account.to_s,:class=>"ref large" %>
+			<a href="#" class-data="Account"><span class="reference"></span></a>			
+		</div>
+	</div>
+	<div class="form_field">
+		<%= f.label "收款账户结汇后余额",:class=>"large" %>
+		<%= f.text_field :remain_amount,:class=>"input1 " %> 
 	</div>
 </div>
 <div class="form_block">

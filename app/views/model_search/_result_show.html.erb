@@ -5,7 +5,7 @@
 			<%= check_box_tag "selected_all"%>
 		<% end %>
 	</th>
-	<% display_columns(@class).each do |c|%>
+	<% display_columns(@class,params[:user_display_columns] ? @class.send(params[:user_display_columns]) : []).each do |c|%>
     <th><%= @class.human_attribute_name(c.name)%></th>
 	<% end %>
 	<!--here is the custom display columns-->
