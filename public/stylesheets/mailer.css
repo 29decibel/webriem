@@ -1,0 +1,22 @@
+body{
+	width:1020px;
+	margin:auto;
+	font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;
+}
+/*parts*/
+div#header{
+	height:100px;
+	margin-top: 10px;
+	margin-left: 0px;
+	position:relative;
+	background-image: url("../images/image002.jpg");
+	background-repeat:no-repeat;
+}
+div#content{
+	margin-left: 0px;
+	padding-left: 50px;
+	color: #1F497D;
+	font-size: 10pt;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+}

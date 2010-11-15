@@ -1,5 +1,5 @@
-class MailingJob < Struct.new(:notifier_method,:approver,:doc_head)  
+class MailingJob < Struct.new(:mail_method,:para)  
   def perform 
-    WorkFlowMailer.send(notifier_method, approver,doc_head).deliver  
+    WorkFlowMailer.send(mail_method, para).deliver  
   end  
 end
