@@ -79,6 +79,7 @@ function adjust_amount()
 					total_riem-=current_amount;
 			});
 		}
+    total_riem=total_riem.toFixed(2);
 		if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 		{
 			$("tr.reciver").not(":hidden").find("input.doc_ori_amount").first().val(total_riem);
