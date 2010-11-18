@@ -50,7 +50,7 @@ class WorkFlowInfosController < ApplicationController
     #Delayed::Job.enqueue MailingJob.new(:notice_approver, @work_flow_info.doc_head.approver,@work_flow_info.doc_head) 
     @doc_head=@work_flow_info.doc_head
     if @work_flow_info.valid? and @doc_head.valid?
-      @work_flow.save && @doc_head.save
+      @work_flow_info.save && @doc_head.save
       @message="审批完成"
       @work_flow_info=nil
       render "shared/show_result"

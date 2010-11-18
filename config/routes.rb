@@ -16,7 +16,7 @@ Webreim::Application.routes.draw do
   
   get "doc_heads/pay"
   
-  get "doc_heads/print"
+  get "doc_heads/print(.:format)"
 
   get "doc_heads/giveup"
   

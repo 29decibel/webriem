@@ -1,5 +1,6 @@
 #coding: utf-8
 #require "ruby-debug"
+require 'prawn/layout'
 #借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
 #9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
 #DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
@@ -221,8 +222,59 @@ class DocHeadsController < ApplicationController
   end
   #print goes here
   def print
-    output = HelloTest.new.to_pdf
-    send_data output, :filename => "hello.pdf",:type => "application/pdf"
+    doc=DocHead.find(params[:doc_id])
+    pdf = Prawn::Document.new
+    pdf.font"#{::Prawn::BASEDIR}/data/fonts/Kai.ttf"
+    #title
+    pdf.text "出差报销单",:size=>18,:align=>:center
+    #image
+    logo = "public/images/logo_new.png"
+    pdf.image logo, :scale => 0.8
+    #table here
+    pdf.table [
+      ["出差人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
+      ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
+      ["项目编号","#{doc.project.name}","项目名称","#{doc.project.code}"],
+      ["费用承担部门","#{doc.dep.name}","",""]],:width=>550,:border_style => :grid
+    #travel
+    if doc.rd_travels.count>0
+      pdf.move_down 10
+      pdf.text "差旅费补助明细"
+      pdf.table doc.rd_travels.map {|r| ["#{r.days}","#{r.region_type.name}","#{r.region}","#{r.reason}","#{r.ori_amount}"]},
+        :headers => ["出差天数","地区级次","出差地点","出差事由","原币金额"],:width=>550,:border_style => :grid,:header=>true
+    end
+    #transport
+    if doc.rd_transports.count>0
+      pdf.move_down 10
+      pdf.text "交通费明细"
+      pdf.table doc.rd_transports.map {|r| ["#{r.start_date}","#{r.end_date}","#{r.start_position}","#{r.end_position}","#{r.reason}","#{r.ori_amount}"]},
+        :headers => ["开始时间","到达时间","出发地","目的地","出差事由","原币金额"],:width=>550,:border_style => :grid,:header=>true
+    end
+    #lodging
+    if doc.rd_lodgings.count>0
+      pdf.move_down 10
+      pdf.text "住宿费明细"
+      pdf.table doc.rd_lodgings.map {|r| ["#{r.start_date}","#{r.end_date}","#{r.days}","#{r.region}","#{r.people_count}","#{r.ori_amount}"]},
+        :headers => ["开始日期","结束日期","住宿天数","城市","人数","原币金额"],:width=>550,:border_style => :grid,:header=>true
+    end
+    #other riems
+    if doc.other_riems.count>0
+      pdf.move_down 10
+      pdf.text "其他费用明细"
+      pdf.table doc.other_riems.map {|r| ["#{r.sequence}","#{r.description}","#{r.ori_amount}"]},
+        :headers => ["序号","费用说明","原币金额"],:width=>550,:border_style => :grid,:header=>true
+    end
+    #final render
+    pdf.move_down 5
+    pdf.text "报销总金额:  "+doc.total_apply_amount.to_s,:align=>:right
+    #work flow infos
+    if doc.work_flow_infos.count>0
+      pdf.move_down 10
+      pdf.text "审批信息"
+      pdf.table doc.work_flow_infos.map {|r| ["#{w.person}","#{w.created_at}","#{w.is_ok ? "通过" : "否决"}","#{w.comments}"]},
+        :headers => ["审批人","审批时间","是否通过","批语"],:width=>550,:border_style => :grid,:header=>true 
+    end
+    send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
   end
   #==================================output to txt========================================
   def output_to_txt
