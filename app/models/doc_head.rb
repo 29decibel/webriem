@@ -1,5 +1,4 @@
 #coding: utf-8
-require 'ruby-debug'
 class DocHead < ActiveRecord::Base
   belongs_to :fee
   belongs_to :dep
