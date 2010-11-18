@@ -73,7 +73,7 @@ class DocHead < ActiveRecord::Base
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
   enum_attr :is_split, [['否', 0], ['是', 1]]
   Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过"}
-  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"工作餐费报销",11=>"加班费报销",12=>"业务交通费报销",13=>"福利费用报销"}
+  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
   #validate the amout is ok
   validate :must_equal,:dep_and_project_not_null
   def must_equal
