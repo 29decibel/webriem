@@ -12,7 +12,7 @@ gem "parseexcel"
 gem "excelsior"
 gem "prawn"
 gem "rufus-scheduler"
-gem "uuid"
+#gem "uuid"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -43,7 +43,7 @@ gem "uuid"
 #group :development, :test do
 #  gem 'ruby-debug19'
 #end
-group :development do
-  gem "ruby-debug19"
-end
+#group :development do
+#  gem "ruby-debug19"
+#end
 
