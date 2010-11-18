@@ -45,7 +45,14 @@ class TaskController < ApplicationController
   end
 	#
   def private_cmd
-  	PersonType.create(:name=>"MTA",:code=>"MTA")
-	  PersonType.create(:name=>"管理担当",:code=>"MN")
+  	#PersonType.create(:name=>"MTA",:code=>"MTA")
+	  #PersonType.create(:name=>"管理担当",:code=>"MN")
+    Person.all.each do |p|
+      u=User.find_by_name(p.code)
+      if u==nil
+        u=User.create(:name=>p.code,:email=>p.e_mail.chop,:password=>"123456",:password_confirmation=>"123456")
+        logger.info "#{u.errors}=====#{u.name}"
+      end
+    end
   end
 end
