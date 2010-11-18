@@ -40,7 +40,7 @@ end
 BusinessType.create(:name=>"借款");
 BusinessType.create(:name=>"报销");
 BusinessType.create(:name=>"其他");
-#region types
+#region typesde
 #RegionType.delete_all
 RegionType.create(:name=>"一级地区");
 RegionType.create(:name=>"二级地区");
@@ -54,6 +54,9 @@ PersonType.create(:name=>"财务主管",:code=>"FI")
 PersonType.create(:name=>"出纳",:code=>"CA")
 PersonType.create(:name=>"MTA",:code=>"MTA")
 PersonType.create(:name=>"管理担当",:code=>"MN")
+#here is the config helper
+ConfigHelper.delete_all
+ConfigHelper.create(:key=>"doc_count",:value=>"0")
 #the default user
 if !User.find_by_name("admin")
   User.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"adminadmin",:password_confirmation=>"adminadmin")

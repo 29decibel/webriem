@@ -42,11 +42,19 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new
   # GET /doc_heads/new.xml
   def new
+    #set a number to
+    doc_count_config=ConfigHelper.find_by_key(:doc_count)
+    if doc_count_config.value==5000
+      doc_count_config.value="0"
+    else
+      doc_count_config.value=(doc_count_config.value.to_i+1).to_s
+    end
+    doc_count_config.save
     @doc_head = DocHead.new
     @doc_head.doc_state = 0
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
-    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%d%m")+DocHead.all.count.to_s.rjust(4,"0")
+    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%d%m")+doc_count_config.value.rjust(4,"0")
     @doc_head.apply_date=Time.now
     @doc_head.dep=current_person.dep
     @doc_type = @doc_head.doc_type

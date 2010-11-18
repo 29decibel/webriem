@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101118065619) do
+ActiveRecord::Schema.define(:version => 20101118090611) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(:version => 20101118065619) do
     t.decimal  "rate",         :precision => 6,  :scale => 4
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.integer  "doc_head_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "config_helpers", :force => true do |t|
+    t.string   "key"
+    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
