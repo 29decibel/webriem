@@ -83,7 +83,8 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_apply_amount}") if is_split==1 and split_total_amount!=total_apply_amount
   end
   def dep_and_project_not_null
-    errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0
+    #debugger
+    errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)
   end
   def self.custom_display_columns
   	{"申请金额"=>:total_apply_amount}
@@ -96,6 +97,23 @@ class DocHead < ActiveRecord::Base
         next if cp.apply_amount==nil
         total+=cp.apply_amount
       end
+    end
+    if doc_type==4
+      total=inner_remittance.amount
+    end
+    if doc_type==5
+      total=inner_transfer.amount 
+    end
+    if doc_type==6
+      inner_cash_draw.cash_draw_items.each do |c_item|
+        total+=c_item.apply_amount
+      end
+    end
+    if doc_type==7
+      total=buy_finance_product.amount
+    end
+    if doc_type==8
+      total=redeem_finance_product.amount
     end
     if doc_type==9
       [rd_travels,rd_transports,rd_lodgings,other_riems].each do |rd|
