@@ -43,7 +43,7 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new.xml
   def new
     #set a number to
-    doc_count_config=ConfigHelper.find_by_key(:doc_count)
+    doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0") 
     if doc_count_config.value==5000
       doc_count_config.value="0"
     else
