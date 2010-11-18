@@ -224,7 +224,7 @@ class DocHeadsController < ApplicationController
   def print
     doc=DocHead.find(params[:doc_id])
     pdf = Prawn::Document.new
-    pdf.font"#{::Prawn::BASEDIR}/data/fonts/Kai.ttf"
+    pdf.font "#{::Prawn::BASEDIR}/data/fonts/Kai.ttf"
     #title
     pdf.text "出差报销单",:size=>18,:align=>:center
     #image
