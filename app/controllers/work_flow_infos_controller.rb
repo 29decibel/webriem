@@ -55,7 +55,7 @@ class WorkFlowInfosController < ApplicationController
       render "shared/show_result"
     else
       #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@work_flow_info)}
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@work_flow_info)+get_error_messages(@doc_head)}
     end
   end
 
