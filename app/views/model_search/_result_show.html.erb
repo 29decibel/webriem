@@ -45,7 +45,13 @@
 	    <td class="action"><%= link_to '查看', result %></td>
 	<% end %>
 	<% if params[:deletable]%>
-    	<td class="action"><%= link_to '删除', result, :confirm => '是否真的要删除?', :method => :delete %></td>
+    <td class="action">
+      <% if result.respond_to? :can_delete and !result.can_delete %>
+        <span></span>
+      <% else %>
+        <%= link_to '删除', result, :confirm => '是否真的要删除?', :method => :delete %>
+      <% end %>
+    </td>
     <% end %>
   </tr>
 <% end %>

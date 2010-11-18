@@ -139,12 +139,12 @@ class DocHeadsController < ApplicationController
   # DELETE /doc_heads/1.xml
   def destroy
     @doc_head = DocHead.find(params[:id])
-    @doc_head.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(doc_heads_url) }
-      format.xml  { head :ok }
-    end
+    #if @doc_head.doc_state==0
+      @doc_head.destroy
+      redirect_to(my_docs_url)
+    #else
+    #  render "shared/errors",:locals=>{:error_msg=>"只有未提交审批的单据可以删除"}
+    #end
   end
   #将单据进入审批阶段
   def begin_work

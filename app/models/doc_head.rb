@@ -289,6 +289,9 @@ class DocHead < ActiveRecord::Base
       end
     end
   end
+  def can_delete
+    return doc_state==0
+  end
   #here is the total custom display column names
   def self.my_doc_display_columns
     ["doc_no","person","apply_date","doc_type","doc_state","amount"]

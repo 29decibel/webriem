@@ -2,7 +2,7 @@
 class TaskController < ApplicationController
   def my_docs
     if current_user.person
-      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"person_id=#{current_user.person.id}",:lookup=>true,:title=>"我的单据",:layout=>true,:outputable=>true,:printable=>true,:user_display_columns=>:my_doc_display_columns
+      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"person_id=#{current_user.person.id}",:lookup=>true,:title=>"我的单据",:layout=>true,:outputable=>true,:printable=>true,:user_display_columns=>:my_doc_display_columns,:deletable=>true
     else
       render "task/no_rights_error"
     end
