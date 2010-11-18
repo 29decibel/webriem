@@ -234,7 +234,7 @@ class DocHead < ActiveRecord::Base
     self.work_flow_step_id=-1
   end
   #==================================about filter================================
-  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','paid','project_id','upload_file_id','note']
+  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','paid','project_id','upload_file_id','note','total_amount']
   def self.not_display
     NOT_DISPLAY
   end
