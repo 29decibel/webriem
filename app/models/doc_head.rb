@@ -270,10 +270,10 @@ class DocHead < ActiveRecord::Base
   end
   #here is the total custom display column names
   def self.my_doc_display_columns
-    ["doc_no","person","apply_date","fee_id","doc_state","amount"]
+    ["doc_no","person","apply_date","doc_type","doc_state","amount"]
   end
   def self.doc_to_approve_display_columns
-    ["doc_no","person","apply_date","fee_id","amount","doc_state"]
+    ["doc_no","person","apply_date","doc_type","amount","doc_state"]
   end
   def self.not_search
     ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id']
