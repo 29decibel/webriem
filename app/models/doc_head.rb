@@ -187,7 +187,7 @@ class DocHead < ActiveRecord::Base
     persons=nil
     dep_to_find=nil
     #decide the dep to look for
-    if self.person.duty.code=="001" and work_flow_step.work_flow.work_flow_steps.first.duty.code=="003"
+    if work_flow_step.work_flow.work_flow_steps.first.duty.code=="003"
       return nil if approver_id==nil
       approver_person=Person.find_by_id(self.approver_id)
       return nil if approver_person==nil
