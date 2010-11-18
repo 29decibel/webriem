@@ -35,6 +35,7 @@ module ApplicationHelper
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
   #to display a nice format date
   def display_date(input_date)
+    return '' if input_date==nil
     input_date.strftime("%Y-%m-%d")
   end
   #used for search engine
