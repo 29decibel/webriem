@@ -41,7 +41,7 @@ gem "rufus-scheduler"
 # end
 
 #group :development, :test do
-#  gem 'ruby-debug19'
+gem "ruby-debug19"
 #end
 #group :development do
 #  gem "ruby-debug19"
