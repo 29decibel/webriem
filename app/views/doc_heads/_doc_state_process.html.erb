@@ -6,7 +6,7 @@
 	<% end %>
 	<% if doc.work_flows %>
 		<%= hidden_field_tag "doc_id",doc.id%>
-		<% if doc.doc_state==0 and doc.person.duty.code=="001" and doc.work_flows and doc.work_flows.first and doc.work_flows.first.duty.code=="003"%>
+		<% if doc.doc_state==0 and doc.work_flows and doc.work_flows.first and doc.work_flows.first.duty.code=="003"%>
 			<div id="approvers" class="form_area">
 				<h3>选择审批人</h3>
 				<table class="form_input">

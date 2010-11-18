@@ -75,12 +75,15 @@ class DocHead < ActiveRecord::Base
   Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过"}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"工作餐费报销",11=>"加班费报销",12=>"业务交通费报销",13=>"福利费用报销"}
   #validate the amout is ok
-  validate :must_equal
+  validate :must_equal,:dep_and_project_not_null
   def must_equal
     errors.add(:base, "报销总金额#{total_apply_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_apply_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
     errors.add(:base,"借款总金额#{total_apply_amount} 不等于 收款总金额#{reciver_amount}") if total_apply_amount!=reciver_amount and doc_type<=2
     #the amount of issplit should be equal to total_apply_amount
     errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_apply_amount}") if is_split==1 and split_total_amount!=total_apply_amount
+  end
+  def dep_and_project_not_null
+    errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0
   end
   def self.custom_display_columns
   	{"申请金额"=>:total_apply_amount}
@@ -153,10 +156,10 @@ class DocHead < ActiveRecord::Base
   def reciver_amount
     total=0
     recivers.each do |r|
-      if doc_type>=9 and doc_type<12
+      if [9,11].include? doc_type
         next if r.fi_amount==nil
         final_amount=r.fi_amount
-      else
+      else    #[10,12]
         next if r.amount==nil
         final_amount=r.amount
       end
