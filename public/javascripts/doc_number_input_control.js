@@ -1,6 +1,6 @@
 $(function(){
 	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount").live("change",adjust_amount);
-	$("input.number").numeric(".");
+	//$("input.number").numeric(".");
 	init_total_amount();
 	$("input.travel_days,input.fee_standard,input.other_fee").live("change",calculate_ori_amount);
 	//set all apply amount readonly
