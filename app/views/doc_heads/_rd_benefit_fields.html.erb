@@ -2,9 +2,6 @@
 	<td>
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
-	<td>
-		<%= f.text_field :reim_date,:class=>"datepicker normal" %>  
-  </td>
   <td>
 		<div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
@@ -12,6 +9,13 @@
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
 		</div>
   </td>
+	<td>
+		<div class="reference">
+			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref middle" %>
+			<a href="#" class-data="Project"><span class="reference"></span></a>			
+		</div>
+	</td>
   <td>
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>

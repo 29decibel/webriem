@@ -75,6 +75,7 @@
 	<% end %>
 	<% if ([9,11,13].include? @doc_head.doc_type)%>
 	<div class="form_block">
+		<% if @doc_head.doc_type!=13%>
 		<div class="form_field">
 			<%= f.label "项目" %>			
 			<div class="reference project">
@@ -83,10 +84,11 @@
 				<a href="#" class-data="Project"><span class="reference"></span></a>			
 			</div>
 		</div>
-			<div class="form_field">
-				<%= f.label "是否分摊" %>
-				<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
-			</div>
+		<% end %>
+		<div class="form_field">
+			<%= f.label "是否分摊" %>
+			<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
+		</div>
 	</div>
 	<% end %>
 	<div class="form_block">
@@ -572,8 +574,8 @@
 			<thead>
 				<tr>					
 					<th>序号</th>
-				    <th>报销日期</th>
             <th>费用承担部门</th>
+			<th>项目</th>
             <th>费用类型</th>
 				    <th>人数</th>
 				    <th>费用期间</th>

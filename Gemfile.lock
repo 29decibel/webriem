@@ -105,5 +105,5 @@ DEPENDENCIES
   parseexcel
   pdfkit
   prawn
-  rails (= 3.0.0)
+  rails (= 3.0.3)
   rufus-scheduler
