@@ -146,7 +146,7 @@ function init_total_amount()
 
 function calculate_ori_amount()
 {
-	var days= parseInt($(this).closest("tr").find("input.travel_days").val());
+	var days= parseFloat($(this).closest("tr").find("input.travel_days").val());
 	var fee_standard=parseFloat($(this).closest("tr").find("input.fee_standard").val());
 	//var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
 	//if(isNaN(other_fee))
