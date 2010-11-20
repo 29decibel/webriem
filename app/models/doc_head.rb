@@ -198,7 +198,7 @@ class DocHead < ActiveRecord::Base
   def current_work_flow_step
     wfs=nil
     if self.work_flow_step_id and self.work_flow_step_id>=0
-      wfs=WorkFlowStep.find(self.work_flow_step_id)
+      wfs=WorkFlowStep.find_by_id(self.work_flow_step_id)
     end
     wfs
   end
@@ -216,6 +216,8 @@ class DocHead < ActiveRecord::Base
     else
       dep_to_find=self.person.dep
     end
+    #if current you find  the part member then return approver_person directly
+    return approver_person if work_flow_step.duty.code=='003'
     #ok now we start to find that person
     if work_flow_step.is_self_dep==0
       persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
@@ -294,10 +296,11 @@ class DocHead < ActiveRecord::Base
   end
   #here is the total custom display column names
   def self.my_doc_display_columns
-    ["doc_no","person","apply_date","doc_type","doc_state","amount"]
+    ["doc_no","person_id","apply_date","doc_type","doc_state","amount"]
   end
   def self.doc_to_approve_display_columns
-    ["doc_no","person","apply_date","doc_type","amount","doc_state"]
+    #debugger
+    ["doc_no","person_id","apply_date","doc_type","amount","doc_state"]
   end
   def self.not_search
     ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id']

@@ -319,7 +319,6 @@ function select_approver_or_begin_work_flow()
 function begin_work_flow(link)
 {
 	approver_id=$("input:checked.ref_select").siblings("#approver").val();
-	alert(approver_id);
 	make_bwf_request(approver_id);
 }
 
