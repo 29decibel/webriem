@@ -271,7 +271,7 @@ class DocHeadsController < ApplicationController
     if doc.work_flow_infos.count>0
       pdf.move_down 10
       pdf.text "审批信息"
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok ? "通过" : "否决"}","#{w.comments}"]},
+      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],:width=>550,:border_style => :grid,:header=>true 
     end
     send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
