@@ -218,6 +218,12 @@ function reference_change()
 		if(rate_input.size()>0)
 		{
 			rate_input.val(other_info.split('_')[0]);
+			rate_input.change();
+		}
+		if(other_info.split('_').length>1)
+		{
+			//find the symbol control and set
+			
 		}
 	}
 }
