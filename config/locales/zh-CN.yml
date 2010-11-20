@@ -298,6 +298,8 @@
           currency_id: "普通费用报销明细 币种"
         rec_notice_details:
           ori_amount: "收款明细 原币金额"
+          project_id: "收款明细 项目"
+          dep_id: "收款明细 费用承担部门"
         rd_extra_work_meals:
           ori_amount: "加班餐费明细 原币金额"
           start_time: "加班餐费明细 开始时间"

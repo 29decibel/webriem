@@ -4,4 +4,7 @@ class Currency < ActiveRecord::Base
   def to_s
     "#{code}"
   end
+  def other_info
+    default_rate
+  end
 end

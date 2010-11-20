@@ -203,9 +203,24 @@ $(function(){
 			}
 		});
 		$("select.is_self_dep").change();
+		//reference changes
+		$("input.ref").live("change",reference_change);
 
 });
-
+//reference change
+function reference_change()
+{
+	if($(this).attr("id")=="currency_info")
+	{
+		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
+		//find the rate input 
+		var rate_input=$(this).closest("tr").find(".doc_rate");
+		if(rate_input.size()>0)
+		{
+			rate_input.val(other_info.split('_')[0]);
+		}
+	}
+}
 function adapt_apply_amount_by_rate()
 {
 	var tr= $(this).closest("tr");
@@ -374,6 +389,8 @@ function pop_up_reference_window()
 		$(this).siblings(".ref").val(returnValue.displays);
 		//set the id
 		$(this).siblings(".ref_hidden_field").val(returnValue.ids);
+		//set other infos
+		$(this).siblings(".ref_hidden_field").attr("data-other-info",returnValue.other_infos);
 		//fire the change event so now you can get the fee standard
 		$(this).siblings(".ref").change();
 	}
@@ -385,9 +402,11 @@ function back_to_the_reference()
 {
 	var ids="";
 	var displays="";
+	var other_infos="";
 	$("input:checked.ref_select").each(function(){
 		ids += $(this).siblings("input.hidden_id").val() + "_";
 		displays += $(this).siblings("input.hidden_display").val() + ";";
+		other_infos+=$(this).siblings("input.hidden_other_info").val() + ";";
 	});
 	//trim the ;
 	if(ids.length>0)
@@ -398,11 +417,15 @@ function back_to_the_reference()
 	{
 		displays=displays.substring(displays.length-1,"");
 	}
-	
+	if(other_infos.length>0)
+	{
+		other_infos=other_infos.substring(other_infos.length-1,"");
+	}
 	//alert($("input:checked.ref_select").size());
 	var returnInfo=new Object();
 	returnInfo.ids=ids;
 	returnInfo.displays=displays;
+	returnInfo.other_infos=other_infos;
 	//returnInfo.id=
 	//$()
 	//set the return value

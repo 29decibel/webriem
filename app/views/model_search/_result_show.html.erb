@@ -25,10 +25,13 @@
 	
 		<td>
 			<% if params[:checkable]%>
-			<%= check_box_tag 'selected', 'yes', params[:values] ? params[:values].split('_').include?(result.id.to_s) : false, :class => 'ref_select'%>
-			<!--hidden row store the reference info-->
-			<%= hidden_field_tag "hidden_id[#{result.id}]",result.id,{:class=>"hidden_id"} %>
-			<%= hidden_field_tag "hidden_display[#{result.id}]",result.to_s,{:class=>"hidden_display"} %>
+				<%= check_box_tag 'selected', 'yes', params[:values] ? params[:values].split('_').include?(result.id.to_s) : false, :class => 'ref_select'%>
+				<!--hidden row store the reference info-->
+				<%= hidden_field_tag "hidden_id[#{result.id}]",result.id,{:class=>"hidden_id"} %>
+				<%= hidden_field_tag "hidden_display[#{result.id}]",result.to_s,{:class=>"hidden_display"} %>
+				<% if result.respond_to? :other_info %>
+					<%= hidden_field_tag "hidden_other_info[#{result.id}]",result.other_info,{:class=>"hidden_other_info"} %>
+				<% end %>
 			<% end %>
 		</td>
 	
