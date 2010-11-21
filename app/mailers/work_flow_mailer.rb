@@ -2,7 +2,7 @@
 #this mailer is used for work flow
 class WorkFlowMailer < ActionMailer::Base
   layout 'mailer_layout'
-  default :from => "eos@skccsystems.cn"
+  default :from => "mike.d.1984@gmail.com"
   # 1.paid 已经付款 
   def doc_paid(para)
     @docs_total=para[:docs_total]

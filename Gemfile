@@ -12,6 +12,7 @@ gem "parseexcel"
 gem "excelsior"
 gem "prawn"
 gem "rufus-scheduler"
+gem "activerecord-sqlserver-adapter"
 #gem "uuid"
 
 # Bundle edge Rails instead:

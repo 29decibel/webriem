@@ -24,14 +24,15 @@ def send_email
   #send the mail
   para={}
   person_doc.each do |person,docs|
-    para[:mail]=person.e_mail
+    para[:mail]="79413824@qq.com"#person.e_mail
     para[:docs_count]=docs.count
     para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_apply_amount }
     puts "sending email to #{para[:mail]} docs count is #{para[:docs_count]} docs total is #{para[:docs_total]}"
-    Delayed::Job.enqueue MailingJob.new(:notice_docs_to_approve, para)
+    WorkFlowMailer.notice_docs_to_approve para
+    #Delayed::Job.enqueue MailingJob.new(:notice_docs_to_approve, para)
   end
 end
 #test only
 scheduler.every '2s' do
-   #send_email
+   send_email
 end
