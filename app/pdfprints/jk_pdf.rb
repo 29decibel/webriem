@@ -22,7 +22,7 @@ class JkPdf < Prawn::Document
       move_down 10
       text "借款单据明细",:size=>12
       move_down 2
-      table doc.cp_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project.name : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
+      table doc.cp_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","费用用途","币种","汇率","原币金额","本币金额"],
         :width=>margin_box.width,
         :border_style => :grid,
