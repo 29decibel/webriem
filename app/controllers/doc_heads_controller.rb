@@ -223,58 +223,24 @@ class DocHeadsController < ApplicationController
   #print goes here
   def print
     doc=DocHead.find(params[:doc_id])
-    pdf = Prawn::Document.new
-    pdf.font "#{::Prawn::BASEDIR}/data/fonts/STSONG.ttf"
-    #title
-    pdf.text "出差报销单",:size=>18,:align=>:center
-    #image
-    logo = "public/images/logo_new.png"
-    pdf.image logo, :scale => 0.8
-    #table here
-    pdf.table [
-      ["出差人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
-      ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
-      ["项目编号","#{doc.project.name}","项目名称","#{doc.project.code}"],
-      ["费用承担部门","#{doc.dep.name}","",""]],:width=>550,:border_style => :grid
-    #travel
-    if doc.rd_travels.count>0
-      pdf.move_down 10
-      pdf.text "差旅费补助明细"
-      pdf.table doc.rd_travels.map {|r| ["#{r.days}","#{r.region_type.name}","#{r.region}","#{r.reason}","#{r.ori_amount}"]},
-        :headers => ["出差天数","地区级次","出差地点","出差事由","原币金额"],:width=>550,:border_style => :grid,:header=>true
+    pdf=nil      
+    pdf=case doc.doc_type
+      when 1 then JkPdf.new
+      when 2 then FkPdf.new
+      when 3 then SktzPdf.new
+      when 4 then JhPdf.new
+      when 5 then ZzPdf.new
+      when 6 then XjtqPdf.new
+      when 7 then GmlcPdf.new
+      when 8 then ShlcPdf.new
+      when 9 then ClPdf.new
+      when 10 then JjPdf.new
+      when 11 then JbfPdf.new
+      when 12 then PtfyPdf.new
+      else Flfy.new
     end
-    #transport
-    if doc.rd_transports.count>0
-      pdf.move_down 10
-      pdf.text "交通费明细"
-      pdf.table doc.rd_transports.map {|r| ["#{r.start_date}","#{r.end_date}","#{r.start_position}","#{r.end_position}","#{r.reason}","#{r.ori_amount}"]},
-        :headers => ["开始时间","到达时间","出发地","目的地","出差事由","原币金额"],:width=>550,:border_style => :grid,:header=>true
-    end
-    #lodging
-    if doc.rd_lodgings.count>0
-      pdf.move_down 10
-      pdf.text "住宿费明细"
-      pdf.table doc.rd_lodgings.map {|r| ["#{r.start_date}","#{r.end_date}","#{r.days}","#{r.region}","#{r.people_count}","#{r.ori_amount}"]},
-        :headers => ["开始日期","结束日期","住宿天数","城市","人数","原币金额"],:width=>550,:border_style => :grid,:header=>true
-    end
-    #other riems
-    if doc.other_riems.count>0
-      pdf.move_down 10
-      pdf.text "其他费用明细"
-      pdf.table doc.other_riems.map {|r| ["#{r.sequence}","#{r.description}","#{r.ori_amount}"]},
-        :headers => ["序号","费用说明","原币金额"],:width=>550,:border_style => :grid,:header=>true
-    end
-    #final render
-    pdf.move_down 5
-    pdf.text "报销总金额:  "+doc.total_apply_amount.to_s,:align=>:right
-    #work flow infos
-    if doc.work_flow_infos.count>0
-      pdf.move_down 10
-      pdf.text "审批信息"
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
-        :headers => ["审批人","审批时间","是否通过","批语"],:width=>550,:border_style => :grid,:header=>true 
-    end
-    send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
+    pdf.doc=doc
+    send_data pdf.to_pdf, :filename => "hello.pdf",:type => "application/pdf"
   end
   #==================================output to txt========================================
   def output_to_txt

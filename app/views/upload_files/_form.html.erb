@@ -1,23 +1,32 @@
 <h3 class="form_title"><%= @title%></h3>
-<%= stylesheet_link_tag :all,:recursive => true %>
+	<%= stylesheet_link_tag :all,:recursive => true %>
+	<%= javascript_include_tag "jquery.js" %>
+	<%= javascript_include_tag "rails.js" %>
+	<%= javascript_include_tag "application.js" %>
+	<%= csrf_meta_tag %>
 <% @upload_files.each do |uf|%>
 	<div class="upload_item">
 		<%= uf.upload.original_filename %>
-		<div class="delete_upload">
-			<%= link_to "删除"%>
-		</div>
+		<% if DocHead.find_by_doc_no(uf.doc_no)==nil or DocHead.find_by_doc_no(uf.doc_no).doc_state==0%>
+			<div class="delete_upload">
+				<%= link_to '删除', uf, :confirm => '是否真的要删除?', :method => :delete %>
+			</div>
+		<% end %>
 		<div class="download">
 			<%= link_to "下载",uf.upload.url %>
 		</div>
 	</div>	
 <% end %>
-<div id="add_uload_file">
-	<% form_for(@upload_file,:html=>{:multipart=>true}) do |f| %>
-		<div class="upload_area">
-			<%= f.file_field :upload%>
-		</div>	
-		<div class="actions">
-		  <%= f.submit "上传" %>
-		</div>
-	<% end %>
-</div>
+<% if @can_upload %>
+	<div id="add_uload_file">
+		<% form_for(@upload_file,:html=>{:multipart=>true}) do |f| %>
+			<div class="upload_area">
+				<%= f.file_field :upload%>
+				<%= f.hidden_field :doc_no,:value=>@doc_no%>
+			</div>	
+			<div class="actions">
+			  <%= f.submit "上传" %>
+			</div>
+		<% end %>
+	</div>
+<% end %>

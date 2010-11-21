@@ -3,8 +3,15 @@ class UploadFilesController < ApplicationController
   # GET /upload_files
   # GET /upload_files.xml
   def index
-    @upload_files = UploadFile.all
+    @upload_files = UploadFile.where("doc_no=?",params[:doc_no])
     @upload_file = UploadFile.new
+    @doc_no=params[:doc_no]
+    doc=DocHead.find_by_doc_no(@doc_no)
+    if doc and doc.doc_state!=0
+      @can_upload=false
+    else
+      @can_upload=true
+    end
     respond_to do |format|
       format.html {render :layout=>false}
       format.xml  { render :xml => @upload_files,:layout=>false }
@@ -14,8 +21,8 @@ class UploadFilesController < ApplicationController
   # GET /upload_files/1
   # GET /upload_files/1.xml
   def show
-    @uplaod_files = UploadFile.all
-    @upload_file = UploadFile.find(params[:id])
+    @uplaod_files = UploadFile.where("doc_no=?",params[:doc_no])
+    @upload_file = UploadFile.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,11 +50,11 @@ class UploadFilesController < ApplicationController
   # POST /upload_files.xml
   def create
     @upload_file = UploadFile.new(params[:upload_file])
-      if @upload_file.save
-        redirect_to(upload_files_path)
-      else
-        render :action => "new"
-      end
+    if @upload_file.save
+      redirect_to upload_files_path(:doc_no=>@upload_file.doc_no)
+    else
+      render :action => "new"
+    end
   end
 
   # PUT /upload_files/1
@@ -70,10 +77,11 @@ class UploadFilesController < ApplicationController
   # DELETE /upload_files/1.xml
   def destroy
     @upload_file = UploadFile.find(params[:id])
+    doc_no=@upload_file.doc_no
     @upload_file.destroy
 
     respond_to do |format|
-      format.html { redirect_to(upload_files_url) }
+      format.html { redirect_to upload_files_url(:doc_no=>doc_no) }
       format.xml  { head :ok }
     end
   end

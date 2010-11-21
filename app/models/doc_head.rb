@@ -101,6 +101,12 @@ class DocHead < ActiveRecord::Base
         total+=cp.apply_amount
       end
     end
+    if doc_type==3
+      rec_notice_details.each do |rd_detail|
+        next if rd_detail.amount==nil
+        total+=rd_detail.amount
+      end
+    end
     if doc_type==4
       total=inner_remittance.amount
     end
@@ -146,6 +152,12 @@ class DocHead < ActiveRecord::Base
           next if rd_detail.apply_amount==nil
           total+=rd_detail.apply_amount
         end
+      end
+    end
+    if doc_type==13
+      rd_benefits.each do |rd_detail|
+        next if rd_detail.fi_amount==nil
+        total+=rd_detail.fi_amount
       end
     end
     total
@@ -208,7 +220,7 @@ class DocHead < ActiveRecord::Base
     persons=nil
     dep_to_find=nil
     #decide the dep to look for
-    if work_flow_step.work_flow.work_flow_steps.first.duty.code=="003"
+    if work_flow_step.work_flow and work_flow_step.work_flow.work_flow_steps.first.duty.code=="003"
       return nil if approver_id==nil
       approver_person=Person.find_by_id(self.approver_id)
       return nil if approver_person==nil
@@ -255,6 +267,10 @@ class DocHead < ActiveRecord::Base
     #终止单据
     self.doc_state=0
     self.work_flow_step_id=-1
+  end
+  #uploads 
+  def uploads
+    UploadFile.find_by_doc_no(self.doc_no)
   end
   #==================================about filter================================
   NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','paid','project_id','upload_file_id','note','total_amount']

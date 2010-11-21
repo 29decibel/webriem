@@ -315,7 +315,8 @@ function set_unique_sequence_num(sequences){
 function add_upload_files(current,path)
 {
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
-	window.showModalDialog(path,'',sFeatures);
+	var doc_no=$("span.doc_no").text();
+	window.showModalDialog(path+"?doc_no="+doc_no,'',sFeatures);
 }
 function removeSelected(remove_link)
 {

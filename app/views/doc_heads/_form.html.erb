@@ -16,7 +16,7 @@
 		<div class="form_field">
 			<%= f.label "单据号#{mark_required(f.object,:doc_no)}" %>
 			<%= f.hidden_field :doc_no %>
-			<span><%= @doc_head.doc_no%></span>
+			<span class="doc_no"><%= @doc_head.doc_no%></span>
 		</div>
 		<div class="form_field">
 			<%= f.label "申请人" %>
@@ -66,6 +66,18 @@
 			</div>
 		</div>-->
 	</div>	
+	<% if @doc_head.doc_type==13 %>
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "附件" %>
+			<%= f.hidden_field :doc_no%>
+			<% if @doc_head.upload_file %>
+				<%= @doc_head.upload_file.upload.original_filename%>
+			<% end %>
+			<%= link_to_function("管理附件","add_upload_files(this,'#{upload_files_path}')")%>
+		</div>
+	</div>
+	<% end %>
 	<% if @doc_head.doc_type==1 %>
 	<div class="form_block">
 		<div class="form_field">
