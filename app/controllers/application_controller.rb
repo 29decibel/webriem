@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     # if params[:locale] is nil then I18n.default_locale will be used
     if request.port==8012
       I18n.locale = 'en'
+      logger.info "============================================="
     end
   end
   def get_error_messages(record)
