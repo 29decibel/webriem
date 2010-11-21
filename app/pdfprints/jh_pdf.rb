@@ -24,8 +24,8 @@ class JhPdf < Prawn::Document
       move_down 2
       table [
         ["申请金额","#{doc.inner_remittance.amount}","币种","#{doc.inner_remittance.currency.name}"],
-        ["结汇账户","#{doc.inner_remittance.out_account}","结汇账户结汇后余额","#{doc.inner_remittance.remain_amount}"],
-        ["收款账户","#{doc.inner_remittance.in_account}","收款账户结汇后余额","#{doc.inner_remittance.in_amount_after}"],
+        ["结汇账户","#{doc.inner_remittance.out_account}","结汇账户结汇后余额","#{doc.inner_remittance.remain_amount}$"],
+        ["收款账户","#{doc.inner_remittance.in_account}","收款账户结汇后余额","#{doc.inner_remittance.in_amount_after}￥"],
         ["当日汇率",{:text => "#{doc.inner_remittance.now_rate_price}", :colspan => 3, :align => :left}],
         ["申请原因",{:text => "#{doc.inner_remittance.description}", :colspan => 3, :align => :left}]],
         :width=>margin_box.width,
