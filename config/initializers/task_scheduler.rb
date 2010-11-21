@@ -34,5 +34,5 @@ def send_email
 end
 #test only
 scheduler.every '2s' do
-   send_email
+   #send_email
 end
