@@ -66,11 +66,11 @@ class ClPdf < Prawn::Document
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
     end
-    if doc.riem_cp_offsets.count>0
+    if doc.reim_cp_offsets.count>0
       move_down 10
       text "借款单冲抵明细",:size=>12
       move_down 2
-      table doc.riem_cp_offsets.map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
+      table doc.reim_cp_offsets.map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
         :headers => ["单号","申请时间","项目","申请总金额","冲抵金额"],
         :width=>margin_box.width,
         :border_style => :grid,
