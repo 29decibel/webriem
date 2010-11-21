@@ -237,7 +237,7 @@ class DocHeadsController < ApplicationController
       when 10 then JjPdf.new
       when 11 then JbfPdf.new
       when 12 then PtfyPdf.new
-      else Flfy.new
+      else FlfyPdf.new
     end
     pdf.doc=doc
     send_data pdf.to_pdf, :filename => "hello.pdf",:type => "application/pdf"
