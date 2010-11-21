@@ -5,7 +5,6 @@ class DocHead < ActiveRecord::Base
   belongs_to :person
   belongs_to :currency
   belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
-  belongs_to :upload_file
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
   blongs_to_name_attr :afford_dep
@@ -307,6 +306,13 @@ class DocHead < ActiveRecord::Base
       end
     end
   end
+  def self.custom_select(results,column_name,filter_text)
+  	if column_name=="doc_state"
+    	results.select {|doc| doc.custom_display.include? filter_text}
+	  else
+		  results
+	  end
+  end
   def can_delete
     return doc_state==0
   end
@@ -314,12 +320,15 @@ class DocHead < ActiveRecord::Base
   def self.my_doc_display_columns
     ["doc_no","person_id","apply_date","doc_type","doc_state","amount"]
   end
+  def person_dep
+    person.dep.name
+  end
   def self.doc_to_approve_display_columns
     #debugger
     ["doc_no","person_id","apply_date","doc_type","amount","doc_state"]
   end
   def self.not_search
-    ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id']
+    ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id','total_amount','upload_file_id']
   end
   def self.docs_to_approve(result,current_person)
   	result=result.select {|doc| doc.approver==current_person}
