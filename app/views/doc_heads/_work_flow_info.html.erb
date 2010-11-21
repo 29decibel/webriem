@@ -41,7 +41,6 @@
 		</div>
 		<div class="form_block">
 			<div class="form_field">
-				<%= f.submit "确定",:class=>"button2" %>
 				<%= link_to "确定",{:href=>"#"},:class=>"submit button2" %>
 				<%= f.hidden_field :people_id,:value=>current_user.person.id%>
 				<%= f.hidden_field :doc_head_id,:value=>@doc_head.id%>
