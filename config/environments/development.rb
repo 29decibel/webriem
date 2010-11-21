@@ -31,7 +31,7 @@ Webreim::Application.configure do
     :enable_starttls_auto => true,
     :port => 587,
     :authentication =>:plain,
-    :user_name => "ldb1984@gmail.com",
+    :user_name => "mike.d.1984@gmail.com",
     :password => 'jj19880718'
   }
   #here is my delayed jobs

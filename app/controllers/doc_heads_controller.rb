@@ -184,6 +184,12 @@ class DocHeadsController < ApplicationController
     #debugger
     @doc_head=DocHead.find(params[:doc_id].to_i)
     @doc_head.update_attribute(:paid,1)
+    #send email
+    para={}
+    para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+    para[:docs_total]=@doc_head.total_apply_amount
+    #WorkFlowMailer.notice_docs_to_approve para
+    Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
     #debugger
     @message="付款成功"
     render "shared/show_result"
@@ -195,6 +201,12 @@ class DocHeadsController < ApplicationController
       if !doc_id.blank?
         doc_head=DocHead.find(doc_id.to_i)
         doc_head.update_attribute(:paid,1)
+        #send email
+        para={}
+        para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+        para[:docs_total]=doc_head.total_apply_amount
+        #WorkFlowMailer.notice_docs_to_approve para
+        Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
       end
     end
     render :json=>"批量付款成功"
@@ -210,6 +222,12 @@ class DocHeadsController < ApplicationController
           wf.doc_head.next_work_flow_step
         else
           wf.doc_head.decline
+          #send email
+          para={}
+          para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+          para[:docs_total]=wf.doc_head.total_apply_amount
+          #WorkFlowMailer.notice_docs_to_approve para
+          Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
         end
         wf.doc_head.save
         #send two emails 这里不处理邮件了

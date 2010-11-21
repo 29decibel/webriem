@@ -60,7 +60,7 @@ function adjust_amount()
 	});
 	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
 	//whole page's total amount
-	total_riem=0.00;
+	var total_riem=0.00;
 	$("input.doc_total_amount").each(function(){
 		total_riem+=parseFloat($(this).val());
 	});
@@ -116,7 +116,7 @@ function find_control_cal_by_tr_wrapper(tr_wrapper)
 function set_split_percent_amount()
 {
 	//get total amount
-	total_riem=0.00;
+	var total_riem=0.00;
 	$("input.doc_total_amount").each(function(){
 		total_riem+=parseFloat($(this).val());
 	});

@@ -41,6 +41,10 @@ class WorkFlowInfosController < ApplicationController
       @work_flow_info.doc_head.next_work_flow_step
     else
       @work_flow_info.doc_head.decline
+      #send email
+      para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+      #WorkFlowMailer.notice_docs_to_approve para
+      Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
     end
     #send two emails
     #here we change the send email job to a background task
