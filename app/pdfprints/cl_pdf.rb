@@ -14,8 +14,8 @@ class ClPdf < Prawn::Document
       ["单号",{:text => "#{doc.doc_no}", :colspan => 3, :align => :left}],
       ["出差人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
       ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
-      ["项目编号","#{doc.project.name}","项目名称","#{doc.project.code}"],
-      ["费用承担部门",{:text => "#{doc.dep.name}", :colspan => 3, :align => :left}]],
+      ["项目编号","#{doc.project ? doc.project.code : ""}","项目名称","#{doc.project ? doc.project.name : ""}"],
+      ["费用承担部门",{:text => "#{doc.dep ? doc.dep.name : ""}", :colspan => 3, :align => :left}]],
       :width=>margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel
@@ -65,6 +65,29 @@ class ClPdf < Prawn::Document
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
+    end
+    if doc.riem_cp_offsets.count>0
+      move_down 10
+      text "借款单冲抵明细",:size=>12
+      move_down 2
+      table doc.riem_cp_offsets.map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
+        :headers => ["单号","申请时间","项目","申请总金额","冲抵金额"],
+        :width=>margin_box.width,
+        :border_style => :grid,
+        :header=>true,:font_size => 10,
+        :row_colors => ["FFFFFF", "DDDDDD"]
+    end
+    #slipt
+    if doc.is_split==1 and doc.reim_split_details.count>0
+        move_down 10
+        text "费用分摊明细",:size=>12
+        move_down 2
+        table doc.reim_split_details.map {|r| ["#{r.sequence}","#{r.dep}","#{r.project}","#{r.percent}","#{r.percent_amount}"]},
+          :headers => ["序号","费用承担部门","项目","百分比","分摊金额"],
+          :width=>margin_box.width,
+          :border_style => :grid,
+          :header=>true,:font_size => 10,
+          :row_colors => ["FFFFFF", "DDDDDD"]
     end
     #final render
     move_down 5

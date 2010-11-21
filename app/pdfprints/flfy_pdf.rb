@@ -30,6 +30,18 @@ class FlfyPdf < Prawn::Document
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
     end
+    #slipt
+    if doc.is_split==1 and doc.reim_split_details.count>0
+        move_down 10
+        text "费用分摊明细",:size=>12
+        move_down 2
+        table doc.reim_split_details.map {|r| ["#{r.sequence}","#{r.dep}","#{r.project}","#{r.percent}","#{r.percent_amount}"]},
+          :headers => ["序号","费用承担部门","项目","百分比","分摊金额"],
+          :width=>margin_box.width,
+          :border_style => :grid,
+          :header=>true,:font_size => 10,
+          :row_colors => ["FFFFFF", "DDDDDD"]
+    end
     #final render
     move_down 5
     text "报销总金额:  "+"#{number_to_currency(doc.total_apply_amount, :unit => '￥')}", :size => 14,:align=>:right
