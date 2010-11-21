@@ -22,7 +22,7 @@ class JjPdf < Prawn::Document
       move_down 10
       text "交际费明细",:size=>12
       move_down 2
-      table doc.rd_work_meals.map {|r| ["#{r.dep.name}","#{r.project.name}","#{r.place}","#{r.apply_date}","#{r.}","#{r.ori_amount}","#{r.rate}","#{r.apply_amount}","#{r.hr_amount}","#{r.fi_amount}"]},
+      table doc.rd_work_meals.map {|r| ["#{r.dep.name}","#{r.project.name}","#{r.place}","#{r.apply_date}","#{r.aa}","#{r.ori_amount}","#{r.rate}","#{r.apply_amount}","#{r.hr_amount}","#{r.fi_amount}"]},
         :headers => ["费用承担部门","项目","地点","日期","人数","事由","币种","汇率","原币金额","本币金额"],
         :width=>margin_box.width,
         :border_style => :grid,
