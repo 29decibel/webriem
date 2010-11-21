@@ -1,5 +1,4 @@
 #coding: utf-8
-require 'ruby-debug'
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
