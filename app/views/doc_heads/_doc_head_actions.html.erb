@@ -7,7 +7,7 @@
 <% if doc_head.person==current_user.person and doc_head.doc_state==1%>
 	<%= link_to '撤销', {:controller=>"doc_heads",:action=>"giveup",:doc_id=>doc_head.id},:remote=>true,:class=>"button2" %>
 <% end %>
-<% if doc_head.doc_state%>
+<% if doc_head.doc_state==2%>
 	<%= link_to '打印', {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"button2" %>
 <% end %>
 <%= link_to '输出', "#",:class=>"button2" %>
