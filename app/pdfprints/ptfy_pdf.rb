@@ -18,11 +18,11 @@ class PtfyPdf < Prawn::Document
       :width=>margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel
-    if doc.rd_common_transports.count>0
+    if doc.common_riems.count>0
       move_down 10
       text "普通费用报销明细",:size=>12
       move_down 2
-      table doc.rd_common_transports.map {|r| ["#{r.dep}","#{r.project}","#{r.reason}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
+      table doc.common_riems.map {|r| ["#{r.dep}","#{r.project}","#{r.reason}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","费用描述","币种","汇率","原币金额","本币金额"],
         :width=>margin_box.width,
         :border_style => :grid,
