@@ -66,6 +66,7 @@ class ClPdf < Prawn::Document
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
     end
+    #冲地
     if doc.reim_cp_offsets.count>0
       move_down 10
       text "借款单冲抵明细",:size=>12
