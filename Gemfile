@@ -24,9 +24,6 @@ gem "rufus-scheduler"
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-#gem 'ruby-debug'
-
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
@@ -41,7 +38,7 @@ gem "rufus-scheduler"
 # end
 
 #group :development, :test do
-#gem "ruby-debug19"
+gem "ruby-debug19"
 #end
 #group :development do
 #  gem "ruby-debug19"
