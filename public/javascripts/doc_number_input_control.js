@@ -97,7 +97,7 @@ function adjust_amount()
 		}
 	}
 	//======================================================================================
-	if($("div.is_split_reim").size()==1)
+	if($("div.is_split_reim").size()>=1)
 	{
 		set_split_percent_amount();
 	}
