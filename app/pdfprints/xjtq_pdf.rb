@@ -40,6 +40,9 @@ class XjtqPdf < Prawn::Document
           :row_colors => ["FFFFFF", "DDDDDD"]
       end
     end
+    #final render
+    move_down 5
+    text "现金提取总金额:  "+"#{number_to_currency(doc.total_apply_amount, :unit => '￥')}", :size => 14,:align=>:right
     #work flow infos
     if doc.work_flow_infos.count>0
       move_down 10
