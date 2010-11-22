@@ -183,10 +183,10 @@ class DocHeadsController < ApplicationController
   def pay
     #debugger
     @doc_head=DocHead.find(params[:doc_id].to_i)
-    @doc_head.update_attribute(:paid,1)
+    @doc_head.update_attribute(:doc_state,1)
     #send email
     para={}
-    para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+    para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
     para[:docs_total]=@doc_head.total_apply_amount
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
@@ -200,10 +200,10 @@ class DocHeadsController < ApplicationController
     params[:doc_ids].split("_").each do |doc_id|
       if !doc_id.blank?
         doc_head=DocHead.find(doc_id.to_i)
-        doc_head.update_attribute(:paid,1)
+        doc_head.update_attribute(:doc_state,3)
         #send email
         para={}
-        para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+        para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
         para[:docs_total]=doc_head.total_apply_amount
         #WorkFlowMailer.notice_docs_to_approve para
         Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
@@ -220,11 +220,18 @@ class DocHeadsController < ApplicationController
         wf=WorkFlowInfo.create(:is_ok=>params[:is_ok]=="true",:comments=>params[:comments],:doc_head_id=>doc_id,:people_id=>current_user.person.id)
         if wf.is_ok==1
           wf.doc_head.next_work_flow_step
+          #看看是否符合发邮件的标准 打印
+          #send email
+          para={}
+          para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+          para[:docs_total]=wf.doc_head.total_apply_amount
+          #WorkFlowMailer.notice_docs_to_approve para
+          Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
         else
           wf.doc_head.decline
           #send email
           para={}
-          para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+          para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
           para[:docs_total]=wf.doc_head.total_apply_amount
           #WorkFlowMailer.notice_docs_to_approve para
           Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
@@ -271,6 +278,19 @@ class DocHeadsController < ApplicationController
           @recivers<<{:bank_no=>r.bank_no,:name=>r.company,:amount=>r.amount}
         end
       end
+    end
+  end
+  def doc_failed
+    doc=DocHead.find(params[:doc_id])
+    @message="已经发送通知"
+    #send email
+    para={}
+    para[:email]=doc.person.e_mail#person.e_mail  @doc_head.person.e_mail
+    para[:doc]=doc
+    #WorkFlowMailer.notice_docs_to_approve para
+    Delayed::Job.enqueue MailingJob.new(:doc_failed, para)
+    respond_to do |format|
+      format.js { render "shared/show_result"}
     end
   end
 end

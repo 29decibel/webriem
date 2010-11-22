@@ -18,7 +18,7 @@ class TaskController < ApplicationController
   #the docs need to pay
   def docs_to_pay
     if current_user.person and current_user.person.person_type and current_user.person.person_type.code=="CA"
-      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"doc_state=2 and paid is null",:lookup=>true,:title=>"需要付款的单据",:multicheck=>true,:checkable=>true,:batch_pay=>true,:layout=>true,:outputable=>true,:printable=>true
+      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"doc_state=2",:lookup=>true,:title=>"需要付款的单据",:multicheck=>true,:checkable=>true,:batch_pay=>true,:layout=>true,:outputable=>true,:printable=>true
     else
       render "task/no_rights_error"
     end
@@ -34,7 +34,7 @@ class TaskController < ApplicationController
   #docs already paid
   def docs_paid
     if current_user.person
-      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"doc_state=2 and paid=1",:lookup=>true,:title=>"已经付款的单据",:layout=>true,:outputable=>true,:printable=>true
+      redirect_to :controller=>"model_search",:action=>"index",:class_name=>"DocHead",:pre_condition=>"doc_state=3",:lookup=>true,:title=>"已经付款的单据",:layout=>true,:outputable=>true,:printable=>true
     else
       render "task/no_rights_error"
     end

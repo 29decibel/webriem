@@ -71,8 +71,7 @@ class DocHead < ActiveRecord::Base
   #the great offset info here
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
-  enum_attr :is_split, [['否', 0], ['是', 1]]
-  Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过"}
+  Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过",3=>"已付款"}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
   #validate the amout is ok
   validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge
@@ -182,7 +181,7 @@ class DocHead < ActiveRecord::Base
     total
   end
   def available_offset_cp_docs(current_person_id)
-    cp_offset_docs=DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0 and doc_state=2 and paid=1",current_person_id).all
+    cp_offset_docs=DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0 and doc_state=3",current_person_id).all
     (cp_offset_docs+cp_docs.all).uniq
   end
   #reciver total amount
@@ -273,7 +272,7 @@ class DocHead < ActiveRecord::Base
     UploadFile.find_by_doc_no(self.doc_no)
   end
   #==================================about filter================================
-  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','paid','project_id','upload_file_id','note','total_amount']
+  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','project_id','upload_file_id','note','total_amount']
   def self.not_display
     NOT_DISPLAY
   end
@@ -298,13 +297,6 @@ class DocHead < ActiveRecord::Base
     end
     if column_name=="doc_type"
       return DOC_TYPES[doc_type]
-    end
-    if column_name=="paid"
-      if paid==1
-        "已付款"
-      else
-        "未支付"
-      end
     end
   end
   def self.custom_select(results,column_name,filter_text)

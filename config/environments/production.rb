@@ -47,5 +47,15 @@ Webreim::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   #set the mail config info
-  config.action_mailer.default_url_options = { :host => 'electric-fog-25.heroku.com' }
+  config.action_mailer.default_url_options = { :host => '114.113.150.227' }
+  config.action_mailer.raise_delivery_errors = true
+  #this settings is a must
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :enable_starttls_auto => true,
+    :port => 587,
+    :authentication =>:plain,
+    :user_name => "baoxiao.skccsystems@gmail.com",
+    :password => 'china123!'
+  }
 end

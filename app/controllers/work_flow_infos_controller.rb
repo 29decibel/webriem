@@ -43,7 +43,7 @@ class WorkFlowInfosController < ApplicationController
       @work_flow_info.doc_head.decline
       #send email
       para={}
-      para[:email]="79413824@qq.com"#person.e_mail  @doc_head.person.e_mail
+      para[:email]=@work_flow_info.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
       #WorkFlowMailer.notice_docs_to_approve para
       Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
     end

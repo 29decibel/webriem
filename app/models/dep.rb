@@ -17,6 +17,11 @@ class Dep < ActiveRecord::Base
       nil
     end
   end
+  class<<self
+    def ref_noshow
+      ["version","start_date","end_date","u8dep_code","parent_dep_id"]
+    end
+  end
   #===================================================================================
   def to_s
     "#{name}"

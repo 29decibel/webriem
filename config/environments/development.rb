@@ -31,8 +31,8 @@ Webreim::Application.configure do
     :enable_starttls_auto => true,
     :port => 587,
     :authentication =>:plain,
-    :user_name => "mike.d.1984@gmail.com",
-    :password => 'jj19880718'
+    :user_name => "baoxiao.skccsystems@gmail.com",
+    :password => 'china123!'
   }
   #here is my delayed jobs
   config.autoload_paths << "#{Rails.root}/app/jobs"

@@ -53,12 +53,12 @@
 			<div class='work_flow_step go_to'>
 			</div>
 		<% end %>
-		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==nil %>'>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2%>'>
 			<span>审批通过</span>
 		</div>
 		<div class='work_flow_step go_to'>
 		</div>
-		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2 and doc.paid==1 %>'>
+		<div class='work_flow_step <%= "current_flow" if doc.doc_state==3 %>'>
 			<span>已经付款</span>
 		</div>
 	<% else %>

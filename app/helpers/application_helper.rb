@@ -38,6 +38,7 @@ module ApplicationHelper
     return '' if input_date==nil
     input_date.strftime("%Y-%m-%d")
   end
+  #====================================core stuff==================================================
   #used for search engine
   def searchable_columns(class_object)
     filtered_columns_by class_object,:not_search
@@ -70,6 +71,7 @@ module ApplicationHelper
       end
     end
   end
+    #====================================core stuff==================================================
   #here is some privats
   private
   def filtered_columns_by(class_object,filter_type)

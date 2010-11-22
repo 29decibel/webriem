@@ -22,6 +22,8 @@ Webreim::Application.routes.draw do
   
   get "doc_heads/batch_pay"
   
+  get "doc_heads/doc_failed"
+  
   get "doc_heads/batch_approve"
   
   get "doc_heads/begin_work"

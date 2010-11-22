@@ -262,7 +262,6 @@
         apply_amount: "申请金额"
         ori_amount: "原始金额"
         real_amount: "实际金额"
-        paid: "付款状态"
         afford_dep_id: "费用承担部门"
         reim_split_details:
           dep_id: "分摊详细信息 费用承担部门"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101121062050) do
+ActiveRecord::Schema.define(:version => 20101122125222) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -155,7 +155,6 @@ ActiveRecord::Schema.define(:version => 20101121062050) do
     t.integer  "project_id"
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
-    t.integer  "paid"
     t.integer  "approver_id"
     t.integer  "afford_dep_id"
     t.integer  "upload_file_id"

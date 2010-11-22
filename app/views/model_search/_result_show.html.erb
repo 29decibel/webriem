@@ -6,7 +6,9 @@
 		<% end %>
 	</th>
 	<% display_columns(@class,params[:user_display_columns] ? @class.send(params[:user_display_columns]) : []).each do |c|%>
-    <th><%= @class.human_attribute_name(c.name)%></th>
+		<% if !(params[:no_show] and @class.send(params[:no_show]).include? c.name) %>
+	    	<th><%= @class.human_attribute_name(c.name)%></th>
+		<% end %>
 	<% end %>
 	<!--here is the custom display columns-->
 	<% if @class.respond_to? "custom_display_columns"%>
@@ -21,8 +23,7 @@
   </tr>
 
 <% @results.each do |result| %>
-  <tr>
-	
+  <tr>	
 		<td>
 			<% if params[:checkable]%>
 				<%= check_box_tag 'selected', 'yes', params[:values] ? params[:values].split('_').include?(result.id.to_s) : false, :class => 'ref_select'%>
@@ -36,7 +37,9 @@
 		</td>
 	
 	<% display_columns(@class,params[:user_display_columns] ? @class.send(params[:user_display_columns]) : []).each do |c|%>
-		<td><%= truncate(get_display_value(result,c).to_s,:length => 30, :omission => '... ')%></td>
+		<% if !(params[:no_show] and @class.send(params[:no_show]).include? c.name) %>
+			<td><%= truncate(get_display_value(result,c).to_s,:length => 30, :omission => '... ')%></td>
+		<% end %>
 	<% end %>
 	<!--here is the custom display columns-->
 	<% if @class.respond_to? "custom_display_columns"%>

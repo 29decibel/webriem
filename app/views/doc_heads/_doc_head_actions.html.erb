@@ -1,5 +1,4 @@
 <%= link_to '新增', new_doc_head_path(:doc_type=>doc_head.doc_type),:class=>"button2" %>
-<%= link_to '编辑', "#",:class=>"button2" %>
 <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
 <% if !doc_head.new_record? and doc_head.doc_state==0 %>
 	<%= link_to_function "提交审批","select_approver_or_begin_work_flow()",:class=>"button2"%>
@@ -7,11 +6,13 @@
 <% if doc_head.person==current_user.person and doc_head.doc_state==1%>
 	<%= link_to '撤销', {:controller=>"doc_heads",:action=>"giveup",:doc_id=>doc_head.id},:remote=>true,:class=>"button2" %>
 <% end %>
-<% if doc_head.doc_state==2%>
+<% if doc_head.doc_state>=2%>
 	<%= link_to '打印', {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"button2" %>
 <% end %>
-<%= link_to '输出', "#",:class=>"button2" %>
+<% if doc_head.doc_state==2 and current_user.person.person_type and  ["HR","FI"].include? current_user.person.person_type.code %>
+	<%= link_to '单据不合格提醒', {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"button2" %>
+<% end %>
 <%= link_to '我的单据', my_docs_path,:class=>"button2" %>
-<% if doc_head.paid==nil and doc_head.doc_state==2 and current_user.person.person_type and  current_user.person.person_type.code=="CA"%>
+<% if doc_head.doc_state==2 and current_user.person.person_type and  current_user.person.person_type.code=="CA"%>
 	<%= link_to "确认付款",{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"button2"%>
 <% end %>
