@@ -34,8 +34,8 @@ class PtfyPdf < Prawn::Document
       move_down 10
       text "工作餐费明细",:size=>12
       move_down 2
-      table doc.rd_work_meals.map {|r| ["#{r.dep}","#{r.project}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.reason}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
-        :headers => ["费用承担部门","项目","地点","日期","人数","事由","币种","汇率","原币金额","本币金额"],
+      table doc.rd_work_meals.map {|r| ["#{r.dep}","#{r.project}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.person_names}","#{r.reason}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
+        :headers => ["费用承担部门","项目","地点","日期","人数","参与人","事由","币种","汇率","原币金额","本币金额"],
         :width=>margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,

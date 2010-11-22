@@ -41,7 +41,7 @@ class ModelSearchController < ApplicationController
       if condition_hash
         @results=@results.all(:include=>condition_hash[:include],:conditions=>[condition_hash[:conditions],"%#{filter_text}%"])
         logger.info "now the result count is #{@results.count}"
-      elsif !(@class.respond_to? :custom_select)
+      else
         #if !@class.respond_to? :custom_select
           @results=@results.where("#{column} like ?",'%'+filter_text+'%')
         #end
