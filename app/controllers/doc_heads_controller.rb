@@ -183,7 +183,7 @@ class DocHeadsController < ApplicationController
   def pay
     #debugger
     @doc_head=DocHead.find(params[:doc_id].to_i)
-    @doc_head.update_attribute(:doc_state,1)
+    @doc_head.update_attribute(:doc_state,3)
     #send email
     para={}
     para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
