@@ -1,5 +1,10 @@
 Webreim::Application.routes.draw do
-
+  #this is for super admin use
+  get "pri_task/clear_doc"
+  get "pri_task/reset_doc_state"
+  get "pri_task/reset_pw"
+  get "pri_task/adapt_menu"
+  
   post "common/reset_p"
   
   get "common/new_reset_p"
@@ -59,10 +64,6 @@ Webreim::Application.routes.draw do
   get "task/docs_to_pay"
   
   get "task/docs_paid"
-  
-  get "task/import"
-  
-  get "task/private_cmd"
   
   devise_for :users
 

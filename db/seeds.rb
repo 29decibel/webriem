@@ -8,34 +8,33 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 #the menus
 Menu.delete_all
-Menu.create(:name=>'my_docs',:name_en=>"MyDocs",:title=>'我的单据',:path=>'/task/my_docs',:menu_type=>1)
-Menu.create(:name=>'docs_to_approve',:name_en=>"DocsToApprove",:title=>'需要审批单据',:path=>'/task/docs_to_approve',:menu_type=>1)
-Menu.create(:name=>'docs_to_pay',:name_en=>"DocsToPay",:title=>'需要付款的单据',:path=>'/task/docs_to_pay',:menu_type=>1)
-Menu.create(:name=>'docs_paid',:name_en=>"DocsPaid",:title=>'已经付款的单据',:path=>'/task/docs_paid',:menu_type=>1)
-Menu.create(:name=>'docs_approved',:name_en=>"DocsApproved",:title=>'审批过的单据',:path=>'/task/docs_approved',:menu_type=>1)
-Menu.create(:name=>'roles',:name_en=>"Roles",:title=>'权限设置',:path=>'/model_search/index?class_name=Role&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'deps',:name_en=>"Deps",:title=>'部门',:path=>'/model_search/index?class_name=Dep&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'duties',:name_en=>"Duty",:title=>'职务',:path=>'/model_search/index?class_name=Duty&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'people',:name_en=>"Stuff",:title=>'员工',:path=>'/model_search/index?class_name=Person&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'fees',:name_en=>"Fees",:title=>'费用类型',:path=>'/model_search/index?class_name=Fee&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'regions',:name_en=>"Regions",:title=>'地区',:path=>'/model_search/index?class_name=Region&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'transportations',:name_en=>"Transportations",:title=>'交通方式',:path=>'/model_search/index?class_name=Transportation&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'lodgings',:name_en=>"Lodgings",:title=>'住宿方式',:path=>'/model_search/index?class_name=Lodging&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'settlements',:name_en=>"Settlements",:title=>'结算方式',:path=>'/model_search/index?class_name=Settlement&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'fee_standards',:name_en=>"FeeStandards",:title=>'费用标准',:path=>'/model_search/index?class_name=FeeStandard&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'projects',:name_en=>"Projects",:title=>'项目',:path=>'/model_search/index?class_name=Project&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'budgets',:name_en=>"Budgets",:title=>'预算数据',:path=>'/model_search/index?class_name=Budget&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'extra_work_standards',:name_en=>"ExtraWorkStandards",:title=>'加班费标准',:path=>'/model_search/index?class_name=ExtraWorkStandard&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'currencies',:name_en=>"Currency",:title=>'币种',:path=>'/model_search/index?class_name=Currency&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'subjects',:name_en=>"Subjects",:title=>'科目设置',:path=>'/model_search/index?class_name=Subject&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'accounts',:name_en=>"Accounts",:title=>'账户设置',:path=>'/model_search/index?class_name=Account&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
-Menu.create(:name=>'work_flows',:name_en=>"WorkFlows",:title=>'审批流设置',:path=>'/model_search/index?class_name=WorkFlow&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'my_docs',:path=>'/task/my_docs',:menu_type=>1)
+Menu.create(:name=>'docs_to_approve',:path=>'/task/docs_to_approve',:menu_type=>1)
+Menu.create(:name=>'docs_to_pay',:path=>'/task/docs_to_pay',:menu_type=>1)
+Menu.create(:name=>'docs_paid',:path=>'/task/docs_paid',:menu_type=>1)
+Menu.create(:name=>'docs_approved',:path=>'/task/docs_approved',:menu_type=>1)
+Menu.create(:name=>'roles',:path=>'/model_search/index?class_name=Role&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'deps',:path=>'/model_search/index?class_name=Dep&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'duties',:path=>'/model_search/index?class_name=Duty&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'people',:path=>'/model_search/index?class_name=Person&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'fees',:path=>'/model_search/index?class_name=Fee&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'regions',:path=>'/model_search/index?class_name=Region&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'transportations',:path=>'/model_search/index?class_name=Transportation&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'lodgings',:path=>'/model_search/index?class_name=Lodging&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'settlements',:path=>'/model_search/index?class_name=Settlement&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'fee_standards',:path=>'/model_search/index?class_name=FeeStandard&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'projects',:path=>'/model_search/index?class_name=Project&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'budgets',:path=>'/model_search/index?class_name=Budget&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'extra_work_standards',:path=>'/model_search/index?class_name=ExtraWorkStandard&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'currencies',:path=>'/model_search/index?class_name=Currency&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'subjects',:path=>'/model_search/index?class_name=Subject&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'accounts',:path=>'/model_search/index?class_name=Account&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
+Menu.create(:name=>'work_flows',:path=>'/model_search/index?class_name=WorkFlow&lookup=true&addable=true&deletable=true&layout=true',:menu_type=>0)
 #docs menu goes here
-DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
-DOC_TYPES_EN = {1=>"Borrow",2=>"PayDoc",3=>"ReciveNotice",4=>"Redeem",5=>"Transfer",6=>"CashDraw",7=>"BuyFinanceProduct",8=>"RedeemFinanceProduct",9=>"TravelExpense",10=>"EntertainmentExpense",11=>"OvertimeWork",12=>"GeneralExpense",13=>"Wage"}
-
+#DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
+DOC_TYPES_EN = {1=>"d_Borrow",2=>"d_PayDoc",3=>"d_ReciveNotice",4=>"d_Redeem",5=>"d_Transfer",6=>"d_CashDraw",7=>"d_BuyFinanceProduct",8=>"d_RedeemFinanceProduct",9=>"d_TravelExpense",10=>"d_EntertainmentExpense",11=>"d_OvertimeWork",12=>"d_GeneralExpense",13=>"d_Wage"}
 (1..13).each do |num|
-  Menu.create(:name=>num.to_s,:name_en=>DOC_TYPES_EN[num],:title=>DOC_TYPES[num],:path=>"/doc_heads/new?doc_type=#{num}",:menu_type=>1)
+  Menu.create(:name=>DOC_TYPES_EN[num],:path=>"/doc_heads/new?doc_type=#{num}",:menu_type=>1)
 end
 #the default business_types
 #BusinessType.delete_all

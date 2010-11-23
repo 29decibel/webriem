@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101123135840) do
+ActiveRecord::Schema.define(:version => 20101123152222) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -274,12 +274,10 @@ ActiveRecord::Schema.define(:version => 20101123135840) do
 
   create_table "menus", :force => true do |t|
     t.string   "name"
-    t.string   "title"
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "menu_type"
-    t.string   "name_en"
   end
 
   create_table "other_riems", :force => true do |t|

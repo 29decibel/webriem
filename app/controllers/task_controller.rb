@@ -39,31 +39,4 @@ class TaskController < ApplicationController
       render "task/no_rights_error"
     end
   end
-  def import
-    @errors=[]
-    
-  end
-	#
-  def private_cmd
-  	#PersonType.create(:name=>"MTA",:code=>"MTA")
-	  #PersonType.create(:name=>"管理担当",:code=>"MN")
-    #Person.all.each do |p|
-    #  u=User.find_by_name(p.code)
-    #  if u==nil
-    #    u=User.create(:name=>p.code,:email=>p.e_mail.chop,:password=>"123456",:password_confirmation=>"123456")
-    #    logger.info "#{u.errors}=====#{u.name}"
-    #  end
-    #end
-    #DocHead.delete_all
-    if params[:clear]
-      DocHead.delete_all
-    end
-    if params[:reset_doc_state]
-      DocHead.all.each do |d|
-        if ![1,2,3].include? d.doc_state
-          d.doc_state=3
-        end
-      end
-    end
-  end
 end

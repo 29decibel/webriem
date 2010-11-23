@@ -40,12 +40,12 @@
 			<div class="menu">
 				<% if current_user.name=="admin"%>
 					<% Menu.where("menu_type=0").each do |m|%>
-						<%= link_to m.title,m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
+						<%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
 					<% end %>
 				<% else %>
 					<% if current_user.person.role%>
 						<% current_user.person.role.menus.each do |m|%>
-							<%= link_to m.title,m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
+							<%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
 						<% end %>
 					<% end %>
 				<% end %>

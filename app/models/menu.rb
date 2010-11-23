@@ -5,6 +5,6 @@ class Menu < ActiveRecord::Base
     NOT_DISPLAY
   end
   def to_s
-    "#{title}"
+    I18n.t "menu.#{name}"
   end
 end
