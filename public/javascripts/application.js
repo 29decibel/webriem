@@ -388,10 +388,11 @@ function pop_up_reference_window()
 	if($(this).attr('class-data')=="Dep")
 	{
 		path+="&no_show=ref_noshow";
-    //除了自己之外的部门参照只能参照末级部门
-	  path+="&pre_condition=Length(code)>=8";
-
-
+    if($(this).attr("self")!="true")
+    {
+      //除了自己之外的部门参照只能参照末级部门
+	    path+="&pre_condition=Length(code)>=8";
+    }
 	}
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
 
