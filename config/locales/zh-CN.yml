@@ -436,3 +436,6 @@
     filter_btn: "过滤"
     add_btn: "添加"
     btn_ok: "确定"
+    btn_view: "查看"
+    btn_del: "删除"
+    delete_confirm: "是否真的要删除？"

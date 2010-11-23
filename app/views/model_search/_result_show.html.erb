@@ -48,14 +48,14 @@
 		<% end %>
 	<% end %>
 	<% if params[:lookup]%>
-	    <td class="action"><%= link_to '查看', result %></td>
+	    <td class="action"><%= link_to I18n.t('model_search.btn_view'), result %></td>
 	<% end %>
 	<% if params[:deletable]%>
     <td class="action">
       <% if result.respond_to? :can_delete and !result.can_delete %>
         <span></span>
       <% else %>
-        <%= link_to '删除', result, :confirm => '是否真的要删除?', :method => :delete %>
+        <%= link_to I18n.t('model_search.btn_del'), result, :confirm => I18n.t('model_search.delete_confirm'), :method => :delete %>
       <% end %>
     </td>
     <% end %>

@@ -44,3 +44,6 @@ en:
     filter_btn: "Filter"
     add_btn: "Add "
     btn_ok: "OK"
+    btn_view: "View"
+    btn_del: "Delete"
+    delete_confirm: "Are you sure?"
