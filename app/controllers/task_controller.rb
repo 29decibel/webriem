@@ -54,6 +54,11 @@ class TaskController < ApplicationController
     #    logger.info "#{u.errors}=====#{u.name}"
     #  end
     #end
-    DocHead.delete_all
+    #DocHead.delete_all
+    DocHead.where("doc_state=2").each do |d|
+      if ![1,2,3].include? d.doc_state
+        d.doc_state=3
+      end
+    end
   end
 end
