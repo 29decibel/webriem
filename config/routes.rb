@@ -52,7 +52,7 @@ Webreim::Application.routes.draw do
   
   get "task/my_docs",:as=>:my_docs
   
-  get "task/docs_to_approve"
+  get "task/docs_to_approve",:as=>:docs_to_approve
   
   get "task/docs_approved"
   

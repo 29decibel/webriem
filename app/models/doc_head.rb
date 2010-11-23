@@ -93,6 +93,18 @@ class DocHead < ActiveRecord::Base
   end
   #the total apply amount
   def total_apply_amount
+    get_doc_amount(:apply_amount)
+  end
+  #the total hr amount
+  def total_hr_amount
+    get_doc_amount(:hr_amount)
+  end
+  #the total fi amount
+  def total_fi_amount
+    get_doc_amount(:fi_amount)
+  end
+  #get doc amount by type ---apply_amount? hr_amount? fi_amount?
+  def get_doc_amount(type)
     total=0
     if doc_type==1 or doc_type==2
       cp_doc_details.each do |cp|
@@ -126,8 +138,8 @@ class DocHead < ActiveRecord::Base
     if doc_type==9
       [rd_travels,rd_transports,rd_lodgings,other_riems].each do |rd|
         rd.each do |rd_detail|
-          next if rd_detail.fi_amount==nil
-          total+=rd_detail.fi_amount         
+          next if rd_detail.send(type)==nil
+          total+=rd_detail.send(type)         
         end
       end
     end
@@ -140,8 +152,8 @@ class DocHead < ActiveRecord::Base
     if doc_type==11
       [rd_extra_work_cars,rd_extra_work_meals].each do |rd|
         rd.each do |rd_detail|
-          next if rd_detail.fi_amount==nil
-          total+=rd_detail.fi_amount         
+          next if rd_detail.send(type)==nil
+          total+=rd_detail.send(type)         
         end
       end
     end
@@ -155,12 +167,13 @@ class DocHead < ActiveRecord::Base
     end
     if doc_type==13
       rd_benefits.each do |rd_detail|
-        next if rd_detail.fi_amount==nil
-        total+=rd_detail.fi_amount
+        next if rd_detail.send(type)==nil
+        total+=rd_detail.send(type)
       end
     end
     total
   end
+  #the split total amount
   def split_total_amount
     total=0
     reim_split_details.each do |split|

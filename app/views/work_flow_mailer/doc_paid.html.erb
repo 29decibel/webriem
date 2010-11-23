@@ -1,5 +1,8 @@
-정산하신 금액의 지급이 완료되었습니다. (금액: 22,295,469원))<br/>
+정산하신 금액의 지급이 완료되었습니다. (금액: ￥<%= @para[:docs_total]%>원))<br/>
 아래의 바로 가기(Doc. Link Icon)를 클릭하면 해당문서로 이동합니다.<br/><br/>
 
-此单据已付款。 (金额: 22,925,496元)<br/>
-点击此处（Doc. Link Icon) 进入相应单据。<br/><br/>
+此单据已付款。 (金额: ￥<%= @para[:docs_total]%>元)<br/>
+<a href=<%= url_for :controller=>'doc_heads',:action=>'show',:host=>'114.113.150.227',:id=>@para[:doc_id] %>>点击此处(Doc. Link Icon) 进入相应单据。</a><br/><br/>
+<div id="click">
+	<a href=<%= url_for :controller=>'doc_heads',:action=>'show',:host=>'114.113.150.227',:id=>@para[:doc_id] %>><img src="http://114.113.150.227/images/image003.jpg"></img></a>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122125222) do
+ActiveRecord::Schema.define(:version => 20101123135840) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -335,7 +335,7 @@ ActiveRecord::Schema.define(:version => 20101122125222) do
     t.date     "reim_date"
     t.integer  "fee_time_span"
     t.integer  "people_count"
-    t.decimal  "amount",        :precision => 16, :scale => 2
+    t.decimal  "apply_amount",  :precision => 16, :scale => 2
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,9 +1,12 @@
-검토 요청 내역이 6건 있습니다.  (합계 금액 : 22,925,496원)<br/>
+검토 요청 내역이 6건 있습니다.  (합계 금액 : ￥<%= @para[:docs_total]%>원)<br/>
 미 승인된 전표에 대해 조속히 검토/ 승인해 주시기 바랍니다.<br/>
 아래의 바로가기(Doc. Link Icon)를 클릭하면 해당문서로 이동합니다.<br/><br/>
 
-待审批单据6份 （合计金额：22,925,496元）<br/>
+待审批单据<%= @para[:docs_count] || 1%>份 （合计金额：￥<%= @para[:docs_total]%>元）<br/>
 对未审批的单据，请及时审批/确认。<br/>
-点击此处（Doc. Link Icon) 进入相应单据。<br/><br/>
+<a href=<%= url_for :controller=>'task',:action=>'docs_to_approve',:host=>'114.113.150.227' %>>点击此处(Doc. Link Icon) 进入相应单据。</a><br/><br/>
 
 (You may open the document by clicking on this link.)<br/><br/>
+<div id="click">
+	<a href=<%= url_for :controller=>'task',:action=>'docs_to_approve',:host=>'114.113.150.227' %>><img src="http://114.113.150.227/images/image003.jpg"></img></a>
+</div>

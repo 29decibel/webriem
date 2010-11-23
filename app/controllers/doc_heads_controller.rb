@@ -188,6 +188,7 @@ class DocHeadsController < ApplicationController
     para={}
     para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
     para[:docs_total]=@doc_head.total_apply_amount
+    para[:doc_id]=@doc_head.id
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
     #debugger
@@ -205,6 +206,7 @@ class DocHeadsController < ApplicationController
         para={}
         para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
         para[:docs_total]=doc_head.total_apply_amount
+        para[:doc_id]=doc_head.id
         #WorkFlowMailer.notice_docs_to_approve para
         Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
       end
@@ -221,25 +223,29 @@ class DocHeadsController < ApplicationController
         if wf.is_ok==1
           wf.doc_head.next_work_flow_step
           #看看是否符合发邮件的标准 打印
-          #send email
-          para={}
-          para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
-          para[:docs_total]=wf.doc_head.total_apply_amount
-          #WorkFlowMailer.notice_docs_to_approve para
-          Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
+          #send email if hr or fi change the doc amount
+          if current_person.person_type and  
+            ((current_person.person_type.code=="HR" and wf.doc_head.total_apply_amount!=wf.doc_head.total_hr_amount) or
+            (current_person.person_type.code=="FI" and wf.doc_head.total_hr_amount!=wf.doc_head.total_fi_amount))
+            para={}
+            para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+            para[:docs_total]=wf.doc_head.total_apply_amount
+            para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
+            para[:doc_id]=wf.doc_head.id
+            #WorkFlowMailer.notice_docs_to_approve para
+            Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+          end
         else
           wf.doc_head.decline
           #send email
           para={}
           para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
           para[:docs_total]=wf.doc_head.total_apply_amount
+          para[:doc_id]=wf.doc_head.id
           #WorkFlowMailer.notice_docs_to_approve para
           Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
         end
         wf.doc_head.save
-        #send two emails 这里不处理邮件了
-        #Delayed::Job.enqueue MailingJob.new(:notice_need_approve, wf.doc_head.approver,wf.doc_head) 
-        #Delayed::Job.enqueue MailingJob.new(:notice_approver, wf.doc_head.approver,wf.doc_head)
       end
     end
     render :json=>"批量审批完成"
@@ -286,7 +292,7 @@ class DocHeadsController < ApplicationController
     #send email
     para={}
     para[:email]=doc.person.e_mail#person.e_mail  @doc_head.person.e_mail
-    para[:doc]=doc
+    para[:doc_id]=doc.id
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_failed, para)
     respond_to do |format|

@@ -39,20 +39,30 @@ class WorkFlowInfosController < ApplicationController
     @work_flow_info = WorkFlowInfo.new(params[:work_flow_info])
     if @work_flow_info.is_ok==1
       @work_flow_info.doc_head.next_work_flow_step
+      #send email if hr or fi change the doc amount
+      doc_head=@work_flow_info.doc_head
+      if current_user.person.person_type and  
+        ((current_user.person.person_type.code=="HR" and doc_head.total_apply_amount!=doc_head.total_hr_amount) or
+        (current_user.person.person_type.code=="FI" and doc_head.total_hr_amount!=doc_head.total_fi_amount))
+        para={}
+        para[:email]=doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+        para[:docs_total]=doc_head.total_apply_amount
+        para[:docs_approve_total]=current_user.person.person_type.code=="FI" ? doc_head.total_fi_amount : doc_head.total_hr_amount
+        para[:doc_id]=doc_head.id
+        #WorkFlowMailer.notice_docs_to_approve para
+        Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+      end
     else
       @work_flow_info.doc_head.decline
       #send email
       para={}
+      para[:docs_total]=@work_flow_info.doc_head.total_apply_amount
+      para[:doc_id]=@work_flow_info.doc_head.id
       para[:email]=@work_flow_info.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
       #WorkFlowMailer.notice_docs_to_approve para
       Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
     end
     #send two emails
-    #here we change the send email job to a background task
-    #WorkFlowMailer.notice_need_approve(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
-    #WorkFlowMailer.notice_aaplyer(@work_flow_info.doc_head.approver,@work_flow_info.doc_head).deliver
-    #Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @work_flow_info.doc_head.approver,@work_flow_info.doc_head) 
-    #Delayed::Job.enqueue MailingJob.new(:notice_approver, @work_flow_info.doc_head.approver,@work_flow_info.doc_head) 
     @doc_head=@work_flow_info.doc_head
     if @work_flow_info.valid? and @doc_head.valid?
       @work_flow_info.save && @doc_head.save
