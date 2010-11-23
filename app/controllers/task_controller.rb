@@ -55,9 +55,14 @@ class TaskController < ApplicationController
     #  end
     #end
     #DocHead.delete_all
-    DocHead.where("doc_state=2").each do |d|
-      if ![1,2,3].include? d.doc_state
-        d.doc_state=3
+    if params[:clear]
+      DocHead.delete_all
+    end
+    if params[:reset_doc_state]
+      DocHead.all.each do |d|
+        if ![1,2,3].include? d.doc_state
+          d.doc_state=3
+        end
       end
     end
   end
