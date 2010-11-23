@@ -44,7 +44,7 @@
 		<div class="reference">
 			<%= f.hidden_field :parent_dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.parent_dep.to_s,:class=>"ref" %>
-			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+			<a href="#" class-data="Dep" self="true"><span class="reference"></span></a>			
 		</div>
 	</div>
 </div>
