@@ -39,3 +39,7 @@ en:
     d_OvertimeWork: "OvertimeWork"
     d_GeneralExpense: "GeneralExpense"
     d_Wage: "Wage"
+  model_search:
+    filter_txt: "FilterCondition"
+    filter_btn: "Filter"
+    my_docs: "MyDocs"

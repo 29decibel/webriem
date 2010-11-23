@@ -1,6 +1,6 @@
 <div class="filter">
 	<%= form_tag('/model_search/with',:remote => true) %>
-		<span>过滤条件：</span>
+		<span><%= I18n.t "model_search.filter_txt"%>：</span>
 		<%= select("filter", "column_name", searchable_columns(@class).map {|c| [@class.human_attribute_name(c.name),c.name] } )%>
 		<%= text_field_tag "filter_text"%>
 		<!--here is the params to show the staff-->
@@ -9,7 +9,7 @@
 			<%= hidden_field_tag p,params[p]%>
 		<% end %>
 		<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-		<%= link_to "过滤",{:href=>"#"},:class=>"submit button2 filter" %>
+		<%= link_to I18n.t("model_search.filter_btn"),{:href=>"#"},:class=>"submit button2 filter" %>
 		<% if params[:addable]%>
 			<%= link_to "增加#{@class.human_name}", eval("new_#{@class.name.underscore}_path"),{:class=>"button2 new_object"}%>
 		<% end %>
