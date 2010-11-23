@@ -11,10 +11,10 @@
 		<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 		<%= link_to I18n.t("model_search.filter_btn"),{:href=>"#"},:class=>"submit button2 filter" %>
 		<% if params[:addable]%>
-			<%= link_to "增加#{@class.human_name}", eval("new_#{@class.name.underscore}_path"),{:class=>"button2 new_object"}%>
+			<%= link_to "#{I18n.t('model_search.add_btn')}#{@class.human_name}", eval("new_#{@class.name.underscore}_path"),{:class=>"button2 new_object"}%>
 		<% end %>
 		<% if params[:confirmable]%>
-			<%= link_to "确定",{:href=>"#"},:class=>"button2 back_to_reference" %>
+			<%= link_to I18n.t('model_search.btn_ok'),{:href=>"#"},:class=>"button2 back_to_reference" %>
 		<% end %>
 		<% if params[:outputable]%>
 			<%= link_to_function "输出TXT","output_to_txt()",:class=>"button2" %>

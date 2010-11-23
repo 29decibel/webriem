@@ -42,4 +42,5 @@ en:
   model_search:
     filter_txt: "FilterCondition"
     filter_btn: "Filter"
-    my_docs: "MyDocs"
+    add_btn: "Add "
+    btn_ok: "OK"

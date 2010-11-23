@@ -434,3 +434,5 @@
   model_search:
     filter_txt: "过滤条件"
     filter_btn: "过滤"
+    add_btn: "添加"
+    btn_ok: "确定"
