@@ -33,6 +33,6 @@ def send_email
   end
 end
 #test only
-scheduler.every '2m' do
+scheduler.every '30m' do
    send_email
 end

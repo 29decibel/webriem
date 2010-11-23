@@ -35,7 +35,7 @@ en:
     d_BuyFinanceProduct: "BuyFinanceProduct"
     d_RedeemFinanceProduct: "RedeemFinanceProduct"
     d_TravelExpense: "TravelExpense"
-    d_EntertainmentExpense: "EntertainmentExpense"
+    d_EntertainmentExpense: "EntExpense"
     d_OvertimeWork: "OvertimeWork"
     d_GeneralExpense: "GeneralExpense"
     d_Wage: "Wage"
