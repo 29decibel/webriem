@@ -55,7 +55,7 @@ class DocHeadsController < ApplicationController
     @doc_head.doc_state = 0
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
-    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%d%m")+doc_count_config.value.rjust(4,"0")
+    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
     @doc_head.apply_date=Time.now
     @doc_head.dep=current_person.dep
     @doc_type = @doc_head.doc_type
