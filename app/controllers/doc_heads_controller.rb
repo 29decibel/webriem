@@ -204,7 +204,7 @@ class DocHeadsController < ApplicationController
         doc_head.update_attribute(:doc_state,3)
         #send email
         para={}
-        para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+        para[:email]=doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
         para[:docs_total]=doc_head.total_apply_amount
         para[:doc_id]=doc_head.id
         #WorkFlowMailer.notice_docs_to_approve para
