@@ -58,7 +58,7 @@ en:
     end_place: "目的地"
     start_time: "开始时间"
     end_time: "结束时间"
-    currency: "币种"
+    currency: "Currency"
     rate: "汇率"
     apply_amount: "原币金额"
     ori_amount: "本币金额"
