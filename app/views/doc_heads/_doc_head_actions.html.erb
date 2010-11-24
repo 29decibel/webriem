@@ -9,7 +9,7 @@
 <% if doc_head.doc_state>=2%>
 	<%= link_to '打印', {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"button2" %>
 <% end %>
-<% if doc_head.doc_state==2 and current_user.person.person_type and  ["HR","FI"].include? current_user.person.person_type.code %>
+<% if current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code %>
 	<%= link_to '单据不合格提醒', {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"button2" %>
 <% end %>
 <%= link_to '我的单据', my_docs_path,:class=>"button2" %>

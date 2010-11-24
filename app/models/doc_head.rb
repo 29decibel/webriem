@@ -79,17 +79,17 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
   end
   def must_equal
-    errors.add(:base, "报销总金额#{total_apply_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_apply_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
-    errors.add(:base,"借款总金额#{total_apply_amount} 不等于 收款总金额#{reciver_amount}") if total_apply_amount!=reciver_amount and doc_type<=2
-    #the amount of issplit should be equal to total_apply_amount
-    errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_apply_amount}") if is_split==1 and split_total_amount!=total_apply_amount
+    errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
+    errors.add(:base,"借款总金额#{total_fi_amount} 不等于 收款总金额#{reciver_amount}") if total_fi_amount!=reciver_amount and doc_type<=2
+    #the amount of issplit should be equal to total_fi_amount
+    errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_fi_amount}") if is_split==1 and split_total_amount!=total_fi_amount
   end
   def dep_and_project_not_null
     #debugger
     errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)
   end
   def self.custom_display_columns
-  	{"申请金额"=>:total_apply_amount}
+  	{"申请金额"=>:total_fi_amount}
   end
   #the total apply amount
   def total_apply_amount

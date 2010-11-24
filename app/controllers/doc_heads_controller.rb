@@ -55,7 +55,7 @@ class DocHeadsController < ApplicationController
     @doc_head.doc_state = 0
     #set the doctype to the paras passed in
     @doc_head.doc_type=params[:doc_type].to_i
-    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%d%m")+doc_count_config.value.rjust(4,"0")
+    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
     @doc_head.apply_date=Time.now
     @doc_head.dep=current_person.dep
     @doc_type = @doc_head.doc_type
@@ -204,7 +204,7 @@ class DocHeadsController < ApplicationController
         doc_head.update_attribute(:doc_state,3)
         #send email
         para={}
-        para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+        para[:email]=doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
         para[:docs_total]=doc_head.total_apply_amount
         para[:doc_id]=doc_head.id
         #WorkFlowMailer.notice_docs_to_approve para
