@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(':input:text:first').focus();            
+    //$(':input:text:first').focus();            
     $(':input:enabled').addClass('enterIndex');
     // get only input tags with class data-entry
     textboxes = $('.enterIndex');
