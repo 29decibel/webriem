@@ -1,7 +1,7 @@
 # Chinese (China) translations for Ruby on Rails 
 # by tsechingho (http://github.com/tsechingho)
 
-"zh-cn":
+"zh-CN":
   date:
     formats:
       default: "%Y-%m-%d"
@@ -166,6 +166,10 @@
     date: "日期"
     transport_fee: "交际费"
     work_meal: "工作餐费"
+    user: "用户名"
+    password: "密码"
+    remember: "记住我吧"
+    btn_login: "登陆"
   activerecord:
     #这里加入model的中文名称
     models:

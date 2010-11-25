@@ -1,3 +1,4 @@
+#coding: utf-8
 class InnerCashDraw < ActiveRecord::Base
   belongs_to :account
   belongs_to :doc_head

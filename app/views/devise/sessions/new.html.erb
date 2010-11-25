@@ -1,7 +1,7 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 <!--==================================================================-->
   <div class="login_field">
-    <%= f.label "用户名",:class=>"input_label" %>
+    <%= f.label "#{I18n.t('common_attr.user')}",:class=>"input_label" %>
 	<div class="login_input_area">
 		<p class="login_input">
 			<%= f.text_field :name,:class=>"normal" %>
@@ -10,7 +10,7 @@
   </div>
 <!--==================================================================-->
   <div class="login_field">
-    <%= f.label "密码",:class=>"input_label" %>
+    <%= f.label "#{I18n.t('common_attr.password')}",:class=>"input_label" %>
 	<div class="login_input_area">
 		<p class="login_input">
 			<%= f.password_field :password,:class=>"normal" %>
@@ -21,7 +21,7 @@
 <!--==================================================================-->
   <% if devise_mapping.rememberable? -%>
   <div class="login_field">
-    <%= f.label "记住我吧",:class=>"input_label" %>
+    <%= f.label "#{I18n.t('common_attr.remember')}",:class=>"input_label" %>
 	<div class="login_input_area">
 		<p class="login_input">
 			<%= f.check_box :remember_me,:class=>"normal" %>
@@ -31,7 +31,7 @@
   </div>
   <% end -%>
 <div class="login_actions">
-	<%= f.submit "登录" %>
+	<%= f.submit "#{I18n.t('common_attr.btn_login')}" %>
 	<% if alert %>
 		<spna id="error"><%= alert %></span>
 	<% end %>

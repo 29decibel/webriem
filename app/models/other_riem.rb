@@ -1,3 +1,4 @@
+#coding: utf-8
 class OtherRiem < ActiveRecord::Base
   belongs_to :doc_head
   belongs_to :currency

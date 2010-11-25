@@ -1,3 +1,4 @@
+#coding: utf-8
 class CommonRiem < ActiveRecord::Base
   belongs_to :currency
   belongs_to :dep
@@ -14,5 +15,9 @@ class CommonRiem < ActiveRecord::Base
     if self.currency
       self.rate=self.currency.default_rate
     end
+  end
+  validate :dep_is_end
+  def dep_is_end
+    errors.add(:base,"部门必须为末级部门") if dep and dep.sub_deps.count>0
   end
 end

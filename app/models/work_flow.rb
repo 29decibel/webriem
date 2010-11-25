@@ -1,3 +1,4 @@
+#coding: utf-8
 class WorkFlow < ActiveRecord::Base
   include ApplicationHelper
   has_many :work_flow_steps, :class_name => "WorkFlowStep", :foreign_key => "work_flow_id"

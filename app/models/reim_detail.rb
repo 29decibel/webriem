@@ -24,4 +24,8 @@ class ReimDetail < ActiveRecord::Base
   accepts_nested_attributes_for :rd_travels ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   enum_attr :is_split, [['否', 0], ['是', 1]]
+  validate :dep_is_end
+  def dep_is_end
+    errors.add(:base,"部门必须为末级部门") if dep and dep.sub_deps.count>0
+  end
 end

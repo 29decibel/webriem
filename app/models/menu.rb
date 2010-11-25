@@ -1,3 +1,4 @@
+#coding: utf-8
 class Menu < ActiveRecord::Base
   validates_uniqueness_of :name
   NOT_DISPLAY=['menu_type']
