@@ -1,14 +1,14 @@
 <div class="form_title">
-	<h3>审批信息</h3>
+	<h3><%= "#{I18n.t('activerecord.models.work_flow_info')}"%></h3>
 </div>
 <div class="form_area">
 	<!--目前已经存在的审批信息-->
 	<table class="hor-zebra">
 	  <tr>
-	    <th>是否通过</th>
-	    <th>审批人</th>
-		<th>审批时间</th>
-	    <th>备注</th>
+	    <th><%= "#{I18n.t('activerecord.attributes.work_flow_info.is_ok')}"%></th>
+	    <th><%= "#{I18n.t('activerecord.attributes.work_flow_info.people_id')}"%></th>
+		<th><%= "#{I18n.t('activerecord.attributes.work_flow_info.created_at')}"%></th>
+	    <th><%= "#{I18n.t('activerecord.attributes.work_flow_info.comments')}"%></th>
 	  </tr>
 
 	<% doc_head.work_flow_infos.each do |wf| %>
@@ -23,25 +23,25 @@
 </div>
 <% if doc_head.approver ==current_user.person %>
 	<div class="form_title">
-		<h3>填写审批意见</h3>
+		<h3><%= "#{I18n.t('activerecord.attributes.work_flow_info.write_comments')}"%></h3>
 	</div>
 	<%= form_for work_flow_info,:remote=>true do |f| %>
 	<div class="form_area">
 		<div class="form_block">
 			<div class="form_field">
-				<%= f.label :is_ok,"是否通过"%>
+				<%= f.label :is_ok,"#{I18n.t('activerecord.attributes.work_flow_info.is_ok')}"%>
 				<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK,:class=>"input1" %>
 			</div>
 		</div>
 		<div class="form_block">
 			<div class="form_field">
-				<%= f.label :comments,"审批意见"%>
+				<%= f.label :comments,"#{I18n.t('activerecord.attributes.work_flow_info.comments')}"%>
 				<%= f.text_area :comments,:class=>"input2" %>
 			</div>
 		</div>
 		<div class="form_block">
 			<div class="form_field">
-				<%= link_to "确定",{:href=>"#"},:class=>"submit button2" %>
+				<%= link_to "#{I18n.t('model_search.btn_ok')}",{:href=>"#"},:class=>"submit button2" %>
 				<%= f.hidden_field :people_id,:value=>current_user.person.id%>
 				<%= f.hidden_field :doc_head_id,:value=>@doc_head.id%>
 			</div>

@@ -105,7 +105,14 @@
       last_word_connector: ", 和 "
     select:
       prompt: "请选择"
+  common_op:
+    btn_new: "新增"
+    btn_return: "返回"
+    btn_save: "保存"
   common_attr:
+    name: "名称"
+    code: "编码"
+    none: "无"
     sequence: "序号"
     dep: "部门"
     afford_dep: "费用承担部门"
@@ -170,6 +177,19 @@
     password: "密码"
     remember: "记住我吧"
     btn_login: "登陆"
+    btn_delete: "删除"
+    remitance_detail: "结汇申请详细"
+    transfer_detail: "转帐申请详细"
+    cash_draw_detail: "现金提取申请详细"
+    buy_fin_p_detail: "购买理财产品详细"
+    redeem_fin_p_detail: "赎回理财产品详细"
+    ok: "是"
+    not: "否"
+    male: "男"
+    female: "女"
+    not_know: "未知"
+    should_riem: "应报销"
+    should_back: "应还款"
   activerecord:
     #这里加入model的中文名称
     models:
@@ -193,22 +213,40 @@
       role: "角色"
       rd_lodging: "住宿费用报销"
       extra_work_standard: "加班费标准"
-    attributes: 
+      business_type: "业务类型"
+      work_flow_step: "添加一个审批环节"
+      work_flow_info: "审批信息"
+    attributes:
+      work_flow_info:
+        is_ok: "是否通过"
+        people_id: "审批人"
+        comments: "审批意见"
+        created_at: "审批时间"
+        write_comments: "填写审批意见"
       extra_work_standard:
         larger_than_hours: "加班时长大于"
         late_than_time: "加班结束时间晚于"
         is_sunday: "是否周末"
         amount: "标准金额"
         fee_id: "费用类型"
+      work_flow_step:
+        dep_id: "部门"
+        is_self_dep: "是否指定部门"
+        duty_id: "职务"
+        max_amount: "审批金额超过"      
       region_type:
         name: "名称"
       role:
         name: "角色名称"
+        people: "该角色下的人员"
+        menus: "该角色下的菜单"
       work_flow:
-        name: "名称"
-        doc_types: "对应的单据类型"
+        name: "审批名称"
+        doc_types: "单据类型"
+        duty: "申请人的职务"
+        add_new_step: "添加一个审批环节"
       account:
-        name: "名称"  
+        name: "账户名称"  
         account_no: "帐号"
       currency:
         name: "名称"  
@@ -255,6 +293,7 @@
       region:
         name: "名称"  
         code: "编码"
+        region_type_id: ""
       transportation:
         name: "名称"  
         code: "编码"
@@ -263,15 +302,15 @@
         code: "编码"
         end_date: "停用日期"
         attr: "费用属性"
-        parent_fee_id: "父费用类型"
+        parent_fee_id: "所属费用类型"
       dep:
         name: "名称"  
         code: "编码"
         start_date: "启用时间"
         end_date: "停止使用时间"
-        version: "组织结构"
+        version: "所属组织结构"
         parent_dep_id: "上级部门"
-        u8dep_code: "对应U8部门编码"
+        u8dep_code: "对应U8编码"
       duty:
         code: "编码"
         name: "名称"
@@ -279,7 +318,7 @@
         name: "姓名"
         code: "编码"
         gender: "性别"
-        dep_id: "部门"
+        dep_id: "所在部门"
         duty_id: "职务"
         boss_id: "上级领导"
         phone: "联系方式"
@@ -303,7 +342,7 @@
         business_type_id: "业务类型"
         fee_id: "费用类型"
         dep_id: "部门"
-        u8_fee_subject: "u8其他"
+        u8_fee_subject: "u8费用科目"
         u8_borrow_subject: "u8借款项目"
         u8_reim_subject: "u8报销科目"
       doc_head:
@@ -430,6 +469,39 @@
           currency_id: "其他费用明细 币种"
           rate: "其他费用明细 汇率"
           description: "其他费用明细 费用描述"
+      buy_finance_product:
+        name: "理财产品名称"
+        rate: "理财产品利率"      
+        account_id: "购买账户"
+        buy_date: "预计购买日期"
+        redeem_date: "预计赎回日期"
+        description: "申请购买原因及预期收益"
+        amount: "申请购买金额"
+      redeem_finance_product:
+        name: "理财产品名称"
+        rate: "理财产品利率"
+        account_id: "赎回账户"
+        clear_date: "预计赎回日期"
+        redeem_date: "申请赎回日期"
+        description: "申请赎回原因"
+        amount: "申请赎回金额"
+      inner_remittance:
+        out_account_id: "结汇账户"
+        amount: "申请金额"  
+        description: "申请原因"
+        remain_amount: "结汇账户结汇后余额"
+        now_rate_price: "当日汇率"
+        currency_id: "币种"
+        in_account_id: "收款账户"  
+        in_amount_after: "收款账户结汇后余额"
+      inner_transfer:
+        out_account_id: "转出账户"
+        out_amount_before: "转出账户转帐前余额"
+        in_amount_before: ""
+        amount: "申请金额" 
+        description: "转帐申请原因"
+        in_account_id: "转入账户"
+        in_amount_after: "转入账户转帐后余额"
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
@@ -515,3 +587,8 @@
     btn_view: "查看"
     btn_del: "删除"
     delete_confirm: "是否真的要删除？"
+  cp_doc_offset:
+    delete_ori: "删除原有冲抵记录"
+    left_offset_amount: "剩余冲抵金额"
+    offset_amount: "冲抵金额"
+  #validate info

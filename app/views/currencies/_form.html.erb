@@ -3,24 +3,24 @@
 	<h3><%= @title%></h3>
 </div>
 <div class="actions">
-	<%= link_to '新增', new_currency_path,:class=>"button2" %>
-  <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to '返回', currencies_path,:class=>"button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_new')}", new_currency_path,:class=>"button2" %>
+  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", currencies_path,:class=>"button2" %>
 </div>
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "名称#{mark_required(f.object,:name)}" %>			
+		<%= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}" %>			
 		<%= f.text_field :name,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "编码#{mark_required(f.object,:code)}" %>
+		<%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %>
 		<%= f.text_field :code,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "对本币默认汇率#{mark_required(f.object,:name)}" %>			
+		<%= f.label "#{I18n.t('activerecord.attributes.currency.default_rate')}#{mark_required(f.object,:name)}" %>			
 		<%= f.text_field :default_rate,:class=>"input1 " %>
 	</div>
 </div>

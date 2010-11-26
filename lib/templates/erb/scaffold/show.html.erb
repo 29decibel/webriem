@@ -10,5 +10,5 @@
 </div>
 
 <%%= link_to '编辑', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
-<%%= link_to '返回', <%= index_helper %>_path %> |
+<%%= link_to "#{I18n.t('common_op.btn_return')}", <%= index_helper %>_path %> |
 <%%= link_to '添加 <%= human_name %>', new_<%= singular_table_name %>_path %>

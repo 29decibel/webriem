@@ -1,10 +1,10 @@
 <div class="form_block">
 	<div class="form_field large">
-		<%= f.label "申请金额" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"%>
 		<%= f.text_field :amount,:class=>"input1 large" %>  
 	</div>
 	<div class="form_field">
-		<%= f.label "币种" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"%>
 		<div class="reference">
 			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
@@ -14,7 +14,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "结汇账户" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"%>
 		<div class="reference">
 			<%= f.hidden_field :out_account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "out_account_info",detail_doc.out_account.to_s,:class=>"ref large" %>
@@ -22,13 +22,13 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "结汇账户结汇后余额",:class=>"large" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.remain_amount')}",:class=>"large" %>
 		<span id="currency_sign">$</span><%= f.text_field :in_amount_after,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "收款账户",:class=>"large" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_account_id')}",:class=>"large" %>
 		<div class="reference">
 			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "in_account_info",detail_doc.in_account.to_s,:class=>"ref large" %>
@@ -36,19 +36,19 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "收款账户结汇后余额",:class=>"large" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_amount_after')}",:class=>"large" %>
 		<span id="currency_sign">￥</span><%= f.text_field :remain_amount,:class=>"input1 " %> 
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "当日汇率",:class=>"large" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.now_rate_price')}",:class=>"large" %>
 		<%= f.text_field :now_rate_price,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "申请原因",:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.description')}",:class=>"large"%>
 		<%= f.text_area :description,:class=>"input2 " %>
 	</div>
 </div>

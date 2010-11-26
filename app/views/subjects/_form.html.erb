@@ -3,14 +3,14 @@
 	<h3><%= @title%></h3>
 </div>  
 <div class="actions">
-	<%= link_to '新增', new_subject_path,:class=>"button2" %>
-    <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to '返回', subjects_path,:class=>"button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_new')}", new_subject_path,:class=>"button2" %>
+    <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", subjects_path,:class=>"button2" %>
  </div>
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "业务类型#{mark_required(f.object,:business_type)}" %>			
+		<%= f.label "#{I18n.t('activerecord.attributes.subject.business_type_id')}#{mark_required(f.object,:business_type)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "business_type_info",@subject.business_type.to_s,:class=>"ref" %>
@@ -18,7 +18,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "费用类型#{mark_required(f.object,:fee)}" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.subject.fee_id')}#{mark_required(f.object,:fee)}" %>
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@subject.fee.to_s,:class=>"ref" %>
@@ -28,7 +28,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "部门#{mark_required(f.object,:dep)}" %>			
+		<%= f.label "#{I18n.t('common_attr.dep')}#{mark_required(f.object,:dep)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",@subject.dep.to_s,:class=>"ref" %>
@@ -36,17 +36,17 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "u8费用科目#{mark_required(f.object,:u8_fee_subject)}" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.subject.u8_fee_subject')}#{mark_required(f.object,:u8_fee_subject)}" %>
 		<%= f.text_field :u8_fee_subject,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "u8借款科目#{mark_required(f.object,:u8_borrow_subject)}" %>			
+		<%= f.label "#{I18n.t('activerecord.attributes.subject.u8_borrow_subject')}#{mark_required(f.object,:u8_borrow_subject)}" %>			
 		<%= f.text_field :u8_borrow_subject,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "u8报销科目#{mark_required(f.object,:u8_reim_subject)}" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.subject.u8_reim_subject')}#{mark_required(f.object,:u8_reim_subject)}" %>
 		<%= f.text_field :u8_reim_subject,:class=>"input1 " %>
 	</div>
 </div>

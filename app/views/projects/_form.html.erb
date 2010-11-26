@@ -3,24 +3,24 @@
 	<h3><%= @title%></h3>
 </div>
 <div class="actions">
-			<%= link_to '新增', new_project_path,:class=>"button2" %>
-  <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to '返回', projects_path,:class=>"button2" %>
+			<%= link_to "#{I18n.t('common_op.btn_new')}", new_project_path,:class=>"button2" %>
+  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", projects_path,:class=>"button2" %>
 </div>
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "项目名称#{mark_required(f.object,:name)}" %>			
+		<%= f.label "#{I18n.t('activerecord.attributes.project.name')}#{mark_required(f.object,:name)}" %>			
 		<%= f.text_field :name,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "项目编码#{mark_required(f.object,:code)}" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.project.code')}#{mark_required(f.object,:code)}" %>
 		<%= f.text_field :code,:class=>"input1 " %>
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "对应U8项目#{mark_required(f.object,:u8_project)}" %>			
+		<%= f.label "#{I18n.t('activerecord.attributes.project.u8_project')}#{mark_required(f.object,:u8_project)}" %>			
 		<%= f.text_field :u8_project,:class=>"input1 " %>
 	</div>
 </div>

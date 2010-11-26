@@ -57,14 +57,6 @@
 			</div>
 		</div>
 		<% end %>
-		<!--<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.fee_id')}" %>
-			<div class="reference">
-				<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
-				<%= text_field_tag "fee_info",@doc_head.fee.to_s,:class=>"ref" %>
-				<a href="#" class-data="Fee"><span class="reference"></span></a>			
-			</div>
-		</div>-->
 	</div>	
 	<% if @doc_head.doc_type==13 %>
 	<div class="form_block">
@@ -195,7 +187,7 @@
 	<!--结汇申请单-->
 	<% if @doc_head.doc_type==4%>
 	<div class="form_title">
-		<h3>结汇申请详细</h3>
+		<h3><%= I18n.t("common_attr.remitance_detail")%></h3>
 	</div>
 	<div id="inner_remittance" class="form_area">
 		<%= f.fields_for :inner_remittance do |builder|  %>
@@ -206,7 +198,7 @@
 	<!--转帐申请单-->
 	<% if @doc_head.doc_type==5%>
 	<div class="form_title">
-		<h3>转帐申请详细</h3>
+		<h3><%= I18n.t("common_attr.transfer_detail")%></h3>
 	</div>
 	<div id="inner_transfer" class="form_area">
 		<%= f.fields_for :inner_transfer do |builder|  %>
@@ -217,7 +209,7 @@
 	<!--现金提取申请单-->
 	<% if @doc_head.doc_type==6%>
 	<div class="form_title">
-		<h3>现金提取申请详细</h3>
+		<h3><%= I18n.t("common_attr.cash_draw_detail")%></h3>
 	</div>
 	<div id="inner_cash_draw" class="form_area">
 		<%= f.fields_for :inner_cash_draw do |builder|  %>
@@ -228,7 +220,7 @@
 	<!--购买理财产品-->
 	<% if @doc_head.doc_type==7%>
 	<div class="form_title">
-		<h3>购买理财产品详细</h3>
+		<h3><%= I18n.t("common_attr.buy_fin_p_detail")%></h3>
 	</div>
 	<div id="buy_finance_products" class="form_area">
 		<%= f.fields_for :buy_finance_product do |builder|  %>
@@ -239,7 +231,7 @@
 	<!--赎回理财产品-->
 	<% if @doc_head.doc_type==8%>
 	<div class="form_title">
-		<h3>赎回理财产品详细</h3>
+		<h3><%= I18n.t("common_attr.redeem_fin_p_detail")%></h3>
 	</div>
 	<div id="redeem_finance_products" class="form_area">
 		<%= f.fields_for :redeem_finance_product do |builder|  %>
@@ -514,7 +506,7 @@
 				  <th><%= "#{I18n.t('common_attr.end_place')}"%>*</th>
 					<th><%= "#{I18n.t('common_attr.start_time')}"%>*</th>
 				  <th><%= "#{I18n.t('common_attr.end_time')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.reason')}"%>*</th><%= "#{I18n.t('common_attr.end_time')}"%>
+					<th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
 					<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
 					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
 					<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
@@ -665,7 +657,7 @@
 					<th>方向</th>
 					<% end %>
 				    <th>结算方式*</th>
-				    <th><%= @doc_head.doc_type==2?"收款单位*":"收款人*"%></th>
+				    <th><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></th>
 				    <th><%= "#{I18n.t('common_attr.bank')}"%>*</th>
 				    <th><%= "#{I18n.t('common_attr.bank_no')}"%>*</th>
 				    <th><%= "#{I18n.t('common_attr.amount')}"%>*</th>

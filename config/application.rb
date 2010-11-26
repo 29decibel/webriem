@@ -29,6 +29,7 @@ module Webreim
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = "zh-CN"
+    #config.i18n.default_locale = "en-US"
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
@@ -42,3 +43,4 @@ module Webreim
   end
 end
 I18n.locale = 'zh-CN'
+#I18n.locale = 'en-US'

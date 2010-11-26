@@ -2,12 +2,12 @@
 	<table class="form_input">
 		<thead>
 			<tr>				
-			    <th>单号</th>
-			    <th>申请时间</th>
-			    <th>项目</th>
-				<th>申请总金额</th>
-				<th>剩余冲抵金额</th>				
-			    <th>冲抵金额</th>
+			    <th><%= "#{I18n.t('activerecord.attributes.doc_head.doc_no')}"%></th>
+			    <th><%= "#{I18n.t('activerecord.attributes.doc_head.apply_date')}"%></th>
+			    <th><%= "#{I18n.t('activerecord.models.project')}"%></th>
+				<th><%= "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}"%></th>
+				<th><%= "#{I18n.t('cp_doc_offset.left_offset_amount')}"%></th>				
+			    <th><%= "#{I18n.t('cp_doc_offset.offset_amount')}"%></th>
 				<th></th>	    
 		    </tr>
 	    <thead>
@@ -29,7 +29,7 @@
 					</td>
 					<td>
 						<% if doc_offset %>
-							<%= link_to "删除原有冲抵记录",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true,:class=>"cp_offset_link"%>
+							<%= link_to "#{I18n.t('cp_doc_offset.delete_ori')}",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true,:class=>"cp_offset_link"%>
 						<% else %>
 							<%= hidden_field_tag "offset_info[#{index}][cp_doc_head_id]",doc.id%>
 						<% end %>

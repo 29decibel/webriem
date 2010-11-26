@@ -225,7 +225,14 @@
     btn_view: "View"
     btn_del: "Delete"
     delete_confirm: "Are you sure?"
+  common_op:
+    btn_new: "Create"
+    btn_return: "Back"
+    btn_save: "Save"
   common_attr:
+    name: "Name"
+    code: "Code"
+    none: "None"
     sequence: "Sequence"
     dep: "Dep"
     afford_dep: "FeeDep"
@@ -290,6 +297,19 @@
     password: "Password"
     remember: "RememberMe"
     btn_login: "Login"
+    btn_delete: "Delete"
+    remitance_detail: "结汇申请详细"
+    transfer_detail: "转帐申请详细"
+    cash_draw_detail: "现金提取申请详细"
+    buy_fin_p_detail: "购买理财产品详细"
+    redeem_fin_p_detail: "赎回理财产品详细"
+    ok: "yes"
+    not: "no"
+    male: "男"
+    female: "女"
+    not_know: "未知"
+    should_riem: "应报销"
+    should_back: "应还款"
   activerecord:
     #这里加入model的中文name
     models:
@@ -313,20 +333,37 @@
       role: "role"
       rd_lodging: "Housing expense"
       extra_work_standard: "overtime standard"
-    attributes: 
+      work_flow_info: "审批信息"
+      business_type: "业务类型"
+      work_flow_step: "添加一个审批环节"
+    attributes:
+      work_flow_info:
+        is_ok: "是否通过"
+        people_id: "审批人"
+        comments: "审批意见"
+        created_at: "审批时间"
       extra_work_standard:
         larger_than_hours: "The shortest overtime"
         late_than_time: "Time off for overtime"
         is_sunday: "Day Off Holiday"
         amount: "sStandard Amount"
         fee_id: "Expense Type"
+      work_flow_step:
+        dep_id: "部门"
+        is_self_dep: "是否指定部门"
+        duty_id: "职务"
+        max_amount: "审批金额超过"
       region_type:
         name: "name"
       role:
         name: "role name"
+        people: "该角色下的人员"
+        menus: "该角色下的菜单"
       work_flow:
-        name: "name"
-        doc_types: "Document Type"
+        name: "审批名称"
+        doc_types: "单据类型"
+        duty: "申请人的职务"
+        add_new_step: "添加一个审批环节"
       account:
         name: "name"  
         account_no: "Account Number"
@@ -375,6 +412,7 @@
       region:
         name: "name"  
         code: "code"
+        region_type_id: "RegionType"
       transportation:
         name: "name"  
         code: "code"
@@ -550,3 +588,41 @@
           currency_id: "Currency"
           rate: "Exchange Rate"
           description: "Expenses description"
+      buy_finance_product:
+        name: "理财产品名称"
+        rate: "理财产品利率"      
+        account_id: "购买账户"
+        buy_date: "预计购买日期"
+        redeem_date: "预计赎回日期"
+        description: "申请购买原因及预期收益"
+        amount: "申请购买金额"
+      redeem_finance_product:
+        name: "理财产品名称"
+        rate: "理财产品利率"
+        account_id: "赎回账户"
+        clear_date: "预计赎回日期"
+        redeem_date: "申请赎回日期"
+        description: "申请赎回原因"
+        amount: "申请赎回金额"
+      inner_remittance:
+        out_account_id: "结汇账户"
+        amount: "申请金额"  
+        description: "申请原因"
+        remain_amount: "结汇账户结汇后余额"
+        now_rate_price: "当日汇率"
+        currency_id: "币种"
+        in_account_id: "收款账户"  
+        in_amount_after: "收款账户结汇后余额"
+      inner_transfer:
+        out_account_id: "转出账户"
+        out_amount_before: "转出账户转帐前余额"
+        in_amount_before: ""
+        amount: "申请金额" 
+        description: "转帐申请原因"
+        in_account_id: "转入账户"
+        in_amount_after: "转入账户转帐后余额"
+  cp_doc_offset:
+    delete_ori: "删除原有冲抵记录"
+    left_offset_amount: "剩余冲抵金额"
+    offset_amount: "冲抵金额"
+    

@@ -1,12 +1,12 @@
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "申请金额" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_transfer.amount')}" ,:class=>"large"%>
 		<%= f.text_field :amount,:class=>"input1 " %>  
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "转出账户" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_transfer.out_account_id')}" ,:class=>"large"%>
 		<div class="reference">
 			<%= f.hidden_field :out_account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "out_account_info",detail_doc.out_account.to_s,:class=>"ref large" %>
@@ -14,13 +14,13 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "转出账户转帐前余额" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_transfer.out_amount_before')}" ,:class=>"large"%>
 		<%= f.text_field :out_amount_before,:class=>"input1 number" %>  
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "转入账户" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_transfer.in_account_id')}" ,:class=>"large"%>
 		<div class="reference">
 			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "in_account_info",detail_doc.in_account.to_s,:class=>"ref large" %>
@@ -28,13 +28,13 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "转入账户转帐后余额" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_transfer.in_amount_after')}" ,:class=>"large"%>
 		<%= f.text_field :in_amount_before,:class=>"input1 number" %>  
 	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "转帐申请原因" ,:class=>"large"%>
+		<%= f.label "#{I18n.t('activerecord.attributes.inner_transfer.description')}" ,:class=>"large"%>
 		<%= f.text_area :description,:class=>"input2 " %>
 	</div>
 </div>

@@ -3,8 +3,8 @@
 	<h3><%= @title%></h3>
 </div>
 <div class="actions">
-  <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to '返回', wrok_flow_infos_path,:class=>"button2" %>
+  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", wrok_flow_infos_path,:class=>"button2" %>
 </div>
 <div class="field">
 	<%= f.label :doc_head_id,:class=>"input_label" %>

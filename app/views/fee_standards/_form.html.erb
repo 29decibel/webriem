@@ -3,14 +3,14 @@
 	<h3><%= @title%></h3>
 </div>
 <div class="actions">
-	<%= link_to '新增', new_fee_standard_path,:class=>"button2" %>
-  <%= link_to "保存",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to '返回', fee_standards_path,:class=>"button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_new')}", new_fee_standard_path,:class=>"button2" %>
+  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", fee_standards_path,:class=>"button2" %>
 </div>
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "项目#{mark_required(f.object,:project_id)}" %>			
+		<%= f.label "#{I18n.t('common_attr.project')}#{mark_required(f.object,:project_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",@fee_standard.project.to_s,:class=>"ref" %>
@@ -18,7 +18,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "地区级次#{mark_required(f.object,:region_type_id)}" %>
+		<%= f.label "#{I18n.t('common_attr.region_type')}#{mark_required(f.object,:region_type_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
@@ -28,7 +28,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "职务#{mark_required(f.object,:duty_id)}" %>			
+		<%= f.label "#{I18n.t('activerecord.models.duty')}#{mark_required(f.object,:duty_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "duty_info",@fee_standard.duty.to_s,:class=>"ref" %>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "住宿方式#{mark_required(f.object,:lodging_id)}" %>
+		<%= f.label "#{I18n.t('activerecord.models.lodging')}#{mark_required(f.object,:lodging_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :lodging_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "lodging_info",f.object.lodging.to_s,:class=>"ref" %>
@@ -46,7 +46,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "交通方式#{mark_required(f.object,:transportation_id)}" %>			
+		<%= f.label "#{I18n.t('activerecord.models.transportation')}#{mark_required(f.object,:transportation_id)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :transportation_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "transportation_info",@fee_standard.transportation.to_s,:class=>"ref" %>
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "业务类型#{mark_required(f.object,:business_type_id)}" %>
+		<%= f.label "#{I18n.t('activerecord.models.business_type')}#{mark_required(f.object,:business_type_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "business_type_info",f.object.business_type.to_s,:class=>"ref" %>
@@ -64,7 +64,7 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "币种#{mark_required(f.object,:currency_id)}" %>
+		<%= f.label "#{I18n.t('common_attr.rate')}#{mark_required(f.object,:currency_id)}" %>
 		<div class="reference">
 			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "currency_info",f.object.currency.to_s,:class=>"ref" %>
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div class="form_field">
-		<%= f.label "费用类型#{mark_required(f.object,:fee)}" %>			
+		<%= f.label "#{I18n.t('common_attr.fee')}#{mark_required(f.object,:fee)}" %>			
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
@@ -82,11 +82,11 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "金额#{mark_required(f.object,:amount)}" %>			
+		<%= f.label "#{I18n.t('common_attr.amount')}#{mark_required(f.object,:amount)}" %>			
 		<%= f.text_field :amount,:class=>"input1 " %>
 	</div>
 	<div class="form_field">
-		<%= f.label "人员属性#{mark_required(f.object,:person_type)}" %>
+		<%= f.label "#{I18n.t('activerecord.attributes.person.person_type_id')}#{mark_required(f.object,:person_type)}" %>
 		<%= collection_select(:fee_standard, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :person_type_id) %>
 	</div>
 </div>
