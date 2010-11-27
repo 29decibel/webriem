@@ -28,7 +28,7 @@ class DutiesController < ApplicationController
   def create
     @duty = Duty.new(params[:duty])
     if @duty.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -41,7 +41,7 @@ class DutiesController < ApplicationController
   def update
     @duty = Duty.find(params[:id])
     if @duty.update_attributes(params[:duty])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

@@ -33,7 +33,7 @@ class FeeStandardsController < ApplicationController
   def create
     @fee_standard = FeeStandard.new(params[:fee_standard])
     if @fee_standard.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -46,7 +46,7 @@ class FeeStandardsController < ApplicationController
   def update
     @fee_standard = FeeStandard.find(params[:id])
     if @fee_standard.update_attributes(params[:fee_standard])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

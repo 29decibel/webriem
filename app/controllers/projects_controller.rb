@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

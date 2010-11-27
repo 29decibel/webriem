@@ -34,7 +34,7 @@ class ExtraWorkStandardsController < ApplicationController
     @extra_work_standard = ExtraWorkStandard.new(params[:extra_work_standard])
 
     if @extra_work_standard.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -48,7 +48,7 @@ class ExtraWorkStandardsController < ApplicationController
     @extra_work_standard = ExtraWorkStandard.find(params[:id])
 
     if @extra_work_standard.update_attributes(params[:extra_work_standard])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

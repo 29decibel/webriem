@@ -105,7 +105,7 @@ class DocHeadsController < ApplicationController
       end
     end
     if @doc_head.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -125,7 +125,7 @@ class DocHeadsController < ApplicationController
     end
     if @doc_head.update_attributes(params[:doc_head])
       @doc_head.update_attribute(:cp_doc_remain_amount,@doc_head.total_apply_amount)
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       if @doc_head.approver==current_user.person
         @work_flow_info=WorkFlowInfo.new
       end
@@ -159,7 +159,7 @@ class DocHeadsController < ApplicationController
     #WorkFlowMailer.notice_need_approve(@doc_head.approver,@doc_head).deliver
     #now i am using the delayed job to do this
     #Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
-    @message="开始进入审批环节，审批期间单据不能修改"
+    @message="#{I18n.t('controller_msg.start_approve')}"
     if @doc_head.approver==current_user.person
       @work_flow_info=WorkFlowInfo.new
     end
@@ -174,7 +174,7 @@ class DocHeadsController < ApplicationController
   	@doc_head.approver_id=nil
   	@doc_head.work_flow_step_id=nil
   	@doc_head.save
-  	@message="单据已经撤回，现在可以进行修改"
+  	@message="#{I18n.t('controller_msg.doc_approve_failed')}"
     respond_to do |format|
       format.js { render "shared/show_result"}
     end
@@ -192,7 +192,7 @@ class DocHeadsController < ApplicationController
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
     #debugger
-    @message="付款成功"
+    @message="#{I18n.t('controller_msg.pay_ok')}"
     render "shared/show_result"
   end
   #batch pay
@@ -211,7 +211,7 @@ class DocHeadsController < ApplicationController
         Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
       end
     end
-    render :json=>"批量付款成功"
+    render :json=>"#{I18n.t('controller_msg.batch_pay_ok')}"
     #redirect_to :controller=>:tasks,:action=>:docs_to_pay,:notice=>"批量付款成功",:status => 301
   end
   #batch approve docs
@@ -248,7 +248,7 @@ class DocHeadsController < ApplicationController
         wf.doc_head.save
       end
     end
-    render :json=>"批量审批完成"
+    render :json=>"#{I18n.t('controller_msg.batch_approve_ok')}"
     #redirect_to :controller=>:tasks,:action=>:docs_to_approve,:notice=>"批量审批完成",:status => 301
   end
   #print goes here
@@ -288,7 +288,7 @@ class DocHeadsController < ApplicationController
   end
   def doc_failed
     doc=DocHead.find(params[:doc_id])
-    @message="已经发送通知"
+    @message="#{I18n.t('controller_msg.message_sent')}"
     #send email
     para={}
     para[:email]=doc.person.e_mail#person.e_mail  @doc_head.person.e_mail

@@ -33,7 +33,7 @@ class CurrenciesController < ApplicationController
   def create
     @currency = Currency.new(params[:currency])
     if @currency.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -46,7 +46,7 @@ class CurrenciesController < ApplicationController
   def update
     @currency = Currency.find(params[:id])
     if @currency.update_attributes(params[:currency])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

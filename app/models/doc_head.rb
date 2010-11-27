@@ -79,7 +79,7 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
   end
   def dep_is_end
-    errors.add(:base,"部门必须为末级部门") if (dep and dep.sub_deps.count>0) or (afford_dep and afford_dep.sub_deps.count>0)
+    errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if (dep and dep.sub_deps.count>0) or (afford_dep and afford_dep.sub_deps.count>0)
   end
   def must_equal
     errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12

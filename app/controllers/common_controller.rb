@@ -2,11 +2,11 @@
 class CommonController < ApplicationController
   def reset_p
     if params[:p].blank? or params[:p_c].blank?
-      render "shared/errors",:locals=>{:error_msg=>"密码不能为空"}
+      render "shared/errors",:locals=>{:error_msg=>"#{I18n.t('controller_msg.password_not_none')}"}
     elsif params[:p]!=params[:p_c]
-      render "shared/errors",:locals=>{:error_msg=>"两个密码不匹配"}
+      render "shared/errors",:locals=>{:error_msg=>"#{I18n.t('controller_msg.two_pass_not_equal')}"}
     elsif current_user.reset_password!(params[:p],params[:p_c])
-      @message="修改密码成功"
+      @message="#{I18n.t('controller_msg.update_pass_ok')}"
       render "shared/show_result"
     else
       render "shared/errors",:locals=>{:error_msg=>get_error_messages(current_user)}

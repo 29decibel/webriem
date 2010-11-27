@@ -26,6 +26,6 @@ class ReimDetail < ActiveRecord::Base
   enum_attr :is_split, [["#{I18n.t('common_attr.not')}", 0], ["#{I18n.t('common_attr.ok')}", 1]]
   validate :dep_is_end
   def dep_is_end
-    errors.add(:base,"部门必须为末级部门") if dep and dep.sub_deps.count>0
+    errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
   end
 end

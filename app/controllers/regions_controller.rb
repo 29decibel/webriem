@@ -33,7 +33,7 @@ class RegionsController < ApplicationController
   def create
     @region = Region.new(params[:region])
     if @region.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -46,7 +46,7 @@ class RegionsController < ApplicationController
   def update
     @region = Region.find(params[:id])
     if @region.update_attributes(params[:region])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

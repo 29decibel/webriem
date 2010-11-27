@@ -9,6 +9,6 @@ class RdBenefit < ActiveRecord::Base
   validates_presence_of :apply_amount
   validate :dep_is_end
   def dep_is_end
-    errors.add(:base,"部门必须为末级部门") if dep and dep.sub_deps.count>0
+    errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
   end
 end

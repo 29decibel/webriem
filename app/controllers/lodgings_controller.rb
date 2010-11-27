@@ -33,7 +33,7 @@ class LodgingsController < ApplicationController
   def create
     @lodging = Lodging.new(params[:lodging])
     if @lodging.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -46,7 +46,7 @@ class LodgingsController < ApplicationController
   def update
     @lodging = Lodging.find(params[:id])
     if @lodging.update_attributes(params[:lodging])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

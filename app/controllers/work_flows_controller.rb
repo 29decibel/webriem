@@ -41,7 +41,7 @@ class WorkFlowsController < ApplicationController
     end
     #debugger
     if @work_flow.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -64,7 +64,7 @@ class WorkFlowsController < ApplicationController
       @work_flow.duties<<Duty.find(duty_id.to_i)
     end
     if @work_flow.update_attributes(params[:work_flow])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

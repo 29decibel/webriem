@@ -15,7 +15,7 @@ class DepsController < ApplicationController
   def show
     @dep = Dep.find(params[:id])
     if @dep.parent_dep==nil
-      @parent_dep="没有上级部门"
+      @parent_dep="#{I18n.t('controller_msg.no_parent_dep')}"
     else
       @parent_dep=@dep.parent_dep.name
     end
@@ -25,7 +25,7 @@ class DepsController < ApplicationController
   def create
     @dep = Dep.new(params[:dep])
     if @dep.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -37,7 +37,7 @@ class DepsController < ApplicationController
   def update
     @dep = Dep.find(params[:id])
     if @dep.update_attributes(params[:dep])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

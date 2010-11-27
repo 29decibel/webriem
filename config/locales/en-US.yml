@@ -625,4 +625,23 @@
     delete_ori: "删除原有冲抵记录"
     left_offset_amount: "剩余冲抵金额"
     offset_amount: "冲抵金额"
+  #validate info
+  controller_msg:
+    create_ok: "创建成功"
+    update_ok: "更新成功"
+    none: "暂时没有"
+    remove_ok: "成功去除"
+    password_not_none: "密码不能为空"
+    two_pass_not_equal: "两个密码不匹配"
+    update_pass_ok: "修改密码成功"
+    no_parent_dep: "没有上级部门"
+    start_approve: "开始进入审批环节，审批期间单据不能修改"
+    doc_approve_failed: "单据已经撤回，现在可以进行修改"
+    pay_ok: "付款成功"
+    batch_pay_ok: "批量付款成功"
+    approve_ok: "审批完成"
+    batch_approve_ok: "批量审批完成"
+    message_sent: "已经发送通知"
+  v_info:
+    dep_is_end: "部门必须为末级部门"
     

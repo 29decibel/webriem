@@ -8,7 +8,7 @@ class AjaxServiceController < ApplicationController
     else
       fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and duty_id=?",params[:region_type_id],params[:fee_code],params[:duty_id])
     end
-    render :json=>fee_standard.count==0 ? "暂时没有".to_json : "#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}".to_json
+    render :json=>fee_standard.count==0 ? "#{I18n.t('controller_msg.none')}".to_json : "#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}".to_json
     #"#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}"
   end
   def get_extrafee
@@ -24,7 +24,7 @@ class AjaxServiceController < ApplicationController
     else
       ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? and timediff(time(?),time(late_than_time))>=0",is_sunday,params[:fee_code],end_time.to_s)
     end
-    render :json=>ex_st.count==0 ? "暂时没有".to_json : ex_st.first.amount
+    render :json=>ex_st.count==0 ? "#{I18n.t('controller_msg.none')}".to_json : ex_st.first.amount
   end
   def remove_offset
     @doc_head=DocHead.find(params[:reim_doc_head_id].to_i)
@@ -33,7 +33,7 @@ class AjaxServiceController < ApplicationController
     rp_offset=RiemCpOffset.where("cp_doc_head_id = ? and reim_doc_head_id= ? ",params[:cp_doc_head_id].to_i,params[:reim_doc_head_id].to_i).first
     rp_doc.update_attribute(:cp_doc_remain_amount,rp_doc.cp_doc_remain_amount+rp_offset.amount)
     rp_offset.destroy
-    @message="成功去除"
+    @message="#{I18n.t('controller_msg.remove_ok')}"
     render "shared/show_result"
   end
   #==================================output to txt========================================

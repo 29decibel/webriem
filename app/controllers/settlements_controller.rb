@@ -33,7 +33,7 @@ class SettlementsController < ApplicationController
   def create
     @settlement = Settlement.new(params[:settlement])
     if @settlement.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -46,7 +46,7 @@ class SettlementsController < ApplicationController
   def update
     @settlement = Settlement.find(params[:id])
     if @settlement.update_attributes(params[:settlement])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

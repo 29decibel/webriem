@@ -37,7 +37,7 @@ class PeopleController < ApplicationController
     if user.valid? and @person.valid?
       user.save
       @person.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -55,7 +55,7 @@ class PeopleController < ApplicationController
     if @person.valid?
       #user.update_attributes :name=>@person.code,:e_mail=>@person.e_mail
       @person.update_attributes params[:person]
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息

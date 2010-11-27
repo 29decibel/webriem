@@ -47,7 +47,7 @@ class RolesController < ApplicationController
       @role.menu_rights.build(:menu_id=>menu_id)
     end
     if @role.save
-      @message="创建成功"
+      @message="#{I18n.t('controller_msg.create_ok')}"
       render "shared/show_result"
     else
       #write some codes
@@ -72,7 +72,7 @@ class RolesController < ApplicationController
        @role.menu_rights.build(:menu_id=>menu_id)
      end
       if @role.update_attributes(params[:role])
-        @message="更新成功"
+        @message="#{I18n.t('controller_msg.update_ok')}"
         render "shared/show_result"
       else
         #写一些校验出错信息

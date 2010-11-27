@@ -66,7 +66,7 @@ class WorkFlowInfosController < ApplicationController
     @doc_head=@work_flow_info.doc_head
     if @work_flow_info.valid? and @doc_head.valid?
       @work_flow_info.save && @doc_head.save
-      @message="审批完成"
+      @message="#{I18n.t('controller_msg.approve_ok')}"
       @work_flow_info=nil
       render "shared/show_result"
     else
@@ -80,7 +80,7 @@ class WorkFlowInfosController < ApplicationController
   def update
     @work_flow_info = WorkFlowInfo.find(params[:id])
     if @work_flow_info.update_attributes(params[:work_flow_info])
-      @message="更新成功"
+      @message="#{I18n.t('controller_msg.update_ok')}"
       render "shared/show_result"
     else
       #写一些校验出错信息
