@@ -2,7 +2,7 @@
 class RdExtraWorkCar < ActiveRecord::Base
     belongs_to :reim_detail  
     belongs_to :currency
-    enum_attr :is_sunday, [["yes",0],["no", 1]]
+    enum_attr :is_sunday, [["#{I18n.t('common_attr.sure_ok')}",0],["#{I18n.t('common_attr.sure_not')}", 1]]
     validates_presence_of :start_time
     validates_presence_of :end_time
     validates_presence_of :start_place
