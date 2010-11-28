@@ -23,7 +23,7 @@ class ReimDetail < ActiveRecord::Base
   accepts_nested_attributes_for :rd_lodgings ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_travels ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  enum_attr :is_split, [["#{I18n.t('common_attr.not')}", 0], ["#{I18n.t('common_attr.ok')}", 1]]
+  enum_attr :is_split, [["#{I18n.t('common_attr.not')}", 0], ["#{I18n.t('common_attr.__ok')}", 1]]
   validate :dep_is_end
   def dep_is_end
     errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
