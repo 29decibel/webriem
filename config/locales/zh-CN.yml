@@ -144,7 +144,7 @@
     transport_detail: "交通费明细"
     transportation: "交通工具"
     people_count: "人数"
-    live_together_person: "合住人"
+    live_together_person: "参与人"
     lodging_desc: "住宿费用明细"
     lodging_days: "住宿天数"
     city: "城市"
@@ -610,4 +610,18 @@
     message_sent: "已经发送通知"
   v_info:
     dep_is_end: "部门必须为末级部门"   
-    
+  netzke:
+    basepack:
+      grid_panel:
+        add: "添加"
+        edit: "修改"
+        delete: "删除"
+        apply: "提交更新"
+        add_in_form: "在新窗体中添加"
+        edit_in_form: "在窗体中修改"
+        search: "高级搜索"
+
+    formats:
+      date: Y-m-d
+      datetime: Y-m-d H:i:s
+      time: H:i:s

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网上报销系统</title>
+  <%= stylesheet_link_tag :all,:recursive => true %>
+  <%= netzke_init %>
+	<%= csrf_meta_tag %>
+</head>
+<body>
+	<div id="header">
+		<div id="title">
+			<h4 id="cn_title">网上报销系统</h4>
+			<h4 id="en_title">Online  Expense System，OES</h4>
+		</div>		
+  </div>
+		<!--user log in info-->
+	<div id="main_area">
+		<div id="content">
+			<%= yield %>
+		</div>		
+	</div>
+</body>
+</html>
+

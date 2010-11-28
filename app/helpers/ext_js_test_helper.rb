@@ -1,0 +1,2 @@
+module ExtJsTestHelper
+end

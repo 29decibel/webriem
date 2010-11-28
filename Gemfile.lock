@@ -1,3 +1,20 @@
+GIT
+  remote: git://github.com/skozlov/netzke-basepack.git
+  revision: 7eb3ce9ef32c5714aa54965874bcd4401d20f1f5
+  specs:
+    netzke-basepack (0.6.3)
+      acts_as_list
+      meta_where (>= 0.9.3)
+      netzke-core (~> 0.6.4)
+      will_paginate (~> 3.0.pre2)
+
+GIT
+  remote: git://github.com/skozlov/netzke-core.git
+  revision: a0bcc366297336e4006675ad486fc64bf1912882
+  specs:
+    netzke-core (0.6.5)
+      activesupport (>= 3.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -30,6 +47,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    acts_as_list (0.1.2)
     arel (2.0.4)
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
@@ -37,9 +55,9 @@ GEM
     delayed_job (2.1.0.pre2)
       activesupport (~> 3.0)
       daemons
-    devise (1.1.3)
+    devise (1.1.4)
       bcrypt-ruby (~> 2.1.2)
-      warden (~> 0.10.7)
+      warden (~> 1.0.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     excelsior (0.1.0)
@@ -52,9 +70,13 @@ GEM
       i18n (~> 0.4.1)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_where (0.9.9.2)
+      activerecord (~> 3.0.2)
+      activesupport (~> 3.0.2)
+      arel (~> 2.0.2)
     mime-types (1.16)
     mysql2 (0.2.6)
-    paperclip (2.3.5)
+    paperclip (2.3.6)
       activerecord
       activesupport
     parseexcel (0.5.2)
@@ -88,12 +110,13 @@ GEM
     rake (0.8.7)
     rufus-scheduler (2.0.7)
       tzinfo
-    thor (0.14.4)
+    thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
-    warden (0.10.7)
+    warden (1.0.2)
       rack (>= 1.0.0)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -105,9 +128,12 @@ DEPENDENCIES
   excelsior
   jquery-rails
   mysql2 (= 0.2.6)
+  netzke-basepack!
+  netzke-core!
   paperclip
   parseexcel
   pdfkit
   prawn
   rails (= 3.0.3)
   rufus-scheduler
+  will_paginate (~> 3.0.pre2)

@@ -6,7 +6,7 @@ gem "jquery-rails"
 gem "devise"
 gem 'delayed_job','2.1.0.pre2'
 gem "pdfkit"
-# gem "will_paginate", "~> 3.0.pre2"
+gem "will_paginate", "~> 3.0.pre2"
 gem "paperclip"
 gem "parseexcel"
 gem "excelsior"
@@ -14,6 +14,8 @@ gem "prawn"
 gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
 #gem "uuid"
+gem 'netzke-core', :git => "git://github.com/skozlov/netzke-core.git"
+gem 'netzke-basepack', :git => "git://github.com/skozlov/netzke-basepack.git"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

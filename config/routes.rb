@@ -1,5 +1,8 @@
 Webreim::Application.routes.draw do
+  get "ext_js_test/test"
+
   #this is for super admin use
+  netzke
   get "pri_task/clear_doc"
   get "pri_task/reset_doc_state"
   get "pri_task/reset_pw"
