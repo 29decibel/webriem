@@ -14,8 +14,10 @@ gem "prawn"
 gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
 #gem "uuid"
+#skozlov is the main stream,29decibel is my test fork
 gem 'netzke-core', :git => "git://github.com/skozlov/netzke-core.git"
-gem 'netzke-basepack', :git => "git://github.com/skozlov/netzke-basepack.git"
+gem 'netzke-basepack', :git => "git://github.com/29decibel/netzke-basepack.git"
+gem 'admin_data' #manage the data in the fly very cool
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

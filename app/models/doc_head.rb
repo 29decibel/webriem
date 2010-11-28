@@ -92,7 +92,7 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)
   end
   def self.custom_display_columns
-  	{"申请金额"=>:total_fi_amount}
+  	{DocHead.human_attribute_name(:apply_amount)=>:total_fi_amount}
   end
   #the total apply amount
   def total_apply_amount

@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/skozlov/netzke-basepack.git
-  revision: 7eb3ce9ef32c5714aa54965874bcd4401d20f1f5
+  remote: git://github.com/29decibel/netzke-basepack.git
+  revision: 50fa317
   specs:
     netzke-basepack (0.6.3)
       acts_as_list
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/skozlov/netzke-core.git
-  revision: a0bcc366297336e4006675ad486fc64bf1912882
+  revision: f225070
   specs:
     netzke-core (0.6.5)
       activesupport (>= 3.0.1)
@@ -48,6 +48,8 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     acts_as_list (0.1.2)
+    admin_data (1.0.22)
+      will_paginate (>= 3.0.pre2)
     arel (2.0.4)
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
@@ -55,7 +57,7 @@ GEM
     delayed_job (2.1.0.pre2)
       activesupport (~> 3.0)
       daemons
-    devise (1.1.4)
+    devise (1.1.5)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
     erubis (2.6.6)
@@ -123,6 +125,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-sqlserver-adapter
+  admin_data
   delayed_job (= 2.1.0.pre2)
   devise
   excelsior

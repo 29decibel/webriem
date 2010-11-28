@@ -17,37 +17,37 @@
 			<%= link_to I18n.t('model_search.btn_ok'),{:href=>"#"},:class=>"button2 back_to_reference" %>
 		<% end %>
 		<% if params[:outputable]%>
-			<%= link_to_function "输出TXT","output_to_txt()",:class=>"button2" %>
+			<%= link_to_function I18n.t('common_attr.btn_output_txt'),"output_to_txt()",:class=>"button2" %>
 		<% end %>
 		<% if params[:printable]%>
-			<%= link_to "打印",{:href=>"#"},:class=>"button2" %>
+			<%= link_to I18n.t('common_attr.btn_print'),{:href=>"#"},:class=>"button2" %>
 		<% end %>		
 		<% if params[:batch_pay]%>
-			<%= link_to_function "批量付款","batch_pay()",:class=>"button2" %>
+			<%= link_to_function I18n.t('common_attr.btn_batch_pay'),"batch_pay()",:class=>"button2" %>
 		<% end %>
 		<% if params[:batch_approve]%>
-			<%= link_to_function "批量审批","batch_approve()",:class=>"button2" %>
+			<%= link_to_function I18n.t('common_attr.btn_batch_approve'),"batch_approve()",:class=>"button2" %>
 			<div id="approve_info">
 				<div class="form_title">
-					<h3>填写审批意见</h3>
+					<h3><%= I18n.t('common_attr.write_note')%></h3>
 				</div>
 				<div class="form_area">
 					<div class="form_block">
 						<div class="form_field">
-							<%= label_tag "是否通过"%>
+							<%= label_tag I18n.t('common_attr.pass')%>
 							<%= check_box_tag :is_ok,:class=>"input1" %>
 						</div>
 					</div>
 					<div class="form_block">
 						<div class="form_field">
-							<%= label_tag "审批意见"%>
+							<%= label_tag I18n.t('common_attr.approve_info')%>
 							<%= text_area_tag :comments,nil,:class=>"input2" %>
 						</div>
 					</div>
 					<div class="form_block">
 						<div class="form_field">
-							<%= link_to_function "确定","batch_approve_confirm()",:class=>"button2" %>
-							<%= link_to_function "取消","$.unblockUI()",:class=>"button2" %>
+							<%= link_to_function I18n.t('common_op.btn_ok'),"batch_approve_confirm()",:class=>"button2" %>
+							<%= link_to_function I18n.t('common_op.btn_cancel'),"$.unblockUI()",:class=>"button2" %>
 							<%= hidden_field_tag :people_id,:value=>current_user.person.id%>
 						</div>
 					</div>

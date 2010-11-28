@@ -109,7 +109,12 @@
     btn_new: "新增"
     btn_return: "返回"
     btn_save: "保存"
+    btn_ok: 确定
+    btn_cancel: 取消
   common_attr:
+    write_note: 填写审批意见
+    approve_info: 审批意见
+    pass: 是否通过
     name: "名称"
     code: "编码"
     none: "无"
@@ -190,6 +195,12 @@
     not_know: "未知"
     should_riem: "应报销"
     should_back: "应还款"
+    btn_output_txt: 输出文本文件
+    btn_print: 打印
+    btn_batch_approve: 批量审批
+    settlement: 结算方式
+    direction: 方向
+    btn_batch_pay: 批量付款
   activerecord:
     #这里加入model的中文名称
     models:
@@ -620,7 +631,11 @@
         add_in_form: "在新窗体中添加"
         edit_in_form: "在窗体中修改"
         search: "高级搜索"
-
+      search_window:
+        cancel: 取消
+        search: 搜索
+        clear: 清除
+        advance_search: 高级搜索
     formats:
       date: Y-m-d
       datetime: Y-m-d H:i:s

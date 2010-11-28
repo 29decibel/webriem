@@ -654,9 +654,9 @@
 				<tr>					
 					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
 					<% if @doc_head.doc_type>=9 %>
-					<th>方向</th>
+					<th><%= "#{I18n.t('common_attr.direction')}"%></th>
 					<% end %>
-				    <th>结算方式*</th>
+				    <th><%= "#{I18n.t('common_attr.settlement')}"%>*</th>
 				    <th><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></th>
 				    <th><%= "#{I18n.t('common_attr.bank')}"%>*</th>
 				    <th><%= "#{I18n.t('common_attr.bank_no')}"%>*</th>

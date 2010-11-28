@@ -1,4 +1,4 @@
-# US English translations for Ruby on Rails
+﻿# US English translations for Ruby on Rails
 #
 # Use this as the base for the locale file of your language.
 
@@ -229,12 +229,7 @@
     btn_new: "Create"
     btn_return: "Back"
     btn_save: "Save"
-    btn_ok: Confirm
-    btn_cancel: Cancel
   common_attr:
-    write_note: Write Approve Info
-    approve_info: "Notes"
-    pass: Passed ?
     name: "Name"
     code: "Code"
     none: "None"
@@ -315,12 +310,6 @@
     not_know: "Unkonw"
     should_riem: "Should reimbursement"
     should_back: "Should repay"
-    btn_output_txt: OutPutTxt
-    btn_print: Print
-    btn_batch_approve: BatchApprove
-    settlement: Settlement
-    direction: Direction
-    btn_batch_pay: BatchPay
   activerecord:
     #这里加入model的中文name
     models:
@@ -655,3 +644,4 @@
     message_sent: "Notice has been sent "
   v_info:
     dep_is_end: "Departments must for the last stage department"
+    
