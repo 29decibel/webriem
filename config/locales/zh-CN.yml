@@ -189,7 +189,7 @@
     buy_fin_p_detail: "购买理财产品详细"
     redeem_fin_p_detail: "赎回理财产品详细"
     __ok: "是"
-    __not: "否"
+    sure_not: "否"
     male: "男"
     female: "女"
     not_know: "未知"
