@@ -7,7 +7,7 @@ class ExtraWorkStandard < ActiveRecord::Base
   def custom_display(column)
     column_name=column.class==String ? column:column.name
     if column_name=="is_sunday"
-      return is_sunday ? "#{I18n.t('common_attr.__ok')}" : "#{I18n.t('common_attr.not')}"
+      return is_sunday ? "#{I18n.t('common_attr.__ok')}" : "#{I18n.t('common_attr.__not')}"
     end
   end
   def self.custom_select(results,column_name,filter_text)
