@@ -68,6 +68,7 @@ class PriTaskController < ApplicationController
       reciver.company=person.name
       reciver.direction=0	
 	    reciver.settlement=Settlement.find_by_code("02")
+      reciver.amount=cp.apply_amount
       doc_head.save
       logger.error doc_head.errors
     end
