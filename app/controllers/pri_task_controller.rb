@@ -47,7 +47,7 @@ class PriTaskController < ApplicationController
       #set the doctype to the paras passed in
       doc_head.doc_type=1
       that_time=Time.parse(line.split(' ')[4].strip)
-      doc_head.doc_no=DOC_TYPE_PREFIX[1]+that_time.strftime("%Y%m%d")+count.rjust(4,"0")
+      doc_head.doc_no=DOC_TYPE_PREFIX[1]+that_time.strftime("%Y%m%d")+count.to_s.rjust(4,"0")
       doc_head.apply_date=that_time
       doc_head.dep=dep
       doc_head.person=person
