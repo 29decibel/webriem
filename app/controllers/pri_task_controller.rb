@@ -59,7 +59,7 @@ class PriTaskController < ApplicationController
       cp.rate=1
       cp.ori_amount=line.split(' ')[5].strip.to_f
       cp.apply_amount=line.split(' ')[5].strip.to_f
-      cp.used_for=line.split(' ')[6].strip.to_f
+      cp.used_for=line.split(' ')[6].strip
 	    #end
       reciver=doc_head.recivers.build
       #init the reciver's info to current person
