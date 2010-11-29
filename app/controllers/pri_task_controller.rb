@@ -67,6 +67,7 @@ class PriTaskController < ApplicationController
       reciver.direction=0	
 	    reciver.settlement=Settlement.find_by_code("02")
       doc_head.save
+      puts doc_head.errors
     end
   end
 end
