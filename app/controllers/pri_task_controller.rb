@@ -36,10 +36,10 @@ class PriTaskController < ApplicationController
   end
   def import_cps
     DocHead.delete_all
+    count=432
     File.open("#{RAILS_ROOT}/doc/pre_cps.txt").each_line do |line|
       logger.info line
       #get doc number
-      doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0")
       person=Person.find_by_code(line.split(' ')[2].strip)
       dep=Dep.find_by_code(line.split(' ')[0].strip)
       doc_head=DocHead.new
@@ -47,7 +47,7 @@ class PriTaskController < ApplicationController
       #set the doctype to the paras passed in
       doc_head.doc_type=1
       that_time=Time.parse(line.split(' ')[4].strip)
-      doc_head.doc_no=DOC_TYPE_PREFIX[1]+that_time.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
+      doc_head.doc_no=DOC_TYPE_PREFIX[1]+that_time.strftime("%Y%m%d")+count.rjust(4,"0")
       doc_head.apply_date=that_time
       doc_head.dep=dep
       doc_head.person=person
@@ -69,7 +69,9 @@ class PriTaskController < ApplicationController
       reciver.direction=0	
 	    reciver.settlement=Settlement.find_by_code("02")
       reciver.amount=cp.apply_amount
+      doc_head.doc_state=3
       doc_head.save
+      count=count+1
       logger.error doc_head.errors
     end
   end
