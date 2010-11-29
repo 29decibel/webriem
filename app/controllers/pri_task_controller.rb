@@ -1,4 +1,5 @@
 #coding: utf-8
+require 'time'
 class PriTaskController < ApplicationController
   #delete all docs
   def clear_doc
@@ -32,5 +33,38 @@ class PriTaskController < ApplicationController
     end
     @message="#{count}个菜单被重命名"
     render "pri_task/cmd_result"
+  end
+  def import_cps
+    File.open("#{RAILS_ROOT}/doc/pre_cps.txt").each_line do |line|
+      person=Person.find_by_code(line.split(' ')[2].strip)
+      dep=Dep.find_by_code(line.split(' ')[0].strip)
+      doc=DocHead.new
+      doc_head.doc_state = 0
+      #set the doctype to the paras passed in
+      doc_head.doc_type=1
+      that_time=Time.parse(line.split(' ')[4].strip)
+      doc_head.doc_no=DOC_TYPE_PREFIX[1]+that_time.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
+      doc_head.apply_date=that_time
+      doc_head.dep=dep
+      doc_head.person=person
+      #build some new doc details
+      #if @doc_head.doc_type==1 or  @doc_head.doc_type==2
+      cp=	doc_head.cp_doc_details.build 
+      cp.dep=dep
+      cp.currency=Currency.find_by_code('RMB')
+      cp.rate=1
+      cp.ori_amount=line.split(' ')[5].strip.to_f
+      cp.apply_amount=line.split(' ')[5].strip.to_f
+      cp.used_for=line.split(' ')[6].strip.to_f
+	    #end
+      reciver=@doc_head.recivers.build
+      #init the reciver's info to current person
+      reciver.bank=person.bank
+      reciver.bank_no=person.bank_no
+      reciver.company=person.name
+      reciver.direction=0	
+	    reciver.settlement=Settlement.find_by_code("02")
+      doc.save
+    end
   end
 end
