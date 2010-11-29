@@ -37,7 +37,7 @@ class PriTaskController < ApplicationController
   def import_cps
     DocHead.delete_all
     File.open("#{RAILS_ROOT}/doc/pre_cps.txt").each_line do |line|
-      puts line
+      logger.info line
       #get doc number
       doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0")
       person=Person.find_by_code(line.split(' ')[2].strip)
@@ -69,7 +69,7 @@ class PriTaskController < ApplicationController
       reciver.direction=0	
 	    reciver.settlement=Settlement.find_by_code("02")
       doc_head.save
-      puts doc_head.errors
+      logger.error doc_head.errors
     end
   end
 end
