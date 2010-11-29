@@ -2,7 +2,7 @@
 class RdExtraWorkMeal < ActiveRecord::Base
     belongs_to :reim_detail 
     belongs_to :currency 
-    enum_attr :is_sunday, [["yes",0],["no", 1]]
+    enum_attr :is_sunday, [["是",0],["否", 1]]
     validates_presence_of :start_time
     validates_presence_of :end_time
     validates_presence_of :reason
