@@ -38,7 +38,7 @@ class PriTaskController < ApplicationController
     File.open("#{RAILS_ROOT}/doc/pre_cps.txt").each_line do |line|
       person=Person.find_by_code(line.split(' ')[2].strip)
       dep=Dep.find_by_code(line.split(' ')[0].strip)
-      doc=DocHead.new
+      doc_head=DocHead.new
       doc_head.doc_state = 0
       #set the doctype to the paras passed in
       doc_head.doc_type=1
@@ -64,7 +64,7 @@ class PriTaskController < ApplicationController
       reciver.company=person.name
       reciver.direction=0	
 	    reciver.settlement=Settlement.find_by_code("02")
-      doc.save
+      doc_head.save
     end
   end
 end
