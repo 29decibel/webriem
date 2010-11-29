@@ -6,14 +6,7 @@
 	  <%= csrf_meta_tag %>
 	</head>
 	<body>
-		<div id="lan">
-			<% if I18n.locale=="en-US".to_sym %>
-				<a href='http://114.113.150.227'>转到中文</a>
-			<% else %>
-				<a href='http://114.113.150.227:8012'>Change to English</a>
-			<% end %>
-		</div>
-		<div id="login">	
+			<div id="login">	
 			<%= yield %>
 		</div>
 	</body>
