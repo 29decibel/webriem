@@ -29,22 +29,22 @@ $(function(){
 		//fire it once
 		$("select.is_split_reim").change();
 		//change the enter key to tab
-		$('input').live("keypress", function(e) {
-		                /* ENTER PRESSED*/
-		                if (e.keyCode == 13) {
-		                    /* FOCUS ELEMENT */
-		                    var inputs = $(this).parents("form").eq(0).find(":input,:select");
-		                    var idx = inputs.index(this);
+		//$('input').live("keypress", function(e) {
+		//#                /* ENTER PRESSED*/
+		//#                if (e.keyCode == 13) {
+		//#                    /* FOCUS ELEMENT */
+		//#                    var inputs = $(this).parents("form").eq(0).find(":input,:select");
+		//#                    var idx = inputs.index(this);
 
-		                    if (idx == inputs.length - 1) {
-		                        inputs[0].select()
-		                    } else {
-		                        inputs[idx + 1].focus(); //  handles submit buttons
-		                        inputs[idx + 1].select();
-		                    }
-		                    return false;
-		                }
-		            });		
+		//#                    if (idx == inputs.length - 1) {
+		//#                        inputs[0].select()
+		//#                    } else {
+		//#                        inputs[idx + 1].focus(); //  handles submit buttons
+		//#                        inputs[idx + 1].select();
+		//#                    }
+		//#                    return false;
+		//#                }
+		//#            });		
 		//bind ajax event 
 		$("form").live("ajax:before",function(){
 			//var link_position=$("div.filter a.filter").offset();
