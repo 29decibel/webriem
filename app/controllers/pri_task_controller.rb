@@ -35,6 +35,7 @@ class PriTaskController < ApplicationController
     render "pri_task/cmd_result"
   end
   def import_cps
+    DocHead.delete_all
     File.open("#{RAILS_ROOT}/doc/pre_cps.txt").each_line do |line|
       #get doc number
       doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0")
