@@ -15,7 +15,7 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads.xml
   def index
     #get the specific docs by the doc_type passed by querystring
-    @doc_heads = DocHead.where("doc_type=?",params[:doc_type].to_i)
+    @doc_heads = DocHead.all#where("doc_type=?",params[:doc_type].to_i)
     @doc_type=params[:doc_type].to_i
     respond_to do |format|
       format.html # index.html.erb
