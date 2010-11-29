@@ -33,7 +33,7 @@
 		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  
 	</td>
 	<td>
-		<%= f.text_field :apply_amount,:class=>"normal doc_apply_amount" %>  
+		<%= f.text_field :apply_amount,:class=>"normal doc_apply_amount number" %>  
 		<%= hidden_field_tag "hr_amount",f.object.apply_amount,:class=>"doc_HR_amount normal number" %> 
 		<%= hidden_field_tag "fi_amount",f.object.apply_amount,:class=>"doc_FI_amount normal number" %>
 	</td>
