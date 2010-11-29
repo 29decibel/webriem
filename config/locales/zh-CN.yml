@@ -73,7 +73,7 @@
     currency:
       format:
         format: "%u %n"
-        unit: "CN¥"
+        unit: "CN￥"
         separator: "."
         delimiter: ","
         precision: 2
@@ -188,7 +188,7 @@
     cash_draw_detail: "现金提取申请详细"
     buy_fin_p_detail: "购买理财产品详细"
     redeem_fin_p_detail: "赎回理财产品详细"
-    __ok: "是"
+    sure_ok: "是"
     sure_not: "否"
     male: "男"
     female: "女"
