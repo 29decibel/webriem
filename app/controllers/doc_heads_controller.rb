@@ -62,10 +62,10 @@ class DocHeadsController < ApplicationController
     #set the apply person to the current login user
     @doc_head.person=current_person
     #build some new doc details
-    if @doc_head.doc_type==1 or  @doc_head.doc_type==2
-    	cp=	@doc_head.cp_doc_details.build 
-    	cp.dep=current_person.dep
-	end
+    #if @doc_head.doc_type==1 or  @doc_head.doc_type==2
+    #	cp=	@doc_head.cp_doc_details.build 
+    #	cp.dep=current_person.dep
+	  #end
     @doc_head.rec_notice_details.build if @doc_head.doc_type==3
     reciver=@doc_head.recivers.build
     #init the reciver's info to current person
