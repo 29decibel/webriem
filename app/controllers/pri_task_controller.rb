@@ -59,7 +59,7 @@ class PriTaskController < ApplicationController
       cp.apply_amount=line.split(' ')[5].strip.to_f
       cp.used_for=line.split(' ')[6].strip.to_f
 	    #end
-      reciver=@doc_head.recivers.build
+      reciver=doc_head.recivers.build
       #init the reciver's info to current person
       reciver.bank=person.bank
       reciver.bank_no=person.bank_no
