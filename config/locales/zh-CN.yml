@@ -111,6 +111,12 @@
     btn_save: "保存"
     btn_ok: 确定
     btn_cancel: 取消
+    btn_mydocs: 我的单据
+    btn_print: 打印
+    btn_cancel: 撤销
+    btn_start_work_flow: 提交审批
+    doc_not_valide_notice: 单据不合格提醒
+    confirm_paid: 确认付款
   common_attr:
     write_note: 填写审批意见
     approve_info: 审批意见
@@ -201,6 +207,9 @@
     settlement: 结算方式
     direction: 方向
     btn_batch_pay: 批量付款
+    add_apply_item: 添加申请条目
+    cash_draw_account: 提现账户
+    cash_draw_money_remain: 提现前余额
   activerecord:
     #这里加入model的中文名称
     models:

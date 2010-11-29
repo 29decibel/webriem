@@ -231,6 +231,12 @@
     btn_save: "Save"
     btn_ok: Confirm
     btn_cancel: Cancel
+    btn_mydocs: My documents
+    btn_print: Print
+    btn_cancel: Cancel
+    btn_start_work_flow: Commit
+    doc_not_valide_notice: Bill unqualified
+    confirm_paid: ConfirmPaid
   common_attr:
     write_note: Write Approve Info
     approve_info: "Notes"
@@ -321,6 +327,9 @@
     settlement: Settlement
     direction: Direction
     btn_batch_pay: BatchPay
+    add_apply_item: Add Cash Item
+    cash_draw_account: Cash Draw Account
+    cash_draw_money_remain: Amount Remain
   activerecord:
     #这里加入model的中文name
     models:

@@ -1,7 +1,7 @@
 <div class="form_area">
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "提现账户" %>
+		<%= f.label "#{I18n.t('common_attr.cash_draw_account')}" %>
 		<div class="reference">
 			<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref large" %>
@@ -11,21 +11,21 @@
 </div>
 <div class="form_block">
 	<div class="form_field">
-		<%= f.label "提现前余额",:class=>"input_label" %>
+		<%= f.label "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" %>
 		<%= f.text_field :now_remain_amout,:class=>"input1 "%>
 	</div>
 </div>
 </div>
 <div class="form_title">
-	<h3>添加申请条目</h3>
+	<h3><%= I18n.t('common_attr.add_apply_item')%></h3>
 </div>
 <div id="cash_draw_items form_block">
 	<table class="form_input">
 		<thead>
 			<tr>	
-				<th>序号</th>
-			    <th>用途</th>
-			    <th>申请金额</th>
+				<th><%= I18n.t('common_attr.sequence')%></th>
+			    <th><%= I18n.t('common_attr.used_for')%></th>
+			    <th><%= I18n.t('common_attr.apply_amount')%></th>
 				<th></th><!--给删除的-->
 		    </tr>
 	    <thead>
@@ -35,8 +35,8 @@
 			<% end %>				
 		</tbody>
 		<tr>
-			<th colspan="1"><%= link_to_add_fields "点击添加",f,:cash_draw_items %></th>
-			<td>申请金额合计</td>
+			<th colspan="1"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cash_draw_items %></th>
+			<td><%= I18n.t('common_attr.total_apply_amount')%></td>
 			<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 			<td></td>
 		</tr>		
