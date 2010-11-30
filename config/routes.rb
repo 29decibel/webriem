@@ -8,6 +8,7 @@ Webreim::Application.routes.draw do
   get "pri_task/reset_pw"
   get "pri_task/adapt_menu"
   get "pri_task/import_cps"
+  get "pri_task/adapt_cp_offsets"
   
   post "common/reset_p"
   

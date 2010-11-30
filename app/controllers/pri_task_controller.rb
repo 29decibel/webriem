@@ -34,6 +34,13 @@ class PriTaskController < ApplicationController
     @message="#{count}个菜单被重命名"
     render "pri_task/cmd_result"
   end
+  def adapt_cp_offsets
+    DocHead.all.each do |doc|
+      doc.cp_doc_remain_amount=doc.total_apply_amount
+      doc.total_amount=doc.total_apply_amount
+      doc.save
+    end
+  end
   def import_cps
     DocHead.delete_all
     count=1
