@@ -278,11 +278,12 @@ class DocHeadsController < ApplicationController
     @recivers=[]
     params[:ids].split('_').each do |id|
       doc_head=DocHead.find_by_id(id)
-      if doc_head
-        doc_head.recivers.each do |r|
-          @recivers<<{:bank_no=>r.bank_no,:name=>r.company,:amount=>r.amount}
-        end
-      end
+      send_data "aaaaggggg",:filename=>"accountsInfo.txt",:type=>"application/txt"
+      #if doc_head
+      #  doc_head.recivers.each do |r|
+      #    @recivers<<{:bank_no=>r.bank_no,:name=>r.company,:amount=>r.amount}
+      #  end
+      #end
     end
   end
   def doc_failed
