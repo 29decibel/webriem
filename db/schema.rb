@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101123152222) do
+ActiveRecord::Schema.define(:version => 20101130074533) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -507,7 +507,6 @@ ActiveRecord::Schema.define(:version => 20101123152222) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_head_id"
-    t.integer  "direction"
     t.decimal  "hr_amount",     :precision => 16, :scale => 2
     t.decimal  "fi_amount",     :precision => 16, :scale => 2
   end

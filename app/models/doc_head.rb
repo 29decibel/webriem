@@ -212,7 +212,7 @@ class DocHead < ActiveRecord::Base
         next if r.amount==nil
         final_amount=r.amount
       end
-      r.direction==0 ? total+=final_amount : total-=final_amount
+      total+=final_amount
     end
     total
   end

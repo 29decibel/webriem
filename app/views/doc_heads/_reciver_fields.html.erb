@@ -2,13 +2,6 @@
 	<td>  
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td> 
-	<% if @doc_head.doc_type>=9 %>
-	<td>
-		<%= f.select :direction, Reciver::ENUMS_DIRECTION,{},{:class=>"input1 "} %>
-	</td>
-	<% else %>
-		<%= f.hidden_field :direction,:value=>@doc_head.doc_type<=2 ? 0 : 1 %>
-	<% end %>
 	<td>
 		<div class="reference">
 			<%= f.hidden_field :settlement_id,{:class=>"ref_hidden_field"}%>

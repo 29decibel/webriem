@@ -653,9 +653,6 @@
 			<thead>
 				<tr>					
 					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					<% if @doc_head.doc_type>=9 %>
-					<th><%= "#{I18n.t('common_attr.direction')}"%></th>
-					<% end %>
 				    <th><%= "#{I18n.t('common_attr.settlement')}"%>*</th>
 				    <th><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></th>
 				    <th><%= "#{I18n.t('common_attr.bank')}"%>*</th>
@@ -674,7 +671,7 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<th colspan="8"><%= link_to_add_fields "#{I18n.t('common_attr.add_reciver')}",f,:recivers %></th>
+				<th colspan="7"><%= link_to_add_fields "#{I18n.t('common_attr.add_reciver')}",f,:recivers %></th>
 			</tr>		
 		</table>
 	</div>	
