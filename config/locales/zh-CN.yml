@@ -155,7 +155,8 @@
     transport_detail: "交通费明细"
     transportation: "交通工具"
     people_count: "人数"
-    live_together_person: "参与人"
+    live_together_person: "合住人"
+    join_together_person: 参与人
     lodging_desc: "住宿费用明细"
     lodging_days: "住宿天数"
     city: "城市"
