@@ -5,6 +5,9 @@ $(function(){
 	//wrap the datatime picker
 	$(".datepicker").datepicker();
 	$(".datetimepicker").datetimepicker();
+  $(".datetimepicker").live("change",function(){
+      //$(this).val($(this).text());
+    });
 	//set the error message span to none if it have no message
 	$("span.error_message").each(
 		function(){

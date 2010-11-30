@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130074533) do
+ActiveRecord::Schema.define(:version => 20101130100304) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -349,8 +349,8 @@ ActiveRecord::Schema.define(:version => 20101130074533) do
     t.string   "end_place"
     t.integer  "sequence"
     t.date     "work_date"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2
@@ -369,8 +369,8 @@ ActiveRecord::Schema.define(:version => 20101130074533) do
     t.integer  "sequence"
     t.date     "work_date"
     t.integer  "is_sunday"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2
@@ -387,8 +387,8 @@ ActiveRecord::Schema.define(:version => 20101130074533) do
     t.integer  "sequence"
     t.date     "work_date"
     t.integer  "is_sunday"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2
@@ -426,8 +426,8 @@ ActiveRecord::Schema.define(:version => 20101130074533) do
   create_table "rd_transports", :force => true do |t|
     t.integer  "sequence"
     t.integer  "doc_head_id"
-    t.time     "start_date"
-    t.time     "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string   "start_position"
     t.string   "end_position"
     t.integer  "transportation_id"

@@ -115,6 +115,7 @@ class DocHeadsController < ApplicationController
   # PUT /doc_heads/1
   # PUT /doc_heads/1.xml
   def update
+    #debugger
     @doc_head = DocHead.find(params[:id])
     #add the offset info
     if params[:offset_info]
