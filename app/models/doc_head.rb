@@ -323,8 +323,13 @@ class DocHead < ActiveRecord::Base
 		  results
 	  end
   end
+  #can delete depands on two things
   def can_delete
-    return doc_state==0
+    can=true
+    can=false if reim_cp_offsets.count>0
+    can=false if cp_docs.count>0
+    can=false if doc_state!=0
+    can
   end
   #here is the total custom display column names
   def self.my_doc_display_columns

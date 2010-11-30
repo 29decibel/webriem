@@ -41,6 +41,23 @@ class PriTaskController < ApplicationController
       doc.save
     end
   end
+  def check_cp_offset
+    offset_ids=RiemCpOffset.all.map {|offset| offset.id}
+    offset_ids.each do |o_id|
+      o_set=RiemCpOffset.find(o_id)
+      if o_set.cp_doc_head==nil
+        if o_set.reim_doc_head
+          o_set.reim_doc_head.destroy
+        end
+      end
+      if o_set.reim_doc_head==nil
+        if o_set.cp_doc_head
+          o_set.cp_doc_head.update_attribute(:cp_doc_remain_amount,o_set.cp_doc_head.total_apply_amount)
+        end
+      end
+      o_set.destroy
+    end
+  end
   def import_cps
     DocHead.delete_all
     count=1
