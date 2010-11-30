@@ -111,13 +111,13 @@ class DocHead < ActiveRecord::Base
     total=0
     if doc_type==1 or doc_type==2
       cp_doc_details.each do |cp|
-        next if cp.apply_amount==nil
+        next if cp.marked_for_destruction? || cp.apply_amount==nil
         total+=cp.apply_amount
       end
     end
     if doc_type==3
       rec_notice_details.each do |rd_detail|
-        next if rd_detail.amount==nil
+        next if  rd_detail.marked_for_destruction? || rd_detail.amount==nil
         total+=rd_detail.amount
       end
     end
@@ -129,6 +129,7 @@ class DocHead < ActiveRecord::Base
     end
     if doc_type==6
       inner_cash_draw.cash_draw_items.each do |c_item|
+        next if c_item.apply_amount==nil or c_item.marked_for_destruction?
         total+=c_item.apply_amount
       end
     end
@@ -141,21 +142,21 @@ class DocHead < ActiveRecord::Base
     if doc_type==9
       [rd_travels,rd_transports,rd_lodgings,other_riems].each do |rd|
         rd.each do |rd_detail|
-          next if rd_detail.send(type)==nil
+          next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
           total+=rd_detail.send(type)         
         end
       end
     end
     if doc_type==10
       rd_work_meals.each do |rd|
-        next if rd.apply_amount==nil
+        next if rd.marked_for_destruction? || rd.apply_amount==nil
         total+=rd.apply_amount
       end
     end
     if doc_type==11
       [rd_extra_work_cars,rd_extra_work_meals].each do |rd|
         rd.each do |rd_detail|
-          next if rd_detail.send(type)==nil
+          next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
           total+=rd_detail.send(type)         
         end
       end
@@ -163,14 +164,14 @@ class DocHead < ActiveRecord::Base
     if doc_type==12
       [rd_common_transports,rd_work_meals,common_riems].each do |rd|
         rd.each do |rd_detail|
-          next if rd_detail.apply_amount==nil
+          next if  rd_detail.marked_for_destruction? || rd_detail.apply_amount==nil
           total+=rd_detail.apply_amount
         end
       end
     end
     if doc_type==13
       rd_benefits.each do |rd_detail|
-        next if rd_detail.send(type)==nil
+        next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
         total+=rd_detail.send(type)
       end
     end

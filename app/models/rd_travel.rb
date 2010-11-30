@@ -20,4 +20,32 @@ class RdTravel < ActiveRecord::Base
   def must_have_a_place
     errors.add(:base,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
   end
+  #def before_validation
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'before validateing travel================='
+  #end
+  #def after_validation
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'after validate doc travel================='
+  #end
+  #def before_save
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'before save doc travel================='
+  #end
+  #def after_save
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'after save  travel=================doc'
+  #end
+  #def before_update
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'before update d travel=================oc'
+  #end
+  #def around_update
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'around update doc travel================='
+  #end
+  #def after_update
+  #  clogger=Logger.new ('aaa.txt')
+  #  clogger.info 'after update travel================='
+  #end
 end
