@@ -12,10 +12,12 @@
 		<%= f.text_field :end_place,:class=>"normal" %>  
 	</td>
 	<td>
-		<%= f.text_field :start_time,:class=>"datetimepicker middle" %>  
+		<%- start_time_string = f.object.start_time && f.object.start_time.to_s -%>
+		<%= f.text_field :start_time,:class=>"datetimepicker middle",:value => start_time_string %>  
 	</td>
 	<td>
-		<%= f.text_field :end_time,:class=>"datetimepicker middle" %>  
+		<%- end_time_string = f.object.end_time && f.object.end_time.to_s -%>
+		<%= f.text_field :end_time,:class=>"datetimepicker middle",:value => end_time_string %>  
 	</td>
 	<td>
 		<%= f.text_field :reason,:class=>"large-x" %>  

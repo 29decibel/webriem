@@ -6,10 +6,12 @@
 		<%= f.select :is_sunday, RdExtraWorkMeal::ENUMS_IS_SUNDAY,{},{:class=>"normal is_sunday"} %>
 	</td>
 	<td>
-		<%= f.text_field :start_time,:class=>"datetimepicker middle ew_b_time" %>  
+		<%- start_time_string = f.object.start_time && f.object.start_time.to_s -%>
+		<%= f.text_field :start_time,:class=>"datetimepicker middle ew_b_time",:value => start_time_string %>  
 	</td>
-	<td> 
-		<%= f.text_field :end_time,:class=>"datetimepicker middle ew_e_time" %>  
+	<td>
+		<%- end_time_string = f.object.end_time && f.object.end_time.to_s -%>
+		<%= f.text_field :end_time,:class=>"datetimepicker middle ew_e_time",:value => end_time_string %>  
 	</td>
 	<td> 
 		<%= f.text_field :reason,:class=>"large-x" %>  

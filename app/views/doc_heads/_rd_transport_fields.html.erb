@@ -2,11 +2,13 @@
 	<td>  
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
-	<td>  
-		<%= f.text_field :start_date,:class=>"datetimepicker middle" %>  
+	<td>
+		<%- start_time_string = f.object.start_date && f.object.start_date.to_s -%>
+		<%= f.text_field :start_date,:class=>"datetimepicker middle",:value => start_time_string %>  
 	</td>
 	<td>
-		<%= f.text_field :end_date,:class=>"datetimepicker middle" %>  
+		<%- end_time_string = f.object.end_date && f.object.end_date.to_s -%>
+		<%= f.text_field :end_date,:class=>"datetimepicker middle",:value => end_time_string %>  
 	</td>
 	<td>
 		<%= f.text_field :start_position,:class=>"normal" %>  
