@@ -287,7 +287,7 @@ class DocHeadsController < ApplicationController
           output_str<<"|"
           output_str<<r.amount.to_s
           output_str<<"|00110|1122|"
-          output_str<<"\n"
+          output_str<<"\r\n"
         end
       end
     end
