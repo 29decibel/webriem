@@ -274,17 +274,24 @@ class DocHeadsController < ApplicationController
   end
   #==================================output to txt========================================
   def output_to_txt
-    #send_data Person.first, :filename => "hello.txt",:type => "application/txt"
-    @recivers=[]
+    output_str=""
     params[:ids].split('_').each do |id|
       doc_head=DocHead.find_by_id(id)
-      send_data "aaaaggggg",:filename=>"accountsInfo.txt",:type=>"application/txt"
-      #if doc_head
-      #  doc_head.recivers.each do |r|
-      #    @recivers<<{:bank_no=>r.bank_no,:name=>r.company,:amount=>r.amount}
-      #  end
-      #end
+      if doc_head
+        doc_head.recivers.each_with_index do |r,index|
+          output_str<<(index+1).to_s.rjust(7,"0")
+          output_str<<"|"
+          output_str<<r.bank_no
+          output_str<<"|"
+          output_str<<r.company
+          output_str<<"|"
+          output_str<<r.amount.to_s
+          output_str<<"|00110|1122|"
+          output_str<<"\n"
+        end
+      end
     end
+    send_data output_str, :filename => "person_accounts.txt",:type => "application/txt"
   end
   def doc_failed
     doc=DocHead.find(params[:doc_id])
