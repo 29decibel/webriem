@@ -280,6 +280,7 @@ class DocHeadsController < ApplicationController
       doc_head=DocHead.find_by_id(id)
       if doc_head
         doc_head.recivers.each_with_index do |r,index|
+          next if r.amount==0
           output_str<<(index+1).to_s.rjust(7,"0")
           output_str<<"|"
           output_str<<r.bank_no
