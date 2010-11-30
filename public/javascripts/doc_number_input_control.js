@@ -138,7 +138,12 @@ function init_total_amount()
 	$("table").each(function(){
 		var total=0.00;
     //alert($(this).find("input.doc_FI_amount").size());
-		$(this).find("input.doc_FI_amount").each(function(){
+    var amount_controls=$(this).find("input.doc_FI_amount");
+    if(amount_controls.size()==0)
+    {
+      amount_controls=$(this).find("input.doc_apply_amount");
+    }
+		amount_controls.each(function(){
 			total+=parseFloat($(this).val());
 		});
 		$(this).find("input.doc_total_amount").val(total.toFixed(2));
