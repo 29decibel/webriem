@@ -137,7 +137,7 @@ function init_total_amount()
 {
 	$("table").each(function(){
 		var total=0.00;
-    alert($(this).find("input.doc_FI_amount").size());
+    //alert($(this).find("input.doc_FI_amount").size());
 		$(this).find("input.doc_FI_amount").each(function(){
 			total+=parseFloat($(this).val());
 		});
