@@ -15,7 +15,7 @@ class ModelSearchController < ApplicationController
     if params[:filter_method] and @class.respond_to?(params[:filter_method])
     	@results=@class.send(params[:filter_method],@results,current_user.person)
     end
-    render :text=>@results.first
+    render :text=>@results.first.id
     #render :layout=>false if !params[:layout]
   end
   def with
