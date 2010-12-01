@@ -42,10 +42,9 @@
 		<% end %>
 	<% end %>
 	<!--here is the custom display columns-->
-	<%= result.id%>
 	<% if @class.respond_to? "custom_display_columns"%>
 		<% @class.custom_display_columns.each do |key,value|%>
-			<td><%= result.send(value).to_s%></td>
+			<td><%= result.send(value)%></td>
 		<% end %>
 	<% end %>
 	<% if params[:lookup]%>
