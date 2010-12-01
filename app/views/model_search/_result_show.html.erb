@@ -45,7 +45,7 @@
 	<%= result.id%>
 	<% if @class.respond_to? "custom_display_columns"%>
 		<% @class.custom_display_columns.each do |key,value|%>
-			<td><%= result.send(value)%></td>
+			<td><%= result.send(value).to_s%></td>
 		<% end %>
 	<% end %>
 	<% if params[:lookup]%>
