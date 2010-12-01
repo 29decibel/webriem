@@ -34,6 +34,13 @@ class PriTaskController < ApplicationController
     @message="#{count}个菜单被重命名"
     render "pri_task/cmd_result"
   end
+  def fuck_date
+    doc=DocHead.find(385)
+    doc.rd_extra_work_meals.each do |w_m|
+      w_m.update_attribute(:start_time,Time.now)
+      w_m.update_attribute(:end_time,Time.now)
+    end
+  end
   def adapt_cp_offsets
     DocHead.all.each do |doc|
       doc.cp_doc_remain_amount=doc.total_apply_amount

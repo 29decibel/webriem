@@ -10,6 +10,7 @@ Webreim::Application.routes.draw do
   get "pri_task/import_cps"
   get "pri_task/adapt_cp_offsets"
   get "pri_task/check_cp_offset"
+  get "pri_task/fuck_date"
   
   post "common/reset_p"
   
