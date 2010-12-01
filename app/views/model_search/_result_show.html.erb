@@ -42,6 +42,7 @@
 		<% end %>
 	<% end %>
 	<!--here is the custom display columns-->
+	<%= result.id%>
 	<% if @class.respond_to? "custom_display_columns"%>
 		<% @class.custom_display_columns.each do |key,value|%>
 			<td><%= result.send(value)%></td>
