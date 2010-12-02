@@ -3,7 +3,7 @@ require 'rufus/scheduler'
 
 scheduler = Rufus::Scheduler.start_new
 #every day send a email
-scheduler.cron '00 01 * * *' do
+scheduler.cron '30 11 * * *' do
   send_email
 end
 def send_email
@@ -19,8 +19,7 @@ def send_email
       person_doc[doc.approver]=[doc]
     end
   end
-  puts person_doc.count
-  puts person_doc
+  puts "total emails to send is #{person_doc.count}.................."
   #send the mail
   para={}
   person_doc.each do |person,docs|

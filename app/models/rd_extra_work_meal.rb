@@ -15,4 +15,11 @@ class RdExtraWorkMeal < ActiveRecord::Base
         self.rate=self.currency.default_rate
       end
     end
+    validate :time_validate
+    def time_validate
+      if start_time !=nil and end_time!=nil
+        errors.add(:start_time,"请检查填写的日期或时间") if start_time>Time.now
+        errors.add(:end_time,"请检查填写的日期或时间") if end_time>Time.now
+      end
+    end
 end
