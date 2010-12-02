@@ -1,0 +1,130 @@
+# Logfile created on 2010-12-02 19:21 by logger.rb/25413
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000109170c78>
+current work flow step is #<WorkFlowStep:0x00000109170ae8>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000104e99e18>
+current work flow step is #<WorkFlowStep:0x00000104e99cb0>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001091bb3b8>
+current work flow step is #<WorkFlowStep:0x000001091bb228>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000104e58af8>
+current work flow step is #<WorkFlowStep:0x00000104e589b8>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x0000010901ae28>
+current work flow step is #<WorkFlowStep:0x0000010901acc0>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001091b3938>
+current work flow step is #<WorkFlowStep:0x000001091b37d0>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001090cb890>
+current work flow step is #<WorkFlowStep:0x000001090cb728>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001091ffdd8>
+current work flow step is #<WorkFlowStep:0x000001091ffc98>
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000109191180>
+current work flow step is #<WorkFlowStep:0x00000109191018>
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001090b1990>
+current work flow step is #<WorkFlowStep:0x000001090b1850>
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001090012c0>
+current work flow step is #<WorkFlowStep:0x00000109001158>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001091b6688>
+current work flow step is #<WorkFlowStep:0x000001091b6520>
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001090e2888>
+current work flow step is #<WorkFlowStep:0x000001090e26f8>
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x0000010901fc20>
+current work flow step is #<WorkFlowStep:0x0000010901fab8>
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001040fa398>
+current work flow step is #<WorkFlowStep:0x000001040fa208>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001041aa338>
+current work flow step is #<WorkFlowStep:0x000001041aa180>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001041d8968>
+current work flow step is #<WorkFlowStep:0x000001041d87d8>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000104234650>
+current work flow step is #<WorkFlowStep:0x00000104234448>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000107bb6860>
+current work flow step is #<WorkFlowStep:0x00000107bb66f8>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000107c2ab70>
+current work flow step is #<WorkFlowStep:0x00000107c2a9e0>
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x0000010900afa0>
+find the dep is  100404
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x00000107a46700>
+find the dep is  100404
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x00000107a388d0>
+find the dep is  100404
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x00000107a2ab90>
+find the dep is  100404
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x00000107a1ce78>
+find the dep is  100404
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x00000107a0f278>
+find the dep is  100403
+work_flow_step duty is   003
+approver person is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001079ff170>
+find the dep is  100402
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x000001079f1318>
+find the dep is  100401
+work_flow_step duty is   003
+approver person is 
+current work flow step is #<WorkFlowStep:0x000001079e33a8>
+find the dep is  100401
+work_flow_step duty is   003
+approver person is 
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is 
+current work flow step is 
