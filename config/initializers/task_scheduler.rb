@@ -3,7 +3,7 @@ require 'rufus/scheduler'
 
 scheduler = Rufus::Scheduler.start_new
 #every day send a email
-scheduler.cron '30 11 * * *' do
+scheduler.cron '40 11 * * *' do
   send_email
 end
 def send_email
