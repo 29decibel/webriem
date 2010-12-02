@@ -3,7 +3,7 @@ class FlfyPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{::Prawn::BASEDIR}/data/fonts/STSONG.ttf"
+    font "#{RAILS_ROOT}/fonts/wenquanyi.ttf"
     #title
     text "福利费用报销单",:size=>18,:align=>:center
     #image

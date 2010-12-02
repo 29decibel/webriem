@@ -3,7 +3,13 @@ class FkPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{::Prawn::BASEDIR}/data/fonts/STSONG.ttf"
+     #font_families.update(
+     #     "MyFontFamily" => {:bold        => "#{RAILS_ROOT}/fonts/wenquanyi.ttf",
+     #                        :italic      => "#{RAILS_ROOT}/fonts/wenquanyi.ttf",
+     #                        :bold_italic => "#{RAILS_ROOT}/fonts/wenquanyi.ttf",
+     #                        :normal      => "#{RAILS_ROOT}/fonts/wenquanyi.ttf" })
+    #font("MyFontFamily")
+    font "#{RAILS_ROOT}/fonts/wenquanyi.ttf"
     #title
     text "付款单",:size=>18,:align=>:center
     #image
