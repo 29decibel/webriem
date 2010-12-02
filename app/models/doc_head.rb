@@ -248,7 +248,7 @@ class DocHead < ActiveRecord::Base
     end
     logger.info "find the dep is  #{dep_to_find.code}"
     logger.info "work_flow_step duty is   #{work_flow_step.duty.code}"
-    logger.info "approver person is    #{approver_person.code}"
+    logger.info "approver person is #{approver_person}"
     #if current you find  the part member then return approver_person directly
     return approver_person if work_flow_step.duty.code=='003'
     #ok now we start to find that person
