@@ -3,7 +3,7 @@ class PtfyPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{RAILS_ROOT}/fonts/wenquanyi.ttf"
+    font "#{RAILS_ROOT}/fonts/stsong.ttf"
     #title
     text "普通费用报销单",:size=>18,:align=>:center
     #image
@@ -97,12 +97,15 @@ class PtfyPdf < Prawn::Document
       move_down 10
       text "收款人信息",:size=>12
       move_down 2
-      table doc.recivers.map {|r| ["#{r.settlement}","#{r.company}","#{r.bank}","#{r.bank_no}","#{r.amount}"]},
-        :headers => ["结算方式","收款人","银行","银行帐号","本币金额"],
+      data_array=doc.recivers.map {|r| ["#{r.settlement}","#{r.company}","#{r.bank}","#{r.bank_no}","#{r.amount}"]}
+      data_array<<["收款人签名",{:text => "", :colspan => 4, :align => :left}]
+      table data_array,
+        :headers => ["结算方式","收款人","银行","银行帐号","金额"],
         :width=>margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
+      
     end
     self.render
   end

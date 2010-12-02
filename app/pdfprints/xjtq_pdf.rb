@@ -3,7 +3,7 @@ class XjtqPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{RAILS_ROOT}/fonts/wenquanyi.ttf"
+    font "#{RAILS_ROOT}/fonts/stsong.ttf"
     #title
     text "现金提取",:size=>18,:align=>:center
     #image

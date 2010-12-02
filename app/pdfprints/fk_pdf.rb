@@ -4,12 +4,12 @@ class FkPdf < Prawn::Document
   attr_accessor :doc
   def to_pdf
      #font_families.update(
-     #     "MyFontFamily" => {:bold        => "#{RAILS_ROOT}/fonts/wenquanyi.ttf",
-     #                        :italic      => "#{RAILS_ROOT}/fonts/wenquanyi.ttf",
-     #                        :bold_italic => "#{RAILS_ROOT}/fonts/wenquanyi.ttf",
-     #                        :normal      => "#{RAILS_ROOT}/fonts/wenquanyi.ttf" })
+     #     "MyFontFamily" => {:bold        => "#{RAILS_ROOT}/fonts/stsong.ttf",
+     #                        :italic      => "#{RAILS_ROOT}/fonts/stsong.ttf",
+     #                        :bold_italic => "#{RAILS_ROOT}/fonts/stsong.ttf",
+     #                        :normal      => "#{RAILS_ROOT}/fonts/stsong.ttf" })
     #font("MyFontFamily")
-    font "#{RAILS_ROOT}/fonts/wenquanyi.ttf"
+    font "#{RAILS_ROOT}/fonts/stsong.ttf"
     #title
     text "付款单",:size=>18,:align=>:center
     #image
