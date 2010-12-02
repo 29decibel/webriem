@@ -470,6 +470,11 @@ span.reference{
 	width:16px;
 	height:16px;
 }
+/*approver list*/
+div.approver_list{
+	max-height:200px;
+	overflow: auto;
+}
 /*=================================disabled link style============================*/
 a.disable{
 	cursor: text;

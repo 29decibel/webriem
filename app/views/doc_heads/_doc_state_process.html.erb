@@ -7,29 +7,31 @@
 	<% if doc.work_flows %>
 		<%= hidden_field_tag "doc_id",doc.id%>
 		<% if doc.doc_state==0 and doc.work_flows and doc.work_flows.first and doc.work_flows.first.duty.code=="003"%>
-			<div id="approvers" class="form_area">
+			<div id="approvers">
 				<h3>选择审批人</h3>
-				<table class="form_input">
-					<thead>
-						<tr>					
-							<th></th>
-							<th>姓名</th>
-						    <th>编号</th>		    
-					    </tr>
-				    <thead>
-					<tbody>
-							<% Person.where('duty_id=?',Duty.find_by_name("part长").id).each do |approver|%>
-								<tr>
-									<td>
-										<%= check_box_tag 'selected', 'yes', false, :class => 'ref_select'%>
-										<%= hidden_field_tag "approver",approver.id%>
-									</td>
-									<td><%= label_tag "#{approver.name}"%></td>
-									<td><%= label_tag "#{approver.code}"%></td>
-								</tr>
-							<% end %>
-					</tbody>	
-				</table>
+				<div class="approver_list">					
+					<table class="">
+						<thead>
+							<tr>					
+								<th></th>
+								<th>姓名</th>
+							    <th>编号</th>		    
+						    </tr>
+					    <thead>
+						<tbody>
+								<% Person.where('duty_id=?',Duty.find_by_code("003").id).each do |approver|%>
+									<tr>
+										<td>
+											<%= check_box_tag 'selected', 'yes', false, :class => 'ref_select'%>
+											<%= hidden_field_tag "approver",approver.id%>
+										</td>
+										<td><%= label_tag "#{approver.name}"%></td>
+										<td><%= label_tag "#{approver.code}"%></td>
+									</tr>
+								<% end %>
+						</tbody>	
+					</table>
+				</div>				
 				<%= link_to_function "确定","begin_work_flow(this)",:class=>"button2"%>
 				<%= link_to_function "取消","$.unblockUI()",:class=>"button2"%>
 			</div>
