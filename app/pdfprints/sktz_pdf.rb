@@ -3,7 +3,7 @@ class SktzPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{RAILS_ROOT}/fonts/STSONG.TTF"
+    font "#{RAILS_ROOT}/fonts/STSONG.ttf"
     #title
     text "收款通知单",:size=>18,:align=>:center
     #image
