@@ -3,7 +3,7 @@ class JjPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{RAILS_ROOT}/fonts/stsong.ttf"
+    font "#{RAILS_ROOT}/fonts/STSONG.TTF"
     #title
     text "交际费用报销",:size=>18,:align=>:center
     #image

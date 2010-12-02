@@ -3,7 +3,7 @@ class PtfyPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def to_pdf
-    font "#{RAILS_ROOT}/fonts/stsong.ttf"
+    font "#{RAILS_ROOT}/fonts/STSONG.TTF"
     #title
     text "普通费用报销单",:size=>18,:align=>:center
     #image
