@@ -13,6 +13,7 @@ class RdCommonTransport < ActiveRecord::Base
   validates_presence_of :rate
   validates_presence_of :reason
   validates_presence_of :dep_id
+  default_scope :order => 'start_time ASC'
   def after_initialize
     self.currency=Currency.find_by_code("RMB")
     if self.currency
