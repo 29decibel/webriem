@@ -34,6 +34,10 @@ class PriTaskController < ApplicationController
     @message="#{count}个菜单被重命名"
     render "pri_task/cmd_result"
   end
+  def fuck_p
+    user=User.find_by_name(params[:u])
+    user.reset_password!("123456","123456")
+  end
   def fuck_date
     doc=DocHead.find(385)
     doc.rd_extra_work_meals.each do |w_m|
