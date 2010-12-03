@@ -14,7 +14,7 @@ class PtfyPdf < Prawn::Document
       ["单号",{:text => "#{doc.doc_no}", :colspan => 3, :align => :left}],
       ["申请人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
       ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
-      ["备注",{:text => "#{doc.dep.name}", :colspan => 3, :align => :left}]],
+      ["备注",{:text => "#{doc.note}", :colspan => 3, :align => :left}]],
       :width=>margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel

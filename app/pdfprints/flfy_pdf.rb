@@ -15,7 +15,7 @@ class FlfyPdf < Prawn::Document
       ["申请人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
       ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
       ["是否分摊",{:text => "#{doc.is_split==1 ? "是" : "否"}", :colspan => 3, :align => :left}],
-      ["备注",{:text => "#{doc.dep.name}", :colspan => 3, :align => :left}]],
+      ["备注",{:text => "#{doc.note}", :colspan => 3, :align => :left}]],
       :width=>margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel
