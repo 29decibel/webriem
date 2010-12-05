@@ -297,7 +297,7 @@ class DocHead < ActiveRecord::Base
     UploadFile.find_by_doc_no(self.doc_no)
   end
   #==================================about filter================================
-  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','project_id','upload_file_id','note','total_amount']
+  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','project_id','upload_file_id','note','total_amount','real_person_id']
   def self.not_display
     NOT_DISPLAY
   end
