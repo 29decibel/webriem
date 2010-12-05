@@ -19,7 +19,7 @@
 						    </tr>
 					    <thead>
 						<tbody>
-								<% Person.where('duty_id=?',Duty.find_by_code("003").id).each do |approver|%>
+								<% Person.where('duty_id=? or person_type_id=?',Duty.find_by_code("003").id,PersonType.find_by_code("PART").id).each do |approver|%>
 									<tr>
 										<td>
 											<%= check_box_tag 'selected', 'yes', false, :class => 'ref_select'%>

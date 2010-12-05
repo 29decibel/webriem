@@ -3,8 +3,9 @@ require 'time'
 class PriTaskController < ApplicationController
   #delete all docs
   def clear_doc
-    @message="#{DocHead.count}个单据被清除"
-    DocHead.delete_all
+    PersonType.create(:name=>"同PART长",:code=>"PART")
+    #@message="#{DocHead.count}个单据被清除"
+    #DocHead.delete_all
   end
   #reset all doc state
   def reset_doc_state

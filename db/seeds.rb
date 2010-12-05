@@ -55,6 +55,7 @@ PersonType.create(:name=>"财务主管",:code=>"FI")
 PersonType.create(:name=>"出纳",:code=>"CA")
 PersonType.create(:name=>"MTA",:code=>"MTA")
 PersonType.create(:name=>"管理担当",:code=>"MN")
+PersonType.create(:name=>"同PART长",:code=>"PART")
 #here is the config helper
 ConfigHelper.delete_all
 ConfigHelper.create(:key=>"doc_count",:value=>"0")
