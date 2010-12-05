@@ -63,7 +63,7 @@ class JkPdf
       pdf.move_down 2
       data_array=doc.recivers.map {|r| ["#{r.settlement}","#{r.company}","#{r.bank}","#{r.bank_no}","#{r.amount}"]}
       data_array<<["收款人签名",{:text => "", :colspan => 4, :align => :left}]
-      table data_array,
+      pdf.table data_array,
         :headers => ["结算方式","收款人","银行","银行帐号","金额"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,
