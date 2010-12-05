@@ -43,7 +43,7 @@ gem 'admin_data' #manage the data in the fly very cool
 # end
 
 #group :development, :test do
-gem "ruby-debug19"
+#gem "ruby-debug19"
 #end
 #group :development do
 #  gem "ruby-debug19"
