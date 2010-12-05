@@ -6,6 +6,7 @@ class DocHead < ActiveRecord::Base
   belongs_to :currency
   belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
   belongs_to :upload_file
+  belongs_to :real_person, :class_name => "Person", :foreign_key => "real_person_id"
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
   blongs_to_name_attr :afford_dep
@@ -219,7 +220,8 @@ class DocHead < ActiveRecord::Base
   #=====================================================
   #获得所有的审批流程
   def work_flows
-    wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s and w.duties.include? person.duty }
+    which_duty = (real_person==nil ? person.duty : real_person.duty)
+    wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s and w.duties.include? which_duty }
     return nil if wf.count==0
     wf==nil ? []:wf.first.work_flow_steps.to_a
   end

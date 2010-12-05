@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130100304) do
+ActiveRecord::Schema.define(:version => 20101205142420) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20101130100304) do
     t.integer  "afford_dep_id"
     t.integer  "upload_file_id"
     t.decimal  "total_amount",         :precision => 16, :scale => 2
+    t.integer  "real_person_id"
   end
 
   create_table "duties", :force => true do |t|

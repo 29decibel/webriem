@@ -269,6 +269,13 @@ class DocHeadsController < ApplicationController
       end
     end
     #debugger
+    #pdf.number_pages "第<page>页 共<total>页", [pdf.bounds.right - 50, 0]
+     #pdf.page_count.times do |i|
+     #  pdf.go_to_page(i+1)
+     #  pdf.lazy_bounding_box([pdf.bounds.right-50, pdf.bounds.bottom + 25], :width => 50) {
+     #    pdf.text "#{i+1} / #{page_count}"
+     #  }.draw
+     #end
     send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
   end
   #==================================output to txt========================================

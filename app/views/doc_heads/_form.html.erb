@@ -58,6 +58,16 @@
 		</div>
 		<% end %>
 	</div>	
+	<div class="form_block">
+		<div class="form_field">
+			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" %>
+			<div class="reference">
+				<%= f.hidden_field :real_person_id,{:class=>"ref_hidden_field"}%>
+				<%= text_field_tag "real_person_info",@doc_head.real_person.to_s,:class=>"ref" %>
+				<a href="#" class-data="Person" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
+			</div>
+		</div>
+	</div>
 	<% if @doc_head.doc_type==13 %>
 	<div class="form_block">
 		<div class="form_field">
