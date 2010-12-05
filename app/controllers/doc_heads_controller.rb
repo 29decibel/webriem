@@ -1,5 +1,5 @@
 #coding: utf-8
-#require "ruby-debug"
+require "ruby-debug"
 require 'prawn/layout'
 #借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
 #9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
@@ -254,24 +254,22 @@ class DocHeadsController < ApplicationController
   #print goes here
   def print
     doc=DocHead.find(params[:doc_id])
-    pdf=nil      
-    pdf=case doc.doc_type
-      when 1 then JkPdf.new
-      when 2 then FkPdf.new
-      when 3 then SktzPdf.new
-      when 4 then JhPdf.new
-      when 5 then ZzPdf.new
-      when 6 then XjtqPdf.new
-      when 7 then GmlcPdf.new
-      when 8 then ShlcPdf.new
-      when 9 then ClPdf.new
-      when 10 then JjPdf.new
-      when 11 then JbfPdf.new
-      when 12 then PtfyPdf.new
-      else FlfyPdf.new
+    pdf=Prawn::Document.new
+    pdf=to_pdf(pdf,doc)
+    send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
+  end
+  def batch_print
+    pdf=Prawn::Document.new
+    #get the doc ids and pay it
+    params[:doc_ids].split("_").each_with_index do |doc_id,index|
+      if !doc_id.blank?
+        doc=DocHead.find(doc_id.to_i)
+        pdf=to_pdf(pdf,doc)
+        pdf.start_new_page if index!=params[:doc_ids].split("_").count-1
+      end
     end
-    pdf.doc=doc
-    send_data pdf.to_pdf, :filename => "hello.pdf",:type => "application/pdf"
+    #debugger
+    send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
   end
   #==================================output to txt========================================
   def output_to_txt
@@ -306,6 +304,25 @@ class DocHeadsController < ApplicationController
     Delayed::Job.enqueue MailingJob.new(:doc_failed, para)
     respond_to do |format|
       format.js { render "shared/show_result"}
+    end
+  end
+  
+  private
+  def to_pdf(pdf,doc)
+    pdf=case doc.doc_type
+      when 1 then JkPdf.to_pdf(pdf,doc)
+      when 2 then FkPdf.to_pdf(pdf,doc)
+      when 3 then SktzPdf.to_pdf(pdf,doc)
+      when 4 then JhPdf.to_pdf(pdf,doc)
+      when 5 then ZzPdf.to_pdf(pdf,doc)
+      when 6 then XjtqPdf.to_pdf(pdf,doc)
+      when 7 then GmlcPdf.to_pdf(pdf,doc)
+      when 8 then ShlcPdf.to_pdf(pdf,doc)
+      when 9 then ClPdf.to_pdf(pdf,doc)
+      when 10 then JjPdf.to_pdf(pdf,doc)
+      when 11 then JbfPdf.to_pdf(pdf,doc)
+      when 12 then PtfyPdf.to_pdf(pdf,doc)
+      else FlfyPdf.to_pdf(pdf,doc)
     end
   end
 end

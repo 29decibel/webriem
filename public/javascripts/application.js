@@ -483,6 +483,23 @@ function batch_pay()
 		});	
 	}
 }
+function batch_print()
+{
+	if($("input:checked.ref_select").size()!=0)
+	{
+		//get all doc id and invoke a ajax call
+		var doc_ids="";
+		$("input:checked.ref_select").each(function(){
+			doc_ids += $(this).siblings("input.hidden_id").val() + "_";
+		});
+		//trim the ;
+		if(doc_ids.length>0)
+		{
+			doc_ids=doc_ids.substring(doc_ids.length-1,"");
+		}
+		window.location="/doc_heads/batch_print?"+"doc_ids="+doc_ids;
+	}
+}
 function batch_approve()
 {
 	if($("input:checked.ref_select").size()!=0)

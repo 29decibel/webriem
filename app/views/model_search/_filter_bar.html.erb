@@ -24,6 +24,7 @@
 		<% end %>		
 		<% if params[:batch_pay]%>
 			<%= link_to_function I18n.t('common_attr.btn_batch_pay'),"batch_pay()",:class=>"button2" %>
+			<%= link_to_function I18n.t('common_attr.btn_batch_print'),"batch_print()",:class=>"button2" %>
 		<% end %>
 		<% if params[:batch_approve]%>
 			<%= link_to_function I18n.t('common_attr.btn_batch_approve'),"batch_approve()",:class=>"button2" %>
