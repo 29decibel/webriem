@@ -1,0 +1,54 @@
+# Logfile created on 2010-12-05 22:33 by logger.rb/25413
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x000001014e31b0>
+current work flow step is #<WorkFlowStep:0x000001014e2ff8>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102d01a58>
+current work flow step is #<WorkFlowStep:0x00000102d015f8>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102d0c390>
+current work flow step is #<WorkFlowStep:0x00000102d09b18>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x0000010151bf38>
+current work flow step is #<WorkFlowStep:0x0000010151bd30>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000104241d00>
+current work flow step is #<WorkFlowStep:0x00000104241b48>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102e864c8>
+current work flow step is #<WorkFlowStep:0x00000102e85e10>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x0000010294dc90>
+current work flow step is #<WorkFlowStep:0x0000010294d470>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102f5a5e8>
+current work flow step is #<WorkFlowStep:0x00000102f5a368>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000104350ca0>
+current work flow step is #<WorkFlowStep:0x00000104350ac0>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102d23ae0>
+current work flow step is #<WorkFlowStep:0x00000102d238b0>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102fe05f8>
+current work flow step is #<WorkFlowStep:0x00000102fe0260>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102ca2530>
+current work flow step is #<WorkFlowStep:0x00000102ca2260>
+current work flow step is 
+current work flow step is 
+current work flow step is #<WorkFlowStep:0x00000102dc5b38>
+current work flow step is #<WorkFlowStep:0x00000102dc3748>
+current work flow step is 
