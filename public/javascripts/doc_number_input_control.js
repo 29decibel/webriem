@@ -121,7 +121,8 @@ function set_split_percent_amount()
 		total_riem+=parseFloat($(this).val());
 	});
 	$("div.is_split_reim table tr").not(":hidden").find("input.split_percent").each(function(){
-		$(this).closest("tr").find("input.percent_amount").val($(this).val()*total_riem/100);
+		var v=$(this).val()*total_riem/100;
+		$(this).closest("tr").find("input.percent_amount").val(v.toFixed(2));
 	});
 }
 
