@@ -246,7 +246,11 @@ class DocHead < ActiveRecord::Base
       return nil if approver_person==nil
       dep_to_find=approver_person.dep
     else
-      dep_to_find=self.person.dep
+      if real_person
+        dep_to_find=self.real_person.dep
+      else
+        dep_to_find=self.person.dep
+      end
     end
     logger.info "find the dep is  #{dep_to_find.code}"
     logger.info "work_flow_step duty is   #{work_flow_step.duty.code}"
