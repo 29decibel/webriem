@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101205142420) do
+ActiveRecord::Schema.define(:version => 20101207234233) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -480,6 +480,7 @@ ActiveRecord::Schema.define(:version => 20101205142420) do
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.integer  "dep_id"
     t.integer  "project_id"
+    t.decimal  "st_amount",    :precision => 8,  :scale => 2
   end
 
   create_table "rec_notice_details", :force => true do |t|

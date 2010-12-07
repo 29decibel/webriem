@@ -19,8 +19,8 @@ class FkPdf
     pdf.table [
       ["单号",{:text => "#{doc.doc_no}", :colspan => 3, :align => :left}],
       ["申请人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
-      ["借款日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
-      ["借款用途",{:text => "#{doc.note}",:colspan => 3, :align => :left}]],
+      ["付款日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
+      ["付款原因",{:text => "#{doc.note}",:colspan => 3, :align => :left}]],
       :width=>pdf.margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel
