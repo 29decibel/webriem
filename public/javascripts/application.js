@@ -183,7 +183,7 @@ $(function(){
 		//$(".region_type_select").change();
 		//fire the region change event
 		//$("input.get_fee").change();
-                $(".is_sunday").change();
+                //$(".is_sunday").change();
 		//set reference readonly
 		$("input.ref").attr("readonly",true);
 		//set the fee standard readonly
