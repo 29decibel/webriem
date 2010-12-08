@@ -5,8 +5,8 @@ $(function(){
 	$("input.travel_days,input.fee_standard,input.other_fee").live("change",calculate_ori_amount);
 	//set all apply amount readonly
 	//$("input.doc_apply_amount").attr("readonly",true);
-	$("input.split_percent").live("change",set_split_percent_amount);
-	$("input.split_percent").change();
+	//$("input.split_percent").live("change",set_split_percent_amount);
+	//$("input.split_percent").change();
 	$("input.offset_amount").live("change",offset_amount_change);
 });
 //$("input.doc_apply_amount").attr("readonly","readonly");
@@ -97,10 +97,10 @@ function adjust_amount()
 		}
 	}
 	//======================================================================================
-	if($("div.is_split_reim").size()>=1)
-	{
-		set_split_percent_amount();
-	}
+	//if($("div.is_split_reim").size()>=1)
+	//{
+		//set_split_percent_amount();
+	//}
 }
 
 //寻找该用那个控件进行total value的计算

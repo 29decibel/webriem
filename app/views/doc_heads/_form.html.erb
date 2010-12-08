@@ -629,7 +629,6 @@
 					<% if @doc_head.doc_type!=9 %>
 						<th><%= "#{I18n.t('common_attr.fee')}"%></th>
 					<% end %>
-				    <th><%= "#{I18n.t('common_attr.percent')}"%></th>
 					<th><%= "#{I18n.t('common_attr.split_amount')}"%></th>
 					<th></th><!--给删除的-->
 			    </tr>
@@ -640,7 +639,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="10"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
+				<th colspan="9"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
 				<td></td>
 			</tr>		
 		</table>
