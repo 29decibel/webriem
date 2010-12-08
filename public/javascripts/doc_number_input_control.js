@@ -8,6 +8,8 @@ $(function(){
 	//$("input.split_percent").live("change",set_split_percent_amount);
 	//$("input.split_percent").change();
 	$("input.offset_amount").live("change",offset_amount_change);
+	$("input.percent_amount").live("change",set_split_total);
+	$("input.percent_amount").change();
 });
 //$("input.doc_apply_amount").attr("readonly","readonly");
 function adjust_amount()
@@ -113,6 +115,23 @@ function find_control_cal_by_tr_wrapper(tr_wrapper)
 	if(tr_wrapper.find("input.doc_ori_amount").size()>0)
 		return tr_wrapper.find("input.doc_ori_amount");
 }
+function set_split_total()
+{
+	//set self to 2 fixed
+	var current_val=parseFloat($(this).val());
+	if(isNaN(current_val))
+	{
+		current_val=0.0;
+	}
+	//set me back
+	$(this).val(current_val.toFixed(2));
+	total_split=0.0;
+	$("input.percent_amount").each(function(){
+		total_split+=parseFloat($(this).val());
+	});
+	$("#split_total_amount").val(total_split.toFixed(2));
+}
+//not use now
 function set_split_percent_amount()
 {
 	//get total amount
@@ -149,6 +168,11 @@ function init_total_amount()
 		});
 		$(this).find("input.doc_total_amount").val(total.toFixed(2));
 	});
+	//set split if 
+	if($("div.is_split_reim").size()>=1)
+	{
+		$("input.percent_amount").first().change();
+	}
 }
 
 function calculate_ori_amount()

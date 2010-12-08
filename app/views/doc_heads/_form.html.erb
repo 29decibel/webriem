@@ -639,7 +639,9 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="9"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
+				<th colspan="2"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
+				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
+				<td><%= text_field_tag 'split_total_amount', nil, :class => 'split_total_amount normal'%></td>
 				<td></td>
 			</tr>		
 		</table>
