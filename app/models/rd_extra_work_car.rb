@@ -12,14 +12,6 @@ class RdExtraWorkCar < ActiveRecord::Base
     validates_presence_of :rate
     validates_presence_of :ori_amount
     default_scope :order => 'start_time ASC'
-    def after_initialize
-      if self.new_record?
-        self.currency=Currency.find_by_code("RMB")
-        if self.currency
-          self.rate=self.currency.default_rate
-        end
-      end
-    end
     validate :time_validate
     def time_validate
       if start_time !=nil and end_time!=nil

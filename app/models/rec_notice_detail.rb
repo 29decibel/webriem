@@ -8,14 +8,6 @@ class RecNoticeDetail < ActiveRecord::Base
   validates_presence_of :project_id
   validates_presence_of :ori_amount
   validates_numericality_of :ori_amount
-  def after_initialize
-    if self.new_record?
-      self.currency=Currency.find_by_code("RMB")
-      if self.currency
-        self.rate=self.currency.default_rate
-      end
-    end
-  end
   validate :dep_is_end
   def dep_is_end
     errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0

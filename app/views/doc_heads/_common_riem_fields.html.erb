@@ -21,13 +21,14 @@
 	</td>
 	<td>
 		<div class="reference">
-			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "currency_info",f.object.currency.to_s,:class=>"ref" %>
+			<%- currency = f.object.currency==nil ? Currency.find_by_code('RMB') : f.object.currency%>
+			<%= f.hidden_field :currency_id,{:value=>currency.id,:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "currency_info",currency.to_s,:class=>"ref" %>
 			<a href="#" class-data="Currency"><span class="reference"></span></a>			
-		</div>
+		</div>  
 	</td>
 	<td>
-		<%= f.text_field :rate,:class=>"xsmall doc_rate number" %>  
+		<%= f.text_field :rate,:value=>currency.default_rate,:class=>"xsmall doc_rate number" %>  
 	</td>
 	<td>
 		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  

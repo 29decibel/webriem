@@ -12,17 +12,8 @@ class RdLodging < ActiveRecord::Base
   validates_presence_of :people_count
   validates_presence_of :days
   validate :must_have_live_person,:must_have_a_place,:amout_validation
-
   def must_have_live_person
     errors.add(:base,"当住宿人数大于1时，合住人必填") if people_count and people_count>1 and person_names.blank?
-  end
-  def after_initialize
-    if self.new_record?
-      self.currency=Currency.find_by_code("RMB")
-      if self.currency
-        self.rate=self.currency.default_rate
-      end
-    end
   end
   def must_have_a_place
     errors.add(:base,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?

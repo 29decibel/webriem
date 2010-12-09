@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101207234906) do
+ActiveRecord::Schema.define(:version => 20101209154139) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
 
   create_table "buy_finance_products", :force => true do |t|
     t.string   "name"
-    t.decimal  "rate",        :precision => 6,  :scale => 4
+    t.decimal  "rate",        :precision => 14, :scale => 4
     t.integer  "account_id"
     t.date     "buy_date"
     t.date     "redeem_date"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.string   "description"
     t.integer  "currency_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2
-    t.decimal  "rate",         :precision => 6,  :scale => 4
+    t.decimal  "rate",         :precision => 14, :scale => 4
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.integer  "doc_head_id"
     t.datetime "created_at"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.integer  "currency_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
-    t.decimal  "rate",         :precision => 6,  :scale => 4
+    t.decimal  "rate",         :precision => 14, :scale => 4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_head_id"
@@ -237,7 +237,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "amount",          :precision => 16, :scale => 2
     t.text     "description"
     t.decimal  "remain_amount",   :precision => 16, :scale => 2
-    t.decimal  "now_rate_price",  :precision => 6,  :scale => 4
+    t.decimal  "now_rate_price",  :precision => 14, :scale => 4
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -357,7 +357,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "apply_amount", :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",         :precision => 6,  :scale => 4
+    t.decimal  "rate",         :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.integer  "dep_id"
@@ -379,7 +379,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "fi_amount",    :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",         :precision => 6,  :scale => 4
+    t.decimal  "rate",         :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
   end
@@ -397,7 +397,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "fi_amount",    :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",         :precision => 6,  :scale => 4
+    t.decimal  "rate",         :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.decimal  "st_amount",    :precision => 8,  :scale => 2
@@ -415,7 +415,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "fi_amount",      :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",           :precision => 6,  :scale => 4
+    t.decimal  "rate",           :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",     :precision => 16, :scale => 2
     t.string   "custom_place"
@@ -439,7 +439,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "fi_amount",         :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",              :precision => 6,  :scale => 4
+    t.decimal  "rate",              :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",        :precision => 16, :scale => 2
   end
@@ -457,7 +457,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",                  :precision => 6,  :scale => 4
+    t.decimal  "rate",                  :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",            :precision => 16, :scale => 2
     t.string   "custom_place"
@@ -476,7 +476,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "apply_amount", :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",         :precision => 6,  :scale => 4
+    t.decimal  "rate",         :precision => 14, :scale => 4
     t.integer  "currency_id"
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.integer  "dep_id"
@@ -493,7 +493,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "amount",      :precision => 16, :scale => 2
     t.integer  "currency_id"
     t.decimal  "ori_amount",  :precision => 16, :scale => 2
-    t.decimal  "rate",        :precision => 6,  :scale => 4
+    t.decimal  "rate",        :precision => 14, :scale => 4
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -515,7 +515,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
 
   create_table "redeem_finance_products", :force => true do |t|
     t.string   "name"
-    t.decimal  "rate",        :precision => 6,  :scale => 4
+    t.decimal  "rate",        :precision => 14, :scale => 4
     t.integer  "account_id"
     t.date     "clear_date"
     t.date     "redeem_date"
@@ -550,7 +550,7 @@ ActiveRecord::Schema.define(:version => 20101207234906) do
     t.decimal  "amount",      :precision => 16, :scale => 2
     t.integer  "currency_id"
     t.decimal  "ori_amount",  :precision => 16, :scale => 2
-    t.decimal  "rate",        :precision => 6,  :scale => 4
+    t.decimal  "rate",        :precision => 14, :scale => 4
     t.decimal  "real_amount", :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
