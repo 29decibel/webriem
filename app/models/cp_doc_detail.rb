@@ -11,9 +11,11 @@ class CpDocDetail < ActiveRecord::Base
   validates_presence_of :rate
   validates_presence_of :used_for
   def after_initialize
-    self.currency=Currency.find_by_code("RMB")
-    if self.currency
-      self.rate=self.currency.default_rate
+    if self.new_record?
+      self.currency=Currency.find_by_code("RMB")
+      if self.currency
+        self.rate=self.currency.default_rate
+      end
     end
   end
   validate :dep_is_end

@@ -15,9 +15,11 @@ class RdTransport < ActiveRecord::Base
     default_scope :order => 'start_date ASC'
     validate :time_validate
     def after_initialize
-      self.currency=Currency.find_by_code("RMB")
-      if self.currency
-        self.rate=self.currency.default_rate
+      if self.new_record?
+        self.currency=Currency.find_by_code("RMB")
+        if self.currency
+          self.rate=self.currency.default_rate
+        end
       end
     end
     def time_validate

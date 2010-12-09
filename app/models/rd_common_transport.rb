@@ -15,9 +15,11 @@ class RdCommonTransport < ActiveRecord::Base
   validates_presence_of :dep_id
   default_scope :order => 'start_time ASC'
   def after_initialize
-    self.currency=Currency.find_by_code("RMB")
-    if self.currency
-      self.rate=self.currency.default_rate
+    if self.new_record?
+      self.currency=Currency.find_by_code("RMB")
+      if self.currency
+        self.rate=self.currency.default_rate
+      end
     end
   end
   validate :dep_is_end,:time_validate

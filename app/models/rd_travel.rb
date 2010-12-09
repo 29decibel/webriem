@@ -12,10 +12,12 @@ class RdTravel < ActiveRecord::Base
   validates_presence_of :currency_id
   validate :must_have_a_place
    def after_initialize
-    self.currency=Currency.find_by_code("RMB")
-    if self.currency
-      self.rate=self.currency.default_rate
-    end
+     if self.new_record?
+        self.currency=Currency.find_by_code("RMB")
+        if self.currency
+          self.rate=self.currency.default_rate
+        end
+      end
   end
   def must_have_a_place
     errors.add(:base,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
