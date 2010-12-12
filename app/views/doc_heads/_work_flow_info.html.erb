@@ -41,7 +41,7 @@
 		</div>
 		<div class="form_block">
 			<div class="form_field">
-				<%= link_to "#{I18n.t('model_search.btn_ok')}",{:href=>"#"},:class=>"submit button2" %>
+				<%= link_to "#{I18n.t('model_search.btn_ok')}",{:href=>"#"},:class=>"submit button2",:confirm => '确定该审批意见?' %>
 				<%= f.hidden_field :people_id,:value=>current_user.person.id%>
 				<%= f.hidden_field :doc_head_id,:value=>@doc_head.id%>
 			</div>

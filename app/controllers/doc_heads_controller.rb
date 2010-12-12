@@ -281,22 +281,34 @@ class DocHeadsController < ApplicationController
   #==================================output to txt========================================
   def output_to_txt
     output_str=""
+    #reciver's hash
+    recivers={}
     params[:ids].split('_').each do |id|
       doc_head=DocHead.find_by_id(id)
-      if doc_head
+      if doc_head and doc_head.doc_type!=2
         doc_head.recivers.each_with_index do |r,index|
           next if r.amount==0
-          output_str<<(index+1).to_s.rjust(7,"0")
-          output_str<<"|"
-          output_str<<r.bank_no
-          output_str<<"|"
-          output_str<<r.company
-          output_str<<"|"
-          output_str<<r.amount.to_s
-          output_str<<"|00110|1122|"
-          output_str<<"\r\n"
+          if recivers.has_key? r.company
+            recivers[r.company][:amount]=recivers[r.company][:amount]+r.amount
+          else
+            recivers[r.company]={:bank_no=>r.bank_no,:amount=>r.amount}
+          end
         end
       end
+    end
+    #print
+    count=1
+    recivers.each_pair do |key,value|
+      output_str<<count.to_s.rjust(7,"0")
+      output_str<<"|"
+      output_str<<value[:bank_no]
+      output_str<<"|"
+      output_str<<key
+      output_str<<"|"
+      output_str<<value[:amount].to_s
+      output_str<<"|00110|1122|"
+      output_str<<"\r\n"
+      count=count+1
     end
     send_data output_str, :filename => "person_accounts.txt",:type => "application/txt"
   end
