@@ -1,6 +1,9 @@
 #coding: utf-8
 require 'time'
 class PriTaskController < ApplicationController
+  def cmds
+    
+  end
   #delete all docs
   def clear_doc
     PersonType.create(:name=>"同PART长",:code=>"PART")
@@ -36,8 +39,16 @@ class PriTaskController < ApplicationController
     render "pri_task/cmd_result"
   end
   def fuck_p
-    user=User.find_by_name(params[:u])
-    user.reset_password!("123456","123456")
+    if params[:u] and !params[:u].blank?
+      user=User.find_by_name(params[:u])
+      if user
+        user.reset_password!("123456","123456")
+        @message="reseted to 123456"
+        render "shared/show_result"
+      end
+    else
+      render "shared/errors",:locals=>{:error_msg=>"please give me a user code"}
+    end
   end
   def fuck_date
     doc=DocHead.find(385)
