@@ -33,7 +33,7 @@ class FkPdf
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
-        :column_widths=>{0=>10,1=>10,2=>20,3=>20,4=>20,5=>20,6=>20},
+        :column_widths=>{0=>50,1=>50,2=>50,3=>50,4=>50,5=>50,6=>50},
         :row_colors => ["FFFFFF", "DDDDDD"]
     end
     #slipt
