@@ -13,7 +13,8 @@ class ClPdf
       ["出差人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
       ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
       ["项目编号","#{doc.project ? doc.project.code : ""}","项目名称","#{doc.project ? doc.project.name : ""}"],
-      ["费用承担部门",{:text => "#{doc.dep ? doc.dep.name : ""}", :colspan => 3, :align => :left}]],
+      ["费用承担部门",{:text => "#{doc.dep ? doc.dep.name : ""}", :colspan => 3, :align => :left}],
+      ["备注",{:text => "#{doc.note}",:colspan => 3, :align => :left}]],
       :width=>pdf.margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel
@@ -90,7 +91,7 @@ class ClPdf
     end
     #final render
     pdf.move_down 5
-     pdf.text "报销总金额:  "+"#{doc.total_apply_amount}", :size => 14,:align=>:right
+     pdf.text "报销总金额:  "+"#{doc.total_fi_amount}", :size => 14,:align=>:right
     #work flow infos
     if doc.work_flow_infos.count>0
       pdf.move_down 10

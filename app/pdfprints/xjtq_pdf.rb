@@ -42,7 +42,7 @@ class XjtqPdf
     end
     #final render
     pdf.move_down 5
-    pdf.text "现金提取总金额:  "+"#{doc.total_apply_amount}", :size => 14,:align=>:right
+    pdf.text "现金提取总金额:  "+"#{doc.total_fi_amount}", :size => 14,:align=>:right
     #work flow infos
     if doc.work_flow_infos.count>0
       pdf.move_down 10
