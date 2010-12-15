@@ -16,6 +16,7 @@ class FlfyPdf
       ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
       ["是否分摊",{:text => "#{doc.is_split==1 ? "是" : "否"}", :colspan => 3, :align => :left}],
       ["备注",{:text => "#{doc.note}", :colspan => 3, :align => :left}]],
+      :column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :width=>pdf.margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel

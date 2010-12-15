@@ -15,6 +15,7 @@ class JkPdf
       ["申请人","#{doc.person.name}","所属部门","#{doc.person.dep.name}"],
       ["借款日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
       ["借款用途",{:text => "#{doc.note}",:colspan => 3, :align => :left}]],
+      :column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :width=>pdf.margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel

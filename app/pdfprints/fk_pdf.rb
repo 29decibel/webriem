@@ -15,6 +15,8 @@ class FkPdf
     #image
     logo = "public/images/logo_new.png"
     pdf.image logo, :scale => 0.8
+    #the note table
+    #todo
     #table here
     pdf.table [
       ["单号",{:text => "#{doc.doc_no}", :colspan => 3, :align => :left}],
@@ -22,6 +24,7 @@ class FkPdf
       ["付款日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
       ["付款原因",{:text => "#{doc.note}",:colspan => 3, :align => :left}]],
       :width=>pdf.margin_box.width,
+      :column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :border_style => :grid,:font_size => 11
     #travel
     if doc.cp_doc_details.count>0
@@ -33,7 +36,7 @@ class FkPdf
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
-        :column_widths=>{0=>50,1=>50,2=>50,3=>50,4=>50,5=>50,6=>50},
+        :column_widths=>{0=>85,1=>100,2=>140,3=>40,4=>35,5=>70,6=>70},
         :row_colors => ["FFFFFF", "DDDDDD"]
     end
     #slipt

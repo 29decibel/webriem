@@ -15,6 +15,7 @@ class ClPdf
       ["项目编号","#{doc.project ? doc.project.code : ""}","项目名称","#{doc.project ? doc.project.name : ""}"],
       ["费用承担部门",{:text => "#{doc.dep ? doc.dep.name : ""}", :colspan => 3, :align => :left}],
       ["备注",{:text => "#{doc.note}",:colspan => 3, :align => :left}]],
+      :column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :width=>pdf.margin_box.width,
       :border_style => :grid,:font_size => 11
     #travel
@@ -24,6 +25,7 @@ class ClPdf
       pdf.move_down 2
       pdf.table doc.rd_travels.map {|r| ["#{r.days}","#{r.region_type.name}","#{r.region}","#{r.reason}","#{r.ori_amount}","#{r.rate}","#{r.apply_amount}","#{r.hr_amount}","#{r.fi_amount}"]},
         :headers => ["出差天数","地区级次","出差地点","出差事由","原币金额","汇率","本币金额","HR调整","财务调整"],
+        :column_widths=>{0=>30,1=>60,2=>35,3=>100,4=>70,5=>35,6=>70,7=>70,8=>70},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
