@@ -37,7 +37,7 @@ class PtfyPdf
       pdf.move_down 2
       pdf.table doc.rd_work_meals.map {|r| ["#{r.dep}","#{r.project}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.person_names}","#{r.reason}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","地点","日期","人数","参与人","事由","币种","汇率","原币金额","本币金额"],
-        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>35,5=>120,6=>60,7=>45,8=>35,9=>70,10=>70},
+        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>35,5=>90,6=>40,7=>45,8=>35,9=>65,10=>65},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
