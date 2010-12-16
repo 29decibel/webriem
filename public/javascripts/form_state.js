@@ -27,7 +27,7 @@ function set_form_state()
 		{
 			$("input.doc_HR_amount").removeAttr("readonly");
 		}
-		else if($("#looker").val()=="FI")
+		else if($("#looker").val()=="FI" || $("#looker").val()=="CA")
 		{
 			$("input.doc_FI_amount").removeAttr("readonly");
 		}

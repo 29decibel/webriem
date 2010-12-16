@@ -1,7 +1,7 @@
 <div id='work_flow_progress'>
 	<%= hidden_field_tag "form_state",doc.doc_state%>
 	<!--hidden field to store the current looker of this doc mainly is HR or FI -->
-	<% if doc.approver ==current_user.person %>
+	<% if doc.approver ==current_user.person or (current_user.person.person_type and current_user.person.person_type.code=="CA")%>
 		<%= hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""%>
 	<% end %>
 	<% if doc.work_flows %>
