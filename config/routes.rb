@@ -22,6 +22,8 @@ Webreim::Application.routes.draw do
 
   get "ajax_service/getfee"
   
+  get "ajax_service/getbudget"
+  
   get "ajax_service/remove_offset",:as=>:remove_offset
   
   get "ajax_service/get_extrafee"

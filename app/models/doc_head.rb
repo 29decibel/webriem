@@ -329,6 +329,22 @@ class DocHead < ActiveRecord::Base
       return DOC_TYPES[doc_type]
     end
   end
+  #the budget fee
+  def budget_fee_id
+    if doc_type==9
+      #差旅费
+      Fee.find_by_code('03').id
+    elsif doc_type==10
+      #交际费用
+      Fee.find_by_code('02').id
+    elsif doc_type==11
+      #加班费用
+      Fee.find_by_code('06').id      
+    else
+      #其他
+      -1
+    end
+  end
   def self.custom_select(results,column_name,filter_text)
   	if column_name=="doc_state"
     	results.select {|doc| doc.custom_display.include? filter_text}

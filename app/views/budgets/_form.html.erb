@@ -14,7 +14,7 @@
 		<div class="reference">
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@budget.fee.to_s,:class=>"ref" %>
-			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+			<a href="#" class-data="Fee" self="true"><span class="reference"></span></a>			
 		</div>
 	</div>
 	<div class="form_field">

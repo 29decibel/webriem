@@ -1,12 +1,18 @@
+<% content_for :jqgrid_js do %>
+  <% budget_area @b_project_id,@b_fee_id,@b_dep_id,@b_month,@doc_id%>
+<% end %>
 <%= form_for @doc_head,:remote=>true,:html => {:class=>:doc_head} do |f| %>
 <div class="form_title">
 	<h3><%= @title%></h3>
 </div>
 <div id="doc_head_actions" class="actions">
-	<%= render :partial=>"doc_head_actions",:locals=>{:doc_head=>@doc_head}%>
+	<%= render :partial=>"doc_head_actions",:locals=>{:doc_head=>@doc_head}%>	
 </div>
 <div id="doc_state_process">
 	<%= render :partial=>"doc_state_process",:locals=>{:doc=>@doc_head}%>
+</div>
+<div class="jqgrid">
+	<table id="jgrid"></table>
 </div>
 <div class="form_title">
 	<h3><%= "#{I18n.t('common_attr.basic_info')}"%></h3>

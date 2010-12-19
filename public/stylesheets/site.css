@@ -64,6 +64,7 @@ div#menu a.selected{
 }
 
 div#content{
+	position: relative;
 	margin: 0px 5px 20px 120px;
 	border: 5px solid #FBCC7F;
 	min-height:600px;
@@ -100,6 +101,16 @@ table.hor-zebra td.action
 table.hor-zebra tr:nth-child(even)
 { 
 	background: #FFF9E5; 
+}
+/*========jqgrid container*/
+div.jqgrid{
+	margin: 0px 15px 15px 15px;
+	padding: 10px;
+	background-color: #FFF9E5;	
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	overflow: auto;
+	position: relative;
 }
 /*=================================================================================*/
 /*form styles*/

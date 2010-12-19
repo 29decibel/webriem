@@ -28,6 +28,12 @@ class DocHeadsController < ApplicationController
   def show
     @doc_head = DocHead.find(params[:id])
     @doc_type = @doc_head.doc_type
+    #show the budget info
+    @b_project_id=@doc_head.project_id
+    @b_fee_id=@doc_head.budget_fee_id
+    @b_dep_id=@doc_head.afford_dep_id
+    @b_month=@doc_head.apply_date.month
+    @doc_id=@doc_head.id
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
       if @doc_head.approver==current_user.person

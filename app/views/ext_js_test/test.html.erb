@@ -1,3 +1,7 @@
-<h1>ExtJsTest#test</h1>
-<p>Find me in app/views/ext_js_test/test.html.erb</p>
-<%= netzke :person, :class_name => "Basepack::GridPanel", :model => "Person",:columns=>[:id,:name,:code,:dep__name,:duty__name,:person_type__name,:e_mail,:phone] %>
+<% netzke :dep,:class=>"Basepack::GridPanel",:model=>'Dep'%>
+<div id="budget">
+	<div id="jqgrid">
+	    <table id="jgrid"></table>
+	    <div id="gridpager"></div>
+	</div>
+</div>

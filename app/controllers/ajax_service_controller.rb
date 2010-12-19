@@ -1,5 +1,32 @@
 #coding: utf-8
 class AjaxServiceController < ApplicationController
+  def getbudget
+    #get the budget info
+    budget=Budget.dep_of(params[:dep_id].to_i).project_of(params[:project_id].to_i).fee_of(params[:fee_id]).first
+    #get the doc
+    doc=DocHead.find(params[:doc_id])
+    used=0
+    approving_used=0
+    docs=DocHead.where("doc_type=#{doc.doc_type} and afford_dep_id=#{doc.afford_dep_id} and project_id=#{doc.project_id}")
+    docs.where("doc_state=2").each do |doc|
+      used=used+doc.total_fi_amount
+    end
+    docs.where("doc_state=1").each do |doc|
+      approving_used=approving_used+doc.total_fi_amount
+    end
+    b_info=BudgetInfo.new 
+    if budget
+      b_info.fee=budget.fee.name
+      b_info.dep=budget.dep.name
+      b_info.project=budget.project.name
+      b_info.current_month=budget.by_month(params[:month])
+      b_info.used=used
+      b_info.approving_used=approving_used
+      b_info.this_used=0
+      b_info.remain=0
+    end
+    render :xml=>b_info.to_xml
+  end
   def getfee
     fee_standard=nil
     #travel relate
