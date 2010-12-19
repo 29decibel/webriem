@@ -235,8 +235,8 @@ class DocHead < ActiveRecord::Base
   end
   #the specific person if there are more than one person ,check the approver_id
   def approver(work_flow_step=current_work_flow_step)
-    logger=Logger.new("wf.txt")
-    logger.info "current work flow step is #{work_flow_step}"
+    #logger=Logger.new("wf.txt")
+    #logger.info "current work flow step is #{work_flow_step}"
     return nil if work_flow_step==nil
     persons=nil
     dep_to_find=nil
@@ -253,9 +253,6 @@ class DocHead < ActiveRecord::Base
         dep_to_find=self.person.dep
       end
     end
-    logger.info "find the dep is  #{dep_to_find.code}"
-    logger.info "work_flow_step duty is   #{work_flow_step.duty.code}"
-    logger.info "approver person is #{approver_person}"
     #if current you find  the part member then return approver_person directly
     return approver_person if work_flow_step.duty.code=='003'
     #ok now we start to find that person
@@ -268,7 +265,6 @@ class DocHead < ActiveRecord::Base
         dep_to_find=dep_to_find.parent_dep
       end
     end
-    logger.info "persons is     #{persons.map {|p| p.code}}"
     #here we must find a person
     persons.first
   end
