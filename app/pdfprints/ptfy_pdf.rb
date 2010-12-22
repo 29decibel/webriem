@@ -26,6 +26,7 @@ class PtfyPdf
       pdf.table doc.common_riems.map {|r| ["#{r.dep}","#{r.project}","#{r.description}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","费用描述","币种","汇率","原币金额","本币金额"],
         :width=>pdf.margin_box.width,
+        :column_widths=>{0=>50,1=>50,2=>225,3=>50,4=>35,5=>65,6=>65},
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
@@ -51,6 +52,7 @@ class PtfyPdf
       pdf.table doc.rd_common_transports.map {|r| ["#{r.dep}","#{r.project}","#{r.start_place}","#{r.end_place}","#{r.start_time}","#{r.end_time}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","开始地点","结束地点","开始时间","结束时间","币种","汇率","原币金额","本币金额"],
         :width=>pdf.margin_box.width,
+        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>90,5=>75,6=>45,7=>35,8=>65,9=>65},
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]

@@ -23,8 +23,9 @@ class JjPdf
       pdf.move_down 10
       pdf.text "交际费明细",:size=>12
       pdf.move_down 2
-      pdf.table doc.rd_work_meals.map {|r| ["#{r.dep ? r.dep.name : ""}","#{r.project ? r.project.name : ""}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.person_names}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
+      pdf.table doc.rd_work_meals.map {|r| ["#{r.dep ? r.dep.name : ""}","#{r.project ? r.project.code : ""}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.person_names}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","地点","日期","人数","参与人","币种","汇率","原币金额","本币金额"],
+        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>90,5=>75,6=>45,7=>35,8=>65,9=>65},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
@@ -35,7 +36,7 @@ class JjPdf
       pdf.move_down 10
       pdf.text "借款单冲抵明细",:size=>12
       pdf.move_down 2
-      pdf.table doc.reim_cp_offsets.where("amount>0").map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
+      pdf.table doc.reim_cp_offsets.where("amount>0").map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project ? r.cp_doc_head.project.code : ""}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
         :headers => ["单号","申请时间","项目","申请总金额","冲抵金额"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,
@@ -47,7 +48,7 @@ class JjPdf
         pdf.move_down 10
         pdf.text "费用分摊明细",:size=>12
         pdf.move_down 2
-        pdf.table doc.reim_split_details.map {|r| ["#{r.sequence}","#{r.dep}","#{r.project}","#{r.percent}","#{r.percent_amount}"]},
+        pdf.table doc.reim_split_details.map {|r| ["#{r.sequence}","#{r.dep}","#{r.project ? r.project.code : ""}","#{r.percent}","#{r.percent_amount}"]},
           :headers => ["序号","费用承担部门","项目","百分比","分摊金额"],
           :width=>pdf.margin_box.width,
           :border_style => :grid,
