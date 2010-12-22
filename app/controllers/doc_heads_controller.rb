@@ -27,13 +27,7 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/1.xml
   def show
     @doc_head = DocHead.find(params[:id])
-    @doc_type = @doc_head.doc_type
-    #show the budget info
-    @b_project_id=@doc_head.project_id
-    @b_fee_id=@doc_head.budget_fee_id
-    @b_dep_id=@doc_head.afford_dep_id
-    @b_month=@doc_head.apply_date.month
-    @doc_id=@doc_head.id
+    set_doc_info_4_budget
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
       if @doc_head.approver==current_user.person
@@ -45,7 +39,15 @@ class DocHeadsController < ApplicationController
       format.xml  { render :xml => @doc_head }
     end
   end
-
+  def set_doc_info_4_budget
+    @doc_type = @doc_head.doc_type
+    #show the budget info
+    @b_project_id=@doc_head.project_id
+    @b_fee_id=@doc_head.budget_fee_id
+    @b_dep_id=@doc_head.afford_dep_id
+    @b_year=@doc_head.apply_date.year
+    @doc_id=@doc_head.id
+  end
   # GET /doc_heads/new
   # GET /doc_heads/new.xml
   def new
@@ -72,6 +74,7 @@ class DocHeadsController < ApplicationController
     #	cp=	@doc_head.cp_doc_details.build 
     #	cp.dep=current_person.dep
 	  #end
+	  set_doc_info_4_budget
     @doc_head.rec_notice_details.build if @doc_head.doc_type==3
     reciver=@doc_head.recivers.build
     #init the reciver's info to current person

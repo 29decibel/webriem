@@ -1,29 +1,36 @@
 #coding: utf-8
 class AjaxServiceController < ApplicationController
+  DocTypeFeeTypeMap={9=>'03',10=>'02',11=>'06'}
   def getbudget
     #get the budget info
+    fee_id=Fee.find_by_code(DocTypeFeeTypeMap[params[:doc_type]])
     budget=Budget.dep_of(params[:dep_id].to_i).project_of(params[:project_id].to_i).fee_of(params[:fee_id]).first
     #get the doc
-    doc=DocHead.find(params[:doc_id])
     used=0
     approving_used=0
-    docs=DocHead.where("doc_type=#{doc.doc_type} and afford_dep_id=#{doc.afford_dep_id} and project_id=#{doc.project_id}")
-    docs.where("doc_state=2").each do |doc|
+    this_used=0
+    doc=DocHead.find_by_id(params[:doc_id])
+    if doc
+      this_used=doc.total_fi_amount
+    end
+    
+    docs=DocHead.where("doc_type=#{params[:doc_type]} and afford_dep_id=#{params[:dep_id].to_i} and project_id=#{params[:project_id].to_i}")
+    docs.where("doc_state=2 and YEAR(apply_date)=#{params[:year]}").each do |doc|
       used=used+doc.total_fi_amount
     end
-    docs.where("doc_state=1").each do |doc|
+    docs.where("doc_state=1 and YEAR(apply_date)=#{params[:year]}").each do |doc|
       approving_used=approving_used+doc.total_fi_amount
-    end
+    end    
     b_info=BudgetInfo.new 
     if budget
       b_info.fee=budget.fee.name
       b_info.dep=budget.dep.name
       b_info.project=budget.project.name
-      b_info.current_month=budget.by_month(params[:month])
+      b_info.current_year=budget.all
       b_info.used=used
       b_info.approving_used=approving_used
-      b_info.this_used=0
-      b_info.remain=0
+      b_info.this_used=this_used
+      b_info.remain=budget.all-used-approving_used-this_used
     end
     render :xml=>b_info.to_xml
   end

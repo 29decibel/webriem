@@ -289,7 +289,8 @@
         sep: "九月"      
         oct: "十月"      
         nov: "十一月"      
-        dec: "十二月"      
+        dec: "十二月"   
+        year: 预算年份   
       project:
         name: "名称"  
         code: "编码"

@@ -35,6 +35,10 @@
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
 		</div>
 	</div>
+	<div class="form_field">
+		<%= f.label "#{I18n.t('activerecord.attributes.budget.year')}#{mark_required(f.object,:year)}" %>			
+		<%= f.text_field :year,:class=>"input1 "+ mark_required(@budget, :year) %>
+	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">

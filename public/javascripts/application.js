@@ -413,7 +413,7 @@ function pop_up_reference_window()
 		//set other infos
 		$(this).siblings(".ref_hidden_field").attr("data-other-info",returnValue.other_infos);
 		//fire the change event so now you can get the fee standard
-		$(this).siblings(".ref").change();
+		$(this).siblings(".ref,.ref_hidden_field").change();
 	}
 	return false;
 }

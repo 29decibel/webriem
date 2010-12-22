@@ -1,7 +1,7 @@
 #coding: utf-8
 require 'builder'
 class BudgetInfo
-  attr_accessor :fee,:dep,:project,:current_month,:used,:approving_used,:this_used,:remain
+  attr_accessor :fee,:dep,:project,:current_year,:used,:approving_used,:this_used,:remain
   def to_xml(options={})
     if options[:builder]
       build_xml(options[:builder])
@@ -18,7 +18,7 @@ class BudgetInfo
         xml.fee fee
         xml.dep dep
         xml.project project
-        xml.current_month current_month
+        xml.current_year current_year
         xml.used used
         xml.approving_used approving_used
         xml.this_used this_used

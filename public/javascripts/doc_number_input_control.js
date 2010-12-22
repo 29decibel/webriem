@@ -68,6 +68,7 @@ function adjust_amount()
 	});
 	//set page's amount
 	$("#total_riem").text(total_riem.toFixed(2));
+	$("#total_riem").change();
 	//set the reciver amount==============================================================
 	//只有一个收款人的时候进行total的设置
 	if($("tr.reciver").not(":hidden").size()==1)
@@ -167,6 +168,7 @@ function init_total_amount()
 			total+=parseFloat($(this).val());
 		});
 		$(this).find("input.doc_total_amount").val(total.toFixed(2));
+		$("input.doc_total_amount").change();
 	});
 	//set split if 
 	if($("div.is_split_reim").size()>=1)
