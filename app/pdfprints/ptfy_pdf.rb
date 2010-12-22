@@ -38,7 +38,7 @@ class PtfyPdf
       pdf.move_down 2
       pdf.table doc.rd_work_meals.map {|r| ["#{r.dep}","#{r.project}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.person_names}","#{r.reason}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","地点","日期","人数","参与人","事由","币种","汇率","原币金额","本币金额"],
-        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>35,5=>90,6=>40,7=>45,8=>35,9=>65,10=>65},
+        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>35,5=>70,6=>40,7=>45,8=>35,9=>65,10=>65},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
@@ -52,7 +52,7 @@ class PtfyPdf
       pdf.table doc.rd_common_transports.map {|r| ["#{r.dep}","#{r.project}","#{r.start_place}","#{r.end_place}","#{r.start_time}","#{r.end_time}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","开始地点","结束地点","开始时间","结束时间","币种","汇率","原币金额","本币金额"],
         :width=>pdf.margin_box.width,
-        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>90,5=>75,6=>45,7=>35,8=>65,9=>65},
+        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>70,5=>75,6=>45,7=>35,8=>65,9=>65},
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]

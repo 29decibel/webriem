@@ -25,7 +25,7 @@ class JjPdf
       pdf.move_down 2
       pdf.table doc.rd_work_meals.map {|r| ["#{r.dep ? r.dep.name : ""}","#{r.project ? r.project.code : ""}","#{r.place}","#{r.meal_date}","#{r.people_count}","#{r.person_names}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","地点","日期","人数","参与人","币种","汇率","原币金额","本币金额"],
-        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>90,5=>75,6=>45,7=>35,8=>65,9=>65},
+        :column_widths=>{0=>50,1=>50,2=>35,3=>50,4=>35,5=>110,6=>45,7=>35,8=>65,9=>65},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
