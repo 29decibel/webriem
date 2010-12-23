@@ -1,4 +1,4 @@
-<% if [9,10,11].include? @doc_head.doc_type %>
+<% if [9,10,11,13].include? @doc_head.doc_type %>
 	<% content_for :jqgrid_js do %>
 	  <% budget_area @b_project_id,@b_fee_id,@b_dep_id,@b_year,@doc_id,@doc_type%>
 	<% end %>

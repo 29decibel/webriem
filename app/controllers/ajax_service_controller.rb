@@ -1,6 +1,6 @@
 #coding: utf-8
 class AjaxServiceController < ApplicationController
-  DocTypeFeeTypeMap={9=>'03',10=>'02',11=>'06'}
+  DocTypeFeeTypeMap={9=>'03',10=>'02',11=>'06',13=>'04'}
   def getbudget
     #get the budget info
     fee_id=Fee.find_by_code(DocTypeFeeTypeMap[params[:doc_type]])

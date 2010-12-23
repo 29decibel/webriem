@@ -336,6 +336,8 @@ class DocHead < ActiveRecord::Base
     elsif doc_type==11
       #加班费用
       Fee.find_by_code('06').id      
+    elsif doc_type==13
+      Fee.find_by_code('04').id
     else
       #其他
       -1
