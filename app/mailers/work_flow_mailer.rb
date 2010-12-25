@@ -2,7 +2,7 @@
 #this mailer is used for work flow
 class WorkFlowMailer < ActionMailer::Base
   layout 'mailer_layout'
-  default :from => "skccsystems\baoxiao@skccsystems.cn"#"baoxiao_skccsystem@163.com"
+  default :from => "oes@skccsystems.cn"#"baoxiao_skccsystem@163.com"
   default_url_options[:host] = "114.113.150.227"
   # 1.paid 已经付款 
   def doc_paid(para)
