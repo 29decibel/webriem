@@ -51,11 +51,8 @@ Webreim::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   #this settings is a must
   config.action_mailer.smtp_settings = {
-    :address => "mail.skccsystems.cn",
-    :enable_starttls_auto => true,
-    :authentication=>:login,
-    :port => 587,
-    :user_name => "skccsystems\baoxiao@skccsystems.cn",
-    :password => 'china123!'
+    :address         =>  "localhost",
+    :port            =>  25,  
+    :domain          =>  "localhost"
   }
 end
