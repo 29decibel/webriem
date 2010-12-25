@@ -55,7 +55,7 @@ Webreim::Application.configure do
     :enable_starttls_auto => true,
     :authentication=>:login,
     :port => 587,
-    :user_name => "skccsystems\baoxiao",
+    :user_name => "skccsystems\baoxiao@skccsystems.cn",
     :password => 'china123!'
   }
 end
