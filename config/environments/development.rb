@@ -29,8 +29,8 @@ Webreim::Application.configure do
   #this settings is a must
   config.action_mailer.smtp_settings = {
     :address => "smtp.163.com",
+    :enable_starttls_auto => true,
     :port => 25,
-    :domain => "163.com",
     :authentication =>:login,
     :user_name => "baoxiao_skccsystem@163.com",
     :password => 'china123!'
