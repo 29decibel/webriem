@@ -13,7 +13,7 @@
 <div id="doc_state_process">
 	<%= render :partial=>"doc_state_process",:locals=>{:doc=>@doc_head}%>
 </div>
-<% if [9,10,11].include? @doc_head.doc_type %>
+<% if [9,10,11,13].include? @doc_head.doc_type %>
 	<div class="jqgrid">
 		<table id="jgrid"></table>
 	</div>

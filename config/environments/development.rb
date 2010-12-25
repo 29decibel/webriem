@@ -27,11 +27,11 @@ Webreim::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   #this settings is a must
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
+    :address => "mail.skccsystems.cn",
     :enable_starttls_auto => true,
+    :authentication => :login,
     :port => 587,
-    :authentication =>:plain,
-    :user_name => "baoxiao.skccsystems@gmail.com",
+    :user_name => "baoxiao",
     :password => 'china123!'
   }
   #here is my delayed jobs
