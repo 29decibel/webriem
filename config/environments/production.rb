@@ -53,9 +53,9 @@ Webreim::Application.configure do
   config.action_mailer.smtp_settings = {
     :address => "mail.skccsystems.cn",
     :enable_starttls_auto => true,
-    :authentication=>:plain,
+    :authentication=>:login,
     :port => 587,
-    :user_name => "baoxiao@skccsystems.cn",
+    :user_name => "skccsystems\baoxiao@skccsystems.cn",
     :password => 'china123!'
   }
 end
