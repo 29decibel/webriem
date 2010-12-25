@@ -53,6 +53,6 @@ Webreim::Application.configure do
   config.action_mailer.smtp_settings = {
     :address         =>  "localhost",
     :port            =>  25,  
-    :domain          =>  "localhost"
+    :domain          =>  "skccsystems.cn"
   }
 end
