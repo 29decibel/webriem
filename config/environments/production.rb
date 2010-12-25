@@ -55,7 +55,7 @@ Webreim::Application.configure do
     :enable_starttls_auto => true,
     :port => 587,
     :authentication =>:login,
-    :user_name => "skccsystems\\baoxiao",
+    :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
     :password => 'china123!'
   }
 end
