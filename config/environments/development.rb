@@ -28,18 +28,12 @@ Webreim::Application.configure do
   config.action_mailer.delivery_method = :smtp
   #this settings is a must
   config.action_mailer.smtp_settings = {
-   #:address => "smtp.163.com",
-   #:enable_starttls_auto => true,
-   #:port => 25,
-   #:authentication =>:login,
-   #:user_name => "baoxiao_skccsystem@163.com",
-   #:password => 'china123!'
-   :address => "mail.skccsystems.cn",
-   :enable_starttls_auto => false,
-   :authentication=>:login,
-   :port => 587,
-   :user_name => "skccsystems\baoxiao@skccsystems.cn",
-   :password => 'china123!'
+    :address => "smtp.163.com",
+    :enable_starttls_auto => true,
+    :port => 25,
+    :authentication =>:login,
+    :user_name => "baoxiao_skccsystem@163.com",
+    :password => 'china123!'
   }
   #here is my delayed jobs
   config.autoload_paths << "#{Rails.root}/app/jobs"

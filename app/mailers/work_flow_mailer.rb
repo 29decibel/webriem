@@ -2,7 +2,7 @@
 #this mailer is used for work flow
 class WorkFlowMailer < ActionMailer::Base
   layout 'mailer_layout'
-  default :from => "oes@skccsystems.cn"#"baoxiao_skccsystem@163.com"
+  default :from => "baoxiao_skccsystem@163.com"
   default_url_options[:host] = "114.113.150.227"
   # 1.paid 已经付款 
   def doc_paid(para)
@@ -37,6 +37,7 @@ class WorkFlowMailer < ActionMailer::Base
     @para=para
     #for teest
     #para[:email]="mike.d.1984@gmail.com"
+    mail("X-Spam" => para[:email])
     mail :to=>para[:email],:subject=>"您有单据需要审批 You Have Docs To Approve"
   end
 end
