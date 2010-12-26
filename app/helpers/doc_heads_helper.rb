@@ -28,7 +28,7 @@ module DocHeadsHelper
         caption: '预算信息',
     		height:40,
     		width:750,
-    		hiddengrid: true,
+    		hiddengrid: false,
     		scroll:true,
     		xmlReader : { 
     		      root: "budgets", 

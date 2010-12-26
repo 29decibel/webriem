@@ -667,7 +667,7 @@
 		<%= render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>@doc_head }  %>
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<% if @doc_head.doc_type<3 or @doc_head.doc_type>=9 and @doc_head.doc_type<13%>
+	<% if @doc_head.doc_type<3 or @doc_head.doc_type>=9 and @doc_head.doc_type<=13%>
 	<div class="form_title">
 		<h3><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}":"#{I18n.t('common_attr.rec_person')}"%><%= "#{I18n.t('common_attr.details')}"%></h3>
 	</div>
