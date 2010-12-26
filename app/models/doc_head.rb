@@ -238,6 +238,12 @@ class DocHead < ActiveRecord::Base
     #logger=Logger.new("wf.txt")
     #logger.info "current work flow step is #{work_flow_step}"
     return nil if work_flow_step==nil
+    #put the person back if you find only one person
+    if work_flow_step.is_self_dep==0
+      persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
+      return persons.first
+    end
+    #begin to find the right person
     persons=nil
     dep_to_find=nil
     #decide the dep to look for
@@ -256,14 +262,10 @@ class DocHead < ActiveRecord::Base
     #if current you find  the part member then return approver_person directly
     return approver_person if work_flow_step.duty.code=='003'
     #ok now we start to find that person
-    if work_flow_step.is_self_dep==0
-      persons=Person.where("dep_id=? and duty_id=?",work_flow_step.dep_id,work_flow_step.duty_id)
-    else
-      while dep_to_find
-        persons=Person.where("dep_id=? and duty_id=?",dep_to_find.id,work_flow_step.duty_id)
-        break if persons.count>0
-        dep_to_find=dep_to_find.parent_dep
-      end
+    while dep_to_find
+      persons=Person.where("dep_id=? and duty_id=?",dep_to_find.id,work_flow_step.duty_id)
+      break if persons.count>0
+      dep_to_find=dep_to_find.parent_dep
     end
     #here we must find a person
     persons.first
