@@ -3,7 +3,7 @@
 <head>
 	<title>网上报销系统</title>
 	<%= stylesheet_link_tag :all,:recursive => true %>
-	<%= javascript_include_tag "jquery.js" %>
+	<%= jqgrid_init%>
 	<%= javascript_include_tag "jquery.blockUI"%>
 	<%= javascript_include_tag "nested_form.js" %>
 	<%= javascript_include_tag "jquery-ui-1.8.4.custom.min.js" %>
@@ -16,8 +16,6 @@
 	<%= javascript_include_tag "jquery.formatCurrency-1.4.0.js" %>
 	<%= javascript_include_tag "doc_number_input_control.js" %>
 	<%= javascript_include_tag "enter_to_tab.js" %>
-	<%= javascript_include_tag "i18n/grid.locale-cn.js" %>	
-	<%= javascript_include_tag "jquery.jqGrid.min.js" %>
 	<%= javascript_include_tag "jquery.fmatter.js"%>
 	<%= yield :jqgrid_js %>
 	<%= csrf_meta_tag %>

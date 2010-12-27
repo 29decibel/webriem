@@ -71,7 +71,7 @@ module ApplicationHelper
       end
     end
   end
-    #====================================core stuff==================================================
+  #====================================core stuff==================================================
   #here is some privats
   private
   def filtered_columns_by(class_object,filter_type)
