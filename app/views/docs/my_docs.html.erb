@@ -1,0 +1,7 @@
+<%= netzke :deps,:class_name=>"MyDocsGridPanel",:title=>"我的单据列表",
+			:prohibit_update => true,
+			:prohibit_delete => true,
+			:columns=>[
+				:doc_no,{:name=>:person__name,:label=>"申请人"},:apply_date,:doc_type,:doc_state,
+				{:name=>:total_fi_amount,:label=>"审批金额"},{:name=>:id,:hide=>true}],
+			:scope => ["person_id=?",current_user.person.id] %>

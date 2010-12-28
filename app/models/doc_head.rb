@@ -377,4 +377,5 @@ class DocHead < ActiveRecord::Base
   def self.docs_to_approve(result,current_person)
   	result=result.select {|doc| doc.approver==current_person}
   end
+  scope :my_docs, proc { |person_id| where("person_id=?",person_id)}
 end

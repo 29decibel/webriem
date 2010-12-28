@@ -1,4 +1,8 @@
 Webreim::Application.routes.draw do
+  get "docs/my_docs"
+
+  get "basic_setting/dep"
+
   get "ext_js_test/test"
 
   #this is for super admin use
