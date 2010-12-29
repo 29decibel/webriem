@@ -1,17 +1,18 @@
 #coding: utf-8
 class MyDocsGridPanel < Netzke::Basepack::GridPanel
   action :print_docs, :text => "打印选中", :disabled => false
+  action :out_put_txt,:text=>"输出文本文件", :disabled => false
   def default_config
     super.merge({:model => "DocHead"})
   end
   # overriding 2 GridPanel's methods
   def default_bbar
-    [:print_docs.action]
+    [:print_docs.action,:out_put_txt.action]
   end
 
   def default_context_menu
     #[:show_details.action, "-", *super]
-    [:print_docs.action]
+    [:print_docs.action,:out_put_txt.action]
   end
   js_method :init_component, <<-JS
     function(){
@@ -39,6 +40,15 @@ class MyDocsGridPanel < Netzke::Basepack::GridPanel
       //alert(record.get('id'));
       window.location="/doc_heads/print?doc_id="+record.get('id');
     }
+  JS
+  
+  js_method :on_out_put_txt, <<-JS
+    function(){
+      // Remotely calling the server's method greet_the_world (defined below)
+      var record=this.getSelectionModel().getSelected();
+      //alert(record.get('id'));
+      window.location="/doc_heads/output_to_txt?ids="+record.get('id');
+    }  
   JS
 
  ## Server's method that gets called from the JS

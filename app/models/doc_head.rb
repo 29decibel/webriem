@@ -68,8 +68,8 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :common_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :other_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  
-  default_scope :order => 'updated_at DESC'
+  netzke_attribute :total_fi_amount
+  #default_scope :order => 'updated_at DESC'
   #the great offset info here
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
@@ -378,4 +378,13 @@ class DocHead < ActiveRecord::Base
   	result=result.select {|doc| doc.approver==current_person}
   end
   scope :my_docs, proc { |person_id| where("person_id=?",person_id)}
+  def doc_type_name
+    DOC_TYPES[doc_type]
+  end
+  def doc_state_name
+    Doc_State[doc_state]
+  end
+  #sort scopes
+  scope :sort_by_dt, lambda { |dir| order("doc_type #{dir.to_s}") }
+  scope :sort_by_ds, lambda { |dir| order("doc_state #{dir.to_s}") }
 end

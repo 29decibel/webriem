@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/29decibel/netzke-basepack.git
-  revision: 50fa317
+  remote: git://github.com/skozlov/netzke-basepack.git
+  revision: 3947471
   specs:
     netzke-basepack (0.6.3)
       acts_as_list
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/skozlov/netzke-core.git
-  revision: 1de4031
+  revision: 3bea34f
   specs:
     netzke-core (0.6.5)
       activesupport (>= 3.0.1)
@@ -48,10 +48,10 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     acts_as_list (0.1.2)
-    admin_data (1.1.8)
+    admin_data (1.1.10)
       will_paginate (>= 3.0.pre2)
     arel (2.0.6)
-    bcrypt-ruby (2.1.2)
+    bcrypt-ruby (2.1.3)
     builder (2.1.2)
     daemons (1.1.0)
     delayed_job (2.1.2)
@@ -67,7 +67,7 @@ GEM
     jquery-rails (0.2.6)
       rails (~> 3.0)
       thor (~> 0.14.4)
-    mail (2.2.12)
+    mail (2.2.13)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -82,7 +82,7 @@ GEM
       activerecord
       activesupport
     parseexcel (0.5.2)
-    pdfkit (0.4.6)
+    pdfkit (0.5.0)
     polyglot (0.3.1)
     prawn (0.8.4)
       prawn-core (>= 0.8.4, < 0.9)
