@@ -8,6 +8,7 @@ class Budget < ActiveRecord::Base
     blongs_to_name_attr :dep
     validates_presence_of :fee,:project,:dep,:year
     validates_numericality_of :jan,:feb,:mar,:apr,:may,:jun,:jul,:aug,:sep,:oct,:nov,:dec
+    netzke_exclude_attributes :created_at, :updated_at
     NumberHash={1=>:jan,2=>:feb,3=>:mar,4=>:apr,5=>:may,6=>:jun,7=>:jul,8=>:aug,9=>:sep,10=>:oct,11=>:nov,12=>:dec}
     def to_s
       "#{name}"

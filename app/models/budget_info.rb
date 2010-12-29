@@ -2,6 +2,7 @@
 require 'builder'
 class BudgetInfo
   attr_accessor :fee,:dep,:project,:current_year,:used,:approving_used,:this_used,:remain
+  netzke_exclude_attributes :created_at, :updated_at
   def to_xml(options={})
     if options[:builder]
       build_xml(options[:builder])

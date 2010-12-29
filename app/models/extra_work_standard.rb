@@ -3,6 +3,7 @@ class ExtraWorkStandard < ActiveRecord::Base
   validates_presence_of :amount
   validates_numericality_of :amount
   belongs_to :fee
+  netzke_exclude_attributes :created_at, :updated_at
   blongs_to_name_attr :fee
   def custom_display(column)
     column_name=column.class==String ? column:column.name

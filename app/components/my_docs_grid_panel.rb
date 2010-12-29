@@ -1,22 +1,23 @@
 #coding: utf-8
 class MyDocsGridPanel < Netzke::Basepack::GridPanel
-  action :show_details, :text => "打印选中", :disabled => false
+  action :print_docs, :text => "打印选中", :disabled => false
   def default_config
-    super.merge({:model => "DocHead",:selModel=>"new Ext.grid.CheckboxSelectionModel({singleSelect:true})"})
+    super.merge({:model => "DocHead"})
   end
   # overriding 2 GridPanel's methods
   def default_bbar
-    [:show_details.action]
+    [:print_docs.action]
   end
 
   def default_context_menu
     #[:show_details.action, "-", *super]
-    [:show_details.action]
+    [:print_docs.action]
   end
   js_method :init_component, <<-JS
     function(){
       //call the parent
-      #{js_full_class_name}.superclass.initComponent.call(this);
+      this.selModel = new Ext.grid.CheckboxSelectionModel({singleSelect:true});
+      #{js_full_class_name}.superclass.initComponent.call(this);      
       //register a double click event
       /*this.getSelectionModel().on('selectionchange', function(selModel){
         alert(selModel);
@@ -30,4 +31,19 @@ class MyDocsGridPanel < Netzke::Basepack::GridPanel
       });
     }
   JS
+  # Method in the JS class that (by default) processes the action's "click" event
+  js_method :on_print_docs, <<-JS
+    function(){
+      // Remotely calling the server's method greet_the_world (defined below)
+      var record=this.getSelectionModel().getSelected();
+      //alert(record.get('id'));
+      window.location="/doc_heads/print?doc_id="+record.get('id');
+    }
+  JS
+
+ ## Server's method that gets called from the JS
+ #endpoint :greet_the_world do |params|
+ #  # Tell the client side to call its method showGreeting with "Hello World!" as parameter
+ #  {:show_greeting => "Hello World!"}
+ #end
 end

@@ -2,6 +2,7 @@
 class Duty < ActiveRecord::Base
   validates_presence_of :name,:code
   validates_uniqueness_of :name,:code
+  netzke_exclude_attributes :created_at, :updated_at
   #people which have such duty
   has_many :people, :class_name => "Person", :foreign_key => "duty_id"
   has_and_belongs_to_many :work_flows

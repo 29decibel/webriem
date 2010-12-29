@@ -1,6 +1,7 @@
+#coding: utf-8
 class DepGridPanel < Netzke::Basepack::GridPanel
   def default_config
-    super.merge(:model => "Dep")
+    super.merge(:model => "Dep",:title=>"部门列表")
   end
   # overriding 2 GridPanel's methods
   def default_bbar
@@ -19,7 +20,9 @@ class DepGridPanel < Netzke::Basepack::GridPanel
       //register a double click event
       this.on("rowdblclick",function(grid,rowIndex,e){
         //alert(rowIndex);
-        window.location="/deps/"+rowIndex;
+        var record=this.getStore().getAt(rowIndex);
+        //alert(record.get('doc_no'));
+        window.location="/deps/"+record.get('id');
       });
     }
   JS
