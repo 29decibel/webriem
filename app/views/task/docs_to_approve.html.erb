@@ -1,0 +1,41 @@
+<%= jqgrid :docs_to_approve,
+		:model=>"DocHead",
+		:caption=>"需要审批的单据",
+		:multiselect=>true,
+		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
+			"apply_date",{:name=>"doc_type",:getter=>:doc_type_name},
+			{:name=>"doc_state",:getter=>:doc_state_name},
+			{:name=>"afford_dep__name",:label=>"费用承担部门"},
+			{:name=>"total_amount",:getter=>:total_amount,:label=>"审批金额"}],
+		:height=>300,:width=>800,:where=>"doc_state=1 and work_flow_step_id is not null and current_approver_id=#{current_user.person.id}",
+		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
+<div class="jqgrid">
+	<%= link_to_function I18n.t('common_attr.btn_output_txt'),"output_to_txt('#docs_to_approve')",:class=>"button2" %>
+	<%= link_to_function I18n.t('common_attr.btn_batch_print'),"batch_print('#docs_to_approve')",:class=>"button2" %>		
+	<%= link_to_function I18n.t('common_attr.btn_batch_approve'),"batch_approve('#docs_to_approve')",:class=>"button2" %>
+	<div id="approve_info">
+		<div class="form_title">
+			<h3><%= I18n.t('common_attr.write_note')%></h3>
+		</div>
+		<div class="form_area">
+			<div class="form_block">
+				<div class="form_field">
+					<%= label_tag I18n.t('common_attr.pass')%>
+					<%= check_box_tag :is_ok,:class=>"input1" %>
+				</div>
+			</div>
+			<div class="form_block">
+				<div class="form_field">
+					<%= label_tag I18n.t('common_attr.approve_info')%>
+					<%= text_area_tag :comments,nil,:class=>"input2" %>
+				</div>
+			</div>
+			<div class="form_block">
+				<div class="form_field">
+					<%= link_to_function I18n.t('common_op.btn_ok'),"batch_approve_confirm('#docs_to_approve')",:class=>"button2" %>
+					<%= link_to_function I18n.t('common_op.btn_cancel'),"$.unblockUI()",:class=>"button2" %>
+					<%= hidden_field_tag :people_id,:value=>current_user.person.id%>
+				</div>
+			</div>
+		</div>
+</div>

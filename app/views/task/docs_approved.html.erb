@@ -1,0 +1,17 @@
+<%= jqgrid :docs_approved,
+		:model=>"DocHead",
+		:caption=>"已经审批过的单据",
+		:multiselect=>true,
+		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
+			"apply_date",{:name=>"doc_type",:getter=>:doc_type_name},
+			{:name=>"doc_state",:getter=>:doc_state_name},
+			{:name=>"afford_dep__name",:label=>"费用承担部门"},
+			{:name=>"total_amount",:getter=>:total_fi_amount,:label=>"审批金额"}],
+		:height=>300,:width=>800,
+		:joins=>:work_flow_infos,
+		:where=>"work_flow_infos.people_id=#{current_user.person.id}",
+		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
+<div class="jqgrid">
+	<%= link_to_function I18n.t('common_attr.btn_output_txt'),"output_to_txt('#docs_approved')",:class=>"button2" %>
+	<%= link_to_function I18n.t('common_attr.btn_batch_print'),"batch_print('#docs_approved')",:class=>"button2" %>
+</div>

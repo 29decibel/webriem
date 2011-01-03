@@ -454,56 +454,46 @@ function back_to_the_reference()
 	//close the window
 	window.close();
 }
-function batch_pay()
+function batch_pay(grid_id)
 {
-	if($("input:checked.ref_select").size()!=0)
+	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length>=0)
 	{
-		//get all doc id and invoke a ajax call
-		var doc_ids="";
-		$("input:checked.ref_select").each(function(){
-			doc_ids += $(this).siblings("input.hidden_id").val() + "_";
-		});
 		$.ajax({
 		  type: "GET",
 		  url: "/doc_heads/batch_pay",
-		  data: "doc_ids="+doc_ids,
+		  data: "doc_ids="+ids.join('_'),
 		  beforeSend: function(){
 				//fee_standard_control.val("正在获取...");
 				$.blockUI({ message:"付款中，请稍后..." }); 
 		  },
 		  success: function(msg){
-		    //fee_standard_control.val(msg);
-				$("a.filter").submit();
+				$(grid_id).trigger("reloadGrid");
 				$.unblockUI(); 
 		  },
 			error: function(){
-				//fee_standard_control.val("暂无*");
-				$("a.filter").submit();
+				$(grid_id).trigger("reloadGrid");
 				$.unblockUI();
 			}
 		});	
 	}
 }
-function batch_print()
+function batch_print(grid_id)
 {
-	if($("input:checked.ref_select").size()!=0)
+	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length>0)
 	{
-		//get all doc id and invoke a ajax call
-		var doc_ids="";
-		$("input:checked.ref_select").each(function(){
-			doc_ids += $(this).siblings("input.hidden_id").val() + "_";
-		});
-		//trim the ;
-		if(doc_ids.length>0)
-		{
-			doc_ids=doc_ids.substring(doc_ids.length-1,"");
-		}
-		window.location="/doc_heads/batch_print?"+"doc_ids="+doc_ids;
+		window.location="/doc_heads/batch_print?"+"doc_ids="+ids.join('_');
+	}
+	else
+	{
+		alert("请选择需要打印的单据");
 	}
 }
-function batch_approve()
+function batch_approve(grid_id)
 {
-	if($("input:checked.ref_select").size()!=0)
+	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length>0)
 	{
 		//clear previsou value
 		$("#is_ok").attr("checked",false);
@@ -511,13 +501,11 @@ function batch_approve()
 		$.blockUI({ message: $('#approve_info') });
 	}
 }
-function batch_approve_confirm()
+function batch_approve_confirm(grid_id)
 {
 	//get all doc id and invoke a ajax call
-	var doc_ids="";
-	$("input:checked.ref_select").each(function(){
-		doc_ids += $(this).siblings("input.hidden_id").val() + "_";
-	});
+	var ids=$(grid_id).getGridParam("selarrrow");
+	var doc_ids=ids.join('_');
 	var is_ok=$("#is_ok").is(':checked');
 	var comments=$("#comments").val();
 	//make a ajax call
@@ -530,29 +518,23 @@ function batch_approve_confirm()
 			$.blockUI({ message:"审批中，请稍后..." }); 
 	  },
 	  success: function(msg){
-	    //fee_standard_control.val(msg);
-			$("a.filter").submit();
+			$(grid_id).trigger("reloadGrid");
 			$.unblockUI();
 	  },
 		error: function(){
-			//fee_standard_control.val("暂无*");
-			$("a.filter").submit();
+			$(grid_id).trigger("reloadGrid");
 			$.unblockUI();
 		}
 	});	
 }
-function output_to_txt()
+function output_to_txt(grid_id)
 {
-	//now get all ids
-	var ids="";
-	$("input:checked.ref_select").each(function(){
-		ids += $(this).siblings("input.hidden_id").val() + "_";
-	});
+	//get all doc id and invoke a ajax call
+	var ids=$(grid_id).getGridParam("selarrrow");
 	//trim the ;
 	if(ids.length>0)
 	{
-		ids=ids.substring(ids.length-1,"");
-		document.location.href = "/doc_heads/output_to_txt.txt?ids="+ids;
+		document.location.href = "/doc_heads/output_to_txt.txt?ids="+ids.join('_');
 	}
 }
 function output_to_pdf()

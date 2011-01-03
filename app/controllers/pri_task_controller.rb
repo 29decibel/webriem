@@ -1,6 +1,10 @@
 #coding: utf-8
 require 'time'
 class PriTaskController < ApplicationController
+  def update_needs
+    DocHead.all.each {|doc| (doc.current_approver_id=doc.approver.id if doc.approver) and doc.save!}
+    DocHead.all.each {|doc| doc.total_amount=doc.total_fi_amount and doc.save!}
+  end
   def cmds
     
   end
