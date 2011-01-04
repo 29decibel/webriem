@@ -1,6 +1,7 @@
-<div class="form_title">
-	<h3>部门列表</h3>
-</div>
-<%= jqgrid Dep,:fields =>"code,name,version,start_date",:height=>300,:width=>800%>
+<%= jqgrid :deps,
+		:model=>"Dep",
+		:caption=>"部门",
+		:height=>300,:width=>800,
+		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/deps/'+rowid.toString();}--#)%>
 
 

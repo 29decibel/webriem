@@ -1,20 +1,3 @@
-GIT
-  remote: git://github.com/skozlov/netzke-basepack.git
-  revision: 3947471
-  specs:
-    netzke-basepack (0.6.3)
-      acts_as_list
-      meta_where (>= 0.9.3)
-      netzke-core (~> 0.6.4)
-      will_paginate (~> 3.0.pre2)
-
-GIT
-  remote: git://github.com/skozlov/netzke-core.git
-  revision: 3bea34f
-  specs:
-    netzke-core (0.6.5)
-      activesupport (>= 3.0.1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -47,7 +30,6 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    acts_as_list (0.1.2)
     admin_data (1.1.10)
       will_paginate (>= 3.0.pre2)
     arel (2.0.6)
@@ -72,10 +54,6 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    meta_where (0.9.9.2)
-      activerecord (~> 3.0.2)
-      activesupport (~> 3.0.2)
-      arel (~> 2.0.2)
     mime-types (1.16)
     mysql2 (0.2.6)
     paperclip (2.3.8)
@@ -131,8 +109,6 @@ DEPENDENCIES
   excelsior
   jquery-rails
   mysql2 (= 0.2.6)
-  netzke-basepack!
-  netzke-core!
   paperclip
   parseexcel
   pdfkit
