@@ -76,7 +76,7 @@ class DocHead < ActiveRecord::Base
   Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过",3=>"已付款"}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
   #validate the amout is ok
-  #validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
+  validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
   def project_not_null_if_charge
     errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
   end
