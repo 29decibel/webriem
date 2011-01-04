@@ -6,7 +6,6 @@ class Subject < ActiveRecord::Base
   blongs_to_name_attr :business_type
   blongs_to_name_attr :fee
   blongs_to_name_attr :dep
-  netzke_exclude_attributes :created_at, :updated_at
   #enum_attr :busitype,[['借款',0],['报销',1],['其他',2]]
   validates_presence_of :fee_id,:dep_id
   validate :must_input_one_u8_subject

@@ -3,7 +3,6 @@ class Region < ActiveRecord::Base
   validates_presence_of :name,:code
   validates_uniqueness_of :name,:code
   belongs_to :region_type
-  netzke_exclude_attributes :created_at, :updated_at
   blongs_to_name_attr :region_type
   #===================================================================================
   CUSTOM_QUERY={
