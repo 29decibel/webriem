@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103161820) do
+ActiveRecord::Schema.define(:version => 20110104123014) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(:version => 20110103161820) do
     t.integer  "attach"
     t.integer  "person_id"
     t.string   "note"
-    t.date     "apply_date"
+    t.datetime "apply_date"
     t.integer  "dep_id"
     t.integer  "fee_id"
     t.datetime "created_at"
@@ -423,8 +423,8 @@ ActiveRecord::Schema.define(:version => 20110103161820) do
     t.decimal  "ori_amount",     :precision => 16, :scale => 2
     t.string   "custom_place"
     t.integer  "region_type_id"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.decimal  "st_amount",      :precision => 8,  :scale => 2
   end
 

@@ -16,6 +16,7 @@ Webreim::Application.routes.draw do
   get "pri_task/check_cp_offset"
   get "pri_task/fuck_date"
   post "pri_task/fuck_p"
+  get "pri_task/update_doc"
   get "/pri_task/cmds"
   
   post "common/reset_p"

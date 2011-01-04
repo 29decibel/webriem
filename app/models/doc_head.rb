@@ -76,7 +76,7 @@ class DocHead < ActiveRecord::Base
   Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过",3=>"已付款"}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
   #validate the amout is ok
-  validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
+  #validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
   def project_not_null_if_charge
     errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
   end
@@ -92,9 +92,6 @@ class DocHead < ActiveRecord::Base
   def dep_and_project_not_null
     #debugger
     errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)
-  end
-  def self.custom_display_columns
-  	{DocHead.human_attribute_name(:apply_amount)=>:total_fi_amount}
   end
   #the total apply amount
   def total_apply_amount
@@ -183,7 +180,7 @@ class DocHead < ActiveRecord::Base
   def split_total_amount
     total=0
     reim_split_details.each do |split|
-      total+=split.percent_amount
+      total+=split.percent_amount if split.percent_amount
     end
     total
   end
@@ -300,33 +297,7 @@ class DocHead < ActiveRecord::Base
     UploadFile.find_by_doc_no(self.doc_no)
   end
   #==================================about filter================================
-  NOT_DISPLAY=['work_flow_step_id','reim_description','is_split','cp_doc_remain_amount','attach','approver_id','dep_id','fee_id','project_id','upload_file_id','note','total_amount','real_person_id']
-  def self.not_display
-    NOT_DISPLAY
-  end
-  CUSTOM_QUERY={
-      'person_id'=>{:include=>:person,:conditions=>'people.name like ?'},
-      'fee_id'=>{:include=>:fee,:conditions=>'fees.name like ?'},
-      'dep_id'=>{:include=>:dep,:conditions=>'deps.name like ?'},
-      'project_id'=>{:include=>:project,:conditions=>'projects.name like ?'},
-      'currency_id'=>{:include=>:currency,:conditions=>'currencies.name like ?'},
-  }
-  def self.custom_query(column_name,filter_text)
-    if CUSTOM_QUERY.has_key? column_name
-      CUSTOM_QUERY[column_name]
-    else
-      nil
-    end
-  end
-  def custom_display(column)
-    column_name=column.class==String ? column:column.name
-    if column_name=="doc_state"
-      return Doc_State[doc_state]
-    end
-    if column_name=="doc_type"
-      return DOC_TYPES[doc_type]
-    end
-  end
+
   #the budget fee
   def budget_fee_id
     if doc_type==9
@@ -360,31 +331,22 @@ class DocHead < ActiveRecord::Base
     can=false if doc_state!=0
     can
   end
-  #here is the total custom display column names
-  def self.my_doc_display_columns
-    ["doc_no","person_id","apply_date","doc_type","doc_state","amount"]
-  end
+
   def person_dep
     person.dep.name
   end
-  def self.doc_to_approve_display_columns
-    #debugger
-    ["doc_no","person_id","apply_date","doc_type","amount","doc_state"]
-  end
-  def self.not_search
-    ["is_split","work_flow_step_id","reim_description",'approver_id',"cp_doc_remain_amount",'person_id','total_amount','upload_file_id']
-  end
-  def self.docs_to_approve(result,current_person)
-  	result=result.select {|doc| doc.approver==current_person}
-  end
-  scope :my_docs, proc { |person_id| where("person_id=?",person_id)}
+
   def doc_type_name
     DOC_TYPES[doc_type]
   end
   def doc_state_name
     Doc_State[doc_state]
   end
-  #sort scopes
-  scope :sort_by_dt, lambda { |dir| order("doc_type #{dir.to_s}") }
-  scope :sort_by_ds, lambda { |dir| order("doc_state #{dir.to_s}") }
+  #callbacks
+  def before_save
+    #update the current approver, it's a shortcut
+    current_approver_id = approver.id if approver
+    #update the total_fi_amount
+    total_amount = total_fi_amount
+  end
 end
