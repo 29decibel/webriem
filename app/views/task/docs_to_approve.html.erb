@@ -5,7 +5,6 @@
 		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
 			"apply_date",{:name=>"doc_type",:getter=>:doc_type_name},
 			{:name=>"doc_state",:getter=>:doc_state_name},
-			{:name=>"afford_dep__name",:label=>"费用承担部门"},
 			{:name=>"total_amount",:getter=>:total_amount,:label=>"审批金额"}],
 		:height=>300,:width=>800,:where=>"doc_state=1 and work_flow_step_id is not null and current_approver_id=#{current_user.person.id}",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
