@@ -3,7 +3,7 @@ require 'time'
 class PriTaskController < ApplicationController
   def update_doc
     DocHead.all.each do |doc|
-       if approver
+       if doc.approver
            doc.current_approver_id=doc.approver.id
        else
            doc.current_approver_id=nil
