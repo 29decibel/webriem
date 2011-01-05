@@ -2,7 +2,14 @@
 require 'time'
 class PriTaskController < ApplicationController
   def update_doc
-    DocHead.all.each {|doc| (doc.current_approver_id=doc.approver.id if doc.approver) and doc.save!}
+    DocHead.all.each do |doc|
+       if approver
+           doc.current_approver_id=doc.approver.id
+       else
+           doc.current_approver_id=nil
+       end
+       doc.save!
+    end
     DocHead.all.each {|doc| doc.total_amount=doc.total_fi_amount and doc.save!}
     @message="ok"
     render "shared/show_result"
