@@ -5,6 +5,7 @@
 		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
 			"apply_date",{:name=>"doc_type",:getter=>:doc_type_name},
 			{:name=>"doc_state",:getter=>:doc_state_name},
+                        {:name=>"updated_at",:label=>"最后更新时间"},
 			{:name=>"total_amount",:getter=>:total_amount,:label=>"审批金额"}],
 		:height=>300,:width=>800,:where=>"doc_state=2",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
