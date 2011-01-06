@@ -4,12 +4,18 @@
 		:multiselect=>true,
 		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
 			{:name=>"apply_date"},
-                        {:name=>"doc_type",:getter=>:doc_type_name},
-			{:name=>"doc_state",:getter=>:doc_state_name},
+            {:name=>"doc_type",:getter=>:doc_type_name,:enum_type=>"DocHead::DOC_TYPES"},
+			{:name=>"doc_state",:getter=>:doc_state_name,:enum_type=>"DocHead::Doc_State"},
 			{:name=>"total_amount",:getter=>:total_fi_amount,:label=>"审批金额"}],
 		:height=>300,:width=>800,:where=>"person_id=#{current_user.person.id}",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
 <div class="jqgrid">
-	<%= link_to_function I18n.t('common_attr.btn_output_txt'),"output_to_txt('#my_doc')",:class=>"button2" %>
-	<%= link_to_function I18n.t('common_attr.btn_batch_print'),"batch_print('#my_doc')",:class=>"button2" %>
+	<div class="buttons">
+		<a onclick="output_to_txt('#my_doc'); return false;" href="#">
+			<img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt')%>
+		</a>
+		<a onclick="batch_print('#my_doc'); return false;" href="#">
+			<img src="/images/icons/printer.png" alt=""/><%= I18n.t('common_attr.btn_batch_print')%>
+		</a>
+	</div>
 </div>

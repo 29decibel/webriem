@@ -16,7 +16,7 @@ puts opt
     fields = opt[:colModel].collect {|col| col[:name]}    
     find = {}
     find[:order] = params["sidx"] + " " + params["sord"] unless params["sidx"].empty?
-    conditions = filter_bar_conditions(fields,params)
+    conditions = filter_bar_conditions(opt,params)
     find[:conditions] = conditions unless conditions.empty?
     #pager
     find[:per_page] = params["rows"] || 20
@@ -40,10 +40,30 @@ puts opt
       params["page"].to_i)#current page
   end
   
-  def filter_bar_conditions(fields,params)
+  def filter_bar_conditions(opt,params)
+    search_fields=opt[:search_fields]
     conditions = ""
-    fields.each do |field|
-      conditions << "#{field} LIKE '%#{params[field]}%' AND " unless params[field].nil?
+    opt[:columns].each do |col_model|
+      #change the seleted column name if relation
+      s_field = col_model[:name]
+      if search_fields[s_field.to_sym]
+        s_field = search_fields[s_field.to_sym] 
+      end
+      #change the compare LIKE value if enum
+      value = params[col_model[:name]]
+      if value
+        if col_model[:enum_type]
+          enum_hash = eval(col_model[:enum_type])
+          enum_a = enum_hash.select {|k,v| v.include? value}
+          puts value
+          puts enum_a
+          value = (enum_a and enum_a.size>0) ? enum_a.keys[0] : -119
+          puts value
+          conditions << "#{s_field} = '#{value}' AND "
+          next
+        end
+        conditions << "#{s_field} LIKE '%#{value}%' AND "
+      end
     end
     conditions.chomp("AND ")
   end

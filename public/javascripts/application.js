@@ -457,6 +457,11 @@ function back_to_the_reference()
 function batch_pay(grid_id)
 {
 	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length==0)
+	{
+		alert("请选择需要付款的单据");
+		return;
+	}
 	if(ids.length>=0)
 	{
 		$.ajax({
@@ -493,6 +498,11 @@ function batch_print(grid_id)
 function batch_approve(grid_id)
 {
 	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length==0)
+	{
+		alert("请选择需要审批的单据");
+		return;
+	}
 	if(ids.length>0)
 	{
 		//clear previsou value
@@ -531,23 +541,14 @@ function output_to_txt(grid_id)
 {
 	//get all doc id and invoke a ajax call
 	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length==0)
+	{
+		alert("请选择需要输出的单据");
+		return;
+	}
 	//trim the ;
 	if(ids.length>0)
 	{
 		document.location.href = "/doc_heads/output_to_txt.txt?ids="+ids.join('_');
-	}
-}
-function output_to_pdf()
-{
-	//now get all ids
-	var ids="";
-	$("input:checked.ref_select").each(function(){
-		ids += $(this).siblings("input.hidden_id").val() + "_";
-	});
-	//trim the ;
-	if(ids.length>0)
-	{
-		ids=ids.substring(ids.length-1,"");
-		document.location.href = "/doc_heads/output_to_txt.pdf?ids="+ids;
 	}
 }

@@ -1,3 +1,4 @@
+#coding: utf-8
 # Rails-jqgrid
 #Give it a grid name, everything else is optional.
 
@@ -22,6 +23,7 @@ module ActionView
       opt[:rowNum] ||= 20
       opt[:rowList] ||= [20,40,60]
       opt[:viewrecords] ||= true
+      opt[:rownumbers] ||= false
       #Default Grid opt End
       
       opt[:pager_opt] = {}
@@ -30,7 +32,7 @@ module ActionView
       opt[:pager_opt][:add] ||= false
       opt[:pager_opt][:del] ||= false
       opt[:pager_opt][:search] ||= false
-      opt[:pager_opt][:refresh] ||= true
+      opt[:pager_opt][:refresh] ||= false
       opt[:pager_opt][:view] ||= false
       opt[:pager_opt][:editoptions] ||= ""
       opt[:pager_opt][:addoptions] ||= ""
@@ -48,7 +50,7 @@ module ActionView
         <script type="text/javascript">
         
           jQuery(document).ready(function(){
-          var main_grid = jQuery('##{opt[:id]}').jqGrid(
+          var main_grid = jQuery("##{opt[:id]}").jqGrid(
             #{opt.to_json(:exclude => [:pager_opt,:columns,:id]).release_js}
           );
           
@@ -59,9 +61,20 @@ module ActionView
           {#{opt[:pager_opt][:deleteoptions]}},
           {#{opt[:pager_opt][:searchoptions]}}
           );
-          
-          //main_grid.filterToolbar();
-          
+          // two buttons filter and clear filter
+          jQuery("##{opt[:id]}").jqGrid('navButtonAdd',"##{opt[:id]}_pager",{caption:"显示/隐藏过滤栏",title:"显示/隐藏过滤栏", buttonicon :'ui-icon-pin-s',
+          	onClickButton:function(){
+          		main_grid[0].toggleToolbar();          		
+          	} 
+          });
+          jQuery("##{opt[:id]}").jqGrid('navButtonAdd',"##{opt[:id]}_pager",{caption:"清除过滤",title:"清除过滤",buttonicon :'ui-icon-refresh',
+          	onClickButton:function(){
+          		main_grid[0].clearToolbar();
+          	} 
+          });
+          //the filter toolbar
+          jQuery("##{opt[:id]}").jqGrid('filterToolbar',{stringResult: false,searchOnEnter : true});
+        
         });
         </script>
         <div class="jqgrid">
@@ -97,6 +110,8 @@ module ActionView
       select=["distinct #{model.table_name}.id as id"]
       joins = []
       joins << opt[:joins] if opt[:joins]
+      #for the sql search field
+      search_fields={}
       column_models.each do |col_model|
         relation,field = col_model[:name].split('__')
         if field==nil
@@ -108,6 +123,7 @@ module ActionView
           joins<<relation.to_sym
           join_table=eval(model.reflect_on_association(relation.to_sym).class_name).table_name
           select<<"#{join_table}.#{field} as #{col_model[:name]}"
+          search_fields[col_model[:name].to_sym] = "#{join_table}.#{field}"
         else
           select<<"#{model.table_name}.#{field} as #{col_model[:name]}"
         end
@@ -117,7 +133,8 @@ module ActionView
        :colNames=>column_models.collect {|col| col[:label]},
        :colModel=>column_models.collect {|col| {:name=>col[:name],:index=>col[:name]}},
        :select=>select,
-       :joins=>joins}
+       :joins=>joins,
+       :search_fields=>search_fields}
     end
 
     def jqgrid_init(locale="cn")

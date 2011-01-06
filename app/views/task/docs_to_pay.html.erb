@@ -3,14 +3,23 @@
 		:caption=>"需要付款的单据",
 		:multiselect=>true,
 		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
-			"apply_date",{:name=>"doc_type",:getter=>:doc_type_name},
-			{:name=>"doc_state",:getter=>:doc_state_name},
-                        {:name=>"updated_at",:label=>"最后更新时间"},
+			"apply_date",
+            {:name=>"doc_type",:getter=>:doc_type_name,:enum_type=>"DocHead::DOC_TYPES"},
+			{:name=>"doc_state",:getter=>:doc_state_name,:enum_type=>"DocHead::Doc_State"},
+            {:name=>"updated_at",:label=>"最后更新时间"},
 			{:name=>"total_amount",:getter=>:total_amount,:label=>"审批金额"}],
 		:height=>300,:width=>800,:where=>"doc_state=2",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
 <div class="jqgrid">
-	<%= link_to_function I18n.t('common_attr.btn_output_txt'),"output_to_txt('#docs_to_pay')",:class=>"button2" %>
-	<%= link_to_function I18n.t('common_attr.btn_batch_print'),"batch_print('#docs_to_pay')",:class=>"button2" %>		
-	<%= link_to_function I18n.t('common_attr.btn_batch_pay'),"batch_pay('#docs_to_pay')",:class=>"button2" %>		
+	<div class="buttons">
+		<a onclick="output_to_txt('#docs_to_pay'); return false;" href="#">
+			<img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt')%>
+		</a>
+		<a onclick="batch_print('#docs_to_pay'); return false;" href="#">
+			<img src="/images/icons/printer.png" alt=""/><%= I18n.t('common_attr.btn_batch_print')%>
+		</a>
+		<a onclick="batch_pay('#docs_to_pay'); return false;" href="#" >
+			<img src="/images/icons/money_yen.png" alt=""/><%= I18n.t('common_attr.btn_batch_pay')%>
+		</a>
+	</div>	
 </div>
