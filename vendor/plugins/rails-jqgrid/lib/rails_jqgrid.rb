@@ -109,7 +109,7 @@ module ActionView
           join_table=eval(model.reflect_on_association(relation.to_sym).class_name).table_name
           select<<"#{join_table}.#{field} as #{col_model[:name]}"
         else
-          select<<col_model[:name]
+          select<<"#{model.table_name}.#{field} as #{col_model[:name]}"
         end
       end
       #return the final result
