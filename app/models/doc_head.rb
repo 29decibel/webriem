@@ -344,11 +344,13 @@ class DocHead < ActiveRecord::Base
   #callbacks
   def before_save
     #update the current approver, it's a shortcut
+    puts approver
     if approver
         current_approver_id = approver.id
     else
         current_approver_id = nil
     end
+    puts current_approver_id 
     #update the total_fi_amount
     total_amount = total_fi_amount
   end
