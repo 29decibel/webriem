@@ -17,6 +17,7 @@ Webreim::Application.routes.draw do
   get "pri_task/update_doc"
   get "/pri_task/cmds"
   get "pri_task/set_approver_info"
+  get "pri_task/poor_wfi"
   
   post "common/reset_p"
   

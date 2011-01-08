@@ -22,10 +22,28 @@ class PriTaskController < ApplicationController
       if doc.approvers.blank?
         wrong_docs<<doc.doc_no 
       elsif !(doc.approvers.split(',').include? doc.current_approver_id.to_s)
-        wrong_docs<<doc.doc_no 
+        wrong_docs<<"#{doc.doc_no}****#{doc.id}"
       end
     end
     @message=wrong_docs.join(',')
+    render "pri_task/cmd_result"
+  end
+  def poor_wfi
+    bad_docs=[]
+    DocHead.where("doc_state=1").each do |doc|
+      num_map={}
+      doc.work_flow_infos.each do |wfi|
+        if num_map[wfi.people_id]
+          num_map[wfi.people_id]= num_map[wfi.people_id]+1
+        else
+          num_map[wfi.people_id]=1
+        end
+      end
+      #check ok
+      result = num_map.select {|k,v| v>1}
+      bad_docs<<"#{doc.doc_no}****#{doc.id}" if result.size>=1
+    end
+    @message=bad_docs.join(',')
     render "pri_task/cmd_result"
   end
   def update_doc
