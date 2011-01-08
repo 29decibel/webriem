@@ -31,8 +31,16 @@ class PriTaskController < ApplicationController
   def poor_wfi
     bad_docs=[]
     DocHead.where("doc_state=1").each do |doc|
-      num_map={}
+      num_map_ok={}
+      num_map_no={}
       doc.work_flow_infos.each do |wfi|
+        #get the right num map
+        if wfi.is_ok==1
+          num_map=num_map_ok
+        else
+          num_map=num_map_no
+        end
+        #calculate
         if num_map[wfi.people_id]
           num_map[wfi.people_id]= num_map[wfi.people_id]+1
         else
@@ -40,8 +48,9 @@ class PriTaskController < ApplicationController
         end
       end
       #check ok
-      result = num_map.select {|k,v| v>1}
-      bad_docs<<"#{doc.doc_no}****#{doc.id}" if result.size>=1
+      result_ok = num_map_ok.select {|k,v| v>1}
+      result_no = num_map_no.select {|k,v| v>1}
+      bad_docs<<"#{doc.doc_no}****#{doc.id}" if result_ok.size>1 or result_no.size>1
     end
     @message=bad_docs.join(',')
     render "pri_task/cmd_result"
