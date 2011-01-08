@@ -374,7 +374,7 @@ function make_bwf_request(approver_id)
 function pop_up_reference_window()
 {
 	value_now=$(this).siblings("input[type=hidden]").val() || "null";
-	path="/model_search/index?checkable=true&ref=true&confirmable=true&class_name="+$(this).attr('class-data')+"&values="+value_now;
+	path="/ref_form/index?class_name="+$(this).attr('class-data')+"&values="+value_now;
 	if($(this).attr('multicheck'))
 	{
 		path+="&multicheck="+$(this).attr('multicheck');
@@ -388,17 +388,8 @@ function pop_up_reference_window()
 	{
 		path+="&pre_condition=Length(code)>2";
 	}
-	//部门参照只有部分列进行现实
-	//if($(this).attr('class-data')=="Dep")
-	//{
-	//	path+="&no_show=ref_noshow";
-  //  if($(this).attr("self")!="true")
-  //  {
-  //    //除了自己之外的部门参照只能参照末级部门
-	//    path+="&pre_condition=Length(code)>=8";
-  //  }
-	//}
-	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
+
+	sFeatures="dialogHeight: 480px; dialogWidth: 686px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
 
 	//pop up a dialog
 	var returnValue=window.showModalDialog(path,'',sFeatures);

@@ -3,8 +3,6 @@ Webreim::Application.routes.draw do
 
   get "basic_setting/dep"
 
-  get "ext_js_test/test"
-
   get "pri_task/clear_doc"
   get "pri_task/reset_doc_state"
   get "pri_task/reset_pw"

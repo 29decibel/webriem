@@ -104,8 +104,8 @@ table.hor-zebra tr:nth-child(even)
 }
 /*========jqgrid container*/
 div.jqgrid{
-	margin: 0px 15px 15px 15px;
-	padding: 10px;
+
+	padding: 5px;
 	background-color: #FFF9E5;	
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;

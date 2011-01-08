@@ -2,7 +2,7 @@
 		:model=>"DocHead",
 		:caption=>"需要审批的单据",
 		:multiselect=>true,
-		:columns =>["doc_no",{:name=>"person__name",:label=>"申请人"},
+		:colModel =>["doc_no",{:name=>"person__name",:label=>"申请人"},
 			"apply_date",
             {:name=>"doc_type",:getter=>:doc_type_name,:enum_type=>"DocHead::DOC_TYPES"},
 			{:name=>"doc_state",:getter=>:doc_state_name,:enum_type=>"DocHead::Doc_State"},

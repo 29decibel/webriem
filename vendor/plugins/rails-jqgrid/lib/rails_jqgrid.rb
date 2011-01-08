@@ -24,6 +24,8 @@ module ActionView
       opt[:rowList] ||= [20,40,60]
       opt[:viewrecords] ||= true
       opt[:rownumbers] ||= false
+      opt[:hidegrid] ||=false
+      opt[:autowidth] ||=true
       #Default Grid opt End
       
       opt[:pager_opt] = {}
@@ -73,8 +75,7 @@ module ActionView
           	} 
           });
           //the filter toolbar
-          jQuery("##{opt[:id]}").jqGrid('filterToolbar',{stringResult: false,searchOnEnter : true});
-        
+          jQuery("##{opt[:id]}").jqGrid('filterToolbar',{stringResult: false,searchOnEnter : true});     
         });
         </script>
         <div class="jqgrid">
@@ -93,8 +94,9 @@ module ActionView
     def get_column_models(model,opt)
       column_models=[]
       #get column models first
-      if opt[:columns] and !opt[:columns].empty?
-        column_models = opt[:columns].map do |col|
+      #according to the given colModel,combine a new one
+      if opt[:colModel] and !opt[:colModel].empty?
+        column_models = opt[:colModel].map do |col|
           if col.is_a? String or col.is_a? Symbol
             {:name=>col,:label =>model.human_attribute_name(col)}
           else
@@ -103,7 +105,14 @@ module ActionView
         end
       else
         model.column_names.each do |col|
-          column_models << {:name => col,:label =>model.human_attribute_name(col)}
+          #hide id ,created_at,updated_at
+          filter_field=["created_at","updated_at"]
+          next if filter_field.include? col
+          if col=="id"
+            column_models << {:name => col,:hidden=>true}
+          else
+            column_models << {:name => col,:label =>model.human_attribute_name(col)}
+          end
         end
       end
       #get select and joins
@@ -125,24 +134,27 @@ module ActionView
           select<<"#{join_table}.#{field} as #{col_model[:name]}"
           search_fields[col_model[:name].to_sym] = "#{join_table}.#{field}"
         else
-          select<<"#{model.table_name}.#{field} as #{col_model[:name]}"
+          #this if condition considering the virtual column
+          select<<"#{model.table_name}.#{field} as #{col_model[:name]}" if model.column_names.include? col_model[:name]
         end
       end
       #return the final result
-      {:columns=>column_models,
-       :colNames=>column_models.collect {|col| col[:label]},
-       :colModel=>column_models.collect {|col| {:name=>col[:name],:index=>col[:name]}},
+      #this colModel is rich model which contains almost everything that a column need, not only the jqgrid client
+      #such as :getter option , which is used for the server getting display value
+      {:colNames=>column_models.collect {|col| col[:label]},
+       :colModel=>column_models,
        :select=>select,
        :joins=>joins,
        :search_fields=>search_fields}
     end
-
+    
+    #init the scripts of jqgrid widget
     def jqgrid_init(locale="cn")
       #includes = capture { stylesheet_link_tag "jqgrid/#{theme}/jquery-ui-1.7.2.custom" }
       #includes << capture { stylesheet_link_tag "jqgrid/ui.jqgrid" }
       includes = capture { javascript_include_tag "jqgrid/jquery-1.4.2.min" }
       includes << capture { javascript_include_tag "jqgrid/i18n/grid.locale-#{locale}" }
-      includes << capture { javascript_include_tag "jqgrid/jquery.jqGrid.min" }
+      includes << capture { javascript_include_tag "jqgrid/jquery.jqGrid.min" }      
       includes
     end
   end
@@ -162,7 +174,11 @@ module JqgridJson
       value_a = []
       column_models.each do |col|
         if col[:getter]
-          value_a << row.send(col[:getter])
+          if row.respond_to? col[:getter].to_sym
+            value_a << row.send(col[:getter])
+          else
+            value_a << nil
+          end
         else
           value_a << row[col[:name]]
         end

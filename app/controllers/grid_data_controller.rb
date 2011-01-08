@@ -34,7 +34,7 @@ puts opt
     row_count = relation.count(:all,:conditions => find[:conditions])
     
     respond_with rows.to_jqgrid_json(
-      opt[:columns],#fields
+      opt[:colModel],#fields
       row_count,#total records
       params["rows"].to_i,#rows per page
       params["page"].to_i)#current page
@@ -43,7 +43,7 @@ puts opt
   def filter_bar_conditions(opt,params)
     search_fields=opt[:search_fields]
     conditions = ""
-    opt[:columns].each do |col_model|
+    opt[:colModel].each do |col_model|
       #change the seleted column name if relation
       s_field = col_model[:name]
       if search_fields[s_field.to_sym]
