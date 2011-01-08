@@ -21,7 +21,7 @@
 	<% end %>
 	</table>
 </div>
-<% if doc_head.approver ==current_user.person %>
+<% if doc_head.current_approver_id ==current_user.person.id and work_flow_info %>
 	<div class="form_title">
 		<h3><%= "#{I18n.t('activerecord.attributes.work_flow_info.write_comments')}"%></h3>
 	</div>

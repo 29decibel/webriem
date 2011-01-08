@@ -75,7 +75,7 @@ class DocHead < ActiveRecord::Base
   Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过",3=>"已付款"}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
   #validate the amout is ok
-  validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
+  #validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
   def project_not_null_if_charge
     errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
   end
@@ -216,21 +216,14 @@ class DocHead < ActiveRecord::Base
   end
   #=====================================================
   #获得所有的审批流程
-  def work_flows
+  def work_flow_steps
     which_duty = (real_person==nil ? person.duty : real_person.duty)
     wf=WorkFlow.all.select{|w| w.doc_types.split(';').include? doc_type.to_s and w.duties.include? which_duty }
     return nil if wf.count==0
     wf==nil ? []:wf.first.work_flow_steps.to_a
   end
-  def current_work_flow_step
-    wfs=nil
-    if self.work_flow_step_id and self.work_flow_step_id>=0
-      wfs=WorkFlowStep.find_by_id(self.work_flow_step_id)
-    end
-    wfs
-  end
   #the specific person if there are more than one person ,check the approver_id
-  def approver(work_flow_step=current_work_flow_step)
+  def approver(work_flow_step)
     #logger=Logger.new("wf.txt")
     #logger.info "current work flow step is #{work_flow_step}"
     return nil if work_flow_step==nil
@@ -244,8 +237,8 @@ class DocHead < ActiveRecord::Base
     dep_to_find=nil
     #decide the dep to look for
     if work_flow_step.work_flow and work_flow_step.work_flow.work_flow_steps.first.duty.code=="003"
-      return nil if approver_id==nil
-      approver_person=Person.find_by_id(self.approver_id)
+      return nil if selected_approver_id==nil
+      approver_person=Person.find_by_id(self.selected_approver_id)
       return nil if approver_person==nil
       dep_to_find=approver_person.dep
     else
@@ -266,30 +259,50 @@ class DocHead < ActiveRecord::Base
     #here we must find a person
     persons.first
   end
-  #next step
-  def next_work_flow_step
-    wfs=nil
-    if self.doc_state==0
-      self.work_flow_step_id=work_flows[0].id
-      self.doc_state=1
-    elsif self.doc_state==2
-      nil
-    elsif current_work_flow_step && work_flows
-      current_index=work_flows.index(current_work_flow_step)
-      if current_index<work_flows.count-1
-        wfs=work_flows[current_index+1]
-        self.work_flow_step_id=wfs.id
-      else
-        self.doc_state=2
-        self.work_flow_step_id=-1
+
+  #============================current api to get approver info=================================
+  #begin to approver
+  #decide the people which this doc should be handled to 
+  #set approvers
+  #set current_approver_id
+  def begin_approve(selected_approver)
+    #set selected approver
+    self.selected_approver_id = selected_approver
+    #get this doc's work flows
+    wfs = work_flow_steps
+    #iterate the workflow
+    approver_ids=[]
+    wfs.each do |wf_step|
+      ap = approver(wf_step)
+      if ap
+        approver_ids << ap.id 
+      else 
+        approver_ids=nil #this should not happen
+        return #no approvers and no current approver
       end
+    end
+    #now i get all approver ids
+    self.approvers = approver_ids.join(',')
+    #set the current approver
+    self.current_approver_id = approver_ids.first
+    #set doc state
+    self.doc_state = 1
+  end
+  #approve
+  def approve
+    approvers_array = approvers.split(',')
+    current_index = approvers_array.index current_approver_id.to_s
+    if current_index < approvers_array.count-1
+      self.current_approver_id = approvers_array[current_index+1].to_i
+    else
+      self.doc_state = 2
+      self.current_approver_id = -2
     end
   end
   #decline
   def decline
     #终止单据
     self.doc_state=0
-    self.work_flow_step_id=-1
   end
   #uploads 
   def uploads
@@ -343,14 +356,6 @@ class DocHead < ActiveRecord::Base
   end
   #callbacks
   def before_save
-    #update the current approver, it's a shortcut
-    puts self.approver
-    if approver
-        self.current_approver_id = self.approver.id
-    else
-        self.current_approver_id = nil
-    end
-    puts self.current_approver_id 
     #update the total_fi_amount
     self.total_amount = total_fi_amount
   end

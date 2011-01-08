@@ -1,6 +1,24 @@
 #coding: utf-8
 require 'time'
 class PriTaskController < ApplicationController
+  def set_approver_info
+    DocHead.where("doc_state=1").each do |doc|
+      #set the approvers
+      #set current approver
+      doc.begin_approve(doc.selected_approver_id)
+      doc.save      
+    end
+    wrong_docs=[]
+    DocHead.where("doc_state=1").each do |doc|
+      if doc.approvers.blank?
+        wrong_docs<<doc.doc_no 
+      elsif !(doc.approvers.split(',').include? doc.current_approver_id.to_s)
+        wrong_docs<<doc.doc_no 
+      end
+    end
+    @message=wrong_docs.join(',')
+    render "pri_task/cmd_result"
+  end
   def update_doc
     DocHead.all.each do |doc|
        if doc.approver

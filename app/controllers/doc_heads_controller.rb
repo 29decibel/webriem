@@ -30,7 +30,7 @@ class DocHeadsController < ApplicationController
     set_doc_info_4_budget
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc_head.doc_state==1
-      if @doc_head.approver==current_user.person
+      if @doc_head.current_approver_id==current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
     end
@@ -158,18 +158,14 @@ class DocHeadsController < ApplicationController
   end
   #将单据进入审批阶段
   def begin_work
-    @doc_head = DocHead.find(params[:doc_id])
-    @doc_head.doc_state=1    
-    @doc_head.approver_id=params[:approver_id] if !(params[:approver_id]=="-1")
-    #找到当前单据类型对应的审批流，然后取第一个流程中的那个step_id
-    @doc_head.work_flow_step_id=@doc_head.work_flows.first.id
+    @doc_head = DocHead.find(params[:doc_id]) 
+    approver_id=params[:approver_id] if !(params[:approver_id]=="-1")
+    #begin approver
+    @doc_head.begin_approve(approver_id)
     @doc_head.save
     #notice the person who need to approve this doc
-    #WorkFlowMailer.notice_need_approve(@doc_head.approver,@doc_head).deliver
-    #now i am using the delayed job to do this
-    #Delayed::Job.enqueue MailingJob.new(:notice_need_approve, @doc_head.approver,@doc_head) 
     @message="#{I18n.t('controller_msg.start_approve')}"
-    if @doc_head.approver==current_user.person
+    if @doc_head.current_approver_id == current_user.person.id
       @work_flow_info=WorkFlowInfo.new
     end
     respond_to do |format|
@@ -180,8 +176,6 @@ class DocHeadsController < ApplicationController
   def giveup
   	@doc_head = DocHead.find(params[:doc_id])
   	@doc_head.doc_state=0
-  	@doc_head.approver_id=nil
-  	@doc_head.work_flow_step_id=nil
   	@doc_head.save
   	@message="#{I18n.t('controller_msg.doc_approve_failed')}"
     respond_to do |format|
@@ -230,7 +224,7 @@ class DocHeadsController < ApplicationController
       if !doc_id.blank?
         wf=WorkFlowInfo.create(:is_ok=>params[:is_ok]=="true",:comments=>params[:comments],:doc_head_id=>doc_id,:people_id=>current_user.person.id)
         if wf.is_ok==1
-          wf.doc_head.next_work_flow_step
+          wf.doc_head.approve
           #看看是否符合发邮件的标准 打印
           #send email if hr or fi change the doc amount
           if current_person.person_type and  

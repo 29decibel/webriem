@@ -1,12 +1,12 @@
 <div id='work_flow_progress'>
 	<%= hidden_field_tag "form_state",doc.doc_state%>
 	<!--hidden field to store the current looker of this doc mainly is HR or FI -->
-	<% if doc.approver ==current_user.person or (current_user.person.person_type and current_user.person.person_type.code=="CA")%>
+	<% if doc.current_approver_id ==current_user.person.id or (current_user.person.person_type and current_user.person.person_type.code=="CA")%>
 		<%= hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""%>
 	<% end %>
-	<% if doc.work_flows %>
+	<% if doc.work_flow_steps %>
 		<%= hidden_field_tag "doc_id",doc.id%>
-		<% if doc.doc_state==0 and doc.work_flows and doc.work_flows.first and doc.work_flows.first.duty.code=="003"%>
+		<% if doc.doc_state==0 and doc.work_flow_steps and doc.work_flow_steps.first and doc.work_flow_steps.first.duty.code=="003"%>
 			<div id="approvers">
 				<h3>选择审批人</h3>
 				<div class="approver_list">					
@@ -44,16 +44,16 @@
 		</div>
 		<div class='work_flow_step go_to'>
 		</div>
-		<% doc.work_flows.each do |w| %>
-			<div class='work_flow_step <%= "current_flow" if doc.work_flow_step_id==w.id %>'>
-				<% if doc.approver(w) %>
-					<span><%= doc.approver(w).name %></span>
-				<% else %>
-					<span><%= "未能确定审批人"%></span>
-				<% end %>
-			</div>
-			<div class='work_flow_step go_to'>
-			</div>
+		<% if doc.approvers %>
+			<% doc.approvers.split(',').each do |approver_id| %>
+				<div class='work_flow_step <%= "current_flow" if doc.current_approver_id==approver_id.to_i %>'>
+					<span><%= Person.find(approver_id).name %></span>
+				</div>
+				<div class='work_flow_step go_to'>
+				</div>
+			<% end %>
+		<% else %>
+			<span>---没有审批人信息---</span>
 		<% end %>
 		<div class='work_flow_step <%= "current_flow" if doc.doc_state==2%>'>
 			<span>审批通过</span>

@@ -38,7 +38,7 @@ class WorkFlowInfosController < ApplicationController
   def create
     @work_flow_info = WorkFlowInfo.new(params[:work_flow_info])
     if @work_flow_info.is_ok==1
-      @work_flow_info.doc_head.next_work_flow_step
+      @work_flow_info.doc_head.approve
       #send email if hr or fi change the doc amount
       doc_head=@work_flow_info.doc_head
       if current_user.person.person_type and  

@@ -3,4 +3,8 @@ here is a list of private commands
 	<%= text_field_tag :u %>
    <div><%= submit_tag 'ResetPassword'%></div>
 <% end -%>
-<%= link_to "更新doc",{:controller=>"pri_task",:action=>"update_doc"},:remote=>true%>
+<%= link_to "Update Doc TotalAmount",{:controller=>"pri_task",:action=>"update_doc"},:remote=>true%><br/>
+<%= link_to "Update the Doc Approvers",{:controller=>"pri_task",:action=>"set_approver_info"},:remote=>true%>
+<h2>Result</h2>
+<div id="cmd_result">
+</div>
