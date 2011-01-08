@@ -22,7 +22,7 @@ class PriTaskController < ApplicationController
       if doc.approvers.blank?
         wrong_docs<<doc.doc_no 
       elsif !(doc.approvers.split(',').include? doc.current_approver_id.to_s)
-        wrong_docs<<"#{doc.doc_no}****#{doc.id}"
+        wrong_docs<<"#{doc.id}"
       end
     end
     @message=wrong_docs.join(',')
@@ -50,7 +50,7 @@ class PriTaskController < ApplicationController
       #check ok
       result_ok = num_map_ok.select {|k,v| v>1}
       result_no = num_map_no.select {|k,v| v>1}
-      bad_docs<<"#{doc.doc_no}****#{doc.id}" if result_ok.size>=1 or result_no.size>=1
+      bad_docs<<"#{doc.id}" if result_ok.size>=1 or result_no.size>=1
     end
     @message=bad_docs.join(',')
     render "pri_task/cmd_result"
