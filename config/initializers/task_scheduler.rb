@@ -16,11 +16,13 @@ def send_email
   person_doc={}
   #set the person and the docs he should approver
   DocHead.where("doc_state=1").each do |doc|
-    next if doc.approver==nil
-    if person_doc[doc.approver]
-      person_doc[doc.approver]<<doc
+    next if doc.current_approver_id==nil
+    p = Person.find_by_id(doc.current_approver_id)
+    next if p==nil
+    if person_doc[p]
+      person_doc[p]<<doc
     else
-      person_doc[doc.approver]=[doc]
+      person_doc[p]=[doc]
     end
   end
   puts "total emails to send is #{person_doc.count}.................."
