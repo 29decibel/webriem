@@ -268,17 +268,19 @@ class DocHead < ActiveRecord::Base
   def begin_approve(selected_approver)
     #set selected approver
     self.selected_approver_id = selected_approver
-    #get this doc's work flows
+    #get this doc's work flow steps
     wfs = work_flow_steps
-    #iterate the workflow
     approver_ids=[]
-    wfs.each do |wf_step|
-      ap = approver(wf_step)
-      if ap
-        approver_ids << ap.id 
-      else 
-        approver_ids=nil #this should not happen
-        return #no approvers and no current approver
+    if wfs
+      #iterate the workflow
+      wfs.each do |wf_step|
+        ap = approver(wf_step)
+        if ap
+          approver_ids << ap.id 
+        else 
+          approver_ids=nil #this should not happen
+          return #no approvers and no current approver
+        end
       end
     end
     #now i get all approver ids
