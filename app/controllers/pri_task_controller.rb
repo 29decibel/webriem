@@ -6,6 +6,15 @@ class PriTaskController < ApplicationController
       #set the approvers
       #set current approver
       doc.begin_approve(doc.selected_approver_id)
+      #because now the current approver is the first 
+      #so i need use the work_flow_step_id to determin the current approver
+      if doc.work_flow_step_id
+        wfs=  WorkFlowStep.find_by_id(doc.work_flow_step_id)
+        if wfs
+          p=doc.approver(wfs)
+          doc.current_approver_id = p.id if p
+        end
+      end
       doc.save      
     end
     wrong_docs=[]
