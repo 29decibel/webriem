@@ -1,7 +1,4 @@
 Webreim::Application.routes.draw do
-  get "docs/my_docs"
-
-  get "basic_setting/dep"
 
   get "pri_task/clear_doc"
   get "pri_task/reset_doc_state"
@@ -16,74 +13,58 @@ Webreim::Application.routes.draw do
   get "/pri_task/cmds"
   get "pri_task/set_approver_info"
   get "pri_task/poor_wfi"
-  
-  post "common/reset_p"
-  
-  get "common/new_reset_p"
 
-  resources :extra_work_standards
-
-  get "ajax_service/getfee"
-  
-  get "ajax_service/getbudget"
-  
-  get "ajax_service/remove_offset",:as=>:remove_offset
-  
+  get "ajax_service/getfee"  
+  get "ajax_service/getbudget"  
+  get "ajax_service/remove_offset",:as=>:remove_offset  
   get "ajax_service/get_extrafee"
     
-  get "doc_heads/output_to_txt(.:format)"
-  
-  get "doc_heads/pay"
-  
+  get "doc_heads/output_to_txt(.:format)"  
+  get "doc_heads/pay"  
   get "doc_heads/print(.:format)"
-
-  get "doc_heads/giveup"
-  
-  get "doc_heads/batch_pay"
-  
-  get "doc_heads/batch_print"
-  
-  get "doc_heads/doc_failed"
-  
-  get "doc_heads/batch_approve"
-  
+  get "doc_heads/giveup"  
+  get "doc_heads/batch_pay"  
+  get "doc_heads/batch_print"  
+  get "doc_heads/doc_failed"  
+  get "doc_heads/batch_approve"  
   get "doc_heads/begin_work"
 
   resources :roles
 
-  post "model_search/with"
-  
-  get "model_search/index"
-
-  resources :upload_files
+  post "model_search/with"  
+  get "model_search/index"  
 
   get "ref_form/index"
-
+  
+  resources :upload_files
+  resources :extra_work_standards
   resources :feed_backs
-
   resources :work_flow_infos
-
   resources :work_flows
-
   resources :accounts
-
   resources :recivers
-
   resources :doc_heads  
+  resources :subjects
+  resources :currencies
+  resources :budgets
+  resources :fee_standards
+  resources :projects
+  resources :settlements
+  resources :lodgings
+  resources :transportations
+  resources :regions
+  resources :fees
+  resources :people
+  resources :duties
+  resources :deps
   
-  get "task/my_docs",:as=>:my_docs
-  
-  get "task/docs_to_approve",:as=>:docs_to_approve
-  
-  get "task/docs_approved"
-  
-  get "task/docs_to_pay"
-  
+  get "task/my_docs",:as=>:my_docs  
+  get "task/docs_to_approve",:as=>:docs_to_approve  
+  get "task/docs_approved"  
+  get "task/docs_to_pay"  
   get "task/docs_paid"
   
   devise_for :users
-
-  resources :subjects,:currencies,:budgets,:fee_standards,:projects,:settlements,:lodgings,:transportations,:regions,:fees,:people,:duties,:deps
     
   root :to=>"task#my_docs"
 
