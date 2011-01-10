@@ -25,6 +25,7 @@ class JbfPdf
       pdf.move_down 2
       pdf.table doc.rd_extra_work_meals.map {|r| ["#{r.is_sunday==0 ? "是" : "否" }","#{r.start_time}","#{r.end_time}","#{r.reason}","#{r.currency.name}","#{r.ori_amount}","#{r.rate}","#{r.apply_amount}","#{r.hr_amount}","#{r.fi_amount}"]},
         :headers => ["休息日","开始时间","结束时间","加班事由","币种","原币金额","汇率","本币金额","HR调整","财务调整"],
+        :column_widths=>{0=>30,1=>35,2=>35,3=>95,4=>70,5=>30,6=>35,7=>70,8=>70,9=>70},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
@@ -37,6 +38,7 @@ class JbfPdf
       pdf.move_down 2
       pdf.table doc.rd_extra_work_cars.map {|r| ["#{r.is_sunday==0 ? "是" : "否" }","#{r.start_place}","#{r.end_place}","#{r.start_time}","#{r.end_time}","#{r.reason}","#{r.currency.name}","#{r.ori_amount}","#{r.rate}","#{r.apply_amount}","#{r.hr_amount}","#{r.fi_amount}"]},
         :headers => ["休息日","开始地点","结束地点","开始时间","结束时间","加班事由","币种","原币金额","汇率","本币金额","HR调整","财务调整"],
+        :column_widths=>{0=>30,1=>35,2=>35,3=>35,4=>35,5=>60,6=>30,7=>35,8=>35,9=>70,10=>70,11=>70},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
