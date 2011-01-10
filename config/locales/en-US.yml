@@ -323,6 +323,7 @@
     should_back: "Should repay"
     btn_output_txt: OutPutTxt
     btn_print: Print
+    btn_batch_print: BatchPrint
     btn_batch_approve: BatchApprove
     settlement: Settlement
     direction: Direction
@@ -354,7 +355,7 @@
       rd_lodging: "Housing expense"
       extra_work_standard: "overtime standard"
       work_flow_info: "Approval Information"
-      business_type: "业务类型"
+      business_type: "BusinessType"
       work_flow_step: "Add step"
     attributes:
       work_flow_info:

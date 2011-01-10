@@ -19,7 +19,7 @@ function back_to_the_reference(grid_id,cancel)
 	{
 		ids=$(grid_id).getGridParam("selrow");
 	}
-	console.log(ids);
+	//console.log(ids);
 	if(ids==null)
 	{
 		alert("请选择记录");
@@ -28,7 +28,7 @@ function back_to_the_reference(grid_id,cancel)
 	//get displays and other infos
 	$(ids.toString().split(',')).each(function(){
 		row_data=$(grid_id).getRowData(this);
-		console.log(row_data);
+		//console.log(row_data);
 		displays += row_data["hidden_display"] + ";";
 		other_infos+=row_data["other_info"] + ";";
 	});
@@ -47,9 +47,9 @@ function back_to_the_reference(grid_id,cancel)
 	returnInfo.displays=displays;
 	returnInfo.other_infos=other_infos;
 	//log
-	console.log("ids="+ids);
-	console.log("displays="+displays);
-	console.log("other_infos="+other_infos);
+	//console.log("ids="+ids);
+	//console.log("displays="+displays);
+	//console.log("other_infos="+other_infos);
 	//set the return value
 	window.returnValue=returnInfo;
 	//close the window
