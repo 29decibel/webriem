@@ -135,7 +135,10 @@ module ActionView
           search_fields[col_model[:name].to_sym] = "#{join_table}.#{field}"
         else
           #this if condition considering the virtual column
-          select<<"#{model.table_name}.#{field} as #{col_model[:name]}" if model.column_names.include? col_model[:name]
+          if model.column_names.include? col_model[:name]
+            select<<"#{model.table_name}.#{field} as #{col_model[:name]}" 
+            search_fields[col_model[:name].to_sym] = "#{model.table_name}.#{field}" #set the search field
+          end
         end
       end
       #return the final result
