@@ -219,7 +219,6 @@ function reference_change()
 		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
 		//find the rate input 
 		var rate_input=$(this).closest("tr").find(".doc_rate");
-		alert(other_info);
 		if(rate_input.size()>0 && other_info!=null)
 		{
 			rate_input.val(other_info.split('_')[0]);
