@@ -1,15 +1,19 @@
 $(document).ready(function () {
-    //$(':input:text:first').focus();            
-    $(':input:enabled').addClass('enterIndex');
-    // get only input tags with class data-entry
-    textboxes = $('.enterIndex');
-    // now we check to see which browser is being used
-    if ($.browser.mozilla) {
-        $(textboxes).bind('keypress', CheckForEnter);                
-    } else {
-        $(textboxes).bind('keydown', CheckForEnter);                
-    }
+	add_enter_to_tab();
 });
+function add_enter_to_tab()
+{
+	//$(':input:text:first').focus();            
+  $(':input:enabled').addClass('enterIndex');
+  // get only input tags with class data-entry
+  textboxes = $('.enterIndex');
+  // now we check to see which browser is being used
+  if ($.browser.mozilla) {
+      $(textboxes).bind('keypress', CheckForEnter);                
+  } else {
+      $(textboxes).bind('keydown', CheckForEnter);                
+  }
+}
 function CheckForEnter(event) {
     if (event.keyCode == 13 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
 				//add a change trigger,added by 29decibel

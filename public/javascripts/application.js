@@ -219,15 +219,11 @@ function reference_change()
 		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
 		//find the rate input 
 		var rate_input=$(this).closest("tr").find(".doc_rate");
-		if(rate_input.size()>0)
+		alert(other_info);
+		if(rate_input.size()>0 && other_info!=null)
 		{
 			rate_input.val(other_info.split('_')[0]);
 			rate_input.change();
-		}
-		if(other_info.split('_').length>1)
-		{
-			//find the symbol control and set
-			
 		}
 	}
 }
@@ -305,6 +301,8 @@ function add_fields(link, association, content) {
 	$(link).closest("tr").prev().find("input.fee_standard").attr("readonly",true);
 	//fire get fee
 	$(link).closest("tr").prev().find(".region_type_select").change();
+	//enable the enter to tab
+	add_enter_to_tab();
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){
