@@ -259,7 +259,12 @@ input.required{
 table.form_input{
 	margin:0px;
 	padding:0px;
-	cellspacing:5px;
+	cellspacing:0px;
+}
+table.form_input input{
+	border: 0px solid #999;
+	border-bottom: 1px solid #999;
+	font-size: 1em;
 }
 table.form_input input.normal{
 	width:87px;
@@ -595,4 +600,11 @@ button.positive, .buttons a.positive{
     background-color:#d12f19;
     border:1px solid #d12f19;
     color:#fff;
+}
+/*the facebox*/
+div#mark_the_doc{
+	height:60px;
+	width:150px;
+	margin: 2px;
+	padding: 0px;
 }

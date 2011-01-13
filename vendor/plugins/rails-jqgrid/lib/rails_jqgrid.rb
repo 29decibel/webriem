@@ -26,6 +26,7 @@ module ActionView
       opt[:rownumbers] ||= false
       opt[:hidegrid] ||=false
       opt[:autowidth] ||=true
+      opt[:autoheight] ||=true
       #Default Grid opt End
       
       opt[:pager_opt] = {}

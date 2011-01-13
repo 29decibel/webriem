@@ -328,7 +328,17 @@ class DocHeadsController < ApplicationController
       format.js { render "shared/show_result"}
     end
   end
-  
+  def mark
+    ids=params[:doc_ids]
+    mark_info=params[:mark]
+    ids.split(",").each do |id|
+      doc=DocHead.find_by_id(id)
+      if doc
+        doc.update_attribute(:mark,mark_info)
+      end
+    end
+    render :json=>"ok"
+  end
   private
   def to_pdf(pdf,doc)
     pdf=case doc.doc_type

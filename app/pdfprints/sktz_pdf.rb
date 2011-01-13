@@ -24,7 +24,7 @@ class SktzPdf
       pdf.text "收款明细",:size=>12
       pdf.move_down 2
       pdf.table doc.rec_notice_details.map {|r| 
-        ["#{r.apply_date}","#{r.dep.name}","#{r.project ? r.project.name : ''}",
+        ["#{r.apply_date}","#{r.dep.name}","#{r.project ? r.project : ''}",
         "#{r.description}",
         "#{r.currency.name}",
         "#{r.rate}",

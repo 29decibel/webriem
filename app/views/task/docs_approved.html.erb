@@ -4,10 +4,10 @@
 		:multiselect=>true,
 		:colModel =>["doc_no",{:name=>"person__name",:label=>"申请人"},
 			"apply_date",
-            {:name=>"doc_type",:getter=>:doc_type_name,:enum_type=>"DocHead::DOC_TYPES"},
+			{:name=>"doc_type",:getter=>:doc_type_name,:enum_type=>"DocHead::DOC_TYPES"},
 			{:name=>"doc_state",:getter=>:doc_state_name,:enum_type=>"DocHead::Doc_State"},
 			{:name=>"total_amount",:getter=>:total_fi_amount,:label=>"审批金额"}],
-		:height=>500,:width=>800,
+		:height=>450,:width=>800,
 		:joins=>:work_flow_infos,
 		:where=>"work_flow_infos.people_id=#{current_user.person.id}",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>

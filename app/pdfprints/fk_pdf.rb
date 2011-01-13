@@ -31,7 +31,7 @@ class FkPdf
       pdf.move_down 10
       pdf.text "付款单据明细",:size=>12
       pdf.move_down 2
-      pdf.table doc.cp_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project.name : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
+      pdf.table doc.cp_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","费用用途","币种","汇率","原币金额","本币金额"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,

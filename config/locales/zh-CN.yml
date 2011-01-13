@@ -206,6 +206,8 @@
     btn_print: 打印
     btn_batch_approve: 批量审批
     btn_batch_print: 批量打印
+    btn_mark_doc: 标记
+    btn_unmark_doc: 取消标记
     settlement: 结算方式
     direction: 方向
     btn_batch_pay: 批量付款
@@ -395,6 +397,7 @@
         real_amount: "实际金额"
         afford_dep_id: "费用承担部门"
         total_apply_amount: "申请总金额"
+        mark: 特殊标记
         reim_split_details:
           dep_id: "分摊详细信息 费用承担部门"
         cp_doc_details:
