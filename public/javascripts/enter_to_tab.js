@@ -12,6 +12,9 @@ $(document).ready(function () {
 });
 function CheckForEnter(event) {
     if (event.keyCode == 13 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
+				//add a change trigger,added by 29decibel
+				$(this).change();
+				//original logic
         var i = $('.enterIndex').index($(this));  
         var n = $('.enterIndex').length; 
         if (i < n - 1) {

@@ -255,16 +255,15 @@ span.error_message{
 input.required{
 	background: #FFF6BF;
 }
-/*++++++++++++++++++++++++++++++++here is my own table made by pure divs*/
+/*++++++++++++++++++++++++++++++++here is my own table styles*/
 table.form_input{
 	margin:0px;
 	padding:0px;
-	cellspacing:0px;
+	border-width:1px;
+	border-collapse:collapse;
 }
 table.form_input input{
-	border: 0px solid #999;
-	border-bottom: 1px solid #999;
-	font-size: 1em;
+	width:100%;
 }
 table.form_input input.normal{
 	width:87px;
@@ -461,16 +460,16 @@ div.reference{
 }
 div.reference input{
 	display:inline-block;
-	margin-right: 16px;
-	width:184px;
+	margin-right: 0px;
+	width:200px;
 }
 div.reference input.large{
 	display:inline-block;
-	margin-right: 16px;
-	width:400px;
+	margin-right: 0px;
+	width:416px;
 }
 table div.reference input{
-	width:84px;
+	width:100px;
 }
 div.reference a{
 	display:inline-block;
@@ -482,7 +481,9 @@ span.reference{
 	background-image: url("../images/reference_icon.png");
 	background-repeat: no-repeat;
 	display:inline-block;
-	margin: 0px;
+	position:absolute;
+	right:2px;
+	top:2px;
 	width:16px;
 	height:16px;
 }

@@ -55,11 +55,14 @@ function adjust_amount()
 	var total=0;
 	var control_to_calculate=find_control_cal_by_tr_wrapper($(this).closest("table").find("tr.fields").not(":hidden"));
 	//alert($(this).closest("table").find("tr.fields").not(":hidden").size());
-	control_to_calculate.each(function(){
-		//debugger;
-		//alert(this);
-		total+=parseFloat($(this).val());
-	});
+	if(control_to_calculate!=0)
+	{
+		control_to_calculate.each(function(){
+			//debugger;
+			//alert(this);
+			total+=parseFloat($(this).val());
+		});
+	}
 	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
 	//whole page's total amount
 	var total_riem=0.00;
@@ -115,6 +118,7 @@ function find_control_cal_by_tr_wrapper(tr_wrapper)
 		return tr_wrapper.find("input.doc_apply_amount");
 	if(tr_wrapper.find("input.doc_ori_amount").size()>0)
 		return tr_wrapper.find("input.doc_ori_amount");
+	return 0;
 }
 function set_split_total()
 {
