@@ -3,7 +3,7 @@
 		:caption=>"我的单据",
 		:multiselect=>true,
 		:colModel =>["doc_no",{:name=>"person__name",:label=>"申请人"},
-			{:name=>"apply_date"},
+			{:name=>"apply_date",:formatter=>'date',:datefmt=>'Y-m-d'},
 			{:name=>"doc_type",:getter=>:doc_type_name,:enum_type=>"DocHead::DOC_TYPES"},
 			{:name=>"doc_state",:getter=>:doc_state_name,:enum_type=>"DocHead::Doc_State"},
 			{:name=>"total_amount",:getter=>:total_fi_amount,:label=>"审批金额"}],
