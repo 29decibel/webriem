@@ -313,7 +313,7 @@ class DocHeadsController < ApplicationController
       output_str<<"\r\n"
       count=count+1
     end
-    send_data output_str, :filename => "person_accounts.txt",:type => "application/txt"
+    send_data output_str, :filename => "person_accounts.txt",:type => 'text/plain'
   end
   def doc_failed
     doc=DocHead.find(params[:doc_id])
