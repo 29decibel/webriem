@@ -119,7 +119,7 @@ class DocHead < ActiveRecord::Base
         amount=details.amount
       end
     end
-    amount
+    amount.ceil(2)
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_doc_amount(type)
