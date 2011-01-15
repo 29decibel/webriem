@@ -9,13 +9,3 @@ sheet.row(0).default_format = format
 @docs.each_with_index do |d,index|
 	sheet.row(index+1).concat d
 end
-
-#sheet[1,0] = 'Japan'
-#row = sheet.row(1)
-#row.push 'Creator of Ruby'
-#row.unshift 'Yukihiro Matsumoto'
-#sheet.row(2).replace [ 'Daniel J. Berger', 'U.S.A.',
-#                        'Author of original code for Spreadsheet::Excel' ]
-#sheet.row(3).push 'Charles Lowe', 'Author of the ruby-ole Library'
-#sheet.row(3).insert 1, 'Unknown'
-#sheet.update_row 4, 'Hannes Wyss', 'Switzerland', 'Author'

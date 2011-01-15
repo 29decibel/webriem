@@ -527,31 +527,24 @@ function batch_approve_confirm(grid_id)
 }
 function output_to_txt(grid_id)
 {
-	//get all doc id and invoke a ajax call
-	var ids=$(grid_id).getGridParam("selarrrow");
-	if(ids.length==0)
-	{
-		alert("请选择需要输出的单据");
-		return;
-	}
-	//trim the ;
-	if(ids.length>0)
-	{
-		document.location.href = "/doc_heads/output_to_txt.txt?ids="+ids.join('_');
-	}
+	send_request_from_grid(grid_id,"/doc_heads/output_to_txt.txt?ids=");
 }
 function output_to_excel(grid_id)
+{
+	send_request_from_grid(grid_id,"/doc_heads/export_xls.xls?ids=");
+}
+function send_request_from_grid(grid_id,url)
 {
 	//get all doc id and invoke a ajax call
 	var ids=$(grid_id).getGridParam("selarrrow");
 	if(ids.length==0)
 	{
-		alert("请选择需要输出的单据");
+		alert("请选择需要操作的单据");
 		return;
 	}
 	//trim the ;
 	if(ids.length>0)
 	{
-		document.location.href = "/doc_heads/export_xls.xls?ids="+ids.join(',');
+		document.location.href = url+ids.join(',');
 	}
 }

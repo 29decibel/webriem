@@ -286,8 +286,7 @@ class DocHeadsController < ApplicationController
     output_str=""
     #reciver's hash
     recivers={}
-    params[:ids].split('_').each do |id|
-      doc_head=DocHead.find_by_id(id)
+    DocHead.where("id in (#{params[:ids]})").each do |doc_head|
       if doc_head and doc_head.doc_type!=2
         doc_head.recivers.each_with_index do |r,index|
           next if r.amount==0
@@ -315,6 +314,21 @@ class DocHeadsController < ApplicationController
     end
     send_data output_str, :filename => "person_accounts.txt",:type => 'text/plain'
   end
+  def export_xls
+    ids=params[:ids]
+    @docs=[]
+    DocHead.where("id in (#{ids})").each do |doc|
+      if doc.doc_type==12
+        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(业务交通费)",doc.amount_for(:rd_common_transports)] if doc.rd_common_transports.count>0
+        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(工作餐费)",doc.amount_for(:rd_work_meals)] if doc.rd_work_meals.count>0
+      else
+        @docs<<[doc.doc_no,doc.person.name,doc.doc_type_name,doc.total_amount]
+      end
+    end
+    respond_to do |format|
+      format.xls
+    end
+  end
   def doc_failed
     doc=DocHead.find(params[:doc_id])
     @message="#{I18n.t('controller_msg.message_sent')}"
@@ -338,25 +352,6 @@ class DocHeadsController < ApplicationController
       end
     end
     render :json=>"ok"
-  end
-  def export_xls
-    ids=params[:ids]
-    @docs=[]
-    DocHead.where("id in (#{ids})").each do |doc|
-      if doc.doc_type==12
-        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(业务交通费)",doc.amount_for(:rd_common_transports)] if doc.rd_common_transports.count>0
-        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(工作餐费)",doc.amount_for(:rd_work_meals)] if doc.rd_work_meals.count>0
-      else
-        @docs<<[doc.doc_no,doc.person.name,doc.doc_type_name,doc.total_amount]
-      end
-    end
-    puts "==========================!!!!!!!!!!!!"
-    puts DocHead.where("id in (?)",ids).all
-    puts @docs
-    puts "==========================!!!!!!!!!!!!"
-    respond_to do |format|
-      format.xls
-    end
   end
   private
   def to_pdf(pdf,doc)
