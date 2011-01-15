@@ -30,6 +30,9 @@ Webreim::Application.routes.draw do
   get "doc_heads/begin_work"
   get "doc_heads/mark"
   get "doc_heads/export_xls"
+  
+  get "api/person",:to=>redirect("http://gpm.skcc.com/services/ServiceFacade/getAllProjectsInformationFromGPM.do")
+  get "api/deps",:to=>redirect("http://10.120.108.97:7001/services/ServiceFacade/GetEmployeeInformations.do")
 
   resources :roles
 
