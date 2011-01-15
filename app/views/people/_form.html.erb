@@ -51,6 +51,14 @@
 		<%= f.label "#{I18n.t('activerecord.attributes.person.phone')}#{mark_required(f.object,:phone)}" %>
 		<%= f.text_field :phone,:class=>"input1 number" %>
 	</div>
+	<div class="form_field">
+		<%= f.label "#{I18n.t('activerecord.attributes.person.role_id')}#{mark_required(f.object,:role_id)}" %>			
+		<div class="reference">
+			<%= f.hidden_field :role_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "role_info",@person.role.to_s,:class=>"ref" %>
+			<a href="#" class-data="Role"><span class="reference"></span></a>			
+		</div>
+	</div>
 </div>
 <div class="form_block">
 	<div class="form_field">
