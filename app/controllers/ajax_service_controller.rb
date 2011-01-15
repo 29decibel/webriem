@@ -70,8 +70,4 @@ class AjaxServiceController < ApplicationController
     @message="#{I18n.t('controller_msg.remove_ok')}"
     render "shared/show_result"
   end
-  #==================================output to txt========================================
-  def output_to_txt
-    send_data Person.first, :filename => "hello.txt",:type => "application/txt"
-  end
 end

@@ -13,6 +13,8 @@ Webreim::Application.routes.draw do
   get "/pri_task/cmds"
   get "pri_task/set_approver_info"
   get "pri_task/poor_wfi"
+  get "pri_task/import_project"
+  get "pri_task/import_person"
 
   get "ajax_service/getfee"  
   get "ajax_service/getbudget"  
@@ -30,9 +32,6 @@ Webreim::Application.routes.draw do
   get "doc_heads/begin_work"
   get "doc_heads/mark"
   get "doc_heads/export_xls"
-  
-  get "api/person",:to=>redirect("http://gpm.skcc.com/services/ServiceFacade/getAllProjectsInformationFromGPM.do")
-  get "api/deps",:to=>redirect("http://10.120.108.97:7001/services/ServiceFacade/GetEmployeeInformations.do")
 
   resources :roles
 
