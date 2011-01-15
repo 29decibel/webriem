@@ -194,14 +194,14 @@ class PriTaskController < ApplicationController
     url="http://gpm.skcc.com/services/ServiceFacade/getAllProjectsInformationFromGPM.do"
     url_content= Net::HTTP.get(URI.parse(url))
     xml=REXML::Document.new(url_content)
-    @message=xml.to_s
+    @message=url_content.to_s
     render "pri_task/cmd_result"
   end
   def import_person
     url="http://10.120.108.97:7001/services/ServiceFacade/GetEmployeeInformations.do"
     url_content= Net::HTTP.get(URI.parse(url))
     xml=REXML::Document.new(url_content)
-    @message=xml.to_s
+    @message=url_content.to_s
     render "pri_task/cmd_result"
   end
 end
