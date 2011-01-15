@@ -19,4 +19,7 @@ class RdExtraWorkCar < ActiveRecord::Base
         errors.add(:end_time,"请检查填写的日期或时间") if end_time>Time.now
       end
     end
+    def amount
+      fi_amount
+    end
 end

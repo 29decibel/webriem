@@ -202,7 +202,8 @@
     not_know: "未知"
     should_riem: "应报销"
     should_back: "应还款"
-    btn_output_txt: 输出文本文件
+    btn_output_txt: 导出TXT
+    btn_output_excel: 导出Excel
     btn_print: 打印
     btn_batch_approve: 批量审批
     btn_batch_print: 批量打印

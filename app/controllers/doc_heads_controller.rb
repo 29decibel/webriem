@@ -339,6 +339,25 @@ class DocHeadsController < ApplicationController
     end
     render :json=>"ok"
   end
+  def export_xls
+    ids=params[:ids]
+    @docs=[]
+    DocHead.where("id in (#{ids})").each do |doc|
+      if doc.doc_type==12
+        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(业务交通费)",doc.amount_for(:rd_common_transports)] if doc.rd_common_transports.count>0
+        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(工作餐费)",doc.amount_for(:rd_work_meals)] if doc.rd_work_meals.count>0
+      else
+        @docs<<[doc.doc_no,doc.person.name,doc.doc_type_name,doc.total_amount]
+      end
+    end
+    puts "==========================!!!!!!!!!!!!"
+    puts DocHead.where("id in (?)",ids).all
+    puts @docs
+    puts "==========================!!!!!!!!!!!!"
+    respond_to do |format|
+      format.xls
+    end
+  end
   private
   def to_pdf(pdf,doc)
     pdf=case doc.doc_type

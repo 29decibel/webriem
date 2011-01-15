@@ -104,6 +104,23 @@ class DocHead < ActiveRecord::Base
   def total_fi_amount
     get_doc_amount(:fi_amount)
   end
+  #get amount for specific doc type
+  #asumme every detail has a amount attribute
+  def amount_for(doc_detail_name)
+    amount=0
+    details=self.send(doc_detail_name)
+    if details
+      #has_many
+      if details.respond_to? :count
+        details.each do |d|
+          amount=d.amount+amount
+        end
+      else
+        amount=details.amount
+      end
+    end
+    amount
+  end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_doc_amount(type)
     total=0

@@ -24,4 +24,7 @@ class RdCommonTransport < ActiveRecord::Base
       errors.add(:end_time,"请检查填写的日期或时间") if end_time>Time.now
     end
   end
+  def amount
+    apply_amount
+  end
 end

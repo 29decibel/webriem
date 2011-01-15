@@ -5,4 +5,7 @@ class OtherRiem < ActiveRecord::Base
   validates_presence_of :rate
   validates_presence_of :currency_id
   validates_presence_of :description
+  def amount
+    fi_amount
+  end
 end

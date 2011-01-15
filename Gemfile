@@ -13,8 +13,10 @@ gem "excelsior"
 gem "prawn"
 gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
-#gem "uuid"
-gem 'admin_data' #manage the data in the fly very cool
+gem 'admin_data'
+gem 'ruby-ole'
+gem 'spreadsheet'
+#gem 'iconv'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

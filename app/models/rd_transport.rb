@@ -20,4 +20,7 @@ class RdTransport < ActiveRecord::Base
         errors.add(:end_date,"请检查填写的日期或时间") if end_date>Time.now
       end
     end
+    def amount
+      fi_amount
+    end
 end

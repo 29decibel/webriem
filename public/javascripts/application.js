@@ -540,3 +540,18 @@ function output_to_txt(grid_id)
 		document.location.href = "/doc_heads/output_to_txt.txt?ids="+ids.join('_');
 	}
 }
+function output_to_excel(grid_id)
+{
+	//get all doc id and invoke a ajax call
+	var ids=$(grid_id).getGridParam("selarrrow");
+	if(ids.length==0)
+	{
+		alert("请选择需要输出的单据");
+		return;
+	}
+	//trim the ;
+	if(ids.length>0)
+	{
+		document.location.href = "/doc_heads/export_xls.xls?ids="+ids.join(',');
+	}
+}

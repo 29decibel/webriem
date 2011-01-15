@@ -11,4 +11,7 @@ class RdBenefit < ActiveRecord::Base
   def dep_is_end
     errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
   end
+  def amount
+    fi_amount
+  end
 end
