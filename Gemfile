@@ -16,6 +16,9 @@ gem "activerecord-sqlserver-adapter"
 gem 'admin_data'
 gem 'ruby-ole'
 gem 'spreadsheet'
+gem 'curb'
+gem 'curb-fu'
+gem 'rest-client'
 #gem 'iconv'
 
 # Bundle edge Rails instead:

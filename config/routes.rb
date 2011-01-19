@@ -15,6 +15,7 @@ Webreim::Application.routes.draw do
   get "pri_task/poor_wfi"
   get "pri_task/import_project"
   get "pri_task/import_person"
+  get "pri_task/test_curb"
 
   get "ajax_service/getfee"  
   get "ajax_service/getbudget"  

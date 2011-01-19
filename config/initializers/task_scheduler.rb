@@ -29,7 +29,7 @@ def send_email
   #send the mail
   para={}
   person_doc.each do |person,docs|
-    para[:email]= person.e_mail
+    para[:email]= "mike.d.1984@gmail.com"#person.e_mail
     para[:docs_count]=docs.count
     para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_apply_amount }
     puts "sending email to #{para[:mail]} docs count is #{para[:docs_count]} docs total is #{para[:docs_total]}"

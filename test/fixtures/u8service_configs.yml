@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  dbname: MyString
+  username: MyString
+  password: MyString
+  year: 1
+
+two:
+  dbname: MyString
+  username: MyString
+  password: MyString
+  year: 1

@@ -241,6 +241,7 @@
       business_type: "业务类型"
       work_flow_step: "添加一个审批环节"
       work_flow_info: "审批信息"
+      u8_dep: U8部门
     attributes:
       work_flow_info:
         is_ok: "是否通过"
@@ -298,6 +299,11 @@
         name: "名称"  
         code: "编码"
         u8_project: "对应U8项目"
+      u8_dep:
+        cdepcode: 编码
+        bdepend: 是否末级
+        cdepname: 名称
+        idepgrade: 部门级次
       fee_standard:
         project_id: "项目"
         region_type_id: "地区级次"
@@ -337,6 +343,7 @@
         version: "所属组织结构"
         parent_dep_id: "上级部门"
         u8dep_code: "对应U8编码"
+        u8_dep_id: 对应的U8部门
       duty:
         code: "编码"
         name: "名称"

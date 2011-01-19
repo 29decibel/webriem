@@ -35,7 +35,11 @@
 	</div>
 	<div class="form_field">
 		<%= f.label "#{I18n.t('activerecord.attributes.dep.u8dep_code')}#{mark_required(f.object,:u8dep_code)}" %>
-		<%= f.text_field :u8dep_code,:class=>"input1" %>
+		<div class="reference">
+			<%= f.hidden_field :u8_dep_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "dep_info",f.object.u8_dep.to_s,:class=>"ref" %>
+			<a href="#" class-data="U8Dep" self="true"><span class="reference"></span></a>			
+		</div>
 	</div>
 </div>
 <div class="form_block">

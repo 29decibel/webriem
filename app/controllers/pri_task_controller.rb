@@ -1,6 +1,8 @@
 #coding: utf-8
 require 'time'
 require 'rexml/document'
+require 'api'
+require File.join(Rails.root, 'app', 'u8service','api.rb')
 class PriTaskController < ApplicationController
   def set_approver_info
     DocHead.where("doc_state=1").each do |doc|
@@ -201,7 +203,16 @@ class PriTaskController < ApplicationController
     url="http://10.120.108.97:7001/services/ServiceFacade/GetEmployeeInformations.do"
     url_content= Net::HTTP.get(URI.parse(url))
     #xml=REXML::Document.new(url_content)
+    puts url_content
     @message=url_content.to_s
+    render "pri_task/cmd_result"
+  end
+  def test_curb    
+    @message=U8service::API.get_departments
+    JSON(@message).each do |u8dep|
+      d=U8Dep.new(u8dep)
+      d.save
+    end
     render "pri_task/cmd_result"
   end
 end

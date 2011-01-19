@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113132417) do
+ActiveRecord::Schema.define(:version => 20110117064835) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20110113132417) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_dep_id"
+    t.integer  "u8_dep_id"
   end
 
   create_table "doc_heads", :force => true do |t|
@@ -621,6 +622,24 @@ ActiveRecord::Schema.define(:version => 20110113132417) do
   create_table "transportations", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "u8_deps", :force => true do |t|
+    t.string   "cdepcode"
+    t.boolean  "bdepend"
+    t.string   "cdepname"
+    t.string   "idepgrade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "u8service_configs", :force => true do |t|
+    t.string   "dbname"
+    t.string   "username"
+    t.string   "password"
+    t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

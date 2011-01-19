@@ -27,12 +27,20 @@ Webreim::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   #this settings is a must
+  # config.action_mailer.smtp_settings = {
+  #   :address => "smtp.163.com",
+  #   :enable_starttls_auto => true,
+  #   :port => 25,
+  #   :authentication =>:login,
+  #   :user_name => "baoxiao_skccsystem@163.com",
+  #   :password => 'china123!'
+  # }
   config.action_mailer.smtp_settings = {
-    :address => "smtp.163.com",
+    :address => "mail.skccsystems.cn",
     :enable_starttls_auto => true,
-    :port => 25,
+    :port => 587,
     :authentication =>:login,
-    :user_name => "baoxiao_skccsystem@163.com",
+    :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
     :password => 'china123!'
   }
   #here is my delayed jobs
