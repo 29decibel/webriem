@@ -14,7 +14,7 @@ class JbfPdf
       ["申请人","#{doc.person.name}","所属部门","#{doc.dep.name}"],
       ["报销日期","#{doc.apply_date}","附件张数","#{doc.attach}"],
       ["项目编号","#{doc.project ? doc.project.code : ""}","项目名称","#{doc.project ? doc.project : ""}"],
-      ["费用承担部门","#{doc.dep ? doc.afford_dep.name : ""}","是否分摊","#{doc.is_split==1 ? "是" : "否"}"]],
+      ["费用承担部门","#{doc.afford_dep ? doc.afford_dep.name : ""}","是否分摊","#{doc.is_split==1 ? "是" : "否"}"]],
       :column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :width=>pdf.margin_box.width,
       :border_style => :grid,:font_size => 11
