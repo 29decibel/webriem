@@ -1,5 +1,8 @@
 Webreim::Application.routes.draw do
 
+  get "common/new_reset_p"
+  post "common/reset_p"
+  
   get "pri_task/clear_doc"
   get "pri_task/reset_doc_state"
   get "pri_task/reset_pw"
