@@ -36,7 +36,7 @@ class JjPdf
       pdf.move_down 10
       pdf.text "借款单冲抵明细",:size=>12
       pdf.move_down 2
-      pdf.table doc.reim_cp_offsets.where("amount>0").map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project ? r.cp_doc_head.project.code : ""}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
+      pdf.table doc.reim_cp_offsets.where("amount>0").map {|r| ["#{r.cp_doc_head.doc_no}","#{r.cp_doc_head.apply_date}","#{r.cp_doc_head.project ? r.cp_doc_head.project : ""}","#{r.cp_doc_head.total_apply_amount}","#{r.amount}"]},
         :headers => ["单号","申请时间","项目","申请总金额","冲抵金额"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,
@@ -48,7 +48,7 @@ class JjPdf
         pdf.move_down 10
         pdf.text "费用分摊明细",:size=>12
         pdf.move_down 2
-        pdf.table doc.reim_split_details.map {|r| ["#{r.sequence}","#{r.dep}","#{r.project ? r.project.code : ""}","#{r.percent}","#{r.percent_amount}"]},
+        pdf.table doc.reim_split_details.map {|r| ["#{r.sequence}","#{r.dep}","#{r.project ? r.project : ""}","#{r.percent}","#{r.percent_amount}"]},
           :headers => ["序号","费用承担部门","项目","百分比","分摊金额"],
           :width=>pdf.margin_box.width,
           :border_style => :grid,
