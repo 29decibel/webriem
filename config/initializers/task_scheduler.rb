@@ -17,6 +17,7 @@ def send_email
   #set the person and the docs he should approver
   DocHead.where("doc_state=1").each do |doc|
     next if doc.current_approver_id==nil
+    puts "+++++ doc id is #{doc.id}  begin ++++++"
     p = Person.find_by_id(doc.current_approver_id)
     next if p==nil
     if person_doc[p]
@@ -24,6 +25,7 @@ def send_email
     else
       person_doc[p]=[doc]
     end
+    puts "____+++++ doc id is #{doc.id}  end ++++++____"
   end
   puts "total emails to send is #{person_doc.count}.................."
   #send the mail
@@ -38,6 +40,6 @@ def send_email
   end
 end
 #test only
-scheduler.every '2s' do
-   #send_email
+scheduler.every '10s' do
+   send_email
 end
