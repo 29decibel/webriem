@@ -533,6 +533,37 @@ function output_to_excel(grid_id)
 {
 	send_request_from_grid(grid_id,"/doc_heads/export_xls.xls?ids=");
 }
+function delete_docs(grid_id) 
+{
+  var answer=confirm("是否真的删除这些单据，删除的单据将无法恢复！");
+  if(!answer)
+  {
+    return;
+  }
+	//get all doc id and invoke a ajax call
+	var ids=$(grid_id).getGridParam("selarrrow");
+	var doc_ids=ids.join(',');
+	var is_ok=$("#is_ok").is(':checked');
+	var comments=$("#comments").val();
+	//make a ajax call
+	$.ajax({
+	  type: "DELETE",
+	  url: "/doc_heads/destroy",
+	  data: "doc_ids="+doc_ids,
+	  beforeSend: function(){
+			//fee_standard_control.val("正在获取...");
+			$.blockUI({ message:"正在删除..." }); 
+	  },
+	  success: function(msg){
+			$(grid_id).trigger("reloadGrid");
+			$.unblockUI();
+	  },
+		error: function(){
+			$(grid_id).trigger("reloadGrid");
+			$.unblockUI();
+		}
+	});	
+}
 function send_request_from_grid(grid_id,url)
 {
 	//get all doc id and invoke a ajax call
