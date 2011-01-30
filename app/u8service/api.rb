@@ -1,6 +1,6 @@
 module U8service
   class API
-    U8ServiceURL="http://192.168.1.101:8008/Service1.asmx"
+    U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
     #GenerateAccVouch      
        #<dbname>string</dbname>
        #<username>string</username>
