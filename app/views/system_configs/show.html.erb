@@ -1,0 +1,22 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Key:</span>
+		<span class="value"><%= @system_config.key %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Value:</span>
+		<span class="value"><%= @system_config.value %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Description:</span>
+		<span class="value"><%= @system_config.description %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_system_config_path(@system_config) %> |
+<%= link_to "#{I18n.t('common_op.btn_return')}", system_configs_path %> |
+<%= link_to '添加 System config', new_system_config_path %>
