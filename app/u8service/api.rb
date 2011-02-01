@@ -1,3 +1,4 @@
+#coding: utf-8
 module U8service
   class API
     U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
@@ -36,6 +37,9 @@ module U8service
        #<project_table_name>string</project_table_name>
     #GetCodes
        #<dbname>string</dbname>
+    def self.generate_vouch(options)
+      get("GenerateAccVouch",options)
+    end
     def self.get_codes
       get("GetCodes")
     end
@@ -53,25 +57,20 @@ module U8service
     end
     def self.get(service_name,options={})
       _dbname =options[:dbname] || dbname
-      _username =options[:username] || username
-      _password =options[:password] || password
-      para={:dbname=>_dbname,:username=>_username,:password=>_password}
+      para={:dbname=>_dbname}
+      para.merge! options.except(:dbname)
       #para=para.merge options.except()
       response = RestClient.post "#{U8ServiceURL}/#{service_name}", para.to_json, :content_type => :json, :accept => :json
       return JSON(response.body)["d"]
     end
     #here is the config info of current year's info
     def self.dbname
-      config=U8serviceConfig.find_by_year(Time.now.year)
-      config==nil ? nil : config.dbname
-    end
-    def self.username
-      config=U8serviceConfig.find_by_year(Time.now.year)
-      config==nil ? nil : config.username
-    end
-    def self.password
-      config=U8serviceConfig.find_by_year(Time.now.year)
-      config==nil ? nil : config.password
+      config=SystemConfig.find_by_key("u8dbname")
+      if config and config.value
+        return config.value
+      end
+      logger.error("请配置u8数据库的名称")
+      ""
     end
   end
 end
