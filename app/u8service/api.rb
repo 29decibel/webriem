@@ -69,7 +69,7 @@ module U8service
       if config and config.value
         return config.value
       end
-      logger.error("请配置u8数据库的名称")
+      Rails.logger.error("请配置u8数据库的名称")
       ""
     end
   end
