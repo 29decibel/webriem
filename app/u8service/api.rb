@@ -1,11 +1,10 @@
 module U8service
   class API
     U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
+    #the database name current
+    #UFDATA_500_2011 configured in the system_configs table
     #GenerateAccVouch      
        #<dbname>string</dbname>
-       #<username>string</username>
-       #<password>string</password>
-       #<iperiod>unsignedByte</iperiod>
        #<csign>string</csign>
        #<isignseq>int</isignseq>
        #<ino_id>short</ino_id>
@@ -28,25 +27,15 @@ module U8service
        #<ccode_equal>string</ccode_equal> 
     #GetCurrency          
        #<dbname>string</dbname>
-       #<username>string</username>
-       #<password>string</password>
     #GetDepartment
        #<dbname>string</dbname>
-       #<username>string</username>
-       #<password>string</password>
     #GetPerson
        #<dbname>string</dbname>
-       #<username>string</username>
-       #<password>string</password>
     #GetProjects
        #<dbname>string</dbname>
-       #<username>string</username>
-       #<password>string</password>
        #<project_table_name>string</project_table_name>
     #GetCodes
        #<dbname>string</dbname>
-       #<username>string</username>
-       #<password>string</password>
     def self.get_codes
       get("GetCodes")
     end
