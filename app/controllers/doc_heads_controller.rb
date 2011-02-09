@@ -135,7 +135,7 @@ class DocHeadsController < ApplicationController
     if @doc_head.update_attributes(params[:doc_head])
       @doc_head.update_attribute(:cp_doc_remain_amount,@doc_head.total_apply_amount)
       @message="#{I18n.t('controller_msg.update_ok')}"
-      if @doc_head.approver==current_user.person
+      if @doc_head.current_approver_id == current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
       render "shared/show_result"
