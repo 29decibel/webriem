@@ -6,7 +6,7 @@ class Dep < ActiveRecord::Base
   blongs_to_name_attr :parent_dep
   blongs_to_name_attr :u8_dep
   validates_presence_of :name,:code,:start_date
-  validates_uniqueness_of :name,:code
+  validates :code,:uniqueness=>{:scope=>:version}
   has_many :people, :class_name => "Person", :foreign_key => "dep_id"
   #===================================================================================
   CUSTOM_QUERY={

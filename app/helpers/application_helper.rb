@@ -51,6 +51,9 @@ module ApplicationHelper
       filtered_columns_by class_object,:not_display
     end
   end
+  def default_rate
+    1.0
+  end
   #get the column value of the object
   def get_display_value(result_obj,column)
     #check whether it is a belongs_to relation

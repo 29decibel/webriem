@@ -3,11 +3,14 @@ require 'rufus/scheduler'
 
 scheduler = Rufus::Scheduler.start_new
 #every day send a email
-scheduler.cron '00 13 * * *' do
+#every midnight passed 1 minute will exec this job
+scheduler.cron '1 0 * * *' do
   send_email
 end
+#the cron format
+#minute hour day month week
 #every day send a email
-scheduler.cron '00 01 * * *' do
+scheduler.cron '10 10 * * *' do
   send_email
 end
 def send_email
@@ -31,7 +34,9 @@ def send_email
   #send the mail
   para={}
   person_doc.each do |person,docs|
-    para[:email]= person.e_mail
+    send_mail_address = RAILS_ENV=="development" ? "mike.d.1984@gmail.com" : person.e_mail
+    puts "$$$$$$$$$ address:  #{send_mail_address}   $$$$$$"
+    para[:email]= send_mail_address
     para[:docs_count]=docs.count
     para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_apply_amount }
     puts "sending email to #{para[:mail]} docs count is #{para[:docs_count]} docs total is #{para[:docs_total]}"

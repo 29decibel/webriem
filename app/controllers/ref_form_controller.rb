@@ -8,8 +8,21 @@ class RefFormController < ApplicationController
     "Currency"=>["name","code","default_rate"]
   }
   FilterColumns=["id","created_at","updated_at"]
+  #custom where strings
+  def custom_where_string(model_name)
+    str=" 1=1 "
+    #if the dep model should see the current version
+    if model_name=="Dep"
+      current_dep_version = SystemConfig.find_by_key("dep_version")
+      if current_dep_version and current_dep_version.value
+        str= str + " and version='#{current_dep_version.value}'" 
+      end
+    end
+    str
+  end
   #give you a model name
   def index
+    @where_str=custom_where_string(params[:class_name])
     @model_name = params[:class_name]
     @multiselect = params[:multicheck] || false #pre_condition    
     @colModel = common_ref_columns(@model_name)

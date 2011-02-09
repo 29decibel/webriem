@@ -2,7 +2,8 @@
 		:model=>@model_name,
 		:multiselect=>@multiselect,
 		:height=>320,
-		:colModel=>@colModel
+    :colModel=>@colModel,
+    :where=>@where_str,
 		#:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){back_to_the_reference(this);}--#)
 		%>
 <div class="jqgrid">

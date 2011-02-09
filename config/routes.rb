@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :system_configs
+
   get "common/new_reset_p"
   post "common/reset_p"
   
