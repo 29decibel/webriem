@@ -29,60 +29,6 @@ class PriTaskController < ApplicationController
     @message=u8codes.count
     render "pri_task/cmd_result"
   end
-  def set_approver_info
-    DocHead.where("doc_state=1").each do |doc|
-      #set the approvers
-      #set current approver
-      doc.begin_approve(doc.selected_approver_id)
-      #because now the current approver is the first 
-      #so i need use the work_flow_step_id to determin the current approver
-      if doc.work_flow_step_id
-        wfs=  WorkFlowStep.find_by_id(doc.work_flow_step_id)
-        if wfs
-          p=doc.approver(wfs)
-          doc.current_approver_id = p.id if p
-        end
-      end
-      doc.save      
-    end
-    wrong_docs=[]
-    DocHead.where("doc_state=1").each do |doc|
-      if doc.approvers.blank?
-        wrong_docs<<doc.doc_no 
-      elsif !(doc.approvers.split(',').include? doc.current_approver_id.to_s)
-        wrong_docs<<"#{doc.id}"
-      end
-    end
-    @message=wrong_docs.join(',')
-    render "pri_task/cmd_result"
-  end
-  def poor_wfi
-    bad_docs=[]
-    DocHead.where("doc_state=1").each do |doc|
-      num_map_ok={}
-      num_map_no={}
-      doc.work_flow_infos.each do |wfi|
-        #get the right num map
-        if wfi.is_ok==1
-          num_map=num_map_ok
-        else
-          num_map=num_map_no
-        end
-        #calculate
-        if num_map[wfi.people_id]
-          num_map[wfi.people_id]= num_map[wfi.people_id]+1
-        else
-          num_map[wfi.people_id]=1
-        end
-      end
-      #check ok
-      result_ok = num_map_ok.select {|k,v| v>1}
-      result_no = num_map_no.select {|k,v| v>1}
-      bad_docs<<"#{doc.id}" if result_ok.size>=1 or result_no.size>=1
-    end
-    @message=bad_docs.join(',')
-    render "pri_task/cmd_result"
-  end
   def cmds
     
   end
@@ -123,71 +69,6 @@ class PriTaskController < ApplicationController
     doc.rd_extra_work_meals.each do |w_m|
       w_m.update_attribute(:start_time,Time.now)
       w_m.update_attribute(:end_time,Time.now)
-    end
-  end
-  def adapt_cp_offsets
-    DocHead.all.each do |doc|
-      doc.cp_doc_remain_amount=doc.total_apply_amount
-      doc.total_amount=doc.total_apply_amount
-      doc.save
-    end
-  end
-  def check_cp_offset
-    offset_ids=RiemCpOffset.all.map {|offset| offset.id}
-    offset_ids.each do |o_id|
-      o_set=RiemCpOffset.find(o_id)
-      if o_set.cp_doc_head==nil
-        if o_set.reim_doc_head
-          o_set.reim_doc_head.destroy
-        end
-      end
-      if o_set.reim_doc_head==nil
-        if o_set.cp_doc_head
-          o_set.cp_doc_head.update_attribute(:cp_doc_remain_amount,o_set.cp_doc_head.total_apply_amount)
-        end
-      end
-      o_set.destroy
-    end
-  end
-  def import_cps
-    DocHead.delete_all
-    count=1
-    File.open("#{RAILS_ROOT}/doc/pre_cps.txt").each_line do |line|
-      logger.info line
-      #get doc number
-      person=Person.find_by_code(line.split(' ')[2].strip)
-      dep=Dep.find_by_code(line.split(' ')[0].strip)
-      doc_head=DocHead.new
-      doc_head.doc_state = 0
-      #set the doctype to the paras passed in
-      doc_head.doc_type=1
-      that_time=Time.parse(line.split(' ')[4].strip)
-      doc_head.doc_no=DOC_TYPE_PREFIX[1]+Time.now.strftime("%Y%m%d")+count.to_s.rjust(4,"0")
-      doc_head.apply_date=Time.now
-      doc_head.dep=dep
-      doc_head.person=person
-      #build some new doc details
-      #if @doc_head.doc_type==1 or  @doc_head.doc_type==2
-      cp=	doc_head.cp_doc_details.build 
-      cp.dep=dep
-      cp.currency=Currency.find_by_code('RMB')
-      cp.rate=1
-      cp.ori_amount=line.split(' ')[5].strip.to_f
-      cp.apply_amount=line.split(' ')[5].strip.to_f
-      cp.used_for=line.split(' ')[6].strip
-	    #end
-      reciver=doc_head.recivers.build
-      #init the reciver's info to current person
-      reciver.bank=person.bank
-      reciver.bank_no=person.bank_no
-      reciver.company=person.name
-      reciver.direction=0	
-	    reciver.settlement=Settlement.find_by_code("02")
-      reciver.amount=cp.apply_amount
-      doc_head.doc_state=3
-      doc_head.save
-      count=count+1
-      logger.error doc_head.errors
     end
   end
   def import_project
