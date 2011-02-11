@@ -5,19 +5,26 @@ require 'api'
 require File.join(Rails.root, 'app', 'u8service','api.rb')
 class PriTaskController < ApplicationController
   def import_u8_codes
-    u8codes=JSON U8service::API.get_codes
-    u8codes.each do |u8_model|
-      model=U8code.new
-      model.cclass=u8_model["cclass"]
-      model.ccode=u8_model["ccode"]
-      model.ccode_name=u8_model["ccode_name"]
-      model.igrade=u8_model["igrade"]
-      model.bend=u8_model["bend"]
-      model.cexch_name=u8_model["cexch_name"]
-      model.bperson=u8_model["bperson"]
-      model.bitem=u8_model["bitem"]
-      model.bdept=u8_model["bdept"]
-      model.save
+    begin
+      u8codes=JSON U8service::API.get_codes
+      U8code.delete_all if u8codes.count>0
+      u8codes.each do |u8_model|
+        model=U8code.new
+        model.cclass=u8_model["cclass"]
+        model.ccode=u8_model["ccode"]
+        model.ccode_name=u8_model["ccode_name"]
+        model.igrade=u8_model["igrade"]
+        model.bend=u8_model["bend"]
+        model.cexch_name=u8_model["cexch_name"]
+        model.bperson=u8_model["bperson"]
+        model.bitem=u8_model["bitem"]
+        model.bdept=u8_model["bdept"]
+        model.save
+      end
+    rescue Exception=>msg
+      logger.error "^^^^^^^^^^^^^^^can't get the u8 serivce to get the codes info"
+      logger.error "#{msg}"
+      @message=msg
     end
     @message=u8codes.count
     render "pri_task/cmd_result"
@@ -76,35 +83,8 @@ class PriTaskController < ApplicationController
     @message=bad_docs.join(',')
     render "pri_task/cmd_result"
   end
-  def update_doc
-    DocHead.all.each do |doc|
-       if doc.approver
-           doc.current_approver_id=doc.approver.id
-       else
-           doc.current_approver_id=nil
-       end
-       doc.save!
-    end
-    DocHead.all.each {|doc| doc.total_amount=doc.total_fi_amount and doc.save!}
-    @message="ok"
-    render "shared/show_result"
-  end
   def cmds
     
-  end
-  #delete all docs
-  def clear_doc
-    PersonType.create(:name=>"同PART长",:code=>"PART")
-    #@message="#{DocHead.count}个单据被清除"
-    #DocHead.delete_all
-  end
-  #reset all doc state
-  def reset_doc_state
-    DocHead.all.each do |d|
-      if ![1,2,3].include? d.doc_state
-        d.doc_state=3
-      end
-    end
   end
   #reset password
   def reset_pw
