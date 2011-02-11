@@ -1,5 +1,8 @@
 Webreim::Application.routes.draw do
 
+  get "vouch/index"
+  get "vouch/generate"
+
   resources :system_configs
 
   get "common/new_reset_p"

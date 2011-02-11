@@ -26,17 +26,6 @@ module U8service
        #<citem_id>string</citem_id>
        #<citem_class>string</citem_class>
        #<ccode_equal>string</ccode_equal> 
-    #GetCurrency          
-       #<dbname>string</dbname>
-    #GetDepartment
-       #<dbname>string</dbname>
-    #GetPerson
-       #<dbname>string</dbname>
-    #GetProjects
-       #<dbname>string</dbname>
-       #<project_table_name>string</project_table_name>
-    #GetCodes
-       #<dbname>string</dbname>
     def self.generate_vouch(options)
       get("GenerateAccVouch",options)
     end
