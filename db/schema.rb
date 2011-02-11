@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110131133941) do
+ActiveRecord::Schema.define(:version => 20110211131721) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20110131133941) do
     t.string   "u8_project"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status"
   end
 
   create_table "rd_benefits", :force => true do |t|
@@ -638,6 +639,20 @@ ActiveRecord::Schema.define(:version => 20110131133941) do
     t.boolean  "bdepend"
     t.string   "cdepname"
     t.string   "idepgrade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "u8codes", :force => true do |t|
+    t.string   "cclass"
+    t.string   "ccode"
+    t.string   "ccode_name"
+    t.string   "igrade"
+    t.boolean  "bend"
+    t.string   "cexch_name"
+    t.boolean  "bperson"
+    t.boolean  "bitem"
+    t.boolean  "bdept"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,6 +4,24 @@ require 'rexml/document'
 require 'api'
 require File.join(Rails.root, 'app', 'u8service','api.rb')
 class PriTaskController < ApplicationController
+  def import_u8_codes
+    u8codes=JSON U8service::API.get_codes
+    u8codes.each do |u8_model|
+      model=U8code.new
+      model.cclass=u8_model["cclass"]
+      model.ccode=u8_model["ccode"]
+      model.ccode_name=u8_model["ccode_name"]
+      model.igrade=u8_model["igrade"]
+      model.bend=u8_model["bend"]
+      model.cexch_name=u8_model["cexch_name"]
+      model.bperson=u8_model["bperson"]
+      model.bitem=u8_model["bitem"]
+      model.bdept=u8_model["bdept"]
+      model.save
+    end
+    @message=u8codes.count
+    render "pri_task/cmd_result"
+  end
   def set_approver_info
     DocHead.where("doc_state=1").each do |doc|
       #set the approvers
