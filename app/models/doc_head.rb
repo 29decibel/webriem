@@ -443,7 +443,7 @@ class DocHead < ActiveRecord::Base
             :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
             :ccode=>"55011001",# dai kemu
             :cexch_name=>"人民币",#currency name
-            :md=>w_m.doc_apply_amount,:mc=>"0",:md_f=>w_m.doc_apply_amount,:mc_f=>"0",
+            :md=>w_m.apply_amount,:mc=>"0",:md_f=>w_m.apply_amount,:mc_f=>"0",
             :nfrat=>"1",# currency rate
             :cdept_id=>w_m.dep.code,# dep code
             :cperson_id=>person.code,#person code
