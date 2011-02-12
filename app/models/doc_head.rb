@@ -462,7 +462,7 @@ class DocHead < ActiveRecord::Base
         vd={
           :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
           :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
-          :ccode=>fee_m_code_meal.ccode+","+fee_m_code_car.ccode,# dai kemu
+          :ccode=>"#{fee_m_code_meal.ccode},#{fee_m_code_car.ccode}",# dai kemu
           :cexch_name=>"人民币",#currency name
           :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
           :nfrat=>"1",# currency rate
