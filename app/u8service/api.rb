@@ -31,7 +31,7 @@ module U8service
     end
     def self.test_g_vouch
       options={
-        :ino_id=>"9999",:inid=>"4444",:dbill_date=>"2011-3-1",
+        :ino_id=>"99999",:inid=>"4444",:dbill_date=>"2011-3-1",
         :idoc=>"999",:cbill=>"mike",:doc_no=>"8989898989",
         :ccode=>"55011001",# dai kemu
         :cexch_name=>"rmb",#currency name
