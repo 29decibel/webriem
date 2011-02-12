@@ -27,7 +27,7 @@ module U8service
        #<citem_class>string</citem_class>
        #<ccode_equal>string</ccode_equal> 
     def self.generate_vouch(options)
-      get("GenerateAccVouch",options)
+      JSON get("GenerateAccVouch",options)
     end
     def self.test_g_vouch
       options={
@@ -41,28 +41,28 @@ module U8service
         :cperson_id=>"CS10011",#person code
         :citem_id=>"OTH-99",#project code
         :ccode_equal=>""}
-      generate_vouch(options)
+      JSON generate_vouch(options)
     end
     def self.exist_vouch(doc_no)
-      get("IsVouchExist",{:doc_no=>doc_no})
+      JSON get("IsVouchExist",{:doc_no=>doc_no})
     end
     def self.max_vouch_info
-      get("GetMaxVouchInfo")
+      JSON get("GetMaxVouchInfo")
     end
     def self.get_codes
-      get("GetCodes")
+      JSON get("GetCodes")
     end
     def self.get_person
-      get("GetPerson")
+      JSON get("GetPerson")
     end
     def self.get_departments
-      get("GetDepartment")
+      JSON get("GetDepartment")
     end
     def self.get_projects
-      get("GetProjects")
+      JSON get("GetProjects")
     end
     def self.get_currency
-      get("GetCurrency")
+      JSON get("GetCurrency")
     end
     def self.get(service_name,options={})
       _dbname =options[:dbname] || dbname
