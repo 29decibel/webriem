@@ -521,7 +521,7 @@ class DocHead < ActiveRecord::Base
             :nfrat=>"1",# currency rate
             :cdept_id=>dep.code,# dep code
             :cperson_id=>person.code,#person code
-            :citem_id=>project.code,#project code
+            :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code.ccode}
           vs<<vj
         end
