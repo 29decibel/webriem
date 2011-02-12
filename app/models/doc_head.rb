@@ -456,19 +456,20 @@ class DocHead < ActiveRecord::Base
         end
       #加班费用，一个贷，两个借
       elsif doc_type==11
-        fee_m_code=FeeCodeMatch.find_by_fee_code("06")
+        fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
+        fee_m_code_car=FeeCodeMatch.find_by_fee_code("0602")
         #一条贷
         vd={
           :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
           :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
-          :ccode=>fee_m_code.ccode,# dai kemu
+          :ccode=>fee_m_code_meal.ccode+","+fee_m_code_car.ccode,# dai kemu
           :cexch_name=>"人民币",#currency name
           :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
           :nfrat=>"1",# currency rate
           :cdept_id=>"",# dep code should select
           :cperson_id=>person.code,#person code
           :citem_id=>"",#project code should select
-          :ccode_equal=>fee_m_code.dcode}
+          :ccode_equal=>fee_m_code_meal.dcode}
         vs<<vd
         #1个或2个借
         if rd_extra_work_meals.count>0
@@ -477,14 +478,14 @@ class DocHead < ActiveRecord::Base
           vj={
             :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
             :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code_meal.dcode,# dai kemu
             :cexch_name=>"人民币",#currency name
             :md=>total,:mc=>"0",:md_f=>total,:mc_f=>"0",
             :nfrat=>"1",# currency rate
             :cdept_id=>afford_dep.code,# dep code
             :cperson_id=>person.code,#person code
             :citem_id=>project.code,#project code
-            :ccode_equal=>fee_m_code.ccode}
+            :ccode_equal=>fee_m_code_meal.ccode}
           vs<<vj
         end
         if rd_extra_work_cars.count>0
@@ -493,14 +494,14 @@ class DocHead < ActiveRecord::Base
           vj={
             :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
             :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code_car.dcode,# dai kemu
             :cexch_name=>"人民币",#currency name
             :md=>total,:mc=>"0",:md_f=>total,:mc_f=>"0",
             :nfrat=>"1",# currency rate
             :cdept_id=>afford_dep.code,# dep code
             :cperson_id=>person.code,#person code
             :citem_id=>project.code,#project code
-            :ccode_equal=>fee_m_code.ccode}
+            :ccode_equal=>fee_m_code_car.ccode}
           vs<<vj
         end
       #福利费用
