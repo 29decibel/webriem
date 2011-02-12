@@ -8,8 +8,6 @@ module U8service
     #UFDATA_500_2011 configured in the system_configs table
     #GenerateAccVouch      
        #<dbname>string</dbname>
-       #<csign>string</csign>
-       #<isignseq>int</isignseq>
        #<ino_id>short</ino_id>
        #<inid>short</inid>
        #<dbill_date>string</dbill_date>
@@ -30,6 +28,20 @@ module U8service
        #<ccode_equal>string</ccode_equal> 
     def self.generate_vouch(options)
       get("GenerateAccVouch",options)
+    end
+    def self.test_g_vouch
+      options={
+        :ino_id=>"9999",:inid=>"4444",:dbill_date=>"2011-3-1",
+        :idoc=>"999",:cbill=>"mike",:doc_no=>"8989898989",
+        :ccode=>"55011001",# dai kemu
+        :cexch_name=>"rmb",#currency name
+        :md=>"121212",:mc=>"0",:md_f=>"121212",:mc_f=>"0",
+        :nfrat=>"1",# currency rate
+        :cdept_id=>"100901",# dep code
+        :cperson_id=>"CS10011",#person code
+        :citem_id=>"OTH-99",#project code
+        :ccode_equal=>""}
+      generate_vouch(options)
     end
     def self.get_codes
       get("GetCodes")
