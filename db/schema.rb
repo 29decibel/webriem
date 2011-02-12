@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110211131721) do
+ActiveRecord::Schema.define(:version => 20110212075835) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -332,7 +332,7 @@ ActiveRecord::Schema.define(:version => 20110211131721) do
     t.string   "u8_project"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
+    t.string   "status"
   end
 
   create_table "rd_benefits", :force => true do |t|

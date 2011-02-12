@@ -75,12 +75,53 @@ module U8service
       Rails.logger.error("请配置u8数据库的名称")
       ""
     end
+    #<name>高波</name>
+    #<empno>CS10065</empno>
+    #<gender>女</gender>
+    #<deptid>100103</deptid>
+    #deptName
+    #<mobile>131-2049-7186</mobile>
+    #<email>gaobo@skccsystems.cn</email>
+    #idCard
+    #bankid
     def self.get_hr_employees
-      response=RestClient.get EmployeesServiceURL
-      return response
+      emps=[]
+      begin
+        response=RestClient.get EmployeesServiceURL
+        xml_doc=REXML::Document.new response.to_s
+        xml_doc.root.elements.each do |ele|
+          p=Person.new
+          p.name=ele.elements["name"].text if ele.elements["name"]
+          p.code=ele.elements["empno"].text if ele.elements["empno"]
+          p.gender=ele.elements["gender"].text=="男" ? 1 : 0 if ele.elements["gender"]
+          p.dep_id=ele.elements["deptid"].text if ele.elements["deptid"]
+          p.phone=ele.elements["mobile"].text if ele.elements["mobile"]
+          p.e_mail=ele.elements["email"].text if ele.elements["email"]
+          p.bank_no=ele.elements["bankid"].text if ele.elements["bankid"]
+          p.ID_card=ele.elements["idCard"].text if ele.elements["idCard"]
+          emps<<p
+        end
+      rescue Exception=>msg
+        Rails.logger.error "can't get the employees info from hr system,errors is #{msg}"
+      end
+      return xml_doc
     end
     def self.get_gpm_projects
-      response=RestClient.get ProjectsServiceURL
+      projects=[]
+      begin
+        response=RestClient.get ProjectsServiceURL
+        xml_doc=REXML::Document.new response.to_s
+        xml_doc.root.elements.each do |ele|
+          p=Project.new
+          p.name=ele.elements["prjName"].text
+          p.code=ele.elements["prjId"].text
+          p.status=ele.elements["status"].text
+          projects<<p
+        end
+      rescue Exception=>msg
+        Rails.logger.error "can't get the projects from gpm,errors is #{msg}"
+      end
+      return projects
     end
   end
 end
