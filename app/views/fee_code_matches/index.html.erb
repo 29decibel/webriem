@@ -1,0 +1,28 @@
+<h3 class="form_title">列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>Fee</th>
+    <th>Dcode</th>
+    <th>Ccode</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fee_code_matches.each do |fee_code_match| %>
+  <tr class="<%= "odd" if fee_code_match.id%2==0 %>">
+    <td><%= fee_code_match.fee_id %></td>
+    <td><%= fee_code_match.dcode_id %></td>
+    <td><%= fee_code_match.ccode_id %></td>
+    <td><%= fee_code_match.description %></td>
+    <td><%= link_to '查看', fee_code_match %></td>
+    <td><%= link_to '编辑', edit_fee_code_match_path(fee_code_match) %></td>
+    <td><%= link_to '删除', fee_code_match, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加 Fee code match', new_fee_code_match_path %>

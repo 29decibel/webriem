@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fee_id: 1
+  dcode_id: 1
+  ccode_id: 1
+  description: MyString
+
+two:
+  fee_id: 1
+  dcode_id: 1
+  ccode_id: 1
+  description: MyString

@@ -397,60 +397,147 @@ class DocHead < ActiveRecord::Base
       if doc_type==9
         #check the afford dep
         return vs if afford_dep==nil
+        #get the two code
+        fee_m_code=FeeCodeMatch.find_by_fee_code("03")
         vj={
           :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
           :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
-          :ccode=>"55011001",# dai kemu
+          :ccode=>fee_m_code.ccode,# dai kemu
           :cexch_name=>"人民币",#currency name
           :md=>total_amount,:mc=>"0",:md_f=>total_amount,:mc_f=>"0",
           :nfrat=>"1",# currency rate
           :cdept_id=>afford_dep.code,# dep code
           :cperson_id=>person.code,#person code
           :citem_id=>project.code,#project code
-          :ccode_equal=>""}
+          :ccode_equal=>fee_m_code.dcode}
         vd={
           :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
           :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
-          :ccode=>"55011001",# dai kemu
+          :ccode=>fee_m_code.dcode,# dai kemu
           :cexch_name=>"人民币",#currency name
           :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
           :nfrat=>"1",# currency rate
           :cdept_id=>afford_dep.code,# dep code
           :cperson_id=>person.code,#person code
           :citem_id=>project.code,#project code
-          :ccode_equal=>""}
+          :ccode_equal=>fee_m_code.ccode}
         vs<<vj
         vs<<vd
       #交际费用，没有分摊，每个明细都是一条借
       elsif doc_type==10
+        fee_m_code=FeeCodeMatch.find_by_fee_code("02")
         #一条贷
         vd={
           :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
           :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
-          :ccode=>"55011001",# dai kemu
+          :ccode=>fee_m_code.ccode,# dai kemu
           :cexch_name=>"人民币",#currency name
           :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
           :nfrat=>"1",# currency rate
           :cdept_id=>"",# dep code should select
           :cperson_id=>person.code,#person code
           :citem_id=>"",#project code should select
-          :ccode_equal=>""}
+          :ccode_equal=>fee_m_code.dcode}
         vs<<vd
         #n 条借
         rd_work_meals.each do |w_m|
           vj={
             :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
             :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
-            :ccode=>"55011001",# dai kemu
+            :ccode=>fee_m_code.dcode,# dai kemu
             :cexch_name=>"人民币",#currency name
             :md=>w_m.apply_amount,:mc=>"0",:md_f=>w_m.apply_amount,:mc_f=>"0",
             :nfrat=>"1",# currency rate
             :cdept_id=>w_m.dep.code,# dep code
             :cperson_id=>person.code,#person code
             :citem_id=>w_m.project.code,#project code
-            :ccode_equal=>""}
+            :ccode_equal=>fee_m_code.ccode}
           vs<<vj
         end
+      #加班费用，一个贷，两个借
+      elsif doc_type==11
+        fee_m_code=FeeCodeMatch.find_by_fee_code("06")
+        #一条贷
+        vd={
+          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
+          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+          :ccode=>fee_m_code.ccode,# dai kemu
+          :cexch_name=>"人民币",#currency name
+          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
+          :nfrat=>"1",# currency rate
+          :cdept_id=>"",# dep code should select
+          :cperson_id=>person.code,#person code
+          :citem_id=>"",#project code should select
+          :ccode_equal=>fee_m_code.dcode}
+        vs<<vd
+        #1个或2个借
+        if rd_extra_work_meals.count>0
+          total=0
+          rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
+          vj={
+            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
+            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :cexch_name=>"人民币",#currency name
+            :md=>total,:mc=>"0",:md_f=>total,:mc_f=>"0",
+            :nfrat=>"1",# currency rate
+            :cdept_id=>afford_dep.code,# dep code
+            :cperson_id=>person.code,#person code
+            :citem_id=>project.code,#project code
+            :ccode_equal=>fee_m_code.ccode}
+          vs<<vj
+        end
+        if rd_extra_work_cars.count>0
+          total=0
+          rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
+          vj={
+            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
+            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :cexch_name=>"人民币",#currency name
+            :md=>total,:mc=>"0",:md_f=>total,:mc_f=>"0",
+            :nfrat=>"1",# currency rate
+            :cdept_id=>afford_dep.code,# dep code
+            :cperson_id=>person.code,#person code
+            :citem_id=>project.code,#project code
+            :ccode_equal=>fee_m_code.ccode}
+          vs<<vj
+        end
+      #福利费用
+      elsif doc_type==13
+        vd_codes=""
+        #n条借方
+        rd_benefits.each do |b|
+          #get fee code info
+          fee_m_code=FeeCodeMatch.find_by_fee_code(b.fee.code)
+          vd_codes<<fee_m_code.dcode
+          vj={
+            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
+            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :cexch_name=>"人民币",#currency name
+            :md=>b.fi_amount,:mc=>"0",:md_f=>b.fi_amount,:mc_f=>"0",
+            :nfrat=>"1",# currency rate
+            :cdept_id=>dep.code,# dep code
+            :cperson_id=>person.code,#person code
+            :citem_id=>project.code,#project code
+            :ccode_equal=>fee_m_code.ccode}
+          vs<<vj
+        end
+        #一条贷
+        vd={
+          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
+          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+          :ccode=>fee_m_code.ccode,# dai kemu
+          :cexch_name=>"人民币",#currency name
+          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
+          :nfrat=>"1",# currency rate
+          :cdept_id=>"",# dep code should select
+          :cperson_id=>person.code,#person code
+          :citem_id=>"",#project code should select
+          :ccode_equal=>vd_codes}
+        vs<<vd
+
       end
     end
     vs

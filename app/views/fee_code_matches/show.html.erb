@@ -1,0 +1,27 @@
+<h3 class="form_title">详细信息</h3>
+<div id="details">
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Fee:</span>
+		<span class="value"><%= @fee_code_match.fee_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Dcode:</span>
+		<span class="value"><%= @fee_code_match.dcode_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Ccode:</span>
+		<span class="value"><%= @fee_code_match.ccode_id %></span>	  
+	</div>
+		<!--=========================================-->
+	<div class="field">
+		<span class="attr">Description:</span>
+		<span class="value"><%= @fee_code_match.description %></span>	  
+	</div>
+	</div>
+
+<%= link_to '编辑', edit_fee_code_match_path(@fee_code_match) %> |
+<%= link_to "#{I18n.t('common_op.btn_return')}", fee_code_matches_path %> |
+<%= link_to '添加 Fee code match', new_fee_code_match_path %>
