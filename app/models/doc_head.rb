@@ -511,7 +511,7 @@ class DocHead < ActiveRecord::Base
         rd_benefits.each do |b|
           #get fee code info
           fee_m_code=FeeCodeMatch.find_by_fee_code(b.fee.code)
-          vd_codes<<fee_m_code.dcode
+          vd_codes<<fee_m_code.dcode.to_s
           vj={
             :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
             :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
