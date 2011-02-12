@@ -1,6 +1,8 @@
 #coding: utf-8
 module U8service
   class API
+    ProjectsServiceURL="http://203.235.212.65/getAllProjectsInformationFromGPM.do"
+    EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
     U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
     #the database name current
     #UFDATA_500_2011 configured in the system_configs table
@@ -60,6 +62,13 @@ module U8service
       end
       Rails.logger.error("请配置u8数据库的名称")
       ""
+    end
+    def self.get_hr_employees
+      response=RestClient.get EmployeesServiceURL
+      return response
+    end
+    def self.get_gpm_projects
+      response=RestClient.get ProjectsServiceURL
     end
   end
 end
