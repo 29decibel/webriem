@@ -378,4 +378,48 @@ class DocHead < ActiveRecord::Base
     #update the total_fi_amount
     self.total_amount = total_fi_amount
   end
+  #vouch infos
+  #this is a massive method which contains a lot of logic 
+  #and 'if else'
+  def vouchs
+    vs=[]
+    #look at if this already generate 
+    result=U8service::API.exist_vouch(doc_no)
+    return vs if result["Exist"]
+    #get current max vouch no and plus 1 as current vouch no
+    vouch_no=U8service::API.max_vouch_info["MaxNo"].to_i + 1
+    #分摊的逻辑
+    if is_split
+    else
+      #差旅费用【只生成一个借和一个贷，】
+      if doc_type==9
+        time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
+        vj={
+          :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
+          :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+          :ccode=>"55011001",# dai kemu
+          :cexch_name=>"人民币",#currency name
+          :md=>total_amount,:mc=>"0",:md_f=>total_amount,:mc_f=>"0",
+          :nfrat=>"1",# currency rate
+          :cdept_id=>afford_dep.code,# dep code
+          :cperson_id=>person.code,#person code
+          :citem_id=>project.code,#project code
+          :ccode_equal=>""}
+        vd={
+          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
+          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+          :ccode=>"55011001",# dai kemu
+          :cexch_name=>"人民币",#currency name
+          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
+          :nfrat=>"1",# currency rate
+          :cdept_id=>afford_dep.code,# dep code
+          :cperson_id=>person.code,#person code
+          :citem_id=>project.code,#project code
+          :ccode_equal=>""}
+        vs<<vj
+        vs<<vd
+      end
+    end
+    vs
+  end
 end
