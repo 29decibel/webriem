@@ -389,7 +389,7 @@ class DocHead < ActiveRecord::Base
     #get current max vouch no and plus 1 as current vouch no
     vouch_no=U8service::API.max_vouch_info["MaxNo"].to_i + 1
     #分摊的逻辑
-    if is_split
+    if is_split==1
     else
       #差旅费用【只生成一个借和一个贷，】
       if doc_type==9
