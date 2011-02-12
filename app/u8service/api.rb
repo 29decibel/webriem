@@ -104,7 +104,7 @@ module U8service
       rescue Exception=>msg
         Rails.logger.error "can't get the employees info from hr system,errors is #{msg}"
       end
-      return xml_doc
+      return emps
     end
     def self.get_gpm_projects
       projects=[]
