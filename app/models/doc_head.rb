@@ -388,12 +388,15 @@ class DocHead < ActiveRecord::Base
     return vs if result["Exist"]
     #get current max vouch no and plus 1 as current vouch no
     vouch_no=U8service::API.max_vouch_info["MaxNo"].to_i + 1
+    #the time
+    time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
     #分摊的逻辑
     if is_split==1
     else
       #差旅费用【只生成一个借和一个贷，】
       if doc_type==9
-        time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
+        #check the afford dep
+        return vs if afford_dep==nil
         vj={
           :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
           :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
@@ -418,6 +421,36 @@ class DocHead < ActiveRecord::Base
           :ccode_equal=>""}
         vs<<vj
         vs<<vd
+      #交际费用，没有分摊，每个明细都是一条借
+      elsif doc_type==10
+        #一条贷
+        vd={
+          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
+          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+          :ccode=>"55011001",# dai kemu
+          :cexch_name=>"人民币",#currency name
+          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
+          :nfrat=>"1",# currency rate
+          :cdept_id=>"",# dep code should select
+          :cperson_id=>person.code,#person code
+          :citem_id=>"",#project code should select
+          :ccode_equal=>""}
+        vs<<vd
+        #n 条借
+        rd_work_meals.each do |w_m|
+          vj={
+            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
+            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+            :ccode=>"55011001",# dai kemu
+            :cexch_name=>"人民币",#currency name
+            :md=>w_m.doc_apply_amount,:mc=>"0",:md_f=>w_m.doc_apply_amount,:mc_f=>"0",
+            :nfrat=>"1",# currency rate
+            :cdept_id=>w_m.dep.code,# dep code
+            :cperson_id=>person.code,#person code
+            :citem_id=>w_m.project.code,#project code
+            :ccode_equal=>""}
+          vs<<vj
+        end
       end
     end
     vs
