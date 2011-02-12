@@ -43,6 +43,12 @@ module U8service
         :ccode_equal=>""}
       generate_vouch(options)
     end
+    def self.exist_vouch(doc_no)
+      get("IsVouchExist",{:doc_no=>doc_no})
+    end
+    def self.max_vouch_info
+      get("GetMaxVouchInfo")
+    end
     def self.get_codes
       get("GetCodes")
     end
