@@ -1,2 +1,9 @@
-<h1>Vouch#index</h1>
-<p>Find me in app/views/vouch/index.html.erb</p>
+<h1>Vouch info goes here</h1>
+<ul>
+  <% @docs.each do |doc| %>
+    <li>
+      <h3>单据号为<%= doc.doc_no%></h3>
+      <%= doc.vouches.count%>
+    </li>
+  <% end %>
+</ul>

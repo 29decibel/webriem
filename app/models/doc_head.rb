@@ -381,7 +381,7 @@ class DocHead < ActiveRecord::Base
   #vouch infos
   #this is a massive method which contains a lot of logic 
   #and 'if else'
-  def vouchs
+  def vouches
     vs=[]
     #look at if this already generate 
     result=U8service::API.exist_vouch(doc_no)
