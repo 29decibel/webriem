@@ -512,9 +512,10 @@ class DocHead < ActiveRecord::Base
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
           :ccode_equal=>vd_codes.join(',')})
-      self.vouches.create(vd)
+        self.vouches.create(vd)
       end
     end
+  end
   end
   private
   def get_v(options)
