@@ -397,7 +397,12 @@ class DocHead < ActiveRecord::Base
       if doc_type==9
         #get the two code
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
-        vj=get_v ({:inid=>"1",:ccode=>fee_m_code.ccode,:md=>total_amount,:md_f=>total_amount,:cdept_id=>afford_dep.code,:citem_id=>project.code,:ccode_equal=>fee_m_code.dcode})
+        vj=get_v ({:inid=>"1",
+          :ccode=>fee_m_code.ccode,
+          :md=>total_amount,:md_f=>total_amount,
+          :cdept_id=>afford_dep==nil ? "" : afford_dep.code,
+          :citem_id=>project==nil ? "": project.code,
+          :ccode_equal=>fee_m_code.dcode})
         vd=get_v ({
           :inid=>"2",
           :ccode=>fee_m_code.dcode,# dai kemu
