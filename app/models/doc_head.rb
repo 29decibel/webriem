@@ -57,6 +57,8 @@ class DocHead < ActiveRecord::Base
   has_many :reim_split_details, :class_name => "ReimSplitDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :common_riems, :class_name => "CommonRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :other_riems, :class_name => "OtherRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
+  #here is for the vouch info
+  has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
   accepts_nested_attributes_for :reim_split_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
@@ -382,8 +384,7 @@ class DocHead < ActiveRecord::Base
   #vouch infos
   #this is a massive method which contains a lot of logic 
   #and 'if else'
-  def vouches
-    vs=[]
+  def rg_vouches
     #look at if this already generate 
     if RAILS_ENV=="production"
       result=U8service::API.exist_vouch(doc_no)
@@ -406,10 +407,12 @@ class DocHead < ActiveRecord::Base
           :cdept_id=>afford_dep.code,# dep code
           :citem_id=>project.code,#project code
           :ccode_equal=>fee_m_code.ccode})
-        vs<<vj
-        vs<<vd
+        self.vouches.clear
+        self.vouches.create(vj)
+        self.vouches.create(vd)
       #交际费用，没有分摊，每个明细都是一条借
       elsif doc_type==10
+        self.vouches.clear
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
         #一条贷
         vd=get_v ({
@@ -419,7 +422,7 @@ class DocHead < ActiveRecord::Base
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
           :ccode_equal=>fee_m_code.dcode})
-        vs<<vd
+        self.vouches.create(vd)
         #n 条借
         rd_work_meals.each do |w_m|
           vj=get_v ({
@@ -429,10 +432,11 @@ class DocHead < ActiveRecord::Base
             :cdept_id=>w_m.dep==nil ? "" : w_m.dep.code,# dep code
             :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
             :ccode_equal=>fee_m_code.ccode})
-          vs<<vj
+        self.vouches.create(vj)
         end
       #加班费用，一个贷，两个借
       elsif doc_type==11
+        self.vouches.clear
         fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
         fee_m_code_car=FeeCodeMatch.find_by_fee_code("0602")
         #一条贷
@@ -443,7 +447,7 @@ class DocHead < ActiveRecord::Base
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
           :ccode_equal=>fee_m_code_meal.dcode})
-        vs<<vd
+        self.vouches.create(vd)
         #1个或2个借
         if rd_extra_work_meals.count>0
           total=0
@@ -455,7 +459,7 @@ class DocHead < ActiveRecord::Base
             :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code_meal.ccode})
-          vs<<vj
+        self.vouches.create(vj)
         end
         if rd_extra_work_cars.count>0
           total=0
@@ -467,10 +471,11 @@ class DocHead < ActiveRecord::Base
             :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code_car.ccode})
-          vs<<vj
+        self.vouches.create(vj)
         end
       #福利费用
       elsif doc_type==13
+        self.vouches.clear
         vd_codes=""
         #n条借方
         rd_benefits.each do |b|
@@ -484,7 +489,7 @@ class DocHead < ActiveRecord::Base
             :cdept_id=>dep==nil ? "": dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code.ccode})
-          vs<<vj
+          self.vouches.create(vj)
         end
         #一条贷
         vd=get_v ({
@@ -494,10 +499,9 @@ class DocHead < ActiveRecord::Base
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
           :ccode_equal=>vd_codes})
-        vs<<vd
+      self.vouches.create(vd)
       end
     end
-    vs
   end
   private
   def get_v(options)
