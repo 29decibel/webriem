@@ -436,52 +436,55 @@ class DocHead < ActiveRecord::Base
             :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
             :ccode_equal=>fee_m_code.ccode})
         self.vouches.create(vj)
-        end
       #加班费用，一个贷，两个借
       elsif doc_type==11
         self.vouches.clear
         fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
         fee_m_code_car=FeeCodeMatch.find_by_fee_code("0602")
+        #1个或2个借
+        inid_count=1
+        if rd_extra_work_meals.count>0
+          total=0
+          rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
+          vj=get_v ({
+            :inid=>"#{inid_count}",
+            :ccode=>fee_m_code_meal.dcode,# dai kemu
+            :md=>total,:md_f=>total,
+            :cdept_id=>self.afford_dep==nil ? "" : self.afford_dep.code,# dep code
+            :citem_id=>project==nil ? "" : project.code,#project code
+            :ccode_equal=>fee_m_code_meal.ccode})
+          self.vouches.create(vj)
+          inid_count=inid_count+1
+        end
+        if rd_extra_work_cars.count>0
+          total=0
+          rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
+          vj=get_v ({
+            :inid=>"#{inid_count}",
+            :ccode=>fee_m_code_car.dcode,# dai kemu
+            :md=>total,:md_f=>total,
+            :cdept_id=>self.afford_dep==nil ? "" : self.afford_dep.code,# dep code
+            :citem_id=>project==nil ? "" : project.code,#project code
+            :ccode_equal=>fee_m_code_car.ccode})
+          self.vouches.create(vj)
+          inid_count=inid_count+1
+        end
         #一条贷
         vd=get_v ({
-          :inid=>"2",
+          :inid=>"#{inid_count}",
           :ccode=>"#{fee_m_code_meal.ccode},#{fee_m_code_car.ccode}",# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
           :ccode_equal=>fee_m_code_meal.dcode})
         self.vouches.create(vd)
-        #1个或2个借
-        if rd_extra_work_meals.count>0
-          total=0
-          rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
-          vj=get_v ({
-            :inid=>"1",
-            :ccode=>fee_m_code_meal.dcode,# dai kemu
-            :md=>total,:md_f=>total,
-            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
-            :citem_id=>project==nil ? "" : project.code,#project code
-            :ccode_equal=>fee_m_code_meal.ccode})
-        self.vouches.create(vj)
-        end
-        if rd_extra_work_cars.count>0
-          total=0
-          rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
-          vj=get_v ({
-            :inid=>"1",
-            :ccode=>fee_m_code_car.dcode,# dai kemu
-            :md=>total,:md_f=>total,
-            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
-            :citem_id=>project==nil ? "" : project.code,#project code
-            :ccode_equal=>fee_m_code_car.ccode})
-        self.vouches.create(vj)
-        end
       #福利费用
       elsif doc_type==13
         self.vouches.clear
         vd_codes=[]
         fee_m_code=FeeCodeMatch.find_by_fee_code("04")
         #n条借方
+        inid_count=1
         rd_benefits.each do |b|
           #get fee code info
           if b.fee
@@ -489,17 +492,18 @@ class DocHead < ActiveRecord::Base
           end
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
-            :inid=>"1",
+            :inid=>"#{inid_count}",
             :ccode=>fee_m_code.dcode,# dai kemu
             :md=>b.fi_amount,:md_f=>b.fi_amount,
             :cdept_id=>dep==nil ? "": dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code.ccode})
           self.vouches.create(vj)
+          inid_count=inid_count+1
         end
         #一条贷
         vd=get_v ({
-          :inid=>"2",
+          :inid=>"#{inid_count}",
           :ccode=>fee_m_code.ccode,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
