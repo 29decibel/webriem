@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ino_id: MyString
+  inid: MyString
+  dbill_date: MyString
+  idoc: MyString
+  cbill: MyString
+  doc_no: MyString
+  ccode: MyString
+  cexch_name: MyString
+  md: MyString
+  mc: MyString
+  md_f: MyString
+  mc_f: MyString
+  nfrat: MyString
+  cdept_id: MyString
+  cperson_id: MyString
+  citem_id: MyString
+  ccode_equal: MyString
+
+two:
+  ino_id: MyString
+  inid: MyString
+  dbill_date: MyString
+  idoc: MyString
+  cbill: MyString
+  doc_no: MyString
+  ccode: MyString
+  cexch_name: MyString
+  md: MyString
+  mc: MyString
+  md_f: MyString
+  mc_f: MyString
+  nfrat: MyString
+  cdept_id: MyString
+  cperson_id: MyString
+  citem_id: MyString
+  ccode_equal: MyString
