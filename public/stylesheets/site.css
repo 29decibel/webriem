@@ -617,3 +617,9 @@ div.vouch_info{
 div.vouch_info:hover{
   background-color:#fff9e5;
 }
+/*redefine the image in the link in vouch*/
+div.vouch_info a img{
+  border:0px;
+  display:inline-block;
+  margin-left:5px;
+}
