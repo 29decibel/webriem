@@ -1,5 +1,5 @@
 <div class="form_title">
-  <h5>单据号为<%= doc.doc_no%><%= link_to "重新生成",{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true %></h5>
+  <h5>单据号为<%= doc.doc_no%><%= link_to image_tag("/images/icons/database_refresh.png"),{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true %></h5>
 </div>    
 <table class="hor-zebra">
   <tr>
