@@ -1,2 +1,2 @@
-$("#vd_<%= @doc.id%>").html("<%= render :partial=>"doc_vouch_info",:locals=>{:doc=>@doc}%>");
-alert("ok");
+$("#vd_<%= @doc.id%>").html("<%= excape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
+//alert("ok");
