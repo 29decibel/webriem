@@ -4,6 +4,7 @@ Webreim::Application.routes.draw do
 
   get "vouch/index"
   get "vouch/generate"
+  get "vouch/rg_vouch"
 
   resources :system_configs
 

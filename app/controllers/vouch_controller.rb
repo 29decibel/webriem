@@ -6,6 +6,10 @@ class VouchController < ApplicationController
     @docs=DocHead.where("id in (#{params[:doc_ids]})").all
     @docs.each {|d| d.rg_vouches if d.vouches.count==0}
   end
+  def rg_vouch
+    @doc=DocHead.find(params[:doc_id])
+
+  end
   #生成凭证的策略
   #1.判断该单据号是否已经生成过凭证，如果生成过则不生成，
   #并提醒删除那个凭证
