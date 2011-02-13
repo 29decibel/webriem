@@ -1,9 +1,9 @@
 <h1>Vouch info goes here</h1>
+<div class="form_title"><h3>选中单据的凭证预览</h3></div>
 <ul>
   <% @docs.each do |doc| %>
     <li>
-      <h3>单据号为<%= doc.doc_no%></h3>
-      凭证条数<%= doc.vouches.count%>
+      <div class="form_title"><h5>单据号为<%= doc.doc_no%></h5></div>    
       <table class="hor-zebra">
         <tr>
           <th>凭证号码</th><th>部门</th>
@@ -17,7 +17,7 @@
         <% doc.vouches.each do  |v|%>
           <tr>
             <td><%= v[:inid]%></td><td><%= v[:cdep_id]%></td>
-            <td><%= v[:ccode]%></td><td><%= v[:ccode_equal]%></td>
+            <td><%= truncate(v[:ccode],:length=>10)%></td><td><%= v[:ccode_equal]%></td>
             <td><%= v[:citem_id]%></td><td><%= v[:cperson_id]%></td>
             <td><%= v[:md]%></td><td><%= v[:mc]%></td>
             <td><%= v[:cexch_name]%></td><td><%= v[:nfrat]%></td>

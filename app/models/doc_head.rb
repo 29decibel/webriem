@@ -479,7 +479,7 @@ class DocHead < ActiveRecord::Base
       #福利费用
       elsif doc_type==13
         self.vouches.clear
-        vd_codes=""
+        vd_codes=[]
         fee_m_code=FeeCodeMatch.find_by_fee_code("04")
         #n条借方
         rd_benefits.each do |b|
@@ -504,7 +504,7 @@ class DocHead < ActiveRecord::Base
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
-          :ccode_equal=>vd_codes})
+          :ccode_equal=>vd_codes.join(',')})
       self.vouches.create(vd)
       end
     end
