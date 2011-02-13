@@ -215,7 +215,7 @@
     add_apply_item: 添加申请条目
     cash_draw_account: 提现账户
     cash_draw_money_remain: 提现前余额
-    btn_g_vouch: 生成凭证
+    btn_g_vouch: 生成U8凭证
   activerecord:
     #这里加入model的中文名称
     models:
