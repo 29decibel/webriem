@@ -418,25 +418,28 @@ class DocHead < ActiveRecord::Base
       if doc_type==10
         self.vouches.clear
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
+        init_count=1
+        #n 条借
+        rd_work_meals.each do |w_m|
+          vj=get_v ({
+            :inid=>"#{init_count}",
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
+            :cdept_id=>w_m.dep==nil ? "" : w_m.dep.code,# dep code
+            :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
+            :ccode_equal=>fee_m_code.ccode})
+          self.vouches.create(vj)
+          init_count=init_count+1
+        end
         #一条贷
         vd=get_v ({
-          :inid=>"2",
+          :inid=>"#{init_count}",
           :ccode=>fee_m_code.ccode,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
           :ccode_equal=>fee_m_code.dcode})
         self.vouches.create(vd)
-        #n 条借
-        rd_work_meals.each do |w_m|
-          vj=get_v ({
-            :inid=>"1",
-            :ccode=>fee_m_code.dcode,# dai kemu
-            :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
-            :cdept_id=>w_m.dep==nil ? "" : w_m.dep.code,# dep code
-            :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
-            :ccode_equal=>fee_m_code.ccode})
-        self.vouches.create(vj)
       end
       #加班费用，一个贷，两个借
       if doc_type==11
@@ -515,7 +518,6 @@ class DocHead < ActiveRecord::Base
         self.vouches.create(vd)
       end
     end
-  end
   end
   private
   def get_v(options)
