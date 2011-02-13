@@ -413,8 +413,9 @@ class DocHead < ActiveRecord::Base
         self.vouches.clear
         self.vouches.create(vj)
         self.vouches.create(vd)
+      end
       #交际费用，没有分摊，每个明细都是一条借
-      elsif doc_type==10
+      if doc_type==10
         self.vouches.clear
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
         #一条贷
@@ -436,8 +437,9 @@ class DocHead < ActiveRecord::Base
             :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
             :ccode_equal=>fee_m_code.ccode})
         self.vouches.create(vj)
+      end
       #加班费用，一个贷，两个借
-      elsif doc_type==11
+      if doc_type==11
         self.vouches.clear
         fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
         fee_m_code_car=FeeCodeMatch.find_by_fee_code("0602")
@@ -478,8 +480,9 @@ class DocHead < ActiveRecord::Base
           :citem_id=>"",#project code should select
           :ccode_equal=>fee_m_code_meal.dcode})
         self.vouches.create(vd)
+      end
       #福利费用
-      elsif doc_type==13
+      if doc_type==13
         self.vouches.clear
         vd_codes=[]
         fee_m_code=FeeCodeMatch.find_by_fee_code("04")
