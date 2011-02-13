@@ -4,18 +4,25 @@
     <li>
       <h3>单据号为<%= doc.doc_no%></h3>
       凭证条数<%= doc.vouches.count%>
-      <table>
+      <table class="hor-zebra">
         <tr>
           <th>凭证号码</th><th>部门</th>
           <th>借方科目</th><th>贷方科目</th>
           <th>项目</th><th>人员</th>
-          <th>借方金额</th><th>贷方金额</th></tr>
+          <th>借方金额</th><th>贷方金额</th>
+          <th>币种</th><th>汇率</th>
+          <th>凭证日期</th><th>成单者</th>
+          <th>附件张数</th>
+        </tr>
         <% doc.vouches.each do  |v|%>
           <tr>
             <td><%= v[:inid]%></td><td><%= v[:cdep_id]%></td>
             <td><%= v[:ccode]%></td><td><%= v[:ccode_equal]%></td>
             <td><%= v[:citem_id]%></td><td><%= v[:cperson_id]%></td>
             <td><%= v[:md]%></td><td><%= v[:mc]%></td>
+            <td><%= v[:cexch_name]%></td><td><%= v[:nfrat]%></td>
+            <td><%= v[:dbill_date]%></td><td><%= v[:cbill]%></td>
+            <td><%= v[:idoc]%></td>
           </tr>
         <% end %>
       </table>
