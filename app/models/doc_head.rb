@@ -395,8 +395,6 @@ class DocHead < ActiveRecord::Base
     else
       #差旅费用【只生成一个借和一个贷，】
       if doc_type==9
-        #check the afford dep
-        return vs if afford_dep==nil
         #get the two code
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
         vj=get_v ({:inid=>"1",:ccode=>fee_m_code.ccode,:md=>total_amount,:md_f=>total_amount,:cdept_id=>afford_dep.code,:citem_id=>project.code,:ccode_equal=>fee_m_code.dcode})
@@ -404,8 +402,8 @@ class DocHead < ActiveRecord::Base
           :inid=>"2",
           :ccode=>fee_m_code.dcode,# dai kemu
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
-          :cdept_id=>afford_dep.code,# dep code
-          :citem_id=>project.code,#project code
+          :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
+          :citem_id=>project==nil ? "": project.code,#project code
           :ccode_equal=>fee_m_code.ccode})
         self.vouches.clear
         self.vouches.create(vj)
