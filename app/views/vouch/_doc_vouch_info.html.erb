@@ -13,7 +13,7 @@
   </tr>
   <% doc.vouches.each do  |v|%>
     <tr>
-      <td><%= v[:inid]%></td><td><%= v[:cdep_id]%></td>
+      <td><%= v[:inid]%></td><td><%= v[:cdept_id]%></td>
       <td><%= truncate(v[:ccode].to_s,:length=>10)%></td>
       <td><%= truncate(v[:ccode_equal].to_s,:length=>10)%></td>
       <td><%= v[:citem_id]%></td><td><%= v[:cperson_id]%></td>

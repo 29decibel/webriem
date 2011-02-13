@@ -455,7 +455,7 @@ class DocHead < ActiveRecord::Base
             :inid=>"#{inid_count}",
             :ccode=>fee_m_code_meal.dcode,# dai kemu
             :md=>total,:md_f=>total,
-            :cdept_id=>self.afford_dep==nil ? "" : self.afford_dep.code,# dep code
+            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code_meal.ccode})
           self.vouches.create(vj)
@@ -468,7 +468,7 @@ class DocHead < ActiveRecord::Base
             :inid=>"#{inid_count}",
             :ccode=>fee_m_code_car.dcode,# dai kemu
             :md=>total,:md_f=>total,
-            :cdept_id=>self.afford_dep==nil ? "" : self.afford_dep.code,# dep code
+            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
             :ccode_equal=>fee_m_code_car.ccode})
           self.vouches.create(vj)
