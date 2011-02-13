@@ -609,3 +609,7 @@ div#mark_the_doc{
 	margin: 2px;
 	padding: 0px;
 }
+/*the vouch info area*/
+div.vouch_info:hover{
+  border:1px solid #ccc;
+}
