@@ -8,7 +8,7 @@ class VouchController < ApplicationController
   end
   def rg_vouch
     @doc=DocHead.find(params[:doc_id])
-
+    @doc.rg_vouches
   end
   #生成凭证的策略
   #1.判断该单据号是否已经生成过凭证，如果生成过则不生成，
