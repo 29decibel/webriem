@@ -1,4 +1,5 @@
 #coding: utf-8
+require "#{Rails.root}/app/u8service/api.rb"
 class DocHead < ActiveRecord::Base
   belongs_to :fee
   belongs_to :dep
@@ -384,12 +385,10 @@ class DocHead < ActiveRecord::Base
   def vouches
     vs=[]
     #look at if this already generate 
-    result=U8service::API.exist_vouch(doc_no)
-    return vs if result["Exist"]
-    #get current max vouch no and plus 1 as current vouch no
-    vouch_no=U8service::API.max_vouch_info["MaxNo"].to_i + 1
-    #the time
-    time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
+    if RAILS_ENV=="production"
+      result=U8service::API.exist_vouch(doc_no)
+      return vs if result["Exist"]
+    end
     #分摊的逻辑
     if is_split==1
     else
@@ -399,59 +398,37 @@ class DocHead < ActiveRecord::Base
         return vs if afford_dep==nil
         #get the two code
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
-        vj={
-          :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-          :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
-          :ccode=>fee_m_code.ccode,# dai kemu
-          :cexch_name=>"人民币",#currency name
-          :md=>total_amount,:mc=>"0",:md_f=>total_amount,:mc_f=>"0",
-          :nfrat=>"1",# currency rate
-          :cdept_id=>afford_dep.code,# dep code
-          :cperson_id=>person.code,#person code
-          :citem_id=>project.code,#project code
-          :ccode_equal=>fee_m_code.dcode}
-        vd={
-          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
-          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+        vj=get_v ({:inid=>"1",:ccode=>fee_m_code.ccode,:md=>total_amount,:md_f=>total_amount,:cdept_id=>afford_dep.code,:citem_id=>project.code,:ccode_equal=>fee_m_code.dcode})
+        vd=get_v ({
+          :inid=>"2",
           :ccode=>fee_m_code.dcode,# dai kemu
-          :cexch_name=>"人民币",#currency name
-          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
-          :nfrat=>"1",# currency rate
+          :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>afford_dep.code,# dep code
-          :cperson_id=>person.code,#person code
           :citem_id=>project.code,#project code
-          :ccode_equal=>fee_m_code.ccode}
+          :ccode_equal=>fee_m_code.ccode})
         vs<<vj
         vs<<vd
       #交际费用，没有分摊，每个明细都是一条借
       elsif doc_type==10
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
         #一条贷
-        vd={
-          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
-          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+        vd=get_v ({
+          :inid=>"2",
           :ccode=>fee_m_code.ccode,# dai kemu
-          :cexch_name=>"人民币",#currency name
-          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
-          :nfrat=>"1",# currency rate
+          :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
-          :cperson_id=>person.code,#person code
           :citem_id=>"",#project code should select
-          :ccode_equal=>fee_m_code.dcode}
+          :ccode_equal=>fee_m_code.dcode})
         vs<<vd
         #n 条借
         rd_work_meals.each do |w_m|
-          vj={
-            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+          vj=get_v ({
+            :inid=>"1",
             :ccode=>fee_m_code.dcode,# dai kemu
-            :cexch_name=>"人民币",#currency name
-            :md=>w_m.apply_amount,:mc=>"0",:md_f=>w_m.apply_amount,:mc_f=>"0",
-            :nfrat=>"1",# currency rate
-            :cdept_id=>w_m.dep.code,# dep code
-            :cperson_id=>person.code,#person code
-            :citem_id=>w_m.project.code,#project code
-            :ccode_equal=>fee_m_code.ccode}
+            :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
+            :cdept_id=>w_m.dep==nil ? "" : w_m.dep.code,# dep code
+            :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
+            :ccode_equal=>fee_m_code.ccode})
           vs<<vj
         end
       #加班费用，一个贷，两个借
@@ -459,49 +436,37 @@ class DocHead < ActiveRecord::Base
         fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
         fee_m_code_car=FeeCodeMatch.find_by_fee_code("0602")
         #一条贷
-        vd={
-          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
-          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+        vd=get_v ({
+          :inid=>"2",
           :ccode=>"#{fee_m_code_meal.ccode},#{fee_m_code_car.ccode}",# dai kemu
-          :cexch_name=>"人民币",#currency name
-          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
-          :nfrat=>"1",# currency rate
+          :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
-          :cperson_id=>person.code,#person code
           :citem_id=>"",#project code should select
-          :ccode_equal=>fee_m_code_meal.dcode}
+          :ccode_equal=>fee_m_code_meal.dcode})
         vs<<vd
         #1个或2个借
         if rd_extra_work_meals.count>0
           total=0
           rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
-          vj={
-            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+          vj=get_v ({
+            :inid=>"1",
             :ccode=>fee_m_code_meal.dcode,# dai kemu
-            :cexch_name=>"人民币",#currency name
-            :md=>total,:mc=>"0",:md_f=>total,:mc_f=>"0",
-            :nfrat=>"1",# currency rate
-            :cdept_id=>afford_dep.code,# dep code
-            :cperson_id=>person.code,#person code
-            :citem_id=>project.code,#project code
-            :ccode_equal=>fee_m_code_meal.ccode}
+            :md=>total,:md_f=>total,
+            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
+            :citem_id=>project==nil ? "" : project.code,#project code
+            :ccode_equal=>fee_m_code_meal.ccode})
           vs<<vj
         end
         if rd_extra_work_cars.count>0
           total=0
           rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
-          vj={
-            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+          vj=get_v ({
+            :inid=>"1",
             :ccode=>fee_m_code_car.dcode,# dai kemu
-            :cexch_name=>"人民币",#currency name
-            :md=>total,:mc=>"0",:md_f=>total,:mc_f=>"0",
-            :nfrat=>"1",# currency rate
-            :cdept_id=>afford_dep.code,# dep code
-            :cperson_id=>person.code,#person code
-            :citem_id=>project.code,#project code
-            :ccode_equal=>fee_m_code_car.ccode}
+            :md=>total,:md_f=>total,
+            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
+            :citem_id=>project==nil ? "" : project.code,#project code
+            :ccode_equal=>fee_m_code_car.ccode})
           vs<<vj
         end
       #福利费用
@@ -512,35 +477,49 @@ class DocHead < ActiveRecord::Base
           #get fee code info
           fee_m_code=FeeCodeMatch.find_by_fee_code(b.fee.code)
           vd_codes<<fee_m_code.dcode.to_s
-          vj={
-            :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-            :idoc=>"0",:cbill=>"ExepenseSys",:doc_no=>doc_no,
+          vj=get_v ({
+            :inid=>"1",
             :ccode=>fee_m_code.dcode,# dai kemu
-            :cexch_name=>"人民币",#currency name
-            :md=>b.fi_amount,:mc=>"0",:md_f=>b.fi_amount,:mc_f=>"0",
-            :nfrat=>"1",# currency rate
-            :cdept_id=>dep.code,# dep code
-            :cperson_id=>person.code,#person code
+            :md=>b.fi_amount,:md_f=>b.fi_amount,
+            :cdept_id=>dep==nil ? "": dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
-            :ccode_equal=>fee_m_code.ccode}
+            :ccode_equal=>fee_m_code.ccode})
           vs<<vj
         end
         #一条贷
-        vd={
-          :ino_id=>"#{vouch_no}",:inid=>"2",:dbill_date=>time,
-          :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+        vd=get_v ({
+          :inid=>"2",
           :ccode=>fee_m_code.ccode,# dai kemu
-          :cexch_name=>"人民币",#currency name
-          :md=>"0",:mc=>total_amount,:md_f=>"0",:mc_f=>total_amount,
-          :nfrat=>"1",# currency rate
+          :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
-          :cperson_id=>person.code,#person code
           :citem_id=>"",#project code should select
-          :ccode_equal=>vd_codes}
+          :ccode_equal=>vd_codes})
         vs<<vd
-
       end
     end
     vs
+  end
+  private
+  def get_v(options)
+    #get current max vouch no and plus 1 as current vouch no
+    vouch_no="test in dev"
+    if RAILS_ENV=="production"
+      vouch_no=U8service::API.max_vouch_info["MaxNo"].to_i + 1
+    end
+    #the time
+    time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
+    #default options
+    default_opt={
+      :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
+      :idoc=>"0",:cbill=>"ExpenseSys",:doc_no=>doc_no,
+      :ccode=>"",# dai kemu
+      :cexch_name=>"人民币",#currency name
+      :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",
+      :nfrat=>"1",# currency rate
+      :cdept_id=>"",# dep code should select
+      :cperson_id=>person.code,#person code
+      :citem_id=>"",#project code should select
+      :ccode_equal=>""}
+    default_opt.merge! options
   end
 end
