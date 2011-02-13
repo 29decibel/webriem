@@ -1,4 +1,6 @@
 <div class="form_title"><h3>选中单据的凭证预览</h3></div>
 <% @docs.each do |doc| %>
-  <%= render :partial=>"doc_vouch_info",:locals=>{:doc=>doc}%>
+  <div id="vd_<%= doc.id%>" class="vouch_info">
+    <%= render :partial=>"doc_vouch_info",:locals=>{:doc=>doc}%>
+  </div>
 <% end %>

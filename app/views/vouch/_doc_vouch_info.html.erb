@@ -1,29 +1,27 @@
-<div id="vd_<%= doc.id%>" class="vouch_info">
-  <div class="form_title">
-    <h5>单据号为<%= doc.doc_no%><%= link_to "重新生成",{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true %></h5>
-  </div>    
-  <table class="hor-zebra">
+<div class="form_title">
+  <h5>单据号为<%= doc.doc_no%><%= link_to "重新生成",{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true %></h5>
+</div>    
+<table class="hor-zebra">
+  <tr>
+    <th>凭证号码</th><th>部门</th>
+    <th>借方科目</th><th>贷方科目</th>
+    <th>项目</th><th>人员</th>
+    <th>借方金额</th><th>贷方金额</th>
+    <th>币种</th><th>汇率</th>
+    <th>凭证日期</th><th>成单者</th>
+    <th>附件张数</th>
+  </tr>
+  <% doc.vouches.each do  |v|%>
     <tr>
-      <th>凭证号码</th><th>部门</th>
-      <th>借方科目</th><th>贷方科目</th>
-      <th>项目</th><th>人员</th>
-      <th>借方金额</th><th>贷方金额</th>
-      <th>币种</th><th>汇率</th>
-      <th>凭证日期</th><th>成单者</th>
-      <th>附件张数</th>
+      <td><%= v[:inid]%></td><td><%= v[:cdep_id]%></td>
+      <td><%= truncate(v[:ccode].to_s,:length=>10)%></td>
+      <td><%= truncate(v[:ccode_equal].to_s,:length=>10)%></td>
+      <td><%= v[:citem_id]%></td><td><%= v[:cperson_id]%></td>
+      <td><%= v[:md]%></td><td><%= v[:mc]%></td>
+      <td><%= v[:cexch_name]%></td><td><%= v[:nfrat]%></td>
+      <td><%= v[:dbill_date]%></td><td><%= v[:cbill]%></td>
+      <td><%= v[:idoc]%></td>
     </tr>
-    <% doc.vouches.each do  |v|%>
-      <tr>
-        <td><%= v[:inid]%></td><td><%= v[:cdep_id]%></td>
-        <td><%= truncate(v[:ccode].to_s,:length=>10)%></td>
-        <td><%= truncate(v[:ccode_equal].to_s,:length=>10)%></td>
-        <td><%= v[:citem_id]%></td><td><%= v[:cperson_id]%></td>
-        <td><%= v[:md]%></td><td><%= v[:mc]%></td>
-        <td><%= v[:cexch_name]%></td><td><%= v[:nfrat]%></td>
-        <td><%= v[:dbill_date]%></td><td><%= v[:cbill]%></td>
-        <td><%= v[:idoc]%></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
+  <% end %>
+</table>
 
