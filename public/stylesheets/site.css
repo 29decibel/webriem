@@ -615,6 +615,5 @@ div.vouch_info{
   padding:3px;
 }
 div.vouch_info:hover{
-  border:1px solid #ccc;
   background-color:#fff9e5;
 }
