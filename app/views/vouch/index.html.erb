@@ -3,7 +3,22 @@
   <% @docs.each do |doc| %>
     <li>
       <h3>单据号为<%= doc.doc_no%></h3>
-      <%= doc.vouches.count%>
+      凭证条数<%= doc.vouches.count%>
+      <table>
+        <tr>
+          <th>凭证号码</th><th>部门</th>
+          <th>借方科目</th><th>贷方科目</th>
+          <th>项目</th><th>人员</th>
+          <th>借方金额</th><th>贷方金额</th></tr>
+        <% doc.vouches.each do  |v|%>
+          <tr>
+            <td><%= v[:inid]%></td><td><%= v[:cdep_id]%></td>
+            <td><%= v[:ccode]%></td><td><%= v[:ccode_equal]%></td>
+            <td><%= v[:citem_id]%></td><td><%= v[:cperson_id]%></td>
+            <td><%= v[:md]%></td><td><%= v[:mc]%></td>
+          </tr>
+        <% end %>
+      </table>
     </li>
   <% end %>
 </ul>
