@@ -480,10 +480,13 @@ class DocHead < ActiveRecord::Base
       elsif doc_type==13
         self.vouches.clear
         vd_codes=""
+        fee_m_code=FeeCodeMatch.find_by_fee_code("04")
         #n条借方
         rd_benefits.each do |b|
           #get fee code info
-          fee_m_code=FeeCodeMatch.find_by_fee_code(b.fee.code)
+          if b.fee
+            fee_m_code=FeeCodeMatch.find_by_fee_code(b.fee.code)
+          end
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
             :inid=>"1",
