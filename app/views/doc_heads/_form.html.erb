@@ -628,7 +628,7 @@
 					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
 				    <th><%= "#{I18n.t('common_attr.afford_dep')}"%></th>							    
 				    <th><%= "#{I18n.t('common_attr.project')}"%></th>
-					<% if @doc_head.doc_type!=9 %>
+					<% if @doc_head.doc_type==13 %>
 						<th><%= "#{I18n.t('common_attr.fee')}"%></th>
 					<% end %>
 					<th><%= "#{I18n.t('common_attr.split_amount')}"%></th>
@@ -641,7 +641,7 @@
 				<% end %>				
 			</tbody>
 			<tr>
-				<th colspan="2"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
+        <th colspan="<%= @doc_head.doc_type==13 ? "3" : "2"%>"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
 				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
 				<td><%= text_field_tag 'split_total_amount', nil, :class => 'split_total_amount normal'%></td>
 				<td></td>
