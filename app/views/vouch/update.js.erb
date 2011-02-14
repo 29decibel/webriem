@@ -4,4 +4,5 @@ $(document).trigger("close.facebox");
 $("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
 //just show a message to test
 //alert("ok you just update a vouch!");
-
+//add the facebox effect
+$("a.facebox").faecbox();
