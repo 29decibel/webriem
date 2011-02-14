@@ -626,11 +626,17 @@ div.vouch_info a img{
 /*facebox page 's inputs*/
 div.fb_field{
   display:block;
+  margin-bottom:2px;
+}
+div.fb_actions{
+  display:block;
+  margin-top:2px;
 }
 div.fb_field label{
   width:80px;
   text-align:right;
   margin-right:3px;
+  display:inline-block;
 }
 div.fb_field input {
   width:200px;

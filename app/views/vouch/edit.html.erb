@@ -1,4 +1,4 @@
-<h4>Using css beautiful this form.</h4>
+<h4>凭证明细修改.</h4>
 <% form_for @vouch,:url=>"/vouch/update",:remote=>true do |f| -%>
   <%= f.hidden_field :id %>
   <div class="fb_field"><%= f.label :dbill_date, '' %><%= f.text_field :dbill_date %></div>
@@ -6,5 +6,5 @@
   <div class="fb_field"><%= f.label :cbill, 'cbill' %><%= f.text_field :cbill %></div>
   <div class="fb_field"><%= f.label :ccode, 'ccode' %><%= f.text_field :ccode %></div>
   <div class="fb_field"><%= f.label :ccode_equal, 'ccode_equal' %><%= f.text_field :ccode_equal %></div>
-  <div class="fb_field"><%= f.submit "Update",:class=>"button2" %></div>
+  <div class="fb_actions"><%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %></div>
 <% end -%>
