@@ -1,4 +1,4 @@
-<h4>凭证分录明细修改.【分录号<%= @vouch.inid%>】</h4>
+<h4>凭证明细修改.【单据号<%= @vouch.doc_head.doc_no%>】【分录号<%= @vouch.inid%>】</h4>
 <% form_for @vouch,:url=>"/vouch/update",:remote=>true do |f| -%>
   <%= f.hidden_field :id %>
   <div class="fb_field"><%= f.label :dbill_date %><%= f.text_field :dbill_date %></div>
