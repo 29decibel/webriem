@@ -1,8 +1,3 @@
-<script type="javascript">
-  $(function(){
-      $(".datepicker").datepicker();
-  });
-</script>
 <div class="fb_title"><h4 >凭证明细修改.【单据号<%= @vouch.doc_head.doc_no%>】【分录号<%= @vouch.inid%>】</h4></div>
 <% form_for @vouch,:url=>"/vouch/update",:remote=>true do |f| -%>
   <%= f.hidden_field :id %>
@@ -15,3 +10,9 @@
   <div class="fb_field"><%= f.label :ccode_equal %><%= f.text_field :ccode_equal %></div>
   <div class="fb_actions"><%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %></div>
 <% end -%>
+<script type="javascript">
+  $(function(){
+      $(".datepicker").datepicker();
+  });
+</script>
+
