@@ -2,6 +2,7 @@ Webreim::Application.routes.draw do
 
   resources :fee_code_matches
 
+  get "vouch/update"
   post "vouch/update"
   get "vouch/index"
   get "vouch/generate"
