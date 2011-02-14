@@ -519,6 +519,7 @@ class DocHead < ActiveRecord::Base
       end
       #普通费用
       if doc_type==12
+        self.vouches.clear
         #default fee code match
         fee_m_code=FeeCodeMatch.find_by_fee_code("01")
         inid_count=1
