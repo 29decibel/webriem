@@ -2,7 +2,7 @@ Webreim::Application.routes.draw do
 
   resources :fee_code_matches
 
-  post "vouch/update"
+  #post "vouch/update" i don't know why this doesn't work???
   get "vouch/index"
   get "vouch/generate"
   get "vouch/rg_vouch"

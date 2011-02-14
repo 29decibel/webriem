@@ -1,5 +1,6 @@
 <h4>Using css beautiful this form.</h4>
 <% form_for @vouch,:url=>"/vouch/update",:remote=>true do |f| -%>
+  <%= f.hidden_field :id %>
   <%= f.label :dbill_date, '' %><%= f.text_field :dbill_date %>
   <%= f.label :idoc, 'idoc' %><%= f.text_field :idoc %>
   <%= f.label :cbill, 'cbill' %><%= f.text_field :cbill %>
