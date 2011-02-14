@@ -398,18 +398,18 @@ class DocHead < ActiveRecord::Base
         #get the two code
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
         vj=get_v ({:inid=>"1",
-          :ccode=>fee_m_code.ccode,
+          :ccode=>fee_m_code.ccode.to_s,
           :md=>total_amount,:md_f=>total_amount,
           :cdept_id=>afford_dep==nil ? "" : afford_dep.code,
           :citem_id=>project==nil ? "": project.code,
-          :ccode_equal=>fee_m_code.dcode})
+          :ccode_equal=>fee_m_code.dcode.to_s})
         vd=get_v ({
           :inid=>"2",
-          :ccode=>fee_m_code.dcode,# dai kemu
+          :ccode=>fee_m_code.dcode.to_s,# dai kemu
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
           :citem_id=>project==nil ? "": project.code,#project code
-          :ccode_equal=>fee_m_code.ccode})
+          :ccode_equal=>fee_m_code.ccode.to_s})
         self.vouches.clear
         self.vouches.create(vj)
         self.vouches.create(vd)
@@ -423,22 +423,22 @@ class DocHead < ActiveRecord::Base
         rd_work_meals.each do |w_m|
           vj=get_v ({
             :inid=>"#{init_count}",
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code.dcode.to_s,# dai kemu
             :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
             :cdept_id=>w_m.dep==nil ? "" : w_m.dep.code,# dep code
             :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
-            :ccode_equal=>fee_m_code.ccode})
+            :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           init_count=init_count+1
         end
         #一条贷
         vd=get_v ({
           :inid=>"#{init_count}",
-          :ccode=>fee_m_code.ccode,# dai kemu
+          :ccode=>fee_m_code.ccode.to_s,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
-          :ccode_equal=>fee_m_code.dcode})
+          :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.create(vd)
       end
       #加班费用，一个贷，两个借
@@ -499,18 +499,18 @@ class DocHead < ActiveRecord::Base
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code.dcode.to_s,# dai kemu
             :md=>b.fi_amount,:md_f=>b.fi_amount,
             :cdept_id=>dep==nil ? "": dep.code,# dep code
             :citem_id=>project==nil ? "" : project.code,#project code
-            :ccode_equal=>fee_m_code.ccode})
+            :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
         #一条贷
         vd=get_v ({
           :inid=>"#{inid_count}",
-          :ccode=>fee_m_code.ccode,# dai kemu
+          :ccode=>fee_m_code.ccode.to_s,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
@@ -530,11 +530,11 @@ class DocHead < ActiveRecord::Base
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code.dcode.to_s,# dai kemu
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :cdept_id=>r.dep==nil ? "": r.dep.code,# dep code
             :citem_id=>r.project==nil ? "" : r.project.code,#project code
-            :ccode_equal=>fee_m_code.ccode})
+            :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
@@ -545,11 +545,11 @@ class DocHead < ActiveRecord::Base
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code.dcode.to_s,# dai kemu
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :cdept_id=>r.dep==nil ? "": r.dep.code,# dep code
             :citem_id=>r.project==nil ? "" : r.project.code,#project code
-            :ccode_equal=>fee_g_code.ccode})
+            :ccode_equal=>fee_g_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
@@ -560,18 +560,18 @@ class DocHead < ActiveRecord::Base
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :ccode=>fee_m_code.dcode,# dai kemu
+            :ccode=>fee_m_code.dcode.to_s,# dai kemu
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :cdept_id=>r.dep==nil ? "": r.dep.code,# dep code
             :citem_id=>r.project==nil ? "" : r.project.code,#project code
-            :ccode_equal=>fee_y_code.ccode})
+            :ccode_equal=>fee_y_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
         #1条贷
         vd=get_v ({
           :inid=>"#{inid_count}",
-          :ccode=>fee_m_code.ccode,# dai kemu
+          :ccode=>fee_m_code.ccode.to_s,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :cdept_id=>"",# dep code should select
           :citem_id=>"",#project code should select
