@@ -18,7 +18,7 @@ class VouchController < ApplicationController
   end
   #update the value and update the vouch_info div
   def update
-    @vouch=Vouch.find(params[:id])
+    @vouch=Vouch.find(params[:vouch][:id])
     @vouch.update_attributes(params[:vouch])
     @doc=@vouch.doc_head
   end
