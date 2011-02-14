@@ -1,9 +1,10 @@
-//close the facebox and update the partial stuff
-$(document).trigger("close.facebox");
 //current we just update the whole doc vouch info
 $("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
 //just show a message to test
 //alert("ok you just update a vouch!");
 //add the facebox effect
 $("a.facebox").faecbox();
-$(document).trigger('ready');
+//$(document).trigger('ready');
+//close the facebox and update the partial stuff
+$(document).trigger("close.facebox");
+
