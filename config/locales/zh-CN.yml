@@ -276,9 +276,11 @@
       vouch:
         dbill_date: "凭证日期"
         idoc: "附件张数"
-        cbill: "成单者"
+        cbill: "成单人"
         ccode: "贷方科目"
         ccode_equal: "对方科目"
+        cdept_id: "部门"
+        citem_id: "项目"
       account:
         name: "账户名称"  
         account_no: "帐号"
