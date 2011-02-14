@@ -623,3 +623,16 @@ div.vouch_info a img{
   display:inline-block;
   margin-left:5px;
 }
+/*facebox page 's inputs*/
+div.fb_field{
+  display:block;
+}
+div.fb_field label{
+  width:80px;
+  text-align:right;
+  margin-right:3px;
+}
+div.fb_field input {
+  width:200px;
+  margin-left:2px;
+}

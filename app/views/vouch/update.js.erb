@@ -1,11 +1,9 @@
-//$(document).trigger('ready');
 //close the facebox and update the partial stuff
 $(document).trigger("close.facebox");
 //current we just update the whole doc vouch info
 $("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
-//just show a message to test
-//alert("ok you just update a vouch!");
+//only bind the replaced html's facebox effect
 //add the facebox effect
-$("a.facebox").facebox();
+$("#vd_<%= @doc.id%> a.facebox").facebox();
 
 
