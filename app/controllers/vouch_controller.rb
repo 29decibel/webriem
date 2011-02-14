@@ -10,6 +10,17 @@ class VouchController < ApplicationController
     @doc=DocHead.find(params[:doc_id])
     @doc.rg_vouches
   end
+  #edit just one vouch
+  #return the edit form to the facebox 
+  def edit
+    @vouch=Vouch.find(params[:vouch_id])
+  end
+  #update the value and update the vouch_info div
+  def update
+    @vouch=Vouch.find(params[:id])
+    @vouch.update_attributes(params[:vouch])
+    @doc=@vouch.doc_head
+  end
   #生成凭证的策略
   #1.判断该单据号是否已经生成过凭证，如果生成过则不生成，
   #并提醒删除那个凭证
