@@ -517,6 +517,66 @@ class DocHead < ActiveRecord::Base
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
       end
+      #普通费用
+      if doc_type==12
+        #default fee code match
+        fee_m_code=FeeCodeMatch.find_by_fee_code("01")
+        inid_count=1
+        vd_codes=[]
+        #普通费用n条借
+        common_riems.each do |r|
+          #get fee code info
+          vd_codes<<fee_m_code.dcode.to_s
+          vj=get_v ({
+            :inid=>"#{inid_count}",
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :md=>r.apply_amount,:md_f=>r.apply_amount,
+            :cdept_id=>r.dep==nil ? "": r.dep.code,# dep code
+            :citem_id=>r.project==nil ? "" : r.project.code,#project code
+            :ccode_equal=>fee_m_code.ccode})
+          self.vouches.create(vj)
+          inid_count=inid_count+1
+        end
+        #工作餐费n条借
+        fee_g_code=FeeCodeMatch.find_by_fee_code("0102")
+        rd_work_meals.each do |r|
+          #get fee code info
+          vd_codes<<fee_m_code.dcode.to_s
+          vj=get_v ({
+            :inid=>"#{inid_count}",
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :md=>r.apply_amount,:md_f=>r.apply_amount,
+            :cdept_id=>r.dep==nil ? "": r.dep.code,# dep code
+            :citem_id=>r.project==nil ? "" : r.project.code,#project code
+            :ccode_equal=>fee_g_code.ccode})
+          self.vouches.create(vj)
+          inid_count=inid_count+1
+        end
+        #业务交通费用n条借
+        fee_y_code=FeeCodeMatch.find_by_fee_code("0103")
+        rd_common_transports.each do |r|
+          #get fee code info
+          vd_codes<<fee_m_code.dcode.to_s
+          vj=get_v ({
+            :inid=>"#{inid_count}",
+            :ccode=>fee_m_code.dcode,# dai kemu
+            :md=>r.apply_amount,:md_f=>r.apply_amount,
+            :cdept_id=>r.dep==nil ? "": r.dep.code,# dep code
+            :citem_id=>r.project==nil ? "" : r.project.code,#project code
+            :ccode_equal=>fee_y_code.ccode})
+          self.vouches.create(vj)
+          inid_count=inid_count+1
+        end
+        #1条贷
+        vd=get_v ({
+          :inid=>"#{inid_count}",
+          :ccode=>fee_m_code.ccode,# dai kemu
+          :mc=>total_amount,:mc_f=>total_amount,
+          :cdept_id=>"",# dep code should select
+          :citem_id=>"",#project code should select
+          :ccode_equal=>vd_codes.join(',')})
+        self.vouches.create(vd)
+      end
     end
   end
   private
