@@ -25,7 +25,7 @@
       <td><%= v[:cexch_name]%></td><td><%= v[:nfrat]%></td>
       <td><%= v[:dbill_date]%></td><td><%= v[:cbill]%></td>
       <td><%= v[:idoc]%></td>
-      <td><%= link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true,:class="facebox" %>
+      <td><%= link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true,:class=>"facebox" %>
 </td>
     </tr>
   <% end %>
