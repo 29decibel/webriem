@@ -1,6 +1,6 @@
 <div class="form_title">
   <h5>
-    单据号为<%= doc.doc_no%>
+    单据号为<%= doc.doc_no%>【最后更新时间<%= Time.now%>】
     <%= link_to image_tag("/images/icons/database_refresh.png"),{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true %>
   </h5>
 </div>    

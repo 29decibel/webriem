@@ -1,2 +1,3 @@
 $("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
-alert("成功重新生成凭证信息");
+//bind facebox
+$("#vd_<%= @doc.id%> a.facebox").facebox();
