@@ -7,8 +7,10 @@ class PriTaskController < ApplicationController
   def import_u8_codes
     begin
       u8codes=JSON U8service::API.get_codes
-      U8code.delete_all if u8codes.count>0
+      #never delete 
       u8codes.each do |u8_model|
+        #current year not exist then create
+        next if U8code.where("year =#{Time.now.year} and ccode=#{u8_model["ccode"]}").count>0
         model=U8code.new
         model.cclass=u8_model["cclass"]
         model.ccode=u8_model["ccode"]
@@ -19,6 +21,7 @@ class PriTaskController < ApplicationController
         model.bperson=u8_model["bperson"]
         model.bitem=u8_model["bitem"]
         model.bdept=u8_model["bdept"]
+        model.year=Time.now.year
         model.save
       end
     rescue Exception=>msg
