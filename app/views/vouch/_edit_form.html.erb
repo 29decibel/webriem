@@ -5,11 +5,11 @@
   <div class="fb_field"><%= f.label :cbill %><%= f.text_field :cbill %></div>
   <div class="fb_field">
     <%= f.label :ccode %>
-    <span class="reference">
+    <div class="reference">
 			<%= f.hidden_field :code_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "ccode",@vouch.ccode,:class=>"ref" %>
 			<a href="#" class-data="U8code"><span class="reference"></span></a>			
-		</span>
+		</div>
   </div>
   <div class="fb_field">
     <%= f.label :cdept_id %>

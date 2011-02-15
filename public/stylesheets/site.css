@@ -457,15 +457,17 @@ div a.new_object{
 div.reference{
 	position:relative;
 	display:inline-block;
+  border:1px solid #ccc;
+  padding:0px;
 }
 div.reference input{
 	display:inline-block;
-	margin-right: 0px;
+	margin: 0px;
 	width:200px;
 }
 div.reference input.large{
 	display:inline-block;
-	margin-right: 0px;
+	margin: 0px;
 	width:416px;
 }
 table div.reference input{
