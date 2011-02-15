@@ -3,7 +3,13 @@
   <div class="fb_field"><%= f.label :dbill_date %><%= f.text_field :dbill_date ,:class=>"datepicker"%></div>
   <div class="fb_field"><%= f.label :idoc %><%= f.text_field :idoc %></div>
   <div class="fb_field"><%= f.label :cbill %><%= f.text_field :cbill %></div>
-  <div class="fb_field"><%= f.label :ccode %><%= f.text_field :ccode %></div>
+  <div class="fb_field">
+    <div class="reference">
+			<%= f.hidden_field :code_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "ccode_id",@vouch.ccode_id,:class=>"ref" %>
+			<a href="#" class-data="U8code"><span class="reference"></span></a>			
+		</div>
+  </div>
   <div class="fb_field">
     <div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
@@ -11,7 +17,13 @@
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
 		</div>
   </div>
-  <div class="fb_field"><%= f.label :citem_id %><%= f.text_field :citem_id %></div>
+  <div class="fb_field">
+    <div class="reference">
+			<%= f.hidden_field :item_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "citem_id",@vouch.citem_id,:class=>"ref" %>
+			<a href="#" class-data="Project"><span class="reference"></span></a>			
+		</div>
+  </div>
   <div class="fb_field"><%= f.label :ccode_equal %><%= f.text_field :ccode_equal %></div>
   <div class="fb_actions">
     <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
