@@ -6,7 +6,7 @@ Webreim::Application.routes.draw do
   get "vouch/index"
   get "vouch/generate"
   get "vouch/rg_vouch"
-  get "vouch/edit"
+  match "vouch/edit"=>"vouch#edit"
   match "vouch/update"=>"vouch#update"
 
   resources :system_configs
