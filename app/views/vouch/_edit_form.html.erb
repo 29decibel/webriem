@@ -7,7 +7,10 @@
   <div class="fb_field"><%= f.label :cdept_id %><%= f.text_field :cdept_id %></div>
   <div class="fb_field"><%= f.label :citem_id %><%= f.text_field :citem_id %></div>
   <div class="fb_field"><%= f.label :ccode_equal %><%= f.text_field :ccode_equal %></div>
-  <div class="fb_actions"><%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %></div>
+  <div class="fb_actions">
+    <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
+    <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_vouch(this)",:class=>"button2"%>
+  </div>
 <% end -%>
 <script type="text/javascript">
   $(function(){
