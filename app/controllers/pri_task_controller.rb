@@ -8,6 +8,7 @@ class PriTaskController < ApplicationController
     begin
       u8codes= U8service::API.get_codes
       #never delete 
+      this_time_count=0
       u8codes.each do |u8_model|
         #current year not exist then create
         next if U8code.where("year =#{Time.now.year} and ccode=#{u8_model["ccode"]}").count>0
@@ -23,13 +24,14 @@ class PriTaskController < ApplicationController
         model.bdept=u8_model["bdept"]
         model.year=Time.now.year
         model.save
+        this_time_count=this_time_count+1
       end
     rescue Exception=>msg
       logger.error "^^^^^^^^^^^^^^^can't get the u8 serivce to get the codes info"
       logger.error "#{msg}"
       @message=msg
     end
-    @message=u8codes.count
+    @message="一共获取#{u8codes.count}个，本此更新#{this_time_count}"
     render "pri_task/cmd_result"
   end
   def cmds
