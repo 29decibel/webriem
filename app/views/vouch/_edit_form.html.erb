@@ -4,6 +4,7 @@
   <div class="fb_field"><%= f.label :idoc %><%= f.text_field :idoc %></div>
   <div class="fb_field"><%= f.label :cbill %><%= f.text_field :cbill %></div>
   <div class="fb_field">
+    <%= f.label :ccode %>
     <div class="reference">
 			<%= f.hidden_field :code_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "ccode",@vouch.ccode,:class=>"ref" %>
@@ -11,6 +12,7 @@
 		</div>
   </div>
   <div class="fb_field">
+    <%= f.label :cdept_id %>
     <div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "cdept_id",@vouch.cdept_id,:class=>"ref" %>
@@ -18,6 +20,7 @@
 		</div>
   </div>
   <div class="fb_field">
+    <%= f.label :citem_id %>
     <div class="reference">
 			<%= f.hidden_field :item_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "citem_id",@vouch.citem_id,:class=>"ref" %>
