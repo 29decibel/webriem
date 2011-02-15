@@ -457,8 +457,6 @@ div a.new_object{
 div.reference{
 	position:relative;
 	display:inline-block;
-  border:1px solid #ccc;
-  padding:0px;
 }
 div.reference input{
 	display:inline-block;
@@ -466,9 +464,10 @@ div.reference input{
 	width:200px;
 }
 div.reference input.large{
-	display:inline-block;
-	margin: 0px;
 	width:416px;
+}
+div.reference input.middle{
+	width:200px;
 }
 table div.reference input{
 	width:100px;
