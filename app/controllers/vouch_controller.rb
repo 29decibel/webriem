@@ -17,7 +17,6 @@ class VouchController < ApplicationController
   #so this will return a js template
   def edit
     @vouch=Vouch.find(params[:vouch_id])
-    render :layout=>false
   end
   #update the value and update the vouch_info div
   def update
