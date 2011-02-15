@@ -6,21 +6,21 @@
   <div class="fb_field">
     <%= f.label :ccode %><div class="reference">
 			<%= f.hidden_field :code_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "ccode",@vouch.ccode,:class=>"ref" %>
+			<%= text_field_tag "ccode",@vouch.ccode,:class=>"ref middle" %>
 			<a href="#" class-data="U8code"><span class="reference"></span></a>			
 		</div>
   </div>
   <div class="fb_field">
     <%= f.label :cdept_id %><div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "cdept_id",@vouch.cdept_id,:class=>"ref" %>
+			<%= text_field_tag "cdept_id",@vouch.cdept_id,:class=>"ref middle" %>
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
 		</div>
   </div>
   <div class="fb_field">
     <%= f.label :citem_id %><div class="reference">
 			<%= f.hidden_field :item_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "citem_id",@vouch.citem_id,:class=>"ref" %>
+			<%= text_field_tag "citem_id",@vouch.citem_id,:class=>"ref middle" %>
 			<a href="#" class-data="Project"><span class="reference"></span></a>			
 		</div>
   </div>
