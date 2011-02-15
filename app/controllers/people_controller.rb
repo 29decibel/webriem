@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
      txt<<sep
      txt<<p.dep.name
      txt<<sep
-     txt<<p.duty==nil ? "" : p.duty.name
+     txt<<(p.duty==nil ? "" : p.duty.name)
      txt<<sep
      txt<<p.bank_no
      txt<<"\r\n"
