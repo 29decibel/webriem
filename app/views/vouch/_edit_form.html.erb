@@ -17,7 +17,7 @@
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
 		</div>
   </div>
-  <div class="fb_field">
+  <div class="fb_field"><!--注意这里的两个tag之间一定不能有空格，否则会杯具-->
     <%= f.label :citem_id %><div class="reference">
 			<%= f.hidden_field :item_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "citem_id",@vouch.citem_id,:class=>"ref middle" %>
