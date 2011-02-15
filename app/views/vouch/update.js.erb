@@ -8,5 +8,8 @@
 
 //just hide it
 $("#edit_vouch_<%= @vouch.id%>").hide("normal");
+//refresh the doc info
+$("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
+
 
 
