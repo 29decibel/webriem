@@ -9,7 +9,8 @@
 //just hide it
 $("#edit_vouch_<%= @vouch.id%>").hide("slow");
 //refresh the doc info
-$("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
+$("tr.#vouch_row_<%= @vouch.id%>").html("<%= escape_javascript(render(:partial=>"vouch_row_info",:locals=>{:v=>@vouch}))%>");
+
 
 
 
