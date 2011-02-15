@@ -11,6 +11,7 @@ Webreim::Application.routes.draw do
 
   resources :system_configs
 
+  get "people/all"
   get "common/new_reset_p"
   post "common/reset_p"
   
@@ -75,7 +76,6 @@ Webreim::Application.routes.draw do
   get "task/docs_approved"  
   get "task/docs_to_pay"  
   get "task/docs_paid"
-  get "people/all"
   
   devise_for :users
     
