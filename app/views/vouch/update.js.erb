@@ -7,7 +7,7 @@
 //$("#vd_<%= @doc.id%> a.facebox").facebox();
 
 //just hide it
-$("#edit_vouch_<%= @vouch.id%>").hide("normal");
+$("#edit_vouch_<%= @vouch.id%>").hide("slow");
 //refresh the doc info
 $("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
 
