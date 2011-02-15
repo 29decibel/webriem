@@ -6,7 +6,7 @@ require File.join(Rails.root, 'app', 'u8service','api.rb')
 class PriTaskController < ApplicationController
   def import_u8_codes
     begin
-      u8codes=JSON U8service::API.get_codes
+      u8codes= U8service::API.get_codes
       #never delete 
       u8codes.each do |u8_model|
         #current year not exist then create
