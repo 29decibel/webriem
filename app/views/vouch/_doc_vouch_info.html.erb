@@ -9,6 +9,7 @@
 </div>    
 <table class="hor-zebra">
   <tr>
+    <th></th>
     <th>凭证分录号</th><th>部门</th>
     <th>借方科目</th><th>贷方科目</th>
     <th>项目</th><th>人员</th>
@@ -16,10 +17,10 @@
     <th>币种</th><th>汇率</th>
     <th>凭证日期</th><th>成单者</th>
       <th>附件张数</th>
-      <th></th>
   </tr>
   <% doc.vouches.each do  |v|%>
     <tr>
+      <td><%= link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true %>
       <td><%= v[:inid]%></td><td><%= v[:cdept_id]%></td>
       <td><%= truncate(v[:ccode].to_s,:length=>10)%></td>
       <td><%= truncate(v[:ccode_equal].to_s,:length=>10)%></td>
@@ -28,8 +29,11 @@
       <td><%= v[:cexch_name]%></td><td><%= v[:nfrat]%></td>
       <td><%= v[:dbill_date]%></td><td><%= v[:cbill]%></td>
       <td><%= v[:idoc]%></td>
-      <td><%= link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true,:class=>"facebox" %>
 </td>
+    </tr>
+    <!--this tr is for edit-->
+    <tr colspan="9">
+      <div id="edit_vouch_<%= v.id%>" class="vouch_form"></div>
     </tr>
   <% end %>
 </table>

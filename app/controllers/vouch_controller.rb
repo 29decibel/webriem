@@ -12,6 +12,9 @@ class VouchController < ApplicationController
   end
   #edit just one vouch
   #return the edit form to the facebox 
+  #not using facebox
+  #but inline edit that info
+  #so this will return a js template
   def edit
     @vouch=Vouch.find(params[:vouch_id])
     render :layout=>false
