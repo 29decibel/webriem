@@ -625,8 +625,9 @@ div.vouch_info a img{
 }
 /*facebox page 's inputs*/
 div.fb_field{
-  display:block;
+  display:inline-block;
   margin-bottom:2px;
+  margin-right:5px;
 }
 div.fb_actions{
   display:block;
@@ -644,4 +645,10 @@ div.fb_field input {
 }
 div.fb_title{
   margin-bottom:5px;
+}
+form.fb_form{
+  margin:5px;
+  border:1px solid #42aec2;
+  border-radius:5px;
+  -moz-border-radius:5px;
 }
