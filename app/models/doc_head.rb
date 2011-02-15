@@ -547,7 +547,7 @@ class DocHead < ActiveRecord::Base
             :code=>fee_m_code.dcode,# dai kemu
             :md=>b.fi_amount,:md_f=>b.fi_amount,
             :dep=>dep,# dep code
-            :project=b.project,#project code
+            :project=>b.project,#project code
             :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
