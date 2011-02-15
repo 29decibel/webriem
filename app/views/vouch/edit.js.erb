@@ -1,0 +1,4 @@
+//render the edit form and show it
+$("#edit_vouch_<%= @vouch.id%>").html("<%= escape_javascript(render :partial => "edit_form" ) %>");
+//show it
+$("#edit_vouch_<%= @vouch.id%>").show();
