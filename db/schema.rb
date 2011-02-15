@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215123126) do
+ActiveRecord::Schema.define(:version => 20110215125130) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -665,6 +665,7 @@ ActiveRecord::Schema.define(:version => 20110215123126) do
     t.boolean  "bdept"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "year"
   end
 
   create_table "u8service_configs", :force => true do |t|
@@ -730,6 +731,10 @@ ActiveRecord::Schema.define(:version => 20110215123126) do
     t.datetime "updated_at"
     t.integer  "doc_head_id"
     t.integer  "dep_id"
+    t.integer  "item_id"
+    t.integer  "code_id"
+    t.integer  "code_equal_id"
+    t.integer  "person_id"
   end
 
   create_table "work_flow_duties", :force => true do |t|
