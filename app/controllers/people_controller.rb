@@ -6,6 +6,27 @@ class PeopleController < ApplicationController
     redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Person",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
+  def all
+   sep="     " 
+   txt=""
+   People.all.each do |p|
+     txt<<p.name
+     txt<<sep
+     txt<<p.code
+     txt<<sep
+     txt<<p.e_mail
+     txt<<sep
+     txt<<p.phone
+     txt<<sep
+     txt<<p.dep.name
+     txt<<sep
+     txt<<p.duty==nil ? "" : p.duty.name
+     txt<<sep
+     txt<<p.bank_no
+     txt<<"\r\n"
+   end
+   render :text=>txt,:layout=>false
+  end
   # GET /people/1
   # GET /people/1.xml
   def show

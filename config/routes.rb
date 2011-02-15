@@ -75,6 +75,7 @@ Webreim::Application.routes.draw do
   get "task/docs_approved"  
   get "task/docs_to_pay"  
   get "task/docs_paid"
+  get "people/all"
   
   devise_for :users
     
