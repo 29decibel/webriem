@@ -425,8 +425,8 @@ class DocHead < ActiveRecord::Base
             :inid=>"#{init_count}",
             :code=>fee_m_code.dcode,# dai kemu
             :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
-            :cdept_id=>w_m.dep==nil ? "" : w_m.dep.code,# dep code
-            :citem_id=>w_m.project==nil ? "" : w_m.project.code,#project code
+            :dep=>w_m.dep,# dep code
+            :project=>w_m.project,#project code
             :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           init_count=init_count+1
@@ -436,8 +436,8 @@ class DocHead < ActiveRecord::Base
           :inid=>"#{init_count}",
           :code=>fee_m_code.ccode,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
-          :cdept_id=>"",# dep code should select
-          :citem_id=>"",#project code should select
+          :dep=>nil,# dep code should select
+          :project=>nil,#project code should select
           :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.create(vd)
       end
@@ -453,10 +453,10 @@ class DocHead < ActiveRecord::Base
           rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :ccode=>fee_m_code_meal.dcode,# dai kemu
+            :code=>fee_m_code_meal.dcode,# dai kemu
             :md=>total,:md_f=>total,
-            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
-            :citem_id=>project==nil ? "" : project.code,#project code
+            :dep=>afford_dep,# dep code
+            :project=>project,#project code
             :ccode_equal=>fee_m_code_meal.ccode})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -466,10 +466,10 @@ class DocHead < ActiveRecord::Base
           rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :ccode=>fee_m_code_car.dcode,# dai kemu
+            :code=>fee_m_code_car.dcode,# dai kemu
             :md=>total,:md_f=>total,
-            :cdept_id=>afford_dep==nil ? "" : afford_dep.code,# dep code
-            :citem_id=>project==nil ? "" : project.code,#project code
+            :dep=>afford_dep,# dep code
+            :project=>project,#project code
             :ccode_equal=>fee_m_code_car.ccode})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -479,8 +479,8 @@ class DocHead < ActiveRecord::Base
           :inid=>"#{inid_count}",
           :ccode=>"#{fee_m_code_meal.ccode},#{fee_m_code_car.ccode}",# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
-          :cdept_id=>"",# dep code should select
-          :citem_id=>"",#project code should select
+          :dep=>nil,# dep code should select
+          :project=>nil,#project code should select
           :ccode_equal=>fee_m_code_meal.dcode})
         self.vouches.create(vd)
       end
@@ -501,8 +501,8 @@ class DocHead < ActiveRecord::Base
             :inid=>"#{inid_count}",
             :code=>fee_m_code.dcode,# dai kemu
             :md=>b.fi_amount,:md_f=>b.fi_amount,
-            :cdept_id=>dep==nil ? "": dep.code,# dep code
-            :citem_id=>project==nil ? "" : project.code,#project code
+            :dep=>dep,# dep code
+            :project=>project,#project code
             :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -512,8 +512,8 @@ class DocHead < ActiveRecord::Base
           :inid=>"#{inid_count}",
           :code=>fee_m_code.ccode,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
-          :cdept_id=>"",# dep code should select
-          :citem_id=>"",#project code should select
+          :dep=>nil,# dep code should select
+          :project=>nil,#project code should select
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
       end
@@ -573,7 +573,7 @@ class DocHead < ActiveRecord::Base
           :inid=>"#{inid_count}",
           :code=>fee_m_code.ccode,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
-          :dept=>nil,# dep code should select
+          :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
@@ -598,7 +598,7 @@ class DocHead < ActiveRecord::Base
       :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",
       :nfrat=>"1",# currency rate
       :cdept_id=>"",# dep code should select
-      :cperson_id=>person.code,#person code
+      :person=>person,#person code
       :citem_id=>"",#project code should select
       :ccode_equal=>""}
     default_opt.merge! options
