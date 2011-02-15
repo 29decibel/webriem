@@ -391,7 +391,52 @@ class DocHead < ActiveRecord::Base
       return vs if result["Exist"]
     end
     #分摊的逻辑
-    if is_split==1
+    if is_split==1 and [9,11,13].include? doc_type
+      #加班和差旅基本相同，只是默认的科目不同
+      self.vouches.clear
+      fee_code_match=nil
+      if doc_type==9
+        fee_code_match=FeeCodeMatch.find_by_fee_code("03")
+      end
+      if doc_type==11
+        fee_code_match=FeeCodeMatch.find_by_fee_code("06")
+      end
+      if doc_type==13
+        fee_code_match=FeeCodeMatch.find_by_fee_code("04")
+        b_fee_code_match=fee_code_match #point to default
+      end
+      init_count=1
+      benefits_codes=[]
+      #n debit
+      reim_split_details.each do |s|
+        #如果是福利费用再变化一次科目，并记录
+        fcm=fee_code_match
+        if doc_type==13 and s.fee
+          b_fee_code_match=FeeCodeMatch.find_by_fee_code(s.fee.code)
+          if b_fee_code_match
+            benefits_codes<<b_fee_code_match.ccode
+            fcm=b_fee_code_match
+          end
+        end
+        vj=get_v ({
+          :inid=>"#{init_count}",
+          :code=>fcm.dcode,# dai kemu
+          :md=>s.percent_amount,:md_f=>s.percent_amount,
+          :dep=>s.dep,# dep code
+          :project=>s.project,#project code
+          :ccode_equal=>fcm.ccode})
+        self.vouches.create(vj)
+        init_count=init_count+1
+      end
+      #1 credit
+      vd=get_v ({
+        :inid=>"#{init_count}",
+        :code=>fee_code_match.ccode,# dai kemu
+        :mc=>total_amount,:mc_f=>total_amount,
+        :dep=>nil,# dep code
+        :project=>nil,#project code
+        :code_equal=>(doc_type==13 ? benefits_codes.join(",") : fee_code_match.ccode.to_s)})
+      self.vouches.create(vd)
     else
       #差旅费用【只生成一个借和一个贷，】
       if doc_type==9
