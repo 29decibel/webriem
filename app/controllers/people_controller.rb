@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
   def all
    sep="     " 
    txt=""
-   People.all.each do |p|
+   Person.all.each do |p|
      txt<<p.name
      txt<<sep
      txt<<p.code
