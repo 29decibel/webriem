@@ -435,7 +435,7 @@ class DocHead < ActiveRecord::Base
         :mc=>total_amount,:mc_f=>total_amount,
         :dep=>nil,# dep code
         :project=>nil,#project code
-        :code_equal=>(doc_type==13 ? benefits_codes.join(",") : fee_code_match.ccode.to_s)})
+        :ccode_equal=>(doc_type==13 ? benefits_codes.join(",") : fee_code_match.ccode.to_s)})
       self.vouches.create(vd)
     else
       #差旅费用【只生成一个借和一个贷，】
@@ -447,14 +447,14 @@ class DocHead < ActiveRecord::Base
           :md=>total_amount,:md_f=>total_amount,
           :dep=>afford_dep,
           :project=>project,
-          :code_equal=>fee_m_code.dcode})
+          :ccode_equal=>fee_m_code.dcode})
         vd=get_v ({
           :inid=>"2",
           :code=>fee_m_code.dcode,# dai kemu
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :dep=>afford_dep,# dep code
           :project=>project,#project code
-          :code_equal=>fee_m_code.ccode})
+          :ccode_equal=>fee_m_code.ccode})
         self.vouches.clear
         self.vouches.create(vj)
         self.vouches.create(vd)
