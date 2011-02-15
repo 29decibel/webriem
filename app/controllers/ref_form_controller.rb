@@ -20,7 +20,7 @@ class RefFormController < ApplicationController
     end
     #filter person is leaving
     if model_name=="Person"
-      str=str+" and (end_date is null or end_date > '#{Time.now}')"
+      str=str+" and (people.end_date is null or people.end_date > '#{Time.now}')"
     end
     #filter u8code current year
     if model_name=="U8code"
