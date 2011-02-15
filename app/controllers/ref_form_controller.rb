@@ -18,6 +18,14 @@ class RefFormController < ApplicationController
         str= str + " and version='#{current_dep_version.value}'" 
       end
     end
+    #filter person is leaving
+    if model_name=="Person"
+      str=str+" and (end_date is null or end_date > '#{Time.now}')"
+    end
+    #filter u8code current year
+    if model_name=="U8code"
+      str=str+" and year=#{Time.now.year}"
+    end
     str
   end
   #give you a model name
