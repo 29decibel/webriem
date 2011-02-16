@@ -289,9 +289,9 @@ class DocHeadsController < ApplicationController
         doc_head.recivers.each_with_index do |r,index|
           next if r.amount==0
           if recivers.has_key? r.company
-            recivers[r.company][:amount]=recivers[r.company][:amount]+r.amount
+            recivers[r.company][:amount]=recivers[r.company][:amount]+(r.fi_amount||r.amount)
           else
-            recivers[r.company]={:bank_no=>r.bank_no,:amount=>r.amount}
+            recivers[r.company]={:bank_no=>r.bank_no,:amount=>(r.fi_amount||r.amount)}
           end
         end
       end
