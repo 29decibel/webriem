@@ -4,7 +4,7 @@ gem 'rails', '3.0.3'
 gem 'mysql2','0.2.6'
 gem "jquery-rails"
 gem "devise"
-gem 'delayed_job' #,'2.1.0.pre2'
+gem 'delayed_job'
 gem "pdfkit"
 gem "will_paginate", "~> 3.0.pre2"
 gem "paperclip"
