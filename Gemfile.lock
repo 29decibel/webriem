@@ -40,7 +40,7 @@ GEM
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
-    devise (1.1.6)
+    devise (1.1.5)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
     erubis (2.6.6)
@@ -111,7 +111,7 @@ DEPENDENCIES
   activerecord-sqlserver-adapter
   admin_data
   delayed_job
-  devise
+  devise (= 1.1.5)
   excelsior
   jquery-rails
   mysql2 (= 0.2.6)
