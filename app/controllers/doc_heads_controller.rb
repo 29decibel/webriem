@@ -316,6 +316,7 @@ class DocHeadsController < ApplicationController
       output_str<<"\r\n"
       count=count+1
     end
+    output_str
   end
   def output_to_txt
     docs=DocHead.where("id in (#{params[:ids]})").all
