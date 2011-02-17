@@ -204,6 +204,7 @@
     should_riem: "应报销"
     should_back: "应还款"
     btn_output_txt: 导出TXT
+    btn_output_txt_all: 全部导出TXT
     btn_output_excel: 导出Excel
     btn_print: 打印
     btn_batch_approve: 批量审批
