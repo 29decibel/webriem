@@ -529,6 +529,11 @@ function output_to_txt(grid_id)
 {
 	send_request_from_grid(grid_id,"/doc_heads/output_to_txt.txt?ids=");
 }
+function output_to_txt_all()
+{
+	var url="/doc_heads/output_to_txt_all.txt";
+	document.location.href = url;
+}
 function output_to_excel(grid_id)
 {
 	send_request_from_grid(grid_id,"/doc_heads/export_xls.xls?ids=");

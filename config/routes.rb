@@ -31,6 +31,7 @@ Webreim::Application.routes.draw do
   get "ajax_service/get_extrafee"
     
   get "doc_heads/output_to_txt(.:format)"  
+  get "doc_heads/output_to_txt_all(.:format)"
   get "doc_heads/pay"  
   get "doc_heads/print(.:format)"
   get "doc_heads/giveup"  

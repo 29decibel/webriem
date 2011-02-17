@@ -280,11 +280,17 @@ class DocHeadsController < ApplicationController
     send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
   end
   #==================================output to txt========================================
-  def output_to_txt
+  def output_to_txt_all
+    docs=DocHead.where("doc_state=2").all
+    #just redirect to output_to_txt
+    send_data docs_to_txt(docs), :filename => "person_accounts.txt",:type => 'text/plain'
+  end
+  def docs_to_txt(docs)
+    #get these docs's reciver amount and return a string
     output_str=""
-    #reciver's hash
+    #reciver's hash`
     recivers={}
-    DocHead.where("id in (#{params[:ids]})").each do |doc_head|
+    docs.each do |doc_head|
       if doc_head and doc_head.doc_type!=2
         doc_head.recivers.each_with_index do |r,index|
           next if r.amount==0
@@ -310,7 +316,10 @@ class DocHeadsController < ApplicationController
       output_str<<"\r\n"
       count=count+1
     end
-    send_data output_str, :filename => "person_accounts.txt",:type => 'text/plain'
+  end
+  def output_to_txt
+    docs=DocHead.where("id in (#{params[:ids]})").all
+    send_data docs_to_txt(docs), :filename => "person_accounts.txt",:type => 'text/plain'
   end
   def export_xls
     ids=params[:ids]
