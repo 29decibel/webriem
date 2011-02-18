@@ -31,7 +31,7 @@
   </div>
   <% end -%>
 <div class="login_actions">
-	<%= f.submit "#{I18n.t('common_attr.btn_login')}" %>
+  <%= link_to "#{I18n.t('common_attr.btn_login')}",{:href=>"#"}, :class=>"submit button2" %>
 	<% if alert %>
 		<spna id="error"><%= alert %></span>
 	<% end %>

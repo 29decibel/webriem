@@ -15,6 +15,10 @@ a:hover{
 	background-color: transparent;
 	color:#369;
 }
+input{
+  border:1px solid #AAA;
+  font-size:1em;
+}
 /*parts*/
 div#header{
 	height:100px;
@@ -152,6 +156,7 @@ form div.form_field input,form div.form_field select,form div.form_field textare
 	float:left;
 	margin-left: 5px;
 }
+
 form div.form_field label.large{
 	display:inline-block;
 	width:120px;
