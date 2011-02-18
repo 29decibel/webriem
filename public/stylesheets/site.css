@@ -133,53 +133,39 @@ form div.form_area{
 	overflow: auto;
 	position: relative;
 }
-form div.form_block{
-	float: left;
-	clear: both;
-}
 form div.form_field{
 	display:inline-block;
 	margin-bottom: 5px;
-	min-width:290px;
-	float:left;
+  margin:3px 5px 3px 5px;
 }
-form div.form_field.large{
-	min-width:547px;
+/*normal size of form fields*/
+form div.form_field span.label{
+  width:90px;
+  vertical-align:top;
+  text-align:right;
+  display:inline-block;
 }
-form div.form_field label{
-	display:inline-block;
-	width:84px;
-	text-align: right;
-	float:left;
+form div.form_field span.value{
+  display:inline-block;
+  width:200px;
 }
-form div.form_field input,form div.form_field select,form div.form_field textarea,form div.form_field span{
-	float:left;
-	margin-left: 5px;
+form div.form_field span.value input{
+  width:100%;
+}
+/*here is some special sizes*/
+form div.form_field.col-sp2 span.label{
+	width:90px;
+}
+form div.form_field.col-sp2 span.value{
+	width:505px;
 }
 
-form div.form_field label.large{
-	display:inline-block;
-	width:120px;
-	text-align: right;
-}
-form div.form_field .input0{
-	display:inline-block;
-	width:160px;
-}
-form div.form_field .input1{
-	display:inline-block;
-	width:200px;
-}
 form div.form_field .input2{
-	display:inline-block;
-	width:500px;
+	width:100%;
 	height:50px;
 	font-size:12px;
 }
-form div.flow_area_field{	
-	display: inline-block;
-	margin:2px;
-}
+
 form div.input_area{
 	display: inline-block;
 }
@@ -458,22 +444,18 @@ div.filter form{
 div a.new_object{
 	margin-left: 30px;
 }
-/*=======================reference*/
+/*=======================reference=========================================*/
 div.reference{
+  width:100%;
 	position:relative;
 	display:inline-block;
 }
 div.reference input{
 	display:inline-block;
 	margin: 0px;
-	width:200px;
+	width:100%;
 }
-div.reference input.large{
-	width:416px;
-}
-div.reference input.middle{
-	width:200px;
-}
+
 table div.reference input{
 	width:100px;
 }
@@ -493,6 +475,7 @@ span.reference{
 	width:16px;
 	height:16px;
 }
+/***************************************** end reference*************************/
 /*approver list*/
 div.approver_list{
 	max-height:200px;

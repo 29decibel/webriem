@@ -1,20 +1,16 @@
 <div class="form_area">
-<div class="form_block">
 	<div class="form_field">
-		<%= f.label "#{I18n.t('common_attr.cash_draw_account')}" %>
-		<div class="reference">
+		<span class="label"><%= f.label "#{I18n.t('common_attr.cash_draw_account')}" %></span>
+		<span class="value"><div class="reference">
 			<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref large" %>
 			<a href="#" class-data="Account"><span class="reference"></span></a>			
-		</div>
+		</div></span>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
-		<%= f.label "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" %>
-		<%= f.text_field :now_remain_amout,:class=>"input1 "%>
+		<span class="label"><%= f.label "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" %></span>
+		<span class="value"><%= f.text_field :now_remain_amout,:class=>"input1 "%></span>
 	</div>
-</div>
 </div>
 <div class="form_title">
 	<h3><%= I18n.t('common_attr.add_apply_item')%></h3>

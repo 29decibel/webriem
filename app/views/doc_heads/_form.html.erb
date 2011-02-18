@@ -12,113 +12,97 @@
 	<h3><%= "#{I18n.t('common_attr.basic_info')}"%></h3>
 </div>
 <div class="form_area">
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.doc_no')}#{mark_required(f.object,:doc_no)}" %>
+      <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.doc_no')}#{mark_required(f.object,:doc_no)}",:class=>"" %></span>
 			<%= f.hidden_field :doc_no %>
 			<%= f.hidden_field :id %>
 			<%= f.hidden_field :doc_type %>
-			<span class="doc_no"><%= @doc_head.doc_no%></span>
+			<span class="doc_no value"><%= @doc_head.doc_no%></span>
 		</div>
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.person_id')}" %>
+      <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.person_id')}",:class=>"" %></span>
 			<%= f.hidden_field :person_id %>
-			<%= @doc_head.person_name%>
+      <span class="value"><%= @doc_head.person_name%></span>
 			<%= hidden_field_tag "duty_for_fee_standard",@doc_head.person.duty_id%>
 			<%= hidden_field_tag "pt_for_fee_standard",@doc_head.person.person_type_id%>
 		</div>
-	</div>
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.apply_date')}#{mark_required(f.object,:apply_date)}" %>
-      <%= f.text_field :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" %>
+      <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.apply_date')}#{mark_required(f.object,:apply_date)}",:class=>"" %></span>
+      <span class="value"><%= f.text_field :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" %></span>
 		</div>
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.attach')}" %>
-      <%= f.text_field :attach,:class=>"input1"+ mark_required(@doc_head, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}" %>  
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.attach')}" %></span>
+      <span class="value"><%= f.text_field :attach,:class=>"input1"+ mark_required(@doc_head, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}" %></span>  
 		</div>
-	</div>	
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" %>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" %></span>
             <!--样例参照-->
-			<div class="reference" data-ref-id="dep">
+			<span class="value"><div class="reference" data-ref-id="dep">
 				<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
         <%= text_field_tag "dep_info",@doc_head.dep.to_s,:class=>"ref",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.dep_id')}" %>
 				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
 			</div>
-		</div>
+		</div></span>
 		<% if @doc_head.doc_type==9 or @doc_head.doc_type==11%>
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.afford_dep_id')}" %>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.afford_dep_id')}" %></span>
             <!--样例参照-->
-			<div class="reference afford_dep" data-ref-id="dep">
+			<span class="value"><div class="reference afford_dep" data-ref-id="dep">
 				<%= f.hidden_field :afford_dep_id,{:class=>"ref_hidden_field doc_afford_dep"}%>
         <%= text_field_tag "dep_info",@doc_head.afford_dep.to_s,:class=>"ref",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.afford_dep_id')}" %>
 				<a href="#" class-data="Dep" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
-			</div>
+			</div></span>
 		</div>
 		<% end %>
-	</div>	
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" %>
-			<div class="reference">
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" %></span>
+			<span class="value"><div class="reference">
 				<%= f.hidden_field :real_person_id,{:class=>"ref_hidden_field"}%>
         <%= text_field_tag "real_person_info",@doc_head.real_person.to_s,:class=>"ref",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" %>
 				<a href="#" class-data="Person" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
-			</div>
+			</div></span>
 		</div>
-	</div>
 	<% if @doc_head.doc_type==13 %>
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" %>
-			<%= f.hidden_field :doc_no%>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" %></span>
+			<span class="value"><%= f.hidden_field :doc_no%>
 			<% if @doc_head.upload_file %>
 				<%= @doc_head.upload_file.upload.original_filename%>
 			<% end %>
-			<%= link_to_function("#{I18n.t('activerecord.attributes.doc_head.manage_upload')}","add_upload_files(this,'#{upload_files_path}')")%>
+			<%= link_to_function("#{I18n.t('activerecord.attributes.doc_head.manage_upload')}","add_upload_files(this,'#{upload_files_path}')")%></span>
 		</div>
-	</div>
 	<% end %>
 	<% if @doc_head.doc_type==1 %>
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}" %><span><%= @doc_head.cp_doc_remain_amount%></span>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}" %></span><span class="value"><%= @doc_head.cp_doc_remain_amount%></span>
 		</div>
-	</div>	
 	<% end %>
 	<% if ([9,11,13].include? @doc_head.doc_type)%>
-	<div class="form_block">
 		<% if @doc_head.doc_type!=13%>
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.project_id')}" %>			
-			<div class="reference project">
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.project_id')}" %></span>			
+			<span class="value"><div class="reference project">
 				<%= f.hidden_field :project_id,{:class=>"ref_hidden_field doc_project"}%>
         <%= text_field_tag "project_info",@doc_head.project.to_s,:class=>"ref",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.project_id')}" %>
 				<a href="#" class-data="Project"><span class="reference"></span></a>			
-			</div>
+			</div></span>
 		</div>
 		<% end %>
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.is_split')}" %>
-			<%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.is_split')}" %></span>
+			<span class="value"><%= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"} %></span>
 		</div>
-	</div>
-	<% end %>
-	<div class="form_block">
-		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.note')}" %>
-      <%= f.text_area :note,:class=>"input2"+ mark_required(@doc_head, :note),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.note')}" %>
-		</div>
-	</div>
-	<div class="form_block">
-		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" %>
-			<span id="total_riem"><%= @doc_head.total_fi_amount%></span>
-		</div>
-	</div>
+  <% end %>
+  <br/>
+  <div class="form_field col-sp2">
+    <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.note')}" %></span>
+    <span class="value"><%= f.text_area :note,:class=>"input2"+ mark_required(@doc_head, :note),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.note')}" %></span>
+  </div>
+  <br/>
+  <div class="form_field">
+    <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" %></span>
+    <span class="value" id="total_riem"><%= @doc_head.total_fi_amount%></span>
+  </div>
 	<!---++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<%= f.hidden_field :doc_type%>
 </div>
