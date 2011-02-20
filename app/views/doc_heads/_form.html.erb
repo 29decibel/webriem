@@ -111,41 +111,25 @@
 <div id="details">
 	<!---->
 	<% if @doc_head.doc_type<=2%>
-	<div class="form_title">
-		<h3><%= @doc_head.doc_type==1 ? "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')}":"#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')}" %></h3>
-	</div>
-	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-				    <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')}"%>*</th>
-            <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')}"%><%= "*" if@doc_head.doc_type==2%></th>
-				    <th><%= "#{I18n.t('common_attr.used_for')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.ori_amount')}"%>*</th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
+    <div class="doc_detail">
+      <div class="form_title">
+		    <h3><%= @doc_head.doc_type==1 ? "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')}":"#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')}" %></h3>
+    	</div>
+	    <div class="form_area">
 				<% f.fields_for :cp_doc_details do |builder|  %>
 					<%= render :partial => 'cp_doc_detail_fields',:locals => { :f => builder } %>
 				<% end %>
-			</tbody>
-			<tr>
-				<td colspan="6"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details,[:dep] %></td>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
-	</div>	
+        <br/>
+				<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details,[:dep] %>
+				<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+				<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
+	     </div>
+      </div>	
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==3%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.c_doc_detail')}"%></h3>
 	</div>
@@ -178,10 +162,12 @@
 			</tr>		
 		</table>		
 	</div>
+</div>
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
 	<!--结汇申请单-->
 	<% if @doc_head.doc_type==4%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= I18n.t("common_attr.remitance_detail")%></h3>
 	</div>
@@ -190,9 +176,11 @@
 			<%= render :partial => 'inner_remittance',:locals => { :f => builder,:detail_doc=>@doc_head.inner_remittance }  %>
 		<% end %>
 	</div>
+</div>
 	<% end %>
 	<!--转帐申请单-->
 	<% if @doc_head.doc_type==5%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= I18n.t("common_attr.transfer_detail")%></h3>
 	</div>
@@ -201,9 +189,11 @@
 			<%= render :partial => "inner_transfer",:locals => { :f => builder,:detail_doc=>@doc_head.inner_transfer }  %>
 		<% end %>
 	</div>
+</div>
 	<% end %>
 	<!--现金提取申请单-->
 	<% if @doc_head.doc_type==6%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= I18n.t("common_attr.cash_draw_detail")%></h3>
 	</div>
@@ -212,9 +202,11 @@
 			<%= render :partial => "inner_cash_draw",:locals => { :f => builder,:detail_doc=>@doc_head.inner_cash_draw }  %>
 		<% end %>
 	</div>
+</div>
 	<% end %>
 	<!--购买理财产品-->
 	<% if @doc_head.doc_type==7%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= I18n.t("common_attr.buy_fin_p_detail")%></h3>
 	</div>
@@ -223,9 +215,11 @@
 			<%= render :partial => "buy_finance_products",:locals => { :f => builder,:detail_doc=>@doc_head.buy_finance_product }  %>
 		<% end %>
 	</div>
+</div>
 	<% end %>
 	<!--赎回理财产品-->
 	<% if @doc_head.doc_type==8%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= I18n.t("common_attr.redeem_fin_p_detail")%></h3>
 	</div>
@@ -234,404 +228,172 @@
 			<%= render :partial => "redeem_finance_products",:locals => { :f => builder,:detail_doc=>@doc_head.redeem_finance_product }  %>
 		<% end %>
 	</div>
+</div>
 	<% end %>
 	<!--here is reim details...................................................-->
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==9%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.travel_desc')}"%></h3>
 	</div>
 		<div class="form_area">
-			<table class="form_input">
-				<thead>
-					<tr>	
-						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.travel_days')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.region_type')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.travel_place')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.other_place')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.fee_stan')}"%></th>
-						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-						<th></th><!--给删除的-->
-				    </tr>
-			    <thead>
-				<tbody>
-					<%= f.fields_for :rd_travels do |builder| %>
-						<%= render :partial => 'rd_travel_fields',:locals => { :f => builder } %>
-					<% end %>				
-				</tbody>
-				<tr>
-					<th colspan="11"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_travels %></th>
-					<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-					<td></td>
-				</tr>		
-			</table>
+			<%= f.fields_for :rd_travels do |builder| %>
+				<%= render :partial => 'rd_travel_fields',:locals => { :f => builder } %>
+			<% end %>				
+			<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_travels %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 		</div>
+  </div>
+<div class="doc_detail">
 		<div class="form_title">
 			<h3><%= "#{I18n.t('common_attr.transport_detail')}"%></h3>
 		</div>
 		<div class="form_area">
-			<table class="form_input">
-				<thead>
-					<tr>					
-						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.start_time')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.end_time')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.start_place')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.end_place')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.transportation')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-						<th></th><!--给删除的-->
-				    </tr>
-			    <thead>
-				<tbody>
-					<%= f.fields_for :rd_transports do |builder|  %>
+				<%= f.fields_for :rd_transports do |builder|  %>
 						<%= render :partial => 'rd_transport_fields',:locals => { :f => builder }  %>
-					<% end %>				
-				</tbody>
-				<tr>
-					<th colspan="11"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_transports %></th>
-					<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-					<td></td>
-				</tr>		
-			</table>					
+				<% end %>				
+			  <%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_transports %>
+				<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+				<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 		</div>
+  </div>
+<div class="doc_detail">
 		<div class="form_title">
 			<h3><%= "#{I18n.t('common_attr.lodging_desc')}"%></h3>
 		</div>
 		<div class="form_area">
-			<table class="form_input">
-				<thead>
-					<tr>					
-						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-						<th><%= "#{I18n.t('common_attr.start_time')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.end_time')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.lodging_days')}"%></th>
-						<th><%= "#{I18n.t('common_attr.region_type')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.city')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.other_place')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.fee_stan')}"%></th>
-						<th><%= "#{I18n.t('common_attr.people_count')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.live_together_person')}"%></th>
-						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-						<th></th><!--给删除的-->
-				    </tr>
-			    <thead>
-				<tbody>
-					<%= f.fields_for :rd_lodgings do |builder|  %>
-						<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
-					<% end %>				
-				</tbody>
-				<tr>
-					<th colspan="14"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_lodgings %></th>
-					<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-					<td></td>
-				</tr>		
-			</table>
+				<%= f.fields_for :rd_lodgings do |builder|  %>
+					<%= render :partial => 'rd_lodging_fields',:locals => { :f => builder }  %>
+				<% end %>				
+				<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_lodgings %>
+				<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+				<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 		</div>
+  </div>
+<div class="doc_detail">
 		<div class="form_title">
 			<h3><%= "#{I18n.t('common_attr.other_riem_detail')}"%></h3>
 		</div>
 		<div class="form_area">
-			<table class="form_input">
-				<thead>
-					<tr>					
-						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.fee_desc')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-						<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-						<th></th><!--给删除的-->
-				    </tr>
-			    <thead>
-				<tbody>
-					<%= f.fields_for :other_riems do |builder|  %>
-						<%= render :partial => 'other_riem_fields',:locals => { :f => builder }  %>
-					<% end %>				
-				</tbody>
-				<tr>
-					<th colspan="6"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:other_riems %></th>
-					<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-					<td></td>
-				</tr>		
-			</table>
+				<%= f.fields_for :other_riems do |builder|  %>
+					<%= render :partial => 'other_riem_fields',:locals => { :f => builder }  %>
+				<% end %>				
+				<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:other_riems %>
+				<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+				<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 		</div>
+  </div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==12%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.common_riem_desc')}"%></h3>
 	</div>
 		<div class="form_area">
-			<table class="form_input">
-				<thead>
-					<tr>	
-						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					    <th><%= "#{I18n.t('common_attr.afford_dep')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.project')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.fee_desc')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-						<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-						<th></th><!--给删除的-->
-				    </tr>
-			    <thead>
-				<tbody>
-					<%= f.fields_for :common_riems do |builder| %>
-						<%= render :partial => 'common_riem_fields',:locals => { :f => builder } %>
-					<% end %>				
-				</tbody>
-				<tr>
-					<th colspan="6"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems %></th>
-					<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-					<td></td>
-				</tr>		
-			</table>
+			<%= f.fields_for :common_riems do |builder| %>
+				<%= render :partial => 'common_riem_fields',:locals => { :f => builder } %>
+			<% end %>				
+		 	<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 		</div>
+  </div>
 	<% end %>
 	<% if @doc_head.doc_type==10 or @doc_head.doc_type==12%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= @doc_head.doc_type==10 ? "#{I18n.t('common_attr.transport_fee')}" : "#{I18n.t('common_attr.work_meal')}"%><%= "#{I18n.t('common_attr.details')}"%></h3>
 	</div>
 	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					<th><%= "#{I18n.t('common_attr.afford_dep')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.project')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.place')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.date')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.people_count')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.join_together_person')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.ori_amount')}"%>*</th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :rd_work_meals do |builder|  %>
-					<%= render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  %>
-				<% end %>				
-			</tbody>
-			<tr>
-				<th colspan="10"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_work_meals %></th>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+			<%= f.fields_for :rd_work_meals do |builder|  %>
+				<%= render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  %>
+			<% end %>				
+			<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_work_meals %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 	</div>
+</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==11%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.extra_meal')}"%></h3>
 	</div>
 	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-				  <th><%= "#{I18n.t('common_attr.is_sunday')}"%></th>
-					<th><%= "#{I18n.t('common_attr.start_time')}"%>*</th>
-				  <th><%= "#{I18n.t('common_attr.end_time')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.extra_work_stan')}"%></th>
-					<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :rd_extra_work_meals do |builder|  %>
-					<%= render :partial => 'rd_extra_work_meal_fields',:locals => { :f => builder }  %>
-				<% end %>			
-			</tbody>
-			<tr>
-				<th colspan="10"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_extra_work_meals %></th>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+			<%= f.fields_for :rd_extra_work_meals do |builder|  %>
+				<%= render :partial => 'rd_extra_work_meal_fields',:locals => { :f => builder }  %>
+			<% end %>			
+			<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_extra_work_meals %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 	</div>
+</div>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.extra_car')}"%></h3>
 	</div>
 	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-				  <th><%= "#{I18n.t('common_attr.is_sunday')}"%></th>
-          <th><%= "#{I18n.t('common_attr.start_place')}"%>*</th>
-				  <th><%= "#{I18n.t('common_attr.end_place')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.start_time')}"%>*</th>
-				  <th><%= "#{I18n.t('common_attr.end_time')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :rd_extra_work_cars do |builder|  %>
-					<%= render :partial => 'rd_extra_work_car_fields',:locals => { :f => builder }  %>
-				<% end %>				
-			</tbody>
-			<tr>
-				<th colspan="11"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_extra_work_cars %></th>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+			<%= f.fields_for :rd_extra_work_cars do |builder|  %>
+				<%= render :partial => 'rd_extra_work_car_fields',:locals => { :f => builder }  %>
+			<% end %>				
+			<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_extra_work_cars %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 	</div>
+</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==12%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.common_transport')}"%></h3>
 	</div>
 	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-					<th><%= "#{I18n.t('common_attr.afford_dep')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.project')}"%></th>
-				    <th><%= "#{I18n.t('common_attr.start_place')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.end_place')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.start_time')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.end_time')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.reason')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.apply_amount')}"%>*</th>
-					<th><%= "#{I18n.t('common_attr.ori_amount')}"%></th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :rd_common_transports do |builder|  %>
-					<%= render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  %>
-				<% end %>				
-			</tbody>
-			<tr>
-				<th colspan="10"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_common_transports %></th>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+			<%= f.fields_for :rd_common_transports do |builder|  %>
+				<%= render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  %>
+			<% end %>				
+			<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_common_transports %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 	</div>
+</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type==13%>
+<div class="doc_detail">
 	<div class="form_title">
 		<h3><%= "#{I18n.t('common_attr.benefit_detail')}"%></h3>
 	</div>
 	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-		            <th><%= "#{I18n.t('common_attr.afford_dep')}"%></th>
-					<th><%= "#{I18n.t('common_attr.project')}"%></th>
-		            <th><%= "#{I18n.t('common_attr.fee')}"%></th>
-				    <th><%= "#{I18n.t('common_attr.people_count')}"%></th>
-				    <th><%= "#{I18n.t('common_attr.fee_span')}"%></th>
-				    <th><%= "#{I18n.t('common_attr.apply_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :rd_benefits do |builder|  %>
-					<%= render :partial => 'rd_benefit_fields',:locals => { :f => builder }  %>
-				<% end %>			
-			</tbody>
-			<tr>
-				<th colspan="7"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_benefits %></th>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+			<%= f.fields_for :rd_benefits do |builder|  %>
+				<%= render :partial => 'rd_benefit_fields',:locals => { :f => builder }  %>
+			<% end %>			
+			<%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_benefits %>
+			<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+			<%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%>
 	</div>
+</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if [9,11,13].include? @doc_head.doc_type%>
 	<!--分摊明细动态显示-->
+<div class="doc_detail">
 	<div class="form_title is_split_reim">
 		<h3><%= "#{I18n.t('common_attr.split_detail')}"%></h3>
 	</div>
 	<div class="form_area is_split_reim">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-				    <th><%= "#{I18n.t('common_attr.afford_dep')}"%></th>							    
-				    <th><%= "#{I18n.t('common_attr.project')}"%></th>
-					<% if @doc_head.doc_type==13 %>
-						<th><%= "#{I18n.t('common_attr.fee')}"%></th>
-					<% end %>
-					<th><%= "#{I18n.t('common_attr.split_amount')}"%></th>
-					<th></th><!--给删除的-->
-			    </tr>
-		    <thead>
-			<tbody>
-				<%= f.fields_for :reim_split_details do |builder|  %>
-					<%= render :partial => "reim_split_detail_fields",:locals => { :f => builder }  %>
-				<% end %>				
-			</tbody>
-			<tr>
-        <th colspan="<%= @doc_head.doc_type==13 ? "3" : "2"%>"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %></th>
-				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
-				<td><%= text_field_tag 'split_total_amount', nil, :class => 'split_total_amount normal'%></td>
-				<td></td>
-			</tr>		
-		</table>
+		<%= f.fields_for :reim_split_details do |builder|  %>
+			<%= render :partial => "reim_split_detail_fields",:locals => { :f => builder }  %>
+		<% end %>				
+    <%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details %>
+		<%= "#{I18n.t('common_attr.total_apply_amount')}"%>
+		<%= text_field_tag 'split_total_amount', nil, :class => 'split_total_amount normal'%>
 	</div>
+</div>
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type>=9 and @doc_head.doc_type<=12%>
@@ -642,36 +404,17 @@
 	<% end %>
 	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if @doc_head.doc_type<3 or @doc_head.doc_type>=9 and @doc_head.doc_type<=13%>
+<div class="doc_detail recivers">
 	<div class="form_title">
 		<h3><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}":"#{I18n.t('common_attr.rec_person')}"%><%= "#{I18n.t('common_attr.details')}"%></h3>
 	</div>
 	<div class="form_area">
-		<table class="form_input">
-			<thead>
-				<tr>					
-					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
-				    <th><%= "#{I18n.t('common_attr.settlement')}"%>*</th>
-				    <th><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></th>
-				    <th><%= "#{I18n.t('common_attr.bank')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.bank_no')}"%>*</th>
-				    <th><%= "#{I18n.t('common_attr.amount')}"%>*</th>
-					<% if [9,11,13].include? @doc_head.doc_type%>
-					<th><%= "#{I18n.t('common_attr.hr_amount')}"%></th>
-					<th><%= "#{I18n.t('common_attr.fi_amount')}"%></th>
-					<% end %>	
-					<th></th><!--给删除的-->		    
-			    </tr>
-		    <thead>
-			<tbody>
 				<%= f.fields_for :recivers do |builder|  %>
 					<%= render :partial => 'reciver_fields',:locals => { :f => builder }  %>
 				<% end %>
-			</tbody>
-			<tr>
-				<th colspan="7"><%= link_to_add_fields "#{I18n.t('common_attr.add_reciver')}",f,:recivers %></th>
-			</tr>		
-		</table>
+				<%= link_to_add_fields "#{I18n.t('common_attr.add_reciver')}",f,:recivers %>
 	</div>	
+</div>
 	<% end %>
 </div>
 <% end %>

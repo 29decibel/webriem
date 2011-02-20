@@ -15,11 +15,11 @@ $(function(){
 function adjust_amount()
 {
 	//alert($(this).attr("class"));
-	var doc_rate=parseFloat($(this).closest("tr").find("input.doc_rate").val());
-	var doc_ori_amount=parseFloat($(this).closest("tr").find("input.doc_ori_amount").val());
+	var doc_rate=parseFloat($(this).closest("fieldset").find("input.doc_rate").val());
+	var doc_ori_amount=parseFloat($(this).closest("fieldset").find("input.doc_ori_amount").val());
 	//var doc_apply_amount=$(this).closest("tr").find("input.doc_apply_amount").val();
-	var doc_HR_amount=parseFloat($(this).closest("tr").find("input.doc_HR_amount").val());
-	var doc_FI_amount=parseFloat($(this).closest("tr").find("input.doc_FI_amount").val());
+	var doc_HR_amount=parseFloat($(this).closest("fieldset").find("input.doc_HR_amount").val());
+	var doc_FI_amount=parseFloat($(this).closest("fieldset").find("input.doc_FI_amount").val());
 	//=====================+++++++++++++++++++++++++++++++++
 	if(isNaN(doc_rate))
 		doc_rate=0.0;
@@ -42,28 +42,31 @@ function adjust_amount()
 	}
 	if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 	{
-		$(this).closest("tr").find("input.doc_ori_amount").val(doc_ori_amount);
-		$(this).closest("tr").find("input.doc_apply_amount").val(setting_value);
-		$(this).closest("tr").find("input.doc_HR_amount").val(setting_value);
-		$(this).closest("tr").find("input.doc_FI_amount").val(setting_value);
+		$(this).closest("fieldset").find("input.doc_ori_amount").val(doc_ori_amount);
+		$(this).closest("fieldset").find("input.doc_apply_amount").val(setting_value);
+		$(this).closest("fieldset").find("input.doc_HR_amount").val(setting_value);
+		$(this).closest("fieldset").find("input.doc_FI_amount").val(setting_value);
 	}
 	if(current_style_class.indexOf("doc_HR_amount")>=0)
 	{
-		$(this).closest("tr").find("input.doc_FI_amount").val(doc_HR_amount);
+		$(this).closest("fieldset").find("input.doc_FI_amount").val(doc_HR_amount);
 	}
 	//cal all amount
 	var total=0;
-	var control_to_calculate=find_control_cal_by_tr_wrapper($(this).closest("table").find("tr.fields").not(":hidden"));
+	var control_to_calculate=find_control_cal_by_tr_wrapper($(this).closest("div.form_area").find("fieldset").not(":hidden"));
+  console.log(control_to_calculate);
 	//alert($(this).closest("table").find("tr.fields").not(":hidden").size());
 	if(control_to_calculate!=0)
 	{
 		control_to_calculate.each(function(){
 			//debugger;
-			//alert(this);
+			console.log(this);
 			total+=parseFloat($(this).val());
+      console.log($(this).val());
+      
 		});
 	}
-	$(this).closest("table").find("input.doc_total_amount").val(total.toFixed(2));
+	$(this).closest("div.form_area").find("input.doc_total_amount").val(total.toFixed(2));
 	//whole page's total amount
 	var total_riem=0.00;
 	$("input.doc_total_amount").each(function(){
@@ -74,7 +77,7 @@ function adjust_amount()
 	$("#total_riem").change();
 	//set the reciver amount==============================================================
 	//只有一个收款人的时候进行total的设置
-	if($("tr.reciver").not(":hidden").size()==1)
+	if($("fieldset.reciver").not(":hidden").size()==1)
 	{
 		//whether there is a cp doc exist
 		if($("input.offset_amount").size()>0)
@@ -88,18 +91,18 @@ function adjust_amount()
     total_riem=total_riem.toFixed(2);
 		if(current_style_class.indexOf("doc_rate")>=0 || current_style_class.indexOf("doc_ori_amount")>=0)
 		{
-			$("tr.reciver").not(":hidden").find("input.doc_ori_amount").first().val(total_riem);
-			$("tr.reciver").not(":hidden").find("input.doc_HR_amount").first().val(total_riem);
-			$("tr.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);
+			$("fieldset.reciver").not(":hidden").find("input.doc_ori_amount").first().val(total_riem);
+			$("fieldset.reciver").not(":hidden").find("input.doc_HR_amount").first().val(total_riem);
+			$("fieldset.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);
 		}
 		if(current_style_class.indexOf("doc_HR_amount")>=0)
 		{
-			$("tr.reciver").not(":hidden").find("input.doc_HR_amount").first().val(total_riem);
-			$("tr.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);
+			$("fieldset.reciver").not(":hidden").find("input.doc_HR_amount").first().val(total_riem);
+			$("fieldset.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);
 		}
 		if(current_style_class.indexOf("doc_FI_amount")>=0)
 		{
-			$("tr.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);		
+			$("fieldset.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);		
 		}
 	}
 	//======================================================================================
@@ -122,8 +125,10 @@ function find_control_cal_by_tr_wrapper(tr_wrapper)
 }
 function set_split_total()
 {
+  //alert("aaaa");
 	//set self to 2 fixed
 	var current_val=parseFloat($(this).val());
+  //alert(current_val);
 	if(isNaN(current_val))
 	{
 		current_val=0.0;
@@ -131,36 +136,37 @@ function set_split_total()
 	//set me back
 	$(this).val(current_val.toFixed(2));
 	total_split=0.0;
-	$("input.percent_amount").each(function(){
-		total_split+=parseFloat($(this).val());
+	$("fieldset.split").not(":hidden").each(function(){
+		total_split+=parseFloat($(this).find("input.percent_amount").val());
 	});
 	$("#split_total_amount").val(total_split.toFixed(2));
 }
 //not use now
-function set_split_percent_amount()
-{
-	//get total amount
-	var total_riem=0.00;
-	$("input.doc_total_amount").each(function(){
-		total_riem+=parseFloat($(this).val());
-	});
-	$("div.is_split_reim table tr").not(":hidden").find("input.split_percent").each(function(){
-		var v=$(this).val()*total_riem/100;
-		$(this).closest("tr").find("input.percent_amount").val(v.toFixed(2));
-	});
-}
+//function set_split_percent_amount()
+//{
+//  alert("ggg");
+//	//get total amount
+//	var total_riem=0.00;
+//	$("input.doc_total_amount").each(function(){
+//		total_riem+=parseFloat($(this).val());
+//	});
+//	$("div.is_split_reim fieldset").not(":hidden").find("input.split_percent").each(function(){
+//		var v=$(this).val()*total_riem/100;
+//		$(this).closest("fieldset").find("input.percent_amount").val(v.toFixed(2));
+//	});
+//}
 
 function offset_amount_change()
 {
 	//alert($("tr.reciver").not(":hidden").first().find("input.doc_ori_amount").val());
-	$("tr.reciver").not(":hidden").first().find("input.doc_ori_amount").change();
+	$("fieldset.reciver").not(":hidden").first().find("input.doc_ori_amount").change();
 	return false;
 }
 
 //init total amount
 function init_total_amount()
 {
-	$("table").each(function(){
+	$("div.doc_detail").each(function(){
 		var total=0.00;
     //alert($(this).find("input.doc_FI_amount").size());
     var amount_controls=$(this).find("input.doc_FI_amount");
@@ -183,15 +189,15 @@ function init_total_amount()
 
 function calculate_ori_amount()
 {
-	var days= parseFloat($(this).closest("tr").find("input.travel_days").val());
-	var fee_standard=parseFloat($(this).closest("tr").find("input.fee_standard").val());
+	var days= parseFloat($(this).closest("fieldset").find("input.travel_days").val());
+	var fee_standard=parseFloat($(this).closest("fieldset").find("input.fee_standard").val());
 	//var other_fee=parseFloat($(this).closest("tr").find("input.other_fee").val());
 	//if(isNaN(other_fee))
 	//	other_fee=0;
 	if(!isNaN(days) && !isNaN(fee_standard))
 	{
 		var total=(days*fee_standard).toFixed(2);
-		$(this).closest("tr").find("input.doc_ori_amount").val(total);
-		$(this).closest("tr").find("input.doc_ori_amount").change();
+		$(this).closest("fieldset").find("input.doc_ori_amount").val(total);
+		$(this).closest("fieldset").find("input.doc_ori_amount").change();
 	}
 }

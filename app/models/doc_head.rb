@@ -32,9 +32,10 @@ class DocHead < ActiveRecord::Base
   #审批流
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
   #======================================================================
-  accepts_nested_attributes_for :recivers,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :cp_doc_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rec_notice_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+  #,:reject_if => lambda { |a| a[:sequence].blank? }
+  accepts_nested_attributes_for :recivers, :allow_destroy => true
+  accepts_nested_attributes_for :cp_doc_details , :allow_destroy => true
+  accepts_nested_attributes_for :rec_notice_details , :allow_destroy => true
   #here is the samn reason for 
   accepts_nested_attributes_for :inner_remittance , :allow_destroy => true
   accepts_nested_attributes_for :inner_transfer , :allow_destroy => true
@@ -60,17 +61,17 @@ class DocHead < ActiveRecord::Base
   #here is for the vouch info
   has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
-  accepts_nested_attributes_for :reim_split_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_extra_work_meals ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_benefits ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_common_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_extra_work_cars ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_work_meals ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_lodgings ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_travels ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :common_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :other_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :reim_split_details , :allow_destroy => true
+  accepts_nested_attributes_for :rd_extra_work_meals , :allow_destroy => true
+  accepts_nested_attributes_for :rd_benefits , :allow_destroy => true
+  accepts_nested_attributes_for :rd_common_transports , :allow_destroy => true
+  accepts_nested_attributes_for :rd_extra_work_cars , :allow_destroy => true
+  accepts_nested_attributes_for :rd_work_meals , :allow_destroy => true
+  accepts_nested_attributes_for :rd_lodgings , :allow_destroy => true
+  accepts_nested_attributes_for :rd_travels , :allow_destroy => true
+  accepts_nested_attributes_for :rd_transports , :allow_destroy => true
+  accepts_nested_attributes_for :common_riems , :allow_destroy => true
+  accepts_nested_attributes_for :other_riems , :allow_destroy => true
   #default_scope :order => 'updated_at DESC'
   #the great offset info here
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
@@ -199,6 +200,7 @@ class DocHead < ActiveRecord::Base
   def split_total_amount
     total=0
     reim_split_details.each do |split|
+      next if split.marked_for_destruction?
       total+=split.percent_amount if split.percent_amount
     end
     total

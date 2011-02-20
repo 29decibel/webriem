@@ -1,35 +1,37 @@
-<tr class="fields">
-	<td>
-		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
-	</td>
-	<td>
-		<div class="reference">
+<fieldset class="split">
+  <legend>
+    <span>序号<%= f.object.sequence%>    </span>
+    <%= f.hidden_field(:_destroy) %>
+    <%= link_to_remove %>
+  </legend>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.afford_dep')}"%></span>  
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref middle" %>
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
-		</div>
-	</td> 
-	<td>
-		<div class="reference">
+    </div></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.project')}"%></span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref middle" %>
 			<a href="#" class-data="Project"><span class="reference"></span></a>			
-		</div>
-	</td>
+    </div></span>
+  </div>
 	<% if @doc_head.doc_type==13 %>
-	<td>
-		<div class="reference">
-			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
-			<a href="#" class-data="Fee"><span class="reference"></span></a>			
-		</div>
-	</td>
+    <div class="form_field">
+      <span class="label"><%= "#{I18n.t('common_attr.fee')}"%></span>
+      <span class="value"><div class="reference">
+			  <%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			  <%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
+			  <a href="#" class-data="Fee"><span class="reference"></span></a>			
+		  </div></span>
+    </div>
 	<% end %>
-	<td>
-		<%= f.text_field :percent_amount,:value=>0,:class=>"normal percent_amount" %>  
-	</td>
-	<td>
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "#{I18n.t('common_attr.btn_delete')}", f %> 
-	</td>
-</tr>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.split_amount')}"%></span>
+    <span class="value"><%= f.text_field :percent_amount,:value=>f.object.percent_amount||0,:class=>"normal percent_amount" %></span>
+  </div>  
+</fieldset>

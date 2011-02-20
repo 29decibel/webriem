@@ -1,37 +1,42 @@
-<tr class="fields reciver">
-	<td>  
-		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
-	</td> 
-	<td>
-		<div class="reference">
+<fieldset class="reciver">
+  <legend>
+    <span>序号<%= f.object.sequence%>    </span>
+    <%= f.hidden_field(:_destroy) %>
+    <%= link_to_remove %>
+  </legend> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.settlement')}"%>*</span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :settlement_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "settlement_info",f.object.settlement.to_s,:class=>"ref" %>
 			<a href="#" class-data="Settlement"><span class="reference"></span></a>			
-		</div>
-	</td>
-	<td>  
-		<%= f.text_field :company,:class=> @doc_head.doc_type==2 ? "large" : "normal" %>  
-	</td>
-	<td>  
-		<%= f.text_field :bank,:class=>@doc_head.doc_type==2 ? "large" : "normal" %>  
-	</td>
-	<td>  
-		<%= f.text_field :bank_no ,:class=>"large"%>  
-	</td>
-	<td>  
-		<%= f.text_field :amount,:class=>"normal doc_ori_amount" %>  
-	</td>
+    </div></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></span>
+    <span class="value"><%= f.text_field :company,:class=> @doc_head.doc_type==2 ? "large" : "normal" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.bank')}"%>*</span>
+    <span class="value"><%= f.text_field :bank,:class=>@doc_head.doc_type==2 ? "large" : "normal" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.bank_no')}"%>*</span>
+    <span class="value"><%= f.text_field :bank_no ,:class=>"large"%></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.amount')}"%>*</span>
+    <span class="value"><%= f.text_field :amount,:class=>"normal doc_ori_amount" %></span>
+  </div>  
 	<!--riem need the hr amount and finance amount-->
 	<% if [9,11,13].include? @doc_head.doc_type%>
-	<td>  
-		<%= f.text_field :hr_amount,:class=>"normal number doc_HR_amount" %>  
-	</td>
-	<td>  
-		<%= f.text_field :fi_amount,:class=>"normal number doc_FI_amount" %>  
-	</td>	
+    <div class="form_field">
+      <span class="label"><%= "#{I18n.t('common_attr.hr_amount')}"%></span>  
+      <span class="value"><%= f.text_field :hr_amount,:class=>"normal number doc_HR_amount" %></span>
+    </div>  
+    <div class="form_field">
+      <span class="label"><%= "#{I18n.t('common_attr.fi_amount')}"%></span>    
+      <span class="value"><%= f.text_field :fi_amount,:class=>"normal number doc_FI_amount" %></span>
+    </div>  
 	<% end %>
-	<td>
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "#{I18n.t('common_attr.btn_delete')}", f %> 
-	</td>
-</tr>
+</fieldset>

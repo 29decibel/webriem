@@ -24,9 +24,9 @@ $(function(){
 		);
 		//$("input.table_row_sequence").attr("readonly","readonly");
 		//set all sequence stuff readonly
-		$("table.form_input").each(function(){
-			set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
-		});
+		//$("table.form_input").each(function(){
+		//	set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
+		//});
 		//bind the is_split change events
 		bind_is_split_change_events();
 		//fire it once
@@ -107,21 +107,21 @@ $(function(){
 			region_type= $(this).val();
 			//alert(region_type);
 			//set neib region id info
-			$(this).closest("tr").find("input#region_info").next("a").attr("pre_condition","region_type_id="+region_type);
+			$(this).closest("fieldset").find("input#region_info").next("a").attr("pre_condition","region_type_id="+region_type);
 		});
 		//observe the region change so to calculate the fee standard
 		$("input.get_fee,.region_type_select").live("change",function(){
 			//get the duty id 
 			var duty_id=$("#duty_for_fee_standard").val();
 			//var region_id=$(this).siblings("input.ref_hidden_field").val();
-			var region_type_id=$(this).closest("tr").find(".region_type_select").val();
-			var fee_code=$(this).closest("tr").attr("fee_code");
+			var region_type_id=$(this).closest("fieldset").find(".region_type_select").val();
+			var fee_code=$(this).closest("fieldset").attr("fee_code");
 			//person type
 			var pt=$("#pt_for_fee_standard").val();
 			//this can be a very good find stuff pattern
 			//when you want to find something another cell
 			//first go up until find the table row and then find stuff you want within it 
-			var fee_standard_control=$(this).closest("tr").find("input.fee_standard");
+			var fee_standard_control=$(this).closest("fieldset").find("input.fee_standard");
 			//make a ajax call and get the fee[ not all the time ]
 			//if($("#form_state"))
 			$.ajax({
@@ -137,9 +137,9 @@ $(function(){
 			    fee_standard_control.val(values[0]);
 					fee_standard_control.change();
 					//set currency					
-					fee_standard_control.closest("tr").find("input#currency_info").val(values[2]);
-					fee_standard_control.closest("tr").find("input#currency_info").prev().val(values[1]);
-					fee_standard_control.closest("tr").find(".doc_rate").val(values[3]);
+					fee_standard_control.closest("fieldset").find("input#currency_info").val(values[2]);
+					fee_standard_control.closest("fieldset").find("input#currency_info").prev().val(values[1]);
+					fee_standard_control.closest("fieldset").find(".doc_rate").val(values[3]);
 			  },
 				error: function(){
 					fee_standard_control.val("暂无*");
@@ -148,11 +148,11 @@ $(function(){
 		});
 		//observe the time and get the extra work time fee
 		$(".is_sunday,.ew_b_time,.ew_e_time").live("change",function(){
-			var is_sunday=$(this).closest("tr").find(".is_sunday").val()==0;
-			var start_time=$(this).closest("tr").find(".ew_b_time").val();
-			var end_time=$(this).closest("tr").find(".ew_e_time").val();
-			var fee_code=$(this).closest("tr").attr("fee_code");
-			var extra_st_control=$(this).closest("tr").find(".extra_st");
+			var is_sunday=$(this).closest("fieldset").find(".is_sunday").val()==0;
+			var start_time=$(this).closest("fieldset").find(".ew_b_time").val();
+			var end_time=$(this).closest("fieldset").find(".ew_e_time").val();
+			var fee_code=$(this).closest("fieldset").attr("fee_code");
+			var extra_st_control=$(this).closest("fieldset").find(".extra_st");
 			if(start_time!="" && end_time!="")
 			{
 				//make a ajax call and get the fee
@@ -169,8 +169,8 @@ $(function(){
 						//alert(msg);
 						var amount=parseFloat(msg);
 						if(!isNaN(amount)){
-							extra_st_control.closest("tr").find("input.doc_ori_amount").val(amount);
-							extra_st_control.closest("tr").find("input.doc_ori_amount").change();
+							extra_st_control.closest("fieldset").find("input.doc_ori_amount").val(amount);
+							extra_st_control.closest("fieldset").find("input.doc_ori_amount").change();
 						}
 				  },
 					error: function(){
@@ -196,14 +196,14 @@ $(function(){
 		$("select.is_self_dep").live("change",function(){
 			if($(this).val()==0)
 			{
-				$(this).closest("tr").find("div.dep input").removeAttr("disabled");
-				$(this).closest("tr").find("div.dep a").show();
+				$(this).closest("fieldset").find("div.dep input").removeAttr("disabled");
+				$(this).closest("fieldset").find("div.dep a").show();
 			}
 			else
 			{
-				$(this).closest("tr").find("div.dep input").val("");
-				$(this).closest("tr").find("div.dep input").attr("readonly","true");
-				$(this).closest("tr").find("div.dep a").hide();
+				$(this).closest("fieldset").find("div.dep input").val("");
+				$(this).closest("fieldset").find("div.dep input").attr("readonly","true");
+				$(this).closest("fieldset").find("div.dep a").hide();
 			}
 		});
 		$("select.is_self_dep").change();
@@ -218,7 +218,7 @@ function reference_change()
 	{
 		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
 		//find the rate input 
-		var rate_input=$(this).closest("tr").find(".doc_rate");
+		var rate_input=$(this).closest("fieldset").find(".doc_rate");
 		if(rate_input.size()>0 && other_info!=null)
 		{
 			rate_input.val(other_info.split('_')[0]);
@@ -228,7 +228,7 @@ function reference_change()
 }
 function adapt_apply_amount_by_rate()
 {
-	var tr= $(this).closest("tr");
+	var tr= $(this).closest("fieldset");
 	var rate=tr.find("input.rate").val();
 	var ori_amount=tr.find("input.ori_amount").val();
 	tr.find("input.amount").val(rate*ori_amount);
@@ -248,8 +248,9 @@ function bind_is_split_change_events()
 		}
 		else
 		{
-			$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
-			$("div.is_split_reim").hide("slow");		
+			//$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
+      $("fieldset.split legend input:hidden").val(true);//remove();
+			$("div.is_split_reim").hide("slow");		      
 		}
 		//set the doc head's project and afford dep readonly 
 		if($(this).val()==0)
@@ -277,8 +278,8 @@ function bind_is_split_change_events()
 
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("true");  
-    $(link).closest("tr.fields").hide(); 
-	set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
+    $(link).closest("fieldset").hide(); 
+	//set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
 	//invoke the calcalate number
 	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount,input.percent_amount").change();
 }
@@ -286,9 +287,9 @@ function remove_fields(link) {
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g");
-  $(link).parent().parent().before(content.replace(regexp, new_id));
+  $(link).before(content.replace(regexp, new_id));
 //debugger
-	set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
+	//set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
 	//wrap the datatime picker
 	$(".datepicker").datepicker();
 	$(".datetimepicker").datetimepicker();
@@ -297,20 +298,20 @@ function add_fields(link, association, content) {
 	//set reference readonly
 	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
-	$(link).closest("tr").prev().find("input.fee_standard").attr("readonly",true);
+	$(link).closest("fieldset").prev().find("input.fee_standard").attr("readonly",true);
 	//fire get fee
-	$(link).closest("tr").prev().find(".region_type_select").change();
+	$(link).closest("fieldset").prev().find(".region_type_select").change();
 	//enable the enter to tab
 	add_enter_to_tab();
 }
 //找到所有的table,只要他有sequence列,set the number to a sequence number
 function set_unique_sequence_num(sequences){
 	//设置他们的序号
-	sequences.each(function(index,ele){
-		$(this).val(index+1);
-		//fire it once
-		$(this).attr("readonly","readonly");
-	});
+	//sequences.each(function(index,ele){
+	//	$(this).val(index+1);
+	//	//fire it once
+	//	$(this).attr("readonly","readonly");
+	//});
 }
 
 function add_upload_files(current,path)

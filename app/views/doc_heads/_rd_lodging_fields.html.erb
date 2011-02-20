@@ -1,63 +1,76 @@
-<tr class="fields" fee_code="0302">
-	<td>
-		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
-	</td>
-	<td>
-		<%= f.text_field :start_date,:class=>"datepicker normal" %>  
-	</td>
-	<td>
-		<%= f.text_field :end_date,:class=>"datepicker normal" %>  
-	</td>
-	<td>
-		<%= f.text_field :days,:class=>"normal number" %>  
-	</td>
-	<td>
-		<%= f.select :region_type_id, RegionType.all.collect{|rt|[rt.name,rt.id]},{},{:class=>"normal region_type_select "} %>
-	</td>
-	<td>
-		<div class="reference">
+<fieldset>
+  <legend>
+    <span>序号<%= f.object.sequence%>    </span>
+    <%= f.hidden_field(:_destroy) %>
+    <%= link_to_remove %>
+  </legend>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.start_time')}"%>*</span>
+    <span class="value"><%= f.text_field :start_date,:class=>"datepicker normal" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.end_time')}"%>*</span>
+    <span class="value"><%= f.text_field :end_date,:class=>"datepicker normal" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.lodging_days')}"%></span>
+    <span class="value"><%= f.text_field :days,:class=>"normal number" %></span> 
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.region_type')}"%></span>
+    <span class="value"><%= f.select :region_type_id, RegionType.all.collect{|rt|[rt.name,rt.id]},{},{:class=>"normal region_type_select "} %></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.city')}"%>*</span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :region_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "region_info",f.object.region.to_s,:class=>"ref get_fee" %>
 			<a href="#" class-data="Region"><span class="reference"></span></a>			
-		</div>
-	</td>
-	<td>
-		<%= f.text_field :custom_place,:class=>"normal" %>  
-	</td>
-	<td>
-		<%= f.text_field :st_amount,:class=>"normal fee_standard" %>
-	</td>
-	<td>
-		<%= f.text_field :people_count,:class=>"xsmall" %>  
-	</td>
-	<td>
-		<%= f.text_field :person_names,:class=>"normal" %>  
-	</td>
-	<td>
-		<div class="reference">
+    </div></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.other_place')}"%>*</span>
+    <span class="value"><%= f.text_field :custom_place,:class=>"normal" %> </span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.fee_stan')}"%></span>
+    <span class="value"><%= f.text_field :st_amount,:class=>"normal fee_standard" %></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.people_count')}"%></span>
+    <span class="value"><%= f.text_field :people_count,:class=>"xsmall" %> </span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.live_together_person')}"%></span>
+    <span class="value"><%= f.text_field :person_names,:class=>"normal" %></span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.currency')}"%>*</span>
+    <span class="value"><div class="reference">
 			<%- currency = f.object.currency==nil ? Currency.find_by_code('RMB') : f.object.currency%>
 			<%= f.hidden_field :currency_id,{:value=>currency.id,:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "currency_info",currency.to_s,:class=>"ref" %>
 			<a href="#" class-data="Currency"><span class="reference"></span></a>			
-		</div>  
-	</td>
-	<td>
-		<%= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" %>  
-	</td>
-	<td>
-		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  
-	</td>
-	<td>
-		<%= f.text_field :apply_amount,:class=>"doc_apply_amount normal number" %>  
-	</td>
-	<td>
-		<%= f.text_field :hr_amount,:class=>"doc_HR_amount normal number" %>  
-	</td>
-	<td>
-		<%= f.text_field :fi_amount,:class=>"doc_FI_amount normal number" %>  
-	</td>
-	<td>
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "#{I18n.t('common_attr.btn_delete')}", f %> 
-	</td>
-</tr>
+    </div> </span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.rate')}"%>*</span>
+    <span class="value"><%= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" %></span> 
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.apply_amount')}"%>*</span>
+    <span class="value"><%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %> </span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.ori_amount')}"%></span>
+    <span class="value"><%= f.text_field :apply_amount,:class=>"doc_apply_amount normal number" %> </span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.hr_amount')}"%></span>
+    <span class="value"><%= f.text_field :hr_amount,:class=>"doc_HR_amount normal number" %> </span>
+  </div> 
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.fi_amount')}"%></span>
+    <span class="value"><%= f.text_field :fi_amount,:class=>"doc_FI_amount normal number" %></span> 
+  </div> 
+  </fieldset>
