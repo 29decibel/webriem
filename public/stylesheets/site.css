@@ -160,6 +160,7 @@ form div.form_field span.value input{
 div.form_area fieldset{
   border:1px solid #CCC;
   padding-bottom:5px;
+  position:relative;
 }
 div.form_area fieldset legend{
   margin-left:20px;
@@ -185,6 +186,17 @@ div.form_title{
 	margin: 0px 15px 0px 15px;
 	padding: 5px;
 	border-bottom: 1px solid #E4F0F2;
+}
+div.form_title h3{
+  position:relative;
+}
+div.form_title h3 img{
+  margin-left:5px;
+  margin-top:7px;
+}
+div.form_title span.doc_total_amount{
+  font-size:15px;
+  font-weight:bold;
 }
 /*footer*/
 div#footer{

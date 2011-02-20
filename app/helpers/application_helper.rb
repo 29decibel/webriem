@@ -22,7 +22,7 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", :f => builder)
     end
     #注意了兄弟们,在这里一定要去掉h()对整个文本的转义,否则就会js报错啦~~~~
-    link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")",:class=>"detail_link")
+    link_to_function(image_tag("/images/icons/add.png"), "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")",:class=>"detail_link")
   end
   def doc_type_name(num)
     num=num.to_i if num.class==String

@@ -1,46 +1,52 @@
-<tr class="fields">
-	<td>
-		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
-	</td> 
-	<td>
-		<%= f.text_field :apply_date,:class=>"datepicker normal" %>
-	</td>
-	<td>
-		<div class="reference">
+<fieldset>
+  <legend>
+    <span>序号<%= f.object.sequence%>    </span>
+    <%= f.hidden_field(:_destroy) %>
+    <%= link_to_remove %>
+  </legend>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.apply_date')}"%></span>
+    <span class="value"><%= f.text_field :apply_date,:class=>"datepicker normal" %></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.afford_dep')}"%>*</span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref" %>
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
-		</div>
-	</td>
-	<td>
-		<div class="reference">
+    </div></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.project')}"%>*</span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref middle" %>
 			<a href="#" class-data="Project"><span class="reference"></span></a>			
-		</div>
-	</td>
-	<td>
-		<%= f.text_field :description,:class=>"large" %>  
-	</td>
-	<td>
-		<div class="reference">
+    </div></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('activerecord.attributes.doc_head.rec_notice_details.content')}"%></span>
+    <span class="value"><%= f.text_field :description,:class=>"large" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.currency')}"%></span>
+    <span class="value"><div class="reference">
 			<%- currency = f.object.currency==nil ? Currency.find_by_code('RMB') : f.object.currency%>
 			<%= f.hidden_field :currency_id,{:value=>currency.id,:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "currency_info",currency.to_s,:class=>"ref" %>
 			<a href="#" class-data="Currency"><span class="reference"></span></a>			
-		</div>  
-	</td>
-	<td>
-		<%= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" %>  
-	</td>
-	<td>
-		<%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %>  
-	</td>
-	<td>
-		<%= f.text_field :amount,:class=>"normal doc_apply_amount number" %>  
-	</td>
-	<td>
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "#{I18n.t('common_attr.btn_delete')}", f %> 
-	</td>
-</tr>
+    </div></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.rate')}"%></span>
+    <span class="value"><%= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('common_attr.apply_amount')}"%></span>
+    <span class="value"><%= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" %></span>
+  </div>  
+  <div class="form_field">
+    <span class="label"><%= "#{I18n.t('activerecord.attributes.doc_head.rec_notice_details.amount')}"%>*</span>
+    <span class="value"><%= f.text_field :amount,:class=>"normal doc_apply_amount number" %></span>
+  </div>  
+</fieldset>

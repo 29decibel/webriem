@@ -287,7 +287,7 @@ function remove_fields(link) {
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g");
-  $(link).before(content.replace(regexp, new_id));
+  $(link).closest("div.doc_detail").find("div.form_area").append(content.replace(regexp, new_id));
 //debugger
 	//set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
 	//wrap the datatime picker

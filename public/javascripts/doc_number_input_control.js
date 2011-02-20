@@ -66,11 +66,11 @@ function adjust_amount()
       
 		});
 	}
-	$(this).closest("div.form_area").find("input.doc_total_amount").val(total.toFixed(2));
+	$(this).closest("div.doc_detail").find("div.form_title span.doc_total_amount").html(total.toFixed(2));
 	//whole page's total amount
 	var total_riem=0.00;
-	$("input.doc_total_amount").each(function(){
-		total_riem+=parseFloat($(this).val());
+	$("span.doc_total_amount").each(function(){
+		total_riem+=parseFloat($(this).text());
 	});
 	//set page's amount
 	$("#total_riem").text(total_riem.toFixed(2));
@@ -105,11 +105,6 @@ function adjust_amount()
 			$("fieldset.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);		
 		}
 	}
-	//======================================================================================
-	//if($("div.is_split_reim").size()>=1)
-	//{
-		//set_split_percent_amount();
-	//}
 }
 
 //寻找该用那个控件进行total value的计算
@@ -139,7 +134,7 @@ function set_split_total()
 	$("fieldset.split").not(":hidden").each(function(){
 		total_split+=parseFloat($(this).find("input.percent_amount").val());
 	});
-	$("#split_total_amount").val(total_split.toFixed(2));
+	$("span.split_total_amount").val(total_split.toFixed(2));
 }
 //not use now
 //function set_split_percent_amount()
@@ -166,6 +161,7 @@ function offset_amount_change()
 //init total amount
 function init_total_amount()
 {
+  var page_total=0.0;
 	$("div.doc_detail").each(function(){
 		var total=0.00;
     //alert($(this).find("input.doc_FI_amount").size());
@@ -177,9 +173,13 @@ function init_total_amount()
 		amount_controls.each(function(){
 			total+=parseFloat($(this).val());
 		});
-		$(this).find("input.doc_total_amount").val(total.toFixed(2));
+		$(this).find("span.doc_total_amount").html(total.toFixed(2));
+    page_total+=total;
 		$("input.doc_total_amount").change();
 	});
+  //set page total
+  $("#total_riem").text(page_total.toFixed(2));
+	$("#total_riem").change();
 	//set split if 
 	if($("div.is_split_reim").size()>=1)
 	{

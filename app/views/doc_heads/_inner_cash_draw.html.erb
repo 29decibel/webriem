@@ -12,29 +12,18 @@
 		<span class="value"><%= f.text_field :now_remain_amout,:class=>"input1 "%></span>
 	</div>
 </div>
+<div class="doc_detail">
 <div class="form_title">
-	<h3><%= I18n.t('common_attr.add_apply_item')%></h3>
+  <h3>
+    <%= I18n.t('common_attr.add_apply_item')%>
+	  <%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cash_draw_items %>
+    <%= image_tag "currency_yuan.png"%>
+    <span class='doc_total_amount normal'>0.0</span>
+  </h3>
 </div>
-<div id="cash_draw_items form_block">
-	<table class="form_input">
-		<thead>
-			<tr>	
-				<th><%= I18n.t('common_attr.sequence')%></th>
-			    <th><%= I18n.t('common_attr.used_for')%></th>
-			    <th><%= I18n.t('common_attr.apply_amount')%></th>
-				<th></th><!--给删除的-->
-		    </tr>
-	    <thead>
-		<tbody>
-			<% f.fields_for :cash_draw_items do |builder|  %>
-				<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
-			<% end %>				
-		</tbody>
-		<tr>
-			<th colspan="1"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cash_draw_items %></th>
-			<td><%= I18n.t('common_attr.total_apply_amount')%></td>
-			<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
-			<td></td>
-		</tr>		
-	</table>
+<div class="form_area" id="cash_draw_items form_block">
+	<% f.fields_for :cash_draw_items do |builder|  %>
+		<%= render :partial => 'cash_draw_item_fields',:locals => { :f => builder }  %>
+	<% end %>				
+</div>
 </div>
