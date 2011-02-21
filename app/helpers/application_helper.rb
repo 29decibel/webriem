@@ -9,7 +9,7 @@ module ApplicationHelper
   end
   #function to remove a link
   def link_to_remove
-    link_to_function(image_tag('/images/icons/cross.png'),"remove_fields(this)",:class=>"detail_link")
+    link_to_function(image_tag('list-remove.png'),"remove_fields(this)",:class=>"detail_link")
   end
   #add fields to current form
   def link_to_add_fields(name, f, association,default_values=[])

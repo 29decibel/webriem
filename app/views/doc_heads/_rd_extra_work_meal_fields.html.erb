@@ -1,9 +1,9 @@
 <fieldset>
   <legend>
-    <span>序号<%= f.object.sequence%>    </span>
     <%= f.hidden_field(:_destroy) %>
     <%= link_to_remove %>
   </legend>
+  <span class="sequence"></span>
   <div class="form_field">
 	  <span class="label"><%= "#{I18n.t('common_attr.is_sunday')}"%></span>
     <span class="value"><%= f.select :is_sunday, RdExtraWorkMeal::ENUMS_IS_SUNDAY,{},{:class=>"normal is_sunday"} %></span>

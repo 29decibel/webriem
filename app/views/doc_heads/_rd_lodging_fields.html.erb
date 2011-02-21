@@ -1,9 +1,9 @@
 <fieldset>
   <legend>
-    <span>序号<%= f.object.sequence%>    </span>
     <%= f.hidden_field(:_destroy) %>
     <%= link_to_remove %>
   </legend>
+  <span class="sequence"></span>
   <div class="form_field">
     <span class="label"><%= "#{I18n.t('common_attr.start_time')}"%>*</span>
     <span class="value"><%= f.text_field :start_date,:class=>"datepicker normal" %></span>

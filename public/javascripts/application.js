@@ -22,37 +22,12 @@ $(function(){
 			}
 		}
 		);
-		//$("input.table_row_sequence").attr("readonly","readonly");
-		//set all sequence stuff readonly
-		//$("table.form_input").each(function(){
-		//	set_unique_sequence_num($(this).find("input.table_row_sequence").not("input[value=true]"));
-		//});
 		//bind the is_split change events
 		bind_is_split_change_events();
 		//fire it once
 		$("select.is_split_reim").change();
-		//change the enter key to tab
-		//$('input').live("keypress", function(e) {
-		//#                /* ENTER PRESSED*/
-		//#                if (e.keyCode == 13) {
-		//#                    /* FOCUS ELEMENT */
-		//#                    var inputs = $(this).parents("form").eq(0).find(":input,:select");
-		//#                    var idx = inputs.index(this);
-
-		//#                    if (idx == inputs.length - 1) {
-		//#                        inputs[0].select()
-		//#                    } else {
-		//#                        inputs[idx + 1].focus(); //  handles submit buttons
-		//#                        inputs[idx + 1].select();
-		//#                    }
-		//#                    return false;
-		//#                }
-		//#            });		
 		//bind ajax event 
 		$("form").live("ajax:before",function(){
-			//var link_position=$("div.filter a.filter").offset();
-			//$('span#spinner').css({ top: link_position.top , left: link_position.left }).fadeIn();
-			//$("span#spinner").fadeIn();
 			$.blockUI({ css: { 
           border: 'none', 
           padding: '15px', 
@@ -179,11 +154,6 @@ $(function(){
 				});
 			}
 		});
-		//fire the region type change
-		//$(".region_type_select").change();
-		//fire the region change event
-		//$("input.get_fee").change();
-                //$(".is_sunday").change();
 		//set reference readonly
 		$("input.ref").attr("readonly",true);
 		//set the fee standard readonly
@@ -209,6 +179,18 @@ $(function(){
 		$("select.is_self_dep").change();
 		//reference changes
 		$("input.ref").live("change",reference_change);
+    //set sequence
+    //set unique num of doc detail
+    set_sequence_num();
+    //set up fieldset remove icon when hover
+    //$("div.form_area fieldset").live("mouseenter",function(){
+    //  $(this).find("legend").addClass("show");
+    //  //css("show");
+    //});
+    //$("div.form_area fieldset").live("mouseleave",function(){
+    //  $(this).find("legend").removeClass("show");
+    //  //css("show");
+    //});
 
 });
 //reference change
@@ -277,6 +259,7 @@ function bind_is_split_change_events()
 }
 
 function remove_fields(link) {
+  if(!confirm("是否真的要删除?")) return;
     $(link).prev("input[type=hidden]").val("true");  
     $(link).closest("fieldset").hide(); 
 	//set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
@@ -288,8 +271,8 @@ function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g");
   $(link).closest("div.doc_detail").find("div.form_area").append(content.replace(regexp, new_id));
-//debugger
-	//set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
+  //set unique num of doc detail
+  set_sequence_num();
 	//wrap the datatime picker
 	$(".datepicker").datepicker();
 	$(".datetimepicker").datetimepicker();

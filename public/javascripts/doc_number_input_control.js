@@ -105,6 +105,20 @@ function adjust_amount()
 			$("fieldset.reciver").not(":hidden").find("input.doc_FI_amount").first().val(total_riem);		
 		}
 	}
+  //set unique num of doc detail
+  set_sequence_num();
+}
+
+function set_sequence_num () {
+  //get details
+  $("div.doc_detail").each(function() {
+    var count=1;
+    $(this).find("fieldset").not(":hidden").find("span.sequence").each(function(){
+      //set value
+      $(this).html(count);
+      count+=1;
+    });
+  });
 }
 
 //寻找该用那个控件进行total value的计算
