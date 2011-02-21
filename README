@@ -1,2 +1,8 @@
-Remarkble gems
-delayed_jobs and so on
+
+UI设计原则
+1.消除横向滚动条
+2.减少描述性文字，尽量用图片和颜色说话
+
+
+后台设计
+1.过度到MongoDB数据库
