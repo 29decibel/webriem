@@ -2,3 +2,6 @@ Remarkble gems
 delayed_jobs and so on
 
 some branch test--
+edit from sk server
+test this branch command:
+git branch --set-upstream sk_version origin/skversion
