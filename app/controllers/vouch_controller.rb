@@ -13,7 +13,7 @@ class VouchController < ApplicationController
   def g_u8
     @doc=DocHead.find(params[:doc_id])
     @doc.vouches.each do |v|
-      U8Server::API.generate_vouch_from_doc v
+      U8Service::API.generate_vouch_from_doc v
     end
   end
   #edit just one vouch
