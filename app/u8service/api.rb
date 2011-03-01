@@ -46,7 +46,7 @@ module U8service
     def self.generate_vouch_from_doc(vmodel)
       options={
         :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{vmodel.dbill_date}",
-        :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"#{vmodel.doc_no}",
+        :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"单据号：#{vmodel.doc_no}；#{vmodel.p_name};#{vmodel.doc_head.doc_type_name}",
         :ccode=>"#{vmodel.ccode}",# dai kemu
         :cexch_name=>"#{vmodel.cexch_name}",#currency name
         :md=>"#{vmodel.md}",:mc=>"#{vmodel.mc}",:md_f=>"#{vmodel.md_f}",:mc_f=>"#{vmodel.mc_f}",

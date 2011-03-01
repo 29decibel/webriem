@@ -6,10 +6,10 @@ class Vouch < ActiveRecord::Base
   belongs_to :code,:class_name=>"U8code",:foreign_key=>"code_id"
   belongs_to :code_equal,:class_name=>"U8code",:foreign_key=>"code_equal_id"
   def cdept_id
-    dep==nil ? "" : dep.code
+    dep==nil ? "00001" : dep.code
   end
   def citem_id
-    project==nil ? "" : project.code
+    project==nil ? "2180102" : project.code
   end
   def cperson_id
     person==nil ? "" : person.code
@@ -19,5 +19,8 @@ class Vouch < ActiveRecord::Base
   end
   def ccode_equal
     code_equal==nil ? "" : code_equal.ccode
+  end
+  def p_name
+    person==nil ? "" : person.name
   end
 end
