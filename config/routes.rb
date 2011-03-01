@@ -8,6 +8,7 @@ Webreim::Application.routes.draw do
   get "vouch/rg_vouch"
   match "vouch/edit"=>"vouch#edit"
   match "vouch/update"=>"vouch#update"
+  match "vouch/g_u8"=>"vouch#g_u8"
 
   resources :system_configs
 

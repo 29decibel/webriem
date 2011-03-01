@@ -43,6 +43,20 @@ module U8service
         :ccode_equal=>""}
       generate_vouch(options)
     end
+    def self.generate_vouch_from_doc(vmodel)
+      options={
+        :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{vmodel.dbill_date}",
+        :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"#{vmodel.doc_no}",
+        :ccode=>"#{vmodel.ccode}",# dai kemu
+        :cexch_name=>"#{vmodel.cexch_name}",#currency name
+        :md=>"#{vmodel.md}",:mc=>"#{vmodel.mc}",:md_f=>"#{vmodel.md_f}",:mc_f=>"#{vmodel.mc_f}",
+        :nfrat=>"#{vmodel.nfrat}",# currency rate
+        :cdept_id=>"#{vmodel.cdep_id}",# dep code
+        :cperson_id=>"#{vmodel.cperson_id}",#person code
+        :citem_id=>"#{vmodel.citem_id}",#project code
+        :ccode_equal=>"#{vmodel.ccode_equal}"}
+      generate_vouch(options)
+    end
     def self.exist_vouch(doc_no)
       JSON get("IsVouchExist",{:doc_no=>doc_no})
     end

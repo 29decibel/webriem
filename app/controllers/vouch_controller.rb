@@ -10,6 +10,12 @@ class VouchController < ApplicationController
     @doc=DocHead.find(params[:doc_id])
     @doc.rg_vouches
   end
+  def g_u8
+    @doc=DocHead.find(params[:doc_id])
+    @doc.vouches.each do |v|
+      U8Server::API.generate_vouch_from_doc v
+    end
+  end
   #edit just one vouch
   #return the edit form to the facebox 
   #not using facebox
@@ -36,7 +42,7 @@ class VouchController < ApplicationController
     #filter the docs which already generated
     doc_ids = p_doc_ids.select do |doc_id|
       result=U8service::API.exist_vouch(doc_id)
-      !result["Exist"]
+      !result["Exist"] #存在的都筛选掉了
     end
     #generate 
     doc_ids.each do |doc_id|
