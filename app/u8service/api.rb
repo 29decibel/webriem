@@ -60,8 +60,8 @@ module U8service
     def self.exist_vouch(doc_no)
       JSON get("IsVouchExist",{:doc_no=>doc_no})
     end
-    def self.max_vouch_info
-      JSON get("GetMaxVouchInfo")
+    def self.max_vouch_info(iperiod)
+      JSON get("GetMaxVouchInfo",{:iperiod=>iperiod})
     end
     def self.get_codes
       JSON get("GetCodes")
