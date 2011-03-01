@@ -12,6 +12,10 @@ class Vouch < ActiveRecord::Base
     project==nil ? "2180102" : project.code
   end
   def cperson_id
+    #贷的时候永远是00001
+    if md==0
+      return "00001"
+    end
     person==nil ? "00001" : person.code
   end
   def ccode
