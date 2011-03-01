@@ -443,18 +443,18 @@ class DocHead < ActiveRecord::Base
         #get the two code
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
         vj=get_v ({:inid=>"1",
-          :code=>fee_m_code.ccode,
+          :code=>fee_m_code.dcode,
           :md=>total_amount,:md_f=>total_amount,
           :dep=>afford_dep,
           :project=>project,
-          :ccode_equal=>fee_m_code.dcode})
+          :ccode_equal=>fee_m_code.ccode})
         vd=get_v ({
           :inid=>"2",
-          :code=>fee_m_code.dcode,# dai kemu
+          :code=>fee_m_code.ccode,# dai kemu
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :dep=>afford_dep,# dep code
           :project=>project,#project code
-          :ccode_equal=>fee_m_code.ccode})
+          :ccode_equal=>fee_m_code.dcode})
         self.vouches.clear
         self.vouches.create(vj)
         self.vouches.create(vd)
