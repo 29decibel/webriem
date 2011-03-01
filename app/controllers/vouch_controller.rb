@@ -1,4 +1,5 @@
 #coding: utf-8
+require "#{Rails.root}/app/u8service/api.rb"
 class VouchController < ApplicationController
   #every doc has it's own way to generate the vouch
   #i put the logic into the doc itself
