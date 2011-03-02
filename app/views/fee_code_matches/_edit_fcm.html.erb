@@ -1,4 +1,4 @@
-<%= form_for @fee_code_match,:url=>"/fee_code_match/update",:remote=>true,:class=>"fcm_form" do |f| %>
+<%= form_for @fee_code_match,:url=>"/fee_code_match/update",:remote=>true,:class=>"edit_inline" do |f| %>
 <div class="form_field">
 	<span class="label"><%= f.label :fee_id,:class=>"input_label" %></span>
   <span class="value"<div class="reference">
@@ -26,6 +26,8 @@
 	<span class="label"><%= f.label :description,:class=>"input_label" %></span>
 	<span class="value"><%= f.text_field :description,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
-<%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
-<%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"%>
+<div class="fb_actions">
+  <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
+  <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"%>
+</div>
 <% end %>
