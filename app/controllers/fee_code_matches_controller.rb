@@ -8,7 +8,7 @@ class FeeCodeMatchesController < ApplicationController
   end
 
   def update
-    @fee_code_match = FeeCodeMatch.find(params[:id])
+    @fee_code_match = FeeCodeMatch.find(params[:fee_code_match][:id])
     @fee_code_match.update_attributes(params[:fee_code_match])
   end
 end
