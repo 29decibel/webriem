@@ -10,7 +10,7 @@ Webreim::Application.routes.draw do
   
   get "fee_code_matches/index"
   get "fee_code_matches/edit"
-  post "fee_code_matches/update"
+  match "fee_code_matches/update"
 
   resources :system_configs
 
