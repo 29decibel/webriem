@@ -10,7 +10,7 @@
   </tr>
 
 <% @fee_code_matches.each do |fee_code_match| %>
-  <tr id="<%= fee_code_match.id%>" class="<%= "odd" if fee_code_match.id%2==0 %>">
+  <tr id="fcm_<%= fee_code_match.id%>" class="<%= "odd" if fee_code_match.id%2==0 %>">
     <%= render :partial => "tr_fee_code_match",:locals=>{:fee_code_match=>fee_code_match} %>
   </tr>
   <!--this tr is for edit-->
