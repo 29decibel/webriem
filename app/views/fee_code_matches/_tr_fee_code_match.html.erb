@@ -1,0 +1,6 @@
+<td><%= fee_code_match.fee %></td>
+<td><%= fee_code_match.dcode %></td>
+<td><%= fee_code_match.ccode %></td>
+<td><%= fee_code_match.description %></td>
+<td><%= link_to '编辑', edit_fee_code_match_path(fee_code_match),:remote=>true %></td>
+<td><%= link_to '删除', fee_code_match, :confirm => '是否真的要删除?', :method => :delete,:remote=>true %></td>

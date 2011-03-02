@@ -587,6 +587,8 @@ function send_request_from_grid(grid_id,url)
 		document.location.href = url+ids.join(',');
 	}
 }
-function cancel_edit_vouch (cancel_link) {
+
+function cancel_edit_form (cancel_link) {
   $(cancel_link).closest("form").hide("fast");
 }
+

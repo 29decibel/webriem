@@ -1,25 +1,24 @@
 <h3 class="form_title">列表</h3>
 <table class="hor-zebra">
   <tr>
-    <th>Fee</th>
-    <th>Dcode</th>
-    <th>Ccode</th>
-    <th>Description</th>
-    <th></th>
+    <th>费用</th>
+    <th>借方科目</th>
+    <th>贷方科目</th>
+    <th>简要描述</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @fee_code_matches.each do |fee_code_match| %>
-  <tr class="<%= "odd" if fee_code_match.id%2==0 %>">
-    <td><%= fee_code_match.fee_id %></td>
-    <td><%= fee_code_match.dcode_id %></td>
-    <td><%= fee_code_match.ccode_id %></td>
-    <td><%= fee_code_match.description %></td>
-    <td><%= link_to '查看', fee_code_match %></td>
-    <td><%= link_to '编辑', edit_fee_code_match_path(fee_code_match) %></td>
-    <td><%= link_to '删除', fee_code_match, :confirm => '是否真的要删除?', :method => :delete %></td>
+  <tr id="<%= fee_code_match.id%>" class="<%= "odd" if fee_code_match.id%2==0 %>">
+    <%= render :partial => "tr_fee_code_match",:locals=>{:fee_code_match=>fee_code_match} %>
   </tr>
+  <!--this tr is for edit-->
+    <tr>
+      <td colspan="6">
+        <div id="edit_fcm_<%= v.id%>" class="vouch_form"></div>
+      </td>
+    </tr>
 <% end %>
 </table>
 
