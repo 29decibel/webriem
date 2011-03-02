@@ -1,0 +1,4 @@
+//hide self
+$("#edit_fcm_<%= @fee_code_match.id%>").hide("slow");
+//refresh the tr
+$("tr#fcm_<%= @fee_code_match.id%>").html("<%= escape_javascript(render(:partial=>"tr_fee_code_match",:locals=>{:fee_code_match=>@fee_code_match}))%>");
