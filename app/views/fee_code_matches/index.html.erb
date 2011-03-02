@@ -6,7 +6,6 @@
     <th>贷方科目</th>
     <th>简要描述</th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @fee_code_matches.each do |fee_code_match| %>
@@ -15,7 +14,7 @@
   </tr>
   <!--this tr is for edit-->
     <tr>
-      <td colspan="6">
+      <td colspan="5">
         <div id="edit_fcm_<%= fee_code_match.id%>" class="vouch_form"></div>
       </td>
     </tr>
@@ -24,4 +23,3 @@
 
 <br />
 
-<%= link_to '添加 Fee code match', new_fee_code_match_path %>
