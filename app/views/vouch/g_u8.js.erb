@@ -1,1 +1,5 @@
-alert("已经成功生成到凭证到U8");
+<% if @message.blank? %>
+  alert("已经成功生成到凭证到U8");
+<% else %>
+  alert("有错误发生：<%= #{@message} %>");
+<% end %>

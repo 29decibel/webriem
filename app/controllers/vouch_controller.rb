@@ -12,9 +12,13 @@ class VouchController < ApplicationController
     @doc.rg_vouches
   end
   def g_u8
+    @message=""
     @doc=DocHead.find(params[:doc_id])
     @doc.vouches.each do |v|
-      U8service::API.generate_vouch_from_doc v
+      msg=U8service::API.generate_vouch_from_doc v
+      if msg!="OK"
+        @message<<"#{msg} \n"
+      end
     end
   end
   #edit just one vouch

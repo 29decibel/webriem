@@ -55,7 +55,7 @@ module U8service
         :cperson_id=>"#{vmodel.cperson_id}",#person code
         :citem_id=>"#{vmodel.citem_id}",#project code
         :ccode_equal=>"#{vmodel.ccode_equal}"}
-      generate_vouch(options)
+      generate_vouch(options)["Result"]
     end
     def self.exist_vouch(doc_no)
       JSON get("IsVouchExist",{:doc_no=>doc_no})
