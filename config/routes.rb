@@ -8,9 +8,9 @@ Webreim::Application.routes.draw do
   match "vouch/update"=>"vouch#update"
   match "vouch/g_u8"=>"vouch#g_u8"
   
-  get "fee_code_matchs/index"
-  get "fee_code_matchs/edit"
-  post "fee_code_matchs/update"
+  get "fee_code_matches/index"
+  get "fee_code_matches/edit"
+  post "fee_code_matches/update"
 
   resources :system_configs
 
