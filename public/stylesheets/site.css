@@ -635,6 +635,14 @@ div.fb_field input {
 div.fb_title{
   margin-bottom:5px;
 }
+tr span.d{
+  color:red;
+  font-weight:bold;
+}
+tr span.c{
+  color:green;
+  font-weight:bold;
+}
 div.edit_inline form{
   margin:5px;
   border:1px solid #42aec2;

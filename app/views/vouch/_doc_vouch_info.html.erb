@@ -1,12 +1,12 @@
 <div class="form_title">
-  <h5>
-    单据号为<%= link_to "#{doc.doc_no}", doc_head_path(doc) %> 
+  <h6>
+    单号<%= link_to "#{doc.doc_no}", doc_head_path(doc) %> 
     <% if doc.vouches.count>0 %>
       【最后更新时间<%= doc.vouches.order("updated_at desc").first.updated_at%>】
     <% end %>
     <%= link_to image_tag("/images/icons/database_refresh.png"),{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true %>
     <%= link_to image_tag("/images/icons/door_in.png"),{:controller=>"vouch",:action=>"g_u8",:doc_id=>doc.id},:remote=>true %>
-  </h5>
+  </h6>
 </div>    
 <table class="hor-zebra">
   <tr>
