@@ -8,49 +8,41 @@
 	<%= link_to "#{I18n.t('common_op.btn_return')}", deps_path,:class=>"button2" %>
 </div>
 <div class="form_area">
-<div class="form_block">
 	<div class="form_field">
-		<%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %>			
-		<%= f.text_field :code,:class=>"input1 " %>
+		<span class="label"><%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %></span>			
+		<span class="value"><%= f.text_field :code,:class=>"input1 " %></span>
 	</div>
 	<div class="form_field">
-		<%= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}" %>
-		<%= f.text_field :name,:class=>"input1 " %>
-	</div>
-</div>
-<div class="form_block">
-	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.attributes.dep.version')}#{mark_required(f.object,:version)}" %>			
-		<%= f.text_field :version,:class=>"input1" %>
+		<span class="label"><%= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}" %></span>
+		<span class="value"><%= f.text_field :name,:class=>"input1 " %></span>
 	</div>
 	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.attributes.dep.start_date')}#{mark_required(f.object,:start_date)}" %>
-		<%= f.text_field :start_date,:class=>"datepicker input1" %>
-	</div>
-</div>
-<div class="form_block">
-	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.attributes.dep.end_date')}#{mark_required(f.object,:end_date)}" %>			
-		<%= f.text_field :end_date,:class=>"datepicker input1" %>
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.dep.version')}#{mark_required(f.object,:version)}" %></span>			
+		<span class="value"><%= f.text_field :version,:class=>"input1" %></span>
 	</div>
 	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.attributes.dep.u8dep_code')}#{mark_required(f.object,:u8dep_code)}" %>
-		<div class="reference">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.dep.start_date')}#{mark_required(f.object,:start_date)}" %></span>
+		<span class="value"><%= f.text_field :start_date,:class=>"datepicker input1" %></span>
+	</div>
+	<div class="form_field">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.dep.end_date')}#{mark_required(f.object,:end_date)}" %></span>			
+		<span class="value"><%= f.text_field :end_date,:class=>"datepicker input1" %></span>
+	</div>
+	<div class="form_field">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.dep.u8dep_code')}#{mark_required(f.object,:u8dep_code)}" %></span>
+		<span class="value"><div class="reference">
 			<%= f.hidden_field :u8_dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.u8_dep.to_s,:class=>"ref" %>
 			<a href="#" class-data="U8Dep" self="true"><span class="reference"></span></a>			
-		</div>
+		</div></span>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.attributes.dep.parent_dep_id')}" %>			
-		<div class="reference">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.dep.parent_dep_id')}" %></span>			
+		<span class="value"><div class="reference">
 			<%= f.hidden_field :parent_dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.parent_dep.to_s,:class=>"ref" %>
 			<a href="#" class-data="Dep" self="true"><span class="reference"></span></a>			
-		</div>
+		</div></span>
 	</div>
-</div>
 </div>
 <% end %>

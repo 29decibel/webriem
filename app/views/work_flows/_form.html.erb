@@ -8,13 +8,11 @@
 	<%= link_to "#{I18n.t('common_op.btn_return')}", work_flows_path,:class=>"button2" %>
 </div>
 <div class="form_area">
-	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "#{I18n.t('activerecord.attributes.work_flow.name')}#{mark_required(f.object,:name)}" %>		
 			<%= f.text_field :name,:class=>"input1" %><%= mark_required(@work_flow, :name) %>
 		</div>
-	</div>
-	<div class="form_block">
+    <br/>
 		<div class="form_field">
 			<%= f.label "#{I18n.t('activerecord.attributes.work_flow.doc_types')}" %><br/>
 		</div>
@@ -25,9 +23,7 @@
 				</div>			
 			<% end %>
 		</div>
-	</div>
 	<br/>
-	<div class="form_block">
 		<div class="form_field">
 			<%= f.label "#{I18n.t('activerecord.attributes.work_flow.duty')}#{mark_required(f.object,:duties)}" %>			
 			<div class="reference">
@@ -36,7 +32,6 @@
 				<a href="#" class-data="Duty" multicheck="true"><span class="reference"></span></a>			
 			</div>
 		</div>
-	</div>
 </div>
 <div id="details">
 	<div class="table_details">

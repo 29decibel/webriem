@@ -8,25 +8,21 @@
 	<%= link_to "#{I18n.t('common_op.btn_return')}", regions_path,:class=>"button2" %>
 </div>
 <div class="form_area">
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.region.name')}#{mark_required(f.object,:name)}" %>
-			<%= f.text_field :name,:class=>"input1 " %>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.region.name')}#{mark_required(f.object,:name)}" %></span>
+			<span class="value"><%= f.text_field :name,:class=>"input1 " %></span>
 		</div>
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.region.code')}#{mark_required(f.object,:code)}" %>
-			<%= f.text_field :code,:class=>"input1 " %>
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.region.code')}#{mark_required(f.object,:code)}" %></span>
+			<span class="value"><%= f.text_field :code,:class=>"input1 " %></span>
 		</div>
-	</div>
-	<div class="form_block">
 		<div class="form_field">
-			<%= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" %>
-			<div class="reference">
+			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" %></span>
+			<span class="value"><div class="reference">
 				<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
 				<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
 				<a href="#" class-data="RegionType"><span class="reference"></span></a>			
 			</div>
-		</div>
-	</div>
+		</div></span>
 </div>
 <% end %>
