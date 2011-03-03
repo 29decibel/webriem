@@ -1,6 +1,6 @@
 <div class="form_title">
   <h5>
-    单据号为<%= doc.doc_no%>
+    单据号为<%= link_to "#{doc.doc_no}", doc_head_path(doc) %> 
     <% if doc.vouches.count>0 %>
       【最后更新时间<%= doc.vouches.order("updated_at desc").first.updated_at%>】
     <% end %>
