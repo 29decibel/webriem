@@ -19,8 +19,8 @@
 		</div></span>
  </div>
 <div class="form_field">
-	<span class="label"><%= f.label :ccode_id,:class=>"input_label" %>
-</span><span class="value"><div class="reference">
+	<span class="label"><%= f.label :ccode_id,:class=>"input_label" %></span>
+  <span class="value"><div class="reference">
 			<%= f.hidden_field :ccode_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "ccode_info",@fee_code_match.ccode.to_s,:class=>"ref" %>
 			<a href="#" class-data="U8code"><span class="reference"></span></a>			
