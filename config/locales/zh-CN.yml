@@ -351,6 +351,10 @@
         dcode_id: 借方科目
         ccode_id: 贷方科目
         description: 简要描述
+        dperson: 指定借方人
+        cperson: 指定贷方人
+        ddep: 指定借方部门
+        cdep: 指定贷方部门
       dep:
         name: "名称"  
         code: "编码"

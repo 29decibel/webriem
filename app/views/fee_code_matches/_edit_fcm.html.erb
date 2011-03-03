@@ -27,6 +27,23 @@
 	<span class="label"><%= f.label :description,:class=>"input_label" %></span>
 	<span class="value"><%= f.text_field :description,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
+<!--added four specify vouch info-->
+<div class="form_field">
+	<span class="label"><%= f.label :dperson,:class=>"input_label" %></span>
+	<span class="value"><%= f.text_field :deperson,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+</div>
+<div class="form_field">
+	<span class="label"><%= f.label :cperson,:class=>"input_label" %></span>
+	<span class="value"><%= f.text_field :cperson,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+</div>
+<div class="form_field">
+	<span class="label"><%= f.label :ddep,:class=>"input_label" %></span>
+	<span class="value"><%= f.text_field :cdep,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+</div>
+<div class="form_field">
+	<span class="label"><%= f.label :description,:class=>"input_label" %></span>
+	<span class="value"><%= f.text_field :description,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+</div>
 <div class="fb_actions">
   <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
   <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"%>

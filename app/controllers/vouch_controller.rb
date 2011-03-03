@@ -17,7 +17,7 @@ class VouchController < ApplicationController
     @doc.vouches.each do |v|
       msg=U8service::API.generate_vouch_from_doc v
       if msg!="OK"
-        @message<<"分录号为#{v.inid}生成凭证错误：#{get_specific_error msg} \n"
+        @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
       end
     end
   end
