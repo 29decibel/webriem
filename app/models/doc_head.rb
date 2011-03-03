@@ -424,7 +424,7 @@ class DocHead < ActiveRecord::Base
           :md=>s.percent_amount,:md_f=>s.percent_amount,
           :dep=>s.dep,# dep code
           :project=>s.project,#project code
-          :ccode_equal=>fcm.ccode,
+          :ccode_equal=>fcm.ccode.to_s,
           :s_cdept_id=>fcm.ddep,
           :s_cperson_id=>fcm.dperson})
         self.vouches.create(vj)
@@ -462,7 +462,7 @@ class DocHead < ActiveRecord::Base
            :project=>cp.project,
            :s_cdept_id=>fee_m_code.ddep,
            :s_cperson_id=>fee_m_code.dperson,
-           :ccode_equal=>fee_m_code.ccode})
+           :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           jcount+=1
         end
@@ -475,7 +475,7 @@ class DocHead < ActiveRecord::Base
           :project=>nil,#project code
           :s_cdept_id=>fee_m_code.cdep,
           :s_cperson_id=>fee_m_code.cperson,
-          :ccode_equal=>fee_m_code.dcode})
+          :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.create(vd)
       end
       #差旅费用【只生成一个借和一个贷，】
@@ -490,7 +490,7 @@ class DocHead < ActiveRecord::Base
           :project=>project,
           :s_cdept_id=>fee_m_code.ddep,
           :s_cperson_id=>fee_m_code.dperson,
-          :ccode_equal=>fee_m_code.ccode})
+          :ccode_equal=>fee_m_code.ccode.to_s})
         vd=get_v ({
           :inid=>"2",
           :code=>fee_m_code.ccode,# dai kemu
@@ -499,7 +499,7 @@ class DocHead < ActiveRecord::Base
           :project=>project,#project code
           :s_cdept_id=>fee_m_code.cdep,
           :s_cperson_id=>fee_m_code.cperson,
-          :ccode_equal=>fee_m_code.dcode})
+          :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.clear
         self.vouches.create(vj)
         self.vouches.create(vd)
@@ -555,7 +555,7 @@ class DocHead < ActiveRecord::Base
             :project=>project,#project code
             :s_cdept_id=>fee_m_code_meal.ddep,
             :s_cperson_id=>fee_m_code_meal.dperson,
-            :ccode_equal=>fee_m_code_meal.ccode})
+            :ccode_equal=>fee_m_code_meal.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
@@ -570,7 +570,7 @@ class DocHead < ActiveRecord::Base
             :project=>project,#project code
             :s_cdept_id=>fee_m_code_car.ddep,
             :s_cperson_id=>fee_m_code_car.dperson,
-            :ccode_equal=>fee_m_code_car.ccode})
+            :ccode_equal=>fee_m_code_car.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
@@ -583,7 +583,7 @@ class DocHead < ActiveRecord::Base
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code_meal.cdep,
           :s_cperson_id=>fee_m_code_meal.cperson,
-          :ccode_equal=>fee_m_code_meal.dcode})
+          :ccode_equal=>fee_m_code_meal.dcode.to_s})
         self.vouches.create(vd)
       end
       #福利费用

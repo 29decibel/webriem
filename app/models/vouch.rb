@@ -25,11 +25,9 @@ class Vouch < ActiveRecord::Base
     end
     person==nil ? "00001" : person.code
   end
+  #只有这一个是引用的方式，对方科目就是简单的字符串
   def ccode
     code==nil ? "" : code.ccode
-  end
-  def ccode_equal
-    code_equal==nil ? "" : code_equal.ccode
   end
   def p_name
     person==nil ? "" : person.name
