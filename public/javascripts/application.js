@@ -539,7 +539,14 @@ function output_to_excel(grid_id)
 	send_request_from_grid(grid_id,"/doc_heads/export_xls.xls?ids=");
 }
 function g_vouch (grid_id) {
-  send_request_from_grid(grid_id,"/vouch/index?doc_ids=");
+  if(confirm("是否重新生成已有数据？"))
+  {
+    send_request_from_grid(grid_id,"/vouch/index?rg=true&doc_ids=");
+  }
+  else
+  {
+    send_request_from_grid(grid_id,"/vouch/index?doc_ids=");
+  }
 }
 function delete_docs(grid_id) 
 {
