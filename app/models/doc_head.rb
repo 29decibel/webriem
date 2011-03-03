@@ -424,7 +424,9 @@ class DocHead < ActiveRecord::Base
           :md=>s.percent_amount,:md_f=>s.percent_amount,
           :dep=>s.dep,# dep code
           :project=>s.project,#project code
-          :ccode_equal=>fcm.ccode})
+          :ccode_equal=>fcm.ccode,
+          :s_cdept_id=>fcm.ddep,
+          :s_cperson_id=>fcm.dperson})
         self.vouches.create(vj)
         init_count=init_count+1
       end
@@ -435,10 +437,13 @@ class DocHead < ActiveRecord::Base
         :mc=>total_amount,:mc_f=>total_amount,
         :dep=>nil,# dep code
         :project=>nil,#project code
+        :s_cdept_id=>fee_code_match.cdep,
+        :s_cperson_id=>fee_code_match.cperson,
         :ccode_equal=>(doc_type==13 ? benefits_codes.join(",") : fee_code_match.ccode.to_s)})
       self.vouches.create(vd)
     else
       #差旅费用【只生成一个借和一个贷，】
+      ###################################################################################################
       if doc_type==9
         #get the two code
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
@@ -447,6 +452,8 @@ class DocHead < ActiveRecord::Base
           :md=>total_amount,:md_f=>total_amount,
           :dep=>afford_dep,
           :project=>project,
+          :s_cdept_id=>fee_m_code.ddep,
+          :s_cperson_id=>fee_m_code.dperson,
           :ccode_equal=>fee_m_code.ccode})
         vd=get_v ({
           :inid=>"2",
@@ -454,12 +461,15 @@ class DocHead < ActiveRecord::Base
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :dep=>afford_dep,# dep code
           :project=>project,#project code
+          :s_cdept_id=>fee_m_code.cdep,
+          :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>fee_m_code.dcode})
         self.vouches.clear
         self.vouches.create(vj)
         self.vouches.create(vd)
       end
       #交际费用，没有分摊，每个明细都是一条借
+      ###################################################################################################
       if doc_type==10
         self.vouches.clear
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
@@ -472,6 +482,8 @@ class DocHead < ActiveRecord::Base
             :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
             :dep=>w_m.dep,# dep code
             :project=>w_m.project,#project code
+            :s_cdept_id=>fee_m_code.ddep,
+            :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           init_count=init_count+1
@@ -483,10 +495,13 @@ class DocHead < ActiveRecord::Base
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
+          :s_cdept_id=>fee_m_code.cdep,
+          :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.create(vd)
       end
       #加班费用，一个贷，两个借
+      ###################################################################################################
       if doc_type==11
         self.vouches.clear
         fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
@@ -502,6 +517,8 @@ class DocHead < ActiveRecord::Base
             :md=>total,:md_f=>total,
             :dep=>afford_dep,# dep code
             :project=>project,#project code
+            :s_cdept_id=>fee_m_code_meal.ddep,
+            :s_cperson_id=>fee_m_code_meal.dperson,
             :ccode_equal=>fee_m_code_meal.ccode})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -515,6 +532,8 @@ class DocHead < ActiveRecord::Base
             :md=>total,:md_f=>total,
             :dep=>afford_dep,# dep code
             :project=>project,#project code
+            :s_cdept_id=>fee_m_code_car.ddep,
+            :s_cperson_id=>fee_m_code_car.dperson,
             :ccode_equal=>fee_m_code_car.ccode})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -526,10 +545,13 @@ class DocHead < ActiveRecord::Base
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
+          :s_cdept_id=>fee_m_code_meal.cdep,
+          :s_cperson_id=>fee_m_code_meal.cperson,
           :ccode_equal=>fee_m_code_meal.dcode})
         self.vouches.create(vd)
       end
       #福利费用
+      ###################################################################################################
       if doc_type==13
         self.vouches.clear
         vd_codes=[]
@@ -548,6 +570,8 @@ class DocHead < ActiveRecord::Base
             :md=>b.fi_amount,:md_f=>b.fi_amount,
             :dep=>dep,# dep code
             :project=>b.project,#project code
+            :s_cdept_id=>fee_m_code.ddep,
+            :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -559,10 +583,13 @@ class DocHead < ActiveRecord::Base
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
+          :s_cdept_id=>fee_m_code.cdep,
+          :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
       end
       #普通费用
+      ###################################################################################################
       if doc_type==12
         self.vouches.clear
         #default fee code match
@@ -579,6 +606,8 @@ class DocHead < ActiveRecord::Base
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
+            :s_cdept_id=>fee_m_code.ddep,
+            :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -594,6 +623,8 @@ class DocHead < ActiveRecord::Base
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
+            :s_cdept_id=>fee_g_code.ddep,
+            :s_cperson_id=>fee_g_code.dperson,
             :ccode_equal=>fee_g_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -609,6 +640,8 @@ class DocHead < ActiveRecord::Base
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
+            :s_cdept_id=>fee_y_code.ddep,
+            :s_cperson_id=>fee_y_code.dperson,
             :ccode_equal=>fee_y_code.ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
@@ -620,6 +653,8 @@ class DocHead < ActiveRecord::Base
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
+          :s_cdept_id=>fee_m_code.cdep,
+          :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
       end
