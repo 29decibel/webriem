@@ -442,6 +442,42 @@ class DocHead < ActiveRecord::Base
         :ccode_equal=>(doc_type==13 ? benefits_codes.join(",") : fee_code_match.ccode.to_s)})
       self.vouches.create(vd)
     else
+      #借款或付款单据【只生成一个借和一个贷，】
+      ###################################################################################################
+      if doc_type==1 or doc_type==2
+        #get the two code
+        if doc_type==1
+          fee_m_code=FeeCodeMatch.find_by_fee_code("07") 
+        else
+          fee_m_code=FeeCodeMatch.find_by_fee_code("08")
+        end
+        self.vouches.clear
+        #n条借方
+        jcount=1
+        self.cp_doc_details.each do |cp|
+           vj=get_v ({:inid=>"#{jcount}",
+           :code=>fee_m_code.dcode,
+           :md=>total_amount,:md_f=>total_amount,
+           :dep=>cp.dep,
+           :project=>cp.project,
+           :s_cdept_id=>fee_m_code.ddep,
+           :s_cperson_id=>fee_m_code.dperson,
+           :ccode_equal=>fee_m_code.ccode})
+          self.vouches.create(vj)
+          jcount+=1
+        end
+        #1个贷方
+        vd=get_v ({
+          :inid=>"#{jcount}",
+          :code=>fee_m_code.ccode,# dai kemu
+          :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
+          :dep=>nil,# dep code
+          :project=>nil,#project code
+          :s_cdept_id=>fee_m_code.cdep,
+          :s_cperson_id=>fee_m_code.cperson,
+          :ccode_equal=>fee_m_code.dcode})
+        self.vouches.create(vd)
+      end
       #差旅费用【只生成一个借和一个贷，】
       ###################################################################################################
       if doc_type==9
