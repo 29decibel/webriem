@@ -17,9 +17,19 @@ class VouchController < ApplicationController
     @doc.vouches.each do |v|
       msg=U8service::API.generate_vouch_from_doc v
       if msg!="OK"
-        @message<<"#{msg} \n"
+        @message<<"分录号为#{v.inid}生成凭证错误：#{get_specific_error msg} \n"
       end
     end
+  end
+  def get_specific_error(msg)
+    message=msg
+    if msg.include? '冲突' and msg.include? 'cDepCode'
+      message="部门在U8系统不存在，请修改凭证或默认设置"
+    end
+    if msg.include? '冲突' and msg.include? 'cPersonCode'
+      message="人员在U8系统不存在，请修改凭证或默认设置"
+    end
+    message
   end
   #edit just one vouch
   #return the edit form to the facebox 
