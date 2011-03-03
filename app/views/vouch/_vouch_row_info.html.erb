@@ -1,4 +1,4 @@
-<td><span><%= v.md==0 ? "贷" : "借" %></span><%= link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true %>
+<td><span><%= v.md=="0" ? "贷" : "借" %></span><%= link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true %>
 <td><%= v.inid%></td><td><%= v.cdept_id%></td>
 <td><%= truncate(v.ccode,:length=>10)%></td>
 <td><%= truncate(v[:ccode_equal].to_s,:length=>10)%></td>
