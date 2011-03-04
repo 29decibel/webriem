@@ -31,6 +31,7 @@ class VouchController < ApplicationController
         msg=U8service::API.generate_vouch_from_doc v
         if msg!="OK"
           @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
+          return
         end
       end
     end
