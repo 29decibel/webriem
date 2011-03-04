@@ -27,6 +27,7 @@ Webreim::Application.routes.draw do
   get "pri_task/import_person"
   get "pri_task/test_curb"
   get "pri_task/import_u8_codes"
+  get "pri_task/import_u8_deps"
 
   get "ajax_service/getfee"  
   get "ajax_service/getbudget"  

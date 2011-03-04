@@ -55,7 +55,6 @@ class PriTaskController < ApplicationController
     end
     @message="一共获取#{u8deps.count}个，本此更新#{this_time_count}"
     render "pri_task/cmd_result"
-   
   end
   def cmds
     
