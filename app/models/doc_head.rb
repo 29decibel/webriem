@@ -381,6 +381,11 @@ class DocHead < ActiveRecord::Base
     #update the total_fi_amount
     self.total_amount = total_fi_amount
   end
+  #判断是否单据已经生成过凭证
+  def exist_vouch?
+    exist_info=U8service::API.exist_vouch doc_no
+    return exist_info["Exist"]
+  end
   #vouch infos
   #this is a massive method which contains a lot of logic 
   #and 'if else'

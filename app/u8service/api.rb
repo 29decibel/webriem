@@ -44,6 +44,7 @@ module U8service
       generate_vouch(options)
     end
     def self.generate_vouch_from_doc(vmodel)
+      #永远忽略存储的凭证id，要临时获取一个当前最大的值+1
       options={
         :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{vmodel.dbill_date}",
         :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"#{vmodel.doc_no}",
