@@ -488,6 +488,7 @@ class DocHead < ActiveRecord::Base
           :md=>total_amount,:md_f=>total_amount,
           :dep=>afford_dep,
           :project=>project,
+          :person=>nil,
           :s_cdept_id=>fee_m_code.ddep,
           :s_cperson_id=>fee_m_code.dperson,
           :ccode_equal=>fee_m_code.ccode.to_s})
@@ -518,6 +519,7 @@ class DocHead < ActiveRecord::Base
             :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
             :dep=>w_m.dep,# dep code
             :project=>w_m.project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_m_code.ddep,
             :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
@@ -553,6 +555,7 @@ class DocHead < ActiveRecord::Base
             :md=>total,:md_f=>total,
             :dep=>afford_dep,# dep code
             :project=>project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_m_code_meal.ddep,
             :s_cperson_id=>fee_m_code_meal.dperson,
             :ccode_equal=>fee_m_code_meal.ccode.to_s})
@@ -568,6 +571,7 @@ class DocHead < ActiveRecord::Base
             :md=>total,:md_f=>total,
             :dep=>afford_dep,# dep code
             :project=>project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_m_code_car.ddep,
             :s_cperson_id=>fee_m_code_car.dperson,
             :ccode_equal=>fee_m_code_car.ccode.to_s})
@@ -606,6 +610,7 @@ class DocHead < ActiveRecord::Base
             :md=>b.fi_amount,:md_f=>b.fi_amount,
             :dep=>dep,# dep code
             :project=>b.project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_m_code.ddep,
             :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
@@ -642,6 +647,7 @@ class DocHead < ActiveRecord::Base
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_m_code.ddep,
             :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
@@ -659,6 +665,7 @@ class DocHead < ActiveRecord::Base
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_g_code.ddep,
             :s_cperson_id=>fee_g_code.dperson,
             :ccode_equal=>fee_g_code.ccode.to_s})
@@ -676,6 +683,7 @@ class DocHead < ActiveRecord::Base
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
+            :person=>nil,
             :s_cdept_id=>fee_y_code.ddep,
             :s_cperson_id=>fee_y_code.dperson,
             :ccode_equal=>fee_y_code.ccode.to_s})
