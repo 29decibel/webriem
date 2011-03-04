@@ -716,7 +716,7 @@ class DocHead < ActiveRecord::Base
     #default options
     default_opt={
       :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-      :idoc=>"0",:cbill=>"杨琳",:doc_no=>doc_no,
+      :idoc=>"0",:cbill=>"杨琳",:doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
       :ccode=>"",# dai kemu
       :cexch_name=>"人民币",#currency name
       :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",
