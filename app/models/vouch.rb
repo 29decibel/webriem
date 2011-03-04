@@ -23,7 +23,7 @@ class Vouch < ActiveRecord::Base
     if md==0
       return "00001"
     end
-    person==nil ? "00001" : person.code
+    person==nil ? "" : person.code
   end
   #只有这一个是引用的方式，对方科目就是简单的字符串
   def ccode
