@@ -35,16 +35,17 @@ class PriTaskController < ApplicationController
     render "pri_task/cmd_result"
   end
   def import_u8_deps
+    U8Dep.delete_all
      begin
       u8deps= U8service::API.get_departments
       #never delete 
       this_time_count=0
       u8deps.each do |u8_model|
         model=U8Dep.new
-        model.cdepcode=u8_model["cdepcode"]
-        model.bdepend=u8_model["bdepend"]
-        model.cdepname=u8_model["cdepname"]
-        model.idepgrade=u8_model["idepgrade"]
+        model.cdepcode=u8_model["cDepCode"]
+        model.bdepend=u8_model["bDepEnd"]
+        model.cdepname=u8_model["cDepName"]
+        model.idepgrade=u8_model["iDepGrade"]
         model.save
         this_time_count=this_time_count+1
       end
