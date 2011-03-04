@@ -10,6 +10,10 @@ class Vouch < ActiveRecord::Base
     if s_cdept_id and !s_cdept_id.blank?
       return s_cdept_id
     end
+    #如果该部门已经做了对应，则用对应的数据
+    if dep and dep.u8_dep
+      return dep.u8_dep.cdepcode
+    end
     dep==nil ? "1010" : dep.code
   end
   def citem_id

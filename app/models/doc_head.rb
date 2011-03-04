@@ -426,6 +426,7 @@ class DocHead < ActiveRecord::Base
           :project=>s.project,#project code
           :ccode_equal=>fcm.ccode.to_s,
           :s_cdept_id=>fcm.ddep,
+          :doc_no=>cdigest_info(fcm),
           :s_cperson_id=>fcm.dperson})
         self.vouches.create(vj)
         init_count=init_count+1
@@ -438,6 +439,7 @@ class DocHead < ActiveRecord::Base
         :dep=>nil,# dep code
         :project=>nil,#project code
         :s_cdept_id=>fee_code_match.cdep,
+        :doc_no=>cdigest_info(fee_code_match),
         :s_cperson_id=>fee_code_match.cperson,
         :ccode_equal=>(doc_type==13 ? benefits_codes.join(",") : fee_code_match.ccode.to_s)})
       self.vouches.create(vd)
@@ -460,6 +462,7 @@ class DocHead < ActiveRecord::Base
            :md=>total_amount,:md_f=>total_amount,
            :dep=>cp.dep,
            :project=>cp.project,
+           :doc_no=>cdigest_info(fee_m_code),
            :s_cdept_id=>fee_m_code.ddep,
            :s_cperson_id=>fee_m_code.dperson,
            :ccode_equal=>fee_m_code.ccode.to_s})
@@ -474,6 +477,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code
           :project=>nil,#project code
           :s_cdept_id=>fee_m_code.cdep,
+          :doc_no=>cdigest_info(fee_m_code),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.create(vd)
@@ -489,6 +493,7 @@ class DocHead < ActiveRecord::Base
           :dep=>afford_dep,
           :project=>project,
           :person=>nil,
+          :doc_no=>cdigest_info(fee_m_code),
           :s_cdept_id=>fee_m_code.ddep,
           :s_cperson_id=>fee_m_code.dperson,
           :ccode_equal=>fee_m_code.ccode.to_s})
@@ -499,6 +504,7 @@ class DocHead < ActiveRecord::Base
           :dep=>afford_dep,# dep code
           :project=>project,#project code
           :s_cdept_id=>fee_m_code.cdep,
+          :doc_no=>cdigest_info(fee_m_code),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.clear
@@ -520,6 +526,7 @@ class DocHead < ActiveRecord::Base
             :dep=>w_m.dep,# dep code
             :project=>w_m.project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_m_code),
             :s_cdept_id=>fee_m_code.ddep,
             :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
@@ -534,6 +541,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code.cdep,
+          :doc_no=>cdigest_info(fee_m_code),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>fee_m_code.dcode.to_s})
         self.vouches.create(vd)
@@ -556,6 +564,7 @@ class DocHead < ActiveRecord::Base
             :dep=>afford_dep,# dep code
             :project=>project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_m_code_meal),
             :s_cdept_id=>fee_m_code_meal.ddep,
             :s_cperson_id=>fee_m_code_meal.dperson,
             :ccode_equal=>fee_m_code_meal.ccode.to_s})
@@ -572,6 +581,7 @@ class DocHead < ActiveRecord::Base
             :dep=>afford_dep,# dep code
             :project=>project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_m_code_car),
             :s_cdept_id=>fee_m_code_car.ddep,
             :s_cperson_id=>fee_m_code_car.dperson,
             :ccode_equal=>fee_m_code_car.ccode.to_s})
@@ -586,6 +596,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code_meal.cdep,
+          :doc_no=>cdigest_info(fee_m_code_meal),
           :s_cperson_id=>fee_m_code_meal.cperson,
           :ccode_equal=>fee_m_code_meal.dcode.to_s})
         self.vouches.create(vd)
@@ -611,6 +622,7 @@ class DocHead < ActiveRecord::Base
             :dep=>dep,# dep code
             :project=>b.project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_m_code),
             :s_cdept_id=>fee_m_code.ddep,
             :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
@@ -625,6 +637,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code.cdep,
+          :doc_no=>cdigest_info(fee_m_code),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
@@ -648,6 +661,7 @@ class DocHead < ActiveRecord::Base
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_m_code),
             :s_cdept_id=>fee_m_code.ddep,
             :s_cperson_id=>fee_m_code.dperson,
             :ccode_equal=>fee_m_code.ccode.to_s})
@@ -658,14 +672,15 @@ class DocHead < ActiveRecord::Base
         fee_g_code=FeeCodeMatch.find_by_fee_code("0102")
         rd_work_meals.each do |r|
           #get fee code info
-          vd_codes<<fee_m_code.dcode.to_s
+          vd_codes<<fee_g_code.dcode.to_s
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :code=>fee_m_code.dcode,# dai kemu
+            :code=>fee_g_code.dcode,# dai kemu
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_g_code),
             :s_cdept_id=>fee_g_code.ddep,
             :s_cperson_id=>fee_g_code.dperson,
             :ccode_equal=>fee_g_code.ccode.to_s})
@@ -676,14 +691,15 @@ class DocHead < ActiveRecord::Base
         fee_y_code=FeeCodeMatch.find_by_fee_code("0103")
         rd_common_transports.each do |r|
           #get fee code info
-          vd_codes<<fee_m_code.dcode.to_s
+          vd_codes<<fee_y_code.dcode.to_s
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :code=>fee_m_code.dcode,# dai kemu
+            :code=>fee_y_code.dcode,# dai kemu
             :md=>r.apply_amount,:md_f=>r.apply_amount,
             :dep=>r.dep,# dep code
             :project=>r.project,#project code
             :person=>nil,
+            :doc_no=>cdigest_info(fee_y_code),
             :s_cdept_id=>fee_y_code.ddep,
             :s_cperson_id=>fee_y_code.dperson,
             :ccode_equal=>fee_y_code.ccode.to_s})
@@ -698,6 +714,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code.cdep,
+          :doc_no=>cdigest_info(fee_m_code),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
@@ -705,6 +722,9 @@ class DocHead < ActiveRecord::Base
     end
   end
   private
+  def cdigest_info(fee_code_match)
+    "#{person.name},#{fee_code_match.fee.name}[#{doc_no}]"
+  end
   def get_v(options)
     #get current max vouch no and plus 1 as current vouch no
     vouch_no="test in dev"
