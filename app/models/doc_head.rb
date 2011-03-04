@@ -591,7 +591,7 @@ class DocHead < ActiveRecord::Base
         #一条贷
         vd=get_v ({
           :inid=>"#{inid_count}",
-          :ccode=>"#{fee_m_code_meal.ccode},#{fee_m_code_car.ccode}",# dai kemu
+          :code=>fee_m_code_meal.ccode,# dai kemu
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
