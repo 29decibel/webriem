@@ -390,11 +390,6 @@ class DocHead < ActiveRecord::Base
   #this is a massive method which contains a lot of logic 
   #and 'if else'
   def rg_vouches
-    #look at if this already generate 
-    if RAILS_ENV=="production"
-      result=U8service::API.exist_vouch(doc_no)
-      return vs if result["Exist"]
-    end
     #分摊的逻辑
     if is_split==1 and [9,11,13].include? doc_type
       #加班和差旅基本相同，只是默认的科目不同
