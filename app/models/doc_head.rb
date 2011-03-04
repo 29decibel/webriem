@@ -650,61 +650,71 @@ class DocHead < ActiveRecord::Base
         fee_m_code=FeeCodeMatch.find_by_fee_code("01")
         inid_count=1
         vd_codes=[]
+        fcms=[] #记录可能的费用类型
         #普通费用n条借
-        common_riems.each do |r|
-          #get fee code info
-          vd_codes<<fee_m_code.dcode.to_s
-          vj=get_v ({
-            :inid=>"#{inid_count}",
-            :code=>fee_m_code.dcode,# dai kemu
-            :md=>r.apply_amount,:md_f=>r.apply_amount,
-            :dep=>r.dep,# dep code
-            :project=>r.project,#project code
-            :person=>nil,
-            :doc_no=>cdigest_info(fee_m_code),
-            :s_cdept_id=>fee_m_code.ddep,
-            :s_cperson_id=>fee_m_code.dperson,
-            :ccode_equal=>fee_m_code.ccode.to_s})
-          self.vouches.create(vj)
-          inid_count=inid_count+1
+        if common_riems.count>0
+          fcms<<fee_m_code
+          common_riems.each do |r|
+            #get fee code info
+            vd_codes<<fee_m_code.dcode.to_s
+            vj=get_v ({
+              :inid=>"#{inid_count}",
+              :code=>fee_m_code.dcode,# dai kemu
+              :md=>r.apply_amount,:md_f=>r.apply_amount,
+              :dep=>r.dep,# dep code
+              :project=>r.project,#project code
+              :person=>nil,
+              :doc_no=>cdigest_info(fee_m_code),
+              :s_cdept_id=>fee_m_code.ddep,
+              :s_cperson_id=>fee_m_code.dperson,
+              :ccode_equal=>fee_m_code.ccode.to_s})
+            self.vouches.create(vj)
+            inid_count=inid_count+1
+          end
         end
         #工作餐费n条借
-        fee_g_code=FeeCodeMatch.find_by_fee_code("0102")
-        rd_work_meals.each do |r|
-          #get fee code info
-          vd_codes<<fee_g_code.dcode.to_s
-          vj=get_v ({
-            :inid=>"#{inid_count}",
-            :code=>fee_g_code.dcode,# dai kemu
-            :md=>r.apply_amount,:md_f=>r.apply_amount,
-            :dep=>r.dep,# dep code
-            :project=>r.project,#project code
-            :person=>nil,
-            :doc_no=>cdigest_info(fee_g_code),
-            :s_cdept_id=>fee_g_code.ddep,
-            :s_cperson_id=>fee_g_code.dperson,
-            :ccode_equal=>fee_g_code.ccode.to_s})
-          self.vouches.create(vj)
-          inid_count=inid_count+1
+        if rd_work_meals.count>0
+          fee_g_code=FeeCodeMatch.find_by_fee_code("0102")
+          fcms<<fee_g_code
+          rd_work_meals.each do |r|
+            #get fee code info
+            vd_codes<<fee_g_code.dcode.to_s
+            vj=get_v ({
+              :inid=>"#{inid_count}",
+              :code=>fee_g_code.dcode,# dai kemu
+              :md=>r.apply_amount,:md_f=>r.apply_amount,
+              :dep=>r.dep,# dep code
+              :project=>r.project,#project code
+              :person=>nil,
+              :doc_no=>cdigest_info(fee_g_code),
+              :s_cdept_id=>fee_g_code.ddep,
+              :s_cperson_id=>fee_g_code.dperson,
+              :ccode_equal=>fee_g_code.ccode.to_s})
+            self.vouches.create(vj)
+            inid_count=inid_count+1
+          end
         end
         #业务交通费用n条借
-        fee_y_code=FeeCodeMatch.find_by_fee_code("0103")
-        rd_common_transports.each do |r|
-          #get fee code info
-          vd_codes<<fee_y_code.dcode.to_s
-          vj=get_v ({
-            :inid=>"#{inid_count}",
-            :code=>fee_y_code.dcode,# dai kemu
-            :md=>r.apply_amount,:md_f=>r.apply_amount,
-            :dep=>r.dep,# dep code
-            :project=>r.project,#project code
-            :person=>nil,
-            :doc_no=>cdigest_info(fee_y_code),
-            :s_cdept_id=>fee_y_code.ddep,
-            :s_cperson_id=>fee_y_code.dperson,
-            :ccode_equal=>fee_y_code.ccode.to_s})
-          self.vouches.create(vj)
-          inid_count=inid_count+1
+        if rd_common_transports.count>0
+          fee_y_code=FeeCodeMatch.find_by_fee_code("0103")
+          fcms<<fee_y_code
+          rd_common_transports.each do |r|
+            #get fee code info
+            vd_codes<<fee_y_code.dcode.to_s
+            vj=get_v ({
+              :inid=>"#{inid_count}",
+              :code=>fee_y_code.dcode,# dai kemu
+              :md=>r.apply_amount,:md_f=>r.apply_amount,
+              :dep=>r.dep,# dep code
+              :project=>r.project,#project code
+              :person=>nil,
+              :doc_no=>cdigest_info(fee_y_code),
+              :s_cdept_id=>fee_y_code.ddep,
+              :s_cperson_id=>fee_y_code.dperson,
+              :ccode_equal=>fee_y_code.ccode.to_s})
+            self.vouches.create(vj)
+            inid_count=inid_count+1
+          end
         end
         #1条贷
         vd=get_v ({
@@ -714,7 +724,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code.cdep,
-          :doc_no=>cdigest_info(fee_m_code),
+          :doc_no=>cdigest_info(fcms),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
@@ -723,7 +733,17 @@ class DocHead < ActiveRecord::Base
   end
   private
   def cdigest_info(fee_code_match)
-    "#{person.name},#{fee_code_match.fee.name}[#{doc_no}]"
+    cdigest_info=""
+    cdigest_info<<"#{person.name},"
+    if fee_code_match.is_a? Array
+      fee_code_match.each do |fcm|
+        cdigest_info<<"#{fcm.fee.name},"
+      end
+    else
+      cdigest_info<<"#{fee_code_match.fee.name}"
+    end
+    cdigest_info<<"[#{doc_no}]"
+    return cdigest_info
   end
   def get_v(options)
     #get current max vouch no and plus 1 as current vouch no
