@@ -1,13 +1,16 @@
 Webreim::Application.routes.draw do
 
-  resources :fee_code_matches
-
   #post "vouch/update" i don't know why this doesn't work???
   get "vouch/index"
   get "vouch/generate"
   get "vouch/rg_vouch"
   match "vouch/edit"=>"vouch#edit"
   match "vouch/update"=>"vouch#update"
+  match "vouch/g_u8"=>"vouch#g_u8"
+  
+  get "fee_code_matches/index"
+  get "fee_code_matches/edit"
+  match "fee_code_matches/update"
 
   resources :system_configs
 
@@ -24,6 +27,7 @@ Webreim::Application.routes.draw do
   get "pri_task/import_person"
   get "pri_task/test_curb"
   get "pri_task/import_u8_codes"
+  get "pri_task/import_u8_deps"
 
   get "ajax_service/getfee"  
   get "ajax_service/getbudget"  

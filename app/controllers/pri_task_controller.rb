@@ -34,6 +34,29 @@ class PriTaskController < ApplicationController
     @message="一共获取#{u8codes.count}个，本此更新#{this_time_count}"
     render "pri_task/cmd_result"
   end
+  def import_u8_deps
+    U8Dep.delete_all
+     begin
+      u8deps= U8service::API.get_departments
+      #never delete 
+      this_time_count=0
+      u8deps.each do |u8_model|
+        model=U8Dep.new
+        model.cdepcode=u8_model["cDepCode"]
+        model.bdepend=u8_model["bDepEnd"]
+        model.cdepname=u8_model["cDepName"]
+        model.idepgrade=u8_model["iDepGrade"]
+        model.save
+        this_time_count=this_time_count+1
+      end
+    rescue Exception=>msg
+      logger.error "^^^^^^^^^^^^^^^can't get the u8 serivce to get the departments info"
+      logger.error "#{msg}"
+      @message=msg
+    end
+    @message="一共获取#{u8deps.count}个，本此更新#{this_time_count}"
+    render "pri_task/cmd_result"
+  end
   def cmds
     
   end

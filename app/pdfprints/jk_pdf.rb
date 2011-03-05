@@ -25,6 +25,7 @@ class JkPdf
       pdf.move_down 2
       pdf.table doc.cp_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","费用用途","币种","汇率","原币金额","本币金额"],
+	:column_widths=>{0=>80,1=>80,2=>140,3=>40,4=>40,5=>80,6=>80},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,

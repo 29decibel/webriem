@@ -1,33 +1,67 @@
-<% form_for @vouch,:url=>"/vouch/update",:remote=>true,:class=>"fb_form" do |f| -%>
+<% form_for @vouch,:url=>"/vouch/update",:remote=>true,:class=>"edit_inline" do |f| -%>
   <%= f.hidden_field :id %>
-  <div class="fb_field"><%= f.label :dbill_date %><%= f.text_field :dbill_date ,:class=>"datepicker"%></div>
-  <div class="fb_field"><%= f.label :idoc %><%= f.text_field :idoc %></div>
-  <div class="fb_field"><%= f.label :cbill %><%= f.text_field :cbill %></div>
-  <div class="fb_field">
-    <%= f.label :ccode %><div class="reference">
+  <div class="form_field">
+    <span class="label"><%= f.label :dbill_date %></span>
+    <span class="value"><%= f.text_field :dbill_date ,:class=>"datepicker"%></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= f.label :idoc %></span>
+    <span class="value"><%= f.text_field :idoc %></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= f.label :cbill %></span>
+    <span class="value"><%= f.text_field :cbill %></span></div>
+  <div class="form_field">
+    <span class="label"><%= f.label :ccode %></span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :code_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "ccode",@vouch.ccode,:class=>"ref middle" %>
 			<a href="#" class-data="U8code"><span class="reference"></span></a>			
-		</div>
+		</div></span>
   </div>
-  <div class="fb_field">
-    <%= f.label :cdept_id %><div class="reference">
+  <div class="form_field">
+    <span class="label"><%= f.label :cdept_id %></span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "cdept_id",@vouch.cdept_id,:class=>"ref middle" %>
 			<a href="#" class-data="Dep"><span class="reference"></span></a>			
-		</div>
+		</div></span>
   </div>
-  <div class="fb_field"><!--注意这里的两个tag之间一定不能有空格，否则会杯具-->
-    <%= f.label :citem_id %><div class="reference">
+  <div class="form_field">
+    <span class="label"><%= f.label :s_cdept_id %></span>
+    <span class="value"><%= f.text_field :s_cdept_id %></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= f.label :cperson_id %></span>
+    <span class="value"><div class="reference">
+			<%= f.hidden_field :person_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "cperson_id",@vouch.cperson_id,:class=>"ref middle" %>
+			<a href="#" class-data="Person"><span class="reference"></span></a>			
+		</div></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= f.label :s_cperson_id %></span>
+    <span class="value"><%= f.text_field :s_cperson_id %></span>
+  </div>
+  <div class="form_field">
+    <span class="label"><%= f.label :doc_no %></span>
+    <span class="value"><%= f.text_field :doc_no %></span>
+  </div>
+  <div class="form_field"><!--注意这里的两个tag之间一定不能有空格，否则会杯具-->
+    <span class="label"><%= f.label :citem_id %></span>
+    <span class="value"><div class="reference">
 			<%= f.hidden_field :item_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "citem_id",@vouch.citem_id,:class=>"ref middle" %>
 			<a href="#" class-data="Project"><span class="reference"></span></a>			
-		</div>
+		</div></span>
   </div>
-  <div class="fb_field"><%= f.label :ccode_equal %><%= f.text_field :ccode_equal %></div>
+  <div class="form_field">
+    <span class="label"><%= f.label :ccode_equal %></span>
+    <span class="value"><%= f.text_field :ccode_equal %></span>
+  </div>
   <div class="fb_actions">
     <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
-    <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_vouch(this)",:class=>"button2"%>
+    <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"%>
   </div>
 <% end -%>
 

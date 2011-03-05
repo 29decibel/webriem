@@ -8,21 +8,17 @@
 	<%= link_to "#{I18n.t('common_op.btn_return')}", settlements_path,:class=>"button2" %>
 </div>
 <div class="form_area">
-<div class="form_block">
 	<div class="form_field">
-		<%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %>			
-		<%= f.text_field :code,:class=>"input1 " %>
+		<span class="label"><%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %></span>			
+		<span class="value"><%= f.text_field :code,:class=>"input1 " %></span>
 	</div>
 	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.models.settlement')}#{mark_required(f.object,:name)}" %>
-		<%= f.text_field :name,:class=>"input1 " %>
+		<span class="label"><%= f.label "#{I18n.t('activerecord.models.settlement')}#{mark_required(f.object,:name)}" %></span>
+		<span class="value"><%= f.text_field :name,:class=>"input1 " %></span>
 	</div>
-</div>
-<div class="form_block">
 	<div class="form_field">
-		<%= f.label "#{I18n.t('activerecord.attributes.settlement.subject')}#{mark_required(f.object,:subject)}" %>			
-		<%= f.text_field :subject,:class=>"input1 "%>
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.settlement.subject')}#{mark_required(f.object,:subject)}" %></span>			
+		<span class="value"><%= f.text_field :subject,:class=>"input1 "%></span>
 	</div>
-</div>
 </div>
 <% end %>

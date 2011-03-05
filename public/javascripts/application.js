@@ -523,7 +523,14 @@ function output_to_excel(grid_id)
 	send_request_from_grid(grid_id,"/doc_heads/export_xls.xls?ids=");
 }
 function g_vouch (grid_id) {
-  send_request_from_grid(grid_id,"/vouch/index?doc_ids=");
+  if(confirm("是否重新生成已有数据？"))
+  {
+    send_request_from_grid(grid_id,"/vouch/index?rg=true&doc_ids=");
+  }
+  else
+  {
+    send_request_from_grid(grid_id,"/vouch/index?doc_ids=");
+  }
 }
 function delete_docs(grid_id) 
 {
@@ -571,6 +578,15 @@ function send_request_from_grid(grid_id,url)
 		document.location.href = url+ids.join(',');
 	}
 }
-function cancel_edit_vouch (cancel_link) {
+
+function cancel_edit_form (cancel_link) {
   $(cancel_link).closest("form").hide("fast");
 }
+
+//$(document).bind('ajax:beforeSend', function(xhr, settings) {
+//  //$('[data-once=true]').something();
+//  console.log(xhr);
+//  console.log(settings);
+//  console.log(this);
+//});
+

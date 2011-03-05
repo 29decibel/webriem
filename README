@@ -1,4 +1,3 @@
-
 UI设计原则
 1.消除横向滚动条
 2.减少描述性文字，尽量用图片和颜色说话
@@ -6,3 +5,11 @@ UI设计原则
 
 后台设计
 1.过度到MongoDB数据库
+
+Remarkble gems
+delayed_jobs and so on
+
+some branch test--
+edit from sk server
+test this branch command:
+git branch --set-upstream sk_version origin/skversion

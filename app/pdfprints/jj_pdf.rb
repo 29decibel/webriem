@@ -66,6 +66,7 @@ class JjPdf
       pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
         :width=>pdf.margin_box.width,
+        :column_widths=>{0=>80,1=>80,2=>80,3=>300},
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"] 

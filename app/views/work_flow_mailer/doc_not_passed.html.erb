@@ -1,7 +1,7 @@
 반려된 내역이 6건 있습니다.   (합계 금액 : ￥<%= @para[:docs_total]%>원)<br/>
 아래의 바로 가기(Doc. Link Icon)를 클릭하면 해당문서로 이동합니다.<br/><br/>
 
-未通过审批单据<%= @para[:docs_count] || 1%>份（合计金额：￥<%= @para[:docs_total]%>元）<br/>
+未通过审批单据1份（合计金额：￥<%= @para[:docs_total]%>元）<br/>
 <a href=<%= url_for :controller=>'doc_heads',:action=>'show',:host=>'114.113.150.227',:id=>@para[:doc_id] %>>点击此处(Doc. Link Icon) 进入相应单据。</a><br/><br/>
 <div id="click">
 	<a href=<%= url_for :controller=>'doc_heads',:action=>'show',:host=>'114.113.150.227',:id=>@para[:doc_id] %>><img src="http://114.113.150.227/images/image003.jpg"></img></a>

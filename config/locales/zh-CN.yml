@@ -282,6 +282,10 @@
         ccode_equal: "对方科目"
         cdept_id: "部门"
         citem_id: "项目"
+        cperson_id: "人员"
+        s_cdept_id: "指定部门"
+        s_cperson_id: "指定人员"
+        doc_no: "凭证描述"
       account:
         name: "账户名称"  
         account_no: "帐号"
@@ -346,6 +350,15 @@
         end_date: "停用日期"
         attr: "费用属性"
         parent_fee_id: "所属费用类型"
+      fee_code_match:
+        fee_id: 费用类型
+        dcode_id: 借方科目
+        ccode_id: 贷方科目
+        description: 简要描述
+        dperson: 指定借方人
+        cperson: 指定贷方人
+        ddep: 指定借方部门
+        cdep: 指定贷方部门
       dep:
         name: "名称"  
         code: "编码"
@@ -612,6 +625,7 @@
     subjects: "科目设置"
     accounts: "账户设置"
     work_flows: "审批流设置"
+    fee_code_matches: "费用类型对应的科目"
     d_Borrow: "借款单"
     d_PayDoc: "付款单"
     d_ReciveNotice: "收款通知单"

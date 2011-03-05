@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215125130) do
+ActiveRecord::Schema.define(:version => 20110303132042) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -205,6 +205,10 @@ ActiveRecord::Schema.define(:version => 20110215125130) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "fee_code"
+    t.string   "dperson"
+    t.string   "ddep"
+    t.string   "cperson"
+    t.string   "cdep"
   end
 
   create_table "fee_standards", :force => true do |t|
@@ -735,6 +739,8 @@ ActiveRecord::Schema.define(:version => 20110215125130) do
     t.integer  "code_id"
     t.integer  "code_equal_id"
     t.integer  "person_id"
+    t.string   "s_cdept_id"
+    t.string   "s_cperson_id"
   end
 
   create_table "work_flow_duties", :force => true do |t|
