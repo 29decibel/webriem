@@ -621,6 +621,7 @@ div.fb_field{
 div.fb_actions{
   display:block;
   margin-top:2px;
+  margin-left:80px;
 }
 div.fb_field label{
   width:80px;
