@@ -552,9 +552,11 @@ class DocHead < ActiveRecord::Base
         self.vouches.clear
         fee_m_code_meal=FeeCodeMatch.find_by_fee_code("0601")
         fee_m_code_car=FeeCodeMatch.find_by_fee_code("0602")
+        jb_fcms=[]
         #1个或2个借
         inid_count=1
         if rd_extra_work_meals.count>0
+          jb_fcms<<fee_m_code_meal
           total=0
           rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
           vj=get_v ({
@@ -572,6 +574,7 @@ class DocHead < ActiveRecord::Base
           inid_count=inid_count+1
         end
         if rd_extra_work_cars.count>0
+          jb_fcms<<fee_m_code_car
           total=0
           rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
           vj=get_v ({
@@ -596,7 +599,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code_meal.cdep,
-          :doc_no=>cdigest_info(fee_m_code_meal),
+          :doc_no=>cdigest_info(jb_fcms),
           :s_cperson_id=>fee_m_code_meal.cperson,
           :ccode_equal=>fee_m_code_meal.dcode.to_s})
         self.vouches.create(vd)
@@ -607,12 +610,14 @@ class DocHead < ActiveRecord::Base
         self.vouches.clear
         vd_codes=[]
         fee_m_code=FeeCodeMatch.find_by_fee_code("04")
+        fl_fcms=[]
         #n条借方
         inid_count=1
         rd_benefits.each do |b|
           #get fee code info
           if b.fee
             fee_m_code=FeeCodeMatch.find_by_fee_code(b.fee.code)
+            fl_fcms<<fee_m_code if !fl_fcms.include? fee_m_code
           end
           vd_codes<<fee_m_code.dcode.to_s
           vj=get_v ({
@@ -637,7 +642,7 @@ class DocHead < ActiveRecord::Base
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
           :s_cdept_id=>fee_m_code.cdep,
-          :doc_no=>cdigest_info(fee_m_code),
+          :doc_no=>cdigest_info(fl_fcms),
           :s_cperson_id=>fee_m_code.cperson,
           :ccode_equal=>vd_codes.join(',')})
         self.vouches.create(vd)
