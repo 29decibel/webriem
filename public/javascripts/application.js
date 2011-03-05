@@ -599,3 +599,10 @@ function cancel_edit_form (cancel_link) {
   $(cancel_link).closest("form").hide("fast");
 }
 
+//$(document).bind('ajax:beforeSend', function(xhr, settings) {
+//  //$('[data-once=true]').something();
+//  console.log(xhr);
+//  console.log(settings);
+//  console.log(this);
+//});
+
