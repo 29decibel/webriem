@@ -22,11 +22,29 @@
 	<%= csrf_meta_tag %>
 </head>
 <body>
-	<div id="header">
-		<div id="title">
-			<h4 id="cn_title">网上报销系统</h4>
-			<h4 id="en_title">Online  Expense System，OES</h4>
-		</div>		
+  <ul id="nav">
+    <li class="current"><a href="#">Home</a></li>
+    <li><a href="#">基础设置</a><ul>
+          <% if current_user.name=="admin"%>
+            <ul class="sub_menu">
+				  	  <% Menu.where("menu_type=0").each do |m|%>
+                <li><%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%></li>
+              <% end %>
+            </ul>
+          <% end %>
+    </ul></li>
+    <li><a href="#">单据管理</a>
+    <ul>
+          <ul class="sub_menu">
+            <% if current_user.person.role%>
+              <% current_user.person.role.menus.each do |m|%>
+                <li><%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%></li>
+              <% end %>
+            <% end %>
+          </ul>
+      </ul>
+    </li>
+  </ul>
 		<!--user log in info-->
 		<div id="user_nav">
 			<% if user_signed_in? %>  
@@ -38,23 +56,6 @@
 		</div>		
 	</div>
 	<div id="main_area">
-		<% if user_signed_in? %>
-		<div id="menu">
-			<div class="menu">
-				<% if current_user.name=="admin"%>
-					<% Menu.where("menu_type=0").each do |m|%>
-						<%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
-					<% end %>
-				<% else %>
-					<% if current_user.person.role%>
-						<% current_user.person.role.menus.each do |m|%>
-							<%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%>
-						<% end %>
-					<% end %>
-				<% end %>
-			</div>		
-		</div>
-		<% end %>
 		<!--++++++++++++++++++++++++++++++++++contents goes here++++++++++++++++-->
 		<div id="content">
 			<%= yield %>

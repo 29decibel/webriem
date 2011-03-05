@@ -2,19 +2,16 @@
 *{margin:0px;padding:0px;}
 /*whole style*/
 body{
-	width:97%;
 	margin:auto;
 	/*font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
   font-family:arial,sans-serif; 
+  background:url("../images/bck.jpg");
   background-color:#F2F2F2;
+  color:#999;
+  font-size:13px;
 }
 img{
   border:0px;
-}
-a{
-	color:#369;
-	text-decoration: none;
-	font-size:14px;
 }
 a:hover{
 	background-color: transparent;
@@ -25,59 +22,177 @@ input{
   font-size:1em;
   height:18px;
 }
-/*parts*/
-div#header{
-	height:100px;
-	margin-top: 10px;
-	margin-left: 5px;
-	position:relative;
-	background-image: url("../images/logo.png");
-	background-repeat:no-repeat;
+/*header*/
+a {
+    color: #333;
 }
-div#header #title{
-	padding:0px;
-	float:left;
-	display:block;
-	margin-left: 5px;
-	margin-top: 57px;
+#nav {
+    margin: 0;
+    padding: 7px 6px 0;
+    background: #7d7d7d url("../images/gradient.png") repeat-x 0 -110px;
+    line-height: 100%;
+
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0, .4);
+}
+#nav li {
+    margin: 0 5px;
+    padding: 0 0 8px;
+    float: left;
+    position: relative;
+    list-style: none;
 }
 
-div#header #user_nav{
-	float: right;
-	margin-top: 60px;
-	margin-right: 20px;
+
+/* main level link */
+#nav a {
+    font-weight: bold;
+    color: #e7e5e5;
+    text-decoration: none;
+    display: block;
+    padding:  8px 20px;
+    margin: 0;
+
+    -webkit-border-radius: 1.6em;
+    -moz-border-radius: 1.6em;
+    
+    text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
+#nav a:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* main level link hover */
+#nav .current a, #nav li:hover > a {
+    background: #666 url(img/gradient.png) repeat-x 0 -40px;
+    color: #444;
+    border-top: solid 1px #f8f8f8;
+
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0, .2);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0, .2);
+    box-shadow: 0 1px 1px rgba(0,0,0, .2);
+
+    text-shadow: 0 1px 0 rgba(255,255,255, 1);
+}
+
+/* sub levels link hover */
+#nav ul li:hover a, #nav li:hover li a {
+    background: none;
+    border: none;
+    color: #666;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+#nav ul a:hover {
+    background: #0078ff url(img/gradient.png) repeat-x 0 -100px !important;
+    color: #fff !important;
+
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+
+    text-shadow: 0 1px 1px rgba(0,0,0, .1);
+}
+
+/* dropdown */
+#nav li:hover > ul {
+    display: block;
+}
+
+/* level 2 list */
+#nav ul {
+    display: none;
+
+    margin: 0;
+    padding: 0;
+    width: 185px;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background: #ddd url(img/gradient.png) repeat-x 0 0;
+    border: solid 1px #b4b4b4;
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .3);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0, .3);
+    box-shadow: 0 1px 3px rgba(0,0,0, .3);
+}
+#nav ul li {
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav ul a {
+    font-weight: normal;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* level 3+ list */
+#nav ul ul {
+    left: 181px;
+    top: -3px;
+}
+
+/* rounded corners of first and last link */
+#nav ul li:first-child > a {
+    -webkit-border-top-left-radius: 9px;
+    -moz-border-radius-topleft: 9px;
+
+    -webkit-border-top-right-radius: 9px;
+    -moz-border-radius-topright: 9px;
+}
+#nav ul li:last-child > a {
+    -webkit-border-bottom-left-radius: 9px;
+    -moz-border-radius-bottomleft: 9px;
+
+    -webkit-border-bottom-right-radius: 9px;
+    -moz-border-radius-bottomright: 9px;
+}
+
+/* clearfix */
+#nav:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+#nav {
+    display: inline-block;
+} 
+html[xmlns] #nav {
+    display: block;
+}
+ 
+* html #nav {
+    height: 1%;
+}
+
+/*===============================*/
 div#main_area{
 	min-height:800px;
 	position: relative;
 }
-div#menu{
-	float:left;
-	width:120px;
-	padding-top: 20px;
-	padding-bottom: 50px;
-}
-div#menu div.menu{
-	border-bottom: 1px solid #999;
-}
-div#menu a.menu_item{
-	padding: 2px 0px 2px 5px;
-	display: block;
-}
-div#menu a.menu_item:hover{
-	background-color: #FFF9E5;
-}
-
-div#menu a.selected{
-	color:black;
-	background-color: #FBCC7F;
-}
 
 div#content{
 	position: relative;
-	margin: 0px 5px 20px 120px;
-	border: 5px solid #FBCC7F;
+	margin: 0px 40px 20px 40px;
+	border: 1px solid #999;
 	min-height:600px;
+  background:#fff;
+  border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 /*give the table a wear==========================================================*/
 
@@ -144,10 +259,7 @@ form div.form_area{
   -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
   -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 }
-form div.form_area a{
-  color:#6A9199;/*#4D4D4D;*/
-  border:0px;
-}
+
 form div.form_area a img{
   border:0px;
 }
@@ -195,6 +307,13 @@ div.form_area fieldset span.sequence{
   position:absolute;
   left:-8px;
   top:0px;
+}
+/*delete link*/
+form div.form_area fieldset a.detail_link{
+  display:none;
+}
+form div.form_area fieldset:hover a.detail_link{
+  display:block;
 }
 /*here is some special sizes*/
 form div.form_field.col-sp2 span.label{
@@ -301,44 +420,7 @@ span.error_message{
 input.required{
 	background: #FFF6BF;
 }
-/*++++++++++++++++++++++++++++++++here is my own table styles*/
-table.form_input{
-	margin:0px;
-	padding:0px;
-	border-width:1px;
-	border-collapse:collapse;
-}
-table.form_input input{
-	width:100%;
-}
-table.form_input input.normal{
-	width:87px;
-}
-table.form_input input.small{
-	width:25px;
-}
-table.form_input input.xsmall{
-	width:45px;
-}
-table.form_input input.middle{
-	width:184px;
-}
-table.form_input input.large{
-	width:200px;
-}
-table.form_input input.xlarge{
-	width:400px;
-}
-table.form_input input.large_x{
-	width:250px;
-}
-table.form_input th{
-	text-align: left;
-}
-table.form_input td a.detail_link{
-	width:75px;
-	display: inline-block;
-}
+
 /*+++++++++++++++++++++++++++++++*/
 div.table_details,div.rdd_details,div.reim_split_details{
 	overflow: auto;
@@ -397,7 +479,7 @@ div#work_flow_progress{
 	position: relative;
 	padding: 5px;
 	margin: 0 15px 15px 15px;
-	background-color: #FFF9E5;
+	background-color: #FFF;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
@@ -540,13 +622,7 @@ div.approver_list{
 	overflow: auto;
 }
 /*=================================disabled link style============================*/
-a.disable{
-	cursor: text;
-	color: grey;
-}
-a:active.disable {
 
-}
 /*4work flow*/
 div.form_field_4_work_flow{
 	margin-left: 32px;
@@ -670,29 +746,10 @@ div.vouch_info a img{
   display:inline-block;
   margin-left:5px;
 }
-/*facebox page 's inputs*/
-div.fb_field{
-  display:inline-block;
-  margin-bottom:2px;
-  margin-right:5px;
-}
-div.fb_actions{
+div.form_inline_actions{
   display:block;
   margin-top:2px;
   margin-left:100px;
-}
-div.fb_field label{
-  width:80px;
-  text-align:right;
-  margin-right:3px;
-  display:inline-block;
-}
-div.fb_field input {
-  width:200px;
-  margin-left:2px;
-}
-div.fb_title{
-  margin-bottom:5px;
 }
 tr span.d{
   color:red;
