@@ -16,35 +16,17 @@
 	<%= javascript_include_tag "jquery.formatCurrency-1.4.0.js" %>
 	<%= javascript_include_tag "doc_number_input_control.js" %>
 	<%= javascript_include_tag "enter_to_tab.js" %>
-	<!--the facebox stuff-->
-	<%= javascript_include_tag "facebox/facebox.js" %>
-	<%= javascript_include_tag "facebox/init.js" %>
 	<%= csrf_meta_tag %>
 </head>
 <body>
-  <ul id="nav">
-    <li class="current"><a href="#">Home</a></li>
-    <li><a href="#">基础设置</a><ul>
-          <% if current_user.name=="admin"%>
-            <ul class="sub_menu">
-				  	  <% Menu.where("menu_type=0").each do |m|%>
+  <div class="header">
+<!--              <% Menu.where("menu_type=0").each do |m|%>
                 <li><%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%></li>
               <% end %>
-            </ul>
-          <% end %>
-    </ul></li>
-    <li><a href="#">单据管理</a>
-    <ul>
-          <ul class="sub_menu">
-            <% if current_user.person.role%>
               <% current_user.person.role.menus.each do |m|%>
                 <li><%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%></li>
-              <% end %>
-            <% end %>
-          </ul>
-      </ul>
-    </li>
-  </ul>
+              <% end %>-->
+  </div>
 		<!--user log in info-->
 		<div id="user_nav">
 			<% if user_signed_in? %>  
