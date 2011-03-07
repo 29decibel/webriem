@@ -1,32 +1,9 @@
-<div class="form_title">
-	<h3>员工列表</h3>
-</div>
-	<div class="actions">
-		<%= link_to '添加员工', new_person_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>姓名</th>
-    <th>编号</th>
-    <th>性别</th>
-    <th><%= link_to "部门",:deps%></th>
-    <th><%= link_to "职务",:duties%></th>
-    <th>直属领导</th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= jqgrid :people,
+		:model=>"Person",
+		:caption=>"人员列表",
+		:height=>450,:width=>800,
+    :colModel=>["name","code","e_mail",{:name=>"dep__name",:label=>"所在部门"},
+      {:name=>"duty__name",:label=>"职务"},"end_date"],
+		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/people/'+rowid.toString();}--#)%>
 
-<% @people.each do |person| %>
-  <tr>
-    <td><%= person.name %></td>
-    <td><%= person.code %></td>
-    <td><%= person.gender_name %></td>
-    <td><%= person.dep_name %></td>
-    <td><%= person.duty_name %></td>
-    <td><%= person.boss==nil ? "":person.boss.name %></td>
-    <td class="action"><%= link_to '查看', person %></td>
-    <td class="action"><%= link_to '删除', person, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-<%= will_paginate @people,:previous_label=>"上一页",:next_label=>"下一页" %>
+

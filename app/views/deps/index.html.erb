@@ -1,7 +1,8 @@
 <%= jqgrid :deps,
 		:model=>"Dep",
 		:caption=>"部门",
-		:height=>300,:width=>800,
+		:height=>450,:width=>800,
+    :colModel=>["name","code","version","start_date","end_date",{:name=>"parent_dep__name",:label=>"上级部门"}],
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/deps/'+rowid.toString();}--#)%>
 
 

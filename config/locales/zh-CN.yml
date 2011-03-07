@@ -314,6 +314,7 @@
         name: "名称"  
         code: "编码"
         u8_project: "对应U8项目"
+        status: "项目状态"
       u8_dep:
         cdepcode: 编码
         bdepend: 是否末级
