@@ -4,5 +4,12 @@
 		:height=>450,:width=>800,
     :colModel=>["name","code","status"],
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/projects/'+rowid.toString();}--#)%>
-
+<div class="jqgrid">
+	<div class="buttons">
+		<a href="/projects/new">
+			<img src="/images/icons/add.png" alt=""/> <%= "添加项目" %>
+		</a>
+  </div>
+</div>
+ 
 
