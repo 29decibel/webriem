@@ -4,7 +4,7 @@ class VouchController < ApplicationController
   #every doc has it's own way to generate the vouch
   #i put the logic into the doc itself
   def index
-    @docs=DocHead.where("id in (#{params[:doc_ids]})").all
+    @docs=DocHead.where("id in (#{params[:doc_ids]}) and mark='ok'").all
     rg_all=(params[:rg]=="true")
     @docs.each {|d| d.rg_vouches if (rg_all or d.vouches.count==0) }
   end
