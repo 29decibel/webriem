@@ -1,7 +1,7 @@
 #coding: utf-8
 module U8service
   class API
-    ProjectsServiceURL="http://203.235.212.65/getAllProjectsInformationFromGPM.do"
+    ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
     EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
     U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
     #the database name current
