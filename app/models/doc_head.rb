@@ -518,13 +518,25 @@ class DocHead < ActiveRecord::Base
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
         init_count=1
         #n 条借
+        #根据新的需求，如果有部门项目相同的则进行合并，所以部门加项目是唯一的key
+        combined_wms={} #先把合并后的放进这个结构，然后再进行凭证生成
+        #这个结构为 key=>"#{project_id}__#{dep_id}",:value=>{:project=>project,:dep=>dep,:amount=>....}
         rd_work_meals.each do |w_m|
+          key="#{w_m.project_id}__#{w_m.dep_id}"
+          if combined_wms.include? key
+            combined_wms[key][:amount]+=w_m.apply_amount
+          else
+            combined_wms[key]={:project=>w_m.project,:dep=>w_m.dep,:amount=>w_m.amount }
+          end
+        end
+        #这里才进行真正的生成
+        combined_wms.each do |k,c_w_m|
           vj=get_v ({
             :inid=>"#{init_count}",
             :code=>fee_m_code.dcode,# dai kemu
-            :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
-            :dep=>w_m.dep,# dep code
-            :project=>w_m.project,#project code
+            :md=>c_w_m[:amount],:md_f=>c_w_m[:amount],
+            :dep=>c_w_m[:dep],# dep code
+            :project=>c_w_m[:project],#project code
             :person=>nil,
             :doc_no=>cdigest_info(fee_m_code),
             :s_cdept_id=>fee_m_code.ddep,
@@ -759,9 +771,11 @@ class DocHead < ActiveRecord::Base
     #the time
     time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
     #default options
+    #get the default from system config
+    config_cbill=SystemConfig.find_by_key("cbill")
     default_opt={
       :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-      :idoc=>"0",:cbill=>"杨琳",:doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
+      :idoc=>"0",:cbill=>(config_cbill ? config_cbill.value : "OES"),:doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
       :ccode=>"",# dai kemu
       :cexch_name=>"人民币",#currency name
       :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",

@@ -20,5 +20,9 @@
 		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.project.u8_project')}#{mark_required(f.object,:u8_project)}" %></span>			
 		<span class="value"><%= f.text_field :u8_project,:class=>"input1 " %></span>
 	</div>
+	<div class="form_field">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.project.status')}#{mark_required(f.object,:status)}" %></span>			
+    <span class="value"><%= f.select "status",Project::P_STATUS.map {|k,v| [v,k]},:class=>"input1 " %></span>
+	</div>
 </div>
 <% end %>
