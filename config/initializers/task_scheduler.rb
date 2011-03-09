@@ -44,7 +44,15 @@ def send_email
     Delayed::Job.enqueue MailingJob.new(:notice_docs_to_approve, para)
   end
 end
+def import_gpm_projects
+  projs=U8service::API.get_gpm_projects
+  if projs and projs.count>0
+    projs.each do |p|
+      p.save if p.valide?
+    end
+  end
+end
 #test only
 scheduler.every '10s' do
-   #send_email
+  import_gpm_projects
 end
