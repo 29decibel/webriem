@@ -15,23 +15,29 @@ class VouchController < ApplicationController
   def g_u8
     @message=""
     @doc=DocHead.find(params[:doc_id])
-    #首先校验看时候已经生成过了，根据单据号
-    if @doc.exist_vouch?
-      @message="该单据在U8中已经生成过凭证，请先删除凭证再重复生成"
+    #first at all we check wether the ccode is the end code
+    vouch_valide = @doc.vouches.all? {|v| v.code and v.code.bend }
+    if !vouch_valide
+      @message="有分录没有设置科目或所设置的科目非末级，请检查"
     else
-      #记住这里要计算一下当前系统中当月的最大单据号，然后赋值给v
-      #get current max vouch no and plus 1 as current vouch no
-      vouch_no="test in dev"
-      if RAILS_ENV=="production"
-        vouch_no=U8service::API.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
-      end
-      #begin generate
-      @doc.vouches.each do |v|
-        v.ino_id=vouch_no
-        msg=U8service::API.generate_vouch_from_doc v
-        if msg!="OK"
-          @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
-          return
+      #首先校验看时候已经生成过了，根据单据号
+      if @doc.exist_vouch?
+        @message="该单据在U8中已经生成过凭证，请先删除凭证再重复生成"
+      else
+        #记住这里要计算一下当前系统中当月的最大单据号，然后赋值给v
+        #get current max vouch no and plus 1 as current vouch no
+        vouch_no="test in dev"
+        if RAILS_ENV=="production"
+          vouch_no=U8service::API.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
+        end
+        #begin generate
+        @doc.vouches.each do |v|
+          v.ino_id=vouch_no
+          msg=U8service::API.generate_vouch_from_doc v
+          if msg!="OK"
+            @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
+            return
+          end
         end
       end
     end
