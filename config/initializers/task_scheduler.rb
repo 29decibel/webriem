@@ -5,7 +5,14 @@ scheduler = Rufus::Scheduler.start_new
 #every day send a email
 #every midnight passed 1 minute will exec this job
 scheduler.cron '1 0 * * *' do
+  #send mail first
   send_email
+  #sync the project info
+  begin
+    import_gpm_projects
+  rescue Exception=>msg
+    Rails.logger.error "sync gpm projects error,error message is #{msg}"
+  end
 end
 #the cron format
 #minute hour day month week
@@ -54,5 +61,5 @@ def import_gpm_projects
 end
 #test only
 scheduler.every '10s' do
-  import_gpm_projects
+  #import_gpm_projects
 end
