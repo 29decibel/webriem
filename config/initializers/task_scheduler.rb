@@ -48,7 +48,7 @@ def import_gpm_projects
   projs=U8service::API.get_gpm_projects
   if projs and projs.count>0
     projs.each do |p|
-      p.save if p.valide?
+      p.save if p.valid?
     end
   end
 end
