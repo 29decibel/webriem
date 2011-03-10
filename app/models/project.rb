@@ -10,4 +10,8 @@ class Project < ActiveRecord::Base
     return P_STATUS[status] if status
     P_STATUS[0]
   end
+  def before_save
+    self.code=self.code.strip
+    self.name=self.name.strip
+  end
 end
