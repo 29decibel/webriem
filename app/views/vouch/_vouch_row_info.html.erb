@@ -7,3 +7,4 @@
 <td><%= v.cexch_name%></td><td><%= v.nfrat%></td>
 <td><%= v.dbill_date%></td><td><%= v.cbill%></td>
 <td><%= v.idoc%></td>
+<td><%= image_tag (v.doc_head.exist_vouch? ? "/images/icons/accept.png" : "/images/icons/cross.png") %><td>

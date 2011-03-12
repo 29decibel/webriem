@@ -385,7 +385,13 @@ class DocHead < ActiveRecord::Base
   end
   #判断是否单据已经生成过凭证
   def exist_vouch?
-    exist_info=U8service::API.exist_vouch doc_no
+    exist_info=nil
+    begin
+      exist_info=U8service::API.exist_vouch doc_no
+    rescue Exception=>msg
+      Rails.logger.error "u8 service exist vouch error ,error msg is #{msg}"
+      return false
+    end
     return exist_info["Exist"]
   end
   #vouch infos
@@ -513,20 +519,32 @@ class DocHead < ActiveRecord::Base
         self.vouches.create(vj)
         self.vouches.create(vd)
       end
-      #交际费用，没有分摊，每个明细都是一条借
+      #交际费用，没有分摊，每个明细都是一条借(已经对相同的项目和部门的分录进行了合并)
       ###################################################################################################
       if doc_type==10
         self.vouches.clear
         fee_m_code=FeeCodeMatch.find_by_fee_code("02")
         init_count=1
         #n 条借
+        #根据新的需求，如果有部门项目相同的则进行合并，所以部门加项目是唯一的key
+        combined_wms={} #先把合并后的放进这个结构，然后再进行凭证生成
+        #这个结构为 key=>"#{project_id}__#{dep_id}",:value=>{:project=>project,:dep=>dep,:amount=>....}
         rd_work_meals.each do |w_m|
+          key="#{w_m.project_id}__#{w_m.dep_id}"
+          if combined_wms.include? key
+            combined_wms[key][:amount]+=w_m.apply_amount
+          else
+            combined_wms[key]={:project=>w_m.project,:dep=>w_m.dep,:amount=>w_m.amount }
+          end
+        end
+        #这里才进行真正的生成
+        combined_wms.each do |k,c_w_m|
           vj=get_v ({
             :inid=>"#{init_count}",
             :code=>fee_m_code.dcode,# dai kemu
-            :md=>w_m.apply_amount,:md_f=>w_m.apply_amount,
-            :dep=>w_m.dep,# dep code
-            :project=>w_m.project,#project code
+            :md=>c_w_m[:amount],:md_f=>c_w_m[:amount],
+            :dep=>c_w_m[:dep],# dep code
+            :project=>c_w_m[:project],#project code
             :person=>nil,
             :doc_no=>cdigest_info(fee_m_code),
             :s_cdept_id=>fee_m_code.ddep,
@@ -606,7 +624,7 @@ class DocHead < ActiveRecord::Base
           :ccode_equal=>fee_m_code_meal.dcode.to_s})
         self.vouches.create(vd)
       end
-      #福利费用
+      #福利费用(已经根据fee project和dep进行了合并)
       ###################################################################################################
       if doc_type==13
         self.vouches.clear
@@ -614,7 +632,8 @@ class DocHead < ActiveRecord::Base
         fee_m_code=FeeCodeMatch.find_by_fee_code("04")
         fl_fcms=[]
         #n条借方
-        inid_count=1
+        #cobined hash
+        combined_benefits={}
         rd_benefits.each do |b|
           #get fee code info
           if b.fee
@@ -622,17 +641,28 @@ class DocHead < ActiveRecord::Base
             fl_fcms<<fee_m_code if !fl_fcms.include? fee_m_code
           end
           vd_codes<<fee_m_code.dcode.to_s
+          #到这里的时候已经确定了fee，用fee+dep+project作为key进行合并
+          combine_key="#{fee_m_code.id}__#{b.dep.id}__#{b.project.id}"
+          if combined_benefits[combine_key]
+            combined_benefits[combine_key][:amount]+=b.fi_amount
+          else
+            combined_benefits[combine_key]={:dep=>b.dep,:project=>b.project,:amount=>b.fi_amount,:fee=>fee_m_code}
+          end
+        end
+        #这里进行真正的生成
+        inid_count=1
+        combined_benefits.each do |k,b|
           vj=get_v ({
             :inid=>"#{inid_count}",
-            :code=>fee_m_code.dcode,# dai kemu
-            :md=>b.fi_amount,:md_f=>b.fi_amount,
-            :dep=>dep,# dep code
-            :project=>b.project,#project code
+            :code=>b[:fee].dcode,# dai kemu
+            :md=>b[:amount],:md_f=>b[:amount],
+            :dep=>b[:dep],# dep code
+            :project=>b[:project],#project code
             :person=>nil,
-            :doc_no=>cdigest_info(fee_m_code),
-            :s_cdept_id=>fee_m_code.ddep,
-            :s_cperson_id=>fee_m_code.dperson,
-            :ccode_equal=>fee_m_code.ccode.to_s})
+            :doc_no=>cdigest_info(b[:fee]),
+            :s_cdept_id=>b[:fee].ddep,
+            :s_cperson_id=>b[:fee].dperson,
+            :ccode_equal=>b[:fee].ccode.to_s})
           self.vouches.create(vj)
           inid_count=inid_count+1
         end
@@ -658,18 +688,30 @@ class DocHead < ActiveRecord::Base
         inid_count=1
         vd_codes=[]
         fcms=[] #记录可能的费用类型
+        #-----------------------------------------------------------------------
         #普通费用n条借
         if common_riems.count>0
+          comb_info={}
           fcms<<fee_m_code
+          #先进行合并
           common_riems.each do |r|
             #get fee code info
             vd_codes<<fee_m_code.dcode.to_s
+            #combine it
+            comb_key="#{r.dep.id}__#{r.project.id}"
+            if comb_info[comb_key]
+              comb_info[comb_key][:amount]+=r.apply_amount
+            else
+              comb_info[comb_key]={:dep=>r.dep,:project=>r.project,:amount=>r.apply_amount}
+            end
+          end
+          comb_info.each do |k,r|
             vj=get_v ({
               :inid=>"#{inid_count}",
               :code=>fee_m_code.dcode,# dai kemu
-              :md=>r.apply_amount,:md_f=>r.apply_amount,
-              :dep=>r.dep,# dep code
-              :project=>r.project,#project code
+              :md=>r[:amount],:md_f=>r[:amount],
+              :dep=>r[:dep],# dep code
+              :project=>r[:project],#project code
               :person=>nil,
               :doc_no=>cdigest_info(fee_m_code),
               :s_cdept_id=>fee_m_code.ddep,
@@ -679,19 +721,30 @@ class DocHead < ActiveRecord::Base
             inid_count=inid_count+1
           end
         end
+        #-----------------------------------------------------------------------
         #工作餐费n条借
         if rd_work_meals.count>0
+          comb_info={}
           fee_g_code=FeeCodeMatch.find_by_fee_code("0102")
           fcms<<fee_g_code
           rd_work_meals.each do |r|
             #get fee code info
             vd_codes<<fee_g_code.dcode.to_s
+            #combine it
+            comb_key="#{r.dep.id}__#{r.project.id}"
+            if comb_info[comb_key]
+              comb_info[comb_key][:amount]+=r.apply_amount
+            else
+              comb_info[comb_key]={:dep=>r.dep,:project=>r.project,:amount=>r.apply_amount}
+            end
+          end
+          comb_info.each do |k,r|
             vj=get_v ({
               :inid=>"#{inid_count}",
               :code=>fee_g_code.dcode,# dai kemu
-              :md=>r.apply_amount,:md_f=>r.apply_amount,
-              :dep=>r.dep,# dep code
-              :project=>r.project,#project code
+              :md=>r[:amount],:md_f=>r[:amount],
+              :dep=>r[:dep],# dep code
+              :project=>r[:project],#project code
               :person=>nil,
               :doc_no=>cdigest_info(fee_g_code),
               :s_cdept_id=>fee_g_code.ddep,
@@ -701,19 +754,30 @@ class DocHead < ActiveRecord::Base
             inid_count=inid_count+1
           end
         end
+        #-----------------------------------------------------------------------
         #业务交通费用n条借
         if rd_common_transports.count>0
+          comb_info={}
           fee_y_code=FeeCodeMatch.find_by_fee_code("0103")
           fcms<<fee_y_code
           rd_common_transports.each do |r|
             #get fee code info
             vd_codes<<fee_y_code.dcode.to_s
+            #combine it
+            comb_key="#{r.dep.id}__#{r.project.id}"
+            if comb_info[comb_key]
+              comb_info[comb_key][:amount]+=r.apply_amount
+            else
+              comb_info[comb_key]={:dep=>r.dep,:project=>r.project,:amount=>r.apply_amount}
+            end
+          end
+          comb_info.each do |k,r|
             vj=get_v ({
               :inid=>"#{inid_count}",
               :code=>fee_y_code.dcode,# dai kemu
-              :md=>r.apply_amount,:md_f=>r.apply_amount,
-              :dep=>r.dep,# dep code
-              :project=>r.project,#project code
+              :md=>r[:amount],:md_f=>r[:amount],
+              :dep=>r[:dep],# dep code
+              :project=>r[:project],#project code
               :person=>nil,
               :doc_no=>cdigest_info(fee_y_code),
               :s_cdept_id=>fee_y_code.ddep,
@@ -761,9 +825,11 @@ class DocHead < ActiveRecord::Base
     #the time
     time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
     #default options
+    #get the default from system config
+    config_cbill=SystemConfig.find_by_key("cbill")
     default_opt={
       :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-      :idoc=>"0",:cbill=>"杨琳",:doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
+      :idoc=>"0",:cbill=>(config_cbill ? config_cbill.value : "OES"),:doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
       :ccode=>"",# dai kemu
       :cexch_name=>"人民币",#currency name
       :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",

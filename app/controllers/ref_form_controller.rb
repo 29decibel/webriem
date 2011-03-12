@@ -26,6 +26,10 @@ class RefFormController < ApplicationController
     if model_name=="U8code"
       str=str+" and year=#{Time.now.year}"
     end
+    #filter closed project
+    if model_name=="Project"
+      str=str+" and status=0"
+    end
     str
   end
   #give you a model name

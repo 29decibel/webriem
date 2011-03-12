@@ -1,25 +1,15 @@
-<div class="form_title">
-	<h3>项目列表</h3>
+<%= jqgrid :projects,
+		:model=>"Project",
+		:caption=>"项目列表",
+		:height=>450,:width=>800,
+    :colModel=>["name","code",{:name=>"status",:enum_type=>"Project::P_STATUS",:getter=>:status_name,:label=>"项目状态"}],
+		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/projects/'+rowid.toString();}--#)%>
+<div class="jqgrid">
+	<div class="buttons">
+		<a href="/projects/new">
+			<img src="/images/icons/add.png" alt=""/> <%= "添加项目" %>
+		</a>
+  </div>
 </div>
-	<div class="actions">
-		<%= link_to '添加项目', new_project_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>名称</th>
-    <th>编码</th>
-    <th>对应U8项目</th>
-    <th></th>
-    <th></th>
-  </tr>
+ 
 
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.name %></td>
-    <td><%= project.code %></td>
-    <td><%= project.u8_project %></td>
-    <td class="action"><%= link_to '查看', project %></td>
-    <td class="action"><%= link_to '删除', project, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>

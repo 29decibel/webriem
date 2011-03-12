@@ -355,6 +355,9 @@ ActiveRecord::Schema.define(:version => 20110312041417) do
   create_table "netzke_temp_table", :force => true do |t|
   end
 
+  create_table "netzke_temp_table", :force => true do |t|
+  end
+
   create_table "other_riems", :force => true do |t|
     t.integer  "sequence"
     t.string   "description"

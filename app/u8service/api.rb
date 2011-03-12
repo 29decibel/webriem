@@ -1,7 +1,7 @@
 #coding: utf-8
 module U8service
   class API
-    ProjectsServiceURL="http://203.235.212.65/getAllProjectsInformationFromGPM.do"
+    ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
     EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
     U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
     #the database name current
@@ -80,6 +80,9 @@ module U8service
       JSON get("GetCurrency")
     end
     def self.get(service_name,options={})
+      if RAILS_ENV=="development"
+        return "{}"
+      end
       _dbname =options[:dbname] || dbname
       para={:dbname=>_dbname}
       para.merge! options.except(:dbname)
@@ -112,14 +115,14 @@ module U8service
         xml_doc=REXML::Document.new response.to_s
         xml_doc.root.elements.each do |ele|
           p=Person.new
-          p.name=ele.elements["name"].text if ele.elements["name"]
-          p.code=ele.elements["empno"].text if ele.elements["empno"]
+          p.name=ele.elements["name"].text.strip if ele.elements["name"]
+          p.code=ele.elements["empno"].text.strip if ele.elements["empno"]
           p.gender=ele.elements["gender"].text=="男" ? 1 : 0 if ele.elements["gender"]
-          p.dep_id=ele.elements["deptid"].text if ele.elements["deptid"]
-          p.phone=ele.elements["mobile"].text if ele.elements["mobile"]
-          p.e_mail=ele.elements["email"].text if ele.elements["email"]
-          p.bank_no=ele.elements["bankid"].text if ele.elements["bankid"]
-          p.ID_card=ele.elements["idCard"].text if ele.elements["idCard"]
+          p.dep_id=ele.elements["deptid"].text.strip if ele.elements["deptid"]
+          p.phone=ele.elements["mobile"].text.strip if ele.elements["mobile"]
+          p.e_mail=ele.elements["email"].text.strip if ele.elements["email"]
+          p.bank_no=ele.elements["bankid"].text.strip if ele.elements["bankid"]
+          p.ID_card=ele.elements["idCard"].text.strip if ele.elements["idCard"]
           emps<<p
         end
       rescue Exception=>msg
@@ -134,9 +137,9 @@ module U8service
         xml_doc=REXML::Document.new response.to_s
         xml_doc.root.elements.each do |ele|
           p=Project.new
-          p.name=ele.elements["prjName"].text
-          p.code=ele.elements["prjId"].text
-          p.status=ele.elements["status"].text
+          p.name=ele.elements["prjName"].text.strip
+          p.code=ele.elements["prjId"].text.strip
+          p.status=1
           projects<<p
         end
       rescue Exception=>msg
