@@ -640,7 +640,7 @@ class DocHead < ActiveRecord::Base
           end
           vd_codes<<fee_m_code.dcode.to_s
           #到这里的时候已经确定了fee，用fee+dep+project作为key进行合并
-          combine_key="#{fee_m_code.id}__#{b.dep_id}__#{b.project.id}"
+          combine_key="#{fee_m_code.id}__#{b.dep.id}__#{b.project.id}"
           if combined_benefits[combine_key]
             combined_benefits[combine_key][:amount]+=b.fi_amount
           else

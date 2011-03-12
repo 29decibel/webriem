@@ -525,6 +525,11 @@
           end_date: "住宿费明细 结束日期"
           days: "住宿费明细 住宿天数"
           people_count: "住宿费明细 住宿人数"
+        rd_benefits:
+          project_id: "福利费用明细 项目"
+          dep_id: "福利费用明细 费用承担部门"
+          fee_id: "福利费用明细 费用类型"
+          apply_amount: "福利费用明细 申请金额"
         other_riems:
           currency_id: "其他费用明细 币种"
           rate: "其他费用明细 汇率"
