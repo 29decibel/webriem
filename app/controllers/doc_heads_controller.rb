@@ -109,7 +109,7 @@ class DocHeadsController < ApplicationController
     #add the offset info
     if params[:offset_info]
       params[:offset_info].each_value do |value|
-        @doc_head.reim_cp_offsets.build(value)
+        @doc_head.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
       end
     end
     if @doc_head.save
@@ -129,7 +129,7 @@ class DocHeadsController < ApplicationController
     #add the offset info
     if params[:offset_info]
       params[:offset_info].each_value do |value|
-        @doc_head.reim_cp_offsets.build(value)
+        @doc_head.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
       end
     end
     if @doc_head.update_attributes(params[:doc_head])

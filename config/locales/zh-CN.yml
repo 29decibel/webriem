@@ -474,6 +474,7 @@
           content: "收款内容"
           amount: "收款金额"
           total_amount: "收款金额合计"
+        reim_cp_offsets:
         rd_extra_work_meals:
           ori_amount: "加班餐费明细 原币金额"
           start_time: "加班餐费明细 开始时间"

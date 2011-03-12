@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :suppliers
+
   #post "vouch/update" i don't know why this doesn't work???
   get "vouch/index"
   get "vouch/generate"
@@ -11,7 +13,7 @@ Webreim::Application.routes.draw do
   get "fee_code_matches/index"
   get "fee_code_matches/edit"
   match "fee_code_matches/update"
-
+  
   resources :system_configs
 
   get "people/all"

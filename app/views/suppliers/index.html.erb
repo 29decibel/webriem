@@ -1,0 +1,23 @@
+<div class="form_title"><h3>供应商列表</h3></div>
+<table class="hor-zebra">
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Bank</th>
+    <th>Bank no</th>
+    <th></th>
+  </tr>
+
+<% @suppliers.each do |supplier| %>
+  <tr id="supplier_<%= supplier.id%>" class="<%= "odd" if supplier.id%2==0 %>">
+    <%= render "tr_supplier",:supplier=>supplier %>
+  </tr>
+  <!--this tr is for edit-->
+  <tr id="supplier_<%= supplier.id%>_for_edit">
+    <td colspan="6">
+      <div id="edit_supplier_<%= supplier.id%>" class="edit_inline"></div>
+    </td>
+  </tr>
+<% end %>
+</table>
