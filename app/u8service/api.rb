@@ -80,6 +80,9 @@ module U8service
       JSON get("GetCurrency")
     end
     def self.get(service_name,options={})
+      if RAILS_ENV=="development"
+        return "{}"
+      end
       _dbname =options[:dbname] || dbname
       para={:dbname=>_dbname}
       para.merge! options.except(:dbname)
