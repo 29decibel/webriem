@@ -15,6 +15,7 @@ img{
 }
 a:hover{
 	background-color: transparent;
+  color:black;
 }
 input{
   border:1px solid #AAA;
@@ -22,7 +23,16 @@ input{
   height:18px;
 }
 /*header*/
-
+div.header{
+  position:relative;
+  margin-bottom:30px;
+}
+div.header div.user_nav{
+  position:absolute;
+  right:20px;
+  top:7px;
+  color:white;
+}
 /*===============================*/
 div#main_area{
 	min-height:800px;

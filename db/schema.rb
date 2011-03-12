@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303132042) do
+ActiveRecord::Schema.define(:version => 20110312041417) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "year"
   end
 
+  add_index "budgets", ["dep_id"], :name => "index_budgets_on_dep_id"
+  add_index "budgets", ["fee_id"], :name => "index_budgets_on_fee_id"
+  add_index "budgets", ["project_id"], :name => "index_budgets_on_project_id"
+
   create_table "business_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -59,6 +63,9 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "doc_head_id"
   end
 
+  add_index "buy_finance_products", ["account_id"], :name => "index_buy_finance_products_on_account_id"
+  add_index "buy_finance_products", ["doc_head_id"], :name => "index_buy_finance_products_on_doc_head_id"
+
   create_table "cash_draw_items", :force => true do |t|
     t.integer  "sequence"
     t.string   "used_for"
@@ -67,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cash_draw_items", ["inner_cash_draw_id"], :name => "index_cash_draw_items_on_inner_cash_draw_id"
 
   create_table "common_riems", :force => true do |t|
     t.integer  "sequence"
@@ -82,6 +91,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "common_riems", ["dep_id"], :name => "index_common_riems_on_dep_id"
+  add_index "common_riems", ["doc_head_id"], :name => "index_common_riems_on_doc_head_id"
+  add_index "common_riems", ["fee_id"], :name => "index_common_riems_on_fee_id"
+  add_index "common_riems", ["project_id"], :name => "index_common_riems_on_project_id"
 
   create_table "config_helpers", :force => true do |t|
     t.string   "key"
@@ -104,6 +118,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.datetime "updated_at"
     t.integer  "doc_head_id"
   end
+
+  add_index "cp_doc_details", ["dep_id"], :name => "index_cp_doc_details_on_dep_id"
+  add_index "cp_doc_details", ["doc_head_id"], :name => "index_cp_doc_details_on_doc_head_id"
+  add_index "cp_doc_details", ["fee_id"], :name => "index_cp_doc_details_on_fee_id"
+  add_index "cp_doc_details", ["project_id"], :name => "index_cp_doc_details_on_project_id"
 
   create_table "currencies", :force => true do |t|
     t.string   "name"
@@ -167,6 +186,17 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.string   "mark"
   end
 
+  add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
+  add_index "doc_heads", ["dep_id"], :name => "index_doc_heads_on_dep_id"
+  add_index "doc_heads", ["doc_state"], :name => "index_doc_heads_on_doc_state"
+  add_index "doc_heads", ["doc_type"], :name => "index_doc_heads_on_doc_type"
+  add_index "doc_heads", ["fee_id"], :name => "index_doc_heads_on_fee_id"
+  add_index "doc_heads", ["mark"], :name => "index_doc_heads_on_mark"
+  add_index "doc_heads", ["person_id"], :name => "index_doc_heads_on_person_id"
+  add_index "doc_heads", ["project_id"], :name => "index_doc_heads_on_project_id"
+  add_index "doc_heads", ["real_person_id"], :name => "index_doc_heads_on_real_person_id"
+  add_index "doc_heads", ["work_flow_step_id"], :name => "index_doc_heads_on_work_flow_step_id"
+
   create_table "duties", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -211,6 +241,10 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.string   "cdep"
   end
 
+  add_index "fee_code_matches", ["ccode_id"], :name => "index_fee_code_matches_on_ccode_id"
+  add_index "fee_code_matches", ["dcode_id"], :name => "index_fee_code_matches_on_dcode_id"
+  add_index "fee_code_matches", ["fee_id"], :name => "index_fee_code_matches_on_fee_id"
+
   create_table "fee_standards", :force => true do |t|
     t.integer  "project_id"
     t.integer  "duty_id"
@@ -225,6 +259,16 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "fee_id"
     t.integer  "person_type_id"
   end
+
+  add_index "fee_standards", ["business_type_id"], :name => "index_fee_standards_on_business_type_id"
+  add_index "fee_standards", ["currency_id"], :name => "index_fee_standards_on_currency_id"
+  add_index "fee_standards", ["duty_id"], :name => "index_fee_standards_on_duty_id"
+  add_index "fee_standards", ["fee_id"], :name => "index_fee_standards_on_fee_id"
+  add_index "fee_standards", ["lodging_id"], :name => "index_fee_standards_on_lodging_id"
+  add_index "fee_standards", ["person_type_id"], :name => "index_fee_standards_on_person_type_id"
+  add_index "fee_standards", ["project_id"], :name => "index_fee_standards_on_project_id"
+  add_index "fee_standards", ["region_type_id"], :name => "index_fee_standards_on_region_type_id"
+  add_index "fee_standards", ["transportation_id"], :name => "index_fee_standards_on_transportation_id"
 
   create_table "feed_backs", :force => true do |t|
     t.text     "content"
@@ -285,6 +329,13 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.datetime "updated_at"
   end
 
+  create_table "menu_categories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "menu_rights", :force => true do |t|
     t.integer  "role_id"
     t.integer  "menu_id"
@@ -298,6 +349,10 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "menu_type"
+    t.integer  "menu_category_id"
+  end
+
+  create_table "netzke_temp_table", :force => true do |t|
   end
 
   create_table "other_riems", :force => true do |t|
@@ -313,6 +368,9 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "other_riems", ["currency_id"], :name => "index_other_riems_on_currency_id"
+  add_index "other_riems", ["doc_head_id"], :name => "index_other_riems_on_doc_head_id"
 
   create_table "people", :force => true do |t|
     t.string   "name"
@@ -333,6 +391,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "person_type_id"
   end
 
+  add_index "people", ["dep_id"], :name => "index_people_on_dep_id"
+  add_index "people", ["duty_id"], :name => "index_people_on_duty_id"
+  add_index "people", ["person_type_id"], :name => "index_people_on_person_type_id"
+  add_index "people", ["role_id"], :name => "index_people_on_role_id"
+
   create_table "person_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -346,7 +409,7 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.string   "u8_project"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.integer  "status"
   end
 
   create_table "rd_benefits", :force => true do |t|
@@ -364,6 +427,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "fee_id"
     t.integer  "project_id"
   end
+
+  add_index "rd_benefits", ["dep_id"], :name => "index_rd_benefits_on_dep_id"
+  add_index "rd_benefits", ["doc_head_id"], :name => "index_rd_benefits_on_doc_head_id"
+  add_index "rd_benefits", ["fee_id"], :name => "index_rd_benefits_on_fee_id"
+  add_index "rd_benefits", ["project_id"], :name => "index_rd_benefits_on_project_id"
 
   create_table "rd_common_transports", :force => true do |t|
     t.string   "start_place"
@@ -383,6 +451,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "dep_id"
     t.integer  "project_id"
   end
+
+  add_index "rd_common_transports", ["currency_id"], :name => "index_rd_common_transports_on_currency_id"
+  add_index "rd_common_transports", ["dep_id"], :name => "index_rd_common_transports_on_dep_id"
+  add_index "rd_common_transports", ["doc_head_id"], :name => "index_rd_common_transports_on_doc_head_id"
+  add_index "rd_common_transports", ["project_id"], :name => "index_rd_common_transports_on_project_id"
 
   create_table "rd_extra_work_cars", :force => true do |t|
     t.string   "start_place"
@@ -404,6 +477,9 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
   end
 
+  add_index "rd_extra_work_cars", ["currency_id"], :name => "index_rd_extra_work_cars_on_currency_id"
+  add_index "rd_extra_work_cars", ["doc_head_id"], :name => "index_rd_extra_work_cars_on_doc_head_id"
+
   create_table "rd_extra_work_meals", :force => true do |t|
     t.integer  "sequence"
     t.date     "work_date"
@@ -422,6 +498,9 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.decimal  "st_amount",    :precision => 8,  :scale => 2
   end
+
+  add_index "rd_extra_work_meals", ["currency_id"], :name => "index_rd_extra_work_meals_on_currency_id"
+  add_index "rd_extra_work_meals", ["doc_head_id"], :name => "index_rd_extra_work_meals_on_doc_head_id"
 
   create_table "rd_lodgings", :force => true do |t|
     t.integer  "sequence"
@@ -445,6 +524,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.decimal  "st_amount",      :precision => 8,  :scale => 2
   end
 
+  add_index "rd_lodgings", ["currency_id"], :name => "index_rd_lodgings_on_currency_id"
+  add_index "rd_lodgings", ["doc_head_id"], :name => "index_rd_lodgings_on_doc_head_id"
+  add_index "rd_lodgings", ["region_id"], :name => "index_rd_lodgings_on_region_id"
+  add_index "rd_lodgings", ["region_type_id"], :name => "index_rd_lodgings_on_region_type_id"
+
   create_table "rd_transports", :force => true do |t|
     t.integer  "sequence"
     t.integer  "doc_head_id"
@@ -463,6 +547,10 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "currency_id"
     t.decimal  "ori_amount",        :precision => 16, :scale => 2
   end
+
+  add_index "rd_transports", ["currency_id"], :name => "index_rd_transports_on_currency_id"
+  add_index "rd_transports", ["doc_head_id"], :name => "index_rd_transports_on_doc_head_id"
+  add_index "rd_transports", ["transportation_id"], :name => "index_rd_transports_on_transportation_id"
 
   create_table "rd_travels", :force => true do |t|
     t.integer  "sequence"
@@ -485,6 +573,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.decimal  "st_amount",             :precision => 8,  :scale => 2
   end
 
+  add_index "rd_travels", ["currency_id"], :name => "index_rd_travels_on_currency_id"
+  add_index "rd_travels", ["doc_head_id"], :name => "index_rd_travels_on_doc_head_id"
+  add_index "rd_travels", ["region_id"], :name => "index_rd_travels_on_region_id"
+  add_index "rd_travels", ["region_type_id"], :name => "index_rd_travels_on_region_type_id"
+
   create_table "rd_work_meals", :force => true do |t|
     t.integer  "sequence"
     t.date     "meal_date"
@@ -502,6 +595,11 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.integer  "dep_id"
     t.integer  "project_id"
   end
+
+  add_index "rd_work_meals", ["currency_id"], :name => "index_rd_work_meals_on_currency_id"
+  add_index "rd_work_meals", ["dep_id"], :name => "index_rd_work_meals_on_dep_id"
+  add_index "rd_work_meals", ["doc_head_id"], :name => "index_rd_work_meals_on_doc_head_id"
+  add_index "rd_work_meals", ["project_id"], :name => "index_rd_work_meals_on_project_id"
 
   create_table "rec_notice_details", :force => true do |t|
     t.integer  "sequence"
@@ -532,6 +630,9 @@ ActiveRecord::Schema.define(:version => 20110303132042) do
     t.decimal  "hr_amount",     :precision => 16, :scale => 2
     t.decimal  "fi_amount",     :precision => 16, :scale => 2
   end
+
+  add_index "recivers", ["doc_head_id"], :name => "index_recivers_on_doc_head_id"
+  add_index "recivers", ["settlement_id"], :name => "index_recivers_on_settlement_id"
 
   create_table "redeem_finance_products", :force => true do |t|
     t.string   "name"

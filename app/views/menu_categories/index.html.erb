@@ -1,0 +1,24 @@
+<h3 class="form_title">列表</h3>
+<table class="hor-zebra">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_categories.each do |menu_category| %>
+  <tr class="<%= "odd" if menu_category.id%2==0 %>">
+    <td><%= menu_category.name %></td>
+    <td><%= menu_category.description %></td>
+    <td><%= link_to '查看', menu_category %></td>
+    <td><%= link_to '编辑', edit_menu_category_path(menu_category) %></td>
+    <td><%= link_to '删除', menu_category, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '添加 Menu category', new_menu_category_path %>

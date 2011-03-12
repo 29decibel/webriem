@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :menu_categories
+
   #post "vouch/update" i don't know why this doesn't work???
   get "vouch/index"
   get "vouch/generate"
