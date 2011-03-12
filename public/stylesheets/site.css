@@ -33,6 +33,9 @@ div.header div.user_nav{
   top:7px;
   color:white;
 }
+div.header div.user_nav a{
+  color:white;
+}
 /*===============================*/
 div#main_area{
 	min-height:800px;
@@ -43,11 +46,11 @@ div#content{
 	position: relative;
 	margin: 0px 40px 20px 40px;
 	border: 1px solid #999;
-	min-height:600px;
   background:#fff;
   border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
+  padding-bottom:30px;
 }
 /*give the table a wear==========================================================*/
 
