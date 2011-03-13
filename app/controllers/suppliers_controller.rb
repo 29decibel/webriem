@@ -25,11 +25,6 @@ class SuppliersController < ApplicationController
   # GET /suppliers/new.xml
   def new
     @supplier = Supplier.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @supplier }
-    end
   end
 
   # GET /suppliers/1/edit
@@ -41,16 +36,8 @@ class SuppliersController < ApplicationController
   # POST /suppliers.xml
   def create
     @supplier = Supplier.new(params[:supplier])
-
-    respond_to do |format|
-      if @supplier.save
-        format.html { redirect_to(@supplier, :notice => 'Supplier was successfully created.') }
-        format.xml  { render :xml => @supplier, :status => :created, :location => @supplier }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @supplier.errors, :status => :unprocessable_entity }
-      end
-    end
+    @supplier.save
+    @suppliers=Supplier.all
   end
 
   # PUT /suppliers/1

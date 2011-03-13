@@ -1,4 +1,4 @@
 //render the partial
-$("#edit_supplier_<%= @supplier.id%>").html("<%= escape_javascript(render :partial=>'edit_supplier')%>");
+$("#edit_supplier_<%= @supplier.id%>").html("<%= escape_javascript(render 'edit_supplier',:supplier=>@supplier)%>");
 //show it
 $("#edit_supplier_<%= @supplier.id%>").show("slow");

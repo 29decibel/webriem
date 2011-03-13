@@ -1,23 +1,6 @@
-<div class="form_title"><h3>供应商列表</h3></div>
-<table class="hor-zebra">
-  <tr>
-    <th></th>
-    <th>Name</th>
-    <th>Code</th>
-    <th>Bank</th>
-    <th>Bank no</th>
-    <th></th>
-  </tr>
+<div class="form_title"><h3><%= link_to image_tag("/images/icons/add.png"), new_supplier_path,:remote=>true %>供应商列表</h3></div>
+<div class="edit_inline new_supplier"></div>
+<div class="list_info">
+  <%= render "list",:suppliers=>@suppliers %>
+</div>
 
-<% @suppliers.each do |supplier| %>
-  <tr id="supplier_<%= supplier.id%>" class="<%= "odd" if supplier.id%2==0 %>">
-    <%= render "tr_supplier",:supplier=>supplier %>
-  </tr>
-  <!--this tr is for edit-->
-  <tr id="supplier_<%= supplier.id%>_for_edit">
-    <td colspan="6">
-      <div id="edit_supplier_<%= supplier.id%>" class="edit_inline"></div>
-    </td>
-  </tr>
-<% end %>
-</table>
