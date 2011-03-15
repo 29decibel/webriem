@@ -2,19 +2,19 @@
 <h3 class="form_title"><%= @title%></h3>
 <div class="form_field">
 	<span class="label"><%= f.label :name,:class=>"input_label" %></span>
-	<span class="value"><%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@supplier, :name) %></span>
+	<span class="value"><%= f.text_field :name,:class=>"basic_input" %></span>
 </div>
 <div class="form_field">
 	<span class="label"><%= f.label :code,:class=>"input_label" %></span>
-  <span class="value"><%= f.text_field :code,:class=>"basic_input" %><%= mark_required(@supplier, :code) %></span>
+  <span class="value"><%= f.text_field :code,:class=>"basic_input" %></span>
 </div>
 <div class="form_field">
 	<span class="label"><%= f.label :bank,:class=>"input_label" %></span>
-  <span class="value"><%= f.text_field :bank,:class=>"basic_input" %><%= mark_required(@supplier, :bank) %></span>
+  <span class="value"><%= f.text_field :bank,:class=>"basic_input" %></span>
 </div>
 <div class="form_field">
 	<span class="label"><%= f.label :bank_no,:class=>"input_label" %></span>
-  <span class="value"><%= f.text_field :bank_no,:class=>"basic_input" %><%= mark_required(@supplier, :bank_no) %></span>
+  <span class="value"><%= f.text_field :bank_no,:class=>"basic_input" %></span>
 </div>
 <div class="fb_actions">
   <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>

@@ -297,8 +297,8 @@
       supplier:
         name: "名称"
         code: "编码"
-        bank: "银行"
-        bank_no: "银行帐号"
+        bank: "银行*"
+        bank_no: "银行帐号*"
       budget:
         fee_id: "费用类型"
         project_id: "项目"
