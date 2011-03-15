@@ -214,6 +214,7 @@ $(function(){
 //reference change
 function reference_change()
 {
+  //change the rate
 	if($(this).attr("id")=="currency_info")
 	{
 		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
@@ -224,6 +225,24 @@ function reference_change()
 			rate_input.val(other_info.split('_')[0]);
 			rate_input.change();
 		}
+	}
+  //change the bank and bank no
+	if($(this).attr("id")=="supplier_info")
+	{
+		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
+    var infos=other_info.split(',');
+		//find the bank 
+		var bank=$(this).closest("tr").find(".bank");
+		if(bank.size()>0)
+		{
+			bank.val(infos[0]);
+		}
+    //find the bank no
+    var bank_no=$(this).closest("tr").find(".bank_no");
+    if(bank_no.size()>0)
+    {
+      bank_no.val(infos[1]);
+    }
 	}
 }
 function adapt_apply_amount_by_rate()
