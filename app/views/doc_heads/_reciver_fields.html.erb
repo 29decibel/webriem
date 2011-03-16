@@ -27,11 +27,11 @@
   </div>  
   <div class="form_field">
     <span class="label"><%= "#{I18n.t('common_attr.bank')}"%>*</span>
-    <span class="value"><%= f.text_field :bank,:class=>@doc_head.doc_type==2 ? "large" : "normal" %></span>
+    <span class="value"><%= f.text_field :bank,:class=>@doc_head.doc_type==2 ? "large bank" : "normal bank" %></span>
   </div>  
   <div class="form_field">
     <span class="label"><%= "#{I18n.t('common_attr.bank_no')}"%>*</span>
-    <span class="value"><%= f.text_field :bank_no ,:class=>"large"%></span>
+    <span class="value"><%= f.text_field :bank_no ,:class=>"large bank_no"%></span>
   </div>  
   <div class="form_field">
     <span class="label"><%= "#{I18n.t('common_attr.amount')}"%>*</span>

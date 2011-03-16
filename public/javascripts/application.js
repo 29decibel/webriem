@@ -233,13 +233,13 @@ function reference_change()
 		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
     var infos=other_info.split(',');
 		//find the bank 
-		var bank=$(this).closest("tr").find(".bank");
+		var bank=$(this).closest("fieldset.reciver").find(".bank");
 		if(bank.size()>0)
 		{
 			bank.val(infos[0]);
 		}
     //find the bank no
-    var bank_no=$(this).closest("tr").find(".bank_no");
+    var bank_no=$(this).closest("fieldset.reciver").find(".bank_no");
     if(bank_no.size()>0)
     {
       bank_no.val(infos[1]);
