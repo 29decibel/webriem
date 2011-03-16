@@ -49,10 +49,26 @@ $(function(){
 		//#                }
 		//#            });		
 		//bind ajax event 
-		$("form").live("ajax:before",function(){
+		$("form").live("ajax:beforeSend",function(){
 			//var link_position=$("div.filter a.filter").offset();
 			//$('span#spinner').css({ top: link_position.top , left: link_position.left }).fadeIn();
 			//$("span#spinner").fadeIn();
+      //first check the offset amount
+      var offset_amounts=$(this).find("input.offset_amount");
+      if(offset_amounts.size()>0)
+      {
+          var total=0.0;
+          offset_amounts.each(function(){
+            total+=$(this).val();
+          });
+          if(total==0.0)
+          {
+            if(!confirm("您有未进行冲抵的记录，是否继续保存？"))
+            { 
+              return false;
+            }
+          }
+      }
 			$.blockUI({ css: { 
           border: 'none', 
           padding: '15px', 

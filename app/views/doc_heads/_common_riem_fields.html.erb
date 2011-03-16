@@ -11,6 +11,13 @@
 	</td>
 	<td>
 		<div class="reference">
+			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
+			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+		</div>
+  </td>
+	<td>
+		<div class="reference">
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",f.object.project.to_s,:class=>"ref middle" %>
 			<a href="#" class-data="Project"><span class="reference"></span></a>			

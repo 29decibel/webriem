@@ -2,6 +2,7 @@
 class CommonRiem < ActiveRecord::Base
   belongs_to :currency
   belongs_to :dep
+  belongs_to :fee
   belongs_to :project
   belongs_to :doc_head
   validates_presence_of :dep_id

@@ -120,7 +120,8 @@
 				<tr>					
 					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
 				    <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')}"%>*</th>
-            <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')}"%><%= "*" if@doc_head.doc_type==2%></th>
+            <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')}"%><%= "*" if @doc_head.doc_type==2%></th>
+            <% if @doc_head.doc_type==2 %><th><%= "#{I18n.t('common_attr.fee')}"%></th><% end %>
 				    <th><%= "#{I18n.t('common_attr.used_for')}"%>*</th>
 				    <th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
 					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
@@ -135,7 +136,7 @@
 				<% end %>
 			</tbody>
 			<tr>
-				<td colspan="6"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details,[:dep] %></td>
+        <td colspan= "<%= @doc_head.doc_type==2 ? 7 : 6 %>"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details,[:dep] %></td>
 				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
 				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 				<td></td>
@@ -393,6 +394,7 @@
 						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
 					    <th><%= "#{I18n.t('common_attr.afford_dep')}"%>*</th>
 					    <th><%= "#{I18n.t('common_attr.project')}"%>*</th>
+					    <th><%= "#{I18n.t('common_attr.fee')}"%>*</th>
 					    <th><%= "#{I18n.t('common_attr.fee_desc')}"%>*</th>
 						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
 						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
@@ -407,7 +409,7 @@
 					<% end %>				
 				</tbody>
 				<tr>
-					<th colspan="6"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems %></th>
+					<th colspan="7"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems %></th>
 					<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
 					<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
 					<td></td>
