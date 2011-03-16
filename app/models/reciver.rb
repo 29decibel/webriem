@@ -10,7 +10,7 @@ class Reciver < ActiveRecord::Base
     validates_presence_of :bank_no ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
     validates_presence_of :bank ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
     #add supplier 
-    def company
+    def company_name
       if supplier
         supplier.name
       else

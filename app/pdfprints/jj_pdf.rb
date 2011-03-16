@@ -76,7 +76,7 @@ class JjPdf
       pdf.move_down 10
       pdf.text "收款人信息",:size=>12
       pdf.move_down 2
-      pdf.table doc.recivers.map {|r| ["#{r.settlement}","#{r.company}","#{r.bank}","#{r.bank_no}","#{r.amount}"]},
+      pdf.table doc.recivers.map {|r| ["#{r.settlement}","#{r.company_name}","#{r.bank}","#{r.bank_no}","#{r.amount}"]},
         :headers => ["结算方式","收款人","银行","银行帐号","本币金额"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,
