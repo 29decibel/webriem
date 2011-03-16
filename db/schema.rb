@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110312041417) do
+ActiveRecord::Schema.define(:version => 20110315125103) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -350,6 +350,12 @@ ActiveRecord::Schema.define(:version => 20110312041417) do
     t.datetime "updated_at"
     t.integer  "menu_type"
     t.integer  "menu_category_id"
+<<<<<<< HEAD
+=======
+  end
+
+  create_table "netzke_temp_table", :force => true do |t|
+>>>>>>> sk_version
   end
 
   create_table "other_riems", :force => true do |t|
@@ -626,6 +632,7 @@ ActiveRecord::Schema.define(:version => 20110312041417) do
     t.integer  "doc_head_id"
     t.decimal  "hr_amount",     :precision => 16, :scale => 2
     t.decimal  "fi_amount",     :precision => 16, :scale => 2
+    t.integer  "supplier_id"
   end
 
   add_index "recivers", ["doc_head_id"], :name => "index_recivers_on_doc_head_id"
@@ -729,6 +736,15 @@ ActiveRecord::Schema.define(:version => 20110312041417) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "business_type_id"
+  end
+
+  create_table "suppliers", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "bank"
+    t.string   "bank_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "system_configs", :force => true do |t|

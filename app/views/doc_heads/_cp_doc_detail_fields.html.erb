@@ -22,6 +22,16 @@
       <a href="#" class-data="Project"><span class="reference"></span></a>			
     </div></span>
   </div>
+  <% if @doc_head.doc_type==2 %>
+    <div class="form_field">
+      <span class="label"><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')}"%><%= "*" if@doc_head.doc_type==2%></span>
+		  <span class="value"><div class="reference">
+			  <%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
+			  <%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
+			  <a href="#" class-data="Fee"><span class="reference"></span></a>			
+    </div></span>
+  </div>
+  <% end %>
   <div class="form_field">
     <span class="label"><%= "#{I18n.t('common_attr.used_for')}"%>*</span>
     <span class="value"><%= f.text_field :used_for,:class=>"xlarge" %></span>

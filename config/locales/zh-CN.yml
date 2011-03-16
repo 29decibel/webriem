@@ -224,6 +224,7 @@
       dep: "部门"
       duty: "职务"
       person: "人员"
+      supplier: "供应商"
       fee: "费用类型"
       region: "地区"
       transportation: "交通方式"
@@ -293,6 +294,11 @@
         name: "名称"  
         code: "编码"
         default_rate: "对本币默认汇率"
+      supplier:
+        name: "名称"
+        code: "编码"
+        bank: "银行*"
+        bank_no: "银行帐号*"
       budget:
         fee_id: "费用类型"
         project_id: "项目"
@@ -474,6 +480,7 @@
           content: "收款内容"
           amount: "收款金额"
           total_amount: "收款金额合计"
+        reim_cp_offsets:
         rd_extra_work_meals:
           ori_amount: "加班餐费明细 原币金额"
           start_time: "加班餐费明细 开始时间"
@@ -609,6 +616,7 @@
           other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
         body: "如下字段出现错误："
   menu:
+    suppliers: "供应商"
     my_docs: "我的单据"
     docs_to_approve: "需要审批单据" 
     docs_to_pay: "需要付款的单据"

@@ -14,7 +14,16 @@
   </div>
   <div class="form_field">
     <span class="label"><%= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></span>
-    <span class="value"><%= f.text_field :company,:class=> @doc_head.doc_type==2 ? "large" : "normal" %></span>
+    <span class="value">
+      <% if @doc_head.doc_type==2 %>
+        <div class="reference">
+          <%= f.hidden_field :supplier_id,{:class=>"ref_hidden_field"}%>
+          <%= text_field_tag "supplier_info",f.object.supplier.to_s,:class=>"ref large" %>
+          <a href="#" class-data="Supplier"><span class="reference"></span></a>			
+        </div>
+      <% else %>
+        <%= f.text_field :company,:class=> "normal" %>  
+      <% end %></span>
   </div>  
   <div class="form_field">
     <span class="label"><%= "#{I18n.t('common_attr.bank')}"%>*</span>

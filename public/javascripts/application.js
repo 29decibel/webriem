@@ -27,7 +27,26 @@ $(function(){
 		//fire it once
 		$("select.is_split_reim").change();
 		//bind ajax event 
-		$("form").live("ajax:before",function(){
+		$("form").live("ajax:beforeSend",function(){
+			//var link_position=$("div.filter a.filter").offset();
+			//$('span#spinner').css({ top: link_position.top , left: link_position.left }).fadeIn();
+			//$("span#spinner").fadeIn();
+      //first check the offset amount
+      var offset_amounts=$(this).find("input.offset_amount");
+      if(offset_amounts.size()>0)
+      {
+          var total=0.0;
+          offset_amounts.each(function(){
+            total+=$(this).val();
+          });
+          if(total==0.0)
+          {
+            if(!confirm("您有未进行冲抵的记录，是否继续保存？"))
+            { 
+              return false;
+            }
+          }
+      }
 			$.blockUI({ css: { 
           border: 'none', 
           padding: '15px', 
@@ -196,6 +215,7 @@ $(function(){
 //reference change
 function reference_change()
 {
+  //change the rate
 	if($(this).attr("id")=="currency_info")
 	{
 		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
@@ -206,6 +226,24 @@ function reference_change()
 			rate_input.val(other_info.split('_')[0]);
 			rate_input.change();
 		}
+	}
+  //change the bank and bank no
+	if($(this).attr("id")=="supplier_info")
+	{
+		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
+    var infos=other_info.split(',');
+		//find the bank 
+		var bank=$(this).closest("tr").find(".bank");
+		if(bank.size()>0)
+		{
+			bank.val(infos[0]);
+		}
+    //find the bank no
+    var bank_no=$(this).closest("tr").find(".bank_no");
+    if(bank_no.size()>0)
+    {
+      bank_no.val(infos[1]);
+    }
 	}
 }
 function adapt_apply_amount_by_rate()

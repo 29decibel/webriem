@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  code: MyString
+  bank: MyString
+  bank_no: MyString
+
+two:
+  name: MyString
+  code: MyString
+  bank: MyString
+  bank_no: MyString

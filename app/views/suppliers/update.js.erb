@@ -1,0 +1,4 @@
+//hide self
+$("#edit_supplier_<%= @supplier.id%>").hide("slow");
+//refresh the tr
+$("tr#supplier_<%= @supplier.id%>").html("<%= escape_javascript(render "tr_supplier",:supplier=>@supplier)%>");
