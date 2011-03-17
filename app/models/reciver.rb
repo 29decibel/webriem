@@ -6,7 +6,7 @@ class Reciver < ActiveRecord::Base
     blongs_to_name_attr :settlement
     validates_presence_of :amount
     validates_presence_of :settlement_id
-    validates_presence_of :company ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
+    validates_presence_of :company ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' and r.supplier==nil }
     validates_presence_of :bank_no ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
     validates_presence_of :bank ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
     #add supplier 
