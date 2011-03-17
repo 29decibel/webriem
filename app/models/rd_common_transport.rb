@@ -27,4 +27,7 @@ class RdCommonTransport < ActiveRecord::Base
   def amount
     apply_amount
   end
+  def fcm
+    return FeeCodeMatch.find_by_fee_code("0103")
+  end
 end

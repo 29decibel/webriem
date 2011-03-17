@@ -17,4 +17,16 @@ class CpDocDetail < ActiveRecord::Base
   def amount
     apply_amount
   end
+  #for the vouch info
+  def fcm
+    return nil if doc_head==nil
+    fee_m_code=doc_head.doc_type==1 ? FeeCodeMatch.find_by_fee_code("07") : FeeCodeMatch.find_by_fee_code("08")
+    if fee
+      fcm= FeeCodeMatch.find_by_fee_code(fee.code)
+      if fcm
+        fee_m_code=fcm
+      end
+    end
+    return fee_m_code
+  end
 end

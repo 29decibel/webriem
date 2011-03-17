@@ -653,3 +653,16 @@ div.edit_inline form{
   border-radius:5px;
   -moz-border-radius:5px;
 }
+/* for the error*/
+div.edit_inline form div.inline_error{
+  margin:2px 5px 2px 5px;
+  color:red;
+  font:12px;
+  border-bottom:1px solid #ccc;
+}
+div.edit_inline form div.inline_error ul{
+  list-style:none;
+  margin:2px 5px 2px 5px;
+  color:red;
+  font:12px;
+}

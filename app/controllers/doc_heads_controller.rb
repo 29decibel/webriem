@@ -221,33 +221,36 @@ class DocHeadsController < ApplicationController
     params[:doc_ids].split("_").each do |doc_id|
       if !doc_id.blank?
         wf=WorkFlowInfo.create(:is_ok=>params[:is_ok]=="true",:comments=>params[:comments],:doc_head_id=>doc_id,:people_id=>current_user.person.id)
-        if wf.is_ok==1
-          wf.doc_head.approve
-          #看看是否符合发邮件的标准 打印
-          #send email if hr or fi change the doc amount
-          if current_person.person_type and  
-            ((current_person.person_type.code=="HR" and wf.doc_head.total_apply_amount!=wf.doc_head.total_hr_amount) or
-            (current_person.person_type.code=="FI" and wf.doc_head.total_hr_amount!=wf.doc_head.total_fi_amount))
+        #增加一个是否是当前审批人的校验
+        if current_user.person.id==wf.doc_head.current_approver_id
+          if wf.is_ok==1 
+            wf.doc_head.approve
+            #看看是否符合发邮件的标准 打印
+            #send email if hr or fi change the doc amount
+            if current_person.person_type and  
+              ((current_person.person_type.code=="HR" and wf.doc_head.total_apply_amount!=wf.doc_head.total_hr_amount) or
+              (current_person.person_type.code=="FI" and wf.doc_head.total_hr_amount!=wf.doc_head.total_fi_amount))
+              para={}
+              para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+              para[:docs_total]=wf.doc_head.total_apply_amount
+              para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
+              para[:doc_id]=wf.doc_head.id
+              #WorkFlowMailer.notice_docs_to_approve para
+              Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+            end
+          else
+            wf.doc_head.decline
+            #send email
             para={}
             para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
             para[:docs_total]=wf.doc_head.total_apply_amount
-            para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
             para[:doc_id]=wf.doc_head.id
             #WorkFlowMailer.notice_docs_to_approve para
-            Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+            Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
           end
-        else
-          wf.doc_head.decline
-          #send email
-          para={}
-          para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
-          para[:docs_total]=wf.doc_head.total_apply_amount
-          para[:doc_id]=wf.doc_head.id
-          #WorkFlowMailer.notice_docs_to_approve para
-          Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
-        end
-        wf.doc_head.save
-      end
+          wf.doc_head.save
+        end #doc's current approver is current person
+      end #doc blank
     end
     render :json=>"#{I18n.t('controller_msg.batch_approve_ok')}"
     #redirect_to :controller=>:tasks,:action=>:docs_to_approve,:notice=>"批量审批完成",:status => 301

@@ -1,0 +1,8 @@
+<h3>手动单据核销</h3>
+<% form_tag({:controller=>"doc_off_set",:action=>"search"},:remote=>true) do -%>
+  <%= text_field_tag :person%>
+  <%= link_to "搜索单据",{:href=>"#"}, :class=>"submit button2" %>
+<% end -%>
+<div class="offset_list">
+
+</div>

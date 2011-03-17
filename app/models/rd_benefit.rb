@@ -17,4 +17,14 @@ class RdBenefit < ActiveRecord::Base
   def amount
     fi_amount
   end
+  def fcm
+    fee_m_code=FeeCodeMatch.find_by_fee_code("04")
+    if fee
+      f=FeeCodeMatch.find_by_fee_code(fee.code)
+      if f
+        fee_m_code=f
+      end
+    end
+    return fee_m_code
+  end
 end

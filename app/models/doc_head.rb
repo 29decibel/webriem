@@ -395,6 +395,8 @@ class DocHead < ActiveRecord::Base
   #vouch infos
   #this is a massive method which contains a lot of logic 
   #and 'if else'
+  #把所有的获取fee_code_match的逻辑都放在各自的子条目中
+  #保证每个子条目都有一个fee_code_match,project,dep
   def rg_vouches
     #分摊的逻辑
     if is_split==1 and [9,11,13].include? doc_type

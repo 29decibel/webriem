@@ -1,0 +1,23 @@
+<table class="hor-zebra">
+  <tr>
+    <th></th>
+    <th>费用</th>
+    <th>借方科目</th>
+    <th>贷方科目</th>
+    <th>简要描述</th>
+    <th></th>
+  </tr>
+
+<% fcms.each do |fee_code_match| %>
+  <tr id="fcm_<%= fee_code_match.id%>" class="<%= "odd" if fee_code_match.id%2==0 %>">
+    <%= render :partial => "tr_fee_code_match",:locals=>{:fee_code_match=>fee_code_match} %>
+  </tr>
+  <!--this tr is for edit-->
+    <tr>
+      <td colspan="6">
+        <div id="edit_fcm_<%= fee_code_match.id%>" class="edit_inline"></div>
+      </td>
+    </tr>
+<% end %>
+</table>
+

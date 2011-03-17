@@ -3,3 +3,4 @@
 <td><%= fee_code_match.dcode %></td>
 <td><%= fee_code_match.ccode %></td>
 <td><%= fee_code_match.description %></td>
+<td><%= link_to image_tag("/images/icons/cross.png"), fee_code_match, :confirm => '是否真的要删除?', :method => :delete,:remote=>true %></td>

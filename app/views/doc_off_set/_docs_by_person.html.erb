@@ -1,0 +1,7 @@
+<% docs_by_person.each do |person,docs| %>
+  <div class="docs_by_person">
+    <h4><%= person.name%></h4>
+    <div class="reim_docs"><%= render "riem_docs",:r_docs=>docs[:riem_docs] %></div>
+    <div class="cp_docs"><%= render "cp_docs",:c_docs=>docs[:cp_docs] %>
+  </div>
+</div><% end %>

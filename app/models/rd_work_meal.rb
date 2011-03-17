@@ -21,4 +21,11 @@ class RdWorkMeal < ActiveRecord::Base
   def amount
     apply_amount
   end
+  def fcm
+    if doc_head.doc_type==12
+      return FeeCodeMatch.find_by_fee_code("0102")
+    else
+      return FeeCodeMatch.find_by_fee_code("02")
+    end
+  end
 end

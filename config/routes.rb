@@ -1,5 +1,8 @@
 Webreim::Application.routes.draw do
 
+  get "doc_off_set/index"
+  post "doc_off_set/search"
+
   resources :suppliers
 
   #post "vouch/update" i don't know why this doesn't work???
@@ -10,9 +13,7 @@ Webreim::Application.routes.draw do
   match "vouch/update"=>"vouch#update"
   match "vouch/g_u8"=>"vouch#g_u8"
   
-  get "fee_code_matches/index"
-  get "fee_code_matches/edit"
-  match "fee_code_matches/update"
+  resources "fee_code_matches"
   
   resources :system_configs
 
