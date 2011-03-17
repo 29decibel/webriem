@@ -120,8 +120,8 @@
 				<tr>					
 					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
 				    <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')}"%>*</th>
-            <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')}"%><%= "*" if @doc_head.doc_type==2%></th>
             <% if @doc_head.doc_type==2 %><th><%= "#{I18n.t('common_attr.fee')}"%></th><% end %>
+            <th><%= "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')}"%><%= "*" if @doc_head.doc_type==2%></th>
 				    <th><%= "#{I18n.t('common_attr.used_for')}"%>*</th>
 				    <th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
 					<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
@@ -393,8 +393,8 @@
 					<tr>	
 						<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
 					    <th><%= "#{I18n.t('common_attr.afford_dep')}"%>*</th>
-					    <th><%= "#{I18n.t('common_attr.project')}"%>*</th>
 					    <th><%= "#{I18n.t('common_attr.fee')}"%>*</th>
+					    <th><%= "#{I18n.t('common_attr.project')}"%>*</th>
 					    <th><%= "#{I18n.t('common_attr.fee_desc')}"%>*</th>
 						<th><%= "#{I18n.t('common_attr.currency')}"%>*</th>
 						<th><%= "#{I18n.t('common_attr.rate')}"%>*</th>
