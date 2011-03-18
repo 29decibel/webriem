@@ -4,5 +4,5 @@
   <%= link_to "搜索单据",{:href=>"#"}, :class=>"submit button2" %>
 <% end -%>
 <div class="offset_list">
-
+  <%= render "list",:docs_by_person=>@docs_by_person %>
 </div>

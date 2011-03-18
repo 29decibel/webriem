@@ -1,3 +1,17 @@
-<% c_docs.each do |doc|%>
-  <%= doc.doc_no%>
+<table class="hor-zebra middle border">
+  <tr>
+    <th>单据号</th>
+    <th>单据金额</th>
+    <th>剩余冲抵金额</th>
+    <th>冲抵金额</th>
+  </tr>
+<% c_docs.each_with_index do |doc,index|%>
+  <tr>
+    <td><%= link_to doc.doc_no,doc_head_path(doc) %></td>
+    <td><%= doc.total_amount%></td>
+    <td><%= doc.cp_doc_remain_amount%></td>
+    <%= hidden_field_tag "cp[#{index}][doc_id]",doc.id%>
+    <td><%= text_field_tag "cp[#{index}][amount]"%></td>
+  </tr>
 <% end %>
+</table>

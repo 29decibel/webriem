@@ -2,6 +2,8 @@ Webreim::Application.routes.draw do
 
   get "doc_off_set/index"
   post "doc_off_set/search"
+  get "doc_off_set/remove_offset"
+  post "doc_off_set/do_offset"
 
   resources :suppliers
 

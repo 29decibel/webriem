@@ -1,0 +1,1 @@
+$("div#dbp_<%= @person.id%>").html("<%= escape_javascript(render "docs_by_person",:person=>@person,:docs=>@dbp)%>");

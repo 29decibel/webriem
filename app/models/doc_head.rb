@@ -376,6 +376,10 @@ class DocHead < ActiveRecord::Base
   def doc_state_name
     Doc_State[doc_state]
   end
+  #minus reciver's amount
+  def reduce_recivers_amount(amount)
+    recivers.first.reduce_amount(amount)
+  end
   #callbacks
   def before_save
     #update the total_fi_amount

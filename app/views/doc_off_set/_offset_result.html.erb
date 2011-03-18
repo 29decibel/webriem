@@ -1,0 +1,16 @@
+<table class="hor-zebra middle border">
+  <tr>
+    <th>报销单据号</th>
+    <th>借款单号</th>
+    <th>冲抵金额</th>
+    <th></th>
+  </tr>
+<% offsets.each do |offset|%>
+  <tr>
+    <td><%= link_to offset.reim_doc_head.doc_no,doc_head_path(offset.reim_doc_head) %></td>
+    <td><%= link_to offset.cp_doc_head.doc_no,doc_head_path(offset.cp_doc_head) %></td>
+    <td><%= offset.amount %></td>
+    <td><%= link_to image_tag("/images/icons/cross.png"), {:controller=>"doc_off_set",:action=>"remove_offset",:id=>offset.id},:remote=>true %></td>
+  </tr>
+<% end %>
+</table>

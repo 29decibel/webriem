@@ -65,6 +65,7 @@ class AjaxServiceController < ApplicationController
     #add back the amount
     rp_doc=DocHead.find(params[:cp_doc_head_id].to_i)
     rp_offset=RiemCpOffset.where("cp_doc_head_id = ? and reim_doc_head_id= ? ",params[:cp_doc_head_id].to_i,params[:reim_doc_head_id].to_i).first
+    @doc_head.recivers.first.add_amount(rp_offset.amount)
     rp_doc.update_attribute(:cp_doc_remain_amount,rp_doc.cp_doc_remain_amount+rp_offset.amount)
     rp_offset.destroy
     @message="#{I18n.t('controller_msg.remove_ok')}"
