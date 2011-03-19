@@ -10,6 +10,13 @@ class Role < ActiveRecord::Base
     return false if menu_ids==nil
     return menu_ids.split(',').include?(menu_id.to_s)
   end
+  def self.cool
+    Role.all.each do |r|
+      menu_a=r.menus.map {|m| m.id}
+      r.menu_ids=menu_a.join(",")
+      r.save
+    end
+  end
   def to_s
     "#{name}"
   end
