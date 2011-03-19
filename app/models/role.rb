@@ -1,6 +1,7 @@
 #coding: utf-8
 class Role < ActiveRecord::Base
   def menus
+    return [] if menu_ids==nil
     Menu.where(:id=>menu_ids.split(',')).all
   end
   def have_right? menu_id
