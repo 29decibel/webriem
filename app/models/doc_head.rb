@@ -59,6 +59,7 @@ class DocHead < ActiveRecord::Base
   has_many :other_riems, :class_name => "OtherRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
   #here is for the vouch info
   has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
+  has_many :fixed_properties,:class_name=>"FixedProperty",:foreign_key=>"doc_head_id",:dependent=>:destroy
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
   accepts_nested_attributes_for :reim_split_details ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
@@ -71,12 +72,13 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_transports ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :common_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :other_riems ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :fixed_properties ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
   #default_scope :order => 'updated_at DESC'
   #the great offset info here
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
   Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过",3=>"已付款"}
-  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
+  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>"固定资产单据"}
   #validate the amout is ok
   validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
   def project_not_null_if_charge
@@ -191,6 +193,12 @@ class DocHead < ActiveRecord::Base
       rd_benefits.each do |rd_detail|
         next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
         total+=rd_detail.send(type)
+      end
+    end
+    if doc_type==14
+      fixed_properties.each do |fp|
+        next if  fp.marked_for_destruction?
+        total+=fp.buy_unit
       end
     end
     total

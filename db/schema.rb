@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315125103) do
+ActiveRecord::Schema.define(:version => 20110319020801) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -284,6 +284,24 @@ ActiveRecord::Schema.define(:version => 20110315125103) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_fee_id"
+  end
+
+  create_table "fixed_properties", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.string   "code"
+    t.integer  "sequence"
+    t.decimal  "buy_unit",       :precision => 16, :scale => 2
+    t.integer  "buy_count"
+    t.decimal  "original_value", :precision => 16, :scale => 2
+    t.integer  "keeper_id"
+    t.string   "place"
+    t.integer  "afford_dep_id"
+    t.integer  "project_id"
+    t.integer  "doc_head_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "seq_no"
   end
 
   create_table "inner_cash_draws", :force => true do |t|
