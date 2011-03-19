@@ -666,6 +666,7 @@
     d_OvertimeWork: "加班费报销"
     d_GeneralExpense: "普通费用报销"
     d_Wage: "福利费用报销"
+    d_FixedProperty: "固定资产单据"
   model_search:
     filter_txt: "过滤条件"
     filter_btn: "过滤"
