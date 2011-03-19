@@ -37,14 +37,9 @@ class RolesController < ApplicationController
   # POST /roles.xml
   def create
     @role = Role.new(params[:role])
-    #set the person have such a role
-    params[:people_ids].split('_').each do |person_id|
-      person=Person.find(person_id.to_i)
-      person.update_attribute(:role_id,@role.id)
-    end
-    #build the menu rights
-    params[:menu_ids].split('_').each do |menu_id|
-      @role.menu_rights.build(:menu_id=>menu_id)
+    #update the people info
+    if params[:menus]
+      @role.menu_ids=params[:menus].join(",")
     end
     if @role.save
       @message="#{I18n.t('controller_msg.create_ok')}"
@@ -60,24 +55,16 @@ class RolesController < ApplicationController
   def update
      @role = Role.find(params[:id])
      #update the people info
-     @role.people.clear
-     #set the person have such a role
-     params[:people_ids].split('_').each do |person_id|
-       person=Person.find(person_id.to_i)
-       person.update_attribute(:role_id,@role.id)
+     if params[:menus]
+       @role.update_attributes(:menu_ids=>params[:menus].join(","))
      end
-     @role.menu_rights.clear
-     #build the menu rights
-     params[:menu_ids].split('_').each do |menu_id|
-       @role.menu_rights.build(:menu_id=>menu_id)
-     end
-      if @role.update_attributes(params[:role])
-        @message="#{I18n.t('controller_msg.update_ok')}"
-        render "shared/show_result"
-      else
-        #写一些校验出错信息
-        render "shared/errors",:locals=>{:error_msg=>get_error_messages(@role)}
-      end
+    if @role.update_attributes(params[:role])
+      @message="#{I18n.t('controller_msg.update_ok')}"
+      render "shared/show_result"
+    else
+      #写一些校验出错信息
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@role)}
+    end
   end
 
   # DELETE /roles/1
