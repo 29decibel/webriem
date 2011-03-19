@@ -8,18 +8,13 @@ class Role < ActiveRecord::Base
     return false if menu_ids==nil
     return menu_ids.split(',').include?(menu_id.to_s)
   end
-  def self.cool
-    need_updates=[]
-    MenuRight.all.each do |mr|
-
-      need_updates<<{}
-    end
-    Role.all.each do |r|
-      ms=MenuRight.where("role_id = ?",r.id).all.map {|mr| mr.menu.id }
-      r.menu_ids=ms.join(",")
-      r.save
-    end
-  end
+  #def self.cool
+  #  Role.all.each do |r|
+  #    ms=MenuRight.where("role_id = ?",r.id).all.map {|mr| mr.menu.id }
+  #    r.menu_ids=ms.join(",")
+  #    r.save
+  #  end
+  #end
   def to_s
     "#{name}"
   end
