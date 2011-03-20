@@ -6,7 +6,7 @@ body{
 	/*font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
   font-family:arial,sans-serif; 
   /*background:url("../images/bck.jpg");*/
-  background-color:#D9CEB2;
+  background-color:#eeeeee;
   color:#999;
   font-size:12px;
 }
@@ -26,8 +26,8 @@ input{
 div.header{
   position:relative;
   margin-bottom:10px;
-  height:40px;
-  background-color:#7A6A53;
+  height:50px;
+  background-color:#515151;
   border-top: none;
   -webkit-border-top-left-radius: 0;
   -webkit-border-top-right-radius: 0;
@@ -43,16 +43,16 @@ div.header a.logo{
   padding-top:10px;
   font-size:20px;
   font-weight:bold;
-  color:#D5DED9;
+  color:white;
 }
 div.header div.user_nav{
   position:absolute;
   right:20px;
-  top:10px;
-  color:#D5DED9;
+  top:17px;
+  color:white;
 }
 div.header div.user_nav,div.header div.user_nav a{
-  color:#D5DED9;
+  color:white;
   font-weight:bold;
 }
 /*===============================*/
@@ -91,7 +91,7 @@ div.sidepanel .title{
   margin-top:2px;
   padding-left:4px;
   padding-top:2px;
-  color:#7A6A53;
+  color:black;
   font-weight:bold;
   font-size:14px;
 }
@@ -103,12 +103,12 @@ div.sidepanel ul li{
   margin:4px 4px 3px 4px;
 }
 div.sidepanel a{
-  color:#7A6A53;
+  color:#515151;
   font-size:13px;
 }
 div.sidepanel a:hover{
-  color:#D5DED9;
-  background-color:#7A6A53;
+  color:white;
+  background-color:#515151;
 }
 /* the footer */
 div.footer{
@@ -138,12 +138,19 @@ table.hor-zebra th
 	font-size: 14px;
 	font-weight: normal;
 	padding: 10px 8px;
-	color: #655B04;
+	color: black;
+  border-bottom:1px solid #ccc;
 }
 table.hor-zebra td
 {
 	padding: 3px;
-	color: #669;
+	color: #515151;
+}
+table.hor-zebra td a.splash{
+  display:none;
+}
+table.hor-zebra tr:hover a.splash{
+  display:inline-block;
 }
 table.hor-zebra td.action
 {
@@ -151,7 +158,8 @@ table.hor-zebra td.action
 }
 table.hor-zebra tr:nth-child(even)
 { 
-	background: #FFF9E5; 
+	/*background: #eeeeee; */
+  border-bottom:1px solid #ccc;
 }
 table.middle{
   font-size:12px;
@@ -267,6 +275,7 @@ form div.input_area{
 	display: inline-block;
 }
 div.form_title{
+  color:black;
 	margin: 0px 15px 0px 15px;
 	padding: 5px;
 	border-bottom: 1px solid #E4F0F2;
@@ -727,7 +736,7 @@ tr span.c{
 }
 div.edit_inline form{
   margin:5px;
-  border:1px solid #42aec2;
+  border:1px solid #bbbbbb;
   border-radius:5px;
   -moz-border-radius:5px;
 }
