@@ -652,7 +652,7 @@
     subjects: "科目设置"
     accounts: "账户设置"
     work_flows: "审批流设置"
-    fee_code_matches: "费用类型对应的科目"
+    fee_code_matches: "凭证生成设置"
     d_Borrow: "借款单"
     d_PayDoc: "付款单"
     d_ReciveNotice: "收款通知单"

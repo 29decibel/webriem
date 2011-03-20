@@ -28,4 +28,7 @@ class FeeCodeMatchesController < ApplicationController
     @delete_id=@fee_code_match.id
     @fee_code_match.destroy
   end
+  def show
+    
+  end
 end

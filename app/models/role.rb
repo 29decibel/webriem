@@ -4,6 +4,10 @@ class Role < ActiveRecord::Base
     return [] if menu_ids==nil
     Menu.where(:id=>menu_ids.split(',')).all
   end
+  def menu_names
+    m_a=menus.map {|m| I18n.t("menu.#{m.name}")}
+    m_a.join(",")
+  end
   def have_right? menu_id
     return false if menu_ids==nil
     return menu_ids.split(',').include?(menu_id.to_s)

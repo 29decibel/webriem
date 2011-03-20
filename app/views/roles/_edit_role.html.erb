@@ -1,0 +1,19 @@
+<%= form_for role,:remote=>true,:class=>"edit_inline" do |f| %>
+  <%= render "shared/common_error",:resource=>role %>
+<%= f.hidden_field :id%>
+	<div class="form_field">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.role.name')}" %></span>			
+		<span class="value"><%= f.text_field :name,:class=>"input1 " %></span>
+	</div>
+	<div class="form_field">
+    <br/>
+    <div class="selection_area"><% Menu.all.each_with_index do |menu,index| %>
+      <span class="checkbox"><%= check_box_tag "menus[]", menu.id, @role.have_right?(menu.id) %>
+      <%= I18n.t("menu.#{menu.name}") %></span>
+    <% end %></div>
+	</div>
+<div class="fb_actions">
+  <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
+  <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"%>
+</div>
+<% end %>

@@ -1,0 +1,4 @@
+//hide
+$("div.new_role").hide("slow");
+//render list
+$("div.list_info").html("<%= escape_javascript(render 'list',:roles=>@roles)%>");

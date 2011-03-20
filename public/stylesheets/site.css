@@ -690,3 +690,14 @@ div.docs_by_person h4{
   border-bottom:1px solid #ccc;
   font-size:15px;
 }
+/* div selection area*/
+div.selection_area {
+  margin:2px 3px 3px 3px;
+  position:relative;
+}
+div.selection_area span.checkbox{
+  display:inline-block;
+  float:left;
+  margin-left:4px;
+  width:125px;
+}

@@ -3,7 +3,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Role",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @roles=Role.all
   end
 
   # GET /roles/1
@@ -21,11 +21,6 @@ class RolesController < ApplicationController
   # GET /roles/new.xml
   def new
     @role = Role.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @role }
-    end
   end
 
   # GET /roles/1/edit
@@ -41,13 +36,10 @@ class RolesController < ApplicationController
     if params[:menus]
       @role.menu_ids=params[:menus].join(",")
     end
-    if @role.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
-    else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@role)}
+    if !@role.save
+      render "new"
     end
+    @roles=Role.all
   end
 
   # PUT /roles/1
@@ -58,12 +50,8 @@ class RolesController < ApplicationController
      if params[:menus]
        @role.update_attributes(:menu_ids=>params[:menus].join(","))
      end
-    if @role.update_attributes(params[:role])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
-    else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@role)}
+    if !@role.update_attributes(params[:role])
+      render "edit"
     end
   end
 
@@ -71,11 +59,7 @@ class RolesController < ApplicationController
   # DELETE /roles/1.xml
   def destroy
     @role = Role.find(params[:id])
+    @delete_id=@role.id
     @role.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(roles_url) }
-      format.xml  { head :ok }
-    end
   end
 end
