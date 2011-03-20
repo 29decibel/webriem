@@ -20,11 +20,24 @@
 </head>
 <body>
 	<div class="header">
-			<ul id="ldd_menu" class="ldd_menu">
+    <%= link_to "S&K Expense System", root_path,:class=>"logo" %>
+      <!--here is the user info-->
+      <!--user log in info-->
+    <div class="user_nav">
+      <% if user_signed_in? %>  
+        欢迎 <%= current_user.name %>  <%= current_user.person.name if current_user.person%> <%= link_to "注销", destroy_user_session_path %>  
+        <%= link_to "修改密码","/common/new_reset_p"%>
+      <% else %>  
+          <%= link_to "登录", new_user_session_path %>  
+      <% end %>
+    </div>		
+		</div>
+	</div>
+	<div id="main_area">
+    <div class="sidebar">
         <% MenuCategory.all.each do |mc|%>
-          <li>
-            <span><%= mc.name%></span><!-- Increases to 510px in width-->
-            <div class="ldd_submenu">
+          <div class="sidepanel">
+            <h4 class="title"><%= mc.name%></h4>
               <% mc.grouped_menus.each do |v|%>
                 <ul>
                   <% v.each do |m| %>
@@ -32,66 +45,15 @@
                   <% end %>
                 </ul>
               <% end %>
-              <a class="ldd_subfoot" href="#"></a>
-            </div>
-          </li>
+          </div>
         <% end %>
-			</ul>
-      <!--here is the user info-->
-      <!--user log in info-->
-      <div class="user_nav">
-        <% if user_signed_in? %>  
-          欢迎 <%= current_user.name %>  <%= current_user.person.name if current_user.person%> <%= link_to "注销", destroy_user_session_path %>  
-          <%= link_to "修改密码","/common/new_reset_p"%>
-        <% else %>  
-            <%= link_to "登录", new_user_session_path %>  
-        <% end %>
-      </div>		
-		</div>
-  <div class="hffeader">
-<!--              <% Menu.where("menu_type=0").each do |m|%>
-                <li><%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%></li>
-              <% end %>
-              <% current_user.person.role.menus.each do |m|%>
-                <li><%= link_to I18n.t("menu.#{m.name}"),m.path,{:class=>"menu_item #{'selected' if controller.controller_name==m.name or (controller.controller_name=="doc_heads" and @doc_type and @doc_type==m.name.to_i) or m.path==request.fullpath}"}%></li>
-              <% end %>-->
-  </div>
-	</div>
-	<div id="main_area">
+     </div>
 		<!--++++++++++++++++++++++++++++++++++contents goes here++++++++++++++++-->
 		<div id="content">
 			<%= yield %>
 		</div>		
 	</div>
-       <script type="text/javascript">
-            $(function() {
-				/**
-				 * the menu
-				 */
-				var $menu = $('#ldd_menu');
-				
-				/**
-				 * for each list element,
-				 * we show the submenu when hovering and
-				 * expand the span element (title) to 510px
-				 */
-				$menu.children('li').each(function(){
-					var $this = $(this);
-					var $span = $this.children('span');
-					$span.data('width',$span.width());
-					
-					$this.bind('mouseenter',function(){
-						$menu.find('.ldd_submenu').stop(true,true).hide();
-						$span.stop().animate({'width':'110px'},230,function(){
-							$this.find('.ldd_submenu').slideDown(230);
-						});
-					}).bind('mouseleave',function(){
-						$this.find('.ldd_submenu').stop(true,true).hide();
-						$span.stop().animate({'width':$span.data('width')+'px'},230);
-					});
-				});
-            });
-        </script>	
-
+  <div class="footer">
+  </div>
 </body>
 </html>

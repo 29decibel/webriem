@@ -5,10 +5,10 @@ body{
 	margin:auto;
 	/*font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
   font-family:arial,sans-serif; 
-  background:url("../images/bck.jpg");
-  background-color:#F2F2F2;
+  /*background:url("../images/bck.jpg");*/
+  background-color:#D9CEB2;
   color:#999;
-  font-size:13px;
+  font-size:12px;
 }
 img{
   border:0px;
@@ -20,21 +20,40 @@ a:hover{
 input{
   border:1px solid #AAA;
   font-size:1em;
-  height:18px;
+  height:16px;
 }
 /*header*/
 div.header{
   position:relative;
-  margin-bottom:30px;
+  margin-bottom:10px;
+  height:40px;
+  background-color:#7A6A53;
+  border-top: none;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topleft: 0;
+  -moz-border-radius-topright: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+div.header a.logo{
+  display:inline-block;
+  text-decoration:none;
+  margin-left:20px;
+  padding-top:10px;
+  font-size:20px;
+  font-weight:bold;
+  color:#D5DED9;
 }
 div.header div.user_nav{
   position:absolute;
   right:20px;
-  top:7px;
-  color:white;
+  top:10px;
+  color:#D5DED9;
 }
-div.header div.user_nav a{
-  color:white;
+div.header div.user_nav,div.header div.user_nav a{
+  color:#D5DED9;
+  font-weight:bold;
 }
 /*===============================*/
 div#main_area{
@@ -44,13 +63,59 @@ div#main_area{
 
 div#content{
 	position: relative;
-	margin: 0px 40px 20px 40px;
+	margin: 0px 20px 20px 230px;
 	border: 1px solid #999;
   background:#fff;
-  border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
   padding-bottom:30px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+}
+div.sidebar{
+  float:left;
+}
+/*side panel*/
+div.sidepanel{
+  width:182px;
+  margin:0px 0px 12px 20px;
+  background:#fff;
+  padding:7px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+}
+div.sidepanel .title{
+  display:block;
+  border-bottom:1px solid #ccc;
+  padding-bottom:2px;
+  margin-top:2px;
+  padding-left:4px;
+  padding-top:2px;
+  color:#7A6A53;
+  font-weight:bold;
+  font-size:14px;
+}
+div.sidepanel ul{
+  list-style:none;
+}
+div.sidepanel ul li{
+  display:block;
+  margin:4px 4px 3px 4px;
+}
+div.sidepanel a{
+  color:#7A6A53;
+  font-size:13px;
+}
+div.sidepanel a:hover{
+  color:#D5DED9;
+  background-color:#7A6A53;
+}
+/* the footer */
+div.footer{
+  margin-top:30px;
+  color:#D5DED9;
+  position:relative;
+
 }
 /*give the table a wear==========================================================*/
 
@@ -302,7 +367,7 @@ div.table_details,div.rdd_details,div.reim_split_details{
 /*==============================================================*/
 /*actions area*/
 div.actions{
-	margin-top: 0px;
+	margin-top: 5px;
 	margin-left: 15px;
 	margin-right: 15px;
 	padding-bottom: 7px;
@@ -386,33 +451,65 @@ div.reim_details_by_fee_type{
 	background-color: #e9eef2;
 }
 /*===========================================devise relate staff=================*/
-div#login{
-	background-image: url("../images/login.png");
-	background-repeat: no-repeat;
-	width:700px;
+div.login{
+	width:500px;
 	position: relative;
 	margin: auto;
-	margin-top: 100px;
-	height:500px;
+	margin-top: 200px;
+  background-color:#fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
 }
-div.login_input_area{
-	display:inline-block;	
+div.login_error{
+  margin-top:3px;
+  padding:5px;
+  background-color:red;
+  color:black;
+  margin-bottom:10px;
 }
-div.login_field label{
-	display:inline-block;
-	width:90px;
+div.login form{
+  padding:20px;
+  padding-top:30px;
+  position:relative;
 }
-div.login_input_area input{
-	width:90px;
+div.login h3{
+  margin:3px;
+  font-weight:bold;
+  color:#ccc;
+  font-size:20px;
+  margin-left:20px;
+  padding-top:20px;
 }
-div#login form{
-	position: absolute;
-	left:350px;
-	top:95px;
+div.login_field{
+  font-size:17px;
+  margin-bottom:10px;
+}
+div.login_field .l_label{
+  width:90px;
+  display:inline-block;
+}
+div.login_field .l_value{
+  width:260px;
+  display:inline-block;
+}
+div.login_field .l_value input{
+  height:20px;
 }
 div.login_actions{
 	display:inline-block;
 	margin-top: 15px;
+}
+div.login div.logo{
+  background-image:url("../images/sk_logo.png");
+  background-repeat:no-repeat;
+  float:right;
+  margin-right:4px;
+  margin-bottom:10px;
+  width:110px;
+  height:54px;
 }
 /*+++++++++++++++++++++++++++*/
 div.upload_item,div#add_uload_file{
@@ -671,3 +768,51 @@ div.selection_area span.checkbox{
   margin-left:4px;
   width:125px;
 }
+/* for the mini button*/
+/* button basics */
+  a.minibutton {
+    display:inline-block;
+    height:24px;
+    padding:0 0 0 3px;
+    font-size:12px;
+    font-weight:bold;
+    color:#333;
+    text-shadow:1px 1px 0 #fff; 
+    background:url(../images/minibutton_matrix.png) 0 0 no-repeat;
+    white-space:nowrap;
+    border:none;
+    overflow:visible;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  
+  a.minibutton>span {
+    display:block;
+    height:23px;
+    padding:0 10px 0 8px;
+    line-height:23px;
+    background:url(../images/minibutton_matrix.png) 100% 0 no-repeat;
+  }
+  
+  a.minibutton:hover {
+    color:#fff;
+    text-decoration:none;
+    text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+    background-position:0 -30px;
+  }
+  a.minibutton:hover>span {background-position:100% -30px;}
+  
+  a.minibutton.mousedown{background-position:0 -60px; }
+  a.minibutton.mousedown>span{background-position:100% -60px; }
+  
+  /* with icon */
+  a.btn-download .icon {
+    float:left;
+    margin-left:-4px;
+    width:18px;
+    height:22px;
+    background:url(http://github.com/images/modules/buttons/minibutton_icons.png?v20100306) 0 0 no-repeat;
+  }
+  a.btn-download .icon {background-position:-40px 0;}
+  a.btn-download:hover .icon, a.btn-download:focus .icon {background-position:-40px -25px;}
+

@@ -468,6 +468,8 @@
 <% end %>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!--审批流++++++++根据当前单据状态以及当前审批人显示下面内容-->
+<% if !@doc_head.new_record?%>
 <div id="work_flow_info">
 	<%= render(:partial=>"work_flow_info",:locals=>{:work_flow_info=>@work_flow_info,:doc_head=>@doc_head})%>
 </div>
+<% end %>

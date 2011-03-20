@@ -1,48 +1,29 @@
+<h3>ExpenseSystem</h3>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <% if alert %>
+    <div class="login_error">
+      <span><%= alert%></span>
+    </div>
+  <% end %>
 <!--==================================================================-->
   <div class="login_field">
-    <%= f.label "#{I18n.t('common_attr.user')}",:class=>"input_label" %>
-	<div class="login_input_area">
-		<p class="login_input">
-			<%= f.text_field :name,:class=>"normal" %>
-		</p>
-	</div>
+    <span class="l_label"><%= f.label "#{I18n.t('common_attr.user')}",:class=>"input_label" %></span>
+		<span class="l_value"><%= f.text_field :name,:class=>"normal" %></span>
   </div>
 <!--==================================================================-->
   <div class="login_field">
-    <%= f.label "#{I18n.t('common_attr.password')}",:class=>"input_label" %>
-	<div class="login_input_area">
-		<p class="login_input">
-			<%= f.password_field :password,:class=>"normal" %>
-		</p>
-		<p class="tip"></p>
-	</div>
+    <span class="l_label"><%= f.label "#{I18n.t('common_attr.password')}",:class=>"input_label" %></span>
+		<span class="l_value"><%= f.password_field :password,:class=>"normal" %></span>
   </div>
 <!--==================================================================-->
   <% if devise_mapping.rememberable? -%>
   <div class="login_field">
-    <%= f.label "#{I18n.t('common_attr.remember')}",:class=>"input_label" %>
-	<div class="login_input_area">
-		<p class="login_input">
-			<%= f.check_box :remember_me,:class=>"normal" %>
-		</p>
-	</div>
-	<span class="error_message"></span>    
+    <span class="l_label"><%= f.label "#{I18n.t('common_attr.remember')}",:class=>"input_label" %></span>
+		<span class="l_value"><%= f.check_box :remember_me,:class=>"normal" %></span>
   </div>
   <% end -%>
-<div class="login_actions">
-  <%= link_to "#{I18n.t('common_attr.btn_login')}",{:href=>"#"}, :class=>"submit button2" %>
-	<% if alert %>
-		<spna id="error"><%= alert %></span>
-	<% end %>
+  <div class="login_actions">
+    <%= link_to content_tag(:span,"#{I18n.t('common_attr.btn_login')}"),{:href=>"#"}, :class=>"minibutton submit" %>
   </div>
-  <div id="lan">
-			<% if I18n.locale=="en-US".to_sym %>
-				<a href='http://114.113.150.227'>转到中文</a>
-			<% else %>
-				<a href='http://114.113.150.227:8012'>Change to English</a>
-			<% end %>
-		</div>
-
-<% end %>
-
+  <div class="logo"></div>
+<% end %> 

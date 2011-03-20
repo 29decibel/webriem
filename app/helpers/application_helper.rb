@@ -38,6 +38,13 @@ module ApplicationHelper
     return '' if input_date==nil
     input_date.strftime("%Y-%m-%d")
   end
+  #=============mini button github style=======
+  def mini_link_to
+     #href="javascript:;" class="minibutton"><span>Basic Button</span></a>
+  end
+  def mini_link_to_function
+    
+  end
   #====================================core stuff==================================================
   #used for search engine
   def searchable_columns(class_object)
