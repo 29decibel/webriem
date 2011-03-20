@@ -1,0 +1,5 @@
+ <% docs_by_person.each do |person,docs| %>
+   <div id=<%="dbp_#{person.id}"%> class="docs_by_person">
+     <%= render "docs_by_person",:person=>person,:docs=>docs %>
+   </div>
+ <% end %>

@@ -8,4 +8,13 @@ class OtherRiem < ActiveRecord::Base
   def amount
     fi_amount
   end
+  def fcm
+    return FeeCodeMatch.find_by_fee_code("03")
+  end
+  def project
+    doc_head.project
+  end
+  def dep
+    doc_head.afford_dep
+  end
 end

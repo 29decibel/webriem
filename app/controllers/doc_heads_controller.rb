@@ -4,7 +4,7 @@ require 'prawn/layout'
 #借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
 #9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
 #DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
-DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",13=>"BXFL"}
+DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",13=>"BXFL",14=>"GDZC"}
 class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
@@ -221,33 +221,36 @@ class DocHeadsController < ApplicationController
     params[:doc_ids].split("_").each do |doc_id|
       if !doc_id.blank?
         wf=WorkFlowInfo.create(:is_ok=>params[:is_ok]=="true",:comments=>params[:comments],:doc_head_id=>doc_id,:people_id=>current_user.person.id)
-        if wf.is_ok==1
-          wf.doc_head.approve
-          #看看是否符合发邮件的标准 打印
-          #send email if hr or fi change the doc amount
-          if current_person.person_type and  
-            ((current_person.person_type.code=="HR" and wf.doc_head.total_apply_amount!=wf.doc_head.total_hr_amount) or
-            (current_person.person_type.code=="FI" and wf.doc_head.total_hr_amount!=wf.doc_head.total_fi_amount))
+        #增加一个是否是当前审批人的校验
+        if current_user.person.id==wf.doc_head.current_approver_id
+          if wf.is_ok==1 
+            wf.doc_head.approve
+            #看看是否符合发邮件的标准 打印
+            #send email if hr or fi change the doc amount
+            if current_person.person_type and  
+              ((current_person.person_type.code=="HR" and wf.doc_head.total_apply_amount!=wf.doc_head.total_hr_amount) or
+              (current_person.person_type.code=="FI" and wf.doc_head.total_hr_amount!=wf.doc_head.total_fi_amount))
+              para={}
+              para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+              para[:docs_total]=wf.doc_head.total_apply_amount
+              para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
+              para[:doc_id]=wf.doc_head.id
+              #WorkFlowMailer.notice_docs_to_approve para
+              Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+            end
+          else
+            wf.doc_head.decline
+            #send email
             para={}
             para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
             para[:docs_total]=wf.doc_head.total_apply_amount
-            para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
             para[:doc_id]=wf.doc_head.id
             #WorkFlowMailer.notice_docs_to_approve para
-            Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+            Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
           end
-        else
-          wf.doc_head.decline
-          #send email
-          para={}
-          para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
-          para[:docs_total]=wf.doc_head.total_apply_amount
-          para[:doc_id]=wf.doc_head.id
-          #WorkFlowMailer.notice_docs_to_approve para
-          Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
-        end
-        wf.doc_head.save
-      end
+          wf.doc_head.save
+        end #doc's current approver is current person
+      end #doc blank
     end
     render :json=>"#{I18n.t('controller_msg.batch_approve_ok')}"
     #redirect_to :controller=>:tasks,:action=>:docs_to_approve,:notice=>"批量审批完成",:status => 301

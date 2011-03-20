@@ -1,4 +1,5 @@
-<%= form_for @fee_code_match,:url=>"/fee_code_matches/update",:remote=>true,:class=>"edit_inline" do |f| %>
+<%= form_for fcm,:remote=>true,:class=>"edit_inline" do |f| %>
+  <%= render "shared/common_error",:resource=>fcm %>
 <%= f.hidden_field :id%>
 <% if @fee_code_match.new_record? %>
 <div class="form_field">

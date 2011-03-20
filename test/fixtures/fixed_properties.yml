@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  name: MyString
+  code: MyString
+  sequence: MyString
+  buy_unit: 9.99
+  buy_count: 
+  original_value: 9.99
+  keeper: 1
+  place: MyString
+  afford_dep_id: 1
+  project_id: 1
+  doc_head_id: 1
+
+two:
+  type: MyString
+  name: MyString
+  code: MyString
+  sequence: MyString
+  buy_unit: 9.99
+  buy_count: 
+  original_value: 9.99
+  keeper: 1
+  place: MyString
+  afford_dep_id: 1
+  project_id: 1
+  doc_head_id: 1

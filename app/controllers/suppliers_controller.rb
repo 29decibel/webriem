@@ -36,7 +36,9 @@ class SuppliersController < ApplicationController
   # POST /suppliers.xml
   def create
     @supplier = Supplier.new(params[:supplier])
-    @supplier.save
+    if !@supplier.save
+      render "new"
+    end
     @suppliers=Supplier.all
   end
 
@@ -44,7 +46,9 @@ class SuppliersController < ApplicationController
   # PUT /suppliers/1.xml
   def update
     @supplier = Supplier.find(params[:id])
-    @supplier.update_attributes(params[:supplier])
+    if !@supplier.update_attributes(params[:supplier])
+      render "edit"
+    end
   end
 
   # DELETE /suppliers/1

@@ -1,0 +1,12 @@
+<% form_tag({:controller=>"doc_off_set",:action=>"do_offset"},:remote=>true) do -%>
+    <%= hidden_field_tag "person_id",person.id%>
+    <h4><%= person.name%></h4>
+    <div class="reim_docs"><%= render "riem_docs",:r_docs=>docs[:riem_docs] %></div>
+    <div class="cp_docs"><%= render "cp_docs",:c_docs=>docs[:cp_docs] %></div>
+    <div class="offsets"><%= render "offset_result",:offsets=>docs[:offsets] %></div>
+  <div class="actions">
+    <!--<%= link_to "自动冲抵",{:href=>"#"}, :class=>"submit button2" %>-->
+    <%= link_to "手动冲抵",{:href=>"#"}, :class=>"submit button2" %>
+  </div>
+  <br/>
+<% end -%>

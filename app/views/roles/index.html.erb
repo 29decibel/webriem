@@ -1,22 +1,5 @@
-<h3 class="form_title">列表</h3>
-<table class="hor-zebra">
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @roles.each do |role| %>
-  <tr class="<%= "odd" if role.id%2==0 %>">
-    <td><%= role.name %></td>
-    <td><%= link_to '查看', role %></td>
-    <td><%= link_to '编辑', edit_role_path(role) %></td>
-    <td><%= link_to '删除', role, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to '添加 Role', new_role_path %>
+<div class="form_title"><h3><%= link_to image_tag("/images/icons/add.png"), new_role_path,:remote=>true %>角色列表</h3></div>
+<div class="edit_inline new_role"></div>
+<div class="list_info">
+  <%= render "list",:roles=>@roles %>
+</div>

@@ -30,10 +30,12 @@
       <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.apply_date')}#{mark_required(f.object,:apply_date)}",:class=>"" %></span>
       <span class="value"><%= f.text_field :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" %></span>
 		</div>
+    <% if @doc_head.doc_type!=14%>
 		<div class="form_field">
 			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.attach')}" %></span>
       <span class="value"><%= f.text_field :attach,:class=>"input1"+ mark_required(@doc_head, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}" %></span>  
 		</div>
+  <% end %>
 		<div class="form_field">
 			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" %></span>
             <!--样例参照-->
@@ -54,6 +56,7 @@
 			</div></span>
 		</div>
 		<% end %>
+    <% if @doc_head.doc_type!=14%>
 		<div class="form_field">
 			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" %></span>
 			<span class="value"><div class="reference">
@@ -61,7 +64,8 @@
         <%= text_field_tag "real_person_info",@doc_head.real_person.to_s,:class=>"ref",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" %>
 				<a href="#" class-data="Person" pre-condition-ref="" pre-condition-sql=""><span class="reference"></span></a>			
 			</div></span>
-		</div>
+    </div>
+  <% end %>
 	<% if @doc_head.doc_type==13 %>
 		<div class="form_field">
 			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" %></span>
@@ -379,6 +383,44 @@
 			<% end %>			
 	</div>
 </div>
+	<% end %>
+	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	<% if @doc_head.doc_type==14%>
+	<div class="form_title">
+		<h3><%= "#{I18n.t('common_attr.fixed_property')}"%></h3>
+	</div>
+	<div class="form_area">
+		<table class="form_input">
+			<thead>
+				<tr>					
+					<th><%= "#{I18n.t('common_attr.sequence')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.type')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.name')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.code')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.sequence')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.buy_unit')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.buy_count')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.original_value')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.keeper_id')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.place')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.afford_dep_id')}"%></th>
+					<th><%= "#{I18n.t('activerecord.attributes.fixed_property.project_id')}"%></th>
+					<th></th><!--给删除的-->
+			    </tr>
+		    <thead>
+			<tbody>
+				<%= f.fields_for :fixed_properties do |builder|  %>
+					<%= render "fixed_property_fields",:f => builder  %>
+				<% end %>			
+			</tbody>
+			<tr>
+				<th colspan="10"><%= link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:fixed_properties %></th>
+				<td><%= "#{I18n.t('common_attr.total_apply_amount')}"%></td>
+				<td><%= text_field_tag 'total_amount', nil, :class => 'doc_total_amount normal'%></td>
+				<td></td>
+			</tr>		
+		</table>
+	</div>
 	<% end %>
 	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 	<% if [9,11,13].include? @doc_head.doc_type%>

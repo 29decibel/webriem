@@ -8,6 +8,7 @@
 				{:name=>"doc_state",:getter=>:doc_state_name,:enum_type=>"DocHead::Doc_State"},
         {:name=>"updated_at",:label=>"最后更新时间"},
 				{:name=>"total_amount",:getter=>:total_amount,:label=>"审批金额"},
+				{:name=>"reciver_amount",:getter=>:reciver_amount,:label=>"需要支付金额"},
 				"mark"],
 		:height=>450,:width=>800,:where=>"doc_state=2",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>

@@ -1,0 +1,4 @@
+//render the partial
+$("#edit_role_<%= @role.id%>").html("<%= escape_javascript(render 'edit_role',:role=>@role)%>");
+//show it
+$("#edit_role_<%= @role.id%>").show("slow");

@@ -1,5 +1,5 @@
 <%= form_for supplier,:remote=>true do |f| %>
-<h3 class="form_title"><%= @title%></h3>
+  <%= render "shared/common_error",:resource=>supplier %>
 <div class="form_field">
 	<span class="label"><%= f.label :name,:class=>"input_label" %></span>
 	<span class="value"><%= f.text_field :name,:class=>"basic_input" %></span>

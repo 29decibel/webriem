@@ -62,6 +62,9 @@ table.hor-zebra
 	border-collapse: collapse;
 	width:95%;
 }
+table.hor-zebra a{
+  font-size:12px;
+}
 table tr{
 	overflow: scroll;
 }
@@ -84,6 +87,14 @@ table.hor-zebra td.action
 table.hor-zebra tr:nth-child(even)
 { 
 	background: #FFF9E5; 
+}
+table.middle{
+  font-size:12px;
+}
+table.border{
+  border-bottom:1px solid #ccc;
+  margin-top:2px;
+  margin-bottom:3px;
 }
 /*========jqgrid container*/
 div.jqgrid{
@@ -622,4 +633,41 @@ div.edit_inline form{
   border:1px solid #42aec2;
   border-radius:5px;
   -moz-border-radius:5px;
+}
+/* for the error*/
+div.edit_inline form div.inline_error{
+  margin:2px 5px 2px 5px;
+  color:red;
+  font:12px;
+  border-bottom:1px solid #ccc;
+}
+div.edit_inline form div.inline_error ul{
+  list-style:none;
+  margin:2px 5px 2px 5px;
+  color:red;
+  font:12px;
+}
+/*docs by person offsets use*/
+div.docs_by_person{
+  margin:5px;
+  border:1px solid #42aec2;
+  border-radius:5px;
+  -moz-border-radius:5px;
+}
+div.docs_by_person h4{
+  margin-left:20px;
+  margin-top:3px;
+  border-bottom:1px solid #ccc;
+  font-size:15px;
+}
+/* div selection area*/
+div.selection_area {
+  margin:2px 3px 3px 3px;
+  position:relative;
+}
+div.selection_area span.checkbox{
+  display:inline-block;
+  float:left;
+  margin-left:4px;
+  width:125px;
 }
