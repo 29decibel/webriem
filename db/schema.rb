@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110319051935) do
+ActiveRecord::Schema.define(:version => 20110321125101) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -291,9 +291,9 @@ ActiveRecord::Schema.define(:version => 20110319051935) do
     t.string   "name"
     t.string   "code"
     t.integer  "sequence"
-    t.decimal  "buy_unit",       :precision => 16, :scale => 2
+    t.decimal  "buy_unit",         :precision => 16, :scale => 2
     t.integer  "buy_count"
-    t.decimal  "original_value", :precision => 16, :scale => 2
+    t.decimal  "original_value",   :precision => 16, :scale => 2
     t.integer  "keeper_id"
     t.string   "place"
     t.integer  "afford_dep_id"
@@ -302,6 +302,7 @@ ActiveRecord::Schema.define(:version => 20110319051935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "seq_no"
+    t.integer  "property_type_id"
   end
 
   create_table "inner_cash_draws", :force => true do |t|
@@ -428,6 +429,13 @@ ActiveRecord::Schema.define(:version => 20110319051935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status"
+  end
+
+  create_table "property_types", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rd_benefits", :force => true do |t|

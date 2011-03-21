@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :property_types
+
   get "doc_off_set/index"
   post "doc_off_set/search"
   get "doc_off_set/remove_offset"

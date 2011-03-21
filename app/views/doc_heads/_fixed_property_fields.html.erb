@@ -3,10 +3,10 @@
 		<%= f.text_field :sequence,:class=>"small table_row_sequence" %>  
 	</td>
 	<td>
-		<%= f.text_field :type,:class=>"normal" %>  
+    <%= f.select :property_type_id, PropertyType.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
 	</td> 
 	<td>
-		<%= f.text_field :name,:class=>"normal" %>  
+		<%= f.text_field :name,:class=>"large" %>  
 	</td> 
 	<td>
 		<%= f.text_field :code,:class=>"normal" %>  
@@ -26,12 +26,12 @@
 	<td>
 		<div class="reference">
 			<%= f.hidden_field :keeper_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "person_info",f.object.keeper.to_s,:class=>"ref middle" %>
+			<%= text_field_tag "person_info",f.object.keeper.to_s,:class=>"ref normal" %>
 			<a href="#" class-data="Person"><span class="reference"></span></a>			
 		</div>
 	</td> 
 	<td>
-		<%= f.text_field :place,:class=>"normal" %>  
+		<%= f.text_field :place,:class=>"large" %>  
 	</td> 
 	<td>
 		<div class="reference">
