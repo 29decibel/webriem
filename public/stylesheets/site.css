@@ -233,9 +233,13 @@ div.form_area fieldset{
   border-bottom:1px solid #ccc;
 }
 div.form_area fieldset legend{
+  display:none;
   position:absolute;
   top:2px;
   right:1px;
+}
+div.form_area fieldset:hover legend{
+  display:block;
 }
 div.form_area fieldset span.sequence{
   /*background-color:#fff9e5;*/
@@ -250,13 +254,7 @@ div.form_area fieldset span.sequence{
   left:-8px;
   top:0px;
 }
-/*delete link*/
-form div.form_area fieldset a.detail_link{
-  display:none;
-}
-form div.form_area fieldset:hover a.detail_link{
-  display:block;
-}
+
 /*here is some special sizes*/
 form div.form_field.col-sp2 span.label{
 	width:90px;
