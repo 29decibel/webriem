@@ -1,0 +1,25 @@
+<div class="doc_actions">
+  <%= render "doc_actions" %>
+</div>
+<div class="doc_state_process">
+  <%= render "doc_state_process",:doc=>doc %>
+</div>
+<div class="doc_head">
+  <%= render "doc_head_show",:doc=>doc %>
+</div>
+<!--根据不同的doc show不同details-->
+<div class="doc_details">
+  <% if doc.cp_doc_details.count>0 %>
+    <div class="doc_detail_show"><%= render "cp_doc_detail_show",:cp_docs=>doc.cp_doc_details,:title=>(doc.doc_type==1 ? "借款明细" : "付款明细") %></div>
+  <% end %>
+  <% if doc.recivers.count>0 %>
+    <div class="doc_detail_show"><%= render "reciver_show",:recivers=>doc.recivers %></div>
+  <% end %>
+  <% if doc.reim_split_details.count>0 %>
+    <div class="doc_detail_show"><%= render "reim_split_details_show",:rsds=>doc.reim_split_details %></div>
+  <% end %>
+</div>
+<div class="doc_work_flows_show">
+  <%= render "doc_work_flow_infos_show",:work_flow_infos=>doc.work_flow_infos %>
+</div>
+

@@ -1,0 +1,27 @@
+<table class="hor-zebra">
+  <tr>
+    <th>单据号</th>
+    <th>附件个数</th>
+    <th>申请人</th>
+    <th>备注</th>
+    <th>申请日期</th>
+    <th>部门</th>
+    <th>费用类型</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% docs.each do |doc_head| %>
+  <tr class="<%= "odd" if doc_head.id%2==0 %>">
+    <td><%= doc_head.doc_no %></td>
+    <td><%= doc_head.attach %></td>
+    <td><%= doc_head.person_name %></td>
+    <td><%= doc_head.note %></td>
+    <td><%= doc_head.apply_date %></td>
+    <td><%= doc_head.dep_name %></td>
+    <td><%= doc_head.fee_name %></td>
+    <td class="action"><%= link_to '查看', doc_head %></td>
+    <td class="action"><%= link_to '删除', doc_head, :confirm => '是否真的要删除?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

@@ -2,40 +2,12 @@
 	<h3><%= doc_type_name(@doc_type)%>列表</h3>
 </div>
 <div class="actions">
-	<%= link_to "添加#{doc_type_name(@doc_type)}",  new_doc_head_path(:doc_type=>params[:doc_type]),:class=>"button2" %>
+  <%= link_to "添加#{doc_type_name(@doc_type)}", new_doc_head_path(:doc_type=>params[:doc_type]),:remote=>true,:class=>"button2" %>
 	<%= link_to '输出', "#",:class=>"button2" %>
 	<%= link_to '打印', "#",:class=>"button2" %>
 	<%= link_to '预览', "#",:class=>"button2" %>
 	<%= link_to '定位', "#",:class=>"button2" %>
 </div>
-<table class="hor-zebra">
-  <tr>
-    <th>单据号</th>
-    <th>附件个数</th>
-    <th>申请人</th>
-    <th>备注</th>
-<% if @doc_type>4 %>
-    <th>申请日期</th>
-    <th>部门</th>
-    <th>费用类型</th>
-<% end %>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @doc_heads.each do |doc_head| %>
-  <tr class="<%= "odd" if doc_head.id%2==0 %>">
-    <td><%= doc_head.doc_no %></td>
-    <td><%= doc_head.attach %></td>
-    <td><%= doc_head.person_name %></td>
-    <td><%= doc_head.note %></td>
-<% if @doc_type>4 %>
-    <td><%= doc_head.apply_date %></td>
-    <td><%= doc_head.dep_name %></td>
-    <td><%= doc_head.fee_name %></td>
-<% end %>
-    <td class="action"><%= link_to '查看', doc_head %></td>
-    <td class="action"><%= link_to '删除', doc_head, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div class="doc_stage">
+  <%= render "docs_list",:docs=>@docs %>
+</div>

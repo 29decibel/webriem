@@ -1,0 +1,34 @@
+<h5><%= title%><span><%= cp_docs.sum {|c| c.fi_amount}%></span></h5>
+<% for cp_doc in cp_docs -%>
+  <div class="doc_detail_item">
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id') %></span>
+      <span class="item_value"><%= cp_doc.dep%></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id') %></span>
+      <span class="item_value"><%= cp_doc.project%></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.used_for') %></span>
+      <span class="item_value"><%= doc.used_for%></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.currency') %></span>
+      <span class="item_value"><%= doc.currency%></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.rate') %></span>
+      <span class="item_value"><%= doc.rate%></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.apply_amount') %></span>
+      <span class="item_value"><%= doc.apply_amount%></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.ori_amount') %></span>
+      <span class="item_value"><%= doc.ori_amount%></span>
+    </div>
+  </div>
+<% end -%>
+

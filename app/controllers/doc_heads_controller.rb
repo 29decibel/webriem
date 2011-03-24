@@ -15,38 +15,38 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads.xml
   def index
     #get the specific docs by the doc_type passed by querystring
-    @doc_heads = DocHead.all#where("doc_type=?",params[:doc_type].to_i)
+    @docs = DocHead.where("doc_type=?",params[:doc_type].to_i).all
     @doc_type=params[:doc_type].to_i
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @doc_heads }
+      format.xml  { render :xml => @docs }
     end
   end
 
   # GET /doc_heads/1
   # GET /doc_heads/1.xml
   def show
-    @doc_head = DocHead.find(params[:id])
+    @doc = DocHead.find(params[:id])
     set_doc_info_4_budget
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
-    if @doc_head.doc_state==1
-      if @doc_head.current_approver_id==current_user.person.id
+    if @doc.doc_state==1
+      if @doc.current_approver_id==current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
     end
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @doc_head }
+      format.xml  { render :xml => @doc }
     end
   end
   def set_doc_info_4_budget
-    @doc_type = @doc_head.doc_type
+    @doc_type = @doc.doc_type
     #show the budget info
-    @b_project_id=@doc_head.project_id
-    @b_fee_id=@doc_head.budget_fee_id
-    @b_dep_id=@doc_head.afford_dep_id
-    @b_year=@doc_head.apply_date.year
-    @doc_id=@doc_head.id
+    @b_project_id=@doc.project_id
+    @b_fee_id=@doc.budget_fee_id
+    @b_dep_id=@doc.afford_dep_id
+    @b_year=@doc.apply_date.year
+    @doc_id=@doc.id
   end
   # GET /doc_heads/new
   # GET /doc_heads/new.xml
@@ -59,43 +59,43 @@ class DocHeadsController < ApplicationController
       doc_count_config.value=(doc_count_config.value.to_i+1).to_s
     end
     doc_count_config.save
-    @doc_head = DocHead.new
-    @doc_head.doc_state = 0
+    @doc = DocHead.new
+    @doc.doc_state = 0
     #set the doctype to the paras passed in
-    @doc_head.doc_type=params[:doc_type].to_i
-    @doc_head.doc_no=DOC_TYPE_PREFIX[@doc_head.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
-    @doc_head.apply_date=Time.now
-    @doc_head.dep=current_person.dep
-    @doc_type = @doc_head.doc_type
+    @doc.doc_type=params[:doc_type].to_i
+    @doc.doc_no=DOC_TYPE_PREFIX[@doc.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
+    @doc.apply_date=Time.now
+    @doc.dep=current_person.dep
+    @doc_type = @doc.doc_type
     #set the apply person to the current login user
-    @doc_head.person=current_person
+    @doc.person=current_person
     #build some new doc details
-    #if @doc_head.doc_type==1 or  @doc_head.doc_type==2
-    #	cp=	@doc_head.cp_doc_details.build 
+    #if @doc.doc_type==1 or  @doc.doc_type==2
+    #	cp=	@doc.cp_doc_details.build 
     #	cp.dep=current_person.dep
 	  #end
 	  set_doc_info_4_budget
-    @doc_head.rec_notice_details.build if @doc_head.doc_type==3
-    reciver=@doc_head.recivers.build
+    @doc.rec_notice_details.build if @doc.doc_type==3
+    reciver=@doc.recivers.build
     #init the reciver's info to current person
-    if @doc_head.doc_type!=2
+    if @doc.doc_type!=2
     	reciver.bank=current_person.bank
     	reciver.bank_no=current_person.bank_no
     	reciver.company=current_person.name
     end
-	reciver.settlement=Settlement.find_by_code("02")
+	  reciver.settlement=Settlement.find_by_code("02")
     #build one related stuff
-    @doc_head.build_inner_remittance if @doc_head.doc_type==4
-    @doc_head.build_inner_transfer if @doc_head.doc_type==5
-    @doc_head.build_inner_cash_draw if @doc_head.doc_type==6
-    @doc_head.build_buy_finance_product if @doc_head.doc_type==7
-    @doc_head.build_redeem_finance_product if @doc_head.doc_type==8
+    @doc.build_inner_remittance if @doc.doc_type==4
+    @doc.build_inner_transfer if @doc.doc_type==5
+    @doc.build_inner_cash_draw if @doc.doc_type==6
+    @doc.build_buy_finance_product if @doc.doc_type==7
+    @doc.build_redeem_finance_product if @doc.doc_type==8
     #暂时每次都创建一个审批流填写信息
-    @doc_head.work_flow_infos.build
+    @doc.work_flow_infos.build
     #render
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @doc_head }
+      format.xml  { render :xml => @doc }
     end
   end
 
@@ -103,21 +103,17 @@ class DocHeadsController < ApplicationController
   # POST /doc_heads
   # POST /doc_heads.xml
   def create
-    @doc_head = DocHead.new(params[:doc_head])
-    @doc_head.doc_state = 0
-    @doc_head.cp_doc_remain_amount=@doc_head.total_apply_amount
+    @doc = DocHead.new(params[:doc_head])
+    @doc.doc_state = 0
+    @doc.cp_doc_remain_amount=@doc.total_apply_amount
     #add the offset info
     if params[:offset_info]
       params[:offset_info].each_value do |value|
-        @doc_head.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
+        @doc.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
       end
     end
-    if @doc_head.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
-    else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc_head)}
+    if !@doc.save
+      render "shared/doc_error",:error_msg=>get_error_messages(@doc)
     end
   end
 
@@ -125,23 +121,23 @@ class DocHeadsController < ApplicationController
   # PUT /doc_heads/1.xml
   def update
     #debugger
-    @doc_head = DocHead.find(params[:id])
+    @doc = DocHead.find(params[:id])
     #add the offset info
     if params[:offset_info]
       params[:offset_info].each_value do |value|
-        @doc_head.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
+        @doc.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
       end
     end
-    if @doc_head.update_attributes(params[:doc_head])
-      @doc_head.update_attribute(:cp_doc_remain_amount,@doc_head.total_apply_amount)
+    if @doc.update_attributes(params[:doc_head])
+      @doc.update_attribute(:cp_doc_remain_amount,@doc.total_apply_amount)
       @message="#{I18n.t('controller_msg.update_ok')}"
-      if @doc_head.current_approver_id == current_user.person.id
+      if @doc.current_approver_id == current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
       render "shared/show_result"
     else
       #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc_head)}
+      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc)}
     end
   end
 
@@ -156,14 +152,14 @@ class DocHeadsController < ApplicationController
   end
   #将单据进入审批阶段
   def begin_work
-    @doc_head = DocHead.find(params[:doc_id]) 
+    @doc = DocHead.find(params[:doc_id]) 
     approver_id=params[:approver_id] if !(params[:approver_id]=="-1")
     #begin approver
-    @doc_head.begin_approve(approver_id)
-    @doc_head.save
+    @doc.begin_approve(approver_id)
+    @doc.save
     #notice the person who need to approve this doc
     @message="#{I18n.t('controller_msg.start_approve')}"
-    if @doc_head.current_approver_id == current_user.person.id
+    if @doc.current_approver_id == current_user.person.id
       @work_flow_info=WorkFlowInfo.new
     end
     respond_to do |format|
@@ -172,9 +168,9 @@ class DocHeadsController < ApplicationController
   end
   #撤销单据的审批
   def giveup
-  	@doc_head = DocHead.find(params[:doc_id])
-  	@doc_head.doc_state=0
-  	@doc_head.save
+  	@doc = DocHead.find(params[:doc_id])
+  	@doc.doc_state=0
+  	@doc.save
   	@message="#{I18n.t('controller_msg.doc_approve_failed')}"
     respond_to do |format|
       format.js { render "shared/show_result"}
@@ -183,13 +179,13 @@ class DocHeadsController < ApplicationController
   #付款
   def pay
     #debugger
-    @doc_head=DocHead.find(params[:doc_id].to_i)
-    @doc_head.update_attribute(:doc_state,3)
+    @doc=DocHead.find(params[:doc_id].to_i)
+    @doc.update_attribute(:doc_state,3)
     #send email
     para={}
-    para[:email]=@doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
-    para[:docs_total]=@doc_head.total_apply_amount
-    para[:doc_id]=@doc_head.id
+    para[:email]=@doc.person.e_mail #person.e_mail  @doc.person.e_mail
+    para[:docs_total]=@doc.total_apply_amount
+    para[:doc_id]=@doc.id
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
     #debugger
@@ -205,7 +201,7 @@ class DocHeadsController < ApplicationController
         doc_head.update_attribute(:doc_state,3)
         #send email
         para={}
-        para[:email]=doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+        para[:email]=doc_head.person.e_mail #person.e_mail  @doc.person.e_mail
         para[:docs_total]=doc_head.total_apply_amount
         para[:doc_id]=doc_head.id
         #WorkFlowMailer.notice_docs_to_approve para
@@ -231,7 +227,7 @@ class DocHeadsController < ApplicationController
               ((current_person.person_type.code=="HR" and wf.doc_head.total_apply_amount!=wf.doc_head.total_hr_amount) or
               (current_person.person_type.code=="FI" and wf.doc_head.total_hr_amount!=wf.doc_head.total_fi_amount))
               para={}
-              para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+              para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc.person.e_mail
               para[:docs_total]=wf.doc_head.total_apply_amount
               para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
               para[:doc_id]=wf.doc_head.id
@@ -242,7 +238,7 @@ class DocHeadsController < ApplicationController
             wf.doc_head.decline
             #send email
             para={}
-            para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc_head.person.e_mail
+            para[:email]=wf.doc_head.person.e_mail #person.e_mail  @doc.person.e_mail
             para[:docs_total]=wf.doc_head.total_apply_amount
             para[:doc_id]=wf.doc_head.id
             #WorkFlowMailer.notice_docs_to_approve para
@@ -345,7 +341,7 @@ class DocHeadsController < ApplicationController
     @message="#{I18n.t('controller_msg.message_sent')}"
     #send email
     para={}
-    para[:email]=doc.person.e_mail#person.e_mail  @doc_head.person.e_mail
+    para[:email]=doc.person.e_mail#person.e_mail  @doc.person.e_mail
     para[:doc_id]=doc.id
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_failed, para)

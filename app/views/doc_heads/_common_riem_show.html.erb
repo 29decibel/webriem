@@ -1,0 +1,37 @@
+<h5>普通费用报销明细<span><%= common_riems.sum {|r| r.fi_amount}%></span></h5>
+<% for common_riem in common_riems -%>
+  <div class="doc_detail_item">
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.afford_dep')%></span>
+      <span class="item_value"><%= common_rime.afford_dep %></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.project')%></span>
+      <span class="item_value"><%= common_rime.project %></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.fee_desc')%></span>
+      <span class="item_value"><%= common_rime.fee %></span>
+    </div>
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.fee_desc')%></span>
+      <span class="item_value"><%= common_rime.fee %></span>
+    </div>  
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.currency')%></span>
+      <span class="item_value"><%= common_rime.currency %></span>
+    </div>  
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.rate')%></span>
+      <span class="item_value"><%= common_rime.rate %></span>
+    </div>  
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.apply_amount')%>*</span>
+      <span class="item_value"><%= common_rime.apply_amount %></span>
+    </div>  
+    <div class="show_item">
+      <span class="item_label"><%= I18n.t('common_attr.ori_amount')%></span>
+      <span class="item_value"><%= common_rime.ori_amount %></span>  
+    </div>
+  </div>
+<% end -%>
