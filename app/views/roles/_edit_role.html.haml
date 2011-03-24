@@ -1,0 +1,16 @@
+-form_for role,:remote=>true,:class=>"edit_inline" do |f|
+  = render "shared/common_error",:resource=>role
+  =f.hidden_field :id
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.role.name')}"
+    %span.value= f.text_field :name,:class=>"input1 "
+  .form_field
+    %br
+    .selection_area
+      -Menu.all.each_with_index do |menu,index|
+        %span.checkbox
+          = check_box_tag "menus[]", menu.id, @role.have_right?(menu.id)
+          = I18n.t("menu.#{menu.name}")
+  .fb_actions
+    = link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2"
+    = link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"

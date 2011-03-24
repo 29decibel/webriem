@@ -46,6 +46,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     excelsior (0.1.0)
+    haml (3.0.25)
     i18n (0.5.0)
     jquery-rails (0.2.7)
       rails (~> 3.0)
@@ -113,6 +114,7 @@ DEPENDENCIES
   delayed_job
   devise (= 1.1.7)
   excelsior
+  haml
   jquery-rails
   mysql2 (= 0.2.6)
   paperclip

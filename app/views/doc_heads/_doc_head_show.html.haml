@@ -1,0 +1,39 @@
+.show_item
+  %span.item_label= I18n.t('activerecord.attributes.doc_head.doc_no')
+  %span.item_value= doc.doc_no
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.person_id') 
+  .item_value= doc.person
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.apply_date')
+  .item_value= doc.apply_date
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.attach')
+  .item_value= doc.attach
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.dep_id') 
+  .item_value= doc.dep
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.afford_dep_id') 
+  .item_value= doc.afford_dep
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.real_person_id') 
+  .item_value= doc.real_person
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.upload')
+  .item_value= doc.upload/span
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount') 
+  .item_value= doc.cp_doc_remain_amount
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.project_id') 
+  .item_value= doc.project
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.is_split')
+  .item_value= doc.is_split
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.note')
+  .item_value= doc.note
+.show_item
+  .item_label= I18n.t('activerecord.attributes.doc_head.total_apply_amount')
+  .item_value= doc.total_apply_amount

@@ -1,0 +1,16 @@
+.doc_actions
+  = render "doc_actions
+.doc_state_process
+  = render "doc_state_process",:doc=>doc
+.doc_head
+  = render "doc_head_show",:doc=>doc
+<!--根据不同的doc show不同details-->
+.doc_details
+  -if doc.cp_doc_details.count>0
+    .doc_detail_show= render "cp_doc_detail_show",:cp_docs=>doc.cp_doc_details,:title=>(doc.doc_type==1 ? "借款明细" : "付款明细")
+  -if doc.recivers.count>0
+    .doc_detail_show= render "reciver_show",:recivers=>doc.recivers
+  -if doc.reim_split_details.count>0
+    .doc_detail_show= render "reim_split_details_show",:rsds=>doc.reim_split_details
+.doc_work_flows_show
+  = render "doc_work_flow_infos_show",:work_flow_infos=>doc.work_flow_infos

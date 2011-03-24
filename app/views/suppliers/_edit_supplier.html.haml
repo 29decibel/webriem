@@ -1,0 +1,17 @@
+-form_for supplier,:remote=>true do |f|
+  = render "shared/common_error",:resource=>supplier
+  .form_field
+    %span.label= f.label :name,:class=>"input_label"
+    %span.value= f.text_field :name,:class=>"basic_input"
+  .form_field
+    %span.label= f.label :code,:class=>"input_label"
+    %span.value= f.text_field :code,:class=>"basic_input"
+  .form_field
+    %span.label= f.label :bank,:class=>"input_label"
+    %span.value= f.text_field :bank,:class=>"basic_input"
+  .form_field
+    %span.label= f.label :bank_no,:class=>"input_label"
+    %span.value= f.text_field :bank_no,:class=>"basic_input"
+  .fb_actions
+    = link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2"
+    = link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"

@@ -1,0 +1,7 @@
+.form_title
+  %h3
+    = link_to image_tag("/images/icons/add.png"), new_supplier_path,:remote=>true
+    供应商列表
+  .edit_inline.new_supplier
+  .list_info
+    = render "list",:suppliers=>@suppliers

@@ -1,0 +1,14 @@
+%table.hor-zebra
+  %tr
+    %th
+    %th 名称
+    %th 编码
+    %th 银行
+    %th 银行帐号
+    %th
+  -suppliers.each do |supplier|
+    %tr(id="supplier_#{supplier.id}")
+      = render "tr_supplier",:supplier=>supplier
+    %tr(id="supplier_#{supplier.id}_for_edit")
+      %td(colspan="6")
+        .edit_inline(id="edit_supplier_#{supplier.id}")

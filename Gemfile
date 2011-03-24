@@ -17,6 +17,7 @@ gem 'admin_data'
 gem 'ruby-ole'
 gem 'spreadsheet'
 gem 'rest-client'
+gem 'haml'
 #gem 'iconv'
 
 # Bundle edge Rails instead:

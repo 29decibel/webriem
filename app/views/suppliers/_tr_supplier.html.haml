@@ -1,0 +1,7 @@
+%td= link_to image_tag("/images/icons/page_edit.png"), {:controller=>"suppliers",:action=>"edit",:id=>supplier.id},:remote=>true 
+%td= supplier.name 
+%td= supplier.code 
+%td= supplier.bank 
+%td= supplier.bank_no 
+%td= link_to image_tag("/images/icons/cross.png"), supplier, :confirm => '是否真的要删除?', :method => :delete,:remote=>true 
+
