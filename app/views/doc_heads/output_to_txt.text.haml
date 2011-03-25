@@ -1,9 +1,2 @@
 -@recivers.each_with_index do |r,index|
-  = (index+1).to_s.rjust(7,"0")
-  |
-  = r[:bank_no]
-  |
-  = r[:name]
-  |
-  = r[:amount]
-  |00110|1122|
+  = "#{(index+1).to_s.rjust(7,"0")}|#{r[:bank_no]}|#{r[:name]}|#{r[:amount]}|00110|1122|"

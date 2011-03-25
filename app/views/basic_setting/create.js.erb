@@ -1,0 +1,4 @@
+//hide
+$("div.new_fcm").hide("slow");
+//render list
+$("div.list_info").html("<%= escape_javascript(render 'list',:fcms=>@fee_code_matches)%>");

@@ -1,0 +1,41 @@
+-form_for fcm,:remote=>true,:class=>"edit_inline" do |f|
+  =render "shared/common_error",:resource=>fcm
+  = f.hidden_field :id
+-if @fee_code_match.new_record?
+  .form_field
+    %span.label= f.label :fee_id,:class=>"input_label" 
+    %span.value= reference_select "fee_id","Fee",@fee_code_match.fee.to_s
+  .form_field
+    %span.label= f.label :dcode_id,:class=>"input_label"
+    %span.value= reference_select "dcode_id","U8code",@fee_code_match.dcode.to_s
+  .form_field
+    %span.label= f.label :ccode_id,:class=>"input_label"
+    %span.value= reference_select "ccode_id","U8code",@fee_code_match.ccode.to_s
+  .form_field
+    %span.label= f.label :description,:class=>"input_label" 
+    %span.value
+      =f.text_field :description,:class=>"basic_input" 
+      =mark_required(@fee_code_match, :description) 
+  .form_field
+    %span.label= f.label :dperson,:class=>"input_label" 
+    %span.value
+      = f.text_field :dperson,:class=>"basic_input" 
+      = mark_required(@fee_code_match, :description) 
+  .form_field
+    %span.label= f.label :cperson,:class=>"input_label" 
+    %span.value
+      = f.text_field :cperson,:class=>"basic_input" 
+      = mark_required(@fee_code_match, :description) 
+  .form_field
+    %span.label= f.label :ddep,:class=>"input_label" 
+    %span.value
+      = f.text_field :ddep,:class=>"basic_input" 
+      = mark_required(@fee_code_match, :description) 
+  .form_field
+    %span.label= f.label :cdep,:class=>"input_label" 
+    %span.value
+      = f.text_field :cdep,:class=>"basic_input" 
+      = mark_required(@fee_code_match, :description) 
+.form_inline_actions
+  = link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" 
+  = link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"

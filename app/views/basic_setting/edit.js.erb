@@ -1,0 +1,4 @@
+//render the partial
+$("#edit_fcm_<%= @fee_code_match.id%>").html("<%= escape_javascript(render 'edit_fcm',:fcm=>@fee_code_match)%>");
+//show it
+$("#edit_fcm_<%= @fee_code_match.id%>").show("slow");
