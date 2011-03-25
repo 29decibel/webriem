@@ -1,0 +1,5 @@
+.list_item
+  %span.list_action= link_to image_tag("/images/icons/page_edit.png"),edit_role_path(role) ,:remote=>true
+  %span.list_field= role.name
+  %span.list_field= truncate(role.menu_names,:length=>50)
+  %span.list_action= link_to image_tag("/images/icons/cross.png"), role, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true

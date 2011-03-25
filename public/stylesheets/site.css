@@ -823,3 +823,13 @@ div.selection_area span.checkbox{
   a.btn-download .icon {background-position:-40px 0;}
   a.btn-download:hover .icon, a.btn-download:focus .icon {background-position:-40px -25px;}
 
+/*for the new haml file style*/
+div.list_item{
+  margin:3px;
+  padding:2px;
+  border:1px solid #ccc;
+}
+span.list_field{
+  display:inline-block;
+  margin:2px 3px 2px 3px;
+}

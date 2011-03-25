@@ -1,4 +1,0 @@
-//hide self
-$("#edit_role_<%= @role.id%>").hide("slow");
-//refresh the tr
-$("tr#role_<%= @role.id%>").html("<%= escape_javascript(render("tr_role",:role=>@role))%>");

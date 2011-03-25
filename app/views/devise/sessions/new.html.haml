@@ -5,11 +5,11 @@
     .login_error
       %span= alert
   .login_field
-    %span.l_label= f.label "#{I18n.t('common_attr.user')}",:class=>"input_label" 
-		%span.l_value= f.text_field :name,:class=>"normal" 
+    %span.l_label= f.label "#{I18n.t('common_attr.user')}",:class=>"input_label"
+    %span.l_value= f.text_field :name,:class=>"normal"
   .login_field
-    %span.l_label= f.label "#{I18n.t('common_attr.password')}",:class=>"input_label" 
-		%span.l_value= f.password_field :password,:class=>"normal" 
+    %span.l_label= f.label "#{I18n.t('common_attr.password')}",:class=>"input_label"
+    %span.l_value= f.password_field :password,:class=>"normal"
   -if devise_mapping.rememberable?
     .login_field
       %span.l_label= f.label "#{I18n.t('common_attr.remember')}",:class=>"input_label"

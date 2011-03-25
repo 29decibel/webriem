@@ -21,11 +21,13 @@ class RolesController < ApplicationController
   # GET /roles/new.xml
   def new
     @role = Role.new
+    render "basic_setting/new",:locals=>{:resource=>@role}
   end
 
   # GET /roles/1/edit
   def edit
     @role = Role.find(params[:id])
+    render "basic_setting/edit",:locals=>{:resource=>@role}
   end
 
   # POST /roles
@@ -40,6 +42,7 @@ class RolesController < ApplicationController
       render "new"
     end
     @roles=Role.all
+    render "basic_setting/create",:locals=>{:resource=>@role,:resources=>@roles}
   end
 
   # PUT /roles/1
