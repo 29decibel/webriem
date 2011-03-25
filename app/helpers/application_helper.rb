@@ -1,5 +1,12 @@
 #coding: utf-8
 module ApplicationHelper
+  def reference_select(field_name,model_name,value,options={})
+    html=""
+    html<<hidden_field_tag(field_name,{:class=>"ref_hidden_field"})
+    html<<text_field_tag "#{model_name}_info",value,:class=>"ref"
+    html<<link_to content_tag(:span,:class=>"reference"),"#",{"class-data"=>model_name}
+    content_tag(:div,html)
+  end
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
         "*"

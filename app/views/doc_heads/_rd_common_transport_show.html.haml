@@ -1,50 +1,38 @@
-<h5>交通费用明细<span><%= detail_doc_items.sum {|dd| dd.fi_amount}%></span></h5>
-<% for item in detail_doc_items -%>
-  <div class="doc_detail_item">
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.afford_dep')%>*</span>
-      <span class="item_value"><%= item.afford_dep %></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.project')%></span>
-      <span class="item_value"><%= item.project %></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.start_place')%></span>
-      <span class="item_value"><%= item.start_place %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.end_place')%></span>
-      <span class="item_value"><%= item.end_place %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.start_time')}"%></span>
-      <span class="item_value"><%= item.start_time %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.end_time')}"%></span>
-      <span class="item_value"><%= item.end_time %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.reason')}"%></span>
-      <span class="item_value"><%= item.reason %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.currency')}"%></span>
-      <span class="item_value"><%= item.currency %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.rate')}"%>*</span>
-      <span class="item_value"><%= item.rate %></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.apply_amount')}"%>*</span>
-      <span class="item_value"><%= item.apply_amount %> </span>
-    </div> 
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.ori_amount')}"%></span>
-      <span class="item_value"><%= item.ori_amount %> </span>
-    </div> 
-  </div>
-<% end -%>
-
+%h5
+  交通费用明细
+  %span detail_doc_items.sum {|dd| dd.fi_amount}
+-for item in detail_doc_items
+  .doc_detail_item
+    .show_item
+      %span.item_label= I18n.t('common_attr.afford_dep')*
+      %span.item_value= item.afford_dep 
+    .show_item
+      %span.item_label= I18n.t('common_attr.project')
+      %span.item_value= item.project 
+    .show_item
+      %span.item_label= I18n.t('common_attr.start_place')
+      %span.item_value= item.start_place 
+    .show_item
+      %span.item_label= I18n.t('common_attr.end_place')
+      %span.item_value= item.end_place 
+    .show_item
+      %span.item_label= I18n.t('common_attr.start_time')}"
+      %span.item_value= item.start_time 
+    .show_item
+      %span.item_label= I18n.t('common_attr.end_time')}"
+      %span.item_value= item.end_time 
+    .show_item
+      %span.item_label= I18n.t('common_attr.reason')}"
+      %span.item_value= item.reason 
+    .show_item
+      %span.item_label= I18n.t('common_attr.currency')}"
+      %span.item_value= item.currency 
+    .show_item
+      %span.item_label= I18n.t('common_attr.rate')}"*
+      %span.item_value= item.rate 
+    .show_item
+      %span.item_label= I18n.t('common_attr.apply_amount')}"*
+      %span.item_value= item.apply_amount  
+    .show_item
+      %span.item_label= I18n.t('common_attr.ori_amount')}"
+      %span.item_value= item.ori_amount  

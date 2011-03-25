@@ -1,34 +1,26 @@
-<h5>收款人详细<span><%= recivers.sum {|r| r.fi_amount}%></span></h5>
-<% for reciver in recivers -%>
-  <div class="doc_detail_item">
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.settlement') %></span>
-      <span class="item_value"><%= r.settlement%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= r.doc.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"%></span>
-      <span class="item_value"><%= r.company_name%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.bank') %></span>
-      <span class="item_value"><%= r.bank%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.bank_no') %></span>
-      <span class="item_value"><%= r.bank_no%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.amount') %></span>
-      <span class="item_value"><%= r.amount%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.hr_amount') %></span>
-      <span class="item_value"><%= r.hr_amount%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.fi_amount') %></span>
-      <span class="item_value"><%= r.fi_amount%></span>
-    </div>
-  </div>
-<% end -%>
-
+%h5
+  收款人详细
+  %span= recivers.sum {|r| r.fi_amount}
+-for reciver in recivers
+  .doc_detail_item
+    .show_item
+      %span.item_label= I18n.t('common_attr.settlement') 
+      %span.item_value= r.settlement
+    .show_item
+      %span.item_label= r.doc.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"
+      %span.item_value= r.company_name
+    .show_item
+      %span.item_label= I18n.t('common_attr.bank') 
+      %span.item_value= r.bank
+    .show_item
+      %span.item_label= I18n.t('common_attr.bank_no') 
+      %span.item_value= r.bank_no
+    .show_item
+      %span.item_label= I18n.t('common_attr.amount') 
+      %span.item_value= r.amount
+    .show_item
+      %span.item_label= I18n.t('common_attr.hr_amount') 
+      %span.item_value= r.hr_amount
+    .show_item
+      %span.item_label= I18n.t('common_attr.fi_amount') 
+      %span.item_value= r.fi_amount

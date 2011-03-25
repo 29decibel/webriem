@@ -1,52 +1,31 @@
-<div class="form_title">
-	<h3><%= "#{I18n.t('activerecord.models.work_flow_info')}"%></h3>
-</div>
-<div class="form_area">
+.form_title
+	%h3= "#{I18n.t('activerecord.models.work_flow_info')}"
+.form_area
 	<!--目前已经存在的审批信息-->
-	<table class="hor-zebra">
-	  <tr>
-	    <th><%= "#{I18n.t('activerecord.attributes.work_flow_info.is_ok')}"%></th>
-	    <th><%= "#{I18n.t('activerecord.attributes.work_flow_info.people_id')}"%></th>
-		<th><%= "#{I18n.t('activerecord.attributes.work_flow_info.created_at')}"%></th>
-	    <th><%= "#{I18n.t('activerecord.attributes.work_flow_info.comments')}"%></th>
-	  </tr>
-
-	<% doc_head.work_flow_infos.each do |wf| %>
-	  <tr >
-	    <td><%= wf.is_ok_name %></td>
-	    <td><%= wf.person_name %></td>
-		<td><%= wf.created_at %></td>
-	    <td><%= wf.comments %></td>
-	  </tr>
-	<% end %>
-	</table>
-</div>
-<% if doc_head.current_approver_id ==current_user.person.id and work_flow_info %>
-	<div class="form_title">
-		<h3><%= "#{I18n.t('activerecord.attributes.work_flow_info.write_comments')}"%></h3>
-	</div>
-	<%= form_for work_flow_info,:remote=>true do |f| %>
-	<div class="form_area">
-		<div class="form_block">
-			<div class="form_field">
-				<%= f.label :is_ok,"#{I18n.t('activerecord.attributes.work_flow_info.is_ok')}"%>
-				<%= f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK,:class=>"input1" %>
-			</div>
-		</div>
-		<div class="form_block">
-			<div class="form_field">
-				<%= f.label :comments,"#{I18n.t('activerecord.attributes.work_flow_info.comments')}"%>
-				<%= f.text_area :comments,:class=>"input2" %>
-			</div>
-		</div>
-		<div class="form_block">
-			<div class="form_field">
-				<%= link_to "#{I18n.t('model_search.btn_ok')}",{:href=>"#"},:class=>"submit button2",:confirm => '确定该审批意见?' %>
-				<%= f.hidden_field :people_id,:value=>current_user.person.id%>
-				<%= f.hidden_field :doc_head_id,:value=>@doc_head.id%>
-			</div>
-		</div>
-	<% end %>
-<% end %>
-
-
+	%table.hor-zebra
+	  %tr
+	    %th= "#{I18n.t('activerecord.attributes.work_flow_info.is_ok')}"
+	    %th= "#{I18n.t('activerecord.attributes.work_flow_info.people_id')}"
+      %th= "#{I18n.t('activerecord.attributes.work_flow_info.created_at')}"
+	    %th= "#{I18n.t('activerecord.attributes.work_flow_info.comments')}"
+	-doc_head.work_flow_infos.each do |wf| 
+	  %tr 
+	    %td= wf.is_ok_name 
+	    %td= wf.person_name
+      %td= wf.created_at 
+	    %td= wf.comments
+-if doc_head.current_approver_id ==current_user.person.id and work_flow_info 
+	.form_title
+		%h3= "#{I18n.t('activerecord.attributes.work_flow_info.write_comments')}"
+	-form_for work_flow_info,:remote=>true do |f| 
+	.form_area
+		.form_field
+      %span.label= f.label :is_ok,"#{I18n.t('activerecord.attributes.work_flow_info.is_ok')}"
+      %span.value=f.select :is_ok,WorkFlowInfo::ENUMS_IS_OK,:class=>"input1"
+		.form_field
+			%span.label=f.label :comments,"#{I18n.t('activerecord.attributes.work_flow_info.comments')}"
+      %span.value=f.text_area :comments,:class=>"input2" 
+		.form_inline_actions
+      = link_to "#{I18n.t('model_search.btn_ok')}",{:href=>"#"},:class=>"submit button2",:confirm => '确定该审批意见?' 
+      = f.hidden_field :people_id,:value=>current_user.person.id
+      = f.hidden_field :doc_head_id,:value=>@doc_head.id

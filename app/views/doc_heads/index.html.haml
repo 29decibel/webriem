@@ -1,13 +1,11 @@
-<div class="form_title">
-	<h3><%= doc_type_name(@doc_type)%>列表</h3>
-</div>
-<div class="actions">
-  <%= link_to "添加#{doc_type_name(@doc_type)}", new_doc_head_path(:doc_type=>params[:doc_type]),:remote=>true,:class=>"button2" %>
-	<%= link_to '输出', "#",:class=>"button2" %>
-	<%= link_to '打印', "#",:class=>"button2" %>
-	<%= link_to '预览', "#",:class=>"button2" %>
-	<%= link_to '定位', "#",:class=>"button2" %>
-</div>
-<div class="doc_stage">
-  <%= render "docs_list",:docs=>@docs %>
-</div>
+.form_title
+  %h3= doc_type_name(@doc_type)
+  列表
+.actions
+  = link_to "添加#{doc_type_name(@doc_type)}", new_doc_head_path(:doc_type=>params[:doc_type]),:remote=>true,:class=>"button2" 
+	= link_to '输出', "#",:class=>"button2" 
+	= link_to '打印', "#",:class=>"button2" 
+	= link_to '预览', "#",:class=>"button2" 
+	= link_to '定位', "#",:class=>"button2" 
+.doc_stage
+  = render "docs_list",:docs=>@docs 

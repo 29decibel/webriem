@@ -1,38 +1,29 @@
-<h5>福利费用明细<span><%= detail_doc_items.sum {|dd| dd.fi_amount}%></span></h5>
-<% for item in detail_doc_items -%>
-  <div class="doc_detail_item">
-    <div class="show_item">
-     <span class="item_label"><%= I18n.t('common_attr.afford_dep')%></span> 
-      <span class="item_value"><%= item.afford_dep%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.project')%></span>
-      <span class="item_value"><%= item.project%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.fee')"%></span>
-      <span class="item_value"><%= item.fee%></span>
-    </div>
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.people_count')%></span>
-      <span class="item_value"><%= item.people_count%></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.fee_span')%></span>
-      <span class="item_value"><%= item.fee_span%></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.apply_amount')%></span>
-      <span class="item_value"><%= item.apply_amount%></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.hr_amount')%></span>
-      <span class="item_value"><%= item.hr_amount%></span>
-    </div>  
-    <div class="show_item">
-      <span class="item_label"><%= I18n.t('common_attr.fi_amount')%></span>
-      <span class="item_value"><%= item.fi_amount%></span>
-    </div>  
-  </div>
-<% end -%>
-
+%h5
+  福利费用明细
+  %span= detail_doc_items.sum {|dd| dd.fi_amount}
+-for item in detail_doc_items
+  .doc_detail_item
+    .show_item
+     %span.item_label= I18n.t('common_attr.afford_dep')
+      %span.item_value= item.afford_dep
+    .show_item
+      %span.item_label= I18n.t('common_attr.project')
+      %span.item_value= item.project
+    .show_item
+      %span.item_label= I18n.t('common_attr.fee')"
+      %span.item_value= item.fee
+    .show_item
+      %span.item_label= I18n.t('common_attr.people_count')
+      %span.item_value= item.people_count
+    .show_item
+      %span.item_label= I18n.t('common_attr.fee_span')
+      %span.item_value= item.fee_span
+    .show_item
+      %span.item_label= I18n.t('common_attr.apply_amount')
+      %span.item_value= item.apply_amount
+    .show_item
+      %span.item_label= I18n.t('common_attr.hr_amount')
+      %span.item_value= item.hr_amount
+    .show_item
+      %span.item_label= I18n.t('common_attr.fi_amount')
+      %span.item_value= item.fi_amount

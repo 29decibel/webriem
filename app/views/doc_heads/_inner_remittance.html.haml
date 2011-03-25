@@ -1,44 +1,28 @@
-	<div class="form_field large">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"%></span>
-		<span class="value"><%= f.text_field :amount,:class=>"input1 large" %></span>  
-	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"%></span>
-		<span class="value"><div class="reference">
-			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "currency_info",detail_doc.currency.to_s,:class=>"ref" %>
-			<a href="#" class-data="Currency"><span class="reference"></span></a>			
-		</div></span> 
-  </div><br/>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"%></span>
-		<span class="value"><div class="reference">
-			<%= f.hidden_field :out_account_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "out_account_info",detail_doc.out_account.to_s,:class=>"ref large" %>
-			<a href="#" class-data="Account"><span class="reference"></span></a>			
-		</div></span>
-  </div><br/>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.remain_amount')}",:class=>"large" %></span>
-		<span class="value"><span id="currency_sign">$</span><%= f.text_field :in_amount_after,:class=>"input1 " %></span>
-	</div>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_account_id')}",:class=>"large" %></span>
-		<span class="value"><div class="reference">
-			<%= f.hidden_field :in_account_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "in_account_info",detail_doc.in_account.to_s,:class=>"ref large" %>
-			<a href="#" class-data="Account"><span class="reference"></span></a>			
-		</div></span>
-	</div>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_amount_after')}",:class=>"large" %></span>
-		<span class="value"><span id="currency_sign">￥</span><%= f.text_field :remain_amount,:class=>"input1 " %></span> 
-  </div><br/>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.now_rate_price')}",:class=>"large" %></span>
-		<span class="value"><%= f.text_field :now_rate_price,:class=>"input1 " %></span>
-  </div><br/>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.inner_remittance.description')}",:class=>"large"%></span>
-		<span class="value"><%= f.text_area :description,:class=>"input2 " %></span>
-	</div>
+.form_field.large
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"
+	%span.value= f.text_field :amount,:class=>"input1 large" 
+.form_field
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"
+	%span.value= reference_select "currency_id","Currency",detail_doc.currency.to_s 
+%br
+.form_field.col-sp2
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"
+	%span.value=reference_select "account_id","Account",detail_doc.account.to_s 
+%br
+.form_field.col-sp2
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.remain_amount')}",:class=>"large" 
+	%span.value= f.text_field :in_amount_after,:class=>"input1 " 
+.form_field.col-sp2
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_account_id')}",:class=>"large" 
+	%span.value=reference_select "in_account_id","Account",detail_doc.in_account.to_s 
+.form_field.col-sp2
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_amount_after')}",:class=>"large" 
+  %span.value= f.text_field :remain_amount,:class=>"input1 "
+%br
+.form_field
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.now_rate_price')}",:class=>"large" 
+	%span.value= f.text_field :now_rate_price,:class=>"input1 " 
+%br
+.form_field.col-sp2
+	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.description')}",:class=>"large"
+	%span.value= f.text_area :description,:class=>"input2 " 
