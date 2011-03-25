@@ -1,35 +1,35 @@
 <%= form_for(@fee,:remote=>true) do |f| %>
-<div class="form_title">
-	<h3><%= @title%></h3>
+%div class="form_title"
+	%h3<%= @title%></h3>
 </div>
-<div class="actions">
+%div class="actions"
 		<%= link_to "#{I18n.t('common_op.btn_new')}", new_fee_path,:class=>"button2" %>
   <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to "#{I18n.t('common_op.btn_return')}", fees_path,:class=>"button2" %>
 </div>
-<div class="form_area">
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %></span>			
-		<span class="value"><%= f.text_field :code,:class=>"input1 " %></span>
+%div class="form_area"
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %></span>			
+		%span class="value"<%= f.text_field :code,:class=>"input1 " %></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}" %></span>
-		<span class="value"><%= f.text_field :name,:class=>"input1 " %></span>
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}" %></span>
+		%span class="value"<%= f.text_field :name,:class=>"input1 " %></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.fee.attr')}#{mark_required(f.object,:attr)}" %></span>			
-		<span class="value"><%= f.select :attr,Fee::ENUMS_ATTR,{:include_blank => "#{I18n.t('common_attr.none')}"},{:class=>"input1 "} %></span>
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.fee.attr')}#{mark_required(f.object,:attr)}" %></span>			
+		%span class="value"<%= f.select :attr,Fee::ENUMS_ATTR,{:include_blank => "#{I18n.t('common_attr.none')}"},{:class=>"input1 "} %></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.fee.end_date')}#{mark_required(f.object,:end_date)}" %></span>
-		<span class="value"><%= f.text_field :end_date,:class=>"datepicker input1 " %></span>
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.fee.end_date')}#{mark_required(f.object,:end_date)}" %></span>
+		%span class="value"<%= f.text_field :end_date,:class=>"datepicker input1 " %></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.fee.parent_fee_id')}#{mark_required(f.object,:parent_fee_id)}" %></span>			
-		<span class="value"><div class="reference">
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.fee.parent_fee_id')}#{mark_required(f.object,:parent_fee_id)}" %></span>			
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :parent_fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@fee.parent_fee.to_s,:class=>"ref" %>
-			<a href="#" class-data="Fee" self="true"><span class="reference"></span></a>			
+			%a href="#" class-data="Fee" self="true"%span class="reference"</span></a>			
 		</div></span>
 	</div>
 </div>

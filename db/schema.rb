@@ -368,14 +368,7 @@ ActiveRecord::Schema.define(:version => 20110319051935) do
     t.datetime "updated_at"
     t.integer  "menu_type"
     t.integer  "menu_category_id"
-<<<<<<< HEAD
-=======
   end
-
-  create_table "netzke_temp_table", :force => true do |t|
->>>>>>> sk_version
-  end
-
   create_table "other_riems", :force => true do |t|
     t.integer  "sequence"
     t.string   "description"

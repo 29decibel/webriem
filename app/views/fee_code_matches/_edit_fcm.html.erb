@@ -2,53 +2,53 @@
   <%= render "shared/common_error",:resource=>fcm %>
 <%= f.hidden_field :id%>
 <% if @fee_code_match.new_record? %>
-<div class="form_field">
-	<span class="label"><%= f.label :fee_id,:class=>"input_label" %></span>
-  <span class="value"><div class="reference">
+%div class="form_field"
+	%span class="label"<%= f.label :fee_id,:class=>"input_label" %></span>
+  %span class="value"%div class="reference"
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",@fee_code_match.fee.to_s,:class=>"ref" %>
-			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+			%a href="#" class-data="Fee"%span class="reference"</span></a>			
   </div></span>
 </div>
 <% end %>
-<div class="form_field">
-  <span class="label"><%= f.label :dcode_id,:class=>"input_label" %></span>
-  <span class="value"><div class="reference">
+%div class="form_field"
+  %span class="label"<%= f.label :dcode_id,:class=>"input_label" %></span>
+  %span class="value"%div class="reference"
 			<%= f.hidden_field :dcode_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dcode_info",@fee_code_match.dcode.to_s,:class=>"ref" %>
-			<a href="#" class-data="U8code"><span class="reference"></span></a>			
+			%a href="#" class-data="U8code"%span class="reference"</span></a>			
 		</div></span>
  </div>
-<div class="form_field">
-	<span class="label"><%= f.label :ccode_id,:class=>"input_label" %></span>
-  <span class="value"><div class="reference">
+%div class="form_field"
+	%span class="label"<%= f.label :ccode_id,:class=>"input_label" %></span>
+  %span class="value"%div class="reference"
 			<%= f.hidden_field :ccode_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "ccode_info",@fee_code_match.ccode.to_s,:class=>"ref" %>
-			<a href="#" class-data="U8code"><span class="reference"></span></a>			
+			%a href="#" class-data="U8code"%span class="reference"</span></a>			
 		</div></span>
 </div>
-<div class="form_field">
-	<span class="label"><%= f.label :description,:class=>"input_label" %></span>
-	<span class="value"><%= f.text_field :description,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+%div class="form_field"
+	%span class="label"<%= f.label :description,:class=>"input_label" %></span>
+	%span class="value"<%= f.text_field :description,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
 <!--added four specify vouch info-->
-<div class="form_field">
-	<span class="label"><%= f.label :dperson,:class=>"input_label" %></span>
-	<span class="value"><%= f.text_field :dperson,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+%div class="form_field"
+	%span class="label"<%= f.label :dperson,:class=>"input_label" %></span>
+	%span class="value"<%= f.text_field :dperson,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
-<div class="form_field">
-	<span class="label"><%= f.label :cperson,:class=>"input_label" %></span>
-	<span class="value"><%= f.text_field :cperson,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+%div class="form_field"
+	%span class="label"<%= f.label :cperson,:class=>"input_label" %></span>
+	%span class="value"<%= f.text_field :cperson,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
-<div class="form_field">
-	<span class="label"><%= f.label :ddep,:class=>"input_label" %></span>
-	<span class="value"><%= f.text_field :ddep,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+%div class="form_field"
+	%span class="label"<%= f.label :ddep,:class=>"input_label" %></span>
+	%span class="value"<%= f.text_field :ddep,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
-<div class="form_field">
-	<span class="label"><%= f.label :cdep,:class=>"input_label" %></span>
-	<span class="value"><%= f.text_field :cdep,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
+%div class="form_field"
+	%span class="label"<%= f.label :cdep,:class=>"input_label" %></span>
+	%span class="value"<%= f.text_field :cdep,:class=>"basic_input" %><%= mark_required(@fee_code_match, :description) %></span>
 </div>
-<div class="form_inline_actions">
+%div class="form_inline_actions"
   <%= link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" %>
   <%= link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"%>
 </div>

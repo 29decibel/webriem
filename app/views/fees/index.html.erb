@@ -1,27 +1,27 @@
-<div class="form_title">
-	<h3>费用类型列表</h3>
+%div class="form_title"
+	%h3费用类型列表</h3>
 </div>
-	<div class="actions">
+	%div class="actions"
 		<%= link_to '添加费用类型', new_fee_path,:class=>"button2" %>
 	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>编码</th>
-    <th>名称</th>
-    <th>费用属性</th>
-    <th>停用日期</th>
-    <th></th>
-    <th></th>
+%table class="hor-zebra"
+  %tr
+    %th编码</th>
+    %th名称</th>
+    %th费用属性</th>
+    %th停用日期</th>
+    %th</th>
+    %th</th>
   </tr>
 
 <% @fees.each do |fee| %>
-  <tr>
-    <td><%= fee.code %></td>
-    <td><%= fee.name %></td>
-    <td><%= fee.attr_name %></td>
-    <td><%= fee.end_date %></td>
-    <td class="action"><%= link_to '查看', fee %></td>
-    <td class="action"><%= link_to '删除', fee, :confirm => '是否真的要删除?', :method => :delete %></td>
+  %tr
+    %td<%= fee.code %></td>
+    %td<%= fee.name %></td>
+    %td<%= fee.attr_name %></td>
+    %td<%= fee.end_date %></td>
+    %td class="action"<%= link_to '查看', fee %></td>
+    %td class="action"<%= link_to '删除', fee, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

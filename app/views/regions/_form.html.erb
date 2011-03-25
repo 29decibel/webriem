@@ -1,27 +1,27 @@
 <%= form_for(@region,:remote=>true) do |f| %>
-<div class="form_title">
-	<h3><%= @title%></h3>
+%div class="form_title"
+	%h3<%= @title%></h3>
 </div>
-<div class="actions">
+%div class="actions"
 			<%= link_to "#{I18n.t('common_op.btn_new')}", new_region_path,:class=>"button2" %>
   <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to "#{I18n.t('common_op.btn_return')}", regions_path,:class=>"button2" %>
 </div>
-<div class="form_area">
-		<div class="form_field">
-			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.region.name')}#{mark_required(f.object,:name)}" %></span>
-			<span class="value"><%= f.text_field :name,:class=>"input1 " %></span>
+%div class="form_area"
+		%div class="form_field"
+			%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.region.name')}#{mark_required(f.object,:name)}" %></span>
+			%span class="value"<%= f.text_field :name,:class=>"input1 " %></span>
 		</div>
-		<div class="form_field">
-			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.region.code')}#{mark_required(f.object,:code)}" %></span>
-			<span class="value"><%= f.text_field :code,:class=>"input1 " %></span>
+		%div class="form_field"
+			%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.region.code')}#{mark_required(f.object,:code)}" %></span>
+			%span class="value"<%= f.text_field :code,:class=>"input1 " %></span>
 		</div>
-		<div class="form_field">
-			<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" %></span>
-			<span class="value"><div class="reference">
+		%div class="form_field"
+			%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" %></span>
+			%span class="value"%div class="reference"
 				<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
 				<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
-				<a href="#" class-data="RegionType"><span class="reference"></span></a>			
+				%a href="#" class-data="RegionType"%span class="reference"</span></a>			
 			</div>
 		</div></span>
 </div>

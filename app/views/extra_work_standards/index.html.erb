@@ -1,26 +1,26 @@
-<h3 class="form_title">列表</h3>
-<table class="hor-zebra">
-  <tr>
-    <th>Larger than hours</th>
-    <th>Late than time</th>
-    <th>Is sunday</th>
-    <th></th>
-    <th></th>
-    <th></th>
+%h3 class="form_title"列表</h3>
+%table class="hor-zebra"
+  %tr
+    %thLarger than hours</th>
+    %thLate than time</th>
+    %thIs sunday</th>
+    %th</th>
+    %th</th>
+    %th</th>
   </tr>
 
 <% @extra_work_standards.each do |extra_work_standard| %>
-  <tr class="<%= "odd" if extra_work_standard.id%2==0 %>">
-    <td><%= extra_work_standard.larger_than_hours %></td>
-    <td><%= extra_work_standard.late_than_time %></td>
-    <td><%= extra_work_standard.is_sunday %></td>
-    <td><%= link_to '查看', extra_work_standard %></td>
-    <td><%= link_to '编辑', edit_extra_work_standard_path(extra_work_standard) %></td>
-    <td><%= link_to '删除', extra_work_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
+  %tr class="<%= "odd" if extra_work_standard.id%2==0 %">
+    %td<%= extra_work_standard.larger_than_hours %></td>
+    %td<%= extra_work_standard.late_than_time %></td>
+    %td<%= extra_work_standard.is_sunday %></td>
+    %td<%= link_to '查看', extra_work_standard %></td>
+    %td<%= link_to '编辑', edit_extra_work_standard_path(extra_work_standard) %></td>
+    %td<%= link_to '删除', extra_work_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
+%br /
 
 <%= link_to '添加 Extra work standard', new_extra_work_standard_path %>

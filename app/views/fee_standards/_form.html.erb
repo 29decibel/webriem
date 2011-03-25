@@ -1,84 +1,84 @@
 <%= form_for(@fee_standard,:remote=>true) do |f| %>
-<div class="form_title">
-	<h3><%= @title%></h3>
+%div class="form_title"
+	%h3<%= @title%></h3>
 </div>
-<div class="actions">
+%div class="actions"
 	<%= link_to "#{I18n.t('common_op.btn_new')}", new_fee_standard_path,:class=>"button2" %>
   <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
 	<%= link_to "#{I18n.t('common_op.btn_return')}", fee_standards_path,:class=>"button2" %>
 </div>
-<div class="form_area">
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.project')}#{mark_required(f.object,:project_id)}" %></span>			
-		<span class="value"><div class="reference">
+%div class="form_area"
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.project')}#{mark_required(f.object,:project_id)}" %></span>			
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :project_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "project_info",@fee_standard.project.to_s,:class=>"ref" %>
-			<a href="#" class-data="Project"><span class="reference"></span></a>			
+			%a href="#" class-data="Project"%span class="reference"</span></a>			
 		</div></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.region_type')}#{mark_required(f.object,:region_type_id)}" %></span>
-		<span class="value"><div class="reference">
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.region_type')}#{mark_required(f.object,:region_type_id)}" %></span>
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :region_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "region_type_info",f.object.region_type.to_s,:class=>"ref" %>
-			<a href="#" class-data="RegionType"><span class="reference"></span></a>			
+			%a href="#" class-data="RegionType"%span class="reference"</span></a>			
 		</div></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.models.duty')}#{mark_required(f.object,:duty_id)}" %></span>			
-		<span class="value"><div class="reference">
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.models.duty')}#{mark_required(f.object,:duty_id)}" %></span>			
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "duty_info",@fee_standard.duty.to_s,:class=>"ref" %>
-			<a href="#" class-data="Duty"><span class="reference"></span></a>			
+			%a href="#" class-data="Duty"%span class="reference"</span></a>			
 		</div></span>
   </div>
-  <div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.models.lodging')}#{mark_required(f.object,:lodging_id)}" %></span>
-		<span class="value"><div class="reference">
+  %div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.models.lodging')}#{mark_required(f.object,:lodging_id)}" %></span>
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :lodging_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "lodging_info",f.object.lodging.to_s,:class=>"ref" %>
-			<a href="#" class-data="Lodging"><span class="reference"></span></a>			
+			%a href="#" class-data="Lodging"%span class="reference"</span></a>			
 		</div></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.models.transportation')}#{mark_required(f.object,:transportation_id)}" %></span>			
-		<span class="value"><div class="reference">
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.models.transportation')}#{mark_required(f.object,:transportation_id)}" %></span>			
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :transportation_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "transportation_info",@fee_standard.transportation.to_s,:class=>"ref" %>
-			<a href="#" class-data="Transportation"><span class="reference"></span></a>			
+			%a href="#" class-data="Transportation"%span class="reference"</span></a>			
 		</div></span>
   </div>
-  <div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.models.business_type')}#{mark_required(f.object,:business_type_id)}" %></span>
-		<span class="value"><div class="reference">
+  %div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.models.business_type')}#{mark_required(f.object,:business_type_id)}" %></span>
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "business_type_info",f.object.business_type.to_s,:class=>"ref" %>
-			<a href="#" class-data="BusinessType"><span class="reference"></span></a>			
+			%a href="#" class-data="BusinessType"%span class="reference"</span></a>			
 		</div></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.rate')}#{mark_required(f.object,:currency_id)}" %></span>
-		<span class="value"><div class="reference">
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.rate')}#{mark_required(f.object,:currency_id)}" %></span>
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :currency_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "currency_info",f.object.currency.to_s,:class=>"ref" %>
-			<a href="#" class-data="Currency"><span class="reference"></span></a>			
+			%a href="#" class-data="Currency"%span class="reference"</span></a>			
 		</div></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.fee')}#{mark_required(f.object,:fee)}" %></span>			
-		<span class="value"><div class="reference">
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.fee')}#{mark_required(f.object,:fee)}" %></span>			
+		%span class="value"%div class="reference"
 			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "fee_info",f.object.fee.to_s,:class=>"ref" %>
-			<a href="#" class-data="Fee"><span class="reference"></span></a>			
+			%a href="#" class-data="Fee"%span class="reference"</span></a>			
 		</div></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('common_attr.amount')}#{mark_required(f.object,:amount)}" %></span>			
-		<span class="value"><%= f.text_field :amount,:class=>"input1 " %></span>
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('common_attr.amount')}#{mark_required(f.object,:amount)}" %></span>			
+		%span class="value"<%= f.text_field :amount,:class=>"input1 " %></span>
 	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.person.person_type_id')}#{mark_required(f.object,:person_type)}" %></span>
-		<span class="value"><%= collection_select(:fee_standard, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :person_type_id) %></span>
+	%div class="form_field"
+		%span class="label"<%= f.label "#{I18n.t('activerecord.attributes.person.person_type_id')}#{mark_required(f.object,:person_type)}" %></span>
+		%span class="value"<%= collection_select(:fee_standard, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"})%><%= mark_required(@fee_standard, :person_type_id) %></span>
 	</div>
 </div>
 <% end %>

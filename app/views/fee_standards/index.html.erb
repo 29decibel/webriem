@@ -1,33 +1,33 @@
-<div class="form_title">
-	<h3>费用标准列表</h3>
+%div class="form_title"
+	%h3费用标准列表</h3>
 </div>	
-<div class="actions">
+%div class="actions"
 	<%= link_to '添加费用标准', new_fee_standard_path,:class=>"button2" %>
 </div>
-<table class="hor-zebra">
-  <tr>
-    <th>项目</th>
-    <th>地图</th>
-    <th>职务</th>
-    <th>住宿方式</th>
-    <th>交通方式</th>
-    <th>业务类型</th>
-    <th>金额</th>
-    <th></th>
-    <th></th>
+%table class="hor-zebra"
+  %tr
+    %th项目</th>
+    %th地图</th>
+    %th职务</th>
+    %th住宿方式</th>
+    %th交通方式</th>
+    %th业务类型</th>
+    %th金额</th>
+    %th</th>
+    %th</th>
   </tr>
 
 <% @fee_standards.each do |fee_standard| %>
-  <tr>
-    <td><%= fee_standard.project_name %></td>
-    <td><%= fee_standard.region_name %></td>
-    <td><%= fee_standard.duty_name %></td>
-    <td><%= fee_standard.lodging_name %></td>
-    <td><%= fee_standard.transportation_name %></td>
-    <td><%= fee_standard.busitype_name %></td>
-    <td><%= fee_standard.amount %></td>
-    <td class="action"><%= link_to '查看', fee_standard %></td>
-    <td class="action"><%= link_to '删除', fee_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
+  %tr
+    %td<%= fee_standard.project_name %></td>
+    %td<%= fee_standard.region_name %></td>
+    %td<%= fee_standard.duty_name %></td>
+    %td<%= fee_standard.lodging_name %></td>
+    %td<%= fee_standard.transportation_name %></td>
+    %td<%= fee_standard.busitype_name %></td>
+    %td<%= fee_standard.amount %></td>
+    %td class="action"<%= link_to '查看', fee_standard %></td>
+    %td class="action"<%= link_to '删除', fee_standard, :confirm => '是否真的要删除?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

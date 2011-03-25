@@ -5,10 +5,10 @@
     :colModel=>["name","code","e_mail",{:name=>"dep__name",:label=>"所在部门"},
       {:name=>"duty__name",:label=>"职务"},"end_date"],
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/people/'+rowid.toString();}--#)%>
-<div class="jqgrid">
-	<div class="buttons">
-		<a href="/people/new">
-			<img src="/images/icons/add.png" alt=""/> <%= "添加人员"%>
+%div class="jqgrid"
+	%div class="buttons"
+		%a href="/people/new"
+			%img src="/images/icons/add.png" alt=""/ <%= "添加人员"%>
 		</a>
   </div>
 </div>
