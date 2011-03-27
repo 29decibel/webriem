@@ -1,4 +1,2 @@
-$("tr#fcm_<%= @delete_id%>").remove();
-$("tr#fcm_<%= @delete_id%>_for_edit").remove();
-//remove edit form if exist
-$("#edit_fcm_<%= @delete_id%>").remove();
+<%- model_s_name=ActiveModel::Naming.singular(resource) %>
+$("#<%= model_s_name%>_<%= @delete_id%>").remove();

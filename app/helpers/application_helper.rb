@@ -1,11 +1,11 @@
 #coding: utf-8
 module ApplicationHelper
-  def reference_select(field_name,model_name,value,options={})
+  def reference_select(field_name,model_name,options={})
     html=""
-    html<<hidden_field_tag(field_name,{:class=>"ref_hidden_field"})
-    html<<text_field_tag("#{model_name}_info",value,:class=>"ref")
-    html<<link_to(content_tag(:span,:class=>"reference"),"#",{"class-data"=>model_name})
-    content_tag(:div,html)
+    html<<hidden_field_tag(field_name,options[:value],:class=>"ref_hidden_field")
+    html<<text_field_tag("#{model_name}_info",options[:text],:class=>"ref")
+    html<<link_to(content_tag(:span,"",:class=>"reference"),"#",{"class-data"=>model_name})
+    content_tag(:div,raw(html),:class=>"reference")
   end
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator

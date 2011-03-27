@@ -1,5 +1,7 @@
 //render the partial
 <%- model_s_name=ActiveModel::Naming.singular(resource) %>
-$("#edit_<%= "#{model_s_name}_#{resource.id}"%>").html("<%= escape_javascript(render "edit_#{model_s_name}",model_s_name.to_sym=>resource)%>");
+$("#<%= "#{model_s_name}_#{resource.id}"%> div.edit").html("<%= escape_javascript(render "edit_#{model_s_name}",model_s_name.to_sym=>resource)%>");
 //show it
-$("#edit_<%= "#{model_s_name}_#{resource.id}"%>").show("slow");
+$("#<%= "#{model_s_name}_#{resource.id}"%> div.edit").show("slow");
+//hide the show item
+$("#<%= "#{model_s_name}_#{resource.id}"%> div.show").hide("slow");

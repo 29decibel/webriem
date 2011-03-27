@@ -825,11 +825,30 @@ div.selection_area span.checkbox{
 
 /*for the new haml file style*/
 div.list_item{
-  margin:3px;
+  margin-left:22px;
+  margin-right:22px;
   padding:2px;
-  border:1px solid #ccc;
+  position:relative;
+  border-bottom:1px solid #ccc;
+}
+div.list_item:hover span.list_action_left{
+  display:inline-block;
+}
+div.list_item:hover span.list_action_right{
+  display:inline-block;
 }
 span.list_field{
-  display:inline-block;
+  display:block;
   margin:2px 3px 2px 3px;
+}
+span.list_action_left{
+  float:left;
+  margin-left:-18px;
+  display:none;
+}
+span.list_action_right{
+  float:right;
+  margin-right:-18px;
+  display:none;
+  clear:right;
 }

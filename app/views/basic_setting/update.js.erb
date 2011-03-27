@@ -1,4 +1,5 @@
+<%- model_s_name=ActiveModel::Naming.singular(resource) %>
 //hide self
-$("#edit_fcm_<%= @fee_code_match.id%>").hide("slow");
-//refresh the tr
-$("tr#fcm_<%= @fee_code_match.id%>").html("<%= escape_javascript(render(:partial=>"tr_fee_code_match",:locals=>{:fee_code_match=>@fee_code_match}))%>");
+$("#<%= "#{model_s_name}_#{resource.id}"%> div.edit").hide("slow");
+//re render the list item
+$("#<%= "#{model_s_name}_#{resource.id}"%>").replaceWith("<%= escape_javascript(render resource)%>");

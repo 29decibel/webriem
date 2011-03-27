@@ -1,6 +1,9 @@
-%span.list_item_action= link_to image_tag("/images/icons/page_edit.png"), {:controller=>"fee_code_matches",:action=>"edit",:id=>fee_code_match.id},:remote=>true
-%span.list_item= fee_code_match.fee
-%span.list_item= fee_code_match.dcode
-%span.list_item= fee_code_match.ccode 
-%span.list_item= fee_code_match.description
-%span.list_item= link_to image_tag("/images/icons/cross.png"), fee_code_match, :confirm => '是否真的要删除?', :method => :delete,:remote=>true 
+.list_item(id="fee_code_match_#{fee_code_match.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"), {:controller=>"fee_code_matches",:action=>"edit",:id=>fee_code_match.id},:remote=>true
+    %span.list_action_left= link_to image_tag("/images/icons/cross.png"), fee_code_match, :confirm => '是否真的要删除?', :method => :delete,:remote=>true 
+    %span.list_field= fee_code_match.fee
+    %span.list_field= fee_code_match.dcode
+    %span.list_field= fee_code_match.ccode 
+    %span.list_field= fee_code_match.description
+  .edit

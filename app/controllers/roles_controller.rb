@@ -54,7 +54,9 @@ class RolesController < ApplicationController
        @role.update_attributes(:menu_ids=>params[:menus].join(","))
      end
     if !@role.update_attributes(params[:role])
-      render "edit"
+      render "basic_setting/edit",:locals=>{:resource=>@role}
+    else
+      render "basic_setting/update",:locals=>{:resource=>@role}
     end
   end
 
@@ -64,5 +66,6 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
     @delete_id=@role.id
     @role.destroy
+    render "basic_setting/destroy",:locals=>{:resource=>@role}
   end
 end

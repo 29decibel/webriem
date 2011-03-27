@@ -619,6 +619,8 @@ function send_request_from_grid(grid_id,url)
 
 function cancel_edit_form (cancel_link) {
   $(cancel_link).closest("form").hide("fast");
+  //show the show item
+  $(cancel_link).closest(".list_item").find("div.show").show("slow");
 }
 
 //$(document).bind('ajax:beforeSend', function(xhr, settings) {
