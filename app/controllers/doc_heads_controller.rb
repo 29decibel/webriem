@@ -76,7 +76,6 @@ class DocHeadsController < ApplicationController
     #	cp=	@doc.cp_doc_details.build 
     #	cp.dep=current_person.dep
 	  #end
-	  set_doc_info_4_budget
     @doc.rec_notice_details.build if @doc.doc_type==3
     reciver=@doc.recivers.build
     #init the reciver's info to current person

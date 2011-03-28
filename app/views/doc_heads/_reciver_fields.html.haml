@@ -1,29 +1,29 @@
-%fieldset class="reciver"
+%fieldset.reciver
   %legend
     = f.hidden_field(:_destroy) 
     = link_to_remove 
   %span.sequence
   .form_field
     %span.label= "#{I18n.t('common_attr.settlement')}"
-    %span.value= reference_select "settlement_id","Settlement",f.object.settlement.to_s 
+    %span.value= reference_select "settlement_id","Settlement",:text=>f.object.settlement.to_s,:value=>f.object.settlement_id
   .form_field
-    %span.label= @doc_head.doc_type==2?"#{I18n.t('common_attr.rec_company')}*":"#{I18n.t('common_attr.rec_person')}*"
+    %span.label= "#{I18n.t('common_attr.rec_company')}*"+"#{I18n.t('common_attr.rec_person')}*"
     %span.value
-      -if @doc_head.doc_type==2 
-        %span.value= reference_select "supplier_id","Supplier",f.object.supplier.to_s 
+      -if 2 
+        %span.value= reference_select "supplier_id","Supplier",:text=>f.object.supplier.to_s,:value=>f.object.supplier_id
       -else 
         %span.value=f.text_field :company,:class=> "normal"   
   .form_field
-    %span.label= "#{I18n.t('common_attr.bank')}"*
-    %span.value= f.text_field :bank,:class=>@doc_head.doc_type==2 ? "large bank" : "normal bank" 
+    %span.label= "#{I18n.t('common_attr.bank')}"
+    %span.value= f.text_field :bank,:class => "large bank" 
   .form_field
-    %span.label= "#{I18n.t('common_attr.bank_no')}"*
+    %span.label= "#{I18n.t('common_attr.bank_no')}"
     %span.value= f.text_field :bank_no ,:class=>"large bank_no"
   .form_field
-    %span.label= "#{I18n.t('common_attr.amount')}"*
+    %span.label= "#{I18n.t('common_attr.amount')}"
     %span.value= f.text_field :amount,:class=>"normal doc_ori_amount" 
-	<!--riem need the hr amount and finance amount-->
-	-if [9,11,13].include? @doc_head.doc_type
+  <!--riem need the hr amount and finance amount-->
+  -if [9,11,13].include? 2
     .form_field
       %span.label= "#{I18n.t('common_attr.hr_amount')}"  
       %span.value= f.text_field :hr_amount,:class=>"normal number doc_HR_amount" 
