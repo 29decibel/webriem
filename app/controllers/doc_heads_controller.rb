@@ -27,7 +27,6 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/1.xml
   def show
     @doc = DocHead.find(params[:id])
-    set_doc_info_4_budget
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
     if @doc.doc_state==1
       if @doc.current_approver_id==current_user.person.id
@@ -39,15 +38,18 @@ class DocHeadsController < ApplicationController
       format.xml  { render :xml => @doc }
     end
   end
-  def set_doc_info_4_budget
-    @doc_type = @doc.doc_type
-    #show the budget info
-    @b_project_id=@doc.project_id
-    @b_fee_id=@doc.budget_fee_id
-    @b_dep_id=@doc.afford_dep_id
-    @b_year=@doc.apply_date.year
-    @doc_id=@doc.id
+
+  def edit
+    @doc = DocHead.find(params[:id])
+    #if the doc is current needed to be approved by current person,then new a @work_flow_info
+    if @doc.doc_state==1
+      if @doc.current_approver_id==current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
+      end
+    end
+    render "edit_doc",:locals=>{:doc=>@doc}
   end
+
   # GET /doc_heads/new
   # GET /doc_heads/new.xml
   def new
@@ -93,10 +95,11 @@ class DocHeadsController < ApplicationController
     #暂时每次都创建一个审批流填写信息
     @doc.work_flow_infos.build
     #render
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @doc }
-    end
+    #render "edit_doc",:locals=>{:doc=>@doc}
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #  format.xml  { render :xml => @doc }
+    #end
   end
 
 

@@ -36,7 +36,7 @@
             -mc.grouped_menus.each do |v|
               %ul
                 -v.each do |m|
-                  %li=link_to I18n.t("menu.#{m.name}"),m.path 
+                  %li=link_to I18n.t("menu.#{m.name}"),m.path,:remote=>true
       #content
         =yield
     .footer
