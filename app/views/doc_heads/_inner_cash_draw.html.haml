@@ -1,17 +1,17 @@
 .form_area
-	.form_field
-		%span.label= f.label "#{I18n.t('common_attr.cash_draw_account')}"
-		%span.value= reference_select "account_id","Account",detail_doc.account.to_s
-	.form_field
-		%span.label= f.label "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" 
-		%span.value= f.text_field :now_remain_amout,:class=>"input1 "
-.doc_detail
-.form_title
-  %h3
-    = I18n.t('common_attr.add_apply_item')
-	  = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cash_draw_items 
-    = image_tag "currency_yuan.png"
-    %span.doc_total_amount.normal 0.0
-.form_area#cash_draw_items#form_block
-	-f.fields_for :cash_draw_items do |builder|
-    = render :partial => 'cash_draw_item_fields',:locals => { :f => builder }
+  .form_field
+    %span.label= f.label "#{I18n.t('common_attr.cash_draw_account')}"
+    %span.value= reference_select "account_id","Account",:text=>detail_doc.account.to_s,:value=>detail_doc.account_id
+  .form_field
+    %span.label= f.label "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" 
+    %span.value= f.text_field :now_remain_amout,:class=>"input1 "
+  .doc_detail
+    .form_title
+      %h3
+        = I18n.t('common_attr.add_apply_item')
+        = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cash_draw_items 
+        = image_tag "currency_yuan.png"
+        %span.doc_total_amount.normal 0.0
+    .form_area#cash_draw_items#form_block
+      -f.fields_for :cash_draw_items do |builder|
+        = render :partial => 'cash_draw_item_fields',:locals => { :f => builder }

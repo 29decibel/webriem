@@ -73,7 +73,7 @@ class DocHeadsController < ApplicationController
     @doc.person=current_person
     #build some new doc details
     #if @doc.doc_type==1 or  @doc.doc_type==2
-    #	cp=	@doc.cp_doc_details.build 
+    @doc.cp_doc_details.build 
     #	cp.dep=current_person.dep
 	  #end
     @doc.rec_notice_details.build if @doc.doc_type==3

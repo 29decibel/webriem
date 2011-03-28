@@ -8,16 +8,16 @@
     %span.value= f.text_field :apply_date,:class=>"datepicker normal" 
   .form_field
     %span.label= "#{I18n.t('common_attr.afford_dep')}"
-    %span.value= reference_select "dep_id","Dep",f.object.dep.to_s 
+    %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id
   .form_field
     %span.label= "#{I18n.t('common_attr.project')}"
-    %span.value= reference_select "project_id","Project",f.object.project.to_s 
+    %span.value= reference_select "project_id","Project",:text=>f.object.project.to_s,:value=>f.object.project_id
   .form_field
     %span.label= "#{I18n.t('activerecord.attributes.doc_head.rec_notice_details.content')}"
     %span.value= f.text_field :description,:class=>"large" 
   .form_field
     %span.label= "#{I18n.t('common_attr.currency')}"
-    %span.value= reference_select "currency_id","Currency",f.object.currency.to_s 
+    %span.value= reference_select "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id
   .form_field
     %span.label= "#{I18n.t('common_attr.rate')}"
     %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 
@@ -25,5 +25,5 @@
     %span.label= "#{I18n.t('common_attr.apply_amount')}"
     %span.value= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" 
   .form_field
-    %span.label= "#{I18n.t('activerecord.attributes.doc_head.rec_notice_details.amount')}"*
+    %span.label= "#{I18n.t('activerecord.attributes.doc_head.rec_notice_details.amount')}"
     %span.value= f.text_field :amount,:class=>"normal doc_apply_amount number" 

@@ -1,28 +1,30 @@
 .form_field.large
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"
-	%span.value= f.text_field :amount,:class=>"input1 large" 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"
+  %span.value= f.text_field :amount,:class=>"input1 large" 
 .form_field
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"
-	%span.value= reference_select "currency_id","Currency",detail_doc.currency.to_s 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"
+  %span.value= reference_select "currency_id","Currency",:text=>detail_doc.currency.to_s,:value=>detail_doc.currency_id 
 %br
 .form_field.col-sp2
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"
-	%span.value=reference_select "account_id","Account",detail_doc.account.to_s 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"
+  %span.value=reference_select "account_id","Account",:text=>detail_doc.out_account.to_s,:value=>detail_doc.out_account_id
 %br
 .form_field.col-sp2
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.remain_amount')}",:class=>"large" 
-	%span.value= f.text_field :in_amount_after,:class=>"input1 " 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.remain_amount')}",:class=>"large" 
+  %span.value= f.text_field :in_amount_after,:class=>"input1 " 
+%br
 .form_field.col-sp2
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_account_id')}",:class=>"large" 
-	%span.value=reference_select "in_account_id","Account",detail_doc.in_account.to_s 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_account_id')}",:class=>"large" 
+  %span.value=reference_select "in_account_id","Account",:text=>detail_doc.in_account.to_s,:value=>detail_doc.in_account_id
+%br
 .form_field.col-sp2
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_amount_after')}",:class=>"large" 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.in_amount_after')}",:class=>"large" 
   %span.value= f.text_field :remain_amount,:class=>"input1 "
 %br
 .form_field
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.now_rate_price')}",:class=>"large" 
-	%span.value= f.text_field :now_rate_price,:class=>"input1 " 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.now_rate_price')}",:class=>"large" 
+  %span.value= f.text_field :now_rate_price,:class=>"input1 " 
 %br
 .form_field.col-sp2
-	%span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.description')}",:class=>"large"
-	%span.value= f.text_area :description,:class=>"input2 " 
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.description')}",:class=>"large"
+  %span.value= f.text_area :description,:class=>"input2 " 

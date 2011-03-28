@@ -261,10 +261,10 @@
           = f.fields_for :reim_split_details do |builder|  
             = render :partial => "reim_split_detail_fields",:locals => { :f => builder }  
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    -if doc.doc_type>=9 and doc.doc_type<=12
-      .form_title
-        %h3= "#{I18n.t('common_attr.now_cp_docs')}"
-      = render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>doc }  
+    <!---if doc.doc_type>=9 and doc.doc_type<=12-->
+    <!--  .form_title-->
+    <!--    %h3= "#{I18n.t('common_attr.now_cp_docs')}"-->
+    <!--  = render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>doc } --> 
     <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type%3 or doc.doc_type=9 and doc.doc_type<=13
       .doc_detail.recivers
