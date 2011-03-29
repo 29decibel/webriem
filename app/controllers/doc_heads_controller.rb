@@ -13,14 +13,19 @@ class DocHeadsController < ApplicationController
   end
   # GET /doc_heads
   # GET /doc_heads.xml
+  # the entry of all about 's filter and order by
   def index
     #get the specific docs by the doc_type passed by querystring
+    #just get all docs of currenct person by test
     @docs = DocHead.where("doc_type=?",params[:doc_type].to_i).all
     @doc_type=params[:doc_type].to_i
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @docs }
     end
+  end
+  def my_docs
+    @docs=DocHead.by_person(current_person.id)
   end
 
   # GET /doc_heads/1
@@ -34,8 +39,8 @@ class DocHeadsController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html # show.html.erb
       format.xml  { render :xml => @doc }
+      format.js # show.html.erb
     end
   end
 
@@ -47,7 +52,6 @@ class DocHeadsController < ApplicationController
         @work_flow_info=WorkFlowInfo.new
       end
     end
-    render "edit_doc",:locals=>{:doc=>@doc}
   end
 
   # GET /doc_heads/new

@@ -96,6 +96,8 @@ class DocHead < ActiveRecord::Base
     #the amount of issplit should be equal to total_fi_amount
     errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_fi_amount}") if is_split==1 and split_total_amount!=total_fi_amount
   end
+  #############################################
+  scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
   def dep_and_project_not_null
     #debugger
     errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)

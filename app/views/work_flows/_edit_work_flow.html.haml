@@ -1,0 +1,60 @@
+<%= form_for(@work_flow,:remote=>true) do |f| %>
+%div class="form_title"
+	%h3<%= @title%></h3>
+</div>
+%div class="actions"
+	<%= link_to "#{I18n.t('common_op.btn_new')}", new_work_flow_path,:class=>"button2" %>
+  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", work_flows_path,:class=>"button2" %>
+</div>
+%div class="form_area"
+		%div class="form_field"
+			<%= f.label "#{I18n.t('activerecord.attributes.work_flow.name')}#{mark_required(f.object,:name)}" %>		
+			<%= f.text_field :name,:class=>"input1" %><%= mark_required(@work_flow, :name) %>
+		</div>
+    %br/
+		%div class="form_field"
+			<%= f.label "#{I18n.t('activerecord.attributes.work_flow.doc_types')}" %>%br/
+		</div>
+		%div class="form_field"
+			<% (1..14).each do |num| %>
+				%div class="doc_type_check"
+					<%= check_box_tag("doc_types[]",num,@work_flow.doc_types.split(';').include?(num.to_s))%><%= f.label doc_type_name(num)%>
+				</div>			
+			<% end %>
+		</div>
+	%br/
+		%div class="form_field"
+			<%= f.label "#{I18n.t('activerecord.attributes.work_flow.duty')}#{mark_required(f.object,:duties)}" %>			
+			%div class="reference"
+				<%= hidden_field_tag "duty_ids",(@work_flow.duties.map{|p| p.id}).join("_"),{:class=>"ref_hidden_field"}%>
+				<%= text_area_tag "duty_info",(@work_flow.duties.map{|p| p.to_s}).join(";"),:class=>"ref input2" %>
+				%a href="#" class-data="Duty" multicheck="true"%span class="reference"</span></a>			
+			</div>
+		</div>
+</div>
+%div id="details"
+	%div class="table_details"
+		%table class="form_input"
+			%thead
+				%tr
+					%th<%= "#{I18n.t('activerecord.attributes.work_flow_step.is_self_dep')}"%></th>
+					%th<%= "#{I18n.t('activerecord.attributes.work_flow_step.dep_id')}"%></th>				    
+				    %th<%= "#{I18n.t('activerecord.attributes.work_flow_step.duty_id')}"%></th>
+					%th<%= "#{I18n.t('activerecord.attributes.work_flow_step.max_amount')}"%></th>
+					%th</th><!--给删除的-->		    
+			    </tr>
+		    %thead
+			%tbody
+				<%= f.fields_for :work_flow_steps do |builder|  %>
+					<%= render :partial => 'work_flow_step_fields',:locals => { :f => builder } %>
+				<% end %>
+			</tbody>
+			%tr
+				%th colspan="4"<%= link_to_add_fields "#{I18n.t('activerecord.attributes.work_flow.add_new_step')}",f,:work_flow_steps %></th>
+			</tr>		
+		</table>
+	</div>	
+</div>
+
+<% end %>

@@ -1,0 +1,27 @@
+<%= form_for(@menu_category) do |f| %>
+<h3 class="form_title"><%= @title%></h3>
+<div class="field">
+	<%= f.label :name,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_field :name,:class=>"basic_input" %><%= mark_required(@menu_category, :name) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+<div class="field">
+	<%= f.label :description,:class=>"input_label" %>
+	<div class="input_area">
+		<p class="input">
+			<%= f.text_area :description,:class=>"basic_input" %><%= mark_required(@menu_category, :description) %>
+		</p>
+		<p class="tip"></p>
+	</div>
+	<span class="error_message"></span>    
+  </div>
+
+  <div class="actions">
+    <%= f.submit "保存" %>
+  </div>
+<% end %>

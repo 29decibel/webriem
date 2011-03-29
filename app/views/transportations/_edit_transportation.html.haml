@@ -1,0 +1,22 @@
+<%= form_for(@transportation,:remote=>true) do |f| %>
+<div class="form_title">
+	<h3><%= @title%></h3>
+</div>
+<div class="actions">
+	<%= link_to "#{I18n.t('common_op.btn_new')}", new_transportation_path,:class=>"button2" %>
+  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
+	<%= link_to "#{I18n.t('common_op.btn_return')}", transportations_path,:class=>"button2" %>
+</div>
+<div class="form_area">
+<div class="form_block">
+	<div class="form_field">
+		<%= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}" %>			
+		<%= f.text_field :name,:class=>"input1 "+ mark_required(@transportation, :name) %>
+	</div>
+	<div class="form_field">
+		<%= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}" %>
+		<%= f.text_field :code,:class=>"input1 "+ mark_required(@transportation, :code) %>
+	</div>
+</div>
+</div>
+<% end %>

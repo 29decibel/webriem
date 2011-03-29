@@ -1,32 +1,25 @@
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.name')}" %></span>
-		<span class="value"><%= f.text_field :name,:class=>"input1" %></span>  
-  </div><br/>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.account_id')}" %></span>
-		<span class="value"><div class="reference">
-			<%= f.hidden_field :account_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "account_info",detail_doc.account.to_s,:class=>"ref large" %>
-			<a href="#" class-data="Account"><span class="reference"></span></a>			
-		</div></span>
-  </div><br/>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.amount')}" %></span>
-		<span class="value"><%= f.text_field :amount,:class=>"input1" %></span>  
-  </div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.rate')}" %></span>
-		<span class="value"><%= f.text_field :rate,:class=>"input1" %></span>  
-  </div><br/>
-	<div class="form_field">
-    <span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.buy_date')}" %></span>
-		<span class="value"><%= f.text_field :buy_date,:class=>"datepicker input1"  %></span>
-	</div>
-	<div class="form_field">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.redeem_date')}" %></span>
-		<span class="value"><%= f.text_field :redeem_date,:class=>"datepicker input1"  %></span>  
-  </div><br/>
-	<div class="form_field col-sp2">
-		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.description')}"%></span>
-		<span class="value"><%= f.text_area :description,:class=>"input2" %></span> 
-	</div>
+.form_field
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.name')}" 
+  %span.value= f.text_field :name,:class=>"input1"   
+%br
+.form_field.col-sp2
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.account_id')}" 
+  %span.value= reference_select "account_id","Account",:text=>f.object.account.to_s,:value=>f.object.account_id
+%br
+.form_field
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.amount')}" 
+  %span.value= f.text_field :amount,:class=>"input1"   
+.form_field
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.rate')}" 
+  %span.value= f.text_field :rate,:class=>"input1"   
+%br
+.form_field
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.buy_date')}" 
+  %span.value= f.text_field :buy_date,:class=>"datepicker input1"  
+.form_field
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.redeem_date')}" 
+  %span.value= f.text_field :redeem_date,:class=>"datepicker input1"    
+%br
+.form_field.col-sp2
+  %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.description')}"
+  %span.value= f.text_area :description,:class=>"input2"  

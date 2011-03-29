@@ -1,41 +1,30 @@
-%div id="reim_cp_doc_offset" class="form_area"
-	%table class="form_input"
-		%thead
-			%tr				
-			    %th<%= "#{I18n.t('activerecord.attributes.doc_head.doc_no')}"%></th>
-			    %th<%= "#{I18n.t('activerecord.attributes.doc_head.apply_date')}"%></th>
-			    %th<%= "#{I18n.t('activerecord.models.project')}"%></th>
-				%th<%= "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}"%></th>
-				%th<%= "#{I18n.t('cp_doc_offset.left_offset_amount')}"%></th>				
-			    %th<%= "#{I18n.t('cp_doc_offset.offset_amount')}"%></th>
-				%th</th>	    
-		    </tr>
-	    %thead
-		%tbody
-			<% doc_head.available_offset_cp_docs(current_user.person.id).each_with_index do |doc,index|%>
-			<% doc_offset=doc.offset_info(doc_head.id)%>
-				%tr
-					%td<%= doc.doc_no%></td>
-					%td<%= doc.apply_date%></td>
-					%td<%= doc.project_name%></td>
-					%td<%= doc.total_apply_amount%></td>
-					%td<%= doc.cp_doc_remain_amount%></td>
-					%td
-						<% if doc_offset %>
-							<%= label_tag "offset_info[#{index}][amount]",doc_offset.amount%>
-						<% else %>
-							<%= text_field_tag "offset_info[#{index}][amount]",0,:class=>"offset_amount" %>
-						<% end %>
-					</td>
-					%td
-						<% if doc_offset %>
-							<%= link_to "#{I18n.t('cp_doc_offset.delete_ori')}",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true,:class=>"cp_offset_link"%>
-						<% else %>
-							<%= hidden_field_tag "offset_info[#{index}][cp_doc_head_id]",doc.id%>
-						<% end %>
-					</td>
-				</tr>
-			<% end %>			
-		</tbody>	
-	</table>
-</div>
+#reim_cp_doc_offset.form_area
+  %table.form_input
+    %thead
+      %tr
+        %th= "#{I18n.t('activerecord.attributes.doc_head.doc_no')}"
+        %th= "#{I18n.t('activerecord.attributes.doc_head.apply_date')}"
+        %th= "#{I18n.t('activerecord.models.project')}"
+        %th= "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}"
+        %th= "#{I18n.t('cp_doc_offset.left_offset_amount')}"
+        %th= "#{I18n.t('cp_doc_offset.offset_amount')}"
+        %th
+    %tbody
+      -doc_head.available_offset_cp_docs(current_user.person.id).each_with_index do |doc,index|
+        -doc_offset=doc.offset_info(doc_head.id)
+        %tr
+          %td= doc.doc_no
+          %td= doc.apply_date
+          %td= doc.project_name
+          %td= doc.total_apply_amount
+          %td= doc.cp_doc_remain_amount
+          %td
+            -if doc_offset 
+              = label_tag "offset_info[#{index}][amount]",doc_offset.amount
+            -else 
+              = text_field_tag "offset_info[#{index}][amount]",0,:class=>"offset_amount"
+          %td
+            -if doc_offset 
+              = link_to "#{I18n.t('cp_doc_offset.delete_ori')}",remove_offset_path(:cp_doc_head_id=>doc.id,:reim_doc_head_id=>doc_head.id),:remote=>true,:class=>"cp_offset_link"
+            -else 
+              = hidden_field_tag "offset_info[#{index}][cp_doc_head_id]",doc.id

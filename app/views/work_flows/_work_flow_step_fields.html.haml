@@ -1,24 +1,24 @@
-<tr class="fields">
-	<td>
+%tr class="fields"
+	%td
 		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input is_self_dep"} %>
 	</td>
-	<td>
-		<div class="reference dep">
+	%td
+		%div class="reference dep"
 			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref middle" %>
-			<a href="#" class-data="Dep"><span class="reference"></span></a>			
+			%a href="#" class-data="Dep"%span class="reference"</span></a>			
 		</div>
-	<td>		
-		<div class="reference">
+	%td		
+		%div class="reference"
 			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
 			<%= text_field_tag "duty_info",f.object.duty.to_s,:class=>"ref middle" %>
-			<a href="#" class-data="Duty"><span class="reference"></span></a>			
+			%a href="#" class-data="Duty"%span class="reference"</span></a>			
 		</div>
 	</td>
-	<td>
+	%td
 		<%= f.text_field :max_amount,:class=>"basic_input" %>元
 	</td>
-	<td>
+	%td
 		<%= f.hidden_field(:_destroy) %>
 		<%= link_to_remove "#{I18n.t('common_attr.btn_delete')}", f %> 
 	</td>
