@@ -3,7 +3,13 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Subject",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Subject.all
+    @model_s_name="subject"
+    @model_p_name="subjects"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /subjects/1

@@ -3,7 +3,13 @@ class CurrenciesController < ApplicationController
   # GET /currencies
   # GET /currencies.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Currency",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Account.all
+    @model_s_name="account"
+    @model_p_name="accounts"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /currencies/1

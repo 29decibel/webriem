@@ -2,11 +2,12 @@ class MenuCategoriesController < ApplicationController
   # GET /menu_categories
   # GET /menu_categories.xml
   def index
-    @menu_categories = MenuCategory.all
-
+    @resources=MenuCategory.all
+    @model_s_name="menu_category"
+    @model_p_name="menu_categories"
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @menu_categories }
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
     end
   end
 

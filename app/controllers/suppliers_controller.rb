@@ -2,11 +2,12 @@ class SuppliersController < ApplicationController
   # GET /suppliers
   # GET /suppliers.xml
   def index
-    @suppliers = Supplier.all
-
+    @resources=Supplier.all
+    @model_s_name="supplier"
+    @model_p_name="suppliers"
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @suppliers }
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
     end
   end
 

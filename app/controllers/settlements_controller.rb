@@ -3,7 +3,13 @@ class SettlementsController < ApplicationController
   # GET /settlements
   # GET /settlements.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Settlement",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Settlement.all
+    @model_s_name="settlement"
+    @model_p_name="settlements"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /settlements/1

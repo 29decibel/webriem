@@ -3,7 +3,13 @@ class TransportationsController < ApplicationController
   # GET /transportations
   # GET /transportations.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Transportation",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Transportation.all
+    @model_s_name="transportation"
+    @model_p_name="transportations"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /transportations/1

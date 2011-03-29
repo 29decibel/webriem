@@ -3,7 +3,13 @@ class RegionsController < ApplicationController
   # GET /regions
   # GET /regions.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Region",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Region.all
+    @model_s_name="region"
+    @model_p_name="regions"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /regions/1

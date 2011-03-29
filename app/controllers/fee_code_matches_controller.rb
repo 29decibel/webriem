@@ -1,6 +1,12 @@
 class FeeCodeMatchesController < ApplicationController
   def index
-    @fee_code_matches = FeeCodeMatch.all
+    @resources=FeeCodeMatch.all
+    @model_s_name="fee_code_match"
+    @model_p_name="fee_code_matches"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   def edit

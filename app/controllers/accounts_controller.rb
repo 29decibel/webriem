@@ -3,7 +3,13 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Account",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Account.all
+    @model_s_name="account"
+    @model_p_name="accounts"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /accounts/1
@@ -16,6 +22,10 @@ class AccountsController < ApplicationController
       format.xml  { render :xml => @account }
     end
   end
+  def edit
+    @account = Account.find(params[:id])
+    render "basic_setting/edit",:locals=>{:resource=>@account}
+  end
 
   # GET /accounts/new
   # GET /accounts/new.xml
@@ -25,6 +35,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @account }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@account }}
     end
   end
 
@@ -32,12 +43,11 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
-    if @account.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@account.save
+      render "basic_setting/new",:locals=>{:resource=>@account }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@account)}
+      @accounts=Account.all
+      render "basic_setting/create",:locals=>{:resource=>@account,:resources=>@accounts}
     end
   end
 
@@ -45,12 +55,10 @@ class AccountsController < ApplicationController
   # PUT /accounts/1.xml
   def update
     @account = Account.find(params[:id])
-    if @account.update_attributes(params[:account])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@account.update_attributes(params[:account])
+      render "basic_setting/edit",:locals=>{:resource=>@account }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@account)}
+      render "basic_setting/update",:locals=>{:resource=>@account}
     end
   end
 
@@ -63,6 +71,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(accounts_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@account} }
     end
   end
 end

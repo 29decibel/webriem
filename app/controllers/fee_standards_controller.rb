@@ -3,7 +3,13 @@ class FeeStandardsController < ApplicationController
   # GET /fee_standards
   # GET /fee_standards.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"FeeStandard",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=FeeStandard.all
+    @model_s_name="fee_standard"
+    @model_p_name="fee_standards"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /fee_standards/1

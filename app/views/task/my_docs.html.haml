@@ -9,19 +9,4 @@
 			{:name=>"total_amount",:getter=>:total_fi_amount,:label=>"审批金额"}],
 		:height=>450,:width=>800,:where=>"person_id=#{current_user.person.id}",
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)
-.jqgrid
-  .buttons
-		<a onclick="output_to_txt('#my_doc'); return false;" href="#">
-			<img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt')%>
-		</a>
-		<a onclick="output_to_excel('#my_doc'); return false;" href="#">
-			<img src="/images/icons/table.png" alt=""/> <%= I18n.t('common_attr.btn_output_excel')%>
-		</a>
-		<a onclick="batch_print('#my_doc'); return false;" href="#">
-			<img src="/images/icons/printer.png" alt=""/><%= I18n.t('common_attr.btn_batch_print')%>
-		</a>
-		<a onclick="delete_docs('#my_doc'); return false;" href="#">
-			<img src="/images/icons/cross.png" alt=""/><%= I18n.t('common_attr.btn_delete')%>
-    </a>
-  </div>
-</div>
+

@@ -1,0 +1,7 @@
+.list_item(id="person_#{person.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_person_path(person) ,:remote=>true
+    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), person, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
+    %span.list_field= person.name
+    %span.list_field= person.code
+  .edit

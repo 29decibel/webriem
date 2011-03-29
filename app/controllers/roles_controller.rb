@@ -3,7 +3,13 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.xml
   def index
-    @roles=Role.all
+    @resources=Role.all
+    @model_s_name="role"
+    @model_p_name="roles"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /roles/1
@@ -39,10 +45,11 @@ class RolesController < ApplicationController
       @role.menu_ids=params[:menus].join(",")
     end
     if !@role.save
-      render "new"
+      render "basic_setting/new",:locals=>{:resource=>@role }
+    else
+      @roles=Role.all
+      render "basic_setting/create",:locals=>{:resource=>@role,:resources=>@roles}
     end
-    @roles=Role.all
-    render "basic_setting/create",:locals=>{:resource=>@role,:resources=>@roles}
   end
 
   # PUT /roles/1

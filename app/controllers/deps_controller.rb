@@ -2,14 +2,24 @@
 class DepsController < ApplicationController
   # GET /deps
   def index
-    #redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Dep",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Dep.all
+    @model_s_name="dep"
+    @model_p_name="deps"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
   
   # GET /currencies/new
   def new
     @dep = Dep.new
+    render "basic_setting/new",:locals=>{:resource=>@dep}
   end
-  
+  def edit
+    @dep = Dep.find(params[:id])
+    render "basic_setting/edit",:locals=>{:resource=>@dep}
+  end
   # GET /deps/1
   #显示所有的部门在这里啊
   def show
@@ -24,24 +34,21 @@ class DepsController < ApplicationController
   # POST /deps
   def create
     @dep = Dep.new(params[:dep])
-    if @dep.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@dep.save
+      render "basic_setting/new",:locals=>{:resource=>@dep }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@dep)}
+      @deps=Dep.all
+      render "basic_setting/create",:locals=>{:resource=>@dep,:resources=>@deps}
     end
   end
 
   # PUT /deps/1
   def update
     @dep = Dep.find(params[:id])
-    if @dep.update_attributes(params[:dep])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@dep.update_attributes(params[:dep])
+      render "basic_setting/edit",:locals=>{:resource=>@dep}
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@dep)}
+      render "basic_setting/update",:locals=>{:resource=>@dep}
     end
   end
 
@@ -49,6 +56,6 @@ class DepsController < ApplicationController
   def destroy
     @dep = Dep.find(params[:id])
     @dep.destroy
-    redirect_to(deps_url)
+    render "basic_setting/destroy",:locals=>{:resource=>@dep}
   end
 end

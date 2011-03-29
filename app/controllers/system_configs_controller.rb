@@ -2,11 +2,12 @@ class SystemConfigsController < ApplicationController
   # GET /system_configs
   # GET /system_configs.xml
   def index
-    @system_configs = SystemConfig.all
-
+    @resources=SystemConfig.all
+    @model_s_name="system_config"
+    @model_p_name="system_configs"
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @system_configs }
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
     end
   end
 

@@ -3,7 +3,13 @@ class DutiesController < ApplicationController
   # GET /duties
   # GET /duties.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Duty",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Duty.all
+    @model_s_name="duty"
+    @model_p_name="duties"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /duties/1
@@ -21,18 +27,21 @@ class DutiesController < ApplicationController
   # GET /duties/new.xml
   def new
     @duty = Duty.new
+    render "basic_setting/new",:locals=>{:resource=>@duty}
   end
-
+  def edit
+    @duty = Duty.find(params[:id])
+    render "basic_setting/edit",:locals=>{:resource=>@duty}
+  end
   # POST /duties
   # POST /duties.xml
   def create
     @duty = Duty.new(params[:duty])
-    if @duty.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@duty.save
+      render "basic_setting/new",:locals=>{:resource=>@duty }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@duty)}
+      @duties=Duty.all
+      render "basic_setting/create",:locals=>{:resource=>@duty,:resources=>@duties}
     end
   end
 
@@ -40,12 +49,10 @@ class DutiesController < ApplicationController
   # PUT /duties/1.xml
   def update
     @duty = Duty.find(params[:id])
-    if @duty.update_attributes(params[:duty])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@duty.update_attributes(params[:duty])
+      render "basic_setting/edit",:locals=>{:resource=>@duty}
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@duty)}
+      render "basic_setting/update",:locals=>{:resource=>@duty}
     end
   end
 
@@ -58,6 +65,7 @@ class DutiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(duties_url) }
       format.xml  { head :ok }
+      format.js {render "basic_setting/destroy",:locals=>{:resource=>@duty}}
     end
   end
 end

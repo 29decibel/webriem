@@ -3,7 +3,13 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    #redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Person",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Person.all
+    @model_s_name="person"
+    @model_p_name="people"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   def all
@@ -46,6 +52,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @person }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@person} }
     end
   end
 
@@ -55,15 +62,17 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(params[:person])
     user=User.new(:name => @person.code, :email => @person.e_mail, :password => "123456",:password_confirmation=>"123456")
-    if user.valid? and @person.valid?
+    if @person.save and user.valid?
       user.save
-      @person.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+      @people=Person.all
+      render "basic_setting/create",:locals=>{:resource=>@person,:resources=>@people}
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@person)+get_error_messages(user)}
+      render "basic_setting/new",:locals=>{:resource=>@person }
     end
+  end
+  def edit
+    @person = Person.find(params[:id])
+    render "basic_setting/edit",:locals=>{:resource=>@person}
   end
 
   # PUT /people/1
@@ -73,14 +82,10 @@ class PeopleController < ApplicationController
     @person.attributes=params[:person]
     #user=User.find_by_name(@person.code)
     #user.attributes={:name=>@person.code,:e_mail=>@person.e_mail,:password_confirmation=>user.password}
-    if @person.valid?
-      #user.update_attributes :name=>@person.code,:e_mail=>@person.e_mail
-      @person.update_attributes params[:person]
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if @person.update_attributes params[:person] and @person.valid?
+      render "basic_setting/update",:locals=>{:resource=>@person}
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(user)+get_error_messages(@person)}
+      render "basic_setting/edit",:locals=>{:resource=>@person}
     end
   end
 
@@ -98,6 +103,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(people_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@person} }
     end
   end
 end

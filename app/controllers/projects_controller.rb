@@ -3,7 +3,13 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    #redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Project",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=Project.all
+    @model_s_name="project"
+    @model_p_name="projects"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /projects/1
@@ -25,6 +31,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@project} }
     end
   end
 
@@ -32,25 +39,25 @@ class ProjectsController < ApplicationController
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
-    if @project.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@project.save
+      render "basic_setting/new",:locals=>{:resource=>@project }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@project)}
+      @projects=Project.all
+      render "basic_setting/create",:locals=>{:resource=>@project,:resources=>@projects}
     end
   end
-
+  def edit
+    @project = Project.find(params[:id])
+    render "basic_setting/edit",:locals=>{:resource=>@project}
+  end
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
-    if @project.update_attributes(params[:project])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@project.update_attributes(params[:project])
+      render "basic_setting/edit",:locals=>{:resource=>@project}
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@project)}
+      render "basic_setting/update",:locals=>{:resource=>@project}
     end
   end
 
@@ -63,6 +70,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(projects_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@project} }
     end
   end
 end

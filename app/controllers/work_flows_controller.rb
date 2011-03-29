@@ -4,7 +4,13 @@ class WorkFlowsController < ApplicationController
   # GET /work_flows
   # GET /work_flows.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"WorkFlow",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=WorkFlow.all
+    @model_s_name="work_flow"
+    @model_p_name="work_flows"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /work_flows/1

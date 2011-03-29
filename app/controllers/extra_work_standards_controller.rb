@@ -3,7 +3,13 @@ class ExtraWorkStandardsController < ApplicationController
   # GET /extra_work_standards
   # GET /extra_work_standards.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"ExtraWorkStandard",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
+    @resources=ExtraWorkStandard.all
+    @model_s_name="extra_work_standard"
+    @model_p_name="extra_work_standards"
+    respond_to do |format|
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
+    end
   end
 
   # GET /extra_work_standards/1

@@ -3,13 +3,13 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.xml
   def index
-    @budgets = Budget.all
-
+    @resources=Account.all
+    @model_s_name="account"
+    @model_p_name="accounts"
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @budgets }
+      format.xml  { render :xml => @resources }
+      format.js   { render "basic_setting/index"}
     end
-    #redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Budget",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
   # GET /budgets/1
