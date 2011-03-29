@@ -1,0 +1,7 @@
+.list_item(id="account_#{account.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_account_path(account) ,:remote=>true
+    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), account, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
+    %span.list_field= account.name
+    %span.list_field= account.code
+  .edit

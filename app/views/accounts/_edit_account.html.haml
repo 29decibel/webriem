@@ -1,14 +1,11 @@
--form_for(@account,:remote=>true) do |f| 
-  .form_title
-    %h3= @title
-  .actions
-    = link_to "#{I18n.t('common_op.btn_new')}", new_account_path,:class=>"button2" 
-    = link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" 
-    = link_to "#{I18n.t('common_op.btn_return')}", accounts_path,:class=>"button2" 
-  .form_area
-    .form_field
-      %span.label= f.label "#{I18n.t('activerecord.attributes.account.name')}#{mark_required(f.object,:name)}"
-      %span.value= f.text_field :name,:class=>"input1"
-    .form_field
-      %span.label=f.label "#{I18n.t('activerecord.attributes.account.account_no')}#{mark_required(f.object,:account_no)}"
-      %span.value=f.text_field :account_no,:class=>"input1"
+-form_for account,:remote=>true,:class=>"edit_inline" do |f|
+  = render "shared/common_error",:resource=>account
+  =f.hidden_field :id
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.account.name')}#{mark_required(f.object,:name)}"
+    %span.value= f.text_field :name,:class=>"input1"
+  .form_field
+    %span.label=f.label "#{I18n.t('activerecord.attributes.account.account_no')}#{mark_required(f.object,:account_no)}"
+    %span.value=f.text_field :account_no,:class=>"input1"
+  =render "basic_setting/fb_actions"
+
