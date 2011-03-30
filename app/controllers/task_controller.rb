@@ -8,28 +8,28 @@ class TaskController < ApplicationController
   end
   #docs need to approve
   def docs_to_approve
-    @docs=DocHead.by_person(current_user.person.id)
+    @docs=DocHead.where("doc_state=1 and current_approver_id=#{current_user.person.id}")
     respond_to do |format|
       format.js { render 'show_docs'}
     end
   end
   #the docs need to pay
   def docs_to_pay
-    @docs=DocHead.by_person(current_user.person.id)
+    @docs=DocHead.("doc_state=2")
     respond_to do |format|
       format.js { render 'show_docs'}
     end
   end
   #the docs that has been approved
   def docs_approved
-    @docs=DocHead.by_person(current_user.person.id)
+    @docs=DocHead.joins(:work_flow_infos).where("work_flow_infos.people_id=#{current_user.person.id}").all
     respond_to do |format|
       format.js { render 'show_docs'}
     end
   end
   #docs already paid
   def docs_paid
-    @docs=DocHead.by_person(current_user.person.id)
+    @docs=DocHead.("doc_state=3")
     respond_to do |format|
       format.js { render 'show_docs'}
     end
