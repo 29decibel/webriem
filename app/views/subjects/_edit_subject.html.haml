@@ -1,54 +1,22 @@
-<%= form_for(@subject,:remote=>true) do |f| %>
-%div class="form_title"
-	%h3<%= @title%></h3>
-</div>  
-%div class="actions"
-	<%= link_to "#{I18n.t('common_op.btn_new')}", new_subject_path,:class=>"button2" %>
-    <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to "#{I18n.t('common_op.btn_return')}", subjects_path,:class=>"button2" %>
- </div>
-%div class="form_area"
-%div class="form_block"
-	%div class="form_field"
-		<%= f.label "#{I18n.t('activerecord.attributes.subject.business_type_id')}#{mark_required(f.object,:business_type)}" %>			
-		%div class="reference"
-			<%= f.hidden_field :business_type_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "business_type_info",@subject.business_type.to_s,:class=>"ref" %>
-			%a href="#" class-data="BusinessType"%span class="reference"</span></a>			
-		</div>
-	</div>
-	%div class="form_field"
-		<%= f.label "#{I18n.t('activerecord.attributes.subject.fee_id')}#{mark_required(f.object,:fee)}" %>
-		%div class="reference"
-			<%= f.hidden_field :fee_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "fee_info",@subject.fee.to_s,:class=>"ref" %>
-			%a href="#" class-data="Fee"%span class="reference"</span></a>			
-		</div>
-	</div>
-</div>
-%div class="form_block"
-	%div class="form_field"
-		<%= f.label "#{I18n.t('common_attr.dep')}#{mark_required(f.object,:dep)}" %>			
-		%div class="reference"
-			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "dep_info",@subject.dep.to_s,:class=>"ref" %>
-			%a href="#" class-data="Dep"%span class="reference"</span></a>			
-		</div>
-	</div>
-	%div class="form_field"
-		<%= f.label "#{I18n.t('activerecord.attributes.subject.u8_fee_subject')}#{mark_required(f.object,:u8_fee_subject)}" %>
-		<%= f.text_field :u8_fee_subject,:class=>"input1 " %>
-	</div>
-</div>
-%div class="form_block"
-	%div class="form_field"
-		<%= f.label "#{I18n.t('activerecord.attributes.subject.u8_borrow_subject')}#{mark_required(f.object,:u8_borrow_subject)}" %>			
-		<%= f.text_field :u8_borrow_subject,:class=>"input1 " %>
-	</div>
-	%div class="form_field"
-		<%= f.label "#{I18n.t('activerecord.attributes.subject.u8_reim_subject')}#{mark_required(f.object,:u8_reim_subject)}" %>
-		<%= f.text_field :u8_reim_subject,:class=>"input1 " %>
-	</div>
-</div>
-</div>
-<% end %>
+-form_for subject,:remote=>true,:class=>"edit_inline" do |f|
+  = render "shared/common_error",:resource=>subject
+  =f.hidden_field :id
+	.form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.subject.business_type_id')}#{mark_required(f.object,:business_type)}" 
+    %span.value= reference_select "business_type_id","BusinessType",:text=>f.object.business_type.to_s,:value=>f.object.business_type_id
+	.form_field
+		%span.label= f.label "#{I18n.t('activerecord.attributes.subject.fee_id')}#{mark_required(f.object,:fee)}" 
+    %span.value= reference_select "fee_id","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id
+	.form_field
+    %span.label= f.label "#{I18n.t('common_attr.dep')}#{mark_required(f.object,:dep)}"
+    %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id
+	.form_field
+		%span.label= f.label "#{I18n.t('activerecord.attributes.subject.u8_fee_subject')}#{mark_required(f.object,:u8_fee_subject)}"
+		%span.value= f.text_field :u8_fee_subject,:class=>"input1 "
+	.form_field
+		%span.label= f.label "#{I18n.t('activerecord.attributes.subject.u8_borrow_subject')}#{mark_required(f.object,:u8_borrow_subject)}" 
+		%span.value= f.text_field :u8_borrow_subject,:class=>"input1 " 
+	.form_field
+		%span.label= f.label "#{I18n.t('activerecord.attributes.subject.u8_reim_subject')}#{mark_required(f.object,:u8_reim_subject)}"
+		%span.value= f.text_field :u8_reim_subject,:class=>"input1 "
+  =render "basic_setting/fb_actions"

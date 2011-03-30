@@ -27,11 +27,19 @@ class ExtraWorkStandardsController < ApplicationController
   # GET /extra_work_standards/new.xml
   def new
     @extra_work_standard = ExtraWorkStandard.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @extra_work_standard }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@extra_work_standard }}
+    end
   end
 
   # GET /extra_work_standards/1/edit
   def edit
     @extra_work_standard = ExtraWorkStandard.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@extra_work_standard }}
+    end
   end
 
   # POST /extra_work_standards
@@ -39,12 +47,10 @@ class ExtraWorkStandardsController < ApplicationController
   def create
     @extra_work_standard = ExtraWorkStandard.new(params[:extra_work_standard])
 
-    if @extra_work_standard.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@extra_work_standard .save
+      render "basic_setting/new",:locals=>{:resource=>@extra_work_standard   }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@extra_work_standard)}
+      redirect_to index
     end
   end
 
@@ -53,12 +59,10 @@ class ExtraWorkStandardsController < ApplicationController
   def update
     @extra_work_standard = ExtraWorkStandard.find(params[:id])
 
-    if @extra_work_standard.update_attributes(params[:extra_work_standard])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@extra_work_standard.update_attributes(params[:extra_work_standard])
+      render "basic_setting/edit",:locals=>{:resource=>@extra_work_standard }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@duty)}
+      render "basic_setting/update",:locals=>{:resource=>@extra_work_standard}
     end
   end
 
@@ -71,6 +75,7 @@ class ExtraWorkStandardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(extra_work_standards_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@extra_work_standard } }
     end
   end
 end

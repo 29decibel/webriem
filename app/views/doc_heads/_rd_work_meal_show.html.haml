@@ -1,0 +1,35 @@
+%fieldset
+  %span.sequence
+  .form_field
+    %span.label= "#{I18n.t('common_attr.afford_dep')}"
+    %span.value= d_item.dep.to_s
+  .form_field
+    %span.label= "#{I18n.t('common_attr.project')}"
+    %span.value= d_item.project.to_s
+  .form_field
+    %span.label= "#{I18n.t('common_attr.place')}"
+    %span.value= d_item.place
+  .form_field
+    %span.label= "#{I18n.t('common_attr.date')}"
+    %span.value= d_item.meal_date
+  .form_field
+    %span.label= "#{I18n.t('common_attr.people_count')}"
+    %span.value= d_item.people_count
+  .form_field
+    %span.label= "#{I18n.t('common_attr.join_together_person')}"
+    %span.value= d_item.person_names
+  .form_field
+    %span.label= "#{I18n.t('common_attr.reason')}"
+    %span.value= d_item.reason
+  .form_field
+    %span.label= "#{I18n.t('common_attr.currency')}"
+    %span.value= d_item.currency.to_s
+  .form_field
+    %span.label= "#{I18n.t('common_attr.rate')}"
+    %span.value= d_item.rate
+  .form_field
+    %span.label= "#{I18n.t('common_attr.apply_amount')}"
+    %span.value= d_item.ori_amount
+  .form_field
+    %span.label= "#{I18n.t('common_attr.ori_amount')}"
+    %span.value= d_item.apply_amount

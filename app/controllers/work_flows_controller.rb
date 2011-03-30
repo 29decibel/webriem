@@ -13,6 +13,12 @@ class WorkFlowsController < ApplicationController
     end
   end
 
+  def edit
+    @work_flow  = WorkFlow.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@work_flow  }}
+    end  
+  end
   # GET /work_flows/1
   # GET /work_flows/1.xml
   def show
@@ -32,6 +38,7 @@ class WorkFlowsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @work_flow }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@work_flow }}
     end
   end
 
@@ -46,12 +53,10 @@ class WorkFlowsController < ApplicationController
       @work_flow.duties<<Duty.find(duty_id.to_i)
     end
     #debugger
-    if @work_flow.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@work_flow .save
+      render "basic_setting/new",:locals=>{:resource=>@work_flow  }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@work_flow)}
+      redirect_to index
     end
   end
   
@@ -69,12 +74,10 @@ class WorkFlowsController < ApplicationController
     params[:duty_ids].split('_').each do |duty_id|
       @work_flow.duties<<Duty.find(duty_id.to_i)
     end
-    if @work_flow.update_attributes(params[:work_flow])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@work_flow.update_attributes(params[:work_flow])
+      render "basic_setting/edit",:locals=>{:resource=>@work_flow }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@work_flow)}
+      render "basic_setting/update",:locals=>{:resource=>@work_flow }
     end
   end
 
@@ -87,6 +90,7 @@ class WorkFlowsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(work_flows_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@work_flow} }
     end
   end
 end

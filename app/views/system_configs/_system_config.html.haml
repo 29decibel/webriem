@@ -1,0 +1,7 @@
+.list_item(id="system_config_#{system_config.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_system_config_path(system_config) ,:remote=>true
+    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), system_config, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
+    %span.list_field= system_config.key
+    %span.list_field= system_config.value
+  .edit

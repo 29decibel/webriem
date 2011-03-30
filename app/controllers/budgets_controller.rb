@@ -3,15 +3,21 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.xml
   def index
-    @resources=Account.all
-    @model_s_name="account"
-    @model_p_name="accounts"
+    @resources=Budget.all
+    @model_s_name="budget"
+    @model_p_name="budgets"
     respond_to do |format|
       format.xml  { render :xml => @resources }
       format.js   { render "basic_setting/index"}
     end
   end
 
+  def edit
+    @budget = Budget.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@budget}}
+    end
+  end
   # GET /budgets/1
   # GET /budgets/1.xml
   def show
@@ -31,6 +37,7 @@ class BudgetsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @budget }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@budget }}
     end
   end
 
@@ -39,12 +46,10 @@ class BudgetsController < ApplicationController
   # POST /budgets.xml
   def create
     @budget = Budget.new(params[:budget])
-    if @budget.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@budget.save
+      render "basic_setting/new",:locals=>{:resource=>@account }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@budget)}
+      redirect_to index
     end
   end
 
@@ -52,12 +57,10 @@ class BudgetsController < ApplicationController
   # PUT /budgets/1.xml
   def update
     @budget = Budget.find(params[:id])
-    if @budget.update_attributes(params[:budget])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@budget.update_attributes(params[:budget])
+      render "basic_setting/edit",:locals=>{:resource=>@budget }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@budget)}
+      render "basic_setting/update",:locals=>{:resource=>@budget}
     end
   end
 
@@ -70,6 +73,7 @@ class BudgetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(budgets_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@budget} }
     end
   end
 end

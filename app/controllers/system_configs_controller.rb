@@ -36,6 +36,9 @@ class SystemConfigsController < ApplicationController
   # GET /system_configs/1/edit
   def edit
     @system_config = SystemConfig.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@system_config }}
+    end
   end
 
   # POST /system_configs
@@ -43,14 +46,10 @@ class SystemConfigsController < ApplicationController
   def create
     @system_config = SystemConfig.new(params[:system_config])
 
-    respond_to do |format|
-      if @system_config.save
-        format.html { redirect_to(@system_config, :notice => 'System config was successfully created.') }
-        format.xml  { render :xml => @system_config, :status => :created, :location => @system_config }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @system_config.errors, :status => :unprocessable_entity }
-      end
+    if !@system_config .save
+      render "basic_setting/new",:locals=>{:resource=>@system_config  }
+    else
+      redirect_to index
     end
   end
 
@@ -59,14 +58,10 @@ class SystemConfigsController < ApplicationController
   def update
     @system_config = SystemConfig.find(params[:id])
 
-    respond_to do |format|
-      if @system_config.update_attributes(params[:system_config])
-        format.html { redirect_to(@system_config, :notice => 'System config was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @system_config.errors, :status => :unprocessable_entity }
-      end
+    if !@system_config.update_attributes(params[:system_config])
+      render "basic_setting/edit",:locals=>{:resource=>@system_config }
+    else
+      render "basic_setting/update",:locals=>{:resource=>@system_config }
     end
   end
 
@@ -79,6 +74,7 @@ class SystemConfigsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(system_configs_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@system_config} }
     end
   end
 end

@@ -24,7 +24,9 @@ class AccountsController < ApplicationController
   end
   def edit
     @account = Account.find(params[:id])
-    render "basic_setting/edit",:locals=>{:resource=>@account}
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@account}}
+    end
   end
 
   # GET /accounts/new
@@ -46,8 +48,7 @@ class AccountsController < ApplicationController
     if !@account.save
       render "basic_setting/new",:locals=>{:resource=>@account }
     else
-      @accounts=Account.all
-      render "basic_setting/create",:locals=>{:resource=>@account,:resources=>@accounts}
+      redirect_to index
     end
   end
 

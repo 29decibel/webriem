@@ -1,0 +1,25 @@
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.name')}" 
+  %span.value= d_item.name
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.account_id')}" 
+  %span.value= d_item.account.to_s
+%br
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.amount')}" 
+  %span.value= d_item.amount
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.rate')}" 
+  %span.value= d_item.rate
+%br
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.redeem_date')}" 
+  %span.value= d_item.clear_date
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.clear_date')}" 
+  %span.value= d_item.redeem_date
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.redeem_finance_product.description')}"
+  %span.value= d_item.description

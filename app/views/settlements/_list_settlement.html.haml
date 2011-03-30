@@ -1,25 +1,7 @@
-<div class="form_title">
-	<h3>结算方式列表</h3>
-</div>
-	<div class="actions">
-		<%= link_to '添加结算方式', new_settlement_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>编码</th>
-    <th>结算方式</th>
-    <th>结算科目</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @settlements.each do |settlement| %>
-  <tr>
-    <td><%= settlement.code %></td>
-    <td><%= settlement.name %></td>
-    <td><%= settlement.subject %></td>
-    <td class="action"><%= link_to '查看', settlement %></td>
-    <td class="action"><%= link_to '删除', settlement, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+.form_title
+  %h3
+    = link_to image_tag("/images/icons/add.png"), new_settlement_path,:remote=>true
+    支付方式列表
+.edit_inline.new_settlement
+.list_info
+  = render settlements

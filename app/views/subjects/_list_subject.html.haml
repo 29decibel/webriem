@@ -1,31 +1,7 @@
-<div class="form_title">
-	<h3>科目设置列表</h3>
-</div>
-	<div class="actions">
-		<%= link_to '添加科目设置', new_subject_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>业务类型</th>
-    <th>费用类型</th>
-    <th>部门</th>
-    <th>U8费用科目</th>
-    <th>U8借款科目</th>
-    <th>U8报销科目</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @subjects.each do |subject| %>
-  <tr>
-    <td><%= subject.busitype_name %></td>
-    <td><%= subject.fee_name %></td>
-    <td><%= subject.dep_name %></td>
-    <td><%= subject.u8_fee_subject %></td>
-    <td><%= subject.u8_borrow_subject %></td>
-    <td><%= subject.u8_reim_subject %></td>
-    <td class="action"><%= link_to '查看', subject %></td>
-    <td class="action"><%= link_to '删除', subject, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+.form_title
+  %h3
+    = link_to image_tag("/images/icons/add.png"), new_subject_path,:remote=>true
+    科目列表
+.edit_inline.new_subject
+.list_info
+  = render subjects

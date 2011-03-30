@@ -1,25 +1,16 @@
-%tr class="fields"
-	%td
-		<%= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input is_self_dep"} %>
-	</td>
-	%td
-		%div class="reference dep"
-			<%= f.hidden_field :dep_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "dep_info",f.object.dep.to_s,:class=>"ref middle" %>
-			%a href="#" class-data="Dep"%span class="reference"</span></a>			
-		</div>
-	%td		
-		%div class="reference"
-			<%= f.hidden_field :duty_id,{:class=>"ref_hidden_field"}%>
-			<%= text_field_tag "duty_info",f.object.duty.to_s,:class=>"ref middle" %>
-			%a href="#" class-data="Duty"%span class="reference"</span></a>			
-		</div>
-	</td>
-	%td
-		<%= f.text_field :max_amount,:class=>"basic_input" %>元
-	</td>
-	%td
-		<%= f.hidden_field(:_destroy) %>
-		<%= link_to_remove "#{I18n.t('common_attr.btn_delete')}", f %> 
-	</td>
-</tr>
+%fieldset
+  %legend
+    = f.hidden_field(:_destroy) 
+    = link_to_remove
+  .form_field
+    %span.label= I18n.t('activerecord.attributes.work_flow_step.is_self_dep')
+    %span.value= = f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input is_self_dep"}
+  .form_field
+    %span.label= I18n.t('activerecord.attributes.work_flow_step.dep_id')
+    %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id 
+  .form_field
+    %span.label= I18n.t('activerecord.attributes.work_flow_step.duty_id')
+    %span.value= reference_select "duty_id","Duty",:text=>f.object.duty.to_s,:value=>f.object.duty_id 
+  .form_field
+    %span.label= I18n.t('activerecord.attributes.work_flow_step.max_amount')
+    %span.value= f.text_field :max_amount,:class=>"normal "

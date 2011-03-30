@@ -36,6 +36,4 @@
     %span.value
       = f.text_field :cdep,:class=>"basic_input" 
       = mark_required(fee_code_match, :description) 
-  .form_inline_actions
-    = link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2" 
-    = link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"
+  =render "basic_setting/fb_actions"

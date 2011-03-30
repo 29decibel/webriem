@@ -11,7 +11,9 @@ class FeeCodeMatchesController < ApplicationController
 
   def edit
     @fee_code_match = FeeCodeMatch.find(params[:id])
-    render "basic_setting/edit",:locals=>{:resource=>@fee_code_match}
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@fee_code_match}}
+    end
   end
 
   def update
@@ -24,22 +26,26 @@ class FeeCodeMatchesController < ApplicationController
   end
   def new
     @fee_code_match = FeeCodeMatch.new
-    render "basic_setting/new",:locals=>{:resource=>@fee_code_match}
+    respond_to do |format|
+      format.js {render "basic_setting/new",:locals=>{:resource=>@fee_code_match}}
+    end
   end
   def create
     @fee_code_match = FeeCodeMatch.new(params[:fee_code_match])
     if !@fee_code_match.save
       render "basic_setting/new",:locals=>{:resource=>@fee_code_match,:resources=>@fee_code_matches}
     else
-      @fee_code_matches=FeeCodeMatch.all
-      render "basic_setting/create",:locals=>{:resource=>@fee_code_match,:resources=>@fee_code_matches}
+      redirect_to index
     end
   end
   def destroy
     @fee_code_match = FeeCodeMatch.find(params[:id])
-    @delete_id=@fee_code_match.id
     @fee_code_match.destroy
-    render "basic_setting/destroy",:locals=>{:resource=>@fee_code_match}
+    respond_to do |format|
+      format.html { redirect_to(accounts_url) }
+      format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@fee_code_match}}
+    end
   end
   def show
     

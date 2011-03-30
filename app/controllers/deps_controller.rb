@@ -16,9 +16,12 @@ class DepsController < ApplicationController
     @dep = Dep.new
     render "basic_setting/new",:locals=>{:resource=>@dep}
   end
+
   def edit
     @dep = Dep.find(params[:id])
-    render "basic_setting/edit",:locals=>{:resource=>@dep}
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@dep}}
+    end
   end
   # GET /deps/1
   #显示所有的部门在这里啊
@@ -37,8 +40,7 @@ class DepsController < ApplicationController
     if !@dep.save
       render "basic_setting/new",:locals=>{:resource=>@dep }
     else
-      @deps=Dep.all
-      render "basic_setting/create",:locals=>{:resource=>@dep,:resources=>@deps}
+      redirect_to index
     end
   end
 

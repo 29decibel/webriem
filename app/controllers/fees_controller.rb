@@ -23,6 +23,12 @@ class FeesController < ApplicationController
     end
   end
 
+  def edit
+    @fee = Fee.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@fee}}
+    end
+  end
   # GET /fees/new
   # GET /fees/new.xml
   def new
@@ -31,6 +37,7 @@ class FeesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @fee }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@fee }}
     end
   end
 
@@ -38,12 +45,10 @@ class FeesController < ApplicationController
   # POST /fees.xml
   def create
     @fee = Fee.new(params[:fee])
-    if @fee.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@fee.save
+      render "basic_setting/new",:locals=>{:resource=>@fee }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee)}
+      redirect_to index
     end
   end
 
@@ -51,12 +56,10 @@ class FeesController < ApplicationController
   # PUT /fees/1.xml
   def update
     @fee = Fee.find(params[:id])
-    if @fee.update_attributes(params[:fee])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@fee.update_attributes(params[:fee])
+      render "basic_setting/edit",:locals=>{:resource=>@fee }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee)}
+      render "basic_setting/update",:locals=>{:resource=>@fee}
     end
   end
 
@@ -69,6 +72,7 @@ class FeesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(fees_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@fee} }
     end
   end
 end

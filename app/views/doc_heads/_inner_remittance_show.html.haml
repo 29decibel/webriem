@@ -1,0 +1,30 @@
+.form_field.large
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"
+  %span.value= d_item.amount
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"
+  %span.value= d_item.currency.to_s
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"
+  %span.value= d_item.out_account.to_s
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.remain_amount')}",:class=>"large" 
+  %span.value= d_item.in_amount_after
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.in_account_id')}",:class=>"large" 
+  %span.value= d_item.in_account.to_s
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.in_amount_after')}",:class=>"large" 
+  %span.value= d_item.remain_amount
+%br
+.form_field
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.now_rate_price')}",:class=>"large" 
+  %span.value= d_item.now_rate_price
+%br
+.form_field.col-sp2
+  %span.label=  "#{I18n.t('activerecord.attributes.inner_remittance.description')}",:class=>"large"
+  %span.value= d_item.description

@@ -1,9 +1,8 @@
-<span class="sequence"></span>
-<div class="show_item">
-  <span class="item_label"><%= I18n.t('common_attr.used_for')%></span>
-  <span class="item_value"><%= cash_draw_item.used_for %></span>
-</div>  
-<div class="show_item">
-  <span class="item_label"><%= I18n.t('common_attr.apply_amount')%></span>
-  <span class="item_value"><%= cash_draw_item.apply_amount %></span>
-</div>  
+%fieldset
+  %span.sequence
+  .form_field
+    %span.label= I18n.t('common_attr.used_for')
+    %span.value= d_item.used_for
+  .form_field
+    %span.label= I18n.t('common_attr.apply_amount')
+    %span.value= d_item.apply_amount

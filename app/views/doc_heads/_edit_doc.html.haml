@@ -74,7 +74,7 @@
       .doc_detail
         .form_title
           %h3
-            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details,[:dep] 
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details 
             = doc.doc_type==1 ? "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')}":"#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')}" 
             = image_tag "currency_yuan.png"
             %span.doc_total_amount.normal=0.0

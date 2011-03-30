@@ -1,0 +1,6 @@
+.list_item(id="work_flow_#{work_flow.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_work_flow_path(work_flow) ,:remote=>true
+    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), work_flow, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
+    %span.list_field= work_flow.name
+  .edit

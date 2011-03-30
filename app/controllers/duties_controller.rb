@@ -29,9 +29,12 @@ class DutiesController < ApplicationController
     @duty = Duty.new
     render "basic_setting/new",:locals=>{:resource=>@duty}
   end
+
   def edit
     @duty = Duty.find(params[:id])
-    render "basic_setting/edit",:locals=>{:resource=>@duty}
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@duty}}
+    end
   end
   # POST /duties
   # POST /duties.xml
@@ -40,8 +43,7 @@ class DutiesController < ApplicationController
     if !@duty.save
       render "basic_setting/new",:locals=>{:resource=>@duty }
     else
-      @duties=Duty.all
-      render "basic_setting/create",:locals=>{:resource=>@duty,:resources=>@duties}
+      redirect_to index
     end
   end
 

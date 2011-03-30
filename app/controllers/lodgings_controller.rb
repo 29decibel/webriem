@@ -12,6 +12,12 @@ class LodgingsController < ApplicationController
     end
   end
 
+  def edit
+    @lodging = Lodging.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@lodging}}
+    end   
+  end
   # GET /lodgings/1
   # GET /lodgings/1.xml
   def show
@@ -31,6 +37,7 @@ class LodgingsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @lodging }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@lodging}}
     end
   end
 
@@ -38,12 +45,10 @@ class LodgingsController < ApplicationController
   # POST /lodgings.xml
   def create
     @lodging = Lodging.new(params[:lodging])
-    if @lodging.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@lodging.save
+      render "basic_setting/new",:locals=>{:resource=>@lodging }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@lodging)}
+      redirect_to index
     end
   end
 
@@ -51,12 +56,10 @@ class LodgingsController < ApplicationController
   # PUT /lodgings/1.xml
   def update
     @lodging = Lodging.find(params[:id])
-    if @lodging.update_attributes(params[:lodging])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@lodging.update_attributes(params[:lodging])
+      render "basic_setting/edit",:locals=>{:resource=>@lodging }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@lodging)}
+      render "basic_setting/update",:locals=>{:resource=>@lodging}
     end
   end
 
@@ -69,6 +72,7 @@ class LodgingsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(lodgings_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@account} }
     end
   end
 end

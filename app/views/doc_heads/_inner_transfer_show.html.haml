@@ -1,0 +1,21 @@
+.form_field
+	%span.label=  "#{I18n.t('activerecord.attributes.inner_transfer.amount')}" ,:class=>"large"
+	%span.value= d_item.amount
+%br
+.form_field.col-sp2
+	%span.label=  "#{I18n.t('activerecord.attributes.inner_transfer.out_account_id')}" ,:class=>"large"
+	%span.value= d_item.out_account.to_s
+.form_field.col-sp2
+	%span.label=  "#{I18n.t('activerecord.attributes.inner_transfer.out_amount_before')}" ,:class=>"large"
+	%span.value= d_item.out_amount_before
+%br
+.form_field.col-sp2
+	%span.label=  "#{I18n.t('activerecord.attributes.inner_transfer.in_account_id')}" ,:class=>"large"
+	%span.value= d_item.in_account.to_s
+.form_field.col-sp2
+	%span.label=  "#{I18n.t('activerecord.attributes.inner_transfer.in_amount_after')}" ,:class=>"large"
+	%span.value= d_item.in_amount_before
+%br
+.form_field.col-sp2
+	%span.label=  "#{I18n.t('activerecord.attributes.inner_transfer.description')}" ,:class=>"large"
+	%span.value= d_item.description

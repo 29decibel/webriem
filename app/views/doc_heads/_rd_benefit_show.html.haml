@@ -1,29 +1,26 @@
-%h5
-  福利费用明细
-  %span= detail_doc_items.sum {|dd| dd.fi_amount}
--for item in detail_doc_items
-  .doc_detail_item
-    .show_item
-     %span.item_label= I18n.t('common_attr.afford_dep')
-      %span.item_value= item.afford_dep
-    .show_item
-      %span.item_label= I18n.t('common_attr.project')
-      %span.item_value= item.project
-    .show_item
-      %span.item_label= I18n.t('common_attr.fee')"
-      %span.item_value= item.fee
-    .show_item
-      %span.item_label= I18n.t('common_attr.people_count')
-      %span.item_value= item.people_count
-    .show_item
-      %span.item_label= I18n.t('common_attr.fee_span')
-      %span.item_value= item.fee_span
-    .show_item
-      %span.item_label= I18n.t('common_attr.apply_amount')
-      %span.item_value= item.apply_amount
-    .show_item
-      %span.item_label= I18n.t('common_attr.hr_amount')
-      %span.item_value= item.hr_amount
-    .show_item
-      %span.item_label= I18n.t('common_attr.fi_amount')
-      %span.item_value= item.fi_amount
+%fieldset
+  %span.sequence
+  .form_field
+    %span.label= "#{I18n.t('common_attr.afford_dep')}" 
+    %span.value= d_item.dep.to_s
+  .form_field
+    %span.label= "#{I18n.t('common_attr.project')}"
+    %span.value= d_item.project.to_s
+  .form_field
+    %span.label= "#{I18n.t('common_attr.fee')}"
+    %span.value= d_item.fee.to_s
+  .form_field
+    %span.label= "#{I18n.t('common_attr.people_count')}"
+    %span.value= d_item.people_count
+  .form_field
+    %span.label= "#{I18n.t('common_attr.fee_span')}"
+    %span.value= d_item.fee_time_span
+  .form_field
+    %span.label= "#{I18n.t('common_attr.apply_amount')}"
+    %span.value= d_item.apply_amount
+  .form_field
+    %span.label= "#{I18n.t('common_attr.hr_amount')}"
+    %span.value= d_item.hr_amount
+  .form_field
+    %span.label= "#{I18n.t('common_attr.fi_amount')}"
+    %span.value= d_item.fi_amount

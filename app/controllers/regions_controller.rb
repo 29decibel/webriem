@@ -23,6 +23,13 @@ class RegionsController < ApplicationController
     end
   end
 
+  def edit
+    @region = Region.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@region}}
+    end
+   
+  end
   # GET /regions/new
   # GET /regions/new.xml
   def new
@@ -31,6 +38,7 @@ class RegionsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @region }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@region}}
     end
   end
 
@@ -38,12 +46,10 @@ class RegionsController < ApplicationController
   # POST /regions.xml
   def create
     @region = Region.new(params[:region])
-    if @region.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@region.save
+      render "basic_setting/new",:locals=>{:resource=>@region}
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@region)}
+      redirect_to index
     end
   end
 
@@ -51,12 +57,10 @@ class RegionsController < ApplicationController
   # PUT /regions/1.xml
   def update
     @region = Region.find(params[:id])
-    if @region.update_attributes(params[:region])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@region.update_attributes(params[:region])
+      render "basic_setting/edit",:locals=>{:resource=>@region }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@region)}
+      render "basic_setting/update",:locals=>{:resource=>@region}
     end
   end
 
@@ -69,6 +73,7 @@ class RegionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(regions_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@region} }
     end
   end
 end

@@ -1,26 +1,27 @@
-%h5
-  =title
-  %span= cp_docs.sum {|c| c.fi_amount}
--for cp_doc in cp_docs
-  .doc_detail_item
-    .show_item
-      %span.item_label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')
-      %span.item_value= cp_doc.dep
-    .show_item
-      %span.item_label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id') 
-      %span.item_value= cp_doc.project
-    .show_item
-      %span.item_label= I18n.t('common_attr.used_for') 
-      %span.item_value= doc.used_for
-    .show_item
-      %span.item_label= I18n.t('common_attr.currency') 
-      %span.item_value= doc.currency
-    .show_item
-      %span.item_label= I18n.t('common_attr.rate') 
-      %span.item_value= doc.rate
-    .show_item
-      %span.item_label= I18n.t('common_attr.apply_amount') 
-      %span.item_value= doc.apply_amount
-    .show_item
-      %span.item_label= I18n.t('common_attr.ori_amount') 
-      %span.item_value= doc.ori_amount
+%fieldset
+  %span.sequence
+  .form_field
+    %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')
+    %span.value= d_item.dep.to_s
+  .form_field
+    %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
+    %span.value= d_item.project.to_s
+  -if 2
+    .form_field
+      %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
+      %span.value= d_item.fee.to_s
+  .form_field
+    %span.label= I18n.t('common_attr.used_for')
+    %span.value= d_item.used_for
+  .form_field
+    %span.label= I18n.t('common_attr.currency')
+    %span.value= d_item.currency.to_s
+  .form_field
+    %span.label= I18n.t('common_attr.rate')
+    %span.value= d_item.rate
+  .form_field
+    %span.label= I18n.t('common_attr.apply_amount')
+    %span.value= d_item.ori_amount
+  .form_field
+    %span.label= I18n.t('common_attr.ori_amount')
+    %span.value= d_item.apply_amount

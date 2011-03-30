@@ -1,0 +1,7 @@
+.list_item(id="subject_#{subject.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_subject_path(subject) ,:remote=>true
+    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), subject, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
+    %span.list_field= subject.name
+    %span.list_field= subject.code
+  .edit

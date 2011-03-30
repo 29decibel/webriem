@@ -1,23 +1,7 @@
-<div class="form_title">
-	<h3>地区级别档案列表</h3>
-</div>
-	<div class="actions">
-		<%= link_to '添加地区级别', new_region_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>地区级别名称</th>
-    <th>地区级别编码</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @regions.each do |region| %>
-  <tr>
-    <td><%= region.name %></td>
-    <td><%= region.code %></td>
-    <td class="action"><%= link_to '查看', region %></td>
-    <td class="action"><%= link_to '删除', region, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+.form_title
+  %h3
+    = link_to image_tag("/images/icons/add.png"), new_region_path,:remote=>true
+    区域列表
+.edit_inline.new_region
+.list_info
+  = render regions

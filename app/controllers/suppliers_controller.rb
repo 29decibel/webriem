@@ -11,6 +11,13 @@ class SuppliersController < ApplicationController
     end
   end
 
+  # GET /suppliers/1/edit
+  def edit
+    @supplier = Supplier.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@supplier}}
+    end  
+  end
   # GET /suppliers/1
   # GET /suppliers/1.xml
   def show
@@ -26,21 +33,23 @@ class SuppliersController < ApplicationController
   # GET /suppliers/new.xml
   def new
     @supplier = Supplier.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @supplier}
+      format.js { render "basic_setting/new",:locals=>{:resource=>@supplier }}
+    end
   end
 
-  # GET /suppliers/1/edit
-  def edit
-    @supplier = Supplier.find(params[:id])
-  end
 
   # POST /suppliers
   # POST /suppliers.xml
   def create
     @supplier = Supplier.new(params[:supplier])
     if !@supplier.save
-      render "new"
+      render "basic_setting/new",:locals=>{:resource=>@supplier}
+    else
+      redirect_to index
     end
-    @suppliers=Supplier.all
   end
 
   # PUT /suppliers/1
@@ -48,7 +57,9 @@ class SuppliersController < ApplicationController
   def update
     @supplier = Supplier.find(params[:id])
     if !@supplier.update_attributes(params[:supplier])
-      render "edit"
+      render "basic_setting/edit",:locals=>{:resource=>@supplier}
+    else
+      render "basic_setting/update",:locals=>{:resource=>@supplier}
     end
   end
 
@@ -56,7 +67,10 @@ class SuppliersController < ApplicationController
   # DELETE /suppliers/1.xml
   def destroy
     @supplier = Supplier.find(params[:id])
-    @delete_id=@supplier.id
-    @supplier.destroy
+    respond_to do |format|
+      format.html { redirect_to(suppliers_url) }
+      format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@supplier} }
+    end
   end
 end

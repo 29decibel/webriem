@@ -12,6 +12,12 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def edit
+    @subject = Subject.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@subject}}
+    end   
+  end
   # GET /subjects/1
   # GET /subjects/1.xml
   def show
@@ -31,6 +37,7 @@ class SubjectsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @subject }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@subject }}
     end
   end
 
@@ -38,12 +45,10 @@ class SubjectsController < ApplicationController
   # POST /subjects.xml
   def create
     @subject = Subject.new(params[:subject])
-    if @subject.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@subject.save
+      render "basic_setting/new",:locals=>{:resource=>@subject }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@subject)}
+      redirect_to index
     end
   end
 
@@ -51,12 +56,10 @@ class SubjectsController < ApplicationController
   # PUT /subjects/1.xml
   def update
     @subject = Subject.find(params[:id])
-    if @subject.update_attributes(params[:subject])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@subject.update_attributes(params[:subject])
+      render "basic_setting/edit",:locals=>{:resource=>@subject }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@subject)}
+      render "basic_setting/update",:locals=>{:resource=>@subject}
     end
   end
 
@@ -69,6 +72,7 @@ class SubjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(subjects_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@subject} }
     end
   end
 end

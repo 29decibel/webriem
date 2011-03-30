@@ -1,23 +1,7 @@
-<div class="form_title">
-	<h3>交通方式列表</h3>
-</div>
-	<div class="actions">
-		<%= link_to '添加交通方式', new_transportation_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>名称</th>
-    <th>编码</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @transportations.each do |transportation| %>
-  <tr>
-    <td><%= transportation.name %></td>
-    <td><%= transportation.code %></td>
-    <td class="action"><%= link_to '查看', transportation %></td>
-    <td class="action"><%= link_to '删除', transportation, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+.form_title
+  %h3
+    = link_to image_tag("/images/icons/add.png"), new_transportation_path,:remote=>true
+    交通工具列表
+.edit_inline.new_transportation
+.list_info
+  = render transportations

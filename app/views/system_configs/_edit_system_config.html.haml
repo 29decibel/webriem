@@ -1,0 +1,13 @@
+-form_for system_config,:remote=>true,:class=>"edit_inline" do |f|
+  = render "shared/common_error",:resource=>system_config
+  =f.hidden_field :id
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.system_config.key')}#{mark_required(f.object,:key)}" 
+    %span.value= f.text_field :key,:class=>"input1 " 
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.system_config.value')}#{mark_required(f.object,:value)}" 
+    %span.value= f.text_field :value,:class=>"input1 " 
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.system_config.description')}#{mark_required(f.object,:description)}" 
+    %span.value= f.text_field :description,:class=>"input1 " 
+  =render "basic_setting/fb_actions"

@@ -1,0 +1,7 @@
+.list_item(id="transportation_#{transportation.id}")
+  .show
+    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_transportation_path(transportation) ,:remote=>true
+    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), transportation, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
+    %span.list_field= transportation.name
+    %span.list_field= transportation.code
+  .edit

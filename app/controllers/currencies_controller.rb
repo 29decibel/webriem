@@ -3,9 +3,9 @@ class CurrenciesController < ApplicationController
   # GET /currencies
   # GET /currencies.xml
   def index
-    @resources=Account.all
-    @model_s_name="account"
-    @model_p_name="accounts"
+    @resources=Currency.all
+    @model_s_name="currency"
+    @model_p_name="currencies"
     respond_to do |format|
       format.xml  { render :xml => @resources }
       format.js   { render "basic_setting/index"}
@@ -31,6 +31,7 @@ class CurrenciesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @currency }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@currency }}
     end
   end
 
@@ -38,12 +39,10 @@ class CurrenciesController < ApplicationController
   # POST /currencies.xml
   def create
     @currency = Currency.new(params[:currency])
-    if @currency.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@currency.save
+      render "basic_setting/new",:locals=>{:resource=>@currency }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@currency)}
+      redirect_to index
     end
   end
 
@@ -51,12 +50,10 @@ class CurrenciesController < ApplicationController
   # PUT /currencies/1.xml
   def update
     @currency = Currency.find(params[:id])
-    if @currency.update_attributes(params[:currency])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@currency.update_attributes(params[:currency])
+      render "basic_setting/edit",:locals=>{:resource=>@currency }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@currency)}
+      render "basic_setting/update",:locals=>{:resource=>@currency}
     end
   end
 
@@ -69,6 +66,7 @@ class CurrenciesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(currencies_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@currency} }
     end
   end
 end

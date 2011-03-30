@@ -12,6 +12,12 @@ class FeeStandardsController < ApplicationController
     end
   end
 
+  def edit
+    @fee_standard = FeeStandard.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@fee_standard}}
+    end
+  end
   # GET /fee_standards/1
   # GET /fee_standards/1.xml
   def show
@@ -31,6 +37,7 @@ class FeeStandardsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @fee_standard }
+      format.js { render "basic_setting/new",:locals=>{:resource=>@fee_standard  }}
     end
   end
 
@@ -38,12 +45,10 @@ class FeeStandardsController < ApplicationController
   # POST /fee_standards.xml
   def create
     @fee_standard = FeeStandard.new(params[:fee_standard])
-    if @fee_standard.save
-      @message="#{I18n.t('controller_msg.create_ok')}"
-      render "shared/show_result"
+    if !@fee_standard .save
+      render "basic_setting/new",:locals=>{:resource=>@fee_standard  }
     else
-      #write some codes
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee_standard)}
+      redirect_to index
     end
   end
 
@@ -51,12 +56,10 @@ class FeeStandardsController < ApplicationController
   # PUT /fee_standards/1.xml
   def update
     @fee_standard = FeeStandard.find(params[:id])
-    if @fee_standard.update_attributes(params[:fee_standard])
-      @message="#{I18n.t('controller_msg.update_ok')}"
-      render "shared/show_result"
+    if !@fee_standard .update_attributes(params[:fee_standard ])
+      render "basic_setting/edit",:locals=>{:resource=>@fee_standard  }
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@fee_standard)}
+      render "basic_setting/update",:locals=>{:resource=>@fee_standard}
     end
   end
 
@@ -69,6 +72,7 @@ class FeeStandardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(fee_standards_url) }
       format.xml  { head :ok }
+      format.js { render "basic_setting/destroy",:locals=>{:resource=>@fee_standard} }
     end
   end
 end

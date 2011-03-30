@@ -1,0 +1,15 @@
+.form_area.show_only
+  .form_field
+    %span.label=  "#{I18n.t('common_attr.cash_draw_account')}"
+    %span.value= d_item.account.to_s
+  .form_field
+    %span.label=  "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" 
+    %span.value= d_item.now_remain_amout
+  .doc_detail
+    .form_title
+      %h3
+        = I18n.t('common_attr.add_apply_item')
+        = image_tag "currency_yuan.png"
+        %span.doc_total_amount.normal 0.0
+    .form_area#cash_draw_items#form_block#show_only
+      = render 'cash_draw_item_show',:collection=>d_item.cash_draw_items,:as=>d_item

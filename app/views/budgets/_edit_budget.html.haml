@@ -1,14 +1,7 @@
-<%= form_for(@budget,:remote=>true) do |f| %>
-%div class="form_title"
-	%h3<%= @title%></h3>
-</div>
-%div class="actions"
-	<%= link_to "#{I18n.t('common_op.btn_new')}", new_budget_path,:class=>"button2" %>
-  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to "#{I18n.t('common_op.btn_return')}", budgets_path,:class=>"button2" %>
-</div>
-%div class="form_area"
-%div class="form_block"
+-form_for account,:remote=>true,:class=>"edit_inline" do |f|
+  = render "shared/common_error",:resource=>account
+  =f.hidden_field :id
+
 	.form_field
 		<%= f.label "#{I18n.t('common_attr.fee')}#{mark_required(f.object,:fee)}" %>	
 		%div class="reference"

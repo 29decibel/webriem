@@ -1,23 +1,7 @@
-%div class="form_title"
-	%h3住宿方式档案列表</h3>
-</div>
-	%div class="actions"
-		<%= link_to '添加住宿方式', new_lodging_path,:class=>"button2" %>
-	</div>
-%table class="hor-zebra"
-  %tr
-    %th名称</th>
-    %th编码</th>
-    %th</th>
-    %th</th>
-  </tr>
-
-<% @lodgings.each do |lodging| %>
-  %tr
-    %td<%= lodging.name %></td>
-    %td<%= lodging.code %></td>
-    %td class="action"<%= link_to '查看', lodging %></td>
-    %td class="action"<%= link_to '删除', lodging, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+.form_title
+  %h3
+    = link_to image_tag("/images/icons/add.png"), new_lodging_path,:remote=>true
+    住宿方式列表
+.edit_inline.new_lodging
+.list_info
+  = render lodgings
