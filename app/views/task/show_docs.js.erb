@@ -1,1 +1,1 @@
-$("#content").html("<%= render('doc_list_item',:collection=>@docs,:as=>:doc)%>");
+$("#content").html("<%= escape_javascript render(:partial=>'doc_heads/doc_list_item',:collection=>@docs,:as=>:doc)%>");

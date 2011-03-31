@@ -48,7 +48,7 @@ class FeeStandardsController < ApplicationController
     if !@fee_standard .save
       render "basic_setting/new",:locals=>{:resource=>@fee_standard  }
     else
-      redirect_to index
+      redirect_to fee_standards_path
     end
   end
 

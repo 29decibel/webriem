@@ -48,7 +48,7 @@ class TransportationsController < ApplicationController
     if !@transportation .save
       render "basic_setting/new",:locals=>{:resource=>@transportation  }
     else
-      redirect_to index
+      redirect_to transportations_path  
     end
   end
 

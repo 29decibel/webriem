@@ -50,7 +50,7 @@ class ExtraWorkStandardsController < ApplicationController
     if !@extra_work_standard .save
       render "basic_setting/new",:locals=>{:resource=>@extra_work_standard   }
     else
-      redirect_to index
+      redirect_to extra_work_standards_path
     end
   end
 

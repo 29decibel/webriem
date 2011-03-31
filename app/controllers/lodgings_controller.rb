@@ -48,7 +48,7 @@ class LodgingsController < ApplicationController
     if !@lodging.save
       render "basic_setting/new",:locals=>{:resource=>@lodging }
     else
-      redirect_to index
+      redirect_to lodgings_path
     end
   end
 

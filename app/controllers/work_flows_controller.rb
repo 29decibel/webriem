@@ -56,7 +56,7 @@ class WorkFlowsController < ApplicationController
     if !@work_flow .save
       render "basic_setting/new",:locals=>{:resource=>@work_flow  }
     else
-      redirect_to index
+      redirect_to work_flows_path
     end
   end
   

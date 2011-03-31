@@ -2,9 +2,9 @@
   = render "shared/common_error",:resource=>lodging
   =f.hidden_field :id
   .form_field
-		%span.label= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}"
-		%span.value= f.text_field :name,:class=>"input1 "+ mark_required(@lodging, :name)
+    %span.label= f.label "#{I18n.t('common_attr.name')}#{mark_required(f.object,:name)}"
+    %span.value= f.text_field :name,:class=>"input1 "+ mark_required(@lodging, :name)
   .form_field
-		%span.label= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}"
-		%span.value= f.text_field :code,:class=>"input1 "+ mark_required(@lodging, :code)
+    %span.label= f.label "#{I18n.t('common_attr.code')}#{mark_required(f.object,:code)}"
+    %span.value= f.text_field :code,:class=>"input1 "+ mark_required(@lodging, :code)
   =render "basic_setting/fb_actions"

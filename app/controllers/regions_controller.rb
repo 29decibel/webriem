@@ -49,7 +49,7 @@ class RegionsController < ApplicationController
     if !@region.save
       render "basic_setting/new",:locals=>{:resource=>@region}
     else
-      redirect_to index
+      redirect_to regions_path
     end
   end
 

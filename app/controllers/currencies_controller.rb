@@ -23,6 +23,12 @@ class CurrenciesController < ApplicationController
     end
   end
 
+  def edit
+    @currency = Currency.find(params[:id])
+    respond_to do |format|
+      format.js {render "basic_setting/edit",:locals=>{:resource=>@currency}}
+    end   
+  end
   # GET /currencies/new
   # GET /currencies/new.xml
   def new
@@ -42,7 +48,7 @@ class CurrenciesController < ApplicationController
     if !@currency.save
       render "basic_setting/new",:locals=>{:resource=>@currency }
     else
-      redirect_to index
+      redirect_to currencies_path
     end
   end
 

@@ -64,8 +64,8 @@
   .form_field
     %span.label=  "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
     %span.value#total_riem= doc.total_fi_amount
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<!--根据不同的单据类型render不同的单据-->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--根据不同的单据类型render不同的单据-->
 #details.show_only
   -if doc.doc_type<=2
     .doc_detail
@@ -75,9 +75,9 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "cp_doc_detail_show",:collection=>doc.cp_doc_details,:as=>:d_item
-          <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-          <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        =render :partial=>"cp_doc_detail_show",:collection=>doc.cp_doc_details,:as=>:d_item
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==3
     .doc_detail
       .form_title
@@ -86,44 +86,44 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rec_notice_show",:collection=>doc.rec_notice_details,:as=>:d_item
-          <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
-          <!--结汇申请单-->
+        =render :partial=>"rec_notice_show",:collection=>doc.rec_notice_details,:as=>:d_item
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
+        <!--结汇申请单-->
   -if doc.doc_type==4
     .doc_detail
       .form_title
         %h3= I18n.t("common_attr.remitance_detail")
       #inner_remittance.form_area
         =render "inner_remittance_show",:d_item=>doc.inner_remittance
-          <!--转帐申请单-->
+        <!--转帐申请单-->
   -if doc.doc_type==5
     .doc_detail
       .form_title
         %h3= I18n.t("common_attr.transfer_detail")
       #inner_transfer.form_area
         =render "inner_transfer_show",:d_item=>doc.inner_transfer
-          <!--现金提取申请单-->
+        <!--现金提取申请单-->
   -if doc.doc_type==6
     .doc_detail
       .form_title
         %h3= I18n.t("common_attr.cash_draw_detail")
       #inner_cash_draw.form_area
         =render "inner_cash_draw_show",:d_item=>doc.inner_cash_draw
-          <!--购买理财产品-->
+        <!--购买理财产品-->
   -if doc.doc_type==7
     .doc_detail
       .form_title
         %h3= I18n.t("common_attr.buy_fin_p_detail")
       #buy_finance_products.form_area
         =render "buy_finance_products_show",:d_item=>doc.buy_finance_product
-          <!--赎回理财产品-->
+        <!--赎回理财产品-->
   -if doc.doc_type==8
     .doc_detail
       .form_title
         %h3= I18n.t("common_attr.redeem_fin_p_detail")
       #redeem_finance_products#form_area
         =render "redeem_finance_products_show",:d_item=>doc.redeem_finance_product
-          <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==9
     .doc_detail
       .form_title
@@ -132,7 +132,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_travel_show",:collection=>doc.rd_travels,:as=>:d_item
+        =render :partial=>"rd_travel_show",:collection=>doc.rd_travels,:as=>:d_item
     .doc_detail
       .form_title
         %h3
@@ -140,7 +140,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_transport_show",:collection=>doc.rd_transports,:as=>:d_item
+        =render :partial=>"rd_transport_show",:collection=>doc.rd_transports,:as=>:d_item
     .doc_detail
       .form_title
         %h3
@@ -148,7 +148,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_lodging_show",:collection=>doc.rd_lodgings,:as=>:d_item
+        =render :partial=>"rd_lodging_show",:collection=>doc.rd_lodgings,:as=>:d_item
     .doc_detail
       .form_title
         %h3
@@ -156,8 +156,8 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "other_riem_show",:collection=>doc.other_riems,:as=>:d_item
-      <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        =render :partial=>"other_riem_show",:collection=>doc.other_riems,:as=>:d_item
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==12
     .doc_detail
       .form_title
@@ -166,7 +166,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "common_riem_show",:collection=>doc.common_riems,:as=>:d_item
+        =render :partial=>"common_riem_show",:collection=>doc.common_riems,:as=>:d_item
   -if doc.doc_type==10 or doc.doc_type==12
     .doc_detail
       .form_title
@@ -175,7 +175,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_work_meal_show",:collection=>doc.rd_work_meals,:as=>:d_item
+        =render :partial=>"rd_work_meal_show",:collection=>doc.rd_work_meals,:as=>:d_item
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==11
     .doc_detail
@@ -185,7 +185,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_extra_work_meal_show",:collection=>doc.rd_extra_work_meals,:as=>:d_item
+        =render :partial=>"rd_extra_work_meal_show",:collection=>doc.rd_extra_work_meals,:as=>:d_item
     .doc_detail
       .form_title
         %h3
@@ -193,8 +193,8 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_extra_work_car_show",:collection=>doc.rd_extra_work_cars,:as=>:d_item
-      <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        =render :partial=>"rd_extra_work_car_show",:collection=>doc.rd_extra_work_cars,:as=>:d_item
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==12
     .doc_detail
       .form_title
@@ -203,8 +203,8 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_common_transport_show",:collection=>doc.rd_common_transports,:as=>:d_item
-      <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        =render :partial=>"rd_common_transport_show",:collection=>doc.rd_common_transports,:as=>:d_item
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==13
     .doc_detail
       .form_title
@@ -213,8 +213,8 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=0.0
       .form_area
-        =render "rd_benefit_show",:collection=>doc.rd_benefits,:as=>:d_item
-      <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        =render :partial=>"rd_benefit_show",:collection=>doc.rd_benefits,:as=>:d_item
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if [9,11,13].include? doc.doc_type
     <!--分摊明细动态显示-->
     .doc_detail
@@ -224,17 +224,17 @@
           = image_tag "currency_yuan.png"
           %span.split_total_amount.normal=0.0
       .form_area.is_split_reim
-        =render "reim_split_show",:collection=>doc.reim_split_details,:as=>:d_item
-      <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  <!---if doc.doc_type>=9 and doc.doc_type<=12-->
-  <!--  .form_title-->
-  <!--    %h3= "#{I18n.t('common_attr.now_cp_docs')}"-->
-  <!--  = render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>doc } --> 
-  <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  -if doc.doc_type%3 or doc.doc_type=9 and doc.doc_type<=13
+        =render :partial=>"reim_split_detail_show",:collection=>doc.reim_split_details,:as=>:d_item
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!---if doc.doc_type>=9 and doc.doc_type<=12-->
+        <!--  .form_title-->
+        <!--    %h3= "#{I18n.t('common_attr.now_cp_docs')}"-->
+        <!--  = render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>doc } --> 
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  -if doc.doc_type==3 or doc.doc_type==9 and doc.doc_type<=13
     .doc_detail.recivers
       .form_title
         %h3
           = doc.doc_type==2 ? "#{I18n.t('common_attr.rec_company')}" : "#{I18n.t('common_attr.rec_person')}" 
       .form_area
-        =render "reciver_show",:collection=>doc.recivers,:as=>:d_item
+        =render :partial=>"reciver_show",:collection=>doc.recivers,:as=>:d_item

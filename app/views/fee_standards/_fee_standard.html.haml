@@ -2,6 +2,5 @@
   .show
     %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_fee_standard_path(fee_standard) ,:remote=>true
     %span.list_action_right= link_to image_tag("/images/icons/cross.png"), fee_standard, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
-    %span.list_field= fee_standard.name
     %span.list_field= fee_standard.fee
   .edit

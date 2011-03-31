@@ -48,7 +48,7 @@ class AccountsController < ApplicationController
     if !@account.save
       render "basic_setting/new",:locals=>{:resource=>@account }
     else
-      redirect_to index
+      redirect_to accounts_path
     end
   end
 

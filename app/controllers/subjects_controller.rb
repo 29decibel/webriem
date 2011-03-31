@@ -48,7 +48,7 @@ class SubjectsController < ApplicationController
     if !@subject.save
       render "basic_setting/new",:locals=>{:resource=>@subject }
     else
-      redirect_to index
+      redirect_to subjects_path
     end
   end
 

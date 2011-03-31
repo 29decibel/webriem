@@ -48,7 +48,7 @@ class SettlementsController < ApplicationController
     if !@settlement.save
       render "basic_setting/new",:locals=>{:resource=>@settlement }
     else
-      redirect_to index
+      redirect_to settlements_path
     end
   end
 

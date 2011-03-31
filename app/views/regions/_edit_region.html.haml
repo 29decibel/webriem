@@ -1,13 +1,13 @@
 -form_for region,:remote=>true,:class=>"edit_inline" do |f|
   = render "shared/common_error",:resource=>region
   =f.hidden_field :id
-		.form_field
-			%span.label= f.label "#{I18n.t('activerecord.attributes.region.name')}#{mark_required(f.object,:name)}" 
-			%span.value= f.text_field :name,:class=>"input1 " 
-		.form_field
-			%span.label= f.label "#{I18n.t('activerecord.attributes.region.code')}#{mark_required(f.object,:code)}" 
-			%span.value= f.text_field :code,:class=>"input1 " 
-		.form_field
-			%span.label= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" 
-      %span.value= reference_select "region_type_id","RegionType",:text=>f.object.region_type.to_s,:value=>f.object.region_type_id
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.region.name')}#{mark_required(f.object,:name)}" 
+    %span.value= f.text_field :name,:class=>"input1 " 
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.region.code')}#{mark_required(f.object,:code)}" 
+    %span.value= f.text_field :code,:class=>"input1 " 
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" 
+    %span.value= reference_select "region_type_id","RegionType",:text=>f.object.region_type.to_s,:value=>f.object.region_type_id
   =render "basic_setting/fb_actions"

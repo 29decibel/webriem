@@ -86,10 +86,11 @@ Webreim::Application.routes.draw do
   get "task/docs_approved"  
   get "task/docs_to_pay"  
   get "task/docs_paid"
+  get "task/dashboard"
   
   devise_for :users
     
-  root :to=>"task#my_docs"
+  root :to=>"task#dashboard"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

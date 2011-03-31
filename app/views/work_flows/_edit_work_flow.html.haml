@@ -1,24 +1,24 @@
 -form_for work_flow,:remote=>true,:class=>"edit_inline" do |f|
   = render "shared/common_error",:resource=>work_flow
   =f.hidden_field :id
-		.form_field
-			%span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.name')}#{mark_required(f.object,:name)}" %>		
-			%span.value= f.text_field :name,:class=>"input1" %><%= mark_required(@work_flow, :name) %>
-    %br
-		.form_field
-			<% (1..14).each do |num| %>
-        .doc_type_check
-          = check_box_tag("doc_types[]",num,@work_flow.doc_types.split(';').include?(num.to_s))
-          = f.label doc_type_name(num)
-    %br
-		.form_field
-      %span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.duty')}#{mark_required(f.object,:duties)}"
-      %span.value= reference_select "duty_ids","Duty",:text=>(f.object.duties.map{|p| p.to_s}).join(";"),:value=>(f.object.duties.map{|p| p.id}).join("_")
-    .doc_detail
-      .form_tytle
-        %h3
-          = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:work_flow_steps 
-          = "审批流步骤" 
-        .form_area
-          -f.fields_for :work_flow_steps do |builder|
-            = render 'work_flow_step_fields',:f => builder 
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.name')}#{mark_required(f.object,:name)}"
+    %span.value= f.text_field :name,:class=>"input1" 
+  %br
+  .form_field
+    -(1..14).each do |num|
+      .doc_type_check
+        = check_box_tag("doc_types[]",num,work_flow.doc_types.split(';').include?(num.to_s))
+        = f.label doc_type_name(num)
+  %br
+  .form_field
+    %span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.duty')}#{mark_required(f.object,:duties)}"
+    %span.value= reference_select "duty_ids","Duty",:text=>(f.object.duties.map{|p| p.to_s}).join(";"),:value=>(f.object.duties.map{|p| p.id}).join("_")
+  .doc_detail
+    .form_stytle
+      %h3
+        = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:work_flow_steps 
+        = "审批流步骤" 
+      .form_area
+        -f.fields_for :work_flow_steps do |builder|
+          = render 'work_flow_step_fields',:f => builder 

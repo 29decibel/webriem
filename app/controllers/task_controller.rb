@@ -15,7 +15,7 @@ class TaskController < ApplicationController
   end
   #the docs need to pay
   def docs_to_pay
-    @docs=DocHead.("doc_state=2")
+    @docs=DocHead.where("doc_state=2")
     respond_to do |format|
       format.js { render 'show_docs'}
     end
@@ -29,9 +29,12 @@ class TaskController < ApplicationController
   end
   #docs already paid
   def docs_paid
-    @docs=DocHead.("doc_state=3")
+    @docs=DocHead.where("doc_state=3")
     respond_to do |format|
       format.js { render 'show_docs'}
     end
+  end
+  def dashboard
+    
   end
 end

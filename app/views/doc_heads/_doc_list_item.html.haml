@@ -1,4 +1,5 @@
-.listitem(id="#{doc.id}")
-  %span.list_action_right= =link_to "编辑", edit_doc_head_path(doc),:remote=>true
-  %span.list_action_right= =link_to "查看", doc_head_path(doc),:remote=>true
-  %span.list_field=doc.doc_no
+.list_item(id="#{doc.id}")
+  .show
+    %span.list_action_right= link_to "编辑", edit_doc_head_path(doc),:remote=>true
+    %span.list_action_right= link_to "查看", doc_head_path(doc),:remote=>true
+    %span.list_field=doc.doc_no
