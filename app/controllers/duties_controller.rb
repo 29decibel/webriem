@@ -3,7 +3,7 @@ class DutiesController < ApplicationController
   # GET /duties
   # GET /duties.xml
   def index
-    @resources=Duty.all
+    @resources=Duty.page(params[:page]).per(20)
     @model_s_name="duty"
     @model_p_name="duties"
     respond_to do |format|

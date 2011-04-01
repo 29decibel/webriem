@@ -3,7 +3,7 @@ class FeesController < ApplicationController
   # GET /fees
   # GET /fees.xml
   def index
-    @resources=Fee.all
+    @resources=Fee.page(params[:page]).per(20)
     @model_s_name="fee"
     @model_p_name="fees"
     respond_to do |format|

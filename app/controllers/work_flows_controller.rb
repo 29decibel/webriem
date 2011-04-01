@@ -4,7 +4,7 @@ class WorkFlowsController < ApplicationController
   # GET /work_flows
   # GET /work_flows.xml
   def index
-    @resources=WorkFlow.all
+    @resources=WorkFlow.page(params[:page]).per(20)
     @model_s_name="work_flow"
     @model_p_name="work_flows"
     respond_to do |format|

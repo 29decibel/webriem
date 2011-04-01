@@ -1,5 +1,4 @@
-= link_to content_tag(:span,"#{I18n.t('common_op.btn_new')}"), new_doc_head_path(:doc_type=>doc_head.doc_type),:class=>"minibutton"
-= link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"
+= link_to content_tag(:span,"#{I18n.t('common_op.btn_new')}"), new_doc_head_path(:doc_type=>doc_head.doc_type),:remote=>true,:class=>"minibutton"
 -if !doc_head.new_record? and doc_head.doc_state==0
   = link_to_function content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"),"select_approver_or_begin_work_flow()",:class=>"minibutton"
 -if doc_head.person==current_user.person and doc_head.doc_state==1
@@ -11,3 +10,4 @@
 = link_to content_tag(:span,"#{I18n.t('common_op.btn_mydocs')}"), my_docs_path,:remote=>true,:class=>"minibutton"
 -if doc_head.doc_state==2 and current_user.person.person_type and  current_user.person.person_type.code=="CA"
   = link_to content_tag(:span,"#{I18n.t('common_op.confirm_paid')}"),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
+=yield :custom_actions

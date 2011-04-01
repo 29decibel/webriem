@@ -2,7 +2,7 @@
 class DepsController < ApplicationController
   # GET /deps
   def index
-    @resources=Dep.all
+    @resources=Dep.page(params[:page]).per(20)
     @model_s_name="dep"
     @model_p_name="deps"
     respond_to do |format|

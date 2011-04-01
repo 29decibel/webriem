@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @resources=Account.all
+    @resources=Account.page(params[:page]).per(20)
     @model_s_name="account"
     @model_p_name="accounts"
     respond_to do |format|

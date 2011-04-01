@@ -1,5 +1,7 @@
 .form_title
   %h3= @title
+-content_for :custom_actions do
+  = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc),:remote=>true,:class=>"minibutton"
 #doc_head_actions.actions
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process

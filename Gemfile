@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.5'
 gem 'mysql2','0.2.6'
 gem "jquery-rails"
 gem "devise",'1.1.7'
@@ -33,6 +33,7 @@ gem 'admin_data'
 gem 'ruby-ole'
 gem 'spreadsheet'
 gem 'rest-client'
+gem "kaminari"
 #gem 'iconv'
 
 # Bundle edge Rails instead:

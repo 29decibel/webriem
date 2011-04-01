@@ -3,7 +3,7 @@ class RegionsController < ApplicationController
   # GET /regions
   # GET /regions.xml
   def index
-    @resources=Region.all
+    @resources=Region.page(params[:page]).per(20)
     @model_s_name="region"
     @model_p_name="regions"
     respond_to do |format|

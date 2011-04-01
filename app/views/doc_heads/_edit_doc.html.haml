@@ -1,6 +1,8 @@
 = form_for doc,:remote=>true,:html => {:class=>:doc_head} do |f| 
   .form_title
     %h3= @title
+  -content_for :custom_actions do
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"
   #doc_head_actions.actions
     = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
   #doc_state_process

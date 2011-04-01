@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @resources=Person.all
+    @resources=Person.page(params[:page]).per(20)
     @model_s_name="person"
     @model_p_name="people"
     respond_to do |format|

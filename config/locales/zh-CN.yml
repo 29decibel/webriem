@@ -20,6 +20,11 @@
       long: "%Y年%b%d日 %H:%M"
     am: "上午"
     pm: "下午"
+  views:
+    pagination:
+      previous: "&lt; 上一页"  
+      next: "下一页 &gt;"  
+      truncate: "&hellip;" 
   
   datetime:
     distance_in_words:
@@ -109,6 +114,7 @@
     btn_new: "新增"
     btn_return: "返回"
     btn_save: "保存"
+    btn_edit: "修改"
     btn_ok: 确定
     btn_cancel: 取消
     btn_mydocs: 我的单据

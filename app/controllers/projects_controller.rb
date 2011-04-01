@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @resources=Project.all
+    @resources=Project.page(params[:page]).per(20)
     @model_s_name="project"
     @model_p_name="projects"
     respond_to do |format|

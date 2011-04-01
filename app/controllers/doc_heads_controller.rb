@@ -140,7 +140,6 @@ class DocHeadsController < ApplicationController
       if @doc.current_approver_id == current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
-      render "shared/show_result"
     else
       #写一些校验出错信息
       render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc)}
