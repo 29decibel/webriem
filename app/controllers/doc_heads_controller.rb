@@ -97,6 +97,7 @@ class DocHeadsController < ApplicationController
     @doc.build_redeem_finance_product if @doc.doc_type==8
     #暂时每次都创建一个审批流填写信息
     @doc.work_flow_infos.build
+    #set the title
     #render
     #render "edit_doc",:locals=>{:doc=>@doc}
     #respond_to do |format|
@@ -118,8 +119,10 @@ class DocHeadsController < ApplicationController
         @doc.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
       end
     end
-    if !@doc.save
-      render "shared/doc_error",:error_msg=>get_error_messages(@doc)
+    if @doc.save
+      redirect_to doc_head_path(@doc)
+    else
+      render "new"
     end
   end
 
@@ -141,8 +144,7 @@ class DocHeadsController < ApplicationController
         @work_flow_info=WorkFlowInfo.new
       end
     else
-      #写一些校验出错信息
-      render "shared/errors",:locals=>{:error_msg=>get_error_messages(@doc)}
+      render "edit"
     end
   end
 

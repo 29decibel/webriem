@@ -2,7 +2,7 @@
   %span.sequence
   .form_field
     %span.label= "#{I18n.t('common_attr.is_sunday')}"
-    %span.value= f.select :is_sunday, RdExtraWorkMeal::ENUMS_IS_SUNDAY,{},{:class=>"normal is_sunday"} 
+    %span.value= d_item.is_sunday
   .form_field
     %span.label= "#{I18n.t('common_attr.start_time')}"
     - start_time_string = d_item.start_time && d_item.start_time.to_s 

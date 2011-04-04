@@ -5,20 +5,20 @@
   %span.sequence
   .form_field
     %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')
-    %span.value= reference_select :dep_id,"Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id
+    %span.value= reference_select :dep_id,"Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id,:f=>f
   .form_field
     %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
-    %span.value= reference_select :project_id,"Project",:text=>f.object.project.to_s,:value=>f.object.project_id
+    %span.value= reference_select :project_id,"Project",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
   -if 2
     .form_field
       %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
-      %span.value= reference_select :fee_id,"Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id
+      %span.value= reference_select :fee_id,"Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
   .form_field
     %span.label= I18n.t('common_attr.used_for')
     %span.value= f.text_field :used_for,:class=>"xlarge" 
   .form_field
     %span.label= I18n.t('common_attr.currency')
-    %span.value= reference_select :currency_id,"Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id
+    %span.value= reference_select :currency_id,"Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
   .form_field
     %span.label= I18n.t('common_attr.rate')
     %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 

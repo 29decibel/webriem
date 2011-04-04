@@ -1,6 +1,6 @@
 //this is used for control the doc state 
 $(function(){
-	set_form_state();	
+	//set_form_state();	
 });
 
 function set_form_state()

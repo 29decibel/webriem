@@ -2,7 +2,11 @@
 module ApplicationHelper
   def reference_select(field_name,model_name,options={})
     html=""
-    html<<hidden_field_tag(field_name,options[:value],:class=>"ref_hidden_field")
+    if options[:f]
+      html<<options[:f].hidden_field(field_name.to_sym,{:value=>options[:value],:class=>"ref_hidden_field"})
+    else
+      html<<hidden_field_tag(field_name,options[:value],:class=>"ref_hidden_field")
+    end
     html<<text_field_tag("#{model_name}_info",options[:text],:class=>"ref")
     html<<link_to(content_tag(:span,"",:class=>"reference"),"#",{"class-data"=>model_name})
     content_tag(:div,raw(html),:class=>"reference")

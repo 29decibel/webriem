@@ -43,7 +43,7 @@ class DutiesController < ApplicationController
     if !@duty.save
       render "basic_setting/new",:locals=>{:resource=>@duty }
     else
-      redirect_to index
+      redirect_to duties_path
     end
   end
 

@@ -224,6 +224,12 @@ form div.form_field span.value{
 form div.form_field span.value input{
   width:100%;
 }
+/*doc show 's information*/
+div.doc_head_show div.form_field,div.show_only div.form_field{
+  display:inline-block;
+  margin:2px 2px 4px 2px;
+}
+/* ------end------------*/
 div.form_area fieldset{
   padding-bottom:5px;
   position:relative;
@@ -831,15 +837,14 @@ div.list_item{
   position:relative;
   border-bottom:1px solid #ccc;
 }
+div.list_item:hover{
+  background-color:#f2f2f2;
+}
 div.list_item:hover span.list_action_left{
   display:inline-block;
 }
 div.list_item:hover span.list_action_right{
   display:inline-block;
-}
-span.list_field{
-  display:block;
-  margin:2px 3px 2px 3px;
 }
 span.list_action_left{
   float:left;
@@ -851,4 +856,43 @@ span.list_action_right{
   margin-right:-18px;
   display:none;
   clear:right;
+}
+span.list_field{
+  display:block;
+  margin:2px 3px 2px 3px;
+}
+/*new list action style*/
+.list_item_action{
+  position:relative;
+  display:none;
+}
+div.list_item:hover .list_item_action{
+  display:block;
+}
+span.action{
+  display:inline-block;
+}
+/* for the pager*/
+.pagination{
+  margin:10px 20px 0px 22px; 
+  color:#515151;
+}
+.pagination a{
+  color:#515151;
+}
+.pagination a:hover{
+  background-color:#515151;
+  color:white;
+}
+/* doc error message*/
+.doc_error .inline_error{
+  margin-left:10px;
+  margin-right:10px;
+  border:2px solid #FBC2C4;
+  padding:5px;
+	background: #FBE3E4;
+	color: #8A1F11;
+}
+.doc_error ul{
+  list-style:none;
 }

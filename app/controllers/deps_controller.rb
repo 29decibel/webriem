@@ -40,7 +40,7 @@ class DepsController < ApplicationController
     if !@dep.save
       render "basic_setting/new",:locals=>{:resource=>@dep }
     else
-      redirect_to index
+      redirect_to deps_path
     end
   end
 

@@ -326,7 +326,7 @@ function add_fields(link, association, content) {
 	$(".datepicker").datepicker();
 	$(".datetimepicker").datetimepicker();
 	//set the doc state
-	set_form_state();
+	//set_form_state();
 	//set reference readonly
 	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
@@ -336,15 +336,7 @@ function add_fields(link, association, content) {
 	//enable the enter to tab
 	add_enter_to_tab();
 }
-//找到所有的table,只要他有sequence列,set the number to a sequence number
-function set_unique_sequence_num(sequences){
-	//设置他们的序号
-	//sequences.each(function(index,ele){
-	//	$(this).val(index+1);
-	//	//fire it once
-	//	$(this).attr("readonly","readonly");
-	//});
-}
+
 
 function add_upload_files(current,path)
 {
@@ -355,7 +347,7 @@ function add_upload_files(current,path)
 function removeSelected(remove_link)
 {
 	$(remove_link).parent().find("select :selected").remove();
-	set_form_state();
+	//set_form_state();
 	return false;
 }
 //=================================select the approver when in the workflow someone begin apply approve
@@ -634,10 +626,5 @@ function cancel_edit_form (cancel_link) {
   $(cancel_link).closest(".list_item").find("div.show").show("slow");
 }
 
-//$(document).bind('ajax:beforeSend', function(xhr, settings) {
-//  //$('[data-once=true]').something();
-//  console.log(xhr);
-//  console.log(settings);
-//  console.log(this);
-//});
+
 
