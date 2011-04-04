@@ -15,16 +15,16 @@
     %span.value= collection_select(:person, :person_type_id, PersonType.all, :id, :name, {:include_blank => '无'},{:class=>"basic_input"}) 
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.person.dep_id')}#{mark_required(f.object,:dep_id)}" 
-    %span.value= reference_select "person[dep_id]","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id
+    %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.person.duty_id')}#{mark_required(f.object,:duty_id)}" 
-    %span.value= reference_select "person[duty_id]","Duty",:text=>f.object.duty.to_s,:value=>f.object.duty_id
+    %span.value= reference_select "duty_id","Duty",:text=>f.object.duty.to_s,:value=>f.object.duty_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.person.phone')}#{mark_required(f.object,:phone)}" 
     %span.value= f.text_field :phone,:class=>"input1 number" 
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.person.role_id')}#{mark_required(f.object,:role_id)}"
-    %span.value= reference_select "person[role_id]","Role",:text=>f.object.role.to_s,:value=>f.object.role_id
+    %span.value= reference_select "role_id","Role",:text=>f.object.role.to_s,:value=>f.object.role_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.person.e_mail')}#{mark_required(f.object,:e_mail)}" 
     %span.value= f.text_field :e_mail,:class=>"input1 " 

@@ -11,7 +11,7 @@
     %span.value= reference_select :project_id,"Project",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
   -if 2
     .form_field
-      %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
+      %span.label= "#{I18n.t('common_attr.fee')}"
       %span.value= reference_select :fee_id,"Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
   .form_field
     %span.label= I18n.t('common_attr.used_for')

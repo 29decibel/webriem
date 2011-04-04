@@ -8,7 +8,7 @@
     %span.value= f.text_field :description,:class=>"xlarge"
   .form_field
     %span.label= "#{I18n.t('common_attr.currency')}"
-    %span.value= reference_select "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id
+    %span.value= reference_select "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
   .form_field
     %span.label= "#{I18n.t('common_attr.rate')}"
     %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 

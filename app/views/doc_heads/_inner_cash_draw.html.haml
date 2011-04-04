@@ -1,7 +1,7 @@
 .form_area
   .form_field
     %span.label= f.label "#{I18n.t('common_attr.cash_draw_account')}"
-    %span.value= reference_select "account_id","Account",:text=>detail_doc.account.to_s,:value=>detail_doc.account_id
+    %span.value= reference_select "account_id","Account",:text=>detail_doc.account.to_s,:value=>detail_doc.account_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" 
     %span.value= f.text_field :now_remain_amout,:class=>"input1 "

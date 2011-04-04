@@ -863,13 +863,24 @@ span.list_field{
 }
 /*new list action style*/
 .list_item_action{
-  position:relative;
+  position:absolute;
+  height:15px;
+  bottom:2px;
+  right:5px;
+}
+.list_item_action span.action{
   display:none;
+  float:right;
+  margin-left:3px;
 }
-div.list_item:hover .list_item_action{
-  display:block;
+.list_item_action span.action a{
+  color:#515151;
 }
-span.action{
+.list_item_action span.action a:hover{
+  background-color:#515151;
+  color:white;
+}
+div.list_item:hover .list_item_action span.action{
   display:inline-block;
 }
 /* for the pager*/

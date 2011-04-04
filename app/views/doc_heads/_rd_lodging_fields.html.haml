@@ -17,7 +17,7 @@
     %span.value= f.select :region_type_id, RegionType.all.collect{|rt|[rt.name,rt.id]},{},{:class=>"normal region_type_select "} 
   .form_field
     %span.label= "#{I18n.t('common_attr.city')}"
-    %span.value= reference_select "region_id","Region",:text=>f.object.region.to_s,:value=>f.object.region_id
+    %span.value= reference_select "region_id","Region",:text=>f.object.region.to_s,:value=>f.object.region_id,:f=>f
   .form_field
     %span.label= "#{I18n.t('common_attr.other_place')}"
     %span.value= f.text_field :custom_place,:class=>"normal"  
@@ -32,7 +32,7 @@
     %span.value= f.text_field :person_names,:class=>"normal" 
   .form_field
     %span.label= "#{I18n.t('common_attr.currency')}"
-    %span.value= reference_select "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id
+    %span.value= reference_select "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
   .form_field
     %span.label= "#{I18n.t('common_attr.rate')}"
     %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number"  
