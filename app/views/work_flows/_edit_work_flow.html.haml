@@ -13,7 +13,7 @@
   %br
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.duty')}#{mark_required(f.object,:duties)}"
-    %span.value= reference_select "duty_ids","Duty",:text=>(f.object.duties.map{|p| p.to_s}).join(";"),:value=>(f.object.duties.map{|p| p.id}).join("_"),:f=>f
+    %span.value= f.text_field :duty_tokens
   .doc_detail
     .form_stytle
       %h3

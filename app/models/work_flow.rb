@@ -18,4 +18,10 @@ class WorkFlow < ActiveRecord::Base
     	results
 	end
   end
+  attr_accessible :author_tokens
+  attr_reader :duty_tokens
+  def duty_tokens=(ids)
+    self.duty_ids = ids.split(",")
+  end
+
 end

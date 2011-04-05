@@ -1,5 +1,9 @@
 Webreim::Application.routes.draw do
 
+  get "token_input/search"
+
+  get "duties/tokened(.:format)"
+
   resources :menu_categories
   get "doc_off_set/index"
   post "doc_off_set/search"
@@ -51,6 +55,7 @@ Webreim::Application.routes.draw do
   get "doc_heads/begin_work"
   get "doc_heads/mark"
   get "doc_heads/export_xls"
+
 
   resources :roles
 

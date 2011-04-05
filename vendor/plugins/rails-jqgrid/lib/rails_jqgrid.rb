@@ -156,8 +156,7 @@ module ActionView
     def jqgrid_init(locale="cn")
       #includes = capture { stylesheet_link_tag "jqgrid/#{theme}/jquery-ui-1.7.2.custom" }
       #includes << capture { stylesheet_link_tag "jqgrid/ui.jqgrid" }
-      includes = capture { javascript_include_tag "jqgrid/jquery-1.4.2.min" }
-      includes << capture { javascript_include_tag "jqgrid/i18n/grid.locale-#{locale}" }
+      includes = capture { javascript_include_tag "jqgrid/i18n/grid.locale-#{locale}" }
       includes << capture { javascript_include_tag "jqgrid/jquery.jqGrid.min" }      
       includes
     end

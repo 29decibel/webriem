@@ -5,3 +5,16 @@ $("#<%= "#{model_s_name}_#{resource.id}"%> div.edit").html("<%= escape_javascrip
 $("#<%= "#{model_s_name}_#{resource.id}"%> div.edit").show("slow");
 //hide the show item
 $("#<%= "#{model_s_name}_#{resource.id}"%> div.show").hide("slow");
+$("#<%= "#{model_s_name}_#{resource.id}"%> div.edit input.token-input").each(function(){
+    $(this).tokenInput("/token_input/search?model="+$(this).data("model")
+    ,{
+      crossDomain: false,
+      prePopulate: $(this).data("pre"),
+      searchingText: "搜索中...",
+      hintText: "输入进行搜索",
+      noResultsText: "无符合条件的记录",
+      theme: "facebook",
+      preventDuplicates: true,
+      tokenLimit: 1
+    });  
+  });

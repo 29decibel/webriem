@@ -2,7 +2,8 @@
 %html
   %head
     %title 网上报销系统
-    = stylesheet_link_tag :all,:recursive => true 
+    = stylesheet_link_tag :all,:recursive => true
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"
     = jqgrid_init
     = javascript_include_tag "jquery.blockUI"
     = javascript_include_tag "nested_form.js" 
@@ -16,6 +17,7 @@
     = javascript_include_tag "jquery.formatCurrency-1.4.0.js" 
     = javascript_include_tag "doc_number_input_control.js" 
     = javascript_include_tag "enter_to_tab.js" 
+    = javascript_include_tag "jquery.tokeninput.js" 
     = csrf_meta_tag 
   %body
     .header

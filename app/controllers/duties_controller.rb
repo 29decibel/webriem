@@ -12,6 +12,13 @@ class DutiesController < ApplicationController
     end
   end
 
+  def tokened
+    @duties=Duty.where("name like ? or code like ?","%#{params[:q]}%","%#{params[:q]}%")
+    respond_to do |format|
+      format.json {render :json=>@duties.map(&:attributes)}
+    end
+  end
+
   # GET /duties/1
   # GET /duties/1.xml
   def show

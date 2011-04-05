@@ -11,6 +11,22 @@ module ApplicationHelper
     html<<link_to(content_tag(:span,"",:class=>"reference"),"#",{"class-data"=>model_name})
     content_tag(:div,raw(html),:class=>"reference")
   end
+  #token select control
+  #model info
+  #field name
+  def ts(field_name,model_name,options={})
+    #change value
+    if options[:value]
+      model=eval(model_name)
+      model.include_root_in_json = false
+      options[:value]=model.find(options[:value]).to_json
+    end
+    if options[:f]
+      options[:f].text_field field_name.to_sym,"data-model"=>model_name,"data-pre"=>"[#{options[:value]}]",:class=>"token-input"
+    else
+      text_field_tag field_name.to_sym,"data-model"=>model_name,"data-pre"=>options[:value],:class=>"token-input"
+    end
+  end
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
         "*"

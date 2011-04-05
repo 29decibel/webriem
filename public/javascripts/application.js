@@ -73,6 +73,7 @@ $(function(){
 		$("form,a").live("ajax:complete",function(){
 			//$("span#spinner").fadeOut();
 			$.unblockUI();
+      //tokenize();
 		});
 		//bind the submit link
 		$("a.submit").live("click",function(){
@@ -223,6 +224,23 @@ $(function(){
     //});
 
 });
+function tokenize()
+{
+  $("input.token-input").each(function(){
+    $(this).tokenInput("/token_input/search?model="+$(this).data("model")
+    ,{
+      crossDomain: false,
+      prePopulate: $(this).data("pre"),
+      searchingText: "搜索中...",
+      hintText: "输入进行搜索",
+      noResultsText: "无符合条件的记录",
+      theme: "facebook",
+      preventDuplicates: true,
+      tokenLimit: 1
+    });  
+  });
+
+}
 //reference change
 function reference_change()
 {
