@@ -6,7 +6,7 @@ class Fee < ActiveRecord::Base
   enum_attr :attr, [['普通费用', 0], ['差旅费用', 1], ['加班费用', 2], ['交际费用', 3], ['业务交通费', 4], ['福利费', 5], ['收款通知', 6], ['结汇申请',7], ['现金提取申请', 8], ['购买（赎回）理财产品申请', 9]]
   validates_presence_of :name,:code
   validates_uniqueness_of :name,:code
-  default_scope :order => 'code DESC'
+  default_scope :order => 'code '
   SHOW_IN_REF={0=>"不显示",1=>"显示"}
   def show_in_ref_name
     return SHOW_IN_REF[show_in_ref] if show_in_ref
