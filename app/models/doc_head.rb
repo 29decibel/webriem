@@ -409,7 +409,7 @@ class DocHead < ActiveRecord::Base
   #and 'if else'
   #把所有的获取fee_code_match的逻辑都放在各自的子条目中
   #保证每个子条目都有一个fee_code_match,project,dep
-  def rg_vouches
+  def rg_vouches(cbill="")
     #分摊的逻辑
     if is_split==1 and [9,11,13].include? doc_type
       #加班和差旅基本相同，只是默认的科目不同
@@ -441,6 +441,7 @@ class DocHead < ActiveRecord::Base
         vj=get_v ({
           :inid=>"#{init_count}",
           :code=>fcm.dcode,# dai kemu
+          :cbill=>cbill,
           :md=>s.percent_amount,:md_f=>s.percent_amount,
           :dep=>s.dep,# dep code
           :project=>s.project,#project code
@@ -454,6 +455,7 @@ class DocHead < ActiveRecord::Base
       #1 credit
       vd=get_v ({
         :inid=>"#{init_count}",
+        :cbill=>cbill,
         :code=>fee_code_match.ccode,# dai kemu
         :mc=>total_amount,:mc_f=>total_amount,
         :dep=>nil,# dep code
@@ -479,6 +481,7 @@ class DocHead < ActiveRecord::Base
         self.cp_doc_details.each do |cp|
            vj=get_v ({:inid=>"#{jcount}",
            :code=>fee_m_code.dcode,
+           :cbill=>cbill,
            :md=>total_amount,:md_f=>total_amount,
            :dep=>cp.dep,
            :project=>cp.project,
@@ -493,6 +496,7 @@ class DocHead < ActiveRecord::Base
         vd=get_v ({
           :inid=>"#{jcount}",
           :code=>fee_m_code.ccode,# dai kemu
+          :cbill=>cbill,
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code
           :project=>nil,#project code
@@ -509,6 +513,7 @@ class DocHead < ActiveRecord::Base
         fee_m_code=FeeCodeMatch.find_by_fee_code("03")
         vj=get_v ({:inid=>"1",
           :code=>fee_m_code.dcode,
+          :cbill=>cbill,
           :md=>total_amount,:md_f=>total_amount,
           :dep=>afford_dep,
           :project=>project,
@@ -520,6 +525,7 @@ class DocHead < ActiveRecord::Base
         vd=get_v ({
           :inid=>"2",
           :code=>fee_m_code.ccode,# dai kemu
+          :cbill=>cbill,
           :md=>"0",:mc=>total_amount,:mc_f=>total_amount,
           :dep=>afford_dep,# dep code
           :project=>project,#project code
@@ -554,6 +560,7 @@ class DocHead < ActiveRecord::Base
           vj=get_v ({
             :inid=>"#{init_count}",
             :code=>fee_m_code.dcode,# dai kemu
+            :cbill=>cbill,
             :md=>c_w_m[:amount],:md_f=>c_w_m[:amount],
             :dep=>c_w_m[:dep],# dep code
             :project=>c_w_m[:project],#project code
@@ -569,6 +576,7 @@ class DocHead < ActiveRecord::Base
         vd=get_v ({
           :inid=>"#{init_count}",
           :code=>fee_m_code.ccode,# dai kemu
+          :cbill=>cbill,
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
@@ -594,6 +602,7 @@ class DocHead < ActiveRecord::Base
           vj=get_v ({
             :inid=>"#{inid_count}",
             :code=>fee_m_code_meal.dcode,# dai kemu
+            :cbill=>cbill,
             :md=>total,:md_f=>total,
             :dep=>afford_dep,# dep code
             :project=>project,#project code
@@ -612,6 +621,7 @@ class DocHead < ActiveRecord::Base
           vj=get_v ({
             :inid=>"#{inid_count}",
             :code=>fee_m_code_car.dcode,# dai kemu
+            :cbill=>cbill,
             :md=>total,:md_f=>total,
             :dep=>afford_dep,# dep code
             :project=>project,#project code
@@ -627,6 +637,7 @@ class DocHead < ActiveRecord::Base
         vd=get_v ({
           :inid=>"#{inid_count}",
           :code=>fee_m_code_meal.ccode,# dai kemu
+          :cbill=>cbill,
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
@@ -667,6 +678,7 @@ class DocHead < ActiveRecord::Base
           vj=get_v ({
             :inid=>"#{inid_count}",
             :code=>b[:fee].dcode,# dai kemu
+            :cbill=>cbill,
             :md=>b[:amount],:md_f=>b[:amount],
             :dep=>b[:dep],# dep code
             :project=>b[:project],#project code
@@ -682,6 +694,7 @@ class DocHead < ActiveRecord::Base
         vd=get_v ({
           :inid=>"#{inid_count}",
           :code=>fee_m_code.ccode,# dai kemu
+          :cbill=>cbill,
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
@@ -721,6 +734,7 @@ class DocHead < ActiveRecord::Base
             vj=get_v ({
               :inid=>"#{inid_count}",
               :code=>fee_m_code.dcode,# dai kemu
+              :cbill=>cbill,
               :md=>r[:amount],:md_f=>r[:amount],
               :dep=>r[:dep],# dep code
               :project=>r[:project],#project code
@@ -754,6 +768,7 @@ class DocHead < ActiveRecord::Base
             vj=get_v ({
               :inid=>"#{inid_count}",
               :code=>fee_g_code.dcode,# dai kemu
+              :cbill=>cbill,
               :md=>r[:amount],:md_f=>r[:amount],
               :dep=>r[:dep],# dep code
               :project=>r[:project],#project code
@@ -787,6 +802,7 @@ class DocHead < ActiveRecord::Base
             vj=get_v ({
               :inid=>"#{inid_count}",
               :code=>fee_y_code.dcode,# dai kemu
+              :cbill=>cbill,
               :md=>r[:amount],:md_f=>r[:amount],
               :dep=>r[:dep],# dep code
               :project=>r[:project],#project code
@@ -803,6 +819,7 @@ class DocHead < ActiveRecord::Base
         vd=get_v ({
           :inid=>"#{inid_count}",
           :code=>fee_m_code.ccode,# dai kemu
+          :cbill=>cbill,
           :mc=>total_amount,:mc_f=>total_amount,
           :dep=>nil,# dep code should select
           :project=>nil,#project code should select
