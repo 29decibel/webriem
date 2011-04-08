@@ -81,6 +81,20 @@ $(function(){
 
       //setTimeout($.unblockUI, 2000);
 		});
+		$("a").live("ajax:beforeSend",function(){
+			$.blockUI({ css: { 
+          border: 'none', 
+          padding: '15px', 
+          backgroundColor: '#000', 
+          '-webkit-border-radius': '10px', 
+          '-moz-border-radius': '10px', 
+          opacity: .5, 
+          color: '#fff'
+      },message:'请稍等' }); 
+    });
+		$("a").live("ajax:complete",function(){
+			$.unblockUI();
+    });
 		$("form").live("ajax:complete",function(){
 			//$("span#spinner").fadeOut();
 			$.unblockUI();
