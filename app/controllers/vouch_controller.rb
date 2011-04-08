@@ -6,7 +6,7 @@ class VouchController < ApplicationController
   def index
     @docs=DocHead.where("id in (#{params[:doc_ids]}) and mark='ok'").all
     rg_all=(params[:rg]=="true")
-    @docs.each {|d| d.rg_vouches if (rg_all or d.vouches.count==0) }
+    @docs.each {|d| d.rg_vouches(current_user.person.name) if (rg_all or d.vouches.count==0) }
   end
   def rg_vouch
     @doc=DocHead.find(params[:doc_id])
