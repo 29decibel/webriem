@@ -5,6 +5,7 @@ class RefFormController < ApplicationController
     "Person"=>["name","code",{:name=>"dep__name",:label=>"所在部门"}],
     "Dep"=>["name","code"],
     "Project"=>["name","code"],
+    "Fee"=>["name","code"],
     "Currency"=>["name","code","default_rate"]
   }
   FilterColumns=["id","created_at","updated_at"]
@@ -25,6 +26,10 @@ class RefFormController < ApplicationController
     #filter u8code current year
     if model_name=="U8code"
       str=str+" and year=#{Time.now.year}"
+    end
+    #filter fee
+    if model_name=="Fee"
+      str=str+" and show_in_ref=1"
     end
     #filter closed project
     if model_name=="Project"
