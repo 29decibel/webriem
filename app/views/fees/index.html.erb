@@ -1,27 +1,13 @@
-<div class="form_title">
-	<h3>费用类型列表</h3>
+<%= jqgrid :fees,
+		:model=>"Fee",
+		:caption=>"费用类型列表",
+		:height=>450,:width=>800,
+    :colModel=>["name","code",{:name=>"show_in_ref",:enum_type=>"Fee::SHOW_IN_REF",:getter=>:show_in_ref_name,:label=>"是否可以选择"}],
+		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/fees/'+rowid.toString();}--#)%>
+<div class="jqgrid">
+	<div class="buttons">
+		<a href="/fees/new">
+			<img src="/images/icons/add.png" alt=""/> <%= "添加费用类型" %>
+		</a>
+  </div>
 </div>
-	<div class="actions">
-		<%= link_to '添加费用类型', new_fee_path,:class=>"button2" %>
-	</div>
-<table class="hor-zebra">
-  <tr>
-    <th>编码</th>
-    <th>名称</th>
-    <th>费用属性</th>
-    <th>停用日期</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @fees.each do |fee| %>
-  <tr>
-    <td><%= fee.code %></td>
-    <td><%= fee.name %></td>
-    <td><%= fee.attr_name %></td>
-    <td><%= fee.end_date %></td>
-    <td class="action"><%= link_to '查看', fee %></td>
-    <td class="action"><%= link_to '删除', fee, :confirm => '是否真的要删除?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>

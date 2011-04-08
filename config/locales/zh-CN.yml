@@ -370,6 +370,7 @@
         end_date: "停用日期"
         attr: "费用属性"
         parent_fee_id: "所属费用类型"
+        show_in_ref: "是否可以选择"
       fee_code_match:
         fee_id: 费用类型
         dcode_id: 借方科目

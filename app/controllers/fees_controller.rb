@@ -3,7 +3,6 @@ class FeesController < ApplicationController
   # GET /fees
   # GET /fees.xml
   def index
-    redirect_to :controller=>"model_search",:action=>"index",:class_name=>"Fee",:lookup=>true,:addable=>true,:deletable=>true,:layout=>true
   end
 
   # GET /fees/1

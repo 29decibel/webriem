@@ -7,6 +7,11 @@ class Fee < ActiveRecord::Base
   validates_presence_of :name,:code
   validates_uniqueness_of :name,:code
   default_scope :order => 'code DESC'
+  SHOW_IN_REF={0=>"不显示",1=>"显示"}
+  def show_in_ref_name
+    return SHOW_IN_REF[show_in_ref] if show_in_ref
+    SHOW_IN_REF[0]
+  end
   #===================================================================================
   CUSTOM_QUERY={
       'parent_fee_id'=>{:include=>:parent_fee,:conditions=>'parent_fees_fees.name like ?'},
