@@ -81,7 +81,7 @@ class DocOffSetController < ApplicationController
     {:pass=>pass,:error_msg=>error_msg}
   end
   def docs_by_person(p)
-    riem_docs=DocHead.where("person_id = ? and doc_type between 9 and 13 and doc_state=2",p.id).all
+    riem_docs=DocHead.where("person_id = ? and doc_type between 9 and 13 and doc_state>=2",p.id).all
     cp_docs=DocHead.where("person_id = ? and doc_type =1 and doc_state=3 and cp_doc_remain_amount>0",p.id).all
     offsets=RiemCpOffset.joins(:reim_doc_head).where("doc_heads.person_id=? and doc_heads.doc_state>=2",p.id)
     {:riem_docs=>riem_docs,:cp_docs=>cp_docs,:offsets=>offsets}
