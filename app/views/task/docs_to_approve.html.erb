@@ -11,13 +11,15 @@
 		:ondblClickRow=>%Q(#--function(rowid,iRow,iCol,e){window.location='/doc_heads/'+rowid.toString();}--#)%>
 <div class="jqgrid">
 	<div class="buttons">
-		<a onclick="output_to_txt('#docs_to_approve'); return false;" href="#">
-			<img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt')%>
-		</a>
-    <!--out put all-->
-    <a onclick="output_to_txt_all(); return false;" href="#">
-			<img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt_all')%>
-		</a>
+    <% if current_user.person.person_type_id==3 %>
+      <a onclick="output_to_txt('#docs_to_approve'); return false;" href="#">
+        <img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt')%>
+      </a>
+      <!--out put all-->
+      <a onclick="output_to_txt_all(); return false;" href="#">
+        <img src="/images/icons/page_white_text.png" alt=""/> <%= I18n.t('common_attr.btn_output_txt_all')%>
+      </a>
+    <% end %>
 		<a onclick="output_to_excel('#docs_to_approve'); return false;" href="#">
 			<img src="/images/icons/table.png" alt=""/> <%= I18n.t('common_attr.btn_output_excel')%>
 		</a>
