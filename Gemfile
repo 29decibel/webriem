@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
-gem 'mysql2','0.2.6'
+gem 'rails', '3.0.6'
+gem 'mysql2'
 gem "jquery-rails"
-gem "devise",'1.1.7'
+gem "devise"
 gem 'delayed_job'
 gem "pdfkit"
 gem "will_paginate", "~> 3.0.pre2"
@@ -22,17 +22,7 @@ gem 'haml'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem "will_paginate", "~> 3.0.pre2"
-gem "paperclip"
-gem "parseexcel"
-gem "excelsior"
-gem "prawn"
-gem "rufus-scheduler"
-gem "activerecord-sqlserver-adapter"
-gem 'admin_data'
-gem 'ruby-ole'
-gem 'spreadsheet'
-gem 'rest-client'
+
 gem "kaminari"
 #gem 'iconv'
 

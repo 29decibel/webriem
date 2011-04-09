@@ -33,7 +33,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: webreim_production
+  database: oes_production
   pool: 5
   username: root
   password: china123!

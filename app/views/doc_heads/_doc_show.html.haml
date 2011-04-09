@@ -6,8 +6,6 @@
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process
   = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
-.form_title
-  %h3= "#{I18n.t('common_attr.basic_info')}"
 .form_area.doc_head_show
   =render "doc_head_show",:doc=>doc
 #details.show_only

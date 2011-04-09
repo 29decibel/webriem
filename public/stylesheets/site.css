@@ -907,3 +907,14 @@ div.list_item:hover .list_item_action span.action{
 .doc_error ul{
   list-style:none;
 }
+/*doc show custom styles*/
+div.s_details{
+  border-bottom:1px solid #aaa;
+}
+div.s_currency{
+  position:relative;
+}
+div.s_currency span{
+  font-size:15px;
+  font-weight:bold;
+}
