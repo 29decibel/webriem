@@ -7,10 +7,10 @@
     %span.value= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input is_self_dep"}
   .form_field
     %span.label= I18n.t('activerecord.attributes.work_flow_step.dep_id')
-    %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id ,:f=>f
+    %span.value= ts "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id ,:f=>f
   .form_field
     %span.label= I18n.t('activerecord.attributes.work_flow_step.duty_id')
-    %span.value= reference_select "duty_id","Duty",:text=>f.object.duty.to_s,:value=>f.object.duty_id ,:f=>f
+    %span.value= ts "duty_id","Duty",:text=>f.object.duty.to_s,:value=>f.object.duty_id ,:f=>f
   .form_field
     %span.label= I18n.t('activerecord.attributes.work_flow_step.max_amount')
     %span.value= f.text_field :max_amount,:class=>"normal "

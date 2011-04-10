@@ -18,8 +18,8 @@
     %span.value= f.text_field :end_date,:class=>"datepicker input1" 
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.dep.u8dep_code')}#{mark_required(f.object,:u8dep_code)}" 
-    %span.value= reference_select "u8_dep_id","U8Dep",:text=>f.object.u8_dep.to_s,:value=>f.object.u8_dep_id,:f=>f
+    %span.value= ts "u8_dep_id","U8Dep",:text=>f.object.u8_dep.to_s,:value=>f.object.u8_dep_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.dep.parent_dep_id')}" 			
-    %span.value= reference_select "parent_dep_id","U8Dep",:text=>f.object.parent_dep.to_s,:value=>f.object.parent_dep_id,:f=>f
+    %span.value= ts "parent_dep_id","Dep",:text=>f.object.parent_dep.to_s,:value=>f.object.parent_dep_id,:f=>f
   =render "basic_setting/fb_actions"

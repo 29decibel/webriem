@@ -3,7 +3,7 @@
   =f.hidden_field :id
   .form_field
     %span.label= f.label "#{I18n.t('common_attr.fee')}#{mark_required(f.object,:fee)}"
-    %span.value= reference_select "fee_id","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
+    %span.value= ts "fee_id","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('common_attr.is_sunday')}#{mark_required(f.object,:is_sunday)}"
     %span.value= f.check_box :is_sunday,:class=>"input1"
