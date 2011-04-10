@@ -4,4 +4,8 @@
     科目列表
 .edit_inline.new_subject
 .list_info
-  = render subjects
+  -if subjects.all.count>0
+    = render subjects
+  -else
+    .empty_info="还没有任何科目信息，请点击标题左侧\"+\"进行添加."
+=paginate subjects,:remote=>true

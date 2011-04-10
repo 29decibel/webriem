@@ -3,7 +3,7 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.xml
   def index
-    @resources=Subject.all
+    @resources=Subject.page(params[:page]).per(20)
     @model_s_name="subject"
     @model_p_name="subjects"
     respond_to do |format|
