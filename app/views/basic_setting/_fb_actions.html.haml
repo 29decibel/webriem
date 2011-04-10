@@ -1,3 +1,3 @@
 .fb_actions
-  = link_to "#{I18n.t('common_op.btn_update')}",{:href=>"#"}, :class=>"submit button2"
-  = link_to_function "#{I18n.t('common_op.btn_cancel')}","cancel_edit_form(this)",:class=>"button2"
+  = link_to content_tag(:span,"#{I18n.t('common_op.btn_update')}"),{:href=>"#"},:class=>"submit minibutton"
+  = link_to_function content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"),"cancel_edit_form(this)",:class=>"minibutton"
