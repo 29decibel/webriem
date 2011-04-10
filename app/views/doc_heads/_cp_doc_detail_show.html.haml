@@ -1,27 +1,27 @@
 %fieldset
   %span.sequence
-  .form_field
+  .show_field
     %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.dep_id')
     %span.value= d_item.dep.to_s
-  .form_field
+  .show_field
     %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
     %span.value= d_item.project.to_s
   -if 2
-    .form_field
+    .show_field
       %span.label= I18n.t('activerecord.attributes.doc_head.cp_doc_details.project_id')
       %span.value= d_item.fee.to_s
-  .form_field
+  .show_field
     %span.label= I18n.t('common_attr.used_for')
     %span.value= d_item.used_for
-  .form_field
+  .show_field
     %span.label= I18n.t('common_attr.currency')
     %span.value= d_item.currency.to_s
-  .form_field
+  .show_field
     %span.label= I18n.t('common_attr.rate')
     %span.value= d_item.rate
-  .form_field
+  .show_field
     %span.label= I18n.t('common_attr.apply_amount')
     %span.value= d_item.ori_amount
-  .form_field
+  .show_field
     %span.label= I18n.t('common_attr.ori_amount')
     %span.value= d_item.apply_amount

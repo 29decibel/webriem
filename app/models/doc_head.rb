@@ -116,20 +116,33 @@ class DocHead < ActiveRecord::Base
   end
   #get amount for specific doc type
   #asumme every detail has a amount attribute
-  def amount_for(doc_detail_name)
-    amount=0
-    details=self.send(doc_detail_name)
+  def amount_for(relation_name)
+    total=0
+    details=self.send(relation_name)
     if details
       #has_many
-      if details.respond_to? :count
+      if details.is_a? Array
         details.each do |d|
-          amount=d.amount+amount
+          total+=get_amount(d)
         end
       else
-        amount=details.amount
+        total=get_amount(details)
       end
     end
-    amount.ceil(2)
+    total
+  end
+  def get_amount(d)
+    if d.respond_to? :amount
+      d.amount
+    elsif d.respond_to? :apply_amount
+      d.apply_amount
+    elsif d.respond_to? :buy_unit
+      d.buy_unit
+    elsif d.respond_to? :total_amount
+      d.total_amount
+    else
+      0
+    end
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_doc_amount(type)

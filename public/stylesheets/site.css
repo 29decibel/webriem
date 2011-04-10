@@ -908,13 +908,43 @@ div.list_item:hover .list_item_action span.action{
   list-style:none;
 }
 /*doc show custom styles*/
-div.s_details{
-  border-bottom:1px solid #aaa;
+div.s_title{
+  margin-bottom:10px;
 }
 div.s_currency{
+  margin-top:10px;
   position:relative;
 }
 div.s_currency span{
+  font-size:13px;
+  font-weight:bold;
+}
+/*the new show field*/
+div.show_field{
+  display:inline-block;
+  margin-left:8px;
+  margin-bottom:6px;
+}
+div.show_field span.label{
+  color:black;
+  display:inline-block;
+  text-align:right;
+  width:80px;
+}
+div.show_field span.value{
+  border-bottom:1px solid #aaa;
+  display:inline-block;
+  min-width:100px;
+}
+/* for the empty_info*/
+div.empty_info{
+  height:80px;
+  margin-top:10px;
+  margin-left:20px;
+  margin-right:20px;
+  text-align:center;
   font-size:15px;
   font-weight:bold;
+  padding-top:60px;
+  border:1px dashed #ccc;
 }

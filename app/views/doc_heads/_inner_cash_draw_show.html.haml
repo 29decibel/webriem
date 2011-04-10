@@ -1,8 +1,8 @@
 .form_area.show_only
-  .form_field
+  .show_field
     %span.label=  "#{I18n.t('common_attr.cash_draw_account')}"
     %span.value= d_item.account.to_s
-  .form_field
+  .show_field
     %span.label=  "#{I18n.t('common_attr.cash_draw_money_remain')}",:class=>"input_label" 
     %span.value= d_item.now_remain_amout
   .doc_detail
