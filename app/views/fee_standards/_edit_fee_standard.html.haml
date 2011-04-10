@@ -24,7 +24,7 @@
     %span.value= ts "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('common_attr.fee')}#{mark_required(f.object,:fee)}" 			
-    %span.value= ts "fee_standard[fee_id]","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
+    %span.value= ts "fee_id","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
   .form_field
     %span.label= f.label "#{I18n.t('common_attr.amount')}#{mark_required(f.object,:amount)}" 			
     %span.value= f.text_field :amount,:class=>"input1 " 
