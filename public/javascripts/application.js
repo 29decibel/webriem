@@ -28,10 +28,6 @@ $(function(){
 		$("select.is_split_reim").change();
 		//bind ajax event 
 		$("form").live("ajax:beforeSend",function(){
-			//var link_position=$("div.filter a.filter").offset();
-			//$('span#spinner').css({ top: link_position.top , left: link_position.left }).fadeIn();
-			//$("span#spinner").fadeIn();
-      //first check the offset amount
       var offset_amounts=$(this).find("input.offset_amount");
       if(offset_amounts.size()>0)
       {
@@ -47,33 +43,13 @@ $(function(){
             }
           }
       }
-			$.blockUI({ css: { 
-          border: 'none', 
-          padding: '15px', 
-          backgroundColor: '#000', 
-          '-webkit-border-radius': '10px', 
-          '-moz-border-radius': '10px', 
-          opacity: .5, 
-          color: '#fff'
-      },message:'请稍等' }); 
-
-      //setTimeout($.unblockUI, 2000);
+      wait();
 		});
 		$("a").live("ajax:beforeSend",function(){
-			$.blockUI({ css: { 
-          border: 'none', 
-          padding: '15px', 
-          backgroundColor: '#000', 
-          '-webkit-border-radius': '10px', 
-          '-moz-border-radius': '10px', 
-          opacity: .5, 
-          color: '#fff'
-      },message:'请稍等' }); 
+      wait();
     });
 		$("form,a").live("ajax:complete",function(){
-			//$("span#spinner").fadeOut();
 			$.unblockUI();
-      //tokenize();
 		});
 		//bind the submit link
 		$("a.submit").live("click",function(){
@@ -224,6 +200,21 @@ $(function(){
     //});
 
 });
+
+function wait()
+{
+  $.blockUI({ css: { 
+      border: 'none', 
+      padding: '15px', 
+      backgroundColor: '#000', 
+      '-webkit-border-radius': '10px', 
+      '-moz-border-radius': '10px', 
+      opacity: .5, 
+      color: '#fff'
+  },message:'请稍等',
+  overlayCSS: { backgroundColor: 'transparent' }}); 
+}
+
 function tokenize()
 {
   $("input.token-input").each(function(){
