@@ -5,9 +5,12 @@ class TokenInputController < ApplicationController
     if params[:q]=="?"
       resource=model.all
     else
-      resource=model.where("name like ?","%#{params[:q]}%")
+      if model.respond_to? "token_filter"
+        resource=model.token_filter(params[:q])
+      else
+        resource=model.where("name like ?","%#{params[:q]}%")
+      end
     end
     render :json=>resource.map(&:attributes)
   end
-
 end
