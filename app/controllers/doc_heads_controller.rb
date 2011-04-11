@@ -332,6 +332,7 @@ class DocHeadsController < ApplicationController
       if doc.doc_type==12
         @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(业务交通费)",doc.amount_for(:rd_common_transports).to_s] if doc.rd_common_transports.count>0
         @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(工作餐费)",doc.amount_for(:rd_work_meals).to_s] if doc.rd_work_meals.count>0
+        @docs<<[doc.doc_no,doc.person.name,"#{doc.doc_type_name}(普通费用)",doc.amount_for(:common_riems).to_s] if doc.common_riems.count>0
       else
         @docs<<[doc.doc_no,doc.person.name,doc.doc_type_name,doc.total_amount.to_s]
       end
