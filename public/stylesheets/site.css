@@ -229,6 +229,10 @@ form div.form_field span.value input{
   width:100%;
   padding:2px;
 }
+form div.form_field span.value select{
+  width:100%;
+  padding:2px;
+}
 /*doc show 's information*/
 div.doc_head_show div.form_field,div.show_only div.form_field{
   display:inline-block;
