@@ -149,7 +149,7 @@ class DocHeadsController < ApplicationController
   # DELETE /doc_heads/1.xml
   def destroy
     #here i will get a lot of ids
-    DocHead.where("id in (#{params[:doc_ids]})").each do |doc_head|
+    DocHead.where("id in (#{params[:doc_ids]}) and doc_state=0").each do |doc_head|
       doc_head.destroy
     end
     render :json=>"ok"
