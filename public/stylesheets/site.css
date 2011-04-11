@@ -209,6 +209,7 @@ form div.form_field{
 	display:inline-block;
 	margin-bottom: 5px;
   margin:3px 5px 3px 5px;
+  position:relative;
 }
 /*normal size of form fields*/
 form div.form_field span.label{
@@ -216,13 +217,17 @@ form div.form_field span.label{
   vertical-align:top;
   text-align:right;
   display:inline-block;
+  float:left;
 }
 form div.form_field span.value{
   display:inline-block;
   width:200px;
+  float:left;
+  margin-left:5px;
 }
 form div.form_field span.value input{
   width:100%;
+  padding:2px;
 }
 /*doc show 's information*/
 div.doc_head_show div.form_field,div.show_only div.form_field{
