@@ -4,7 +4,7 @@
 body{
 	margin:auto;
 	/*font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
-  font-family:arial,sans-serif; 
+  font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun","Helvetica", "Arial", sans-serif; 
   /*background:url("../images/bck.jpg");*/
   background-color:#eeeeee;
   color:#999;
