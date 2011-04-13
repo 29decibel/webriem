@@ -26,7 +26,7 @@
 	</td>
 	<% end %>
 	<td>
-		<%= f.text_field :percent_amount,:value=>0,:class=>"normal percent_amount" %>  
+		<%= f.text_field :percent_amount,:value=>f.object.percent_amount || 0,:class=>"normal percent_amount" %>  
 	</td>
 	<td>
 		<%= f.hidden_field(:_destroy) %>
