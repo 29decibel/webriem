@@ -56,7 +56,7 @@ def import_gpm_projects
   if projs and projs.count>0
     projs.each do |p|
       if p.valid?
-        p.status=1 and p.save! 
+        p.status=1 and p.save 
       end
     end
   end
