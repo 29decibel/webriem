@@ -3,7 +3,7 @@ module U8service
   class API
     ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
     EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
-    U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
+    U8ServiceURL="http://10.120.128.28:8008/Service1.asmx"
     #the database name current
     #UFDATA_500_2011 configured in the system_configs table
     #GenerateAccVouch      
