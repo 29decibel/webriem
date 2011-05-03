@@ -31,6 +31,11 @@ function set_form_state()
 		{
 			$("input.doc_FI_amount").removeAttr("readonly");
 		}
+    //special state for the fi and mta
+		if($("#looker").val()=="FI" || $("#looker").val()=="MTA")
+    {
+		  enable_all_inputs();
+    }
 	}
 	else
 	{
