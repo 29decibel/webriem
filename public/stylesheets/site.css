@@ -598,8 +598,8 @@ span.reference{
 	background-repeat: no-repeat;
 	display:inline-block;
 	position:absolute;
-	right:2px;
-	top:2px;
+	right:0px;
+	top:4px;
 	width:16px;
 	height:16px;
 }

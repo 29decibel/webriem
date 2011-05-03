@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title 参照选择
+    = stylesheet_link_tag :all,:recursive => true 
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"
+    = jqgrid_init
+    = javascript_include_tag "reference" 
+    = csrf_meta_tag 
+    %body= yield 

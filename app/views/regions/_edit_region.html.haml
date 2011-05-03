@@ -9,5 +9,5 @@
     %span.value= f.text_field :code,:class=>"input1 " 
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.region.region_type_id')}#{mark_required(f.object,:region_type)}" 
-    %span.value= ts "region_type_id","RegionType",:text=>f.object.region_type.to_s,:value=>f.object.region_type_id,:f=>f
+    %span.value= reference_select "region_type_id","RegionType",:text=>f.object.region_type.to_s,:value=>f.object.region_type_id,:f=>f
   =render "basic_setting/fb_actions"

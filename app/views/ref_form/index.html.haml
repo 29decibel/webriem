@@ -1,0 +1,10 @@
+= jqgrid "#{@model_name}__ref",
+		:model=>@model_name,
+		:multiselect=>@multiselect,
+		:height=>320,
+    :colModel=>@colModel,
+    :where=>@where_str
+.fb_actions
+  = link_to_function content_tag(:span,"#{I18n.t('common_op.btn_ok')}"),"back_to_the_reference('##{@model_name}__ref',false)",:class=>"minibutton"
+  = link_to_function content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"),"back_to_the_reference('##{@model_name}__ref',true)",:class=>"minibutton"
+
