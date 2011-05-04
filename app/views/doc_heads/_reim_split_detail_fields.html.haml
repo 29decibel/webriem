@@ -8,7 +8,7 @@
     %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id,:f=>f
   .form_field
     %span.label= "#{I18n.t('common_attr.project')}"
-    %span.value= reference_select "project_id","Peoject",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
+    %span.value= reference_select "project_id","Project",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
   -if 13 
     .form_field
       %span.label= "#{I18n.t('common_attr.fee')}"

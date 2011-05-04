@@ -163,14 +163,11 @@ $(function(){
   $("select.is_self_dep").live("change",function(){
     if($(this).val()==0)
     {
-      $(this).closest("fieldset").find("div.dep input").removeAttr("disabled");
-      $(this).closest("fieldset").find("div.dep a").show();
+      $(this).closest("fieldset").find("div.select_dep_field").show();
     }
     else
     {
-      $(this).closest("fieldset").find("div.dep input").val("");
-      $(this).closest("fieldset").find("div.dep input").attr("readonly","true");
-      $(this).closest("fieldset").find("div.dep a").hide();
+      $(this).closest("fieldset").find("div.select_dep_field").hide();
     }
   });
   $("select.is_self_dep").change();
@@ -258,9 +255,10 @@ function adapt_apply_amount_by_rate()
 //bind the change events
 function bind_is_split_change_events()
 {
-	$("select.is_split_reim").change(function(){
+	$("select.is_split_reim").live("change",function(){
 		//alert($(this).children("option:selected").text());
 		//$(this).parent
+    console.log("select change");
 		is_split=$("select.is_split_reim").children("option:selected").val();
 		if(is_split==1)
 		{

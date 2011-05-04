@@ -47,13 +47,18 @@ class WorkFlowsController < ApplicationController
   # POST /work_flows.xml
   def create
     @work_flow = WorkFlow.new(params[:work_flow])
+    @work_flow.name=params[:work_flow]["name"]
+    puts "-----------------------------------------------------------"
+    puts params[:work_flow]
+    puts @work_flow.inspect
+    puts "-----------------------------------------------------------"
     update_doc_types(params[:doc_types])
     #set the person have such a role
-    params[:duty_ids].split('_').each do |duty_id|
+    params[:duty_ids].each do |duty_id|
       @work_flow.duties<<Duty.find(duty_id.to_i)
     end
     #debugger
-    if !@work_flow .save
+    if !@work_flow.save
       render "basic_setting/new",:locals=>{:resource=>@work_flow  }
     else
       redirect_to work_flows_path
@@ -68,10 +73,11 @@ class WorkFlowsController < ApplicationController
   # PUT /work_flows/1.xml
   def update
     @work_flow = WorkFlow.find(params[:id])
+    @work_flow.name=params[:work_flow]["name"]
     update_doc_types(params[:doc_types])
     #set the person have such a role
     @work_flow.duties.clear
-    params[:duty_ids].split('_').each do |duty_id|
+    params[:duty_ids].each do |duty_id|
       @work_flow.duties<<Duty.find(duty_id.to_i)
     end
     if !@work_flow.update_attributes(params[:work_flow])

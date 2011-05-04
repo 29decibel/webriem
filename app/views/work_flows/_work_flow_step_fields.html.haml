@@ -5,7 +5,7 @@
   .form_field
     %span.label= I18n.t('activerecord.attributes.work_flow_step.is_self_dep')
     %span.value= f.select :is_self_dep, WorkFlowStep::ENUMS_IS_SELF_DEP,{},{:class=>"basic_input is_self_dep"}
-  .form_field
+  .form_field.select_dep_field
     %span.label= I18n.t('activerecord.attributes.work_flow_step.dep_id')
     %span.value= reference_select "dep_id","Dep",:text=>f.object.dep.to_s,:value=>f.object.dep_id ,:f=>f
   .form_field

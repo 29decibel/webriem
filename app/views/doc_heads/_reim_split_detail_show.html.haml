@@ -6,7 +6,7 @@
   .show_field
     %span.label= "#{I18n.t('common_attr.project')}"
     %span.value= d_item.project.to_s
-  -if d_item.doc.doc_type==13 
+  -if doc.doc_type==13 
     .show_field
       %span.label= "#{I18n.t('common_attr.fee')}"
       %span.value= d_item.fee.to_s

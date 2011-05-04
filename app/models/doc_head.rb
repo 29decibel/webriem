@@ -140,6 +140,8 @@ class DocHead < ActiveRecord::Base
       d.buy_unit
     elsif d.respond_to? :total_amount
       d.total_amount
+    elsif d.respond_to? :percent_amount
+      d.percent_amount
     else
       0
     end

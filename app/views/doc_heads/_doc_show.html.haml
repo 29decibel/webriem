@@ -172,7 +172,7 @@
           = image_tag "currency_yuan.png"
           %span.split_total_amount.normal=doc.amount_for(:reim_split_details)
       .form_area.is_split_reim
-        =render :partial=>"reim_split_detail_show",:collection=>doc.reim_split_details,:as=>:d_item
+        =render :partial=>"reim_split_detail_show",:collection=>doc.reim_split_details,:as=>:d_item,:locals=>{:doc=>doc}
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <!---if doc.doc_type>=9 and doc.doc_type<=12-->
         <!--  .form_title-->

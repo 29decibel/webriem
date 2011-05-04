@@ -3,17 +3,23 @@
   =f.hidden_field :id
   .form_field
     %span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.name')}#{mark_required(f.object,:name)}"
-    %span.value= f.text_field :name,:class=>"input1" 
+    %span.value= f.text_field :name 
   %br
   .form_field
-    -(1..14).each do |num|
-      .doc_type_check
-        = check_box_tag("doc_types[]",num,work_flow.doc_types.split(';').include?(num.to_s))
-        = f.label doc_type_name(num)
+    %h4 单据类型
+    .selection_area
+      -(1..14).each do |num|
+        %span.checkbox
+          = check_box_tag("doc_types[]",num,work_flow.doc_types.split(';').include?(num.to_s))
+          = f.label doc_type_name(num)
   %br
   .form_field
-    %span.label= f.label "#{I18n.t('activerecord.attributes.work_flow.duty')}#{mark_required(f.object,:duties)}"
-    %span.value= f.text_field :duty_tokens
+    %h4 申请人职务
+    .selection_area
+      -Duty.all.each do |duty|
+        %span.checkbox
+          = check_box_tag("duty_ids[]",duty.id,work_flow.duties.include?(duty))
+          = f.label duty.name
   .doc_detail
     .form_stytle
       %h3
