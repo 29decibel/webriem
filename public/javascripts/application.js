@@ -1,203 +1,184 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-//here we bind the data picker control
-$(function(){
-	//wrap the datatime picker
+function init_control()
+{
+  //wrap the datatime picker
 	$(".datepicker").datepicker();
 	$(".datetimepicker").datetimepicker();
-  $(".datetimepicker").live("change",function(){
-      //$(this).val($(this).text());
-    });
-	//set the error message span to none if it have no message
-	$("span.error_message").each(
-		function(){
-			var span=$(this);
-			if(span.text()=="")
-			{
-				span.css("display","none");
-			}
-			else
-			{
-				span.css("display","inline-block");
-			}
-		}
-		);
-		//bind the is_split change events
-		bind_is_split_change_events();
-		//fire it once
-		$("select.is_split_reim").change();
-		//bind ajax event 
-		$("form").live("ajax:beforeSend",function(){
-      var offset_amounts=$(this).find("input.offset_amount");
-      if(offset_amounts.size()>0)
-      {
-          var total=0.0;
-          offset_amounts.each(function(){
-            total+=$(this).val();
-          });
-          if(total==0.0)
-          {
-            if(!confirm("您有未进行冲抵的记录，是否继续保存？"))
-            { 
-              return false;
-            }
-          }
-      }
-      wait();
-		});
-		$("a").live("ajax:beforeSend",function(){
-      wait();
-    });
-		$("form,a").live("ajax:complete",function(){
-			$.unblockUI();
-		});
-		//bind the submit link
-		$("a.submit").live("click",function(){
-			$(this).closest("form").submit();
-			return false;
-		});
-		//bind the amount and rate event
-		$("input.rate").live("change",adapt_apply_amount_by_rate);
-		$("input.ori_amount").live("change",adapt_apply_amount_by_rate);
-		//bind all references
-		//pop up reference window
-		$("div.reference a").live("click",pop_up_reference_window);
-		//close window and back to the input
-		$("div.filter a.back_to_reference").live("click",back_to_the_reference);
-		//control the reference window's check box
-		$("#selected_all").live("change",function(){
-			$(".ref_select").attr("checked",$(this).is(':checked'));
-		});
-		//register the ref select change events
-		$("input.ref_select").live("change",function(){
-			//select one only
-			if($("#selected_all").size()==0)
-			{
-				$(".ref_select").not($(this)).attr("checked",false);
-			}
-		});
-		//for the damn ie
-		if($.browser.msie)
-		{
-			$('input.ref_select,#selected_all').live('click', function(){
-		    	$(this).trigger('change');
-			});
-		}
+  //fire it once
+  $("select.is_split_reim").change();
+}
+//here we bind the data picker control
+$(function(){
+  init_control();	
 
-		//observe the region type select 
-		$(".region_type_select").live("change",function(){
-			region_type= $(this).val();
-			//alert(region_type);
-			//set neib region id info
-			$(this).closest("fieldset").find("input#region_info").next("a").attr("pre_condition","region_type_id="+region_type);
-		});
-		//observe the region change so to calculate the fee standard
-		$("input.get_fee,.region_type_select").live("change",function(){
-			//get the duty id 
-			var duty_id=$("#duty_for_fee_standard").val();
-			//var region_id=$(this).siblings("input.ref_hidden_field").val();
-			var region_type_id=$(this).closest("fieldset").find(".region_type_select").val();
-			var fee_code=$(this).closest("fieldset").attr("fee_code");
-			//person type
-			var pt=$("#pt_for_fee_standard").val();
-			//this can be a very good find stuff pattern
-			//when you want to find something another cell
-			//first go up until find the table row and then find stuff you want within it 
-			var fee_standard_control=$(this).closest("fieldset").find("input.fee_standard");
-			//make a ajax call and get the fee[ not all the time ]
-			//if($("#form_state"))
-			$.ajax({
-			  type: "GET",
-			  url: "/ajax_service/getfee",
-			  data: "region_type_id="+region_type_id+"&duty_id="+duty_id+"&fee_code="+fee_code+"&pt="+pt,
-			  beforeSend: function(){
-					fee_standard_control.val("正在获取...");
-			  },
-			  success: function(msg){
-					var values=msg.split(",");
-					//set fees
-			    fee_standard_control.val(values[0]);
-					fee_standard_control.change();
-					//set currency					
-					fee_standard_control.closest("fieldset").find("input#currency_info").val(values[2]);
-					fee_standard_control.closest("fieldset").find("input#currency_info").prev().val(values[1]);
-					fee_standard_control.closest("fieldset").find(".doc_rate").val(values[3]);
-			  },
-				error: function(){
-					fee_standard_control.val("暂无*");
-				}
-			});
-		});
-		//observe the time and get the extra work time fee
-		$(".is_sunday,.ew_b_time,.ew_e_time").live("change",function(){
-			var is_sunday=$(this).closest("fieldset").find(".is_sunday").val()==0;
-			var start_time=$(this).closest("fieldset").find(".ew_b_time").val();
-			var end_time=$(this).closest("fieldset").find(".ew_e_time").val();
-			var fee_code=$(this).closest("fieldset").attr("fee_code");
-			var extra_st_control=$(this).closest("fieldset").find(".extra_st");
-			if(start_time!="" && end_time!="")
-			{
-				//make a ajax call and get the fee
-				$.ajax({
-				  type: "GET",
-				  url: "/ajax_service/get_extrafee",
-				  data: "is_sunday="+is_sunday+"&start_time="+start_time+"&end_time="+end_time+"&fee_code="+fee_code,
-				  beforeSend: function(){
-						extra_st_control.val("正在获取...");
-				  },
-				  success: function(msg){
-						//set fees
-						extra_st_control.val(msg);
-						//alert(msg);
-						var amount=parseFloat(msg);
-						if(!isNaN(amount)){
-							extra_st_control.closest("fieldset").find("input.doc_ori_amount").val(amount);
-							extra_st_control.closest("fieldset").find("input.doc_ori_amount").change();
-						}
-				  },
-					error: function(){
-						extra_st_control.val("暂无*");
-					}
-				});
-			}
-		});
-		//set reference readonly
-		$("input.ref").attr("readonly",true);
-		//set the fee standard readonly
-		$("input.fee_standard").attr("readonly",true);
-		//always set the approvers not display
-		$("#approvers").css("display","none");
-		//always set the approve info form not display
-		$("#approve_info").css("display","none");
-		//for the work flow page
-		$("select.is_self_dep").live("change",function(){
-			if($(this).val()==0)
-			{
-				$(this).closest("fieldset").find("div.dep input").removeAttr("disabled");
-				$(this).closest("fieldset").find("div.dep a").show();
-			}
-			else
-			{
-				$(this).closest("fieldset").find("div.dep input").val("");
-				$(this).closest("fieldset").find("div.dep input").attr("readonly","true");
-				$(this).closest("fieldset").find("div.dep a").hide();
-			}
-		});
-		$("select.is_self_dep").change();
-		//reference changes
-		$("input.ref").live("change",reference_change);
-    //set sequence
-    //set unique num of doc detail
-    set_sequence_num();
-    //set up fieldset remove icon when hover
-    //$("div.form_area fieldset").live("mouseenter",function(){
-    //  $(this).find("legend").addClass("show");
-    //  //css("show");
-    //});
-    //$("div.form_area fieldset").live("mouseleave",function(){
-    //  $(this).find("legend").removeClass("show");
-    //  //css("show");
-    //});
+  //bind the is_split change events
+  bind_is_split_change_events();
+
+  //bind ajax event 
+  $("form").live("ajax:beforeSend",function(){
+    var offset_amounts=$(this).find("input.offset_amount");
+    if(offset_amounts.size()>0)
+    {
+        var total=0.0;
+        offset_amounts.each(function(){
+          total+=$(this).val();
+        });
+        if(total==0.0)
+        {
+          if(!confirm("您有未进行冲抵的记录，是否继续保存？"))
+          { 
+            return false;
+          }
+        }
+    }
+    wait();
+  });
+  $("a").live("ajax:beforeSend",function(){
+    wait();
+  });
+  $("form,a").live("ajax:complete",function(){
+    $.unblockUI();
+    init_control();	
+  });
+  //bind the submit link
+  $("a.submit").live("click",function(){
+    $(this).closest("form").submit();
+    return false;
+  });
+  //bind the amount and rate event
+  $("input.rate").live("change",adapt_apply_amount_by_rate);
+  $("input.ori_amount").live("change",adapt_apply_amount_by_rate);
+  //bind all references
+  //pop up reference window
+  $("div.reference a").live("click",pop_up_reference_window);
+  //close window and back to the input
+  $("div.filter a.back_to_reference").live("click",back_to_the_reference);
+  //control the reference window's check box
+  $("#selected_all").live("change",function(){
+    $(".ref_select").attr("checked",$(this).is(':checked'));
+  });
+  //register the ref select change events
+  $("input.ref_select").live("change",function(){
+    //select one only
+    if($("#selected_all").size()==0)
+    {
+      $(".ref_select").not($(this)).attr("checked",false);
+    }
+  });
+  //for the damn ie
+  if($.browser.msie)
+  {
+    $('input.ref_select,#selected_all').live('click', function(){
+        $(this).trigger('change');
+    });
+  }
+
+  //observe the region type select 
+  $(".region_type_select").live("change",function(){
+    region_type= $(this).val();
+    //alert(region_type);
+    //set neib region id info
+    $(this).closest("fieldset").find("input#region_info").next("a").attr("pre_condition","region_type_id="+region_type);
+  });
+  //observe the region change so to calculate the fee standard
+  $("input.get_fee,.region_type_select").live("change",function(){
+    //get the duty id 
+    var duty_id=$("#duty_for_fee_standard").val();
+    //var region_id=$(this).siblings("input.ref_hidden_field").val();
+    var region_type_id=$(this).closest("fieldset").find(".region_type_select").val();
+    var fee_code=$(this).closest("fieldset").attr("fee_code");
+    //person type
+    var pt=$("#pt_for_fee_standard").val();
+    //this can be a very good find stuff pattern
+    //when you want to find something another cell
+    //first go up until find the table row and then find stuff you want within it 
+    var fee_standard_control=$(this).closest("fieldset").find("input.fee_standard");
+    //make a ajax call and get the fee[ not all the time ]
+    //if($("#form_state"))
+    $.ajax({
+      type: "GET",
+      url: "/ajax_service/getfee",
+      data: "region_type_id="+region_type_id+"&duty_id="+duty_id+"&fee_code="+fee_code+"&pt="+pt,
+      beforeSend: function(){
+        fee_standard_control.val("正在获取...");
+      },
+      success: function(msg){
+        var values=msg.split(",");
+        //set fees
+        fee_standard_control.val(values[0]);
+        fee_standard_control.change();
+        //set currency					
+        fee_standard_control.closest("fieldset").find("input#currency_info").val(values[2]);
+        fee_standard_control.closest("fieldset").find("input#currency_info").prev().val(values[1]);
+        fee_standard_control.closest("fieldset").find(".doc_rate").val(values[3]);
+      },
+      error: function(){
+        fee_standard_control.val("暂无*");
+      }
+    });
+  });
+  //observe the time and get the extra work time fee
+  $(".is_sunday,.ew_b_time,.ew_e_time").live("change",function(){
+    var is_sunday=$(this).closest("fieldset").find(".is_sunday").val()==0;
+    var start_time=$(this).closest("fieldset").find(".ew_b_time").val();
+    var end_time=$(this).closest("fieldset").find(".ew_e_time").val();
+    var fee_code=$(this).closest("fieldset").attr("fee_code");
+    var extra_st_control=$(this).closest("fieldset").find(".extra_st");
+    if(start_time!="" && end_time!="")
+    {
+      //make a ajax call and get the fee
+      $.ajax({
+        type: "GET",
+        url: "/ajax_service/get_extrafee",
+        data: "is_sunday="+is_sunday+"&start_time="+start_time+"&end_time="+end_time+"&fee_code="+fee_code,
+        beforeSend: function(){
+          extra_st_control.val("正在获取...");
+        },
+        success: function(msg){
+          //set fees
+          extra_st_control.val(msg);
+          //alert(msg);
+          var amount=parseFloat(msg);
+          if(!isNaN(amount)){
+            extra_st_control.closest("fieldset").find("input.doc_ori_amount").val(amount);
+            extra_st_control.closest("fieldset").find("input.doc_ori_amount").change();
+          }
+        },
+        error: function(){
+          extra_st_control.val("暂无*");
+        }
+      });
+    }
+  });
+  //set reference readonly
+  $("input.ref").attr("readonly",true);
+  //set the fee standard readonly
+  $("input.fee_standard").attr("readonly",true);
+  //always set the approvers not display
+  $("#approvers").css("display","none");
+  //always set the approve info form not display
+  $("#approve_info").css("display","none");
+  //for the work flow page
+  $("select.is_self_dep").live("change",function(){
+    if($(this).val()==0)
+    {
+      $(this).closest("fieldset").find("div.dep input").removeAttr("disabled");
+      $(this).closest("fieldset").find("div.dep a").show();
+    }
+    else
+    {
+      $(this).closest("fieldset").find("div.dep input").val("");
+      $(this).closest("fieldset").find("div.dep input").attr("readonly","true");
+      $(this).closest("fieldset").find("div.dep a").hide();
+    }
+  });
+  $("select.is_self_dep").change();
+  //reference changes
+  $("input.ref").live("change",reference_change);
+  //set sequence
+  //set unique num of doc detail
+  set_sequence_num();
 
 });
 
