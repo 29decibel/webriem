@@ -401,7 +401,7 @@ function pop_up_reference_window()
 		path+="&pre_condition=Length(code)>2";
 	}
 
-	sFeatures="dialogHeight: 480px; dialogWidth: 686px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"
+	sFeatures="dialogHeight: 480px; dialogWidth: 686px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No; titlebar: No; menubar: No;"
 
 	//pop up a dialog
 	var returnValue=window.showModalDialog(path,'',sFeatures);
