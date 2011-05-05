@@ -120,7 +120,7 @@ DEPENDENCIES
   excelsior
   haml
   jquery-rails
-  kaminari (= 0.12.3)
+  kaminari
   mysql
   paperclip
   parseexcel

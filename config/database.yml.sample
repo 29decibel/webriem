@@ -9,7 +9,7 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: webreim_development
+  database: oes_development
   pool: 5
   username: root
   password: 
@@ -23,7 +23,7 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: webreim_test
+  database: oes_test
   pool: 5
   username: root
   password:
