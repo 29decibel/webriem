@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
-gem 'mysql2'
+gem 'rails', '3.0.7'
+gem 'mysql'
 gem "jquery-rails"
 gem "devise"
 gem 'delayed_job'
