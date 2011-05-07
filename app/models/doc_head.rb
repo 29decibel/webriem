@@ -133,15 +133,15 @@ class DocHead < ActiveRecord::Base
   end
   def get_amount(d)
     if d.respond_to? :amount
-      d.amount
+      d.amount || 0
     elsif d.respond_to? :apply_amount
-      d.apply_amount
+      d.apply_amount || 0
     elsif d.respond_to? :buy_unit
-      d.buy_unit
+      d.buy_unit || 0
     elsif d.respond_to? :total_amount
-      d.total_amount
+      d.total_amount || 0
     elsif d.respond_to? :percent_amount
-      d.percent_amount
+      d.percent_amount || 0
     else
       0
     end
