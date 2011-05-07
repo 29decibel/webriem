@@ -47,11 +47,6 @@ class WorkFlowsController < ApplicationController
   # POST /work_flows.xml
   def create
     @work_flow = WorkFlow.new(params[:work_flow])
-    @work_flow.name=params[:work_flow]["name"]
-    puts "-----------------------------------------------------------"
-    puts params[:work_flow]
-    puts @work_flow.inspect
-    puts "-----------------------------------------------------------"
     update_doc_types(params[:doc_types])
     #set the person have such a role
     params[:duty_ids].each do |duty_id|

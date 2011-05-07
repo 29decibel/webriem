@@ -61,7 +61,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mysql (2.8.1)
+    mysql2 (0.2.7)
     orm_adapter (0.0.4)
     paperclip (2.3.11)
       activerecord (>= 2.3.0)
@@ -121,7 +121,7 @@ DEPENDENCIES
   haml
   jquery-rails
   kaminari
-  mysql
+  mysql2
   paperclip
   parseexcel
   pdfkit
