@@ -865,8 +865,8 @@ class DocHead < ActiveRecord::Base
       :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",
       :nfrat=>"1",# currency rate
       :cdept_id=>"00001",# dep code should select
-      :person=>"",#person code
-      :citem_id=>"",#project code should select
+      :person=>person,#person code
+      :citem_id=>nil,#project code should select
       :ccode_equal=>""}
     default_opt.merge! options
   end
