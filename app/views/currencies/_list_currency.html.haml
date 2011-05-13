@@ -4,4 +4,7 @@
     币种列表
 .edit_inline.new_currency
 .list_info
-  = render currencies
+  -if currencies.count>0
+    = render currencies
+  -else
+    .empty_info="没有需要付款的单据"
