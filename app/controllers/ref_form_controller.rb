@@ -11,7 +11,7 @@ class RefFormController < ApplicationController
   FilterColumns=["id","created_at","updated_at"]
   #custom where strings
   def custom_where_string(model_name)
-    str=" status=0 "
+    str=" 1=1 "
     #if the dep model should see the current version
     if model_name=="Dep"
       current_dep_version = SystemConfig.find_by_key("dep_version")
