@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110408064716) do
+ActiveRecord::Schema.define(:version => 20110513001946) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.datetime "updated_at"
     t.integer  "parent_dep_id"
     t.integer  "u8_dep_id"
+    t.integer  "status"
   end
 
   create_table "doc_heads", :force => true do |t|
@@ -284,7 +285,6 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_fee_id"
-    t.integer  "show_in_ref"
   end
 
   create_table "fixed_properties", :force => true do |t|
@@ -292,9 +292,9 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.string   "name"
     t.string   "code"
     t.integer  "sequence"
-    t.decimal  "buy_unit",         :precision => 16, :scale => 2
+    t.decimal  "buy_unit",       :precision => 16, :scale => 2
     t.integer  "buy_count"
-    t.decimal  "original_value",   :precision => 16, :scale => 2
+    t.decimal  "original_value", :precision => 16, :scale => 2
     t.integer  "keeper_id"
     t.string   "place"
     t.integer  "afford_dep_id"
@@ -303,7 +303,6 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "seq_no"
-    t.integer  "property_type_id"
   end
 
   create_table "inner_cash_draws", :force => true do |t|
@@ -372,9 +371,6 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.integer  "menu_category_id"
   end
 
-  create_table "netzke_temp_table", :force => true do |t|
-  end
-
   create_table "other_riems", :force => true do |t|
     t.integer  "sequence"
     t.string   "description"
@@ -430,13 +426,6 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status"
-  end
-
-  create_table "property_types", :force => true do |t|
-    t.string   "name"
-    t.string   "code"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "rd_benefits", :force => true do |t|
@@ -834,7 +823,6 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -846,6 +834,7 @@ ActiveRecord::Schema.define(:version => 20110408064716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "password_salt",                       :default => "", :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -389,6 +389,7 @@
         parent_dep_id: "上级部门"
         u8dep_code: "对应U8编码"
         u8_dep_id: 对应的U8部门
+        status: "部门状态"
       duty:
         code: "编码"
         name: "名称"

@@ -44,5 +44,9 @@
 			<a href="#" class-data="Dep" self="true"><span class="reference"></span></a>			
 		</div></span>
 	</div>
+	<div class="form_field">
+		<span class="label"><%= f.label "#{I18n.t('activerecord.attributes.dep.status')}#{mark_required(f.object,:status)}" %></span>			
+    <span class="value"><%= f.select "status",Dep::P_STATUS.map {|k,v| [v,k]},:class=>"input1 " %></span>
+	</div>
 </div>
 <% end %>
