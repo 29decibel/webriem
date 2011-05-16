@@ -24,6 +24,7 @@ gem 'haml'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "kaminari"
+gem 'activeadmin'
 #gem 'iconv'
 
 # Bundle edge Rails instead:
