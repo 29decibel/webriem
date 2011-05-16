@@ -31,10 +31,11 @@ ActiveAdmin::Dashboards.build do
   #   section "Recent User", :priority => 1
   #
   # Will render the "Recent Users" then the "Recent Posts" sections on the dashboard.
-  section "Recent Posts" do
-  ul do
-    Post.recent(5).collect do |post|
-      li link_to(post.title, admin_post_path(post)))
+  section "Deps list" do
+    ul do
+      Dep.all.collect do |dep|
+        li link_to(dep.name, edit_dep_path(dep))
+      end
     end
   end
 
