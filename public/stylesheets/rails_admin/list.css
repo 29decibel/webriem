@@ -1,38 +1,46 @@
+/* line 1, ../../../app/stylesheets/rails_admin/list.scss */
 .grid {
   width: 100%;
-  border-collapse:collapse;
+  border-collapse: collapse;
 }
 
+/* line 6, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th {
-  border-bottom:2px solid #b9b9b9;
+  border-bottom: 2px solid #b9b9b9;
   padding: 9px 0;
-  text-align:center;
+  text-align: center;
 }
 
+/* line 12, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th a {
   display: inline-block;
   background-repeat: no-repeat;
   background-position: right;
-  text-decoration:none;
-  color:#000;
+  text-decoration: none;
+  color: #000;
 }
 
+/* line 20, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th.selected a {
   padding: 0 20px 0 0;
 }
 
+/* line 24, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th a.ascending {
   background-image: url(../../images/rails_admin/bullet_arrow_up.png);
 }
 
+/* line 28, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th a.descending {
   background-image: url(../../images/rails_admin/bullet_arrow_down.png);
 }
 
+/* line 32, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .boolean {
-  margin-bottom:-5px;
+  margin-bottom: -5px;
 }
 
+/* line 39, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .date,
 .grid tbody .datetime,
 .grid tbody .time,
@@ -40,88 +48,105 @@
   white-space: nowrap;
 }
 
+/* line 43, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .other a {
-  padding-left:2px;
-  padding-right:2px;
-  text-decoration:none;
-  border:1px solid #B9B9B9;
-  background:#FFF;
-  color:#494949;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-decoration: none;
+  border: 1px solid #B9B9B9;
+  background: #FFF;
+  color: #494949;
 }
 
+/* line 52, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .other a:hover {
-  border:1px solid #494949;
+  border: 1px solid #494949;
 }
 
+/* line 56, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .action a {
-  text-decoration:none;
-  font-weight:bold;
+  text-decoration: none;
+  font-weight: bold;
 }
 
+/* line 61, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .action a:hover {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
+/* line 65, ../../../app/stylesheets/rails_admin/list.scss */
 .grid .action.edit a {
-  color:#5182ab;
+  color: #5182ab;
 }
 
+/* line 69, ../../../app/stylesheets/rails_admin/list.scss */
 .grid .action.delete a {
-  color:#ad0208;
+  color: #ad0208;
 }
 
+/* line 73, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead .action {
-  font-size:10px;
-  margin-top:1px;
+  font-size: 10px;
+  margin-top: 1px;
 }
 
+/* line 78, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead .selected {
-  font-weight:bold;
+  font-weight: bold;
 }
 
+/* line 82, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody td {
-  border-bottom:1px solid #b9b9b9;
+  border-bottom: 1px solid #b9b9b9;
   padding: 9px 0;
-  text-align:center;
+  text-align: center;
 }
 
+/* line 88, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .even {
-  background:#f2f2f2;
+  background: #f2f2f2;
 }
 
+/* line 92, ../../../app/stylesheets/rails_admin/list.scss */
 .grid .pagination {
-  padding-top:10px;
+  padding-top: 10px;
 }
 
+/* line 96, ../../../app/stylesheets/rails_admin/list.scss */
 .grid .pagination a {
-  background:#FFF;
-  color:#000;
-  border:1px solid #DDD;
-  padding:6px;
-  padding-top:3px;
-  padding-bottom:4px;
-  text-decoration:none;
+  background: #FFF;
+  color: #000;
+  border: 1px solid #DDD;
+  padding: 6px;
+  padding-top: 3px;
+  padding-bottom: 4px;
+  text-decoration: none;
 }
 
+/* line 106, ../../../app/stylesheets/rails_admin/list.scss */
 .grid .pagination a:hover {
-  background:#EEE;
-  border:1px solid #494949;
+  background: #EEE;
+  border: 1px solid #494949;
 }
 
+/* line 111, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tfoot .bulk {
   float: right;
   margin-top: 8px;
 }
 
+/* line 116, ../../../app/stylesheets/rails_admin/list.scss */
 .this-page {
-  padding:3px;
+  padding: 3px;
 }
 
+/* line 120, ../../../app/stylesheets/rails_admin/list.scss */
 .historyLink {
-  color:#000;
-  text-decoration:none;
+  color: #000;
+  text-decoration: none;
 }
 
+/* line 125, ../../../app/stylesheets/rails_admin/list.scss */
 .historyLink:hover {
-  text-decoration:underline;
+  text-decoration: underline;
 }

@@ -1,5 +1,5 @@
 RailsAdmin.config do |config|
-  config.included_models = [Dep, Person, Currency,Project,Settlement,Duty]
+  config.included_models = [Dep, Person, Currency,Project,Settlement,Duty,WorkFlow,WorkFlowStep]
 
   config.model Person do
     label "Person Model"
