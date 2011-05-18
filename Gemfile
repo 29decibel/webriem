@@ -13,7 +13,7 @@ gem "excelsior"
 gem "prawn"
 gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
-gem 'admin_data'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'ruby-ole'
 gem 'spreadsheet'
 gem 'rest-client'
@@ -24,7 +24,6 @@ gem 'haml'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "kaminari"
-gem 'activeadmin'
 #gem 'iconv'
 
 # Bundle edge Rails instead:
