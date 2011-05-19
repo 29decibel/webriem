@@ -899,7 +899,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   create_table "work_flow_steps", :force => true do |t|
     t.integer  "dep_id"
-    t.integer  "is_self_dep"
+    t.boolean  "is_self_dep"
     t.integer  "duty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
