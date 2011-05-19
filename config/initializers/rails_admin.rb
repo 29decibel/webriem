@@ -2,7 +2,8 @@ RailsAdmin.config do |config|
   config.included_models = 
     [Dep, Person, Currency,Project,Settlement,
     Duty,WorkFlow,WorkFlowStep,Role,Fee,Region,Transportation,Lodging,
-    FeeStandard,Budget,Account,Subject,ExtraWorkStandard,Menu,MenuCategory]
+    FeeStandard,Budget,Account,Subject,ExtraWorkStandard,
+    Menu,MenuCategory,Supplier,FeeCodeMatch,SystemConfig]
 
   #config.model Person do
   #  label "Person Model"

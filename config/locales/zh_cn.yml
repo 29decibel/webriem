@@ -231,6 +231,7 @@
       dep: "部门"
       duty: "职务"
       person: "人员"
+      system_config: "系统参数设置"
       supplier: "供应商"
       fee: "费用类型"
       region: "地区"
@@ -254,7 +255,12 @@
       work_flow_step: "添加一个审批环节"
       work_flow_info: "审批信息"
       u8_dep: U8部门
+      fee_code_match: "生成U8凭证设置"
     attributes:
+      system_config:
+        key: "名称"
+        value: "参数值"
+        description: "描述"
       menu_category:
         name: "名称"
         description: "描述"
@@ -389,6 +395,7 @@
         cperson: 指定贷方人
         ddep: 指定借方部门
         cdep: 指定贷方部门
+        fee_code: "费用类型"
       dep:
         name: "名称"  
         code: "编码"
