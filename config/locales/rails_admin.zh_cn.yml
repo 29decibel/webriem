@@ -3,8 +3,8 @@ zh_cn:
     name: "主页"
   admin:
     dashboard:
-      pagename: "网站管理"
-      name: "Dashboard"
+      pagename: "在线报销后台管理"
+      name: "操作面板"
       model_name: "模型名称"
       last_used: "最后使用"
       records: "记录"

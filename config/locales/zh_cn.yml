@@ -246,6 +246,7 @@
       work_flow: "审批流设置"
       region_type: "地区级次"
       menu: "菜单设置"
+      menu_category: "菜单分类"
       role: "角色"
       rd_lodging: "住宿费用报销"
       extra_work_standard: "加班费标准"
@@ -254,6 +255,9 @@
       work_flow_info: "审批信息"
       u8_dep: U8部门
     attributes:
+      menu_category:
+        name: "名称"
+        description: "描述"
       work_flow_info:
         is_ok: "是否通过"
         people_id: "审批人"
