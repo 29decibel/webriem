@@ -380,7 +380,8 @@ class DocHeadsController < ApplicationController
       when 10 then JjPdf.to_pdf(pdf,doc)
       when 11 then JbfPdf.to_pdf(pdf,doc)
       when 12 then PtfyPdf.to_pdf(pdf,doc)
-      else FlfyPdf.to_pdf(pdf,doc)
+      when 13 then FlfyPdf.to_pdf(pdf,doc)
+      else GdzcPdf.to_pdf(pdf,doc)
     end
   end
 end
