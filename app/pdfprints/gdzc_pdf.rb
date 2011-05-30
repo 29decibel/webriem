@@ -63,4 +63,4 @@ class GdzcPdf
     end
     pdf    
   end
-e
+end
