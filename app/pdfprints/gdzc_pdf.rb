@@ -25,7 +25,7 @@ class GdzcPdf
       pdf.move_down 2
       pdf.table doc.fixed_properties.map {|r| ["#{r.type}","#{r.name}","#{r.code}","#{r.sequence}","#{r.buy_unit}","#{r.buy_count}","#{r.original_value}","#{r.keeper.name}","#{r.place}","#{r.afford_dep.name}","#{r.project.name}"]},
         :headers => ["资产类型","资产名称","规格型号","序列号","购入单价","购入数量","原值","保管人","存放地点","承担部门","承担项目"],
-	:column_widths=>{0=>60,1=>60,2=>80,3=>40,4=>40,5=>60,6=>60,7=>60,8=>20,9=>30,10=>30},
+	:column_widths=>{0=>60,1=>60,2=>60,3=>40,4=>40,5=>60,6=>60,7=>60,8=>40,9=>30,10=>30},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
