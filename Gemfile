@@ -34,6 +34,9 @@ gem 'spreadsheet'
 gem 'rest-client'
 #gem 'iconv'
 
+gem 'whenever', :require => false
+gem 'backup'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

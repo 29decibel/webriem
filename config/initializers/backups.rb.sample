@@ -1,0 +1,21 @@
+Backup::Model.new(:bsqls, 'A sample backup configuration') do
+
+  database MySQL do |database|
+    database.name               = 'webreim_production'
+    database.username           = 'root'
+    database.password           = 'china123!'
+    database.skip_tables        = ['logs']
+    database.additional_options = ['--single-transaction', '--quick']
+  end
+
+  store_with Dropbox do |db|
+    db.email      = 'emial'
+    db.password   = 'password'
+    db.api_key    = 'zcjo7maziw3n6oa'
+    db.api_secret = '1mvtd99z85d3rq3'
+    db.path       = '/webriem_sql_backps'
+    db.keep       = 25
+    db.timeout    = 300
+  end
+
+end
