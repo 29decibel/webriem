@@ -18,4 +18,20 @@ Backup::Model.new(:bsqls, 'A sample backup configuration') do
     db.timeout    = 300
   end
 
+	notify_by Mail do |mail|
+		mail.on_success           = true
+		mail.on_failure           = true
+
+		mail.from                 = 'sender@email.com'
+		mail.to                   = '79413824@email.com'
+		mail.address              = 'smtp.gmail.com'
+		mail.port                 = 587
+		mail.domain               = 'your.host.name'
+		mail.user_name            = 'sender@email.com'
+		mail.password             = 'my_password'
+		mail.authentication       = 'login'
+		mail.enable_starttls_auto = true
+	end
+	
+
 end
