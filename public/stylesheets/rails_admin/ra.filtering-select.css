@@ -1,0 +1,9 @@
+/* line 1, ../../../app/stylesheets/rails_admin/ra.filtering-select.scss */
+.ra-filtering-select-input {
+  border-right: 0 none transparent !important;
+}
+
+/* line 5, ../../../app/stylesheets/rails_admin/ra.filtering-select.scss */
+.ra-filtering-select-button .ui-icon {
+  margin-left: 0px;
+}

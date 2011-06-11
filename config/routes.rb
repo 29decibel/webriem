@@ -1,19 +1,9 @@
 Webreim::Application.routes.draw do
 
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
-  get "token_input/search"
-
-  get "duties/tokened(.:format)"
-
-  resources :menu_categories
   get "doc_off_set/index"
   post "doc_off_set/search"
   get "doc_off_set/remove_offset"
   post "doc_off_set/do_offset"
-  resources :suppliers
 
   #post "vouch/update" i don't know why this doesn't work???
   get "vouch/index"
@@ -22,10 +12,6 @@ Webreim::Application.routes.draw do
   match "vouch/edit"=>"vouch#edit"
   match "vouch/update"=>"vouch#update"
   match "vouch/g_u8"=>"vouch#g_u8"
-  
-  resources "fee_code_matches"
-  
-  resources :system_configs
 
   get "people/all"
   get "common/new_reset_p"
@@ -61,7 +47,7 @@ Webreim::Application.routes.draw do
   get "doc_heads/export_xls"
 
 
-  resources :roles
+  resources :doc_heads
 
   post "model_search/with"  
   get "model_search/index"  
@@ -69,26 +55,6 @@ Webreim::Application.routes.draw do
   get "ref_form/index"
   
   resources :upload_files
-  resources :extra_work_standards
-  resources :feed_backs
-  resources :work_flow_infos
-  resources :work_flows
-  resources :accounts
-  resources :recivers
-  resources :doc_heads  
-  resources :subjects
-  resources :currencies
-  resources :budgets
-  resources :fee_standards
-  resources :projects
-  resources :settlements
-  resources :lodgings
-  resources :transportations
-  resources :regions
-  resources :fees
-  resources :people
-  resources :duties
-  resources :deps
   
   get "task/my_docs",:as=>:my_docs  
   get "task/docs_to_approve",:as=>:docs_to_approve  

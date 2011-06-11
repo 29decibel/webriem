@@ -1,0 +1,737 @@
+# Chinese (China) translations for Ruby on Rails 
+# by tsechingho (http://github.com/tsechingho)
+
+"zh_cn":
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b%d日"
+      long: "%Y年%b%d日"
+    day_names: [星期日, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六]
+    abbr_day_names: [日, 一, 二, 三, 四, 五, 六]
+    month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    order: [ :year, :month, :day ]
+  
+  time:
+    formats:
+      default: "%Y年%b%d日 %A %H:%M:%S %Z"
+      short: "%b%d日 %H:%M"
+      long: "%Y年%b%d日 %H:%M"
+    am: "上午"
+    pm: "下午"
+  views:
+    pagination:
+      previous: "&lt; 上一页"  
+      next: "下一页 &gt;"  
+      truncate: "&hellip;" 
+  
+  datetime:
+    distance_in_words:
+      half_a_minute: "半分钟"
+      less_than_x_seconds:
+        one: "不到一秒"
+        other: "不到 %{count} 秒"
+      x_seconds:
+        one: "一秒"
+        other: "%{count} 秒"
+      less_than_x_minutes:
+        one: "不到一分钟"
+        other: "不到 %{count} 分钟"
+      x_minutes:
+        one: "一分钟"
+        other: "%{count} 分钟"
+      about_x_hours:
+        one: "大约一小时"
+        other: "大约 %{count} 小时"
+      x_days:
+        one: "一天"
+        other: "%{count} 天"
+      about_x_months:
+        one: "大约一个月"
+        other: "大约 %{count} 个月"
+      x_months:
+        one: "一个月"
+        other: "%{count} 个月"
+      about_x_years:
+        one: "大约一年"
+        other: "大约 %{count} 年"
+      over_x_years:
+        one: "一年多"
+        other: "%{count} 年多"
+      almost_x_years:
+        one:   "接近一年"
+        other: "接近 %{count} 年"
+    prompts:
+      year:   "年"
+      month:  "月"
+      day:    "日"
+      hour:   "时"
+      minute: "分"
+      second: "秒"
+  
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+    currency:
+      format:
+        format: "%u %n"
+        unit: "CN￥"
+        separator: "."
+        delimiter: ","
+        precision: 2
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+  
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " 和 "
+      last_word_connector: ", 和 "
+    select:
+      prompt: "请选择"
+  common_op:
+    btn_new: "新增"
+    btn_return: "返回"
+    btn_save: "保存"
+    btn_edit: "修改"
+    btn_ok: 确定
+    btn_cancel: 取消
+    btn_mydocs: 我的单据
+    btn_print: 打印
+    btn_cancel: 撤销
+    btn_update: 更新
+    btn_start_work_flow: 提交审批
+    doc_not_valide_notice: 单据不合格提醒
+    confirm_paid: 确认付款
+  common_attr:
+    write_note: 填写审批意见
+    approve_info: 审批意见
+    pass: 是否通过
+    name: "名称"
+    code: "编码"
+    none: "无"
+    sequence: "序号"
+    dep: "部门"
+    fixed_property: "固定资产明细"
+    afford_dep: "费用承担部门"
+    project: "项目"
+    fee: "费用类型"
+    start_place: "出发地"
+    reason: "事由"
+    end_place: "目的地"
+    start_time: "开始时间"
+    end_time: "结束时间"
+    currency: "币种"
+    rate: "汇率"
+    apply_amount: "原币金额"
+    ori_amount: "本币金额"
+    hr_amount: "HR调整金额"
+    fi_amount: "财务调整金额"
+    total_apply_amount: "申请金额合计"
+    apply_date: "申请时间"
+    add_detail: "添加明细"
+    basic_info: "基本信息"
+    used_for: "费用用途"
+    c_doc_detail: "收款明细"
+    travel_desc: "差旅费补助明细"
+    travel_days: "出差天数"
+    fee_stan: "费用标准"
+    region_type: "地区级次"
+    other_place: "其他地点"
+    travel_place: "出差地点"
+    transport_detail: "交通费明细"
+    transportation: "交通工具"
+    people_count: "人数"
+    live_together_person: "合住人"
+    join_together_person: 参与人
+    lodging_desc: "住宿费用明细"
+    lodging_days: "住宿天数"
+    city: "城市"
+    other_riem_detail: "其他费用明细"
+    fee_desc: "费用说明"
+    common_riem_desc: "普通费用报销明细"
+    bank: "银行"
+    bank_no: "银行帐号"
+    amount: "金额"
+    add_reciver: "添加收款人"
+    rec_company: "收款单位"
+    rec_person: "收款人"
+    now_cp_docs: "现有借款单"
+    details: "明细"
+    percent: "百分比"
+    split_amount: "分摊金额"
+    split_detail: "分摊明细"
+    fee_span: "费用期间"
+    benefit_detail: "福利费用明细"
+    common_transport: "业务交通费明细"
+    is_sunday: "是否休息日"
+    extra_car: "加班车费明细"
+    extra_meal: "加班餐费明细"
+    extra_work_stan: "加班费标准"
+    place: "地点"
+    date: "日期"
+    transport_fee: "交际费"
+    work_meal: "工作餐费"
+    user: "用户名"
+    password: "密码"
+    remember: "记住我吧"
+    btn_login: "登陆"
+    btn_delete: "删除"
+    remitance_detail: "结汇申请详细"
+    transfer_detail: "转帐申请详细"
+    cash_draw_detail: "现金提取申请详细"
+    buy_fin_p_detail: "购买理财产品详细"
+    redeem_fin_p_detail: "赎回理财产品详细"
+    sure_ok: "是"
+    sure_not: "否"
+    male: "男"
+    female: "女"
+    not_know: "未知"
+    should_riem: "应报销"
+    should_back: "应还款"
+    btn_output_txt: 导出TXT
+    btn_output_txt_all: 全部导出TXT
+    btn_output_excel: 导出Excel
+    btn_print: 打印
+    btn_batch_approve: 批量审批
+    btn_batch_print: 批量打印
+    btn_mark_doc: 标记
+    btn_unmark_doc: 取消标记
+    settlement: 结算方式
+    direction: 方向
+    btn_batch_pay: 批量付款
+    add_apply_item: 添加申请条目
+    cash_draw_account: 提现账户
+    cash_draw_money_remain: 提现前余额
+    btn_g_vouch: 生成U8凭证
+  activerecord:
+    #这里加入model的中文名称
+    models:
+      dep: "部门"
+      duty: "职务"
+      person: "人员"
+      system_config: "系统参数设置"
+      supplier: "供应商"
+      fee: "费用类型"
+      region: "地区"
+      transportation: "交通方式"
+      lodging: "住宿方式"
+      settlement: "结算方式"
+      fee_standard: "费用标准"
+      project: "项目"
+      budget: "预算数据"
+      currency: "币种"
+      subject: "科目设置"
+      account: "账户设置"
+      work_flow: "审批流设置"
+      region_type: "地区级次"
+      menu: "菜单设置"
+      menu_category: "菜单分类"
+      role: "角色"
+      rd_lodging: "住宿费用报销"
+      extra_work_standard: "加班费标准"
+      business_type: "业务类型"
+      work_flow_step: "添加一个审批环节"
+      work_flow_info: "审批信息"
+      u8_dep: U8部门
+      fee_code_match: "生成U8凭证设置"
+    attributes:
+      system_config:
+        key: "名称"
+        value: "参数值"
+        description: "描述"
+      menu_category:
+        name: "名称"
+        description: "描述"
+      work_flow_info:
+        is_ok: "是否通过"
+        people_id: "审批人"
+        comments: "审批意见"
+        created_at: "审批时间"
+        write_comments: "填写审批意见"
+      extra_work_standard:
+        larger_than_hours: "加班时长大于"
+        late_than_time: "加班结束时间晚于"
+        is_sunday: "是否周末"
+        amount: "标准金额"
+        fee_id: "费用类型"
+      work_flow_step:
+        dep_id: "部门"
+        is_self_dep: "是否指定部门"
+        duty_id: "职务"
+        max_amount: "审批金额超过"      
+      region_type:
+        name: "名称"
+      role:
+        name: "角色名称"
+        people: "该角色下的人员"
+        menus: "该角色下的菜单"
+      work_flow:
+        name: "审批名称"
+        doc_types: "单据类型"
+        duty: "申请人的职务"
+        add_new_step: "添加一个审批环节"
+      vouch:
+        dbill_date: "凭证日期"
+        idoc: "附件张数"
+        cbill: "成单人"
+        ccode: "科目"
+        ccode_equal: "对方科目"
+        cdept_id: "部门"
+        citem_id: "项目"
+        cperson_id: "人员"
+        s_cdept_id: "指定部门"
+        s_cperson_id: "指定人员"
+        doc_no: "凭证描述"
+      account:
+        name: "账户名称"  
+        account_no: "帐号"
+      currency:
+        name: "名称"  
+        code: "编码"
+        default_rate: "对本币默认汇率"
+      supplier:
+        name: "名称"
+        code: "编码"
+        bank: "银行*"
+        bank_no: "银行帐号*"
+      budget:
+        fee_id: "费用类型"
+        project_id: "项目"
+        dep_id: "部门"
+        jan: "一月"      
+        feb: "二月"      
+        mar: "三月"      
+        apr: "四月"      
+        may: "五月"      
+        jun: "六月"      
+        jul: "七月"      
+        aug: "八月"      
+        sep: "九月"      
+        oct: "十月"      
+        nov: "十一月"      
+        dec: "十二月"   
+        year: 预算年份   
+      fixed_property:
+        type: "资产类型"
+        name: "资产名称"
+        code: "规格型号"
+        sequence: "序列号"
+        buy_unit: "购入单价"
+        buy_count: "购入数量"
+        original_value: "原值"
+        keeper_id: "保管人"
+        place: "存放地点"
+        afford_dep_id: "折旧费用承担部门"
+        project_id: "折旧费用承担项目"
+      project:
+        name: "名称"  
+        code: "编码"
+        u8_project: "对应U8项目"
+        status: "项目状态"
+      u8_dep:
+        cdepcode: 编码
+        bdepend: 是否末级
+        cdepname: 名称
+        idepgrade: 部门级次
+      fee_standard:
+        project_id: "项目"
+        region_type_id: "地区级次"
+        duty_id: "职务"
+        lodging_id: "住宿方式"
+        transportation_id: "交通方式"
+        business_type_id: "业务类型"
+        amount: "金额"     
+        currency_id: "币种" 
+        fee_id: "费用类型"
+        person_type_id: "人员属性"
+      settlement:
+        name: "名称"  
+        code: "编码"
+        subject: "结算科目"
+      lodging:
+        name: "名称"  
+        code: "编码"
+      region:
+        name: "名称"  
+        code: "编码"
+        region_type_id: ""
+      transportation:
+        name: "名称"  
+        code: "编码"
+      fee:
+        name: "名称"  
+        code: "编码"
+        end_date: "停用日期"
+        attr: "费用属性"
+        parent_fee_id: "所属费用类型"
+      fee_code_match:
+        fee_id: 费用类型
+        dcode_id: 借方科目
+        ccode_id: 贷方科目
+        description: 简要描述
+        dperson: 指定借方人
+        cperson: 指定贷方人
+        ddep: 指定借方部门
+        cdep: 指定贷方部门
+        fee_code: "费用类型"
+      dep:
+        name: "名称"  
+        code: "编码"
+        start_date: "启用时间"
+        end_date: "停止使用时间"
+        version: "所属组织结构"
+        parent_dep_id: "上级部门"
+        u8dep_code: "对应U8编码"
+        u8_dep_id: 对应的U8部门
+      duty:
+        code: "编码"
+        name: "名称"
+      person:
+        name: "姓名"
+        code: "编码"
+        gender: "性别"
+        dep_id: "所在部门"
+        duty_id: "职务"
+        boss_id: "上级领导"
+        phone: "联系方式"
+        e_mail: "电子邮件"
+        ID_card: "身份证号"
+        bank_no: "银行帐号"
+        bank: "开户行"
+        end_date: "离职日期"
+        credit_limit: "信用额度"
+        role_id: "角色"
+        person_type_id: "人员属性"
+      menu:
+        name: "名称"
+        title: "标题"
+        path: "地址"
+      region:
+        name: "名称"
+        code: "编码"
+        region_type_id: "地区级次"
+      subject:
+        business_type_id: "业务类型"
+        fee_id: "费用类型"
+        dep_id: "部门"
+        u8_fee_subject: "u8费用科目"
+        u8_borrow_subject: "u8借款项目"
+        u8_reim_subject: "u8报销科目"
+      doc_head:
+        real_person_id: 所代申请人
+        doc_no: "单据号"
+        attach: "附件个数"
+        person_id: "申请人"
+        note: "备注"
+        apply_date: "申请日期"
+        dep_id: "申请部门"
+        fee_id: "费用类型"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        doc_type: "单据类型"
+        doc_state: "单据状态"
+        project_id: "项目"
+        upload: "附件"
+        cp_doc_remain_amount: "借款余额"
+        manage_upload: "管理附件"
+        reim_description: "费用描述"
+        is_split: "是否分摊"
+        rate: "汇率"
+        attach: "附件个数"
+        currency_id: "币种"
+        apply_amount: "申请金额"
+        ori_amount: "原始金额"
+        real_amount: "实际金额"
+        afford_dep_id: "费用承担部门"
+        total_apply_amount: "申请总金额"
+        mark: 特殊标记
+        reim_split_details:
+          dep_id: "分摊详细信息 费用承担部门"
+        cp_doc_details:
+          sequence: "序号"
+          project_id: "项目"
+          c_doc: "借款单据明细"
+          p_doc: "付款单据明细"
+          ori_amount: "原币金额"
+          dep_id: "费用承担部门"
+          currency_id: "币种"
+          rate: "汇率"
+          used_for: "费用用途"
+        recivers:
+          amount: "收款人明细 收款金额"
+          bank: "收款人明细 银行名称"
+          settlement_id: "收款人明细 结算方式"
+          bank_no: "收款人明细 银行帐号"
+          company: "收款人明细 收款人"
+        rd_common_transports:
+          ori_amount: "业务交通费明细 原币金额"
+          start_place: "业务交通费明细 开始地点"
+          end_place: "业务交通费明细 结束地点"
+          start_time: "业务交通费明细 开始时间"
+          end_time: "业务交通费明细 结束时间"
+          reason: "业务交通费明细 事由"
+          currency_id: "业务交通费明细 币种"
+          rate: "业务交通费明细 汇率"
+          dep_id: "业务交通费明细 费用承担部门"
+        common_riems:
+          fee_id: "普通费用报销明细 费用类型"
+          dep_id: "普通费用报销明细 费用承担部门"
+          project_id: "普通费用报销明细 项目"
+          description: "普通费用报销明细 费用描述"
+          ori_amount: "普通费用报销明细 原币金额"
+          rate: "普通费用报销明细 汇率"
+          currency_id: "普通费用报销明细 币种"
+        rec_notice_details:
+          ori_amount: "收款明细 原币金额"
+          project_id: "收款明细 项目"
+          dep_id: "收款明细 费用承担部门"
+          content: "收款内容"
+          amount: "收款金额"
+          total_amount: "收款金额合计"
+        reim_cp_offsets:
+        rd_extra_work_meals:
+          ori_amount: "加班餐费明细 原币金额"
+          start_time: "加班餐费明细 开始时间"
+          end_time: "加班餐费明细 结束时间"
+          reason: "加班餐费明细 事由"
+          currency_id: "加班餐费明细 币种"
+          rate: "加班餐费明细 汇率"
+        rd_extra_work_cars:
+          ori_amount: "加班车费明细 原币金额"
+          start_place: "加班车费明细 开始地点"
+          end_place: "加班车费明细 结束地点"
+          start_time: "加班车费明细 开始时间"
+          end_time: "加班车费明细 结束时间"
+          reason: "加班车费明细 事由"
+          currency_id: "加班车费明细 币种"
+          rate: "加班车费明细 汇率"
+        rd_work_meals:
+          ori_amount: "原币金额"
+          person_names: "参与人姓名"
+          place: "地点"
+          meal_date: "日期"
+          people_count: "人数"
+          reason: "事由"
+          currency_id: "币种"
+          rate: "汇率"
+          dep_id: "费用承担部门"
+          project_id: "项目"
+        rd_travels:
+          days: "差旅费补助明细 出差天数"
+          reason: "差旅费补助明细 出差事由"
+          ori_amount: "差旅费补助明细 原币金额"
+          base: "差旅费补助明细 "          
+        rd_transports:
+          ori_amount: "交通费明细 原币金额"
+          currency_id: "交通费明细 币种"
+          rate: "交通费明细 汇率"   
+          transportation_id: "交通费明细 交通工具"
+          reason: "交通费明细 出差事由"
+          start_position: "交通费明细 出发地"
+          end_position: "交通费明细 目的地"
+          start_date: "交通费明细 开始时间"
+          end_date: "交通费明细 到达时间"       
+        rd_lodgings:
+          ori_amount: "住宿费明细 原币金额"
+          currency_id: "住宿费明细 币种"
+          rate: "住宿费明细 汇率"
+          base: "住宿费明细 "
+          start_date: "住宿费明细 开始日期"
+          end_date: "住宿费明细 结束日期"
+          days: "住宿费明细 住宿天数"
+          people_count: "住宿费明细 住宿人数"
+        rd_benefits:
+          project_id: "福利费用明细 项目"
+          dep_id: "福利费用明细 费用承担部门"
+          fee_id: "福利费用明细 费用类型"
+          apply_amount: "福利费用明细 申请金额"
+        other_riems:
+          currency_id: "其他费用明细 币种"
+          rate: "其他费用明细 汇率"
+          description: "其他费用明细 费用描述"
+      buy_finance_product:
+        name: "理财产品名称"
+        rate: "理财产品利率"      
+        account_id: "购买账户"
+        buy_date: "预计购买日期"
+        redeem_date: "预计赎回日期"
+        description: "申请购买原因及预期收益"
+        amount: "申请购买金额"
+      redeem_finance_product:
+        name: "理财产品名称"
+        rate: "理财产品利率"
+        account_id: "赎回账户"
+        clear_date: "预计赎回日期"
+        redeem_date: "申请赎回日期"
+        description: "申请赎回原因"
+        amount: "申请赎回金额"
+      inner_remittance:
+        out_account_id: "结汇账户"
+        amount: "申请金额"  
+        description: "申请原因"
+        remain_amount: "结汇账户结汇后余额"
+        now_rate_price: "当日汇率"
+        currency_id: "币种"
+        in_account_id: "收款账户"  
+        in_amount_after: "收款账户结汇后余额"
+      inner_transfer:
+        out_account_id: "转出账户"
+        out_amount_before: "转出账户转帐前余额"
+        in_amount_before: ""
+        amount: "申请金额" 
+        description: "转帐申请原因"
+        in_account_id: "转入账户"
+        in_amount_after: "转入账户转帐后余额"
+    errors:
+      template: # ~ 2.3.5 backward compatible
+        header:
+          one: "有 1 个错误发生导致「%{model}」无法被保存。"
+          other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+        body: "如下字段出现错误："
+      messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空字符"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "过短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        not_an_integer: "必须是整数"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+        record_invalid: "校验失败: %{errors}"
+  
+  activemodel:
+    models:
+      dep: "部门"
+    attributes:
+      dep:
+        name: "名称"
+    errors:
+      template:
+        header:
+          one: "有 1 个错误发生导致「%{model}」无法被保存。"
+          other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+        body: "如下字段出现错误："
+  menu:
+    suppliers: "供应商"
+    my_docs: "我的单据"
+    docs_to_approve: "需要审批单据" 
+    docs_to_pay: "需要付款的单据"
+    docs_paid: "已经付款的单据"
+    docs_approved: "审批过的单据"
+    roles: "权限设置"
+    deps: "部门"
+    duties: "职务"
+    people: "员工"
+    fees: "费用类型"
+    regions: "地区"
+    transportations: "交通方式"
+    lodgings: "住宿方式"
+    settlements: "结算方式"
+    fee_standards: "费用标准"
+    projects: "项目"
+    budgets: "预算数据"
+    extra_work_standards: "加班费标准"
+    currencies: "币种"
+    subjects: "科目设置"
+    accounts: "账户设置"
+    work_flows: "审批流设置"
+    fee_code_matches: "凭证生成设置"
+    d_Borrow: "借款单"
+    d_PayDoc: "付款单"
+    d_ReciveNotice: "收款通知单"
+    d_Redeem: "结汇"
+    d_Transfer: "转账"
+    d_CashDraw: "现金提取"
+    d_BuyFinanceProduct: "购买理财产品"
+    d_RedeemFinanceProduct: "赎回理财产品"
+    d_TravelExpense: "差旅费报销"
+    d_EntertainmentExpense: "交际费报销"
+    d_OvertimeWork: "加班费报销"
+    d_GeneralExpense: "普通费用报销"
+    d_Wage: "福利费用报销"
+    d_FixedProperty: "固定资产单据"
+    doc_offset: "手工单据冲抵"
+  model_search:
+    filter_txt: "过滤条件"
+    filter_btn: "过滤"
+    add_btn: "添加"
+    btn_ok: "确定"
+    btn_view: "查看"
+    btn_del: "删除"
+    delete_confirm: "是否真的要删除？"
+  cp_doc_offset:
+    delete_ori: "删除原有冲抵记录"
+    left_offset_amount: "剩余冲抵金额"
+    offset_amount: "冲抵金额"
+  #validate info
+  controller_msg:
+    create_ok: "创建成功"
+    update_ok: "更新成功"
+    none: "暂时没有"
+    remove_ok: "成功去除"
+    password_not_none: "密码不能为空"
+    two_pass_not_equal: "两个密码不匹配"
+    update_pass_ok: "修改密码成功"
+    no_parent_dep: "没有上级部门"
+    start_approve: "开始进入审批环节，审批期间单据不能修改"
+    doc_approve_failed: "单据已经撤回，现在可以进行修改"
+    pay_ok: "付款成功"
+    batch_pay_ok: "批量付款成功"
+    approve_ok: "审批完成"
+    batch_approve_ok: "批量审批完成"
+    message_sent: "已经发送通知"
+  v_info:
+    dep_is_end: "部门必须为末级部门"   
+  netzke:
+    basepack:
+      grid_panel:
+        add: "添加"
+        edit: "修改"
+        delete: "删除"
+        apply: "提交更新"
+        add_in_form: "在新窗体中添加"
+        edit_in_form: "在窗体中修改"
+        search: "高级搜索"
+      search_window:
+        cancel: 取消
+        search: 搜索
+        clear: 清除
+        advance_search: 高级搜索
+    formats:
+      date: Y-m-d
+      datetime: Y-m-d H:i:s
+      time: H:i:s

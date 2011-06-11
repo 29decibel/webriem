@@ -2,7 +2,7 @@
 %html
   %head
     %title 参照选择
-    = stylesheet_link_tag :all,:recursive => true 
+    = stylesheet_link_tag "rails_admin/aristo/jquery-ui-1.8.7.custom","site","ui.jqgrid",:cache=>"ref_form"
     = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"
     = jqgrid_init
     = javascript_include_tag "reference" 

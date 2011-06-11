@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
-gem 'mysql2'
+gem 'mysql2', '0.2.7'
 gem "jquery-rails"
 gem "devise"
 gem 'delayed_job'
@@ -13,18 +13,19 @@ gem "excelsior"
 gem "prawn"
 gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
-gem 'admin_data'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'ruby-ole'
 gem 'spreadsheet'
 gem 'rest-client'
 gem 'haml'
+gem 'haml-rails'
+gem "compass", ">= 0.11.1"
 #gem 'iconv'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "kaminari"
-gem 'activeadmin'
 #gem 'iconv'
 
 # Bundle edge Rails instead:
