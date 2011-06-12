@@ -292,6 +292,8 @@
         doc_types: "单据类型"
         duty: "申请人的职务"
         add_new_step: "添加一个审批环节"
+        work_flow_steps: "选择审批环节"
+        duties: "此审批流对应哪些职务"
       vouch:
         dbill_date: "凭证日期"
         idoc: "附件张数"
@@ -424,6 +426,7 @@
         credit_limit: "信用额度"
         role_id: "角色"
         person_type_id: "人员属性"
+        add_new_dep: "aaa"
       menu:
         name: "名称"
         title: "标题"

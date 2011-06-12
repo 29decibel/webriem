@@ -20,6 +20,8 @@ gem 'rest-client'
 gem 'haml'
 gem 'haml-rails'
 gem "compass", ">= 0.11.1"
+
+gem "nested_form"
 #gem 'iconv'
 
 # Bundle edge Rails instead:

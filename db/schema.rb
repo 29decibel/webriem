@@ -401,7 +401,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   create_table "people", :force => true do |t|
     t.string   "name"
     t.string   "code"
-    t.integer  "gender"
+    t.string   "gender"
     t.integer  "dep_id"
     t.integer  "duty_id"
     t.string   "phone"
