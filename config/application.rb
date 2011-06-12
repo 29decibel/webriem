@@ -31,6 +31,11 @@ module Webreim
     config.i18n.default_locale = "zh_cn"
     #config.i18n.default_locale = "en-US"
 
+    config.generators do |g|
+      g.test_framework :rspec
+      g.template_engine :haml
+    end
+
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 

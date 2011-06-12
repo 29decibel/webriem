@@ -1,6 +1,6 @@
 = link_to content_tag(:span,"#{I18n.t('common_op.btn_new')}"), new_doc_head_path(:doc_type=>doc_head.doc_type),:remote=>true,:class=>"minibutton"
 -if !doc_head.new_record? and doc_head.doc_state==0
-  = link_to_function content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"),"select_approver_or_begin_work_flow()",:class=>"minibutton"
+  = link_to content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"),{:controller=>"doc_heads",:action=>"begin_work",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if doc_head.person==current_user.person and doc_head.doc_state==1
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"), {:controller=>"doc_heads",:action=>"giveup",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if !doc_head.new_record?

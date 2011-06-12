@@ -4,7 +4,8 @@ class RiemCpOffset < ActiveRecord::Base
   belongs_to :cp_doc_head, :class_name => "DocHead", :foreign_key => "cp_doc_head_id"
   validate :amount_lt_cp_remain
   #remove amount from cp
-  def after_save
+  after_save :update_amount
+  def update_amount
     cp_doc_head.update_attribute(:cp_doc_remain_amount,cp_doc_head.cp_doc_remain_amount-amount)
   end
   def amount_lt_cp_remain

@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "project_id"
     t.string   "used_for"
     t.integer  "currency_id"
-    t.decimal  "apply_amount", :precision => 16, :scale => 2
+    t.decimal  "rate_amount", :precision => 16, :scale => 2
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.decimal  "rate",         :precision => 14, :scale => 4
     t.datetime "created_at"
@@ -178,16 +178,13 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "note"
     t.date     "apply_date"
     t.integer  "dep_id"
-    t.integer  "fee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_type"
     t.integer  "doc_state"
-    t.integer  "work_flow_step_id"
     t.integer  "project_id"
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
-    t.integer  "selected_approver_id"
     t.integer  "afford_dep_id"
     t.integer  "upload_file_id"
     t.decimal  "total_amount",         :precision => 16, :scale => 2
@@ -201,12 +198,10 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   add_index "doc_heads", ["dep_id"], :name => "index_doc_heads_on_dep_id"
   add_index "doc_heads", ["doc_state"], :name => "index_doc_heads_on_doc_state"
   add_index "doc_heads", ["doc_type"], :name => "index_doc_heads_on_doc_type"
-  add_index "doc_heads", ["fee_id"], :name => "index_doc_heads_on_fee_id"
   add_index "doc_heads", ["mark"], :name => "index_doc_heads_on_mark"
   add_index "doc_heads", ["person_id"], :name => "index_doc_heads_on_person_id"
   add_index "doc_heads", ["project_id"], :name => "index_doc_heads_on_project_id"
   add_index "doc_heads", ["real_person_id"], :name => "index_doc_heads_on_real_person_id"
-  add_index "doc_heads", ["work_flow_step_id"], :name => "index_doc_heads_on_work_flow_step_id"
 
   create_table "duties", :force => true do |t|
     t.string   "name"
@@ -435,7 +430,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "u8_project"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
+    t.string  "status"
   end
 
   create_table "rd_benefits", :force => true do |t|
@@ -730,8 +725,16 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "menu_ids"
   end
+
+
+  create_table "menus_roles", :id => false do |t|
+    t.integer   "role_id"
+    t.integer   "menu_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

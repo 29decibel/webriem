@@ -14,4 +14,8 @@ class WorkFlow < ActiveRecord::Base
       w.update_attribute :sequence,index
     end
   end
+
+  def doc_types
+    doc_meta_infos.map(&:code)
+  end
 end

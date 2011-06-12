@@ -1,16 +1,20 @@
 #coding: utf-8
 class Project < ActiveRecord::Base
+
   validates_presence_of :name,:code
   validates_uniqueness_of :code
-  P_STATUS={0=>"打开状态",1=>"已关闭"}
+
+  before_save :strip
+
   def to_s
     "#{code};#{name}"
   end
-  def status_name
-    return P_STATUS[status] if status
-    P_STATUS[0]
+
+  def status_enum
+    ["打开状态","已关闭"]
   end
-  def before_save
+
+  def strip
     self.code=self.code.strip
     self.name=self.name.strip
   end

@@ -4,7 +4,6 @@ require 'prawn/layout'
 #借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
 #9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
 #DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
-DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",13=>"BXFL",14=>"GDZC"}
 class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
@@ -57,19 +56,10 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new
   # GET /doc_heads/new.xml
   def new
-    #set a number to
-    doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0") 
-    if doc_count_config.value==5000
-      doc_count_config.value="0"
-    else
-      doc_count_config.value=(doc_count_config.value.to_i+1).to_s
-    end
-    doc_count_config.save
     @doc = DocHead.new
     @doc.doc_state = 0
     #set the doctype to the paras passed in
     @doc.doc_type=params[:doc_type].to_i
-    @doc.doc_no=DOC_TYPE_PREFIX[@doc.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
     @doc.apply_date=Time.now
     @doc.dep=current_person.dep
     @doc_type = @doc.doc_type
