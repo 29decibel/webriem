@@ -256,7 +256,15 @@
       work_flow_info: "审批信息"
       u8_dep: U8部门
       fee_code_match: "生成U8凭证设置"
+      doc_meta_info: "单据管理"
     attributes:
+      doc_meta_info:
+        name: "单据名称"
+        code: "单据编码"
+        description: "单据描述"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       system_config:
         key: "名称"
         value: "参数值"
@@ -312,9 +320,9 @@
         name: "审批名称"
         doc_types: "单据类型"
         duty: "申请人的职务"
-        add_new_step: "添加一个审批环节"
-        work_flow_steps: "选择审批环节"
-        duties: "此审批流对应哪些职务"
+        work_flow_steps: "审批环节"
+        doc_meta_infos: "单据类型"
+        duties: "职务"
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
@@ -805,22 +813,3 @@
     message_sent: "已经发送通知"
   v_info:
     dep_is_end: "部门必须为末级部门"   
-  netzke:
-    basepack:
-      grid_panel:
-        add: "添加"
-        edit: "修改"
-        delete: "删除"
-        apply: "提交更新"
-        add_in_form: "在新窗体中添加"
-        edit_in_form: "在窗体中修改"
-        search: "高级搜索"
-      search_window:
-        cancel: 取消
-        search: 搜索
-        clear: 清除
-        advance_search: 高级搜索
-    formats:
-      date: Y-m-d
-      datetime: Y-m-d H:i:s
-      time: H:i:s
