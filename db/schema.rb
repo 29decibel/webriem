@@ -881,13 +881,13 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "s_cperson_id"
   end
 
-  create_table "work_flow_duties", :force => true do |t|
-    t.integer  "work_flow_id"
-    t.integer  "duty_id"
+  create_table :work_flow_relate_steps , :force => true do |t|
+    t.references :work_flow, :work_flow_step
+    t.integer  "sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
+  
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
     t.integer  "is_ok"
@@ -903,15 +903,27 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "duty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "work_flow_id"
     t.decimal  "max_amount",   :precision => 8, :scale => 2
   end
 
   create_table "work_flows", :force => true do |t|
     t.string   "name"
-    t.string   "doc_types"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table :doc_meta_infos_work_flows , :id => false do |t|
+    t.references :work_flow, :doc_meta_info
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table :doc_meta_infos do |t|
+    t.string :name
+    t.string :code
+    t.string :description
+
+    t.timestamps
   end
 
 end

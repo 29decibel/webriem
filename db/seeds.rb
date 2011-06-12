@@ -28,7 +28,7 @@ Menu.create(:name=>'subjects',:path=>'/subjects',:menu_type=>0,:menu_category=>b
 Menu.create(:name=>'accounts',:path=>'/accounts',:menu_type=>0,:menu_category=>basic_cate)
 Menu.create(:name=>'work_flows',:path=>'/work_flows',:menu_type=>0,:menu_category=>basic_cate)
 #docs menu goes here
-#DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
+DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
 DOC_TYPES_EN = {1=>"d_Borrow",2=>"d_PayDoc",3=>"d_ReciveNotice",4=>"d_Redeem",5=>"d_Transfer",6=>"d_CashDraw",7=>"d_BuyFinanceProduct",8=>"d_RedeemFinanceProduct",9=>"d_TravelExpense",10=>"d_EntertainmentExpense",11=>"d_OvertimeWork",12=>"d_GeneralExpense",13=>"d_Wage"}
 (1..13).each do |num|
   Menu.create(:name=>DOC_TYPES_EN[num],:path=>"/doc_heads/new?doc_type=#{num}",:menu_type=>1,:menu_category=>docs_cate)
@@ -49,6 +49,12 @@ PersonType.create(:name=>"出纳",:code=>"CA")
 PersonType.create(:name=>"MTA",:code=>"MTA")
 PersonType.create(:name=>"管理担当",:code=>"MN")
 PersonType.create(:name=>"同PART长",:code=>"PART")
+#create doc meta infos here
+DocMetaInfo.delete_all
+DOC_TYPES.each_pair do |k,v|
+  DocMetaInfo.create :name=>v,:code=>k
+end
+DocMetaInfo.create :name=>"",:code=>''
 #here is the config helper
 ConfigHelper.delete_all
 ConfigHelper.create(:key=>"doc_count",:value=>"0")

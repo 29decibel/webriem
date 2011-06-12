@@ -252,7 +252,7 @@
       rd_lodging: "住宿费用报销"
       extra_work_standard: "加班费标准"
       business_type: "业务类型"
-      work_flow_step: "添加一个审批环节"
+      work_flow_step: "审批环节"
       work_flow_info: "审批信息"
       u8_dep: U8部门
       fee_code_match: "生成U8凭证设置"
@@ -261,32 +261,53 @@
         key: "名称"
         value: "参数值"
         description: "描述"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       menu_category:
         name: "名称"
         description: "描述"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       work_flow_info:
         is_ok: "是否通过"
         people_id: "审批人"
         comments: "审批意见"
         created_at: "审批时间"
         write_comments: "填写审批意见"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       extra_work_standard:
         larger_than_hours: "加班时长大于"
         late_than_time: "加班结束时间晚于"
         is_sunday: "是否周末"
         amount: "标准金额"
         fee_id: "费用类型"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       work_flow_step:
         dep_id: "部门"
         is_self_dep: "是否指定部门"
         duty_id: "职务"
-        max_amount: "审批金额超过"      
+        max_amount: "审批金额超过"   
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"   
       region_type:
         name: "名称"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       role:
         name: "角色名称"
         people: "该角色下的人员"
         menus: "该角色下的菜单"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       work_flow:
         name: "审批名称"
         doc_types: "单据类型"
@@ -294,6 +315,9 @@
         add_new_step: "添加一个审批环节"
         work_flow_steps: "选择审批环节"
         duties: "此审批流对应哪些职务"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       vouch:
         dbill_date: "凭证日期"
         idoc: "附件张数"
@@ -306,18 +330,30 @@
         s_cdept_id: "指定部门"
         s_cperson_id: "指定人员"
         doc_no: "凭证描述"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       account:
         name: "账户名称"  
         account_no: "帐号"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       currency:
         name: "名称"  
         code: "编码"
         default_rate: "对本币默认汇率"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       supplier:
         name: "名称"
         code: "编码"
         bank: "银行*"
         bank_no: "银行帐号*"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       budget:
         fee_id: "费用类型"
         project_id: "项目"
@@ -335,6 +371,9 @@
         nov: "十一月"      
         dec: "十二月"   
         year: 预算年份   
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       fixed_property:
         type: "资产类型"
         name: "资产名称"
@@ -347,16 +386,25 @@
         place: "存放地点"
         afford_dep_id: "折旧费用承担部门"
         project_id: "折旧费用承担项目"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       project:
         name: "名称"  
         code: "编码"
         u8_project: "对应U8项目"
         status: "项目状态"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       u8_dep:
         cdepcode: 编码
         bdepend: 是否末级
         cdepname: 名称
         idepgrade: 部门级次
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       fee_standard:
         project_id: "项目"
         region_type_id: "地区级次"
@@ -368,26 +416,44 @@
         currency_id: "币种" 
         fee_id: "费用类型"
         person_type_id: "人员属性"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       settlement:
         name: "名称"  
         code: "编码"
         subject: "结算科目"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       lodging:
         name: "名称"  
         code: "编码"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       region:
         name: "名称"  
         code: "编码"
         region_type_id: ""
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       transportation:
         name: "名称"  
         code: "编码"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       fee:
         name: "名称"  
         code: "编码"
         end_date: "停用日期"
         attr: "费用属性"
         parent_fee_id: "所属费用类型"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       fee_code_match:
         fee_id: 费用类型
         dcode_id: 借方科目
@@ -398,6 +464,9 @@
         ddep: 指定借方部门
         cdep: 指定贷方部门
         fee_code: "费用类型"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       dep:
         name: "名称"  
         code: "编码"
@@ -407,9 +476,15 @@
         parent_dep_id: "上级部门"
         u8dep_code: "对应U8编码"
         u8_dep_id: 对应的U8部门
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       duty:
         code: "编码"
         name: "名称"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       person:
         name: "姓名"
         code: "编码"
@@ -426,15 +501,23 @@
         credit_limit: "信用额度"
         role_id: "角色"
         person_type_id: "人员属性"
-        add_new_dep: "aaa"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       menu:
         name: "名称"
         title: "标题"
         path: "地址"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       region:
         name: "名称"
         code: "编码"
         region_type_id: "地区级次"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       subject:
         business_type_id: "业务类型"
         fee_id: "费用类型"
@@ -442,6 +525,9 @@
         u8_fee_subject: "u8费用科目"
         u8_borrow_subject: "u8借款项目"
         u8_reim_subject: "u8报销科目"
+        id: "唯一标识"
+        created_at: "创建时间"
+        updated_at: "更新时间"
       doc_head:
         real_person_id: 所代申请人
         doc_no: "单据号"
