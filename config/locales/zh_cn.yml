@@ -298,7 +298,7 @@
         updated_at: "更新时间"
       work_flow_step:
         dep_id: "部门"
-        is_self_dep: "是否指定部门"
+        is_self_dep: "来自申请者所在部门"
         duty_id: "职务"
         max_amount: "审批金额超过"   
         id: "唯一标识"
