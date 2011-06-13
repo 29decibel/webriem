@@ -95,8 +95,6 @@ class DocHead < ActiveRecord::Base
     end
     doc_count_config.save
     self.doc_no=DOC_TYPE_PREFIX[self.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
-    #set doc state
-    self.doc_state = 0
     #set date
     self.apply_date = Time.now
     #set current_approver
@@ -294,35 +292,46 @@ class DocHead < ActiveRecord::Base
     wf.first
   end
 
+  state_machine :state, :initial => :un_submit do
+    after_transition [:rejected,:un_submit] => :processing do |doc_head, transition|
+      doc_head.set_approvers
+    end    
+    event :submit do
+      transition [:rejected,:un_submit] => :processing
+    end
+    event :recall do
+      transition [:processing] => :un_submit
+    end
+    event :approve do
+      transition [:processing] => :approved
+    end
+    event :pay do
+      transition [:approved] => :paid
+    end
+    event :reject do
+      transition [:processing] => :rejected
+    end
+  end
+
   #approve
   def next_approver
-    if doc_state == 0
-      set_approvers
-      doc_state=1
-    end
+    return unless self.processing?
     approver_array = approvers.split(',')
-    if doc_state==0 || current_approver_id == nil
-      current_approver_id = approver_array[0]
-    else
-      current_index = approver_array.index current_approver_id
-      if current_index!=nil
-        if current_index+1<approver_array.count
-          current_approver_id = approver_array[current_index+1]
-        else
-          doc_state = 2
-          current_approver = -2
-        end
+    current_index = approver_array.index current_approver_id.to_s
+
+    if current_index!=nil
+      if current_index+1<approver_array.count
+        self.update_attribute :current_approver_id,approver_array[current_index+1]
       else
-        current_approver_id = approver_array[0]
+        self.approve
       end
+    else
+      self.update_attribute :current_approver_id,-1000
     end
   end
 
   def set_approvers
     approvers_ids = []
-    if approvers 
-      approvers_ids = approvers.split(',')
-    end
     if (work_flow and work_flow.work_flow_steps.count > 0)
       work_flow.work_flow_steps.each do |w|
         if w.is_self_dep
@@ -333,6 +342,7 @@ class DocHead < ActiveRecord::Base
               approvers_ids<<p.id
               break
             end
+            dep = dep.parent_dep
           end #end while
         else
           p = Person.where("dep_id = ? and duty_id =?",w.dep_id,w.duty_id).first
@@ -342,8 +352,8 @@ class DocHead < ActiveRecord::Base
         end #end is self dep
       end #block end
     end
-    self.approvers = approvers_ids.join(',')
-    puts approvers
+    self.update_attribute :approvers,approvers_ids.join(',')
+    self.update_attribute(:current_approver_id,approvers_ids[0]) if approvers_ids.count>0
   end
 
   #decline

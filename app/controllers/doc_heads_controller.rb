@@ -32,7 +32,7 @@ class DocHeadsController < ApplicationController
   def show
     @doc = DocHead.find(params[:id])
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
-    if @doc.doc_state==1
+    if @doc.processing?
       if @doc.current_approver_id==current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
@@ -46,7 +46,7 @@ class DocHeadsController < ApplicationController
   def edit
     @doc = DocHead.find(params[:id])
     #if the doc is current needed to be approved by current person,then new a @work_flow_info
-    if @doc.doc_state==1
+    if @doc.processing?
       if @doc.current_approver_id==current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
@@ -57,10 +57,8 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new.xml
   def new
     @doc = DocHead.new
-    @doc.doc_state = 0
     #set the doctype to the paras passed in
     @doc.doc_type=params[:doc_type].to_i
-    @doc.apply_date=Time.now
     @doc.dep=current_person.dep
     @doc_type = @doc.doc_type
     #set the apply person to the current login user
@@ -101,7 +99,6 @@ class DocHeadsController < ApplicationController
   # POST /doc_heads.xml
   def create
     @doc = DocHead.new(params[:doc_head])
-    @doc.doc_state = 0
     @doc.cp_doc_remain_amount=@doc.total_apply_amount
     #add the offset info
     if params[:offset_info]
@@ -148,36 +145,32 @@ class DocHeadsController < ApplicationController
     render :json=>"ok"
   end
   #将单据进入审批阶段
-  def begin_work
+  def submit
     @doc = DocHead.find(params[:doc_id]) 
-    approver_id=params[:approver_id] if !(params[:approver_id]=="-1")
-    #begin approver
-    @doc.begin_approve(approver_id)
-    @doc.save
+    @doc.submit
     #notice the person who need to approve this doc
     @message="#{I18n.t('controller_msg.start_approve')}"
     if @doc.current_approver_id == current_user.person.id
       @work_flow_info=WorkFlowInfo.new
     end
     respond_to do |format|
-      format.js { render "shared/show_result"}
+      format.js
     end
   end
   #撤销单据的审批
-  def giveup
+  def recall
   	@doc = DocHead.find(params[:doc_id])
-  	@doc.doc_state=0
-  	@doc.save
+    @doc.recall
   	@message="#{I18n.t('controller_msg.doc_approve_failed')}"
     respond_to do |format|
-      format.js { render "shared/show_result"}
+      format.js
     end
   end
   #付款
   def pay
     #debugger
     @doc=DocHead.find(params[:doc_id].to_i)
-    @doc.update_attribute(:doc_state,3)
+    @doc.pay
     #send email
     para={}
     para[:email]=@doc.person.e_mail #person.e_mail  @doc.person.e_mail
@@ -195,7 +188,7 @@ class DocHeadsController < ApplicationController
     params[:doc_ids].split("_").each do |doc_id|
       if !doc_id.blank?
         doc_head=DocHead.find(doc_id.to_i)
-        doc_head.update_attribute(:doc_state,3)
+        doc_head.pay
         #send email
         para={}
         para[:email]=doc_head.person.e_mail #person.e_mail  @doc.person.e_mail

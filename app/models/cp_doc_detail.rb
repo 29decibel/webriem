@@ -23,7 +23,7 @@ class CpDocDetail < ActiveRecord::Base
     errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
   end
   def amount
-    apply_amount
+    rate_amount
   end
   #for the vouch info
   def fcm

@@ -1,46 +1,26 @@
 #work_flow_progress
-  = hidden_field_tag "form_state",doc.doc_state
+  = hidden_field_tag "form_state",doc.state
   <!--hidden field to store the current looker of this doc mainly is HR or FI -->
   -if doc.current_approver_id ==current_user.person.id or (current_user.person.person_type and current_user.person.person_type.code=="CA")
     = hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""
-  -if doc.work_flow_steps
+  -if doc.work_flow
     = hidden_field_tag "doc_id",doc.id
-    -if doc.doc_state==0 and doc.work_flow_steps and doc.work_flow_steps.first and doc.work_flow_steps.first.duty.code=="003"
-      #approvers
-        %h3 选择审批人
-        .approver_list
-          %table
-            %thead
-              %tr
-                %th
-                %th 姓名
-                %th 编号
-            %tbody
-              -Person.where('duty_id=? or person_type_id=?',Duty.find_by_code("003").id,PersonType.find_by_code("PART").id).each do |approver|
-                %tr
-                  %td
-                    = check_box_tag 'selected', 'yes', false, :class => 'ref_select'
-                    = hidden_field_tag "approver",approver.id
-                  %td= label_tag "#{approver.name}"
-                  %td= label_tag "#{approver.code}"
-        = link_to_function "确定","begin_work_flow(this)",:class=>"button2"
-        = link_to_function "取消","$.unblockUI()",:class=>"button2"
     .work_flow_step
       %span 单据状态
-    .work_flow_step(class= "#{doc.doc_state==0 ? 'current_flow' : ''}")
+    .work_flow_step(class= "#{doc.un_submit? ? 'current_flow' : ''}")
       %span 未提交
     .work_flow_step.go_to
-    -if doc.approvers
+    -if doc.processing?
       -doc.approvers.split(',').each do |approver_id|
         .work_flow_step(class= "#{doc.current_approver_id==approver_id.to_i && 'current_flow'}") 
           %span= Person.find(approver_id).name
         .work_flow_step.go_to
     -else
       %span ---没有审批人信息---
-    .work_flow_step(class="#{doc.doc_state==2 && 'current_flow'}")
+    .work_flow_step(class="#{doc.approved? && 'current_flow'}")
       %span 审批通过
     .work_flow_step.go_to
-    .work_flow_step(class="#{doc.doc_state==3 && 'current_flow'}")
+    .work_flow_step(class="#{doc.paid? && 'current_flow'}")
       %span 已经付款
   -else
     ="该单据没有对应的审批流，设置后才能提交审批"

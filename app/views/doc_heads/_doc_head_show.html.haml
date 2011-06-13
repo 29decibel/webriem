@@ -3,7 +3,7 @@
 .show_field
   = hidden_field_tag :person_id,doc.person_id
   %span.label= I18n.t('activerecord.attributes.doc_head.person_id')
-  %span.value= doc.person_name
+  %span.value= doc.person
   = hidden_field_tag "duty_for_fee_standard",doc.person.duty_id
   = hidden_field_tag "pt_for_fee_standard",doc.person.person_type_id
 .show_field

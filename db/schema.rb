@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_type"
-    t.integer  "doc_state"
+    t.string  "state"
     t.integer  "project_id"
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
   add_index "doc_heads", ["dep_id"], :name => "index_doc_heads_on_dep_id"
-  add_index "doc_heads", ["doc_state"], :name => "index_doc_heads_on_doc_state"
+  add_index "doc_heads", ["state"], :name => "index_doc_heads_on_doc_state"
   add_index "doc_heads", ["doc_type"], :name => "index_doc_heads_on_doc_type"
   add_index "doc_heads", ["mark"], :name => "index_doc_heads_on_mark"
   add_index "doc_heads", ["person_id"], :name => "index_doc_heads_on_person_id"

@@ -21,6 +21,8 @@ gem 'haml'
 gem 'haml-rails'
 gem "compass", ">= 0.11.1"
 
+gem "state_machine", '0.10.4'
+
 gem "nested_form"
 gem "kaminari"
 
