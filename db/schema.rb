@@ -894,7 +894,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
     t.integer  "is_ok"
-    t.integer  "people_id"
+    t.integer  "approver_id"
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"

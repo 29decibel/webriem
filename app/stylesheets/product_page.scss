@@ -1,0 +1,47 @@
+*{margin:0px;}
+body{
+  background:url(../images/product_bg.png) repeat;
+  font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun";
+}
+#wrapper{
+  width:100%;
+  margin:auto;
+  #header{
+    height:50px;
+    width:100%;
+    background-color:black;
+    float:left;
+    ul.menu{
+      list-style:none;
+      float:right;
+      margin-top:8px;
+      margin-right:10px;
+      li{
+        display:inline-block;
+        width:85px;
+        a{
+          font-size:20px;
+          text-decoration:none;
+          display:block;
+          color:#39444A;
+        }
+        &.current{
+          a{color:white;}
+        }
+      }
+    }
+  }
+  #content{
+    float:left;
+    width:960px;
+    border:1px dashed #ccc;
+    height:200px;
+    margin:auto;
+  }
+  #footer{
+    float:left;
+    height:120px;
+    width:100%;
+    background-color:black;
+  }
+}

@@ -1,0 +1,16 @@
+!!! 5
+%html
+  %head
+    %meta(http-equiv="Content-type" content="text/html; charset=utf-8")
+    %title OES
+    = stylesheet_link_tag "product_page",:cache=>"homepage"
+  %body
+    #wrapper
+      #header
+        %ul.menu
+          %li.current= link_to "首页", "#"
+          %li= link_to "产品", "#"
+          %li= link_to "演示", "#"
+          %li= link_to "关于", "#"
+      #content
+      #footer

@@ -36,8 +36,6 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :inner_cash_draw , :allow_destroy => true
   accepts_nested_attributes_for :buy_finance_product ,:allow_destroy => true
   accepts_nested_attributes_for :redeem_finance_product , :allow_destroy => true
-  #审批流
-  accepts_nested_attributes_for :work_flow_infos ,:reject_if => lambda { |a| a[:is_ok].blank? }, :allow_destroy => true
   #here is about reim=============================
   belongs_to :project
   #here is the details
@@ -314,12 +312,13 @@ class DocHead < ActiveRecord::Base
   end
 
   #approve
-  def next_approver
+  def next_approver(comments='OK')
     return unless self.processing?
     approver_array = approvers.split(',')
     current_index = approver_array.index current_approver_id.to_s
 
     if current_index!=nil
+      self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
       if current_index+1<approver_array.count
         self.update_attribute :current_approver_id,approver_array[current_index+1]
       else
@@ -357,11 +356,12 @@ class DocHead < ActiveRecord::Base
   end
 
   #decline
-  def decline
+  def decline(comments='')
     #终止单据
-    self.doc_state=0
+    self.work_flow_infos << WorkFlowInfo.create(:is_ok=>false,:comments=>comments,:approver_id=>current_approver_id) 
+    self.reject
     self.approvers = nil
-    self.current_approver = nil
+    self.current_approver_id = nil
   end
   #uploads 
   def uploads

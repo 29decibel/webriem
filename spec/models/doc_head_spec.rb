@@ -79,4 +79,22 @@ describe DocHead do
     @doc.next_approver
     @doc.should be_approved
   end
+
+  it "should have a work flow info with the current approver" do
+    @doc.submit
+    @doc.next_approver('you are good')
+    @doc.work_flow_infos.count.should == 1
+
+    @doc.work_flow_infos.first.comments.should == 'you are good'
+    @doc.work_flow_infos.first.approver_id.should == @p1.id
+  end
+
+  it "should have the reject approver's comments" do
+    @doc.submit
+    @doc.decline('not fine')
+
+    @doc.work_flow_infos.count.should == 1
+    @doc.work_flow_infos.first.approver_id.should ==@p1.id
+    @doc.work_flow_infos.first.comments.should == 'not fine'
+  end
 end

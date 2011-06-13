@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  get "home/index"
+
   get "doc_off_set/index"
   post "doc_off_set/search"
   get "doc_off_set/remove_offset"
@@ -65,6 +67,6 @@ Webreim::Application.routes.draw do
   
   devise_for :users
     
-  root :to=>"task#dashboard"
+  root :to=>"home#index"
 
 end
