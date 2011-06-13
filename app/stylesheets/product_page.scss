@@ -1,47 +1,63 @@
 *{margin:0px;}
 body{
-  background:url(../images/product_bg.png) repeat;
+  width:100%;
+  background-image:url(../images/bg.jpg) ;
   font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun";
 }
+$active-color:#D68C34;
 #wrapper{
   width:100%;
   margin:auto;
   #header{
+    background-position:bottom;
     height:50px;
-    width:100%;
-    background-color:black;
-    float:left;
-    ul.menu{
-      list-style:none;
-      float:right;
-      margin-top:8px;
-      margin-right:10px;
-      li{
-        display:inline-block;
-        width:85px;
-        a{
-          font-size:20px;
-          text-decoration:none;
-          display:block;
-          color:#39444A;
-        }
-        &.current{
-          a{color:white;}
+    width:960px;
+    .menu{
+      width:960px;
+      margin:auto;
+      ul{
+        float:right;
+        list-style:none;
+        margin-top:12px;
+        li{
+          display:inline-block;
+          width:85px;
+          text-align:center;
+          a{
+            font-size:16px;
+            text-decoration:none;
+            display:block;
+            color:#39444A;
+          }
+          &.current{
+            a{color:$active-color;}
+          }
         }
       }
     }
   }
   #content{
-    float:left;
-    width:960px;
-    border:1px dashed #ccc;
-    height:200px;
-    margin:auto;
+    background-position:bottom;
+    width:100%;
+    margin-top:12px;
+    height:500px;
+    .screenshots{
+      margin-top:10px;
+      border:3px dashed #ccc;
+      height:600px;
+      margin-bottom:10px;
+    }
   }
   #footer{
-    float:left;
-    height:120px;
+    background:url(../images/footer-bg.jpg) ;
+    clear:both;
+    height:150px;
     width:100%;
-    background-color:black;
+    text-align:center;
+    .copy_right{
+      color:white;
+      font-size:13px;
+      margin-top:14px;
+    }
   }
 }
