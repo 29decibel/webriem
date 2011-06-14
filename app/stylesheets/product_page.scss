@@ -5,13 +5,28 @@ body{
   font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun";
 }
 $active-color:#D68C34;
+$main-color:#39444A;
+@mixin shadow{
+  -moz-box-shadow: 10px 10px 5px #888;
+  -webkit-box-shadow: 10px 10px 5px #888;
+  box-shadow: 10px 10px 5px #888;
+  
+}
 #wrapper{
   width:100%;
   margin:auto;
   #header{
-    background-position:bottom;
+    .logo{
+      float:left;
+      font-weight:bold;
+      font-size:28px;
+      margin-top:4px;
+      color:$active-color;
+    }
     height:50px;
     width:960px;
+    margin:auto;
+    border-bottom:1px solid #dedede;
     .menu{
       width:960px;
       margin:auto;
@@ -27,7 +42,7 @@ $active-color:#D68C34;
             font-size:16px;
             text-decoration:none;
             display:block;
-            color:#39444A;
+            color:$main-color;
           }
           &.current{
             a{color:$active-color;}
@@ -38,26 +53,68 @@ $active-color:#D68C34;
   }
   #content{
     background-position:bottom;
-    width:100%;
+    width:960px;
+    margin:auto;
     margin-top:12px;
-    height:500px;
+    .short_intro{
+      text-align:center;
+      color:$main-color;
+      border-bottom:1px solid #dedede;
+    }
+    .features{
+      height:550px;
+      margin-top:20px;
+      #stage{
+        height:480px;
+        width:800px;
+        float:left;
+        border:7px solid white;
+        padding:10px;
+        img{
+          height:480px;
+          width:800px;
+        }
+        overflow:hidden;
+      }
+      ul.menu{
+        list-style:none;
+        margin-left:800px;
+        li{
+          padding-top:10px;
+          border-bottom:1px solid #dedede;
+          margin-top:5px;
+          a{
+            color:$main-color;
+            text-decoration:none;
+          }
+        }
+      }
+    }
     .screenshots{
       margin-top:10px;
-      border:3px dashed #ccc;
       height:600px;
       margin-bottom:10px;
+      img{
+        float:left;
+        width:430px;
+        height:260px;
+        margin:10px;
+        border:6px solid #fff;
+        padding:3px;
+        @include shadow;
+      }
     }
   }
   #footer{
     background:url(../images/footer-bg.jpg) ;
     clear:both;
-    height:150px;
+    height:50px;
     width:100%;
     text-align:center;
     .copy_right{
       color:white;
       font-size:13px;
-      margin-top:14px;
+      margin-top:20px;
     }
   }
 }

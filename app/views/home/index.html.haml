@@ -4,9 +4,15 @@
     %meta(http-equiv="Content-type" content="text/html; charset=utf-8")
     %title OES
     = stylesheet_link_tag "product_page",:cache=>"homepage"
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"
+    :javascript
+      $(window).load(function() {
+
+        });
   %body
     #wrapper
       #header
+        .logo OES
         .menu
           %ul
             %li.current= link_to "首页", "#"
@@ -14,7 +20,24 @@
             %li= link_to "演示", "#"
             %li= link_to "关于", "#"
       #content
-        .intros
-          asdfasfd
+        .short_intro
+          %h3 专注于最适合中小企业的在线报销系统
+        .features
+          #stage
+            =image_tag "product_images/feature1.png"
+            =image_tag "product_images/feature2.png"
+          %ul.menu
+            %li=link_to "全面的单据管理", "#",:class=>'doc'
+            %li=link_to "周到的提醒机制", "#",:class=>'doc'
+            %li=link_to "弹性的审批流", "#",:class=>'doc'
+            %li=link_to "美观易用的界面", "#",:class=>'doc'
+            %li=link_to "流畅的用户体验", "#",:class=>'doc'
+        .short_intro
+          %h3 功能截图
+        .screenshots
+          =image_tag "product_images/feature1.png"
+          =image_tag "product_images/feature2.png"
+          =image_tag "product_images/feature1.png"
+          =image_tag "product_images/feature1.png"
       #footer
         .copy_right 2010 OES System
