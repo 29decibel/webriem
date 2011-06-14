@@ -36,14 +36,14 @@ DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"
 DOC_TYPES_EN = {1=>"d_Borrow",2=>"d_PayDoc",3=>"d_ReciveNotice",4=>"d_Redeem",5=>"d_Transfer",6=>"d_CashDraw",7=>"d_BuyFinanceProduct",8=>"d_RedeemFinanceProduct",9=>"d_TravelExpense",10=>"d_EntertainmentExpense",11=>"d_OvertimeWork",12=>"d_GeneralExpense",13=>"d_Wage"}
 
 #region typesde
-#RegionType.delete_all
+RegionType.delete_all
 RegionType.create(:name=>"一级地区");
 RegionType.create(:name=>"二级地区");
 RegionType.create(:name=>"韩国");
 RegionType.create(:name=>"海外");
 RegionType.create(:name=>"其他");
 #the default person type
-#PersonType.delete_all
+PersonType.delete_all
 PersonType.create(:name=>"HR",:code=>"HR")
 PersonType.create(:name=>"财务主管",:code=>"FI")
 PersonType.create(:name=>"出纳",:code=>"CA")
@@ -60,7 +60,6 @@ DocMetaInfo.delete_all
 DOC_TYPES.each_pair do |k,v|
   DocMetaInfo.create :name=>v,:code=>k
 end
-DocMetaInfo.create :name=>"",:code=>''
 #here is the config helper
 ConfigHelper.delete_all
 ConfigHelper.create(:key=>"doc_count",:value=>"0")
