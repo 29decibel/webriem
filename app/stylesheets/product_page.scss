@@ -18,10 +18,14 @@ $main-color:#39444A;
   #header{
     .logo{
       float:left;
+      padding-left:40px;
       font-weight:bold;
       font-size:28px;
       margin-top:4px;
+      height:37px;
       color:$active-color;
+      background:url(../images/oes_logo_small.png) no-repeat;
+      background-position:left bottom;
     }
     height:50px;
     width:960px;
@@ -112,9 +116,9 @@ $main-color:#39444A;
     width:100%;
     text-align:center;
     .copy_right{
-      color:white;
+      color:$active-color;
       font-size:13px;
-      margin-top:20px;
+      margin-top:70px;
     }
   }
 }
