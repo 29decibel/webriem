@@ -14,21 +14,21 @@ Menu.create(:name=>'docs_paid',:path=>'/task/docs_paid',:menu_type=>1,:menu_cate
 Menu.create(:name=>'docs_approved',:path=>'/task/docs_approved',:menu_type=>1,:menu_category=>basic_cate)
 
 #docs 1
-Menu.create(:name=>"借款单",:path=>"/doc_heads/new?doc_type=1",:menu_type=>1,:menu_category=>docs_cate1)
-Menu.create(:name=>"付款单",:path=>"/doc_heads/new?doc_type=2",:menu_type=>1,:menu_category=>docs_cate1)
+Menu.create(:name=>"d_Borrow",:path=>"/doc_heads/new?doc_type=1",:menu_type=>1,:menu_category=>docs_cate1)
+Menu.create(:name=>"d_PayDoc",:path=>"/doc_heads/new?doc_type=2",:menu_type=>1,:menu_category=>docs_cate1)
 #docs 3
-Menu.create(:name=>"差旅费报销",:path=>"/doc_heads/new?doc_type=9",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"交际费报销",:path=>"/doc_heads/new?doc_type=10",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"加班费报销",:path=>"/doc_heads/new?doc_type=11",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"普通费用报销",:path=>"/doc_heads/new?doc_type=12",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"福利费用报销",:path=>"/doc_heads/new?doc_type=13",:menu_type=>1,:menu_category=>docs_cate2)
+Menu.create(:name=>"d_TravelExpense",:path=>"/doc_heads/new?doc_type=9",:menu_type=>1,:menu_category=>docs_cate2)
+Menu.create(:name=>"d_EntertainmentExpense",:path=>"/doc_heads/new?doc_type=10",:menu_type=>1,:menu_category=>docs_cate2)
+Menu.create(:name=>"d_OvertimeWork",:path=>"/doc_heads/new?doc_type=11",:menu_type=>1,:menu_category=>docs_cate2)
+Menu.create(:name=>"d_GeneralExpense",:path=>"/doc_heads/new?doc_type=12",:menu_type=>1,:menu_category=>docs_cate2)
+Menu.create(:name=>"d_Wage",:path=>"/doc_heads/new?doc_type=13",:menu_type=>1,:menu_category=>docs_cate2)
 #docs 2
-Menu.create(:name=>"收款通知单",:path=>"/doc_heads/new?doc_type=3",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"结汇",:path=>"/doc_heads/new?doc_type=4",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"转账",:path=>"/doc_heads/new?doc_type=5",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"现金提取",:path=>"/doc_heads/new?doc_type=6",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"购买理财产品",:path=>"/doc_heads/new?doc_type=7",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"赎回理财产品",:path=>"/doc_heads/new?doc_type=8",:menu_type=>1,:menu_category=>docs_cate3)
+Menu.create(:name=>"d_ReciveNotice",:path=>"/doc_heads/new?doc_type=3",:menu_type=>1,:menu_category=>docs_cate3)
+Menu.create(:name=>"d_Redeem",:path=>"/doc_heads/new?doc_type=4",:menu_type=>1,:menu_category=>docs_cate3)
+Menu.create(:name=>"d_Transfer",:path=>"/doc_heads/new?doc_type=5",:menu_type=>1,:menu_category=>docs_cate3)
+Menu.create(:name=>"d_CashDraw",:path=>"/doc_heads/new?doc_type=6",:menu_type=>1,:menu_category=>docs_cate3)
+Menu.create(:name=>"d_BuyFinanceProduct",:path=>"/doc_heads/new?doc_type=7",:menu_type=>1,:menu_category=>docs_cate3)
+Menu.create(:name=>"d_RedeemFinanceProduct",:path=>"/doc_heads/new?doc_type=8",:menu_type=>1,:menu_category=>docs_cate3)
 
 
 #docs menu goes here
