@@ -28,6 +28,8 @@ gem "state_machine", '0.10.4'
 gem "nested_form"
 gem "kaminari"
 
+gem 'newrelic_rpm'
+
 group :test do
   gem 'rspec-rails', '2.5.0'
   gem 'rspec', '2.5.0'
