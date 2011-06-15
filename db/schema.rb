@@ -854,6 +854,27 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   add_index "users", ["name"], :name => "index_users_on_user_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
+  create_table(:admin_users) do |t|
+    t.database_authenticatable :null => false
+    t.recoverable
+    t.rememberable
+    t.trackable
+
+    t.string   "name"
+
+    # t.encryptable
+    # t.confirmable
+    # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
+    # t.token_authenticatable
+
+
+    t.timestamps
+  end
+
+  add_index :admin_users, :email,                :unique => true
+  add_index :admin_users, :reset_password_token, :unique => true
+
+
   create_table "vouches", :force => true do |t|
     t.string   "ino_id"
     t.string   "inid"

@@ -1,7 +1,0 @@
-.list_item(id="dep_#{dep.id}")
-  .show
-    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_dep_path(dep) ,:remote=>true
-    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), dep, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
-    %span.list_field= dep.name
-    %span.list_field= dep.code
-  .edit

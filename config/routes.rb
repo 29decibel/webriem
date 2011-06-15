@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  devise_for :admin_users
+
   get "home/index"
 
   get "doc_off_set/index"

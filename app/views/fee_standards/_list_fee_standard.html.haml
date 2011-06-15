@@ -1,8 +1,0 @@
-.form_title
-  %h3
-    = link_to image_tag("/images/icons/add.png"), new_fee_standard_path,:remote=>true
-    费用标准列表
-.edit_inline.new_fee_standard
-.list_info
-  = render fee_standards
-=paginate fee_standards,:remote=>true

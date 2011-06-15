@@ -25,6 +25,10 @@ RailsAdmin.config do |config|
 
   config.navigation.max_visible_tabs 8
 
+  RailsAdmin.authenticate_with do
+    authenticate_admin_user!
+  end
+
   #config.model Dep do
   #  dropdown 'BasicSettings'
   #end  

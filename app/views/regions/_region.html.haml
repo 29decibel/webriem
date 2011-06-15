@@ -1,6 +1,0 @@
-.list_item(id="region_#{region.id}")
-  .show
-    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_region_path(region) ,:remote=>true
-    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), region, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
-    %span.list_field= region.name
-  .edit

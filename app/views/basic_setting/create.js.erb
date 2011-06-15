@@ -1,6 +1,0 @@
-<%- model_s_name=ActiveModel::Naming.singular(resource) %>
-<%- model_p_name=ActiveModel::Naming.plural(resource) %>
-//hide
-$("div.new_<%= model_s_name%>").hide("slow");
-//render list
-$("div.list_info").html("<%= escape_javascript(render resources)%>");

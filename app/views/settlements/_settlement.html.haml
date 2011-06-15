@@ -1,7 +1,0 @@
-.list_item(id="settlement_#{settlement.id}")
-  .show
-    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_settlement_path(settlement) ,:remote=>true
-    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), settlement, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
-    %span.list_field= settlement.name
-    %span.list_field= settlement.code
-  .edit

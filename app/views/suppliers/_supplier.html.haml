@@ -1,8 +1,0 @@
-.list_item(id="supplier_#{supplier.id}")
-  .show
-    %span.list_action_right= link_to image_tag("/images/icons/page_edit.png"),edit_supplier_path(supplier) ,:remote=>true
-    %span.list_action_right= link_to image_tag("/images/icons/cross.png"), supplier, :confirm => '是否真的要删除?',:class=>"splash", :method => :delete,:remote=>true
-    %span.list_field= supplier.name
-    %span.list_field= supplier.code
-  .edit
-

@@ -1,5 +1,0 @@
-<%- model_s_name=ActiveModel::Naming.singular(resource) %>
-//hide self
-$("#<%= "#{model_s_name}_#{resource.id}"%> div.edit").hide("slow");
-//re render the list item
-$("#<%= "#{model_s_name}_#{resource.id}"%>").replaceWith("<%= escape_javascript(render resource)%>");
