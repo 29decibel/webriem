@@ -1,6 +1,7 @@
 Webreim::Application.routes.draw do
 
-  devise_for :admin_users
+  devise_for :admin_users,:controllers => { :sessions => "admin_sessions"}
+  devise_for :users,:controllers => { :sessions => "user_sessions"}
 
   get "home/index"
 
@@ -17,7 +18,6 @@ Webreim::Application.routes.draw do
   match "vouch/update"=>"vouch#update"
   match "vouch/g_u8"=>"vouch#g_u8"
 
-  get "people/all"
   get "common/new_reset_p"
   post "common/reset_p"
   
@@ -50,7 +50,6 @@ Webreim::Application.routes.draw do
   get "doc_heads/mark"
   get "doc_heads/export_xls"
 
-
   resources :doc_heads
 
   post "model_search/with"  
@@ -66,8 +65,6 @@ Webreim::Application.routes.draw do
   get "task/docs_to_pay"  
   get "task/docs_paid"
   get "task/dashboard"
-  
-  devise_for :users
     
   root :to=>"home#index"
 

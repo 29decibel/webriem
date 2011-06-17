@@ -63,13 +63,16 @@ end
 #here is the config helper
 ConfigHelper.delete_all
 ConfigHelper.create(:key=>"doc_count",:value=>"0")
+#create the admin user
+AdminUser.delete_all
+AdminUser.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"123456",:password_confirmation=>"123456")
 #the default user
 User.delete_all
-User.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"123456",:password_confirmation=>"123456")
+User.create(:name=>"staff",:email=>"mike.d.198411@gmail.com",:password=>"123456",:password_confirmation=>"123456")
 #create duty
 Duty.delete_all
 duty=Duty.create :name=>"AdminUseOnly",:code=>"admin_use_only"
 #create person
 Person.delete_all
-Person.create :name=>"admin",:duty=>duty,:code=>"admin",:phone=>"123456",:e_mail=>"mike.d.1984@gmail.com",:ID_card=>"aaa",:bank_no=>"1111",:bank=>"CNNC"
+Person.create :name=>"staff",:duty=>duty,:code=>"staff",:phone=>"123456",:e_mail=>"mike.d.1984@gmail.com",:ID_card=>"aaa",:bank_no=>"1111",:bank=>"CNNC"
 
