@@ -526,7 +526,12 @@ div.login_actions{
 	margin-top: 15px;
 }
 div.login div.logo{
-  background-image:url("../images/sk_logo.png");
+  &.user{
+    background-image:url("../images/.png");
+  }
+  &.admin_user{
+    background-image:url("../images/.png");
+  }
   background-repeat:no-repeat;
   float:right;
   margin-right:4px;

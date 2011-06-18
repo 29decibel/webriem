@@ -21,7 +21,7 @@
     = csrf_meta_tag 
   %body
     .header
-      =link_to "S&K Expense System", root_path,:class=>"logo"
+      =link_to "Expense System", root_path,:class=>"logo"
       .user_nav
         -if user_signed_in?
           =current_user.name

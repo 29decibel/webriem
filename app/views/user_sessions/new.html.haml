@@ -1,5 +1,4 @@
-%h3
-  ExpenseSystem
+%h3 用户登陆
 -form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   -if alert
     .login_error
@@ -16,4 +15,4 @@
       %span.l_value= f.check_box :remember_me,:class=>"normal"
   .login_actions
     = link_to content_tag(:span,"#{I18n.t('common_attr.btn_login')}"),{:href=>"#"}, :class=>"minibutton submit"
-  .logo
+  .logo.user
