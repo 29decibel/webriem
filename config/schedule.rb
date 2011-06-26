@@ -18,8 +18,10 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 10.minutes do
-  command "backup perform --trigger bsqls"
+every 2.minutes do
+  # command "backup perform --trigger bsqls"
+  time_stamp = Time.now.strftime("%Y%m%d%I%M")
+  command "mysqldump --user=root --password=china123! --databases webreim_production > ~/mysql_baks/backup_#{time_stamp}.sql"
 end
 
 # run this last
