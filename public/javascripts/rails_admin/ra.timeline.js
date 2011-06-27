@@ -48,7 +48,11 @@
     _bindEvents: function() {
       var currentMonthIndex = 0,
           widget = this;
-
+      
+      $(window).resize(function() {
+        widget.redraw();
+      });
+      
       this.handle.draggable({
         axis: "x",
         containment: this.element,
@@ -115,7 +119,7 @@
       this.handle.css("left", this.months.width() - this.handle.width() + this.handleOffset);
     },
 
-    refresh: function() {
+    redraw: function() {
       this.months.find("li").remove();
 
       var i = this.options.range,
@@ -124,19 +128,27 @@
       this.monthWidth = Math.floor(this.months.width() / this.options.range) - 1;
 
       while (i--) {
-
         this.months.prepend(
           '<li style="width:' + this.monthWidth + 'px" data-year="' + date.getFullYear() + '" data-month="' + (parseInt(date.getMonth(), 10) + 1) + '">' +
             '<span class="month">' + this.getMonthName(date) + '</span>' +
-            '<span class="bar"><span></span</span>' +
+            '<span class="bar"><span></span></span>' +
           '</li>'
         );
 
         date.setMonth(date.getMonth() - 1);
       }
-
+      
+      // FIXME should really be keeping the handle in the same place
+      // proportionally, but this keeps it from looking too broken:
+      this._moveHandleToRight();
+    },
+    
+    refresh: function() {
+      this.redraw();
+      
       var widget = this;
-
+      var date = this._getCurrentDate();
+      
       $.ajax({
         url: this.options.url,
         data: {
@@ -179,7 +191,7 @@
               }
 
               el.toggleClass(className, 300)
-                .effect("size", { to: { height: height } }, 500);
+                .animate( { height: height }, 1000, 'easeOutBounce');
             }
           });
         },
