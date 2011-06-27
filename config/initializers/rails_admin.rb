@@ -46,6 +46,21 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model Fee do
+    edit do
+      field :name
+      field :code
+      field :end_date
+      field :parent_fee_id
+    end
+    create do
+      field :name
+      field :code
+      field :end_date
+      field :parent_fee_id
+    end
+  end
+
   config.navigation.max_visible_tabs 8
 
   RailsAdmin.authenticate_with do

@@ -9,6 +9,9 @@ class Person < ActiveRecord::Base
   validates_presence_of :duty_id,:name,:code,:phone,:e_mail,:ID_card,:bank_no,:bank
   validates_uniqueness_of :name,:code
 
+  after_save :update_user
+  after_destroy :delete_user
+
   def to_s
     "#{name}"
   end
@@ -16,4 +19,22 @@ class Person < ActiveRecord::Base
   def gender_enum
     ['男','女']
   end
+
+  # if there is no user of current person
+  # then create one with person's code
+  def update_user
+    u = User.find_by_name self.code
+    if !u
+      User.create :name=>self.code,:email=>self.e_mail,
+        :password=>'123456',:password_confirmation=>'123456'
+    else
+      u.update_attribute :email,self.e_mail
+    end
+  end
+
+  def delete_user
+    u = User.find_by_name :self.code
+    u.destroy if u
+  end
+
 end
