@@ -23,6 +23,29 @@ RailsAdmin.config do |config|
     end
   end  
 
+  config.model Dep do
+    edit do
+      field :name
+      field :code
+      field :version
+      field :start_date
+      field :end_date
+      field :u8dep_code
+      field :u8_dep_id
+      field :parent_dep_id
+    end
+    create do
+      field :name
+      field :code
+      field :version
+      field :start_date
+      field :end_date
+      field :u8dep_code
+      field :u8_dep_id
+      field :parent_dep_id
+    end
+  end
+
   config.navigation.max_visible_tabs 8
 
   RailsAdmin.authenticate_with do

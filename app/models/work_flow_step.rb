@@ -9,7 +9,7 @@ class WorkFlowStep < ActiveRecord::Base
   validates_presence_of :duty_id
 
   def name
-    if !is_self_dep
+    if is_self_dep
       "由所在部门的#{duty.name}进行审批"
     else
       "由#{dep.name}的#{duty.name}进行审批"
