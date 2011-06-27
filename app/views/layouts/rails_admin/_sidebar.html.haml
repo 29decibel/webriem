@@ -1,0 +1,7 @@
+#sidebar
+  .block
+    %h3 Navigation
+    = render(:partial => 'rails_admin/main/navigation')
+  .block.notice
+    %h4=" 你好,#{current_admin_user.name}"
+    %p 欢迎使用报销管理系统
