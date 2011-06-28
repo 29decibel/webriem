@@ -31,6 +31,7 @@
           =current_user.person.name if current_user.person
           =link_to "注销", destroy_user_session_path
           =link_to "修改密码","/common/new_reset_p"
+          =link_to "管理员界面", "/admin"
         -else
           =link_to "登录", new_user_session_path
     #main_area
