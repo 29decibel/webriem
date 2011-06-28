@@ -538,6 +538,10 @@ function batch_approve_confirm(grid_id)
 		}
 	});	
 }
+function approve()
+{
+  alert('aaa');
+}
 function output_to_txt(grid_id)
 {
 	send_request_from_grid(grid_id,"/doc_heads/output_to_txt.txt?ids=");

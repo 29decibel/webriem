@@ -182,6 +182,14 @@ class DocHeadsController < ApplicationController
     @message="#{I18n.t('controller_msg.pay_ok')}"
     render "shared/show_result"
   end
+  def approve
+    @doc = DocHead.find(params[:id])
+    if params[:ok]
+      @doc.next_approver params[:comments]
+    else
+      @doc.decline params[:comments]
+    end
+  end
   #batch pay
   def batch_pay
     #get the doc ids and pay it

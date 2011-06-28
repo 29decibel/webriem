@@ -51,6 +51,7 @@ Webreim::Application.routes.draw do
   get "doc_heads/export_xls"
 
   resources :doc_heads
+  resources :work_flow_infos
 
   post "model_search/with"  
   get "model_search/index"  

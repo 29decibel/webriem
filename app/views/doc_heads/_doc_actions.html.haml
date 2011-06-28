@@ -1,5 +1,5 @@
 = link_to content_tag(:span,"#{I18n.t('common_op.btn_new')}"), new_doc_head_path(:doc_type=>doc_head.doc_type),:remote=>true,:class=>"minibutton"
--if !doc_head.new_record? and doc_head.un_submit?
+-if !doc_head.new_record? and doc_head.person==current_user.person and (doc_head.un_submit? or doc_head.rejected?)
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"),{:controller=>"doc_heads",:action=>"submit",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if doc_head.person==current_user.person and doc_head.processing?
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"), {:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
@@ -10,4 +10,15 @@
 = link_to content_tag(:span,"#{I18n.t('common_op.btn_mydocs')}"), my_docs_path,:remote=>true,:class=>"minibutton"
 -if doc_head.approved? and current_user.person.person_type and  current_user.person.person_type.code=="CA"
   = link_to content_tag(:span,"#{I18n.t('common_op.confirm_paid')}"),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
+-if doc_head.current_approver_id == current_user.person.id
+  = link_to content_tag(:span,"#{I18n.t('common_op.approve')}"),{:controller=>"work_flow_infos",:action=>"new",:doc_id=>doc_head.id},:class=>"minibutton pop"
 =yield :custom_actions
+:javascript
+  $("a.pop").fancybox({
+      'transitionIn'  : 'elastic',
+      'transitionOut' : 'elastic',
+      'speedIn'   : 600, 
+      'speedOut'    : 200, 
+      'overlayShow' : false,
+      'height'      : '400'
+  });

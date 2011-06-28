@@ -121,6 +121,7 @@
     btn_print: 打印
     btn_cancel: 撤销
     btn_update: 更新
+    approve: 审批
     btn_start_work_flow: 提交审批
     doc_not_valide_notice: 单据不合格提醒
     confirm_paid: 确认付款

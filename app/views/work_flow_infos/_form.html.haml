@@ -1,50 +1,9 @@
-<%= form_for(@work_flow_info,:remote=>true) do |f| %>
-<div class="form_title">
-	<h3><%= @title%></h3>
-</div>
-<div class="actions">
-  <%= link_to "#{I18n.t('common_op.btn_save')}",{:href=>"#"},:class=>"submit button2" %>
-	<%= link_to "#{I18n.t('common_op.btn_return')}", wrok_flow_infos_path,:class=>"button2" %>
-</div>
-<div class="field">
-	<%= f.label :doc_head_id,:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :doc_head_id,:class=>"basic_input" %><%= mark_required(@work_flow_info, :doc_head_id) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label :is_ok,:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :is_ok,:class=>"basic_input" %><%= mark_required(@work_flow_info, :is_ok) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label :people_id,:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_field :people_id,:class=>"basic_input" %><%= mark_required(@work_flow_info, :people_id) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-<div class="field">
-	<%= f.label :comments,:class=>"input_label" %>
-	<div class="input_area">
-		<p class="input">
-			<%= f.text_area :comments,:class=>"basic_input" %><%= mark_required(@work_flow_info, :comments) %>
-		</p>
-		<p class="tip"></p>
-	</div>
-	<span class="error_message"></span>    
-  </div>
-
-<% end %>
+= form_for(@work_flow_info,:remote=>true) do |f| 
+  =hidden_field_tag 'doc_id',@doc.id
+  .input_field
+    =f.label :is_ok
+    =f.check_box :is_ok
+  .input_field
+    %p=f.label :comments
+    %p=f.text_area :comments
+  = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"

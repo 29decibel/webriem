@@ -2,7 +2,7 @@
 %html
   %head
     %title 网上报销系统
-    = stylesheet_link_tag "ie","mailer","print","screen","site","ui.jqgrid",:cache=>"webriem.app"
+    = stylesheet_link_tag "ie","mailer","print","screen","site","ui.jqgrid","jquery.fancybox-1.3.4",:cache=>"webriem.app"
     = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"
     = jqgrid_init
     = javascript_include_tag "jquery.blockUI"
@@ -11,6 +11,9 @@
     = javascript_include_tag "jquery-ui-timepicker-addon.js" 	
     = javascript_include_tag "datepicker_cn.js"
     = javascript_include_tag "rails.js" 
+    = javascript_include_tag "jquery.fancybox-1.3.4.pack.js"
+    = javascript_include_tag "jquery.easing-1.3.pack.js"
+    = javascript_include_tag "jquery.mousewheel-3.0.4.pack.js"
     = javascript_include_tag "application.js" 
     = javascript_include_tag "form_state.js" 
     = javascript_include_tag "jquery_numeric.js" 
