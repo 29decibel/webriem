@@ -9,14 +9,14 @@ class TaskController < ApplicationController
   end
   #docs need to approve
   def docs_to_approve
-    @docs=DocHead.where("state=1 and current_approver_id=#{current_user.person.id}").page(params[:page]).per(20)
+    @docs=DocHead.where("state='processing' and current_approver_id=#{current_user.person.id}").page(params[:page]).per(20)
     respond_to do |format|
       format.js { render 'show_docs'}
     end
   end
   #the docs need to pay
   def docs_to_pay
-    @docs=DocHead.where("state=2").page(params[:page]).per(20)
+    @docs=DocHead.where("state='approved'").page(params[:page]).per(20)
     respond_to do |format|
       format.js { render 'show_docs'}
     end
@@ -30,7 +30,7 @@ class TaskController < ApplicationController
   end
   #docs already paid
   def docs_paid
-    @docs=DocHead.where("state=3").page(params[:page]).per(20)
+    @docs=DocHead.where("state='paid'").page(params[:page]).per(20)
     respond_to do |format|
       format.js { render 'show_docs'}
     end
