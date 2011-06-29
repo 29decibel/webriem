@@ -8,7 +8,7 @@
 -if current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code
   = link_to content_tag(:span,"#{I18n.t('common_op.doc_not_valide_notice')}"), {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 = link_to content_tag(:span,"#{I18n.t('common_op.btn_mydocs')}"), my_docs_path,:remote=>true,:class=>"minibutton"
--if doc_head.approved? and current_user.person.person_type and  current_user.person.person_type.code=="CA"
+-if doc_head.approved? and current_user.casher?
   = link_to content_tag(:span,"#{I18n.t('common_op.confirm_paid')}"),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if doc_head.current_approver_id == current_user.person.id
   = link_to content_tag(:span,"#{I18n.t('common_op.approve')}"),{:controller=>"work_flow_infos",:action=>"new",:doc_id=>doc_head.id},:class=>"minibutton pop"

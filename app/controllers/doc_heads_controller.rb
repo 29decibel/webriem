@@ -177,9 +177,6 @@ class DocHeadsController < ApplicationController
     para[:doc_id]=@doc.id
     #WorkFlowMailer.notice_docs_to_approve para
     Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
-    #debugger
-    @message="#{I18n.t('controller_msg.pay_ok')}"
-    render "shared/show_result"
   end
   def approve
     @doc = DocHead.find(params[:id])
