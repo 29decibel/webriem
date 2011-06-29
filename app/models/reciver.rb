@@ -10,6 +10,17 @@ class Reciver < ActiveRecord::Base
   validates_presence_of :company ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' and r.supplier==nil }
   validates_presence_of :bank_no ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
   validates_presence_of :bank ,:if => Proc.new{|r| r.settlement!=nil and r.settlement.code == '02' }
+
+  after_initialize :init_settlement
+
+  def init_settlement
+    return unless self.new_record?
+    sc = SystemConfig.find_by_key 'default_settlement'
+    if sc and sc.value
+      self.settlement = Settlement.find_by_code(sc.value)
+    end
+  end
+
   #add supplier 
   def company_name
     if supplier

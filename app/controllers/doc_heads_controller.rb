@@ -76,7 +76,6 @@ class DocHeadsController < ApplicationController
     	reciver.bank_no=current_person.bank_no
     	reciver.company=current_person.name
     end
-	  reciver.settlement=Settlement.find_by_code("02")
     #build one related stuff
     @doc.build_inner_remittance if @doc.doc_type==4
     @doc.build_inner_transfer if @doc.doc_type==5

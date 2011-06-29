@@ -75,4 +75,7 @@ duty=Duty.create :name=>"AdminUseOnly",:code=>"admin_use_only"
 #create person
 Person.delete_all
 Person.create :name=>"staff",:duty=>duty,:code=>"staff",:phone=>"123456",:e_mail=>"mike.d.1984@gmail.com",:ID_card=>"aaa",:bank_no=>"1111",:bank=>"CNNC"
+# create system config
+SystemConfig.delete_all
+SystemConfig.create :key=>'default_settlement',:value=>'001'
 
