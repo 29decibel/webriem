@@ -193,9 +193,10 @@ function wait()
   overlayCSS: { backgroundColor: 'transparent' }}); 
 }
 
-function tokenize()
+function tokenize(content)
 {
   $("input.token-input").each(function(){
+    if($(this).css('display')=='none') return;
     $(this).tokenInput("/token_input/search?model="+$(this).data("model")
     ,{
       crossDomain: false,
@@ -323,6 +324,8 @@ function add_fields(link, association, content) {
 	$(link).closest("fieldset").prev().find(".region_type_select").change();
 	//enable the enter to tab
 	add_enter_to_tab();
+  //tokenize
+  tokenize();
 }
 
 

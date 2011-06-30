@@ -53,11 +53,7 @@ Webreim::Application.routes.draw do
   resources :doc_heads
   resources :work_flow_infos
 
-  post "model_search/with"  
-  get "model_search/index"  
-
-  get "ref_form/index"
-  
+  get "token_input/search"
   resources :upload_files
   
   get "task/my_docs",:as=>:my_docs  

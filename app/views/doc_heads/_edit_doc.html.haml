@@ -34,15 +34,15 @@
         %span.value= f.text_field :attach,:class=>"input1"+ mark_required(doc, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}"   
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" 
-        %span.value= reference_select("dep_id","Dep",:value=>doc.dep_id,:text=>doc.dep,:f=>f)
+        %span.value= ts("dep_id","Dep",:value=>doc.dep_id,:text=>doc.dep,:f=>f)
     -if doc.doc_type==9 or doc.doc_type==11
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.afford_dep_id')}" 
-        %span.value= reference_select("afford_dep_id","Dep",:value=>doc.afford_dep_id,:text=>doc.afford_dep,:f=>f)
+        %span.value= ts("afford_dep_id","Dep",:value=>doc.afford_dep_id,:text=>doc.afford_dep,:f=>f)
     -if doc.doc_type!=14
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" 
-        %span.value= reference_select("real_person_id","Person",:value=>doc.real_person_id,:text=>doc.real_person,:f=>f)
+        %span.value= ts("real_person_id","Person",:value=>doc.real_person_id,:text=>doc.real_person,:f=>f)
     -if doc.doc_type==13
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" 
@@ -59,7 +59,7 @@
       -if doc.doc_type!=13
         .form_field
           %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
-          %span.value= reference_select("project_id","Project",:value=>doc.project_id,:text=>doc.project,:f=>f)
+          %span.value= ts("project_id","Project",:value=>doc.project_id,:text=>doc.project,:f=>f)
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.is_split')}" 
         %span.value= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"}
@@ -280,3 +280,5 @@
         .form_area
           = f.fields_for :recivers do |builder|  
             = render :partial => 'reciver_fields',:locals => { :f => builder,:doc=>doc }  
+:javascript
+  tokenize();
