@@ -4,7 +4,7 @@
 %br
 .form_field.col-sp2
   %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.account_id')}" 
-  %span.value= reference_select "account_id","Account",:text=>f.object.account.to_s,:value=>f.object.account_id,:f=>f
+  %span.value= ts "account_id","Account",:text=>f.object.account.to_s,:value=>f.object.account_id,:f=>f
 %br
 .form_field
   %span.label= f.label "#{I18n.t('activerecord.attributes.buy_finance_product.amount')}" 
