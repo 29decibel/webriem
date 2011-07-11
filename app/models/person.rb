@@ -54,8 +54,9 @@ class Person < ActiveRecord::Base
     u = User.find_by_name self.code
     if !u
       old_u = User.find_by_email self.e_mail
-      old_u.name = self.code
-      old_u.save
+      if old_u
+        old_u.update_attribute :name,self.code
+      end
     end
   end
 end
