@@ -11,6 +11,7 @@ class Person < ActiveRecord::Base
   blongs_to_name_attr :duty
   blongs_to_name_attr :role
   blongs_to_name_attr :person_type
+  after_save :ensure_user
   #===================================================================================
   def self.not_display
     ['end_date','credit_limit','ID_card','bank_no','role_id']
@@ -47,5 +48,14 @@ class Person < ActiveRecord::Base
   #===================================================================================
   def to_s
     "#{name}"
+  end
+  private
+  def ensure_user
+    u = User.find_by_name self.code
+    if !u
+      old_u = User.find_by_email self.e_mail
+      old_u.name = self.code
+      old_u.save
+    end
   end
 end
