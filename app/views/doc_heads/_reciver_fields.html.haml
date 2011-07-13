@@ -22,11 +22,3 @@
   .form_field
     %span.label= "#{I18n.t('common_attr.amount')}"
     %span.value= f.text_field :amount,:class=>"normal doc_ori_amount" 
-  <!--riem need the hr amount and finance amount-->
-  -if [9,11,13].include? 2
-    .form_field
-      %span.label= "#{I18n.t('common_attr.hr_amount')}"  
-      %span.value= f.text_field :hr_amount,:class=>"normal number doc_HR_amount" 
-    .form_field
-      %span.label= "#{I18n.t('common_attr.fi_amount')}"    
-      %span.value= f.text_field :fi_amount,:class=>"normal number doc_FI_amount" 

@@ -10,10 +10,13 @@
 = link_to content_tag(:span,"#{I18n.t('common_op.btn_mydocs')}"), my_docs_path,:remote=>true,:class=>"minibutton"
 -if doc_head.approved? and current_user.casher?
   = link_to content_tag(:span,"#{I18n.t('common_op.confirm_paid')}"),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
--if doc_head.current_approver_id == current_user.person.id
+-if doc_head.current_approver_id == current_user.person.id and doc_head.processing?
   = link_to content_tag(:span,"#{I18n.t('common_op.approve')}"),{:controller=>"work_flow_infos",:action=>"new",:doc_id=>doc_head.id},:class=>"minibutton pop"
 -if !doc_head.new_record? and doc_head.un_submit?
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc_head.id),:remote=>true,:class=>"minibutton"
+-if doc_head.can_destroy? current_user and !doc_head.new_record?
+  = link_to content_tag(:span,"#{I18n.t('common_op.btn_delete')}"), "/doc_heads/#{doc_head.id}",:remote=>true,:class=>"minibutton",:confirm=>'是否真的删除？',:method=>"DELETE"
+
 
 =yield :custom_actions
 :javascript

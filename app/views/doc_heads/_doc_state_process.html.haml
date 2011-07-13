@@ -10,7 +10,7 @@
     .work_flow_step(class= "#{doc.un_submit? ? 'current_flow' : ''}")
       %span 未提交
     .work_flow_step.go_to
-    -if doc.processing?
+    -if !doc.un_submit? and !doc.rejected?
       -doc.approvers.split(',').each do |approver_id|
         .work_flow_step(class= "#{doc.current_approver_id==approver_id.to_i && 'current_flow'}") 
           %span= Person.find(approver_id).name

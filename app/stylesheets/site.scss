@@ -305,40 +305,45 @@ div.form_title span.doc_total_amount{
   font-size:15px;
   font-weight:bold;
 }
+.work_flow_info{
+  margin-bottom:8px;
+  &.approve{color:green;}
+  &.reject{color:red;}
+}
 /*footer*/
 div#footer{
 	height:40px;
 	border-top: 1px solid #999;
 	margin-top: 50px;
 	position: relative;
-}
-div#footer img{
-	float:left;
-	margin-top: 5px;
-}
-div#footer #desc{
-	float:left;
-	margin-top: 15px;
-	margin-left: 10px;
-	font-weight: bold;
+  img{
+    float:left;
+    margin-top: 5px;
+  }
+  #desc{
+    float:left;
+    margin-top: 15px;
+    margin-left: 10px;
+    font-weight: bold;
+  }
 }
 /*details form */
 #details{
 	margin-top: 0 0 15px 0;
 	padding: 0px;
-}
-#details div.fields{
-	margin-bottom: 10px;
-}
-#details div.fields span{
-	display: inline-block;
-}
-#details div.fields span.attr{
-	width:120px;
-	text-align: right;
-}
-#details div.fields span.value{
-	text-align: left;
+  .fields{
+    margin-bottom: 10px;
+    span{
+      display: inline-block;
+    }
+    span.attr{
+      width:120px;
+      text-align: right;
+    }
+    span.value{
+      text-align: left;
+    }
+  }
 }
 /***********************************info notice and alert goes here***************************/
 div.info{
@@ -932,6 +937,8 @@ div.list_item:hover .list_item_action span.action{
       position:absolute;
       top:3px;
       right:5px;
+      width:70px;
+      text-align:center;
       background:#000;
       color:white;
       font-size:13px;

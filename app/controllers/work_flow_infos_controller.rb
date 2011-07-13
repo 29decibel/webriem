@@ -41,8 +41,10 @@ class WorkFlowInfosController < ApplicationController
     @doc = DocHead.find(params[:doc_id])
     if params["work_flow_info"]["is_ok"] =='1'
       @doc.next_approver params["work_flow_info"]["comments"]
+      @doc.reload
     else
       @doc.decline params["work_flow_info"]["comments"]
+      @doc.reload
     end
   end
 

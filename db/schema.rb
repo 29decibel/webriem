@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
     t.integer  "parent_dep_id"
     t.integer  "u8_dep_id"
+    t.integer  "status"
   end
 
   create_table "doc_heads", :force => true do |t|
@@ -182,9 +183,11 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
     t.integer  "doc_type"
     t.string  "state"
+    t.integer  "doc_state"
     t.integer  "project_id"
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
+    t.integer  "selected_approver_id"
     t.integer  "afford_dep_id"
     t.integer  "upload_file_id"
     t.decimal  "total_amount",         :precision => 16, :scale => 2

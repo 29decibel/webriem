@@ -56,9 +56,8 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new
   # GET /doc_heads/new.xml
   def new
-    @doc = DocHead.new
+    @doc = DocHead.new :doc_type=>params[:doc_type]
     #set the doctype to the paras passed in
-    @doc.doc_type=params[:doc_type].to_i
     @doc.dep=current_person.dep
     @doc_type = @doc.doc_type
     #set the apply person to the current login user
@@ -137,11 +136,9 @@ class DocHeadsController < ApplicationController
   # DELETE /doc_heads/1
   # DELETE /doc_heads/1.xml
   def destroy
-    #here i will get a lot of ids
-    DocHead.where("id in (#{params[:doc_ids]}) and doc_state=0").each do |doc_head|
-      doc_head.destroy
-    end
-    render :json=>"ok"
+    doc = DocHead.find_by_id params[:id]
+    doc.destroy
+    @docs=DocHead.by_person(current_user.person.id).page(params[:page]).per(20)
   end
   #将单据进入审批阶段
   def submit

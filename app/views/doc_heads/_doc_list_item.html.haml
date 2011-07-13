@@ -8,5 +8,8 @@
       .docinfo
         ="当前等待#{doc.approver}审批(点击提醒)"
     .list_item_action
-      %span.action= link_to "编辑", edit_doc_head_path(doc),:remote=>true
       %span.action= link_to "查看", doc_head_path(doc),:remote=>true
+      -if doc.can_edit? current_user
+        %span.action= link_to "编辑", edit_doc_head_path(doc),:remote=>true
+      -if doc.can_destroy? current_user
+        %span.action= link_to "删除", "/doc_heads/#{doc.id}",:remote=>true,:method=>'DELETE',:confirm=>'是否真的删除单据?'

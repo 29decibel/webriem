@@ -6,9 +6,9 @@
   .show_field
     %span.label
       -if doc.doc_type==2
-        = "#{I18n.t('common_attr.rec_company')}*"
+        = "#{I18n.t('common_attr.rec_company')}"
       -else
-        ="#{I18n.t('common_attr.rec_person')}*"
+        ="#{I18n.t('common_attr.rec_person')}"
     %span.value
       -if doc.doc_type==2 
         = d_item.supplier.to_s

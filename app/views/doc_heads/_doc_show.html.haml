@@ -184,3 +184,8 @@
           = doc.doc_type==2 ? "#{I18n.t('common_attr.rec_company')}" : "#{I18n.t('common_attr.rec_person')}" 
       .form_area
         =render :partial=>"reciver_show",:collection=>doc.recivers,:as=>:d_item,:locals=>{:doc=>doc}
+-if doc.work_flow_infos.count>0
+  .form_title
+    %h3 审批信息
+  .form_area.doc_head_show
+    =render :partial => "work_flow_info",:locals=>{:doc=>doc}

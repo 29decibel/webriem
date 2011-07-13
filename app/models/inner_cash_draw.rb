@@ -12,7 +12,7 @@ class InnerCashDraw < ActiveRecord::Base
      end
     end
   end
-  accepts_nested_attributes_for :cash_draw_items ,:reject_if => lambda { |a| a[:sequence].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :cash_draw_items , :allow_destroy => true
   def amount
     apply_amount
   end

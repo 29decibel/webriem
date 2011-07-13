@@ -271,14 +271,7 @@ class DocHead < ActiveRecord::Base
   def reciver_amount
     total=0
     recivers.each do |r|
-      if [9,11].include? doc_type
-        next if r.fi_amount==nil
-        final_amount=r.fi_amount
-      else    #[10,12]
-        next if r.amount==nil
-        final_amount=r.amount
-      end
-      total+=final_amount
+      total+=r.amount
     end
     total
   end
@@ -322,6 +315,7 @@ class DocHead < ActiveRecord::Base
       if current_index+1<approver_array.count
         self.update_attribute :current_approver_id,approver_array[current_index+1]
       else
+        self.update_attribute :current_approver_id,-520
         self.approve
       end
     else
@@ -395,12 +389,11 @@ class DocHead < ActiveRecord::Base
 	  end
   end
   #can delete depands on two things
-  def can_delete
-    can=true
-    can=false if reim_cp_offsets.count>0
-    can=false if cp_docs.count>0
-    can=false if doc_state!=0
-    can
+  def can_destroy? user
+    self.un_submit? and user.person==self.person
+  end
+  def can_edit? user
+    (self.un_submit? or self.rejected?) and user.person==self.person
   end
 
   def approver_persons
