@@ -289,7 +289,7 @@ form div.input_area{
 }
 div.form_title{
   color:black;
-	margin: 7px 15px 0px 15px;
+	margin: 7px 15px 5px 15px;
 	padding: 5px;
 	border-bottom: 1px solid #E4F0F2;
   font-size:16px;
@@ -457,6 +457,7 @@ div.work_flow_step span{
 	margin:0px;
 }	
 div.current_flow{
+  padding:4px;
 	background-color: #FBCC7F;
 	color:black;
 }
@@ -851,6 +852,7 @@ div.list_item{
   padding:2px;
   position:relative;
   border-bottom:1px solid #ccc;
+  height:45px;
 }
 div.list_item:hover{
   background-color:#f2f2f2;
@@ -897,6 +899,49 @@ span.list_field{
 }
 div.list_item:hover .list_item_action span.action{
   display:inline-block;
+}
+.list_item{
+  .doc_show{
+    float:left;
+    .doc_type{
+      font-size:14px;
+      float:left;
+      margin-top:3px;
+      margin-left:5px;
+    }
+    .apply_date{
+      float:left;
+      margin-left:5px;
+      margin-top:5px;
+    }
+    .doc_no{
+      float:left;
+      margin:3px 5px 0px 35px;
+      padding-top:2px;
+      a{
+        text-decoration:none;
+        color:#999;
+      }
+    }
+    .docinfo{
+      position:absolute;
+      bottom:10px;
+      left:7px;
+    }
+    .state{
+      position:absolute;
+      top:3px;
+      right:5px;
+      background:#000;
+      color:white;
+      font-size:13px;
+      padding:5px;
+      &.paid{background:green;}
+      &.processing{background:#FFA435;}
+      &.approved{background:green;}
+      &.rejected{background:red;}
+    }
+  }
 }
 /* for the pager*/
 .pagination{

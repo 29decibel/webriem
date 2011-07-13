@@ -74,7 +74,7 @@ class DocHead < ActiveRecord::Base
   #the great offset info here
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
-  Doc_State={0=>"未提交",1=>"审批中",2=>"审批通过",3=>"已付款"}
+  Doc_State={'un_submit'=>"未提交",'processing'=>"审批中",'approved'=>"审批通过",'paid'=>"已付款",'rejected'=>'未通过'}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>"固定资产单据"}
   #validate the amout is ok
   validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
@@ -403,6 +403,10 @@ class DocHead < ActiveRecord::Base
     can
   end
 
+  def approver_persons
+    self.approvers.split(',').map { |approver| Person.find_by_id(approver)}
+  end
+
   def person_dep
     person.dep.name
   end
@@ -411,7 +415,7 @@ class DocHead < ActiveRecord::Base
     DOC_TYPES[doc_type]
   end
   def doc_state_name
-    Doc_State[doc_state]
+    Doc_State[state]
   end
   #minus reciver's amount
   def reduce_recivers_amount(amount)

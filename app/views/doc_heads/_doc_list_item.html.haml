@@ -1,7 +1,12 @@
 .list_item(id="#{doc.id}")
-  .show
-    %span.list_field=doc.doc_no
-    %span.list_field=doc.doc_type_name
+  .doc_show
+    %span.doc_type=doc.doc_type_name
+    %span.apply_date=doc.apply_date
+    %span.doc_no=link_to doc.doc_no,doc_head_path(doc),:remote=>true
+    .state{:class=>doc.state}= doc.doc_state_name
+    -if doc.processing?
+      .docinfo
+        ="当前等待#{doc.approver}审批(点击提醒)"
     .list_item_action
       %span.action= link_to "编辑", edit_doc_head_path(doc),:remote=>true
       %span.action= link_to "查看", doc_head_path(doc),:remote=>true
