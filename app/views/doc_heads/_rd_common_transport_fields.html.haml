@@ -1,3 +1,5 @@
+:javascript
+  $(".datetimepicker").datetimepicker();
 %fieldset
   %legend
     = f.hidden_field(:_destroy) 
@@ -18,7 +20,7 @@
   .form_field
     %span.label= "#{I18n.t('common_attr.start_time')}"
     -start_time_string = f.object.start_time && f.object.start_time.to_s
-    %span.datetimepicker.middle.value= f.text_field :start_time,:value => start_time_string 
+    %span.value= f.text_field :start_time,:class=>"datetimepicker middle",:value => start_time_string 
   .form_field
     %span.label= "#{I18n.t('common_attr.end_time')}"
     - end_time_string = f.object.end_time && f.object.end_time.to_s 

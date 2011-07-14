@@ -39,7 +39,7 @@ $(function(){
   });
   $("form,a").live("ajax:complete",function(){
     $.unblockUI();
-    init_control();	
+    //init_control();	
   });
   //bind the submit link
   $("a.submit").live("click",function(){
@@ -49,11 +49,6 @@ $(function(){
   //bind the amount and rate event
   $("input.rate").live("change",adapt_apply_amount_by_rate);
   $("input.ori_amount").live("change",adapt_apply_amount_by_rate);
-  //bind all references
-  //pop up reference window
-  $("div.reference a").live("click",pop_up_reference_window);
-  //close window and back to the input
-  $("div.filter a.back_to_reference").live("click",back_to_the_reference);
   //control the reference window's check box
   $("#selected_all").live("change",function(){
     $(".ref_select").attr("checked",$(this).is(':checked'));
@@ -383,81 +378,7 @@ function make_bwf_request(approver_id)
 	}
 	$.unblockUI();
 }
-//=======================================pop up references...........
-function pop_up_reference_window()
-{
-	value_now=$(this).siblings("input[type=hidden]").val() || "null";
-	path="/ref_form/index?class_name="+$(this).attr('class-data')+"&values="+value_now;
-	if($(this).attr('multicheck'))
-	{
-		path+="&multicheck="+$(this).attr('multicheck');
-	}
-	if($(this).attr('pre_condition'))
-	{
-		path+="&pre_condition="+$(this).attr('pre_condition');
-	}
-	//能否在录入所有单据 参照选择“费用类型”档案时，不允许选择非末级费用类型。
-	if($(this).attr('class-data')=="Fee" && $(this).attr("self")!="true")
-	{
-		path+="&pre_condition=Length(code)>2";
-	}
 
-	sFeatures="dialogHeight: 480px; dialogWidth: 686px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No; titlebar: No; menubar: No;"
-
-	//pop up a dialog
-	var returnValue=window.showModalDialog(path,'',sFeatures);
-	//get the window value and set to the textbox and hiddenfield
-	//set the display info
-	if(returnValue)
-	{
-		//set displayinfo
-		$(this).siblings(".ref").val(returnValue.displays);
-		//set the id
-		$(this).siblings(".ref_hidden_field").val(returnValue.ids);
-		//set other infos
-		$(this).siblings(".ref_hidden_field").attr("data-other-info",returnValue.other_infos);
-		//fire the change event so now you can get the fee standard
-		$(this).siblings(".ref,.ref_hidden_field").change();
-	}
-	return false;
-}
-//set the selected value the result
-//close the window
-function back_to_the_reference()
-{
-	var ids="";
-	var displays="";
-	var other_infos="";
-	$("input:checked.ref_select").each(function(){
-		ids += $(this).siblings("input.hidden_id").val() + "_";
-		displays += $(this).siblings("input.hidden_display").val() + ";";
-		other_infos+=$(this).siblings("input.hidden_other_info").val() + ";";
-	});
-	//trim the ;
-	if(ids.length>0)
-	{
-		ids=ids.substring(ids.length-1,"");
-	}
-	if(displays.length>0)
-	{
-		displays=displays.substring(displays.length-1,"");
-	}
-	if(other_infos.length>0)
-	{
-		other_infos=other_infos.substring(other_infos.length-1,"");
-	}
-	//alert($("input:checked.ref_select").size());
-	var returnInfo=new Object();
-	returnInfo.ids=ids;
-	returnInfo.displays=displays;
-	returnInfo.other_infos=other_infos;
-	//returnInfo.id=
-	//$()
-	//set the return value
-	window.returnValue=returnInfo;
-	//close the window
-	window.close();
-}
 function batch_pay(grid_id)
 {
 	var ids=$(grid_id).getGridParam("selarrrow");

@@ -13,7 +13,7 @@ class DocHead < ActiveRecord::Base
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
   validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
-  validate :must_equal,:if => lambada { |doc| doc.processing }
+  validate :must_equal,:if => lambda { |doc| doc.processing? }
   #has many recivers and cp_doc_details
 
   has_one :inner_remittance, :class_name => "InnerRemittance", :foreign_key => "doc_head_id",:dependent=>:destroy
