@@ -483,7 +483,7 @@ class DocHead < ActiveRecord::Base
            vj=get_v ({:inid=>"#{jcount}",
            :code=>fee_m_code.dcode,
            :cbill=>cbill,
-           :md=>total_amount,:md_f=>total_amount,
+           :md=>cp.apply_amount,:md_f=>cp.apply_amount,
            :dep=>cp.dep,
            :project=>cp.project,
            :doc_no=>cdigest_info(fee_m_code),
