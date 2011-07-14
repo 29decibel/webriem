@@ -45,8 +45,10 @@ module U8service
     end
     def self.generate_vouch_from_doc(vmodel)
       #永远忽略存储的凭证id，要临时获取一个当前最大的值+1
+      #日期和凭证号码在这设置
+      max_vouch_no = self.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
       options={
-        :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{vmodel.dbill_date}",
+        :ino_id=>"#{max_vouch_no}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{Time.now.to_date}",
         :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"#{vmodel.doc_no}",
         :ccode=>"#{vmodel.ccode}",# dai kemu
         :cexch_name=>"#{vmodel.cexch_name}",#currency name
