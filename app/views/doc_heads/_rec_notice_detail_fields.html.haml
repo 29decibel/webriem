@@ -22,8 +22,8 @@
     %span.label= "#{I18n.t('common_attr.rate')}"
     %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 
   .form_field
-    %span.label= "#{I18n.t('common_attr.apply_amount')}"
+    %span.label= "#{I18n.t('common_attr.ori_amount')}"
     %span.value= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" 
   .form_field
     %span.label= "#{I18n.t('activerecord.attributes.doc_head.rec_notice_details.amount')}"
-    %span.value= f.text_field :amount,:class=>"normal doc_apply_amount number" 
+    %span.value= f.label f.object.amount || 0,:class=>"normal doc_apply_amount number" 

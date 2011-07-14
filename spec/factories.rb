@@ -52,7 +52,7 @@ Factory.define :person do |f|
   f.name {Factory.next(:name)}
   f.code {Factory.next(:code)}
   f.phone '15910601187'
-  f.e_mail 'aaa@aaa.com'
+  f.sequence(:e_mail) {|n| "quentin#{n}@example.com"}
   f.ID_card '23232323'
   f.bank_no '23523525'
   f.bank 'beijing jianshe yinhang'
@@ -86,7 +86,7 @@ Factory.define :cp_doc_detail do |f|
   f.association :currency
   f.used_for 'just want some money'
   f.ori_amount 0
-  f.rate_amount 0
+  f.apply_amount 0
 end
 
 Factory.define :reciver do |f|

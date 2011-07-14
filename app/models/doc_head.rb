@@ -7,38 +7,25 @@ class DocHead < ActiveRecord::Base
   belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
   belongs_to :upload_file
   belongs_to :real_person, :class_name => "Person", :foreign_key => "real_person_id"
+  belongs_to :project
 
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
+  validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
+  validate :must_equal,:if => lambada { |doc| doc.processing }
   #has many recivers and cp_doc_details
-  has_many :recivers, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
-  #has many c and p doc details
-  has_many :cp_doc_details, :class_name => "CpDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
-  #many rec notice details
-  has_many :rec_notice_details,:class_name=>"RecNoticeDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
-  #only one reum details
+
   has_one :inner_remittance, :class_name => "InnerRemittance", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_one :inner_transfer, :class_name => "InnerTransfer", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_one :inner_cash_draw, :class_name => "InnerCashDraw", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_one :buy_finance_product, :class_name => "BuyFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_one :redeem_finance_product, :class_name => "RedeemFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
-  #审批流
-  has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
-  #======================================================================
-  #,:reject_if => lambda { |a| a[:sequence].blank? }
-  accepts_nested_attributes_for :recivers, :allow_destroy => true
-  accepts_nested_attributes_for :cp_doc_details , :allow_destroy => true
-  accepts_nested_attributes_for :rec_notice_details , :allow_destroy => true
-  #here is the samn reason for 
-  accepts_nested_attributes_for :inner_remittance , :allow_destroy => true
-  accepts_nested_attributes_for :inner_transfer , :allow_destroy => true
-  accepts_nested_attributes_for :inner_cash_draw , :allow_destroy => true
-  accepts_nested_attributes_for :buy_finance_product ,:allow_destroy => true
-  accepts_nested_attributes_for :redeem_finance_product , :allow_destroy => true
-  #here is about reim=============================
-  belongs_to :project
-  #here is the details
+
+
+  has_many :recivers, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
+  has_many :cp_doc_details, :class_name => "CpDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
+  has_many :rec_notice_details,:class_name=>"RecNoticeDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_travels, :class_name => "RdTravel", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_transports, :class_name => "RdTransport", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_lodgings, :class_name => "RdLodging",:foreign_key=>"doc_head_id",:dependent=>:destroy
@@ -50,11 +37,22 @@ class DocHead < ActiveRecord::Base
   has_many :reim_split_details, :class_name => "ReimSplitDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :common_riems, :class_name => "CommonRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :other_riems, :class_name => "OtherRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
+  has_many :fixed_properties,:class_name=>"FixedProperty",:foreign_key=>"doc_head_id",:dependent=>:destroy
+  has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
+  has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
+  has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
   #here is for the vouch info
   has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
-  has_many :fixed_properties,:class_name=>"FixedProperty",:foreign_key=>"doc_head_id",:dependent=>:destroy
-  #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
 
+  #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
+  accepts_nested_attributes_for :recivers, :allow_destroy => true
+  accepts_nested_attributes_for :cp_doc_details , :allow_destroy => true
+  accepts_nested_attributes_for :rec_notice_details , :allow_destroy => true
+  accepts_nested_attributes_for :inner_remittance , :allow_destroy => true
+  accepts_nested_attributes_for :inner_transfer , :allow_destroy => true
+  accepts_nested_attributes_for :inner_cash_draw , :allow_destroy => true
+  accepts_nested_attributes_for :buy_finance_product ,:allow_destroy => true
+  accepts_nested_attributes_for :redeem_finance_product , :allow_destroy => true
   accepts_nested_attributes_for :reim_split_details , :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals , :allow_destroy => true
   accepts_nested_attributes_for :rd_benefits , :allow_destroy => true
@@ -70,15 +68,9 @@ class DocHead < ActiveRecord::Base
 
   before_save :set_total_amount
   after_initialize :init_doc
-  #default_scope :order => 'updated_at DESC'
-  #the great offset info here
-  has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
-  has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
+
   Doc_State={'un_submit'=>"未提交",'processing'=>"审批中",'approved'=>"审批通过",'paid'=>"已付款",'rejected'=>'未通过'}
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>"固定资产单据"}
-  #validate the amout is ok
-  validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
-
   DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",13=>"BXFL",14=>"GDZC"}
 
   def init_doc
@@ -153,7 +145,7 @@ class DocHead < ActiveRecord::Base
   def get_amount(d)
     if d.respond_to? :amount
       d.amount || 0
-    elsif d.respond_to? :rate_amount
+    elsif d.respond_to? :apply_amount
       d.apply_amount || 0
     elsif d.respond_to? :buy_unit
       d.buy_unit || 0
@@ -170,8 +162,8 @@ class DocHead < ActiveRecord::Base
     total=0
     if doc_type==1 or doc_type==2
       cp_doc_details.each do |cp|
-        next if cp.marked_for_destruction? || cp.rate_amount==nil
-        total+=cp.rate_amount
+        next if cp.marked_for_destruction? || cp.apply_amount==nil
+        total+=cp.apply_amount
       end
     end
     if doc_type==3
@@ -271,7 +263,7 @@ class DocHead < ActiveRecord::Base
   def reciver_amount
     total=0
     recivers.each do |r|
-      total+=r.amount
+      total+=(r.amount || 0)
     end
     total
   end
@@ -381,13 +373,7 @@ class DocHead < ActiveRecord::Base
       -1
     end
   end
-  def self.custom_select(results,column_name,filter_text)
-  	if column_name=="doc_state"
-    	results.select {|doc| doc.custom_display.include? filter_text}
-	  else
-		  results
-	  end
-  end
+
   #can delete depands on two things
   def can_destroy? user
     self.un_submit? and user.person==self.person

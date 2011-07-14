@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "project_id"
     t.string   "used_for"
     t.integer  "currency_id"
-    t.decimal  "rate_amount", :precision => 16, :scale => 2
+    t.decimal  "apply_amount", :precision => 16, :scale => 2
     t.decimal  "ori_amount",   :precision => 16, :scale => 2
     t.decimal  "rate",         :precision => 14, :scale => 4
     t.datetime "created_at"
@@ -183,7 +183,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
     t.integer  "doc_type"
     t.string  "state"
-    t.integer  "doc_state"
     t.integer  "project_id"
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2

@@ -15,7 +15,6 @@ gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'ruby-ole'
-gem 'spreadsheet'
 gem 'rest-client'
 gem 'haml'
 gem 'haml-rails'

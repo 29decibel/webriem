@@ -1,3 +1,4 @@
+/* line 1, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline {
   padding: 0 12px;
   background-color: #f6f6f6;
@@ -6,8 +7,9 @@
   position: relative;
 }
 
+/* line 9, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline .range {
-  margin-top:16px;
+  margin-top: 16px;
   width: 12px;
   height: 20px;
   display: inline;
@@ -16,28 +18,33 @@
   text-indent: 9999px;
 }
 
+/* line 19, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline .previous {
   left: 0px;
-  background-image: url('../../images/rails_admin/timeline/arrow_left.png');
+  background-image: url("../../images/rails_admin/timeline/arrow_left.png");
 }
 
+/* line 24, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline .next {
   right: 0px;
-  background-image: url('../../images/rails_admin/timeline/arrow_right.png');
+  background-image: url("../../images/rails_admin/timeline/arrow_right.png");
 }
 
+/* line 29, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline .handle {
   width: 54px;
   height: 99px;
   position: absolute;
   top: -13px;
-  background-image: url('../../images/rails_admin/timeline/handler.png');
+  background-image: url("../../images/rails_admin/timeline/handler.png");
 }
 
+/* line 37, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline ul {
   list-style-type: none;
 }
 
+/* line 41, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline ul li {
   float: left;
   font-size: 10px;
@@ -47,16 +54,19 @@
   height: 53px;
 }
 
+/* line 50, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline ul li:first-child {
-  border:none;
+  border: none;
 }
 
+/* line 54, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline .bar {
   display: block;
   height: 41px;
   position: relative;
 }
 
+/* line 60, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .ra-timeline .bar span {
   display: block;
   position: absolute;
@@ -64,14 +74,17 @@
   width: 100%;
 }
 
+/* line 67, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .high {
   background: #bf2531;
 }
 
+/* line 71, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .medium {
   background: #d2a71c;
 }
 
+/* line 75, ../../../app/stylesheets/rails_admin/ra.timeline.scss */
 .low {
   background: #BCCEB6;
 }

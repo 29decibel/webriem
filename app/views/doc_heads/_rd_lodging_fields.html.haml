@@ -37,14 +37,8 @@
     %span.label= "#{I18n.t('common_attr.rate')}"
     %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number"  
   .form_field
-    %span.label= "#{I18n.t('common_attr.apply_amount')}"
+    %span.label= "#{I18n.t('common_attr.ori_amount')}"
     %span.value= f.text_field :ori_amount,:class=>"normal doc_ori_amount number"  
   .form_field
-    %span.label= "#{I18n.t('common_attr.ori_amount')}"
-    %span.value= f.text_field :apply_amount,:class=>"doc_apply_amount normal number"  
-  .form_field
-    %span.label= "#{I18n.t('common_attr.hr_amount')}"
-    %span.value= f.text_field :hr_amount,:class=>"doc_HR_amount normal number"  
-  .form_field
-    %span.label= "#{I18n.t('common_attr.fi_amount')}"
-    %span.value= f.text_field :fi_amount,:class=>"doc_FI_amount normal number"  
+    %span.label= "#{I18n.t('common_attr.apply_amount')}"
+    %span.value= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number"  
