@@ -8,6 +8,31 @@ function init_control()
   //fire it once
   $("select.is_split_reim").change();
 }
+
+$('fieldset').live('row:numberChanged',function(){
+  var fds = $(this).closest('.form_area').find('fieldset').not(':hidden');
+  var total_num = 0.0;
+  //set every fieldset's value
+  fds.each(function(){
+    //begin set every value
+    var apply_amount = $(this).find('.doc_rate').val() * $(this).find('.doc_ori_amount').val();
+    $(this).find('.doc_apply_amount').text(apply_amount.toFixed(2));
+    total_num+=apply_amount;
+  });
+  $(this).closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));
+  $(this).closest('.doc_detail').trigger('area:numberChanged');
+});
+
+$('.doc_detail').live('area:numberChanged',function(){
+  var total_num = 0.0;
+  $('.doc_detail').each(function(){
+    var num = parseFloat($(this).find('.doc_total_amount').text());
+    total_num+=isNaN(num) ? 0.0 : num;
+  });
+  $('#total_riem').text(total_num.toFixed(2));
+  $('.recivers').find('fieldset').first().find('.doc_ori_amount').val(total_num.toFixed(2));
+});
+
 //here we bind the data picker control
 $(function(){
   init_control();	
@@ -170,7 +195,7 @@ $(function(){
   $("input.ref").live("change",reference_change);
   //set sequence
   //set unique num of doc detail
-  set_sequence_num();
+  //set_sequence_num();
 
 });
 
@@ -311,7 +336,7 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g");
   $(link).closest("div.doc_detail").find("div.form_area").append(content.replace(regexp, new_id));
   //set unique num of doc detail
-  set_sequence_num();
+  //set_sequence_num();
 	//wrap the datatime picker
 	$(".datepicker").datepicker();
 	$(".datetimepicker").datetimepicker();

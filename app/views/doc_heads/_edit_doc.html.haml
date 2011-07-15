@@ -281,13 +281,21 @@
             = render :partial => 'reciver_fields',:locals => { :f => builder,:doc=>doc }  
 :javascript
   tokenize();
-  //register token change event
+  //register currency change event
   $("input[data-model=Currency].token-input").live('token:add',function(e,data){
     var rate = $(this);
     $.get('/currency/'+data.id,function(currency){
       rate.closest('fieldset').find('.doc_rate').val(currency.default_rate);
+      rate.closest('fieldset').trigger('row:numberChanged');
     });
   });
   $("input[data-model=Currency].token-input").live('token:delete',function(e,data){
     $(this).closest('fieldset').find('.doc_rate').val('0.0');
+    $(this).closest('fieldset').trigger('row:numberChanged');
+  });
+  //register rate and number change event and fire one
+  $("input.doc_rate,input.doc_ori_amount").live('change',function(){
+    var num=parseFloat($(this).val());
+    $(this).val(!isNaN(num) ? num.toFixed(2) : 0.0);
+    $(this).closest('fieldset').trigger("row:numberChanged");
   });

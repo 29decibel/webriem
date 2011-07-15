@@ -37,14 +37,15 @@ describe DocHead do
   end
 
   it "doc should not be valid when reciver's amount not equals total amount" do
-    doc = Factory(:doc_head)
-    doc.cp_doc_details << Factory(:cp_doc_detail,:ori_amount=>12,:rate=>2,:doc_head=>doc)
-    doc.recivers << Factory(:reciver,:doc_head => doc)
-    doc.should_not be_valid
-    #change reciver to ok
-    r = doc.recivers.first
-    r.amount = 12*2
-    doc.should be_valid
+    pending 'consider to valid'
+    # doc = Factory(:doc_head)
+    # doc.cp_doc_details << Factory(:cp_doc_detail,:ori_amount=>12,:rate=>2,:doc_head=>doc)
+    # doc.recivers << Factory(:reciver,:doc_head => doc)
+    # doc.should_not be_valid
+    # #change reciver to ok
+    # r = doc.recivers.first
+    # r.amount = 12*2
+    # doc.should be_valid
   end
 
   it "should be in the work flow process when begin_work" do
