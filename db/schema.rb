@@ -440,6 +440,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.date     "reim_date"
     t.integer  "fee_time_span"
     t.integer  "people_count"
+    t.decimal  "rate",         :precision => 10, :scale => 4,:default=>1
+    t.decimal  "ori_amount",  :precision => 16, :scale => 2
     t.decimal  "apply_amount",  :precision => 16, :scale => 2
     t.integer  "doc_head_id"
     t.datetime "created_at"

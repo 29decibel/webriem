@@ -1,5 +1,9 @@
 #coding: utf-8
 class RdWorkMeal < ActiveRecord::Base
+  before_save :set_apply_amount
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
+  end
   belongs_to :reim_detail
   belongs_to :currency
   belongs_to :dep
@@ -17,9 +21,6 @@ class RdWorkMeal < ActiveRecord::Base
   validate :dep_is_end
   def dep_is_end
     errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
-  end
-  def amount
-    apply_amount
   end
   def fcm
     if doc_head.doc_type==12

@@ -1,5 +1,9 @@
 #coding: utf-8
 class RdTravel < ActiveRecord::Base
+  before_save :set_apply_amount
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
+  end
   belongs_to :reim_detail
   belongs_to :fee_standard
   belongs_to :region
@@ -13,9 +17,6 @@ class RdTravel < ActiveRecord::Base
   validate :must_have_a_place
   def must_have_a_place
     errors.add(:base,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
-  end
-  def amount
-    fi_amount
   end
   def fcm
     return FeeCodeMatch.find_by_fee_code("03")

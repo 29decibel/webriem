@@ -69,7 +69,7 @@
     %br
     .form_field
       %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
-      %span.value#total_riem= doc.total_fi_amount
+      %span.value#total_riem= doc.total_amount
     = f.hidden_field :doc_type
   <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--根据不同的单据类型render不同的单据-->
@@ -299,3 +299,5 @@
     $(this).val(!isNaN(num) ? num.toFixed(2) : 0.0);
     $(this).closest('fieldset').trigger("row:numberChanged");
   });
+  //triger
+  $(function(){$("fieldset").trigger('row:numberChanged');});

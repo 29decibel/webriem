@@ -1,5 +1,9 @@
 #coding: utf-8
 class RdTransport < ActiveRecord::Base
+  before_save :set_apply_amount
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
+  end
     belongs_to :reim_detail
     belongs_to :transportation, :class_name => "Transportation", :foreign_key => "transportation_id"
     belongs_to :currency
@@ -19,9 +23,6 @@ class RdTransport < ActiveRecord::Base
         errors.add(:start_date,"请检查填写的日期或时间") if start_date>Time.now
         errors.add(:end_date,"请检查填写的日期或时间") if end_date>Time.now
       end
-    end
-    def amount
-      fi_amount
     end
     def fcm
       return FeeCodeMatch.find_by_fee_code("03")

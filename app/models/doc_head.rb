@@ -102,10 +102,10 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if (afford_dep and afford_dep.sub_deps.count>0)
   end
   def must_equal
-    errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
-    errors.add(:base,"借款总金额#{total_fi_amount} 不等于 收款总金额#{reciver_amount}") if total_fi_amount!=reciver_amount and doc_type<=2
-    #the amount of issplit should be equal to total_fi_amount
-    errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_fi_amount}") if is_split==1 and split_total_amount!=total_fi_amount
+    #errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
+    #errors.add(:base,"借款总金额#{total_fi_amount} 不等于 收款总金额#{reciver_amount}") if total_fi_amount!=reciver_amount and doc_type<=2
+    ##the amount of issplit should be equal to total_fi_amount
+    #errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_fi_amount}") if is_split==1 and split_total_amount!=total_fi_amount
   end
   #############################################
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
@@ -113,18 +113,7 @@ class DocHead < ActiveRecord::Base
     #debugger
     errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)
   end
-  #the total apply amount
-  def total_apply_amount
-    get_doc_amount(:apply_amount)
-  end
-  #the total hr amount
-  def total_hr_amount
-    get_doc_amount(:hr_amount)
-  end
-  #the total fi amount
-  def total_fi_amount
-    get_doc_amount(:fi_amount)
-  end
+
   #get amount for specific doc type
   #asumme every detail has a amount attribute
   def amount_for(relation_name)
@@ -158,19 +147,13 @@ class DocHead < ActiveRecord::Base
     end
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
-  def get_doc_amount(type)
+  def get_total_apply_amount
     total=0
     if doc_type==1 or doc_type==2
-      cp_doc_details.each do |cp|
-        next if cp.marked_for_destruction? || cp.apply_amount==nil
-        total+=cp.apply_amount
-      end
+      total+= amount_for :cp_doc_details
     end
     if doc_type==3
-      rec_notice_details.each do |rd_detail|
-        next if  rd_detail.marked_for_destruction? || rd_detail.amount==nil
-        total+=rd_detail.amount
-      end
+      total+= amount_for :rec_notice_details
     end
     if doc_type==4 and inner_remittance!=nil
       total=inner_remittance.amount || 0
@@ -191,46 +174,28 @@ class DocHead < ActiveRecord::Base
       total=redeem_finance_product.amount
     end
     if doc_type==9
-      [rd_travels,rd_transports,rd_lodgings,other_riems].each do |rd|
-        rd.each do |rd_detail|
-          next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
-          total+=rd_detail.send(type)         
-        end
+      %w(rd_travels rd_transports rd_lodgings other_riems).each do |rd|
+        total+=amount_for rd       
       end
     end
     if doc_type==10
-      rd_work_meals.each do |rd|
-        next if rd.marked_for_destruction? || rd.apply_amount==nil
-        total+=rd.apply_amount
-      end
+      total+=amount_for :rd_work_meals
     end
     if doc_type==11
-      [rd_extra_work_cars,rd_extra_work_meals].each do |rd|
-        rd.each do |rd_detail|
-          next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
-          total+=rd_detail.send(type)         
-        end
+      %w(rd_extra_work_cars rd_extra_work_meals).each do |rd|
+        total+=amount_for rd
       end
     end
     if doc_type==12
-      [rd_common_transports,rd_work_meals,common_riems].each do |rd|
-        rd.each do |rd_detail|
-          next if  rd_detail.marked_for_destruction? || rd_detail.apply_amount==nil
-          total+=rd_detail.apply_amount
-        end
+      %w(rd_common_transports rd_work_meals common_riems).each do |rd|
+        total+=amount_for rd
       end
     end
     if doc_type==13
-      rd_benefits.each do |rd_detail|
-        next if  rd_detail.marked_for_destruction? || rd_detail.send(type)==nil
-        total+=rd_detail.send(type)
-      end
+      total+= amount_for :rd_benefits
     end
     if doc_type==14
-      fixed_properties.each do |fp|
-        next if  fp.marked_for_destruction?
-        total+=fp.buy_unit
-      end
+      total+=amount_for :fixed_properties
     end
     total
   end
@@ -403,6 +368,6 @@ class DocHead < ActiveRecord::Base
   #callbacks
   def set_total_amount
     #update the total_fi_amount
-    self.total_amount = total_fi_amount
+    self.total_amount = get_total_apply_amount
   end
 end

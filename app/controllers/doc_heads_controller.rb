@@ -123,7 +123,7 @@ class DocHeadsController < ApplicationController
       end
     end
     if @doc.update_attributes(params[:doc_head])
-      @doc.update_attribute(:cp_doc_remain_amount,@doc.total_apply_amount)
+      @doc.update_attribute(:cp_doc_remain_amount,@doc.total_amount)
       @message="#{I18n.t('controller_msg.update_ok')}"
       if @doc.current_approver_id == current_user.person.id
         @work_flow_info=WorkFlowInfo.new

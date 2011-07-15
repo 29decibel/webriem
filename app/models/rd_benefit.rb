@@ -1,5 +1,9 @@
 #coding: utf-8
 class RdBenefit < ActiveRecord::Base
+  before_save :set_apply_amount
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
+  end
   belongs_to :reim_detail
   belongs_to :dep
   belongs_to :fee

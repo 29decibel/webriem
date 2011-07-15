@@ -1,5 +1,9 @@
 #coding: utf-8
 class RdExtraWorkCar < ActiveRecord::Base
+  before_save :set_apply_amount
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
+  end
     belongs_to :reim_detail  
     belongs_to :currency
     enum_attr :is_sunday, [["否", 1],["是",0]]
@@ -18,9 +22,6 @@ class RdExtraWorkCar < ActiveRecord::Base
         errors.add(:start_time,"请检查填写的日期或时间") if start_time>Time.now
         errors.add(:end_time,"请检查填写的日期或时间") if end_time>Time.now
       end
-    end
-    def amount
-      fi_amount
     end
     def fcm
       return FeeCodeMatch.find_by_fee_code("0602")

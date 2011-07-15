@@ -1,5 +1,9 @@
 #coding: utf-8
 class RdLodging < ActiveRecord::Base
+  before_save :set_apply_amount
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
+  end
   belongs_to :region
   belongs_to :reim_detail
   belongs_to :currency
@@ -20,9 +24,6 @@ class RdLodging < ActiveRecord::Base
   end
   def amout_validation
     errors.add(:base,"差旅住宿费中原币金额不能大于 天数*费用标准*人数") if st_amount&&ori_amount&&people_count&&days and ori_amount>people_count*st_amount*days
-  end
-  def amount
-    fi_amount
   end
   def fcm
     return FeeCodeMatch.find_by_fee_code("03")
