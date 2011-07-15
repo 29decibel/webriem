@@ -150,20 +150,7 @@ function set_split_total()
 	});
 	$("span.split_total_amount").val(total_split.toFixed(2));
 }
-//not use now
-//function set_split_percent_amount()
-//{
-//  alert("ggg");
-//	//get total amount
-//	var total_riem=0.00;
-//	$("input.doc_total_amount").each(function(){
-//		total_riem+=parseFloat($(this).val());
-//	});
-//	$("div.is_split_reim fieldset").not(":hidden").find("input.split_percent").each(function(){
-//		var v=$(this).val()*total_riem/100;
-//		$(this).closest("fieldset").find("input.percent_amount").val(v.toFixed(2));
-//	});
-//}
+
 
 function offset_amount_change()
 {

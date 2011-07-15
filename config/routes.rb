@@ -51,6 +51,7 @@ Webreim::Application.routes.draw do
   get "doc_heads/export_xls"
 
   resources :doc_heads
+  resources :currency
   resources :work_flow_infos
 
   get "token_input/search"

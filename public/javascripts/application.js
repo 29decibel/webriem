@@ -201,7 +201,13 @@ function tokenize(content)
       noResultsText: "无符合条件的记录",
       theme: "facebook",
       preventDuplicates: true,
-      tokenLimit: 1
+      tokenLimit: 1,
+      onAdd:function(data){
+        $(this).trigger('token:add',data);
+      },
+      onDelete:function(data){
+        $(this).trigger('token:delete',data);
+      }
     });  
   });
 
@@ -462,10 +468,7 @@ function batch_approve_confirm(grid_id)
 		}
 	});	
 }
-function approve()
-{
-  alert('aaa');
-}
+
 function output_to_txt(grid_id)
 {
 	send_request_from_grid(grid_id,"/doc_heads/output_to_txt.txt?ids=");
@@ -489,52 +492,8 @@ function g_vouch (grid_id) {
     send_request_from_grid(grid_id,"/vouch/index?doc_ids=");
   }
 }
-function delete_docs(grid_id) 
-{
-  var answer=confirm("是否真的删除这些单据，删除的单据将无法恢复！");
-  if(!answer)
-  {
-    return;
-  }
-	//get all doc id and invoke a ajax call
-	var ids=$(grid_id).getGridParam("selarrrow");
-	var doc_ids=ids.join(',');
-	var is_ok=$("#is_ok").is(':checked');
-	var comments=$("#comments").val();
-	//make a ajax call
-	$.ajax({
-	  type: "DELETE",
-	  url: "/doc_heads/destroy",
-	  data: "doc_ids="+doc_ids,
-	  beforeSend: function(){
-			//fee_standard_control.val("正在获取...");
-			$.blockUI({ message:"正在删除..." }); 
-	  },
-	  success: function(msg){
-			$(grid_id).trigger("reloadGrid");
-			$.unblockUI();
-	  },
-		error: function(){
-			$(grid_id).trigger("reloadGrid");
-			$.unblockUI();
-		}
-	});	
-}
-function send_request_from_grid(grid_id,url)
-{
-	//get all doc id and invoke a ajax call
-	var ids=$(grid_id).getGridParam("selarrrow");
-	if(ids.length==0)
-	{
-		alert("请选择需要操作的单据");
-		return;
-	}
-	//trim the ;
-	if(ids.length>0)
-	{
-		document.location.href = url+ids.join(',');
-	}
-}
+
+
 
 function cancel_edit_form (cancel_link) {
   $(cancel_link).closest("form").hide("fast");

@@ -1,12 +1,12 @@
-.form_field.large
+.form_field
   %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.amount')}" ,:class=>"large"
-  %span.value= f.text_field :amount,:class=>"input1 large" 
+  %span.value= f.text_field :amount,:class=>"input1" 
 .form_field
   %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.currency_id')}" ,:class=>"large"
   %span.value= ts "currency_id","Currency",:text=>detail_doc.currency.to_s,:value=>detail_doc.currency_id ,:f=>f
 %br
 .form_field.col-sp2
-  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" ,:class=>"large"
+  %span.label= f.label "#{I18n.t('activerecord.attributes.inner_remittance.out_account_id')}" 
   %span.value=ts "out_account_id","Account",:text=>detail_doc.out_account.to_s,:value=>detail_doc.out_account_id,:f=>f
 %br
 .form_field.col-sp2

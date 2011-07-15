@@ -281,3 +281,13 @@
             = render :partial => 'reciver_fields',:locals => { :f => builder,:doc=>doc }  
 :javascript
   tokenize();
+  //register token change event
+  $("input[data-model=Currency].token-input").live('token:add',function(e,data){
+    var rate = $(this);
+    $.get('/currency/'+data.id,function(currency){
+      rate.closest('fieldset').find('.doc_rate').val(currency.default_rate);
+    });
+  });
+  $("input[data-model=Currency].token-input").live('token:delete',function(e,data){
+    $(this).closest('fieldset').find('.doc_rate').val('0.0');
+  });

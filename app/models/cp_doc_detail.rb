@@ -6,6 +6,17 @@ class CpDocDetail < ActiveRecord::Base
     self.apply_amount = self.rate * self.ori_amount
   end
 
+  after_initialize  :set_default_value
+  def set_default_value
+    if !currency
+      sysconfig = SystemConfig.find_by_key 'default_currency'
+      if sysconfig
+        self.currency = Currency.find_by_code sysconfig.value
+        self.rate = self.currency.default_rate
+      end
+    end
+  end
+
   belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
   belongs_to :dep
   belongs_to :fee
