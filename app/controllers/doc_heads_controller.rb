@@ -97,7 +97,7 @@ class DocHeadsController < ApplicationController
   # POST /doc_heads.xml
   def create
     @doc = DocHead.new(params[:doc_head])
-    @doc.cp_doc_remain_amount=@doc.total_apply_amount
+    @doc.cp_doc_remain_amount=@doc.total_amount
     #add the offset info
     if params[:offset_info]
       params[:offset_info].each_value do |value|

@@ -1,14 +1,15 @@
 #coding: utf-8
 class ReimSplitDetail < ActiveRecord::Base
+  before_save :set_afford_dep
+  def set_afford_dep
+    if project
+      self.dep = project.dep
+    end
+  end
   belongs_to :dep
   belongs_to :project
   belongs_to :fee
   belongs_to :doc_head
-  validates_presence_of :dep_id
-  validate :dep_is_end
-  def dep_is_end
-    errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
-  end
   #for the vouch info
   def fcm
     return nil if doc_head ==nil

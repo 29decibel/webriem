@@ -9,10 +9,17 @@ class DocHead < ActiveRecord::Base
   belongs_to :real_person, :class_name => "Person", :foreign_key => "real_person_id"
   belongs_to :project
 
+  before_save :set_afford_dep
+  def set_afford_dep
+    if project
+      self.afford_dep = project.dep
+    end
+  end
+
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
-  validate :must_equal,:dep_and_project_not_null,:project_not_null_if_charge,:dep_is_end
+  validate :must_equal,:project_not_null_if_charge
   validate :must_equal,:if => lambda { |doc| doc.processing? }
   #has many recivers and cp_doc_details
 
@@ -98,9 +105,6 @@ class DocHead < ActiveRecord::Base
   def project_not_null_if_charge
     errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
   end
-  def dep_is_end
-    errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if (afford_dep and afford_dep.sub_deps.count>0)
-  end
   def must_equal
     #errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
     #errors.add(:base,"借款总金额#{total_fi_amount} 不等于 收款总金额#{reciver_amount}") if total_fi_amount!=reciver_amount and doc_type<=2
@@ -109,10 +113,6 @@ class DocHead < ActiveRecord::Base
   end
   #############################################
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
-  def dep_and_project_not_null
-    #debugger
-    errors.add(:base,"表头项目或费用承担部门不能为空") if (doc_type==9 or doc_type==11) and is_split==0 and (dep_id==nil or project_id==nil)
-  end
 
   #get amount for specific doc type
   #asumme every detail has a amount attribute
@@ -132,6 +132,7 @@ class DocHead < ActiveRecord::Base
     total
   end
   def get_amount(d)
+    # mark_for_destroy check
     if d.respond_to? :amount
       d.amount || 0
     elsif d.respond_to? :apply_amount

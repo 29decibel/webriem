@@ -1,5 +1,11 @@
 #coding: utf-8
 class RecNoticeDetail < ActiveRecord::Base
+  before_save :set_afford_dep
+  def set_afford_dep
+    if project
+      self.dep = project.dep
+    end
+  end
   belongs_to :dep
   belongs_to :project
   belongs_to :doc_head

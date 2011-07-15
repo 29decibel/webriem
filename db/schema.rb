@@ -430,6 +430,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "name"
     t.string   "code"
     t.string   "u8_project"
+    t.integer  "dep_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string  "status"

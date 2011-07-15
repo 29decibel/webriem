@@ -4,9 +4,14 @@ class RdCommonTransport < ActiveRecord::Base
   def set_apply_amount
     self.apply_amount = self.rate * self.ori_amount
   end
+  before_save :set_afford_dep
+  def set_afford_dep
+    if project
+      self.dep = project.dep
+    end
+  end
   belongs_to :reim_detail  
   belongs_to :currency
-  belongs_to :dep
   belongs_to :project
   validates_presence_of :ori_amount
   validates_presence_of :start_place
@@ -18,10 +23,7 @@ class RdCommonTransport < ActiveRecord::Base
   validates_presence_of :reason
   validates_presence_of :dep_id
   default_scope :order => 'start_time ASC'
-  validate :dep_is_end,:time_validate
-  def dep_is_end
-    errors.add(:base,"#{I18n.t('v_info.dep_is_end')}") if dep and dep.sub_deps.count>0
-  end
+  validate :time_validate
   def time_validate
     if start_time !=nil and end_time!=nil
       errors.add(:start_time,"请检查填写的日期或时间") if start_time>Time.now

@@ -1,8 +1,10 @@
 #coding: utf-8
 class Project < ActiveRecord::Base
 
-  validates_presence_of :name,:code
+  validates_presence_of :name,:code,:dep_id
   validates_uniqueness_of :code
+
+  belongs_to :dep
 
   before_save :strip
 
