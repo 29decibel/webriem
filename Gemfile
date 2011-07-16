@@ -12,7 +12,11 @@ gem "parseexcel"
 gem "excelsior"
 gem "prawn"
 gem "rufus-scheduler"
-gem "activerecord-sqlserver-adapter"
+
+# sudo brew install freetds (on mac os)
+gem "tiny_tds", "~> 0.4.5"
+gem "activerecord-sqlserver-adapter", "~> 3.0.15"
+
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'ruby-ole'
 gem 'rest-client'

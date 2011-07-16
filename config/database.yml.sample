@@ -38,3 +38,5 @@ production:
   username: root
   password: china123!
   socket: /var/run/mysqld/mysqld.sock
+
+	
