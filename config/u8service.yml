@@ -1,0 +1,6 @@
+mssql:
+  adapter:  sqlserver
+  encoding: utf8
+  host:     10.120.128.27
+  username: sa
+  password:
