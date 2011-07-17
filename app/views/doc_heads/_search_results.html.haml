@@ -1,5 +1,22 @@
 .form_title 查询结果
 -if @doc_rows
-  -@doc_rows.each do |dr|
-    =dr.apply_amount
-    =dr.doc_total_amount
+  .amount_result= "报销总金额为 ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
+  %table
+    %tr
+      %th 单据号
+      %th 单据类型
+      %th 部门
+      %th 项目
+      %th 申请人
+      %th 申请日期
+      %th 报销金额
+    -@doc_rows.each do |dr|
+      %tr
+        %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true
+        %td 借款单据
+        %td=dr.dep.try :name
+        %td=dr.project.try :name
+        %td=dr.person.try :name
+        %td=dr.apply_date
+        %td="￥#{dr.apply_amount}"
+.clear
