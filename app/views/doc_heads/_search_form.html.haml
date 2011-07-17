@@ -1,5 +1,5 @@
 .form_title 检索条件
--form_tag '/doc_heads/search_docs',:remote=>true do 
+-form_tag '/doc_heads/search',:remote=>true,:method=>:get do 
   .search_field
     %span.label 申请人
     %span.value= ts 'search[person_id_eq]','Person'
@@ -15,13 +15,13 @@
   .search_field.clear
     %span.label 申请日期区间
     %span.value
-      = text_field_tag 'search[apply_date_gte]',"",:class=>'datepicker'
-      = text_field_tag 'search[apply_date_lte]',"",:class=>'datepicker'
+      = text_field_tag 'search[apply_date_gte]',params[:search] ? params[:search]['apply_date_gte'] : '',:class=>'datepicker'
+      = text_field_tag 'search[apply_date_lte]',params[:search] ? params[:search]['apply_date_lte'] : '',:class=>'datepicker'
   .search_field
     %span.label 单据金额区间
     %span.value
-      = text_field_tag 'search[apply_amount_gte]'
-      = text_field_tag 'search[apply_amount_lte]'
+      = text_field_tag 'search[apply_amount_gte]',params[:search] ? params[:search]['apply_amount_gte'] : ''
+      = text_field_tag 'search[apply_amount_lte]',params[:search] ? params[:search]['apply_amount_lte'] : ''
   .actions
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_search')}"),{:href=>"#"},:class=>"submit minibutton"
 :javascript

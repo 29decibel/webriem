@@ -185,10 +185,10 @@ class DocHeadsController < ApplicationController
   end
 
   def search
-    
-  end
-
-  def search_docs
+    # trim the empty doc_type
+    if params[:search] and params[:search]['resource_type_eq'].first.blank?
+      params[:search].delete 'resource_type_eq'
+    end
     @doc_rows = DocRow.search(params[:search]).all
   end
 

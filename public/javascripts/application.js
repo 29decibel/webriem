@@ -526,5 +526,30 @@ function cancel_edit_form (cancel_link) {
   $(cancel_link).closest(".list_item").find("div.show").show("slow");
 }
 
+if (history && history.pushState) {  
+  $(function () {  
+    $('a[data-remote=true]').live('click', function () {  
+      console.log('get ajax link..');
+      $.getScript(this.href);  
+      history.pushState(null, document.title, this.href);  
+      return false;  
+    });  
+    
+    $('.search_form a').live('click',function () {  
+      console.log('get form data and save state...');
+      var action = $('.search_form form').attr('action');  
+      var formData = $('.search_form form').serialize();  
+      $.get(action, formData, null, 'script');  
+      history.replaceState(null, document.title, action + "?" + formData);  
+      return false;  
+    });  
+    
+    $(window).bind("popstate", function () {  
+      $.getScript(location.href);  
+    });  
+  })  
+}  
+
+
 
 

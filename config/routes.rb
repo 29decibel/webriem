@@ -53,7 +53,6 @@ Webreim::Application.routes.draw do
   resources :doc_heads do
     collection do
       get :search
-      post :search_docs
     end
   end
   resources :currency

@@ -13,7 +13,7 @@
     -@doc_rows.each do |dr|
       %tr
         %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true
-        %td 借款单据
+        %td= DocRow::DocResourceTypes.select{|k,v| v==dr.resource_type}.map{|i|i[0]}.first
         %td=dr.dep.try :name
         %td=dr.project.try :name
         %td=dr.person.try :name
