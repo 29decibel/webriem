@@ -6,6 +6,8 @@ class RdExtraWorkMeal < ActiveRecord::Base
   end
     belongs_to :reim_detail 
     belongs_to :currency 
+  belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
+
     enum_attr :is_sunday, [["否", 1],["是",0]]
     validates_presence_of :start_time
     validates_presence_of :end_time

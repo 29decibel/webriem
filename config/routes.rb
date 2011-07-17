@@ -50,7 +50,12 @@ Webreim::Application.routes.draw do
   get "doc_heads/mark"
   get "doc_heads/export_xls"
 
-  resources :doc_heads
+  resources :doc_heads do
+    collection do
+      get :search
+      post :search_docs
+    end
+  end
   resources :currency
   resources :work_flow_infos
 

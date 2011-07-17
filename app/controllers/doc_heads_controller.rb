@@ -183,6 +183,15 @@ class DocHeadsController < ApplicationController
       @doc.decline params[:comments]
     end
   end
+
+  def search
+    
+  end
+
+  def search_docs
+    @doc_rows = DocRow.search(params[:search]).all
+  end
+
   #batch pay
   def batch_pay
     #get the doc ids and pay it

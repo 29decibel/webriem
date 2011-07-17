@@ -205,6 +205,38 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   add_index "doc_heads", ["project_id"], :name => "index_doc_heads_on_project_id"
   add_index "doc_heads", ["real_person_id"], :name => "index_doc_heads_on_real_person_id"
 
+  create_table :doc_rows do |t|
+    t.integer   "doc_head_id"
+
+    t.integer   "resource_id"
+    t.string    "resource_type"
+
+    t.integer   "dep_id"
+    t.integer   "project_id"
+    t.decimal   "apply_amount",         :precision => 16, :scale => 2
+    t.decimal   "doc_total_amount",         :precision => 16, :scale => 2
+    t.integer   "fee_id"
+    t.integer   "person_id"
+    t.integer   "person_dep_id"
+    t.date      "apply_date"
+    t.string    "doc_no"
+    t.string    "doc_state"
+
+    t.timestamps
+  end
+
+  add_index "doc_rows",["dep_id"],:name=>'index_doc_rows_on_dep_id'
+  add_index "doc_rows",["project_id"],:name=>'index_doc_rows_on_project_id'
+  add_index "doc_rows",["apply_amount"],:name=>'index_doc_rows_on_apply_amount'
+  add_index "doc_rows",["doc_total_amount"],:name=>'index_doc_rows_on_doc_total_amount'
+  add_index "doc_rows",["fee_id"],:name=>'index_doc_rows_on_fee_id'
+  add_index "doc_rows",["person_id"],:name=>'index_doc_rows_on_person_id'
+  add_index "doc_rows",["person_dep_id"],:name=>'index_doc_rows_on_person_dep_id'
+  add_index "doc_rows",["apply_date"],:name=>'index_doc_rows_on_apply_date'
+  add_index "doc_rows",["doc_no"],:name=>'index_doc_rows_on_doc_no'
+  add_index "doc_rows",["doc_state"],:name=>'index_doc_rows_on_doc_state'
+
+
   create_table "duties", :force => true do |t|
     t.string   "name"
     t.string   "code"

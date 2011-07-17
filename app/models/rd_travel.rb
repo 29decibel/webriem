@@ -9,6 +9,8 @@ class RdTravel < ActiveRecord::Base
   belongs_to :region
   belongs_to :currency
   belongs_to :region_type
+  belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
+
   validates_presence_of :ori_amount
   validates_presence_of :days
   validates_presence_of :reason

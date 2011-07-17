@@ -1,0 +1,5 @@
+.form_title 查询结果
+-if @doc_rows
+  -@doc_rows.each do |dr|
+    =dr.apply_amount
+    =dr.doc_total_amount

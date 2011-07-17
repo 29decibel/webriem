@@ -1,0 +1,12 @@
+.form_title 检索条件
+-form_tag '/doc_heads/search_docs',:remote=>true do 
+
+  .search_field
+    %span.label 单据金额 从 
+    %span.value= text_field_tag 'search[doc_total_amount_gte]'
+    %span.value= text_field_tag 'search[doc_total_amount_lte]'
+  .actions
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_search')}"),{:href=>"#"},:class=>"submit minibutton"
+
+:javascript
+  tokenize();

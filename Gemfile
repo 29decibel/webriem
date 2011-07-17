@@ -17,6 +17,9 @@ gem "rufus-scheduler"
 gem "tiny_tds", "~> 0.4.5"
 gem "activerecord-sqlserver-adapter", "~> 3.0.15"
 
+gem "meta_where"
+gem "meta_search"
+
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'ruby-ole'
 gem 'rest-client'

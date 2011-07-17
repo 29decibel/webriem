@@ -117,68 +117,6 @@ div.footer{
   position:relative;
 
 }
-/*give the table a wear==========================================================*/
-
-table.hor-zebra
-{
-	font-size: 12px;
-	margin-left: 15px;
-	text-align: left;
-	border-collapse: collapse;
-	width:95%;
-}
-table.hor-zebra a{
-  font-size:12px;
-}
-table tr{
-	overflow: scroll;
-}
-table.hor-zebra th
-{
-	font-size: 14px;
-	font-weight: normal;
-	padding: 10px 8px;
-	color: black;
-  border-bottom:1px solid #ccc;
-}
-table.hor-zebra td
-{
-	padding: 3px;
-	color: #515151;
-}
-table.hor-zebra td a.splash{
-  display:none;
-}
-table.hor-zebra tr:hover a.splash{
-  display:inline-block;
-}
-table.hor-zebra td.action
-{
-	width:30px;
-}
-table.hor-zebra tr:nth-child(even)
-{ 
-	/*background: #eeeeee; */
-  border-bottom:1px solid #ccc;
-}
-table.middle{
-  font-size:12px;
-}
-table.border{
-  border-bottom:1px solid #ccc;
-  margin-top:2px;
-  margin-bottom:3px;
-}
-/*========jqgrid container*/
-div.jqgrid{
-
-	padding: 5px;
-	background-color: #FFF9E5;	
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	overflow: auto;
-	position: relative;
-}
 /*=================================================================================*/
 /*form styles*/
 form{
@@ -309,6 +247,33 @@ div.form_title span.doc_total_amount{
   margin-bottom:8px;
   &.approve{color:green;}
   &.reject{color:red;}
+}
+.search_form{
+  position:relative;
+  float:left;
+  width:100%;
+  .search_field{
+    .label{
+      width:90px;
+      float:left;
+      text-align:right;
+      margin-right:5px;
+    }
+    .value{
+      float:left;
+      margin-left:5px;
+      width:100px;
+      input{
+        width:100px;
+        margin:2px 0px;
+        padding:3px 0px;
+      }
+    }
+    float:left;
+    margin-right:12px;
+  }
+  .actions{float:left;clear:left;}
+
 }
 /*footer*/
 div#footer{

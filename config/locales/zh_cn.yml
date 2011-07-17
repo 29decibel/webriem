@@ -116,6 +116,7 @@
     btn_save: "保存"
     btn_edit: "修改"
     btn_delete: "删除"
+    btn_search: 搜索
     btn_ok: 确定
     btn_cancel: 取消
     btn_mydocs: 我的单据
@@ -747,6 +748,7 @@
   menu:
     suppliers: "供应商"
     my_docs: "我的单据"
+    search_doc: "单据统计"
     docs_to_approve: "需要审批单据" 
     docs_to_pay: "需要付款的单据"
     docs_paid: "已经付款的单据"

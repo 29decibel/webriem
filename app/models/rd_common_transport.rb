@@ -13,6 +13,9 @@ class RdCommonTransport < ActiveRecord::Base
   belongs_to :reim_detail  
   belongs_to :currency
   belongs_to :project
+  belongs_to :dep
+  belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
+
   validates_presence_of :ori_amount
   validates_presence_of :start_place
   validates_presence_of :end_place

@@ -24,7 +24,7 @@ module ApplicationHelper
     if options[:f]
       options[:f].text_field field_name.to_sym,"data-model"=>model_name,"data-pre"=>"[#{options[:value]}]",:class=>"token-input"
     else
-      text_field_tag field_name.to_sym,"data-model"=>model_name,"data-pre"=>options[:value],:class=>"token-input"
+      text_field_tag field_name.to_sym,'',"data-model"=>model_name,"data-pre"=>options[:value],:class=>"token-input"
     end
   end
   def mark_required(object, attribute)  
@@ -73,53 +73,8 @@ module ApplicationHelper
     
   end
   #====================================core stuff==================================================
-  #used for search engine
-  def searchable_columns(class_object)
-    filtered_columns_by class_object,:not_search
-  end
-  #used for search engine, this is  for display columns
-  def display_columns(class_object,user_display_array=[])
-    if user_display_array.size>0
-      get_columns_by_user_columns class_object,user_display_array
-    else
-      filtered_columns_by class_object,:not_display
-    end
-  end
   def default_rate
     1.0
   end
-  #get the column value of the object
-  def get_display_value(result_obj,column)
-    #check whether it is a belongs_to relation
-    ass=result_obj.class.reflect_on_all_associations.select{|a| a.primary_key_name==column.name and a.macro==:belongs_to}
-    if ass and ass.count>0
-      eval("result_obj.#{ass.first.name}_name")
-    else
-      #check whether is has it's own custom display logic
-      if result_obj.respond_to? :custom_display and result_obj.custom_display(column)
-        result_obj.custom_display(column)
-      else
-        result=result_obj.send(column.name)
-        #deal with the date
-        if column.sql_type=="datetime"
-          result=display_date(result)
-        end
-        result
-      end
-    end
-  end
-  #====================================core stuff==================================================
-  #here is some privats
-  private
-  def filtered_columns_by(class_object,filter_type)
-    class_object.columns.select{|c| !(%w[id created_at updated_at].include? c.name) and !(class_object.respond_to?(filter_type) and class_object.send(filter_type).include?(c.name))}
-  end
-  def get_columns_by_user_columns(class_object,user_display_array)
-    cols=[]
-    user_display_array.each do |u_d|
-      cols<<class_object.columns.select {|c| c.name==u_d}
-    end 
-    puts cols
-    cols.flatten
-  end
+
 end

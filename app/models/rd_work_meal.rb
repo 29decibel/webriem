@@ -13,6 +13,9 @@ class RdWorkMeal < ActiveRecord::Base
   belongs_to :reim_detail
   belongs_to :currency
   belongs_to :project
+  belongs_to :dep
+  belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
+
   validates_presence_of :place
   validates_presence_of :meal_date
   validates_presence_of :people_count
