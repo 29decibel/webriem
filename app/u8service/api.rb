@@ -18,12 +18,12 @@ module U8service
     end
 
     def self.exist_vouch(doc_no)
-      result = client.execute "select count(*) from [gl_accvouch] where cdigest like '%#{doc_no}%'"
+      result = exec_sql "select count(*) from [gl_accvouch] where cdigest like '%#{doc_no}%'"
       result.first['']>0
     end
 
     def self.max_vouch_info(iperiod)
-      result = exec_sql 'select max(ino_id) from [gl_accvouch]'
+      result = exec_sql "select max(ino_id) from [gl_accvouch] where iperiod='#{iperiod}'"
       result.first['']
     end
 
