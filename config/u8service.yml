@@ -2,5 +2,6 @@ mssql:
   adapter:  sqlserver
   encoding: utf8
   host:     10.120.128.27
+  database: UFDATA_500_2011
   username: sa
   password:
