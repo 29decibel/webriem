@@ -64,7 +64,7 @@ class DocHeadsController < ApplicationController
     @doc.person=current_person
     #build some new doc details
     #if @doc.doc_type==1 or  @doc.doc_type==2
-    @doc.cp_doc_details.build 
+    # @doc.cp_doc_details.build 
     #	cp.dep=current_person.dep
 	  #end
     @doc.rec_notice_details.build if @doc.doc_type==3
@@ -186,10 +186,10 @@ class DocHeadsController < ApplicationController
 
   def search
     # trim the empty doc_type
-    if params[:search] and params[:search]['resource_type_eq'].first.blank?
-      params[:search].delete 'resource_type_eq'
+    if params[:search] 
+      params[:search].delete 'resource_type_eq' if params[:search]['resource_type_eq'].first.blank?
+      @doc_rows = DocRow.search(params[:search]).all
     end
-    @doc_rows = DocRow.search(params[:search]).all
   end
 
   #batch pay

@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
   end
 
-  create_table "cp_doc_details", :force => true do |t|
+  create_table "borrow_doc_details", :force => true do |t|
     t.integer  "sequence"
     t.integer  "dep_id"
     t.integer  "fee_id"
@@ -130,10 +130,30 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "doc_head_id"
   end
 
-  add_index "cp_doc_details", ["dep_id"], :name => "index_cp_doc_details_on_dep_id"
-  add_index "cp_doc_details", ["doc_head_id"], :name => "index_cp_doc_details_on_doc_head_id"
-  add_index "cp_doc_details", ["fee_id"], :name => "index_cp_doc_details_on_fee_id"
-  add_index "cp_doc_details", ["project_id"], :name => "index_cp_doc_details_on_project_id"
+  add_index "borrow_doc_details", ["dep_id"], :name => "index_borrow_doc_details_on_dep_id"
+  add_index "borrow_doc_details", ["doc_head_id"], :name => "index_borrow_doc_details_on_doc_head_id"
+  add_index "borrow_doc_details", ["fee_id"], :name => "index_borrow_doc_details_on_fee_id"
+  add_index "borrow_doc_details", ["project_id"], :name => "index_borrow_doc_details_on_project_id"
+
+  create_table "pay_doc_details", :force => true do |t|
+    t.integer  "sequence"
+    t.integer  "dep_id"
+    t.integer  "fee_id"
+    t.integer  "project_id"
+    t.string   "used_for"
+    t.integer  "currency_id"
+    t.decimal  "apply_amount", :precision => 16, :scale => 2
+    t.decimal  "ori_amount",   :precision => 16, :scale => 2
+    t.decimal  "rate",         :precision => 14, :scale => 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doc_head_id"
+  end
+
+  add_index "pay_doc_details", ["dep_id"], :name => "index_pay_doc_details_on_dep_id"
+  add_index "pay_doc_details", ["doc_head_id"], :name => "index_pay_doc_details_on_doc_head_id"
+  add_index "pay_doc_details", ["fee_id"], :name => "index_pay_doc_details_on_fee_id"
+  add_index "pay_doc_details", ["project_id"], :name => "index_pay_doc_details_on_project_id"
 
   create_table "currencies", :force => true do |t|
     t.string   "name"
@@ -659,6 +679,29 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   add_index "rd_work_meals", ["doc_head_id"], :name => "index_rd_work_meals_on_doc_head_id"
   add_index "rd_work_meals", ["project_id"], :name => "index_rd_work_meals_on_project_id"
 
+  create_table "rd_communicates", :force => true do |t|
+    t.integer  "sequence"
+    t.date     "meal_date"
+    t.string   "place"
+    t.integer  "people_count"
+    t.string   "person_names"
+    t.string   "reason"
+    t.integer  "doc_head_id"
+    t.decimal  "apply_amount", :precision => 16, :scale => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "rate",         :precision => 14, :scale => 4
+    t.integer  "currency_id"
+    t.decimal  "ori_amount",   :precision => 16, :scale => 2
+    t.integer  "dep_id"
+    t.integer  "project_id"
+  end
+
+  add_index "rd_communicates", ["currency_id"], :name => "index_rd_communicates_on_currency_id"
+  add_index "rd_communicates", ["dep_id"], :name => "index_rd_communicates_on_dep_id"
+  add_index "rd_communicates", ["doc_head_id"], :name => "index_rd_communicates_on_doc_head_id"
+  add_index "rd_communicates", ["project_id"], :name => "index_rd_communicates_on_project_id"
+
   create_table "rec_notice_details", :force => true do |t|
     t.integer  "sequence"
     t.date     "apply_date"
@@ -752,7 +795,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   create_table "riem_cp_offsets", :force => true do |t|
     t.integer  "reim_doc_head_id"
-    t.integer  "cp_doc_head_id"
+    t.integer  "borrow_doc_head_id"
     t.decimal  "amount",           :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"

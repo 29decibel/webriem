@@ -70,17 +70,28 @@
   <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--根据不同的单据类型render不同的单据-->
   #details
-    -if doc.doc_type<=2
+    -if doc.doc_type==1
       .doc_detail
         .form_title
           %h3
-            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:cp_doc_details 
-            = doc.doc_type==1 ? "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')}":"#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')}" 
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:borrow_doc_details 
+            = I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')
             = image_tag "currency_yuan.png"
-            %span.doc_total_amount.normal=doc.amount_for(:cp_doc_details)
+            %span.doc_total_amount.normal=doc.amount_for(:borrow_doc_details)
         .form_area
-          -f.fields_for :cp_doc_details do |builder|
-            = render :partial => 'cp_doc_detail_fields',:locals => { :f => builder,:doc=>doc } 
+          -f.fields_for :borrow_doc_details do |builder|
+            = render :partial => 'borrow_doc_detail_fields',:locals => { :f => builder,:doc=>doc } 
+    -if doc.doc_type==2
+      .doc_detail
+        .form_title
+          %h3
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:pay_doc_details 
+            = I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')
+            = image_tag "currency_yuan.png"
+            %span.doc_total_amount.normal=doc.amount_for(:pay_doc_details)
+        .form_area
+          -f.fields_for :pay_doc_details do |builder|
+            = render :partial => 'pay_doc_detail_fields',:locals => { :f => builder,:doc=>doc } 
             <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
             <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==3
@@ -190,17 +201,28 @@
         .form_area
           = f.fields_for :common_riems do |builder| 
             = render :partial => 'common_riem_fields',:locals => { :f => builder } 
-    -if doc.doc_type==10 or doc.doc_type==12
+    -if doc.doc_type==12
       .doc_detail
         .form_title
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_work_meals 
-            = doc.doc_type==10 ? "#{I18n.t('common_attr.transport_fee')}" : "#{I18n.t('common_attr.work_meal')}"
+            = I18n.t('common_attr.work_meal')
             = image_tag "currency_yuan.png"
             %span.doc_total_amount.normal=doc.amount_for :rd_work_meals
         .form_area
           = f.fields_for :rd_work_meals do |builder|  
             = render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  
+    -if doc.doc_type==10 
+      .doc_detail
+        .form_title
+          %h3
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_communicates
+            = I18n.t('common_attr.transport_fee')
+            = image_tag "currency_yuan.png"
+            %span.doc_total_amount.normal=doc.amount_for :rd_communicates
+        .form_area
+          = f.fields_for :rd_communicates do |builder|  
+            = render :partial => 'rd_communicate_fields',:locals => { :f => builder }  
           <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==11
       .doc_detail

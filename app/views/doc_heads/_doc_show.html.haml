@@ -7,15 +7,24 @@
 .form_area.doc_head_show
   =render "doc_head_show",:doc=>doc
 #details.show_only
-  -if doc.doc_type<=2 and doc.cp_doc_details.count>0
+  -if doc.doc_type==1 and doc.borrow_doc_details.count>0
     .doc_detail
       .form_title
         %h3
-          = doc.doc_type==1 ? "#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')}":"#{I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')}" 
+          = I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')
           = image_tag "currency_yuan.png"
-          %span.doc_total_amount.normal=doc.amount_for(:cp_doc_details)
+          %span.doc_total_amount.normal=doc.amount_for(:borrow_doc_details)
       .form_area
-        =render :partial=>"cp_doc_detail_show",:collection=>doc.cp_doc_details,:as=>:d_item
+        =render :partial=>"borrow_doc_detail_show",:collection=>doc.borrow_doc_details,:as=>:d_item
+  -if doc.doc_type==2 and doc.pay_doc_details.count>0
+    .doc_detail
+      .form_title
+        %h3
+          = I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')
+          = image_tag "currency_yuan.png"
+          %span.doc_total_amount.normal=doc.amount_for(:pay_doc_details)
+      .form_area
+        =render :partial=>"pay_doc_detail_show",:collection=>doc.pay_doc_details,:as=>:d_item
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==3 and doc.rec_notice_details.count>0
@@ -111,15 +120,24 @@
           %span.doc_total_amount.normal=doc.amount_for(:common_riems)
       .form_area
         =render :partial=>"common_riem_show",:collection=>doc.common_riems,:as=>:d_item
-  -if doc.doc_type==10 or doc.doc_type==12 and doc.rd_work_meals.count>0
+  -if doc.doc_type==12 and doc.rd_work_meals.count>0
     .doc_detail
       .form_title
         %h3
-          = doc.doc_type==10 ? "#{I18n.t('common_attr.transport_fee')}" : "#{I18n.t('common_attr.work_meal')}"
+          = I18n.t('common_attr.work_meal')
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=doc.amount_for(:rd_work_meals)
       .form_area
         =render :partial=>"rd_work_meal_show",:collection=>doc.rd_work_meals,:as=>:d_item
+  -if doc.doc_type==10 and doc.rd_communicates.count>0
+    .doc_detail
+      .form_title
+        %h3
+          = I18n.t('common_attr.transport_fee')
+          = image_tag "currency_yuan.png"
+          %span.doc_total_amount.normal=doc.amount_for(:rd_communicates)
+      .form_area
+        =render :partial=>"rd_communicate_show",:collection=>doc.rd_communicates,:as=>:d_item
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==11
     -if doc.rd_extra_work_meals.count>0

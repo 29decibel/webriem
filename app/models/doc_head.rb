@@ -31,12 +31,14 @@ class DocHead < ActiveRecord::Base
 
 
   has_many :recivers, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
-  has_many :cp_doc_details, :class_name => "CpDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
+  has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
+  has_many :pay_doc_details, :class_name => "PayDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :rec_notice_details,:class_name=>"RecNoticeDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_travels, :class_name => "RdTravel", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_transports, :class_name => "RdTransport", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_lodgings, :class_name => "RdLodging",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_work_meals, :class_name => "RdWorkMeal",:foreign_key=>"doc_head_id",:dependent=>:destroy
+  has_many :rd_communicates, :class_name => "RdCommunicate",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_extra_work_cars, :class_name => "RdExtraWorkCar",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_extra_work_meals, :class_name => "RdExtraWorkMeal",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_benefits, :class_name => "RdBenefit",:foreign_key=>"doc_head_id",:dependent=>:destroy
@@ -53,7 +55,8 @@ class DocHead < ActiveRecord::Base
 
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
   accepts_nested_attributes_for :recivers, :allow_destroy => true
-  accepts_nested_attributes_for :cp_doc_details , :allow_destroy => true
+  accepts_nested_attributes_for :borrow_doc_details , :allow_destroy => true
+  accepts_nested_attributes_for :pay_doc_details , :allow_destroy => true
   accepts_nested_attributes_for :rec_notice_details , :allow_destroy => true
   accepts_nested_attributes_for :inner_remittance , :allow_destroy => true
   accepts_nested_attributes_for :inner_transfer , :allow_destroy => true
@@ -66,6 +69,7 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_common_transports , :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_cars , :allow_destroy => true
   accepts_nested_attributes_for :rd_work_meals , :allow_destroy => true
+  accepts_nested_attributes_for :rd_communicates , :allow_destroy => true
   accepts_nested_attributes_for :rd_lodgings , :allow_destroy => true
   accepts_nested_attributes_for :rd_travels , :allow_destroy => true
   accepts_nested_attributes_for :rd_transports , :allow_destroy => true
@@ -103,7 +107,7 @@ class DocHead < ActiveRecord::Base
   end
 
   def project_not_null_if_charge
-    errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and cp_doc_details.size>0 and !cp_doc_details.all? {|c| c.project_id!=nil}
+    errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and borrow_doc_details.size>0 and !borrow_doc_details.all? {|c| c.project_id!=nil}
   end
   def must_equal
     #errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
@@ -150,8 +154,11 @@ class DocHead < ActiveRecord::Base
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_total_apply_amount
     total=0
-    if doc_type==1 or doc_type==2
-      total+= amount_for :cp_doc_details
+    if doc_type==1
+      total+= amount_for :borrow_doc_details
+    end
+    if doc_type==2
+      total+= amount_for :pay_doc_details
     end
     if doc_type==3
       total+= amount_for :rec_notice_details
@@ -188,7 +195,7 @@ class DocHead < ActiveRecord::Base
       end
     end
     if doc_type==12
-      %w(rd_common_transports rd_work_meals common_riems).each do |rd|
+      %w(rd_common_transports rd_communicates common_riems).each do |rd|
         total+=amount_for rd
       end
     end

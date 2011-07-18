@@ -1,5 +1,5 @@
 #coding: utf-8
-class RdWorkMeal < ActiveRecord::Base
+class RdCommunicate < ActiveRecord::Base
   before_save :set_apply_amount
   def set_apply_amount
     self.apply_amount = self.rate * self.ori_amount
@@ -27,6 +27,6 @@ class RdWorkMeal < ActiveRecord::Base
   validates_presence_of :dep_id
   validates_presence_of :project_id
   def fcm
-    FeeCodeMatch.find_by_fee_code("0102")
+    FeeCodeMatch.find_by_fee_code("02")
   end
 end

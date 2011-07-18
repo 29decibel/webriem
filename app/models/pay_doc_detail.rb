@@ -1,5 +1,5 @@
 #coding: utf-8
-class CpDocDetail < ActiveRecord::Base
+class PayDocDetail < ActiveRecord::Base
 
   before_save :set_apply_amount
   def set_apply_amount

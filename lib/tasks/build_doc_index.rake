@@ -5,8 +5,8 @@ task :build_doc_index => :environment do
   puts 'first delete all datarows....'
   DocRow.delete_all
   puts 'deleted....'
-  resources = %w(CpDocDetail RdBenefit RdCommonTransport RdExtraWorkCar RdExtraWorkMeal RdLodging RdTransport 
-                RdTravel RdWorkMeal OtherRiem)
+  resources = %w(BorrowDocDetail PayDocDetail RdBenefit RdCommonTransport RdExtraWorkCar RdExtraWorkMeal RdLodging RdTransport 
+                RdTravel RdWorkMeal OtherRiem RdCommunicate)
   resources.each do |resource|
     puts "begin index #{resource}"
     model = Kernel.const_get(resource)

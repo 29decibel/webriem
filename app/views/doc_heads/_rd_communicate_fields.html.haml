@@ -1,0 +1,35 @@
+%fieldset
+  %legend
+    = f.hidden_field(:_destroy) 
+    = link_to_remove 
+  %span.sequence
+  .form_field
+    %span.label= "#{I18n.t('common_attr.project')}"
+    %span.value= ts "project_id","Project",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
+  .form_field
+    %span.label= "#{I18n.t('common_attr.place')}"
+    %span.value= f.text_field :place,:class=>"normal" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.date')}"
+    %span.value= f.text_field :meal_date,:class=>"datepicker normal" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.people_count')}"
+    %span.value= f.text_field :people_count,:class=>"xsmall" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.join_together_person')}"
+    %span.value= f.text_field :person_names,:class=>"middle" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.reason')}"
+    %span.value= f.text_field :reason,:class=>"middle" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.currency')}"
+    %span.value= ts "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
+  .form_field
+    %span.label= "#{I18n.t('common_attr.rate')}"
+    %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.ori_amount')}"
+    %span.value= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" 
+  .form_field
+    %span.label= "#{I18n.t('common_attr.apply_amount')}"
+    %span.value= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number"
