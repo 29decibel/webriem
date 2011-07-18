@@ -7,7 +7,6 @@ module U8service
     U8ServiceURL="http://10.120.128.28:8008/Service1.asmx"
 
     def self.send_vouch(vmodel)
-      vmodel = Vouch.new
       insert_cmd = "insert into GL_accvouch( iperiod,  csign,  isignseq,
                     ino_id,  inid,  dbill_date,  idoc,cbill,  cdigest,  ccode,  cexch_name,
                     md, mc,  md_f, mc_f,  nfrat,  cdept_id,cperson_id,  citem_id,  citem_class, ccode_equal) 
