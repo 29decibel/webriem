@@ -11,7 +11,7 @@ module U8service
       insert_cmd = "insert into GL_accvouch( iperiod,  csign,  isignseq,
                     ino_id,  inid,  dbill_date,  idoc,cbill,  cdigest,  ccode,  cexch_name,
                     md, mc,  md_f, mc_f,  nfrat,  cdept_id,cperson_id,  citem_id,  citem_class, ccode_equal) 
-                    values('#{Time.now.month}','#{记}','1',
+                    values('#{Time.now.month}','记','1',
                     '#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}','#{vmodel.cbill}','ExpenseSys:#{vmodel.doc_no}','#{vmodel.ccode}','#{vmodel.cexch_name}',
                     #{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}')"
       result = exe_sql(insert_cmd)
