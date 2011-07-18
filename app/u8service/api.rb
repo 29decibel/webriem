@@ -3,7 +3,7 @@ module U8service
   class API
     ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
     EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
-    U8ServiceURL="http://10.120.128.27:8008/Service1.asmx"
+    U8ServiceURL="http://10.120.128.28:8008/Service1.asmx"
     #the database name current
     #UFDATA_500_2011 configured in the system_configs table
     #GenerateAccVouch      
@@ -44,9 +44,8 @@ module U8service
       generate_vouch(options)
     end
     def self.generate_vouch_from_doc(vmodel)
-      #永远忽略存储的凭证id，要临时获取一个当前最大的值+1
       options={
-        :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{vmodel.dbill_date}",
+        :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{Time.now.to_date}",
         :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"#{vmodel.doc_no}",
         :ccode=>"#{vmodel.ccode}",# dai kemu
         :cexch_name=>"#{vmodel.cexch_name}",#currency name

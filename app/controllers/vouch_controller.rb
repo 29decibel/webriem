@@ -6,7 +6,7 @@ class VouchController < ApplicationController
   def index
     @docs=DocHead.where("id in (#{params[:doc_ids]}) and mark='ok'").all
     rg_all=(params[:rg]=="true")
-    @docs.each {|d| d.rg_vouches if (rg_all or d.vouches.count==0) }
+    @docs.each {|d| d.rg_vouches(current_user.person.name) if (rg_all or d.vouches.count==0) }
   end
   def rg_vouch
     @doc=DocHead.find(params[:doc_id])
@@ -31,14 +31,14 @@ class VouchController < ApplicationController
           vouch_no=U8service::API.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
         end
         #begin generate
-        #@doc.vouches.each do |v|
-        #  v.ino_id=vouch_no
-        #  msg=U8service::API.generate_vouch_from_doc v
-        #  if msg!="OK"
-        #    @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
-        #    return
-        #  end
-        #end
+        @doc.vouches.each do |v|
+          v.ino_id=vouch_no
+          msg=U8service::API.generate_vouch_from_doc v
+          if msg!="OK"
+            @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
+            return
+          end
+        end
       end
     end
   end
@@ -87,3 +87,4 @@ class VouchController < ApplicationController
     end
   end
 end
+
