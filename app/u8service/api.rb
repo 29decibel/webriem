@@ -60,7 +60,7 @@ module U8service
     end
 
     def self.exec_sql(sql)
-      client = TinyTds::Client.new($config[:mssql])
+      client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'')
       client.execute(sql).each
     end
     #here is the config info of current year's info
