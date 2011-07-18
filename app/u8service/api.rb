@@ -14,7 +14,8 @@ module U8service
                     values('#{Time.now.month}','记','1',
                     '#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}','#{vmodel.cbill}','ExpenseSys:#{vmodel.doc_no}','#{vmodel.ccode}','#{vmodel.cexch_name}',
                     #{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}')"
-      result = exe_sql(insert_cmd)
+      puts 'begin insert into u8 database of vouch .....'
+      result = exec_sql(insert_cmd)
       result.insert
     end
 
