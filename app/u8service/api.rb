@@ -1,5 +1,5 @@
 #coding: utf-8
-$config = YAML::load(File.open(Rails.root.join('config/u8service.yml')))
+$config = YAML::load(File.open(Rails.root.join('config/u8service.yml'))).symbolize
 module U8service
   class API
     ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
@@ -60,7 +60,7 @@ module U8service
     end
 
     def self.exec_sql(sql)
-      client = TinyTds::Client.new($config['mssql'])
+      client = TinyTds::Client.new($config[:mssql])
       client.execute(sql).each
     end
     #here is the config info of current year's info
