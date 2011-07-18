@@ -6,7 +6,8 @@ module U8service
     EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
     U8ServiceURL="http://10.120.128.28:8008/Service1.asmx"
 
-    def self.generate_vouch_from_doc(vmodel)
+    def self.send_vouch(vmodel)
+      vmodel = Vouch.new
       insert_cmd = "insert into GL_accvouch( iperiod,  csign,  isignseq,
                     ino_id,  inid,  dbill_date,  idoc,cbill,  cdigest,  ccode,  cexch_name,
                     md, mc,  md_f, mc_f,  nfrat,  cdept_id,cperson_id,  citem_id,  citem_class, ccode_equal) 
@@ -14,7 +15,7 @@ module U8service
                     '#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}','#{vmodel.cbill}','ExpenseSys:#{vmodel.doc_no}','#{vmodel.ccode}','#{vmodel.cexch_name}',
                     #{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}')"
       result = exe_sql(insert_cmd)
-      generate_vouch(options)["Result"]
+      result.insert
     end
 
     def self.exist_vouch(doc_no)
@@ -22,7 +23,7 @@ module U8service
       result.first['']>0
     end
 
-    def self.max_vouch_info(iperiod)
+    def self.max_vouch_no(iperiod)
       result = exec_sql "select max(ino_id) from [gl_accvouch] where iperiod='#{iperiod}'"
       result.first['']
     end
