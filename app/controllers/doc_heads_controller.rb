@@ -184,13 +184,7 @@ class DocHeadsController < ApplicationController
     end
   end
 
-  def search
-    # trim the empty doc_type
-    if params[:search] 
-      params[:search].delete 'resource_type_eq' if params[:search]['resource_type_eq'].first.blank?
-      @doc_rows = DocRow.search(params[:search]).all
-    end
-  end
+
 
   #batch pay
   def batch_pay
