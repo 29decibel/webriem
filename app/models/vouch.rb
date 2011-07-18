@@ -37,4 +37,3 @@ class Vouch < ActiveRecord::Base
     person==nil ? "" : person.name
   end
 end
-

@@ -7,19 +7,21 @@ class Accvouch < ActiveRecord::Base
     self.csign="记"
     self.isignseq = 1
   end
-  def self.max_no(iperiod)
-    Accvouch.where('iperiod=?',iperiod).max(:ino_id)
+  # current
+  def self.max_no
+    Accvouch.where('iperiod=?',Time.now.month).max(:ino_id)
   end
   def self.exist? doc_no
     Accvouch.exists?("cdigest like '%#{doc_no}%'")
   end
   def self.g_vouch doc
+    result = true
     doc.vouches.each do |v|
       accv = Account.new
       accv.ino_id = v.ino_id
       accv.inid = v.inid
-      accv.dbill_date = v.dbill_date
-      accv.iperiod = v.dbill_date.month
+      accv.dbill_date = Time.now.to_date
+      accv.iperiod = Time.now.month
       accv.citem_class = '00'
       accv.idoc = v.idoc
       accv.cbill = v.cbill
@@ -39,12 +41,13 @@ class Accvouch < ActiveRecord::Base
 
       accv.cdigest = "ExpenseSys:#{doc_no}"
       begin
-        accv.save
+        result = accv.save and result
       rescue 
         # accv.where('ino_id=? and iperiod=?',v.ino_id,v.dbill_date.month).delete_all
         logger.error "???? Generate vouch error #{doc.doc_no}"
       end
     end
+    result
   end
 end
 

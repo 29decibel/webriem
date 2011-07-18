@@ -87,4 +87,3 @@ class VouchController < ApplicationController
     end
   end
 end
-
