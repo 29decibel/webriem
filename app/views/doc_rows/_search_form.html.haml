@@ -15,6 +15,9 @@
   .search_field
     %span.label 单据类型
     %span.value= f.select 'resource_type_eq',DocRow::DocResourceTypes.to_a,:include_blank=>true
+  .search_field
+    %span.label 单据状态
+    %span.value= f.select 'doc_state_eq',DocHead::Doc_State.map{|k,v| [v,k]},:include_blank=>true
   .search_field.clear
     %span.label 申请日期区间
     %span.value
