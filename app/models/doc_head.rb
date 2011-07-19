@@ -154,7 +154,7 @@ class DocHead < ActiveRecord::Base
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_total_apply_amount
     total=0
-    if doc_type==1
+    if self.doc_type==1
       total+= amount_for :borrow_doc_details
     end
     if doc_type==2

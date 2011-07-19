@@ -1,0 +1,175 @@
+/* line 1, ../../../app/stylesheets/rails_admin/form.scss */
+form fieldset {
+  border: none;
+  margin-bottom: 15px;
+}
+
+/* line 6, ../../../app/stylesheets/rails_admin/form.scss */
+form legend {
+  width: 100%;
+  clear: both;
+  margin-top: 2px;
+  margin-bottom: 3px;
+  border-bottom: 1px solid #b9b9b9;
+  padding-bottom: 4px;
+  color: #9e988e;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+/* line 19, ../../../app/stylesheets/rails_admin/form.scss */
+form p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 1px;
+}
+
+/* line 25, ../../../app/stylesheets/rails_admin/form.scss */
+form a {
+  color: #000;
+}
+
+/* line 29, ../../../app/stylesheets/rails_admin/form.scss */
+form a.createAssociatedRecord {
+  line-height: 24px;
+  margin-left: 10px;
+}
+
+/* line 34, ../../../app/stylesheets/rails_admin/form.scss */
+form label {
+  width: 100px;
+  display: block;
+  float: left;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+/* line 44, ../../../app/stylesheets/rails_admin/form.scss */
+form label.inline {
+  display: inline;
+  float: none;
+  font-weight: normal;
+}
+
+/* line 51, ../../../app/stylesheets/rails_admin/form.scss */
+.field {
+  padding: 15px 0 0 0;
+}
+
+/* line 55, ../../../app/stylesheets/rails_admin/form.scss */
+.field .input {
+  margin-left: 103px;
+}
+
+/* line 59, ../../../app/stylesheets/rails_admin/form.scss */
+.field .row {
+  margin: 10px 0;
+}
+
+/* line 72, ../../../app/stylesheets/rails_admin/form.scss */
+.field .date,
+.field .datetime,
+.field .decimal,
+.field .float,
+.field .integer,
+.field .text,
+.field .time,
+.field .timestamp,
+.field .password,
+.field .string {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 12px;
+  padding: 5px;
+  width: 250px;
+  border-left: 1px solid #e2e3ea;
+  border-top: 1px solid #abadb3;
+  border-bottom: 1px solid #e3e9ef;
+  border-right: 1px solid #dbdfe6;
+}
+
+/* line 83, ../../../app/stylesheets/rails_admin/form.scss */
+.field .boolean {
+  float: left;
+  margin-top: 6px;
+}
+
+/* line 88, ../../../app/stylesheets/rails_admin/form.scss */
+.field .decimal {
+  width: 170px;
+}
+
+/* line 92, ../../../app/stylesheets/rails_admin/form.scss */
+.field .float {
+  width: 120px;
+}
+
+/* line 96, ../../../app/stylesheets/rails_admin/form.scss */
+.field .date, .field .timestamp, .field .time, .field .datetime {
+  padding-right: 20px;
+  width: 150px;
+}
+
+/* line 101, ../../../app/stylesheets/rails_admin/form.scss */
+.field .date, .field .datetime {
+  background: url("../../images/rails_admin/calendar.png") no-repeat right;
+}
+
+/* line 105, ../../../app/stylesheets/rails_admin/form.scss */
+.field .time, .field .timestamp {
+  background: url("../../images/rails_admin/clock.png") no-repeat right;
+}
+
+/* line 109, ../../../app/stylesheets/rails_admin/form.scss */
+.ui-datepicker .ui-datepicker-today .ui-state-highlight {
+  border-color: #4F4F4F;
+}
+
+/* line 111, ../../../app/stylesheets/rails_admin/form.scss */
+.field .integer {
+  width: 90px;
+}
+
+/* line 115, ../../../app/stylesheets/rails_admin/form.scss */
+.field .text {
+  height: 100px;
+  width: 450px;
+}
+
+/* line 120, ../../../app/stylesheets/rails_admin/form.scss */
+.errorField {
+  border: 1px solid #bd2b14;
+}
+
+/* line 124, ../../../app/stylesheets/rails_admin/form.scss */
+.errorMessage {
+  display: block;
+  margin-top: 5px;
+  margin-left: 103px;
+  color: #bd2b14;
+}
+
+/* line 131, ../../../app/stylesheets/rails_admin/form.scss */
+p.help {
+  clear: both;
+  padding-top: 2px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  font-size: 10px;
+  margin-left: 103px;
+  display: block;
+  font-style: italic;
+  color: #999;
+}
+
+/* line 143, ../../../app/stylesheets/rails_admin/form.scss */
+.cke_skin_kama {
+  margin-left: 100px;
+}
+
+/* line 147, ../../../app/stylesheets/rails_admin/form.scss */
+.createAssociatedRecordDialog li.save.add, .createAssociatedRecordDialog li.save.edit {
+  display: none;
+}

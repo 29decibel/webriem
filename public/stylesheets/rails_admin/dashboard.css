@@ -1,0 +1,104 @@
+/* line 1, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#modelNameHeader {
+  margin-left: 5px;
+  text-align: left;
+}
+
+/* line 6, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.grid tbody td.modelNameRow {
+  text-align: left;
+  margin-left: 5px;
+}
+
+/* line 11, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.grid tbody td {
+  padding: 4px;
+  border: none;
+}
+
+/* line 16, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.scale {
+  margin: 0 auto;
+  display: block;
+  width: 200px;
+  height: 13px;
+}
+
+/* line 23, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.scale .bar {
+  display: block;
+  height: 100%;
+}
+
+/* line 28, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.add {
+  color: #9a012f;
+  font-weight: bold;
+  text-decoration: none;
+  padding-right: 3px;
+}
+
+/* line 35, ../../../app/stylesheets/rails_admin/dashboard.scss */
+a.add:hover {
+  text-decoration: underline;
+}
+
+/* line 39, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.show {
+  padding-left: 3px;
+  color: #215086;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* line 46, ../../../app/stylesheets/rails_admin/dashboard.scss */
+a.show:hover {
+  text-decoration: underline;
+}
+
+/* line 50, ../../../app/stylesheets/rails_admin/dashboard.scss */
+.section h2 {
+  margin-top: 2px;
+  font-size: 12px;
+  border-bottom: 1px solid #DDD;
+  padding-bottom: 4px;
+  font-weight: normal;
+  padding-left: 5px;
+  margin-top: 5px;
+}
+
+/* line 60, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#listing {
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
+/* line 65, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#history {
+  list-style-type: none;
+}
+
+/* line 69, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#history li {
+  padding-bottom: 8px;
+}
+
+/* line 73, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#history li a img {
+  border: none;
+  position: relative;
+  top: 4px;
+  left: 2px;
+}
+
+/* line 80, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#history li em {
+  font-style: normal;
+  text-decoration: underline;
+}
+
+/* line 85, ../../../app/stylesheets/rails_admin/dashboard.scss */
+#history li {
+  font-size: 11px;
+  font-weight: bold;
+}
