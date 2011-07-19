@@ -21,6 +21,7 @@ gem 'rest-client'
 
 # sudo brew install freetds (on mac os)
 gem "tiny_tds", "~> 0.4.5"
+gem "activerecord-sqlserver-adapter-2000", "~> 3.0.15"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
