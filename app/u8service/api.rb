@@ -44,19 +44,31 @@ module U8service
       generate_vouch(options)
     end
     def self.generate_vouch_from_doc(vmodel)
-      options={
-        :ino_id=>"#{vmodel.ino_id}",:inid=>"#{vmodel.inid}",:dbill_date=>"#{Time.now.to_date}",
-        :idoc=>"#{vmodel.idoc}",:cbill=>"#{vmodel.cbill}",:doc_no=>"#{vmodel.doc_no}",
-        :ccode=>"#{vmodel.ccode}",# dai kemu
-        :cexch_name=>"#{vmodel.cexch_name}",#currency name
-        :md=>"#{vmodel.md}",:mc=>"#{vmodel.mc}",:md_f=>"#{vmodel.md_f}",:mc_f=>"#{vmodel.mc_f}",
-        :nfrat=>"#{vmodel.nfrat}",# currency rate
-        :cdept_id=>"#{vmodel.cdept_id}",# dep code
-        :cperson_id=>"#{vmodel.cperson_id}",#person code
-        :citem_id=>"#{vmodel.citem_id}",#project code
-        :ccode_equal=>"#{vmodel.ccode_equal}"}
-      generate_vouch(options)["Result"]
+      insert_cmd = "insert into GL_accvouch( iperiod,  csign,  isignseq,
+              ino_id,  inid,  dbill_date,  idoc,cbill,  cdigest,  ccode,  cexch_name,
+              md, mc,  md_f, mc_f,  nfrat,  cdept_id,cperson_id,  citem_id,  citem_class, ccode_equal,iyear,iYPeriod) 
+              values('#{Time.now.month}','记','1',
+              '#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}','#{vmodel.cbill}','TTTTExpenseSys:#{vmodel.doc_no}','#{vmodel.ccode}','#{vmodel.cexch_name}',
+              #{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}',
+             '#{Time.now.year}','#{Time.now.strftime('%Y%m')}')"
+      puts 'begin insert into u8 database of vouch .....'
+      puts insert_cmd
+      result_msg = ''
+      begin 
+        result = exec_sql(insert_cmd)
+        result_msg = result.insert
+      rescue
+        puts "error when insert #{$1}"
+        result_msg = $1
+      end
+      result_msg
     end
+
+    def self.exec_sql(sql)
+      client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'')
+      client.execute(sql).each
+    end
+    
     def self.exist_vouch(doc_no)
       JSON get("IsVouchExist",{:doc_no=>doc_no})
     end
