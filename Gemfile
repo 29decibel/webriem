@@ -24,17 +24,6 @@ gem "tiny_tds", "~> 0.4.5"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem "will_paginate", "~> 3.0.pre2"
-gem "paperclip"
-gem "parseexcel"
-gem "excelsior"
-gem "prawn"
-gem "rufus-scheduler"
-gem "activerecord-sqlserver-adapter"
-gem 'admin_data'
-gem 'ruby-ole'
-gem 'spreadsheet'
-gem 'rest-client'
 #gem 'iconv'
 
 gem 'whenever', :require => false
