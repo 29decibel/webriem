@@ -49,7 +49,7 @@ module U8service
               md, mc,  md_f, mc_f,  nfrat,  cdept_id,cperson_id,  citem_id,  citem_class, ccode_equal,iyear,iYPeriod) 
               values('#{Time.now.month}','记','1',
               '#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}','#{vmodel.cbill}','TTTTExpenseSys:#{vmodel.doc_no}','#{vmodel.ccode}','#{vmodel.cexch_name}',
-              #{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}',
+              #{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}','#{vmodel.cperson_id}','#{vmodel.citem_id}','00','#{vmodel.ccode_equal}',
              '#{Time.now.year}','#{Time.now.strftime('%Y%m')}')"
       puts 'begin insert into u8 database of vouch .....'
       puts insert_cmd
