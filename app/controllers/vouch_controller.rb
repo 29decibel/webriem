@@ -77,8 +77,8 @@ class VouchController < ApplicationController
     p_doc_ids=params[:doc_ids]
     #filter the docs which already generated
     doc_ids = p_doc_ids.select do |doc_id|
-      result=U8service::API.exist_vouch(doc_id)
-      !result["Exist"] #存在的都筛选掉了
+      # filter exists
+      !U8service::API.exist_vouch(doc_id)
     end
     #generate 
     doc_ids.each do |doc_id|
