@@ -51,7 +51,6 @@ module U8service
       result_msg = ''
       begin 
         result = exec_sql(insert_cmd)
-        result_msg = result.insert
       rescue Exception => error
         puts "error when insert #{error}"
         result_msg = error
