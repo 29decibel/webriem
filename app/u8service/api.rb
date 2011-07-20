@@ -61,7 +61,7 @@ module U8service
 
     def self.exec_sql(sql)
       client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'',:encoding=>'GBK')
-      client.execute(sql.encode('GBK')).each
+      client.execute(sql.encode('GBK')).do
     end
     
     def self.exist_vouch(doc_no)
