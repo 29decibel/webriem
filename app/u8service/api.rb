@@ -4,45 +4,21 @@ module U8service
     ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
     EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
     U8ServiceURL="http://10.120.128.28:8008/Service1.asmx"
-    #the database name current
-    #UFDATA_500_2011 configured in the system_configs table
-    #GenerateAccVouch      
-       #<dbname>string</dbname>
-       #<ino_id>short</ino_id>
-       #<inid>short</inid>
-       #<dbill_date>string</dbill_date>
-       #<idoc>short</idoc>
-       #<cbill>string</cbill>
-       #<cdigest>string</cdigest>
-       #<ccode>string</ccode>
-       #<cexch_name>string</cexch_name>
-       #<md>decimal</md>
-       #<mc>decimal</mc>
-       #<md_f>decimal</md_f>
-       #<mc_f>decimal</mc_f>
-       #<nfrat>double</nfrat>
-       #<cdept_id>string</cdept_id>
-       #<cperson_id>string</cperson_id>
-       #<citem_id>string</citem_id>
-       #<citem_class>string</citem_class>
-       #<ccode_equal>string</ccode_equal> 
-    def self.generate_vouch(options)
-      JSON get("GenerateAccVouch",options)
-    end
-    def self.test_g_vouch
-      options={
-        :ino_id=>"10000",:inid=>"4444",:dbill_date=>"2011-3-1",
-        :idoc=>"999",:cbill=>"mike",:doc_no=>"8989898989",
-        :ccode=>"55011001",# dai kemu
-        :cexch_name=>"rmb",#currency name
-        :md=>"121212",:mc=>"0",:md_f=>"121212",:mc_f=>"0",
-        :nfrat=>"1",# currency rate
-        :cdept_id=>"100901",# dep code
-        :cperson_id=>"CS10011",#person code
-        :citem_id=>"OTH-99",#project code
-        :ccode_equal=>""}
-      generate_vouch(options)
-    end
+
+    #def self.test_g_vouch
+    #  options={
+    #    :ino_id=>"10000",:inid=>"4444",:dbill_date=>"2011-3-1",
+    #    :idoc=>"999",:cbill=>"mike",:doc_no=>"8989898989",
+    #    :ccode=>"55011001",# dai kemu
+    #    :cexch_name=>"rmb",#currency name
+    #    :md=>"121212",:mc=>"0",:md_f=>"121212",:mc_f=>"0",
+    #    :nfrat=>"1",# currency rate
+    #    :cdept_id=>"100901",# dep code
+    #    :cperson_id=>"CS10011",#person code
+    #    :citem_id=>"OTH-99",#project code
+    #    :ccode_equal=>""}
+    #  generate_vouch(options)
+    #end
     def self.generate_vouch_from_doc(vmodel)
       insert_cmd = "insert into GL_accvouch (iperiod,csign,isignseq,ino_id,inid,dbill_date,idoc,cbill,cdigest,ccode,cexch_name,md,mc, md_f, mc_f, nfrat,cdept_id,cperson_id,citem_id, citem_class, ccode_equal,iyear,iYPeriod) 
               values('#{Time.now.month}',N'记','1','#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}',N'#{vmodel.cbill}',N'OES_V0.1:#{vmodel.doc_no}','#{vmodel.ccode}',N'#{vmodel.cexch_name}',#{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id.blank? ? 'null' : "'#{vmodel.cperson_id}'"},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}','#{Time.now.year}','#{Time.now.strftime('%Y%m')}')"
@@ -63,19 +39,30 @@ module U8service
 
     def self.exec_sql(sql)
       client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'',:encoding=>'GBK')
-      client.execute(sql.encode('GBK')).do
+      if sql.start_with? 'select'
+        client.execute(sql.encode('GBK')).each
+      else
+        client.execute(sql.encode('GBK')).do
+      end
     end
 
     def self.remove_vouch doc_no
-      delete_cmd = "delete gl_accvouch where cdigest like '%#{doc_no}%'"
-      self.exec_sql delete_cmd
+      # make sure the doc_no is valid
+      if doc_no.length > 8
+        delete_cmd = "delete gl_accvouch where cdigest like '%#{doc_no}%'"
+        self.exec_sql delete_cmd
+      else
+        "doc no is not valid, please check if it ok"
+      end
     end
 
     def self.exist_vouch(doc_no)
-      JSON get("IsVouchExist",{:doc_no=>doc_no})
+      select_cmd = "select count(*) from gl_accvouch where cdigest like '%#{doc_no}%'"
+      self.exec_sql(select_cmd).first[""] > 0
     end
-    def self.max_vouch_info(iperiod)
-      JSON get("GetMaxVouchInfo",{:iperiod=>iperiod})
+    def self.max_ino_id
+      select_cmd = "select max(ino_id) from GL_accvouch where iperiod='#{Time.now.month}'"
+      self.exec_sql(select_cmd).first[""]
     end
     def self.get_codes
       JSON get("GetCodes")
