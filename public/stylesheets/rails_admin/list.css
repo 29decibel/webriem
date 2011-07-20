@@ -1,46 +1,46 @@
-/* line 1, ../../../app/stylesheets/rails_admin/list.scss */
 .grid {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse:collapse;
 }
 
-/* line 6, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th {
-  border-bottom: 2px solid #b9b9b9;
-  padding: 9px 0;
-  text-align: center;
+  padding: 9px 0 9px 5px;
 }
 
-/* line 12, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th a {
-  display: inline-block;
   background-repeat: no-repeat;
   background-position: right;
-  text-decoration: none;
-  color: #000;
-}
-
-/* line 20, ../../../app/stylesheets/rails_admin/list.scss */
-.grid thead th.selected a {
+  /* so as to not strech when selected: */
   padding: 0 20px 0 0;
 }
 
-/* line 24, ../../../app/stylesheets/rails_admin/list.scss */
+.grid thead th.selected a {
+  /* to accomodate the sort arrow: */
+  padding: 0 20px 0 0;
+  font-weight:bold;
+}
+
 .grid thead th a.ascending {
   background-image: url(../../images/rails_admin/bullet_arrow_up.png);
 }
 
-/* line 28, ../../../app/stylesheets/rails_admin/list.scss */
 .grid thead th a.descending {
   background-image: url(../../images/rails_admin/bullet_arrow_down.png);
 }
 
-/* line 32, ../../../app/stylesheets/rails_admin/list.scss */
-.grid tbody .boolean {
-  margin-bottom: -5px;
+.grid tr.link:hover {
+  background-color: #B9DAFC;
+  cursor: pointer;
 }
 
-/* line 39, ../../../app/stylesheets/rails_admin/list.scss */
+.grid .checker {
+  padding: 0px 5px;
+}
+
+.grid tbody .boolean {
+  margin-bottom:-5px;
+}
+
 .grid tbody .date,
 .grid tbody .datetime,
 .grid tbody .time,
@@ -48,105 +48,60 @@
   white-space: nowrap;
 }
 
-/* line 43, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .other a {
-  padding-left: 2px;
-  padding-right: 2px;
-  text-decoration: none;
-  border: 1px solid #B9B9B9;
-  background: #FFF;
-  color: #494949;
+  padding-left:2px;
+  padding-right:2px;
+  text-decoration:none;
+  border:1px solid #B9B9B9;
+  background:#FFF;
+  color:#494949;
 }
 
-/* line 52, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody .other a:hover {
-  border: 1px solid #494949;
+  border:1px solid #494949;
 }
 
-/* line 56, ../../../app/stylesheets/rails_admin/list.scss */
-.grid tbody .action a {
-  text-decoration: none;
-  font-weight: bold;
+.grid tbody td.last {
+  white-space: nowrap;
 }
 
-/* line 61, ../../../app/stylesheets/rails_admin/list.scss */
-.grid tbody .action a:hover {
-  text-decoration: underline;
+.grid thead th.first {
+  padding-left: 5px;
 }
 
-/* line 65, ../../../app/stylesheets/rails_admin/list.scss */
-.grid .action.edit a {
-  color: #5182ab;
-}
-
-/* line 69, ../../../app/stylesheets/rails_admin/list.scss */
-.grid .action.delete a {
-  color: #ad0208;
-}
-
-/* line 73, ../../../app/stylesheets/rails_admin/list.scss */
-.grid thead .action {
-  font-size: 10px;
-  margin-top: 1px;
-}
-
-/* line 78, ../../../app/stylesheets/rails_admin/list.scss */
-.grid thead .selected {
-  font-weight: bold;
-}
-
-/* line 82, ../../../app/stylesheets/rails_admin/list.scss */
 .grid tbody td {
-  border-bottom: 1px solid #b9b9b9;
-  padding: 9px 0;
+  padding: 7px 5px;
+}
+
+.grid tbody td.boolean, .grid thead th.boolean {
   text-align: center;
 }
-
-/* line 88, ../../../app/stylesheets/rails_admin/list.scss */
-.grid tbody .even {
-  background: #f2f2f2;
+.grid tbody td.boolean {
+  padding: 0 20px 0 0;
 }
 
-/* line 92, ../../../app/stylesheets/rails_admin/list.scss */
-.grid .pagination {
-  padding-top: 10px;
+.filter {
+  display:block;
+  float:left;
+  margin-top:10px;
 }
 
-/* line 96, ../../../app/stylesheets/rails_admin/list.scss */
-.grid .pagination a {
-  background: #FFF;
-  color: #000;
-  border: 1px solid #DDD;
-  padding: 6px;
-  padding-top: 3px;
-  padding-bottom: 4px;
-  text-decoration: none;
+.filter>* {
+  display:block;
+  float:left;
 }
 
-/* line 106, ../../../app/stylesheets/rails_admin/list.scss */
-.grid .pagination a:hover {
-  background: #EEE;
-  border: 1px solid #494949;
+.filter input, .filter select {
+  padding:0px;
+  margin-left:8px;
 }
 
-/* line 111, ../../../app/stylesheets/rails_admin/list.scss */
-.grid tfoot .bulk {
-  float: right;
-  margin-top: 8px;
+.filter label {
+  color:black;
+  width: 100px;
+  margin-left:10px;
 }
 
-/* line 116, ../../../app/stylesheets/rails_admin/list.scss */
-.this-page {
-  padding: 3px;
-}
-
-/* line 120, ../../../app/stylesheets/rails_admin/list.scss */
-.historyLink {
-  color: #000;
-  text-decoration: none;
-}
-
-/* line 125, ../../../app/stylesheets/rails_admin/list.scss */
-.historyLink:hover {
-  text-decoration: underline;
+.filter .delete {
+  color:red;
 }
