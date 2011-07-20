@@ -63,7 +63,12 @@ module U8service
       client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'',:encoding=>'GBK')
       client.execute(sql.encode('GBK')).do
     end
-    
+
+    def self.remove_vouch doc_no
+      delete_cmd = "delete gl_accvouch where cdigest like '%#{doc_no}%'"
+      self.exec_sql delete_cmd
+    end
+
     def self.exist_vouch(doc_no)
       JSON get("IsVouchExist",{:doc_no=>doc_no})
     end

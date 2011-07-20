@@ -127,6 +127,9 @@ class DocHead < ActiveRecord::Base
     end
     amount.ceil(2)
   end
+  def remove_u8_vouch
+    U8service::API.remove_vouch self.doc_no
+  end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_doc_amount(type)
     total=0
