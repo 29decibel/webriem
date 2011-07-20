@@ -53,6 +53,9 @@ module U8service
         result_msg = exec_sql(insert_cmd).to_s
       rescue Exception => error
         puts "!! error when insert #{error}"
+        puts "begin delete all vouches of current doc #{vmodel.doc_no}"
+        delete_result = self.remove_vouch(vmodel.doc_no)
+        puts "delete result is #{delete_result}"
         result_msg = error
       end
       result_msg
