@@ -71,70 +71,40 @@ $(function(){
     $(this).closest("form").submit();
     return false;
   });
-  //bind the amount and rate event
-  $("input.rate").live("change",adapt_apply_amount_by_rate);
-  $("input.ori_amount").live("change",adapt_apply_amount_by_rate);
-  //control the reference window's check box
-  $("#selected_all").live("change",function(){
-    $(".ref_select").attr("checked",$(this).is(':checked'));
-  });
-  //register the ref select change events
-  $("input.ref_select").live("change",function(){
-    //select one only
-    if($("#selected_all").size()==0)
-    {
-      $(".ref_select").not($(this)).attr("checked",false);
-    }
-  });
-  //for the damn ie
-  if($.browser.msie)
-  {
-    $('input.ref_select,#selected_all').live('click', function(){
-        $(this).trigger('change');
-    });
-  }
 
-  //observe the region type select 
-  $(".region_type_select").live("change",function(){
-    region_type= $(this).val();
-    //alert(region_type);
-    //set neib region id info
-    $(this).closest("fieldset").find("input#region_info").next("a").attr("pre_condition","region_type_id="+region_type);
-  });
   //observe the region change so to calculate the fee standard
   $("input.get_fee,.region_type_select").live("change",function(){
     //get the duty id 
     var duty_id=$("#duty_for_fee_standard").val();
-    //var region_id=$(this).siblings("input.ref_hidden_field").val();
     var region_type_id=$(this).closest("fieldset").find(".region_type_select").val();
-    var fee_code=$(this).closest("fieldset").attr("fee_code");
+    var fee_type=$(this).closest("fieldset").find("#fee_type").val();
     //person type
     var pt=$("#pt_for_fee_standard").val();
-    //this can be a very good find stuff pattern
-    //when you want to find something another cell
-    //first go up until find the table row and then find stuff you want within it 
-    var fee_standard_control=$(this).closest("fieldset").find("input.fee_standard");
-    //make a ajax call and get the fee[ not all the time ]
-    //if($("#form_state"))
+    // make ajax call
+    var fee_standard_text = $(".fee_standard_text");
+    var fee_standard = $(".fee_standard");
     $.ajax({
       type: "GET",
       url: "/ajax_service/getfee",
-      data: "region_type_id="+region_type_id+"&duty_id="+duty_id+"&fee_code="+fee_code+"&pt="+pt,
+      data: "region_type_id="+region_type_id+"&duty_id="+duty_id+"&fee_type="+fee_type+"&pt="+pt,
       beforeSend: function(){
-        fee_standard_control.val("正在获取...");
+        fee_standard_text.text("正在获取...");
       },
       success: function(msg){
         var values=msg.split(",");
         //set fees
-        fee_standard_control.val(values[0]);
-        fee_standard_control.change();
-        //set currency					
-        fee_standard_control.closest("fieldset").find("input#currency_info").val(values[2]);
-        fee_standard_control.closest("fieldset").find("input#currency_info").prev().val(values[1]);
-        fee_standard_control.closest("fieldset").find(".doc_rate").val(values[3]);
+        fee_standard.val(values[0]);
+        fee_standard_text.text(values[0]);
+        fee_standard.change();
+        if(values.length>1)
+        {
+          //set currency					
+          $(".token-input[data-model=Currency]").tokenInput("clear");
+          $(".token-input[data-model=Currency]").tokenInput("add",{id:values[1],name:values[2]});
+        }
       },
       error: function(){
-        fee_standard_control.val("暂无*");
+        fee_standard_text.text("暂无*");
       }
     });
   });
@@ -143,7 +113,7 @@ $(function(){
     var is_sunday=$(this).closest("fieldset").find(".is_sunday").val()==0;
     var start_time=$(this).closest("fieldset").find(".ew_b_time").val();
     var end_time=$(this).closest("fieldset").find(".ew_e_time").val();
-    var fee_code=$(this).closest("fieldset").attr("fee_code");
+    var fee_type=$(this).closest("fieldset").find("#fee_type").val();
     var extra_st_control=$(this).closest("fieldset").find(".extra_st");
     if(start_time!="" && end_time!="")
     {
@@ -151,7 +121,7 @@ $(function(){
       $.ajax({
         type: "GET",
         url: "/ajax_service/get_extrafee",
-        data: "is_sunday="+is_sunday+"&start_time="+start_time+"&end_time="+end_time+"&fee_code="+fee_code,
+        data: "is_sunday="+is_sunday+"&start_time="+start_time+"&end_time="+end_time+"&fee_type="+fee_type,
         beforeSend: function(){
           extra_st_control.val("正在获取...");
         },
@@ -171,10 +141,6 @@ $(function(){
       });
     }
   });
-  //set reference readonly
-  $("input.ref").attr("readonly",true);
-  //set the fee standard readonly
-  $("input.fee_standard").attr("readonly",true);
   //always set the approvers not display
   $("#approvers").css("display","none");
   //always set the approve info form not display
@@ -190,12 +156,6 @@ $(function(){
       $(this).closest("fieldset").find("div.select_dep_field").hide();
     }
   });
-  $("select.is_self_dep").change();
-  //reference changes
-  $("input.ref").live("change",reference_change);
-  //set sequence
-  //set unique num of doc detail
-  //set_sequence_num();
 
 });
 
@@ -271,13 +231,7 @@ function reference_change()
     }
 	}
 }
-function adapt_apply_amount_by_rate()
-{
-	var tr= $(this).closest("fieldset");
-	var rate=tr.find("input.rate").val();
-	var ori_amount=tr.find("input.ori_amount").val();
-	tr.find("input.amount").val(rate*ori_amount);
-}
+
 
 //bind the change events
 function bind_is_split_change_events()
@@ -347,7 +301,7 @@ function add_fields(link, association, content) {
 	//set the fee standard readonly
 	$(link).closest("fieldset").prev().find("input.fee_standard").attr("readonly",true);
 	//fire get fee
-	$(link).closest("fieldset").prev().find(".region_type_select").change();
+  $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().find(".region_type_select").change();
 	//enable the enter to tab
 	add_enter_to_tab();
   //tokenize

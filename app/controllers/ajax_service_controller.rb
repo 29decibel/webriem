@@ -38,9 +38,9 @@ class AjaxServiceController < ApplicationController
     fee_standard=nil
     #travel relate
     if !params[:pt].blank?
-      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and person_type_id=?",params[:region_type_id],params[:fee_code],params[:pt])
+      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.fee_type=? and person_type_id=?",params[:region_type_id],params[:fee_type],params[:pt])
     else
-      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.code=? and duty_id=?",params[:region_type_id],params[:fee_code],params[:duty_id])
+      fee_standard=FeeStandard.joins(:fee).where("region_type_id=? and fees.fee_type=? and duty_id=?",params[:region_type_id],params[:fee_type],params[:duty_id])
     end
     render :json=>fee_standard.count==0 ? "#{I18n.t('controller_msg.none')}".to_json : "#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}".to_json
     #"#{fee_standard.first.amount},#{fee_standard.first.currency.id},#{fee_standard.first.currency},#{fee_standard.first.currency.default_rate}"
@@ -54,9 +54,9 @@ class AjaxServiceController < ApplicationController
     #end_time_hour=Time.parse(params[:end_time]).hour
     is_sunday=params[:is_sunday]=="true"
     if is_sunday
-      ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? ",is_sunday,params[:fee_code])
+      ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.fee_type=? ",is_sunday,params[:fee_type])
     else
-      ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.code=? and timediff(time(?),time(late_than_time))>=0",is_sunday,params[:fee_code],end_time.to_s)
+      ex_st= ExtraWorkStandard.joins(:fee).where("is_sunday=? and fees.fee_type=? and timediff(time(?),time(late_than_time))>=0",is_sunday,params[:fee_type],end_time.to_s)
     end
     render :json=>ex_st.count==0 ? "#{I18n.t('controller_msg.none')}".to_json : ex_st.first.amount
   end

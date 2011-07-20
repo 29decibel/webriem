@@ -1,6 +1,7 @@
-%fieldset(fee_code='0303')
+%fieldset
   %legend
     = f.hidden_field(:_destroy) 
+    = hidden_field_tag :fee_type,f.object.class.name
     = link_to_remove 
   %span.sequence
   .form_field
@@ -20,7 +21,8 @@
     %span.value= f.text_field :reason,:class=>"xlarge" 
   .form_field
     %span.label= "#{I18n.t('common_attr.fee_stan')}"
-    %span.value= f.text_field :st_amount,:class=>"normal fee_standard" 
+    %span.value= label_tag 'fee_standard_text','',:class=>"normal fee_standard_text" 
+    =f.hidden_field :st_amount,:class=>'fee_standard'
   .form_field
     %span.label= "#{I18n.t('common_attr.currency')}"
     %span.value= ts "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f

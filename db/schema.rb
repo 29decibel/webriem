@@ -339,7 +339,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   create_table "fees", :force => true do |t|
     t.string   "code"
     t.string   "name"
-    t.integer  "attr"
+    t.string   "fee_type" # class name of expense details
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"

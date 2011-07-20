@@ -3,7 +3,7 @@ RailsAdmin.config do |config|
     [Dep, Person, Currency,Project,Settlement,
     Duty,WorkFlow,WorkFlowStep,Role,Fee,Region,Transportation,Lodging,
     FeeStandard,Budget,Account,Subject,ExtraWorkStandard,
-    Menu,MenuCategory,Supplier,FeeCodeMatch,SystemConfig,DocMetaInfo]
+    Menu,MenuCategory,Supplier,FeeCodeMatch,SystemConfig,DocMetaInfo,RegionType]
 
   #config.model Person do
   #  label "Person Model"
