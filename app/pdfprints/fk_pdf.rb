@@ -27,11 +27,11 @@ class FkPdf
       :column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :border_style => :grid,:font_size => 11
     #travel
-    if doc.cp_doc_details.count>0
+    if doc.pay_doc_details.count>0
       pdf.move_down 10
       pdf.text "付款单据明细",:size=>12
       pdf.move_down 2
-      pdf.table doc.cp_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
+      pdf.table doc.pay_doc_details.map {|r| ["#{r.dep.name}","#{r.project ? r.project : ''}","#{r.used_for}","#{r.currency.name}","#{r.rate}","#{r.ori_amount}","#{r.apply_amount}"]},
         :headers => ["费用承担部门","项目","费用用途","币种","汇率","原币金额","本币金额"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,
@@ -53,13 +53,13 @@ class FkPdf
     end
     #final render
     pdf.move_down 5
-    pdf.text "付款总金额:  "+"#{doc.total_fi_amount}", :size => 14,:align=>:right
+    pdf.text "付款总金额:  "+"#{doc.total_amount}", :size => 14,:align=>:right
     #work flow infos
     if doc.work_flow_infos.count>0
       pdf.move_down 10
       pdf.text "审批信息",:size=>12
       pdf.move_down 2
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
+      pdf.table doc.work_flow_infos.map {|w| ["#{w.approver}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,

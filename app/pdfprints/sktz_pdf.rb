@@ -31,6 +31,7 @@ class SktzPdf
         "#{r.ori_amount}",
         "#{r.amount}"]},
         :headers => ["申请时间","费用承担部门","项目","收款内容","币种","汇率","原币金额","收款金额"],
+	      :column_widths=>{0=>60,1=>60,2=>80,3=>60,4=>80,5=>60,6=>80,7=>60},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
@@ -58,6 +59,7 @@ class SktzPdf
       pdf.move_down 2
       pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
+	      :column_widths=>{0=>80,1=>80,2=>80,3=>300},
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,

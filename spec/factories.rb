@@ -15,11 +15,17 @@ end
 Factory.define :project do |f|
   f.name {Factory.next(:name)}
   f.code {Factory.next(:code)}
+  f.association :dep
 end
 
 Factory.define :settlement do |f|
   f.name {Factory.next(:name)}
   f.code {Factory.next(:code)}
+end
+
+Factory.define(:transportation) do |f|
+  f.name Factory.next(:name)
+  f.code Factory.next(:code)
 end
 
 Factory.define :role do |f|
@@ -48,6 +54,17 @@ Factory.define :currency do |f|
   f.default_rate 1
 end
 
+Factory.define :region do |f|
+  f.name {Factory.next(:name)}
+  f.code {Factory.next(:code)}
+  f.association :region_type
+end
+
+Factory.define :region_type do |f|
+  f.name {Factory.next(:name)}
+  f.code {Factory.next(:code)}
+end
+
 Factory.define :person do |f|
   f.name {Factory.next(:name)}
   f.code {Factory.next(:code)}
@@ -67,10 +84,17 @@ Factory.define :work_flow_step do |f|
   f.association :duty
 end
 
+Factory.define :work_flow_info do |f|
+  f.approver {|u| u.association(:person)}
+  f.is_ok true
+  f.comments 'nice'
+end
+
 Factory.define :work_flow do |f|
   f.name {Factory.next(:name)}
 end
 
+# ------------------ docs here ---------------------
 Factory.define :doc_head do |f|
   f.doc_type          1
   f.association :dep
@@ -78,16 +102,198 @@ Factory.define :doc_head do |f|
   f.afford_dep {|u| u.association(:dep)}
 end
 
-Factory.define :cp_doc_detail do |f|
+Factory.define :borrow_doc_detail do |f|
+  f.association :doc_head
+  f.association :dep
+  f.association :fee
+  f.association :project
+  f.association :currency
+  f.rate '23'
+  f.used_for 'just want some money'
+  f.ori_amount 0
+  f.apply_amount 0
+end
+
+Factory.define :pay_doc_detail do |f|
   f.association :doc_head
   f.association :dep
   f.association :fee
   f.association :project
   f.association :currency
   f.used_for 'just want some money'
+  f.rate '23'
   f.ori_amount 0
   f.apply_amount 0
 end
+
+Factory.define :rd_travel do |f|
+  f.days        3
+  f.association :region
+  f.reason    'good'
+  f.association :region_type
+  f.rate        23.33
+  f.ori_amount  233
+  f.association  :currency
+  f.st_amount   233
+end
+
+Factory.define :fixed_property do |f|
+  f.type    'good'
+  f.name    'fine'
+  f.code    'so nice'
+  f.buy_unit  234
+  f.buy_count 2
+  f.original_value  43
+  f.keeper  {|u| u.association :person}
+  f.association :project
+  f.seq_no  '323232525232626'
+  f.afford_dep {|u| u.association :dep}
+end
+
+Factory.define :inner_cash_draw do |f|
+  f.association :account
+  f.now_remain_amount 23.43
+  f.description 'asdfaf asdfasfa asfd'
+end
+
+Factory.define :inner_remittance do |f|
+  f.out_account {|u| u.association :account}
+  f.in_account {|u| u.association :account}
+  f.in_amount_after 2323
+  f.amount 234
+  f.description 'fasdfadag'
+  f.remain_amount 223
+  f.now_rate_price 23
+  f.associaiton :currency
+end
+
+Factory.define :inner_transfer do |f|
+  f.out_account {|u| u.association :account}
+  f.in_account {|u| u.association :account}
+  f.out_amount_before 2323
+  f.in_amount_before 232
+  f.in_amount_after 2323
+  f.amount  2323
+  f.description 'asdfadfadgadg'
+end
+
+Factory.define :other_riem do |f|
+  f.description 'fasdfasdg'
+  f.association :currency
+  f.rate  23
+  f.ori_amount  232
+end
+
+Factory.define :rd_benefit do |f|
+  f.reim_date 3.days.ago
+  f.fee_time_span   23
+  f.people_count  342
+  f.rate  233
+  f.ori_amount  233
+  f.association :dep
+  f.association :fee
+  f.association :project
+end
+
+Factory.define :rd_common_transport do |f|
+  f.start_place 'beijing'
+  f.end_place   'shanghai'
+  f.work_date   2.days.ago
+  f.start_time  1.month.ago
+  f.end_time    20.days.ago
+  f.reason      'cool'
+  f.rate        234
+  f.association  :dep
+  f.association  :project
+  f.ori_amount  23
+end
+
+Factory.define :rd_extra_work_car do |f|
+  f.start_place 'qianmen'
+  f.end_place   'dashilan'
+  f.work_date   3.days.ago
+  f.is_sunday   1
+  f.start_time  4.days.ago
+  f.end_time    2.days.ago
+  f.reason      'i like it'
+  f.rate        23
+  f.association :currency
+end
+
+Factory.define :rd_extra_work_meal do |f|
+  f.date  1.days.ago
+  f.is_sunday 1
+  f.start_time  5.days.ago
+  f.end_time    3.days.ago
+  f.reason      'fasdfadsf'
+  f.rate        23
+  f.association :currency
+  f.ori_amount  2323
+end
+
+Factory.define(:rd_lodging) do |f|
+  f.association :region
+  f.days        3
+  f.people_count  3
+  f.person_names 'fadfaf'
+  f.rate      233
+  f.association :currency
+  f.ori_amount  232
+  f.start_date  4.days.ago
+  f.end_date    3.days.ago
+  f.association :region_type
+end
+
+Factory.define(:rd_transport) do |f|
+  f.start_position  'asdfaf'
+  f.end_position    'fffff'
+  f.association :transportation
+  f.rate      233
+  f.reason  'fff'
+  f.association :currency
+  f.ori_amount  232
+  f.start_date  4.days.ago
+  f.end_date    3.days.ago
+end
+
+Factory.define(:rd_work_meal) do |f|
+  f.meal_date   23.days.ago
+  f.place       '232332'
+  f.people_count  23
+  f.person_names  'fadfag asdga'
+  f.reason        'sdfasf'
+  f.association :currency
+  f.rate        23
+  f.association :dep
+  f.association :project
+  f.ori_amount  2323
+end
+
+
+Factory.define(:rd_communicate) do |f|
+  f.meal_date   23.days.ago
+  f.place       '232332'
+  f.people_count  23
+  f.person_names  'fadfag asdga'
+  f.reason        'sdfasf'
+  f.association :currency
+  f.rate        23
+  f.association :dep
+  f.association :project
+  f.ori_amount  2323
+end
+
+Factory.define(:rec_notice_detail) do |f|
+  f.apply_date     3.days.ago
+  f.company       'asdfafd'
+  f.association :dep
+  f.association :project
+  f.description 'asdfadfa'
+  f.amount  233
+  f.rate    23
+  f.ori_amount  2323
+end
+  
 
 Factory.define :reciver do |f|
   f.bank 'reciver bank'
