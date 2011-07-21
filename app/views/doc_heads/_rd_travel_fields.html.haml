@@ -35,18 +35,4 @@
   .form_field
     %span.label= "#{I18n.t('common_attr.apply_amount')}"
     %span.value= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number" 
-:javascript
-  //when change region type trigger change:region_select event
-  console.log('being bund region type select change...');
-  $(".region_type_select").live("change",function(e){
-    console.log(e);
-    console.log('control trigger region select change');
-    //alert
-    $(this).closest('fieldset').trigger("change:region_type");
-  });
-  //when travel days change , trigger change:travels_days
-  $(".travel_days").live("change",function(){
-    var num=parseFloat($(this).val());
-    $(this).val(!isNaN(num) ? num.toFixed(2) : 0.0);
-    $(this).closest('fieldset').trigger("change:travel_days");
-  });
+
