@@ -30,7 +30,10 @@ $('.doc_detail').live('area:numberChanged',function(){
     total_num+=isNaN(num) ? 0.0 : num;
   });
   $('#total_riem').text(total_num.toFixed(2));
-  $('.recivers').find('fieldset').first().find('.doc_ori_amount').val(total_num.toFixed(2));
+  if($('.recivers').find('fieldset').not(':hidden').size()==1)
+  {
+    $('.recivers').find('fieldset').first().find('.reciver_ori_amount').val(total_num.toFixed(2));
+  }
 });
 
 //here we bind the data picker control

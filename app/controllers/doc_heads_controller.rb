@@ -128,6 +128,7 @@ class DocHeadsController < ApplicationController
       if @doc.current_approver_id == current_user.person.id
         @work_flow_info=WorkFlowInfo.new
       end
+      @doc.reload
     else
       render "edit"
     end
