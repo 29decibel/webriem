@@ -138,7 +138,7 @@ class DocHeadsController < ApplicationController
   def destroy
     doc = DocHead.find_by_id params[:id]
     doc.destroy
-    @docs=DocHead.by_person(current_user.person.id).page(params[:page]).per(20)
+    redirect_to my_docs_path
   end
   #将单据进入审批阶段
   def submit

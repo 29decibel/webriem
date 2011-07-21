@@ -102,12 +102,12 @@ $(function(){
         if(values.length>1)
         {
           //set currency					
-          $(".token-input[data-model=Currency]").tokenInput("clear");
-          $(".token-input[data-model=Currency]").tokenInput("add",{id:values[1],name:values[2]});
+          fieldset.find(".token-input[data-model=Currency]").tokenInput("clear");
+          fieldset.find(".token-input[data-model=Currency]").tokenInput("add",{id:values[1],name:values[2]});
           console.log('get fees back , begin trigger travel days change');
           //trigger calculate doc_ori_amount
           console.log('final trigger travel days event');
-          fieldset.trigger('change:travel_days');
+          fieldset.trigger('change:fee_standard');
         }
       },
       error: function(){
@@ -116,49 +116,52 @@ $(function(){
     });
   });
 
-  $("fieldset").live("change:travel_days",function(){
-    console.log('change:travel_days');
-    var fee_standard = parseFloat($(this).find('.fee_standard').val());
-    var days = parseFloat($(this).find('.travel_days').val());
-    if(!isNaN(fee_standard))
+  $("fieldset").live("change:fee_standard",function(){
+    console.log('change:fee_standard');
+    if($(this).find('.travel_days').size()>0)
     {
-      $(this).closest('fieldset').find('.doc_ori_amount').val((fee_standard*days).toFixed(2));
-      $(this).closest('fieldset').trigger("row:numberChanged");
+      var fee_standard = parseFloat($(this).find('.fee_standard').val());
+      var days = parseFloat($(this).find('.travel_days').val());
+      if(!isNaN(fee_standard))
+      {
+        $(this).closest('fieldset').find('.doc_ori_amount').val((fee_standard*days).toFixed(2));
+        $(this).closest('fieldset').trigger("row:numberChanged");
+      }
     }
   });
 
   //observe the time and get the extra work time fee
-  $(".is_sunday,.ew_b_time,.ew_e_time").live("change",function(){
-    var is_sunday=$(this).closest("fieldset").find(".is_sunday").val()==0;
-    var start_time=$(this).closest("fieldset").find(".ew_b_time").val();
-    var end_time=$(this).closest("fieldset").find(".ew_e_time").val();
-    var fee_type=$(this).closest("fieldset").find("#fee_type").val();
-    var extra_st_control=$(this).closest("fieldset").find(".extra_st");
-    if(start_time!="" && end_time!="")
-    {
-      //make a ajax call and get the fee
-      $.ajax({
-        type: "GET",
-        url: "/ajax_service/get_extrafee",
-        data: "is_sunday="+is_sunday+"&start_time="+start_time+"&end_time="+end_time+"&fee_type="+fee_type,
-        beforeSend: function(){
-          extra_st_control.val("正在获取...");
-        },
-        success: function(msg){
-          //set fees
-          extra_st_control.val(msg);
-          //alert(msg);
-          var amount=parseFloat(msg);
-          if(!isNaN(amount)){
-            extra_st_control.closest("fieldset").find("input.doc_ori_amount").val(amount);
-            extra_st_control.closest("fieldset").find("input.doc_ori_amount").change();
-          }
-        },
-        error: function(){
-          extra_st_control.val("暂无*");
+  $("fieldset").live("change:rd_extra_fee_standard",function(e,data){
+    console.log('go-------------');
+    console.log(data);
+    var fee_type=$(this).find("#fee_type").val();
+    var fee_standard_text=$(this).find(".fee_standard_text");
+    var fee_standard=$(this).find(".fee_standard");
+    var fieldset = $(this);
+    //make a ajax call and get the fee
+    $.ajax({
+      type: "GET",
+      url: "/ajax_service/get_extrafee",
+      data: "is_sunday="+data.is_sunday+"&start_time="+data.start_time+"&end_time="+data.end_time+"&fee_type="+fee_type,
+      beforeSend: function(){
+        fee_standard_text.text("正在获取...");
+      },
+      success: function(msg){
+        //set fees
+        fee_standard_text.text(msg);
+        fee_standard.val(msg);
+        //alert(msg);
+        var amount=parseFloat(msg);
+        if(!isNaN(amount)){
+          fieldset.find("input.doc_ori_amount").val(amount);
+          fieldset.trigger("row:numberChanged");
         }
-      });
-    }
+      },
+      error: function(){
+        fee_standard_text.val("暂无*");
+        fee_standard.val(0);
+      }
+    });
   });
   //always set the approvers not display
   $("#approvers").css("display","none");
@@ -496,4 +499,30 @@ function cancel_edit_form (cancel_link) {
   //show the show item
   $(cancel_link).closest(".list_item").find("div.show").show("slow");
 }
+
+// just for ajax history state
+if (history && history.pushState) {  
+  $(function () {  
+    $('a[data-remote=true]').live('click', function () {  
+      //var link = $(this);
+      console.log('push to history state');
+      history.pushState(null, document.title, this.href);  
+      return false;  
+    });  
+    
+    $('.search_form a').live('click',function () {  
+      console.log('get form data and save state...');
+      var action = $('.search_form form').attr('action');  
+      var formData = $('.search_form form').serialize();  
+      //$.get(action, formData, null, 'script');  
+      history.replaceState(null, document.title, action + "?" + formData);  
+      return false;  
+    });  
+    
+    $(window).bind("popstate", function () {  
+      $.getScript(location.href);  
+    });  
+  })  
+}  
+
 

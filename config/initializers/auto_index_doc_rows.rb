@@ -38,7 +38,11 @@ module DocIndex
         dr.save
         logger.info 'index over ----------------'
       end
+      def delete_doc_row
+        DocRow.where('resource_type=? and resource_id=?',self.class.name,self.id).delete_all
+      end
     EOF
     klass.after_save :index_doc_row
+    klass.after_destroy :delete_doc_row
   end
 end

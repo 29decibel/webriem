@@ -10,17 +10,18 @@
   .form_field
     %span.label= "#{I18n.t('common_attr.start_time')}"
     - start_time_string = f.object.start_time && f.object.start_time.to_s 
-    %span.value= f.text_field :start_time,:class=>"datetimepicker middle ew_b_time",:value => start_time_string 
+    %span.value= f.text_field :start_time,:class=>"datetimepicker middle start_time",:value => start_time_string 
   .form_field
     %span.label= "#{I18n.t('common_attr.end_time')}"
     - end_time_string = f.object.end_time && f.object.end_time.to_s 
-    %span.value= f.text_field :end_time,:class=>"datetimepicker middle ew_e_time",:value => end_time_string 
+    %span.value= f.text_field :end_time,:class=>"datetimepicker middle end_time",:value => end_time_string 
   .form_field
     %span.label= "#{I18n.t('common_attr.reason')}"
     %span.value= f.text_field :reason,:class=>"xlarge" 
   .form_field
     %span.label= "#{I18n.t('common_attr.extra_work_stan')}"
-    %span.value= f.text_field :st_amount,:class=>"normal extra_st" 
+    %span.value= label_tag 'fee_standard_text','',:class=>"normal fee_standard_text" 
+    =f.hidden_field :st_amount,:class=>'fee_standard'
   .form_field
     %span.label= "#{I18n.t('common_attr.currency')}"
     %span.value= ts "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
@@ -33,3 +34,14 @@
   .form_field
     %span.label= "#{I18n.t('common_attr.apply_amount')}"
     %span.value= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number" 
+:javascript
+  $(".is_sunday,.start_time,.end_time").live("change",function(){
+    var container = $(this).closest('fieldset');
+    var is_sunday = container.find('.is_sunday').val()=='0';
+    var start_time = new Date(container.find('.start_time').val());
+    var end_time = new Date(container.find('.end_time').val());
+    if(!isNaN(start_time.getTime()) && !isNaN(end_time.getTime()))
+    {
+      $(this).closest('fieldset').trigger('change:rd_extra_fee_standard',{is_sunday:is_sunday,start_time:start_time,end_time:end_time});
+    }
+  });
