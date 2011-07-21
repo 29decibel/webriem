@@ -7,7 +7,8 @@ class DocRow < ActiveRecord::Base
       '交际费用'=>'RdCommunicate',
       '加班车费'=>'RdExtraWorkCar','加班餐费'=>'RdExtraWorkMeal',
       '普通费用'=>'CommonRiem','工作餐费'=>'RdWorkMeal','业务交通费'=>'RdCommonTransport',
-      '福利费用'=>'RdBenefit'}  belongs_to :person
+      '福利费用'=>'RdBenefit'}  
+  belongs_to :person
   belongs_to :dep
   belongs_to :project
   before_save :set_person_dep_id

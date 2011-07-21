@@ -317,5 +317,6 @@
     $(this).val(!isNaN(num) ? num.toFixed(2) : 0.0);
     $(this).closest('fieldset').trigger("row:numberChanged");
   });
+
   //triger
   $(function(){$("fieldset").trigger('row:numberChanged');});

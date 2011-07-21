@@ -73,16 +73,19 @@ $(function(){
   });
 
   //observe the region change so to calculate the fee standard
-  $("input.get_fee,.region_type_select").live("change",function(){
+  $("fieldset").live("change:region_type",function(){
+    console.log('change:region_type_select');
     //get the duty id 
     var duty_id=$("#duty_for_fee_standard").val();
-    var region_type_id=$(this).closest("fieldset").find(".region_type_select").val();
-    var fee_type=$(this).closest("fieldset").find("#fee_type").val();
+    var region_type_id=$(this).find(".region_type_select").val();
+    var fee_type=$(this).find("#fee_type").val();
     //person type
     var pt=$("#pt_for_fee_standard").val();
     // make ajax call
-    var fee_standard_text = $(".fee_standard_text");
-    var fee_standard = $(".fee_standard");
+    var fee_standard_text = $(this).find(".fee_standard_text");
+    var fee_standard = $(this).find(".fee_standard");
+    var fieldset = $(this);
+    console.log('begin ajax get fee standard...');
     $.ajax({
       type: "GET",
       url: "/ajax_service/getfee",
@@ -95,12 +98,16 @@ $(function(){
         //set fees
         fee_standard.val(values[0]);
         fee_standard_text.text(values[0]);
-        fee_standard.change();
+        console.log('ok get the fees.....')
         if(values.length>1)
         {
           //set currency					
           $(".token-input[data-model=Currency]").tokenInput("clear");
           $(".token-input[data-model=Currency]").tokenInput("add",{id:values[1],name:values[2]});
+          console.log('get fees back , begin trigger travel days change');
+          //trigger calculate doc_ori_amount
+          console.log('final trigger travel days event');
+          fieldset.trigger('change:travel_days');
         }
       },
       error: function(){
@@ -108,6 +115,18 @@ $(function(){
       }
     });
   });
+
+  $("fieldset").live("change:travel_days",function(){
+    console.log('change:travel_days');
+    var fee_standard = parseFloat($(this).find('.fee_standard').val());
+    var days = parseFloat($(this).find('.travel_days').val());
+    if(!isNaN(fee_standard))
+    {
+      $(this).closest('fieldset').find('.doc_ori_amount').val((fee_standard*days).toFixed(2));
+      $(this).closest('fieldset').trigger("row:numberChanged");
+    }
+  });
+
   //observe the time and get the extra work time fee
   $(".is_sunday,.ew_b_time,.ew_e_time").live("change",function(){
     var is_sunday=$(this).closest("fieldset").find(".is_sunday").val()==0;
@@ -299,9 +318,7 @@ function add_fields(link, association, content) {
 	//set reference readonly
 	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
-	$(link).closest("fieldset").prev().find("input.fee_standard").attr("readonly",true);
-	//fire get fee
-  $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().find(".region_type_select").change();
+  $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().trigger('change:region_type_select');
 	//enable the enter to tab
 	add_enter_to_tab();
   //tokenize
@@ -479,31 +496,4 @@ function cancel_edit_form (cancel_link) {
   //show the show item
   $(cancel_link).closest(".list_item").find("div.show").show("slow");
 }
-
-if (history && history.pushState) {  
-  $(function () {  
-    $('a[data-remote=true]').live('click', function () {  
-      console.log('get ajax link..');
-      $.getScript(this.href);  
-      history.pushState(null, document.title, this.href);  
-      return false;  
-    });  
-    
-    $('.search_form a').live('click',function () {  
-      console.log('get form data and save state...');
-      var action = $('.search_form form').attr('action');  
-      var formData = $('.search_form form').serialize();  
-      $.get(action, formData, null, 'script');  
-      history.replaceState(null, document.title, action + "?" + formData);  
-      return false;  
-    });  
-    
-    $(window).bind("popstate", function () {  
-      $.getScript(location.href);  
-    });  
-  })  
-}  
-
-
-
 
