@@ -5,6 +5,7 @@
     = render "shared/common_error",:resource=>doc
   -content_for :custom_actions do
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"), doc.new_record? ? my_docs_path : doc_head_path(doc),:remote=>true,:class=>"minibutton"
   #doc_head_actions.actions
     = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
   #doc_state_process

@@ -2,7 +2,7 @@
 -if !doc_head.new_record? and doc_head.person==current_user.person and (doc_head.un_submit? or doc_head.rejected?)
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"),{:controller=>"doc_heads",:action=>"submit",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if doc_head.person==current_user.person and doc_head.processing?
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"), {:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
+  = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel_wf')}"), {:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if !doc_head.new_record?
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_print')}"), {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"minibutton"
 -if current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code
@@ -12,8 +12,6 @@
   = link_to content_tag(:span,"#{I18n.t('common_op.confirm_paid')}"),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if doc_head.current_approver_id == current_user.person.id and doc_head.processing?
   = link_to content_tag(:span,"#{I18n.t('common_op.approve')}"),{:controller=>"work_flow_infos",:action=>"new",:doc_id=>doc_head.id},:class=>"minibutton pop"
--if !doc_head.new_record? and doc_head.un_submit?
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc_head.id),:remote=>true,:class=>"minibutton"
 -if doc_head.can_destroy? current_user and !doc_head.new_record?
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_delete')}"), "/doc_heads/#{doc_head.id}",:remote=>true,:class=>"minibutton",:confirm=>'是否真的删除？',:method=>"DELETE"
 

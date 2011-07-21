@@ -118,7 +118,7 @@
     btn_delete: "删除"
     btn_search: 搜索
     btn_ok: 确定
-    btn_cancel: 取消
+    btn_cancel_wf: 撤销审批
     btn_mydocs: 我的单据
     btn_print: 打印
     btn_cancel: 撤销
