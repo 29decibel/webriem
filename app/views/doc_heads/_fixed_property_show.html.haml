@@ -1,0 +1,36 @@
+%fieldset
+  %span.sequence
+  .show_field
+    %span.label= "类型"
+    %span.value= d_item.type
+  .show_field
+    %span.label= "名称"
+    %span.value= d_item.name
+  .show_field
+    %span.label= "编码"
+    %span.value= d_item.code
+  .show_field
+    %span.label= "序列号"
+    %span.value= d_item.seq_no
+  .show_field
+    %span.label= "单价"
+    %span.value= d_item.buy_unit
+  .show_field
+    %span.label= "数量"
+    %span.value= d_item.buy_count
+  .show_field
+    %span.label= "原值"
+    %span.value= d_item.original_value
+  .show_field
+    %span.label= "保管人"
+    %span.value= d_item.keeper.to_s
+  .show_field
+    %span.label= "保管地点"
+    %span.value= d_item.place
+  .show_field
+    %span.label= "费用承担部门"
+    %span.value= d_item.afford_dep.to_s
+  .show_field
+    %span.label= "项目"
+    %span.value= d_item.project.to_s
+

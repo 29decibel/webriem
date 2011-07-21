@@ -270,6 +270,17 @@
         .form_area
           = f.fields_for :rd_benefits do |builder|  
             = render :partial => 'rd_benefit_fields',:locals => { :f => builder }  
+    -if doc.doc_type==14
+      .doc_detail
+        .form_title
+          %h3
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:fixed_properties 
+            = I18n.t('common_attr.fixed_property')
+            = image_tag "currency_yuan.png"
+            %span.doc_total_amount.normal=doc.amount_for :fixed_properties
+        .form_area
+          = f.fields_for :fixed_properties do |builder|  
+            = render :partial => 'fixed_property_fields',:locals => { :f => builder }  
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if [9,11,13].include? doc.doc_type
       <!--分摊明细动态显示-->
@@ -289,7 +300,7 @@
     <!--    %h3= "#{I18n.t('common_attr.now_cp_docs')}"-->
     <!--  = render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>doc } --> 
     <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    -if doc.doc_type%3 or doc.doc_type=9 and doc.doc_type<=13
+    -if doc.doc_type<3 or (doc.doc_type>=9 and doc.doc_type<=13)
       .doc_detail.recivers
         .form_title
           %h3

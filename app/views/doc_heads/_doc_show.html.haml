@@ -181,6 +181,15 @@
           %span.doc_total_amount.normal=doc.amount_for(:rd_benefits)
       .form_area
         =render :partial=>"rd_benefit_show",:collection=>doc.rd_benefits,:as=>:d_item
+  -if doc.doc_type==14 and doc.fixed_properties.count>0
+    .doc_detail
+      .form_title
+        %h3
+          = "#{I18n.t('common_attr.fixed_property')}"
+          = image_tag "currency_yuan.png"
+          %span.doc_total_amount.normal=doc.amount_for(:fixed_properties)
+      .form_area
+        =render :partial=>"fixed_property_show",:collection=>doc.fixed_properties,:as=>:d_item
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if [9,11,13].include?(doc.doc_type) and doc.reim_split_details.count>0
     <!--分摊明细动态显示-->
@@ -192,6 +201,7 @@
           %span.split_total_amount.normal=doc.amount_for(:reim_split_details)
       .form_area.is_split_reim
         =render :partial=>"reim_split_detail_show",:collection=>doc.reim_split_details,:as=>:d_item,:locals=>{:doc=>doc}
+      
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <!---if doc.doc_type>=9 and doc.doc_type<=12-->
         <!--  .form_title-->
