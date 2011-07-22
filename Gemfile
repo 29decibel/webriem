@@ -17,6 +17,8 @@ gem "tiny_tds", "~> 0.4.5"
 gem "meta_where"
 gem "meta_search"
 
+gem 'resque', :require => "resque/server"
+
 gem 'activeadmin'
 gem 'ruby-ole'
 gem 'rest-client'

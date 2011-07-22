@@ -43,7 +43,7 @@ namespace :schedule do
       para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_apply_amount }
       Rails.logger.info "sending email to #{para[:mail]} docs count is #{para[:docs_count]} docs total is #{para[:docs_total]}"
       #WorkFlowMailer.notice_docs_to_approve para
-      Delayed::Job.enqueue MailingJob.new(:notice_docs_to_approve, para)
+      Resque.enqueue(MailWorker, :notice_docs_to_approve,para)
     end
   end
 

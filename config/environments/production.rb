@@ -58,5 +58,4 @@ Webreim::Application.configure do
     :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
     :password => 'china123!'
   }
-  config.autoload_paths << "#{Rails.root}/app/u8service"
 end

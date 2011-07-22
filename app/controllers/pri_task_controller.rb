@@ -1,12 +1,10 @@
 #coding: utf-8
 require 'time'
 require 'rexml/document'
-require 'api'
-require File.join(Rails.root, 'app', 'u8service','api.rb')
 class PriTaskController < ApplicationController
   def import_u8_codes
     begin
-      u8codes= U8service::API.get_codes
+      u8codes= Sk.get_codes
       #never delete 
       this_time_count=0
       u8codes.each do |u8_model|
@@ -37,7 +35,7 @@ class PriTaskController < ApplicationController
   def import_u8_deps
     U8Dep.delete_all
      begin
-      u8deps= U8service::API.get_departments
+      u8deps= Sk.get_departments
       #never delete 
       this_time_count=0
       u8deps.each do |u8_model|
@@ -115,7 +113,7 @@ class PriTaskController < ApplicationController
     render "pri_task/cmd_result"
   end
   def test_curb    
-    @message=U8service::API.get_departments
+    @message=Sk.get_departments
     JSON(@message).each do |u8dep|
       d=U8Dep.new(u8dep)
       d.save

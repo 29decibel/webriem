@@ -177,7 +177,7 @@ class DocHeadsController < ApplicationController
     para[:docs_total]=@doc.total_apply_amount
     para[:doc_id]=@doc.id
     #WorkFlowMailer.notice_docs_to_approve para
-    Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
+    Resque.enqueue(MailWorker, :doc_paid,para)
   end
   def approve
     @doc = DocHead.find(params[:id])
@@ -203,7 +203,7 @@ class DocHeadsController < ApplicationController
         para[:docs_total]=doc_head.total_apply_amount
         para[:doc_id]=doc_head.id
         #WorkFlowMailer.notice_docs_to_approve para
-        Delayed::Job.enqueue MailingJob.new(:doc_paid, para)
+        Resque.enqueue(MailWorker, :doc_paid,para)
       end
     end
     render :json=>"#{I18n.t('controller_msg.batch_pay_ok')}"
@@ -230,7 +230,7 @@ class DocHeadsController < ApplicationController
               para[:docs_approve_total]=current_person.person_type.code=="FI" ? wf.doc_head.total_fi_amount : wf.doc_head.total_hr_amount
               para[:doc_id]=wf.doc_head.id
               #WorkFlowMailer.notice_docs_to_approve para
-              Delayed::Job.enqueue MailingJob.new(:amount_change_and_passed, para)
+              Resque.enqueue(MailWorker, :amount_change_and_passed,para)
             end
           else
             wf.doc_head.decline
@@ -240,7 +240,7 @@ class DocHeadsController < ApplicationController
             para[:docs_total]=wf.doc_head.total_apply_amount
             para[:doc_id]=wf.doc_head.id
             #WorkFlowMailer.notice_docs_to_approve para
-            Delayed::Job.enqueue MailingJob.new(:doc_not_passed, para)
+            Resque.enqueue(MailWorker, :doc_not_passed,para)
           end
           wf.doc_head.save
         end #doc's current approver is current person
@@ -342,7 +342,7 @@ class DocHeadsController < ApplicationController
     para[:email]=doc.person.e_mail#person.e_mail  @doc.person.e_mail
     para[:doc_id]=doc.id
     #WorkFlowMailer.notice_docs_to_approve para
-    Delayed::Job.enqueue MailingJob.new(:doc_failed, para)
+    Resque.enqueue(MailWorker, :doc_failed,para)
     respond_to do |format|
       format.js { render "shared/show_result"}
     end

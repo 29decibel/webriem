@@ -44,8 +44,6 @@ Webreim::Application.configure do
     :password => 'china123!'
   }
   #here is my delayed jobs
-  config.autoload_paths << "#{Rails.root}/app/jobs"
   config.autoload_paths << File.join(config.root, "lib")
-  config.autoload_paths << "#{Rails.root}/app/u8service/api.rb"
 end
 

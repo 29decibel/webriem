@@ -1,5 +1,4 @@
 #coding: utf-8
-require "#{Rails.root}/app/u8service/api.rb"
 class VouchController < ApplicationController
   #every doc has it's own way to generate the vouch
   #i put the logic into the doc itself
@@ -28,12 +27,12 @@ class VouchController < ApplicationController
         #get current max vouch no and plus 1 as current vouch no
         vouch_no="test in dev"
         if RAILS_ENV=="production"
-          vouch_no=U8service::API.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
+          vouch_no=Sk.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
         end
         #begin generate
         @doc.vouches.each do |v|
           v.ino_id=vouch_no
-          msg=U8service::API.generate_vouch_from_doc v
+          msg=Sk.generate_vouch_from_doc v
           if msg!="OK"
             @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
             return
@@ -77,7 +76,7 @@ class VouchController < ApplicationController
     p_doc_ids=params[:doc_ids]
     #filter the docs which already generated
     doc_ids = p_doc_ids.select do |doc_id|
-      result=U8service::API.exist_vouch(doc_id)
+      result=Sk.exist_vouch(doc_id)
       !result["Exist"] #存在的都筛选掉了
     end
     #generate 

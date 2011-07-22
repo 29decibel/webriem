@@ -4,7 +4,7 @@ module DocHeadVouch
   def exist_vouch?
     exist_info=nil
     begin
-      exist_info=U8service::API.exist_vouch doc_no
+      exist_info=Sk.exist_vouch doc_no
     rescue Exception=>msg
       Rails.logger.error "u8 service exist vouch error ,error msg is #{msg}"
       return false
@@ -439,7 +439,7 @@ module DocHeadVouch
     #get current max vouch no and plus 1 as current vouch no
     vouch_no="test in dev"
     if RAILS_ENV=="production"
-      vouch_no=U8service::API.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
+      vouch_no=Sk.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
     end
     #the time
     time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
