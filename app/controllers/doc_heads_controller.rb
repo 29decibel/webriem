@@ -144,8 +144,8 @@ class DocHeadsController < ApplicationController
   #将单据进入审批阶段
   def submit
     @doc = DocHead.find(params[:doc_id]) 
-    if params[:selected_approver_id]
-      @doc.update_attribute :selected_approver_id,params[:selected_approver_id] 
+    if params[:selected_approver_id] and params[:selected_approver_id].first
+      @doc.update_attribute :selected_approver_id,params[:selected_approver_id].first
     end
     @doc.submit
     #notice the person who need to approve this doc

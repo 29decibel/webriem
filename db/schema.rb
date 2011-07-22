@@ -1002,7 +1002,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.boolean  "is_self_dep"
     t.integer  "duty_id"
     t.boolean  "user_select",:default=>false
-    t.integer  "sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "max_amount",   :precision => 8, :scale => 2

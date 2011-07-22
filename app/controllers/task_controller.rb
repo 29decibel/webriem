@@ -41,6 +41,6 @@ class TaskController < ApplicationController
     end
   end
   def dashboard
-    @docs=DocHead.by_person(current_user.person.id).page(params[:page]).per(20)
+    @docs=DocHead.by_person(current_user.person.id).order('created_at desc').page(params[:page]).per(12)
   end
 end

@@ -4,7 +4,7 @@
       %h4 请选择审批人
       -form_tag '/doc_heads/submit',:remote=>true,:method=>:put do
         =hidden_field_tag 'doc_id',doc.id
-        =select 'approvers_list','',doc.approvers_select_list
+        =select 'selected_approver_id','',doc.approvers_select_list,:multiple=>false
         %br
         =link_to content_tag(:span,"确定"),"#",:class=>'minibutton submit'
       
