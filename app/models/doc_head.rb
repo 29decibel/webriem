@@ -325,9 +325,13 @@ class DocHead < ActiveRecord::Base
   end
 
   def approvers_select_list
-    approvers_from_work_flow_step(self.work_flow.work_flow_steps.first).map do |p_id|
-      p = Person.find p_id
-      [p.name,p.id]
+    if self.work_flow and self.work_flow.work_flow_steps.count>0
+      approvers_from_work_flow_step(self.work_flow.work_flow_steps.first).map do |p_id|
+        p = Person.find p_id
+        [p.name,p.id]
+      end
+    else
+      []
     end
   end
 

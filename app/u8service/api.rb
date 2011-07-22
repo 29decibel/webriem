@@ -1,5 +1,5 @@
 #coding: utf-8
-$config = YAML::load(File.open(Rails.root.join('config/u8service.yml'))).symbolize
+#$config = YAML::load(File.open(Rails.root.join('config/u8service.yml'))).symbolize
 module U8service
   class API
     ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"

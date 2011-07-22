@@ -12,17 +12,6 @@
 
 ActiveRecord::Schema.define(:version => 20110516164336) do
 
- create_table :rails_admin_histories do |t|
-     t.string :message # title, name, or object_id
-     t.string :username
-     t.integer :item
-     t.string :table
-     t.integer :month, :limit => 2
-     t.integer :year, :limit => 5
-     t.timestamps
-  end
-  add_index(:rails_admin_histories, [:item, :table, :month, :year])
-
   create_table "accounts", :force => true do |t|
     t.string   "name"
     t.string   "account_no"
@@ -980,13 +969,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "s_cdept_id"
     t.string   "s_cperson_id"
   end
-
-  create_table :work_flow_relate_steps , :force => true do |t|
-    t.references :work_flow, :work_flow_step
-    t.integer  "sequence"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
   
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
@@ -1000,12 +982,14 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   create_table "work_flow_steps", :force => true do |t|
     t.integer  "dep_id"
     t.boolean  "is_self_dep"
-    t.integer  "duty_id"
     t.boolean  "user_select",:default=>false
+    t.integer  "duty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "work_flow_id"
     t.decimal  "max_amount",   :precision => 8, :scale => 2
   end
+
 
   create_table "work_flows", :force => true do |t|
     t.string   "name"
@@ -1024,5 +1008,21 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
     t.timestamps
   end
+
+  create_table :active_admin_comments do |t|
+    # just resource_id and resource_type
+    t.references :resource, :polymorphic => true, :null => false
+    t.integer :author_id
+    t.string  :author_type
+    t.text :body
+    t.string :namespace
+    t.timestamps
+  end
+  add_index :active_admin_comments, [:resource_type, :resource_id]
+  add_index :active_admin_comments, [:author_type, :author_id]
+
+  # Update all the existing comments to the default namespace
+  say "Updating any existing comments to the #{ActiveAdmin.default_namespace} namespace."
+  execute "UPDATE active_admin_comments SET namespace='#{ActiveAdmin.default_namespace}'"  
 
 end

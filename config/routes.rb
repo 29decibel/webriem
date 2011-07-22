@@ -1,8 +1,10 @@
 Webreim::Application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   get "doc_rows/index"
 
-  devise_for :admin_users,:controllers => { :sessions => "admin_sessions"}
   devise_for :users,:controllers => { :sessions => "user_sessions"}
 
   get "home/index"

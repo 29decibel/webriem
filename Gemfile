@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.7'
 gem 'mysql2', '0.2.7'
 gem "jquery-rails"
-gem "devise"
+gem "devise",'1.3.4'
 gem 'delayed_job'
 gem "pdfkit"
 gem "will_paginate", "~> 3.0.pre2"
@@ -19,7 +19,7 @@ gem "tiny_tds", "~> 0.4.5"
 gem "meta_where"
 gem "meta_search"
 
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'activeadmin'
 gem 'ruby-ole'
 gem 'rest-client'
 gem 'haml'
