@@ -1,5 +1,4 @@
 #coding: utf-8
-require "#{Rails.root}/app/u8service/api.rb"
 class DocHead < ActiveRecord::Base
   include DocHeadVouch
   belongs_to :dep
@@ -294,6 +293,7 @@ class DocHead < ActiveRecord::Base
     approvers_ids = []
     if (work_flow and work_flow.work_flow_steps.count > 0)
       work_flow.work_flow_steps.each_with_index do |w,index|
+        next if (w.max_amount and self.total_amount < w.max_amount)
         candidates = approvers_from_work_flow_step(w)
         # decide choose one 
         if index==0 and selected_approver_id and selected_approver_id>0 and (candidates.include? selected_approver_id)

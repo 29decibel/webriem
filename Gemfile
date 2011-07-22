@@ -8,11 +8,9 @@ gem 'delayed_job'
 gem "pdfkit"
 gem "will_paginate", "~> 3.0.pre2"
 gem "paperclip"
-gem "parseexcel"
-gem "excelsior"
 gem "prawn",'0.8.4'
-gem "rufus-scheduler"
 
+gem 'whenever', :require => false
 # sudo brew install freetds (on mac os)
 gem "tiny_tds", "~> 0.4.5"
 
@@ -30,7 +28,6 @@ gem 'capistrano'
 
 gem "state_machine", '0.10.4'
 
-gem "nested_form"
 gem "kaminari"
 
 gem 'newrelic_rpm'

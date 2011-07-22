@@ -184,4 +184,52 @@ describe DocHead do
     doc.submit
     doc.current_approver_id.should == p4.id
   end
+
+  it "should not let the person approve if the doc amount is less than the max_amount" do
+    #three person in the same dep
+    dep = Factory(:dep)
+
+    app_duty = Factory(:duty)
+
+    doc_meta_info = Factory(:doc_meta_info,:code=>'1')
+    #applyer
+    applyer = Factory(:person,:dep=>dep,:duty=>app_duty)
+
+    #create duty
+    duty1 = Factory(:duty)
+    duty2 = Factory(:duty)
+    #create person
+    p1 = Factory(:person,:duty=>duty1,:dep=>dep)
+    p2 = Factory(:person,:duty=>duty2,:dep=>dep)
+    p3 = Factory(:person,:duty=>duty1,:dep=>dep)
+    p4 = Factory(:person,:duty=>duty1,:dep=>dep)
+    #work flow steps here
+    step1 = Factory(:work_flow_step,:duty=>duty1,:is_self_dep=>true,:max_amount=>8000)
+    step2 = Factory(:work_flow_step,:duty=>duty2,:is_self_dep=>true)
+    #create work flow
+    wf = Factory(:work_flow)
+    wf.duties<<app_duty
+    wf.doc_meta_infos<<doc_meta_info
+    wf.work_flow_steps<<step1
+    wf.work_flow_steps<<step2
+
+    #create the doc
+    doc = Factory(:doc_head,:doc_type=>doc_meta_info.code.to_i,:person=>applyer)
+    doc.borrow_doc_details << Factory(:borrow_doc_detail,:ori_amount=>1000,:rate=>7)
+    doc.save
+
+    doc.submit
+    doc.approvers.split(',').count.should == 1
+    doc.current_approver_id.should == p2.id
+
+    doc.reject
+    doc.borrow_doc_details.first.update_attribute :apply_amount,9000
+    doc.save
+    puts doc.total_amount
+
+    doc.submit
+    doc.approvers.split(',').count.should == 2
+    doc.current_approver_id.should == p1.id
+    
+  end
 end
