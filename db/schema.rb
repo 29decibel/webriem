@@ -267,8 +267,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   create_table "duties_work_flows", :id => false, :force => true do |t|
     t.integer  "work_flow_id"
     t.integer  "duty_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "extra_work_standards", :force => true do |t|
@@ -366,7 +364,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   create_table "inner_cash_draws", :force => true do |t|
     t.integer  "account_id"
-    t.decimal  "now_remain_amout", :precision => 16, :scale => 2
+    t.decimal  "now_remain_amount", :precision => 16, :scale => 2
     t.text     "description"
     t.integer  "doc_head_id"
     t.datetime "created_at"
@@ -811,8 +809,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   create_table "menus_roles", :id => false do |t|
     t.integer   "role_id"
     t.integer   "menu_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 
@@ -1005,6 +1001,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "dep_id"
     t.boolean  "is_self_dep"
     t.integer  "duty_id"
+    t.boolean  "user_select",:default=>false
     t.integer  "sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1019,8 +1016,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   create_table :doc_meta_infos_work_flows , :id => false do |t|
     t.references :work_flow, :doc_meta_info
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table :doc_meta_infos do |t|

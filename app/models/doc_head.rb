@@ -288,30 +288,47 @@ class DocHead < ActiveRecord::Base
     end
   end
 
-  def set_approvers
+  # 在单据开始审批的时候设置所有审批人员
+  # 只有第一个环节当审批人超过一个人的时候允许选择审批人
+  def set_approvers(user_selected=nil)
     approvers_ids = []
     if (work_flow and work_flow.work_flow_steps.count > 0)
-      work_flow.work_flow_steps.each do |w|
-        if w.is_self_dep
-          dep = person.dep
-          while dep do
-            p = Person.where("dep_id=? and duty_id=?",dep.id,w.duty_id).first
-            if p
-              approvers_ids<<p.id
-              break
-            end
-            dep = dep.parent_dep
-          end #end while
+      work_flow.work_flow_steps.each_with_index do |w,index|
+        candidates = approvers_from_work_flow_step(w)
+        # decide choose one 
+        if index==0 and selected_approver_id and selected_approver_id>0 and (candidates.include? selected_approver_id)
+          approvers_ids << selected_approver_id
         else
-          p = Person.where("dep_id = ? and duty_id =?",w.dep_id,w.duty_id).first
-          if p
-            approvers_ids<<p.id
-          end
-        end #end is self dep
+          approvers_ids << candidates.first if candidates.first
+        end
       end #block end
     end
     self.update_attribute :approvers,approvers_ids.join(',')
-    self.update_attribute(:current_approver_id,approvers_ids[0]) if approvers_ids.count>0
+    self.update_attribute(:current_approver_id,approvers_ids.first)
+  end
+
+  def approvers_from_work_flow_step(work_flow_step)
+    return [] if !work_flow_step
+    if work_flow_step.is_self_dep
+      dep = real_person.try(:dep) || person.dep # only is_self_dep need the change dep accord the real person
+      while dep do
+        ps = Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id).map(&:id)
+        if ps.count>0
+          return ps
+        end
+        dep = dep.parent_dep
+      end #end while
+      []
+    else
+      Person.where("dep_id = ? and duty_id =?",work_flow_step.dep_id,work_flow_step.duty_id).map(&:id)
+    end #end is self dep
+  end
+
+  def approvers_select_list
+    approvers_from_work_flow_step(self.work_flow.work_flow_steps.first).map do |p_id|
+      p = Person.find p_id
+      [p.name,p.id]
+    end
   end
 
   #decline

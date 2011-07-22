@@ -6,6 +6,10 @@ Factory.sequence :code do |n|
   "code#{n}"
 end
 
+Factory.sequence :no do |n|
+  "some_no_#{n}"
+end
+
 Factory.define :dep do |f|
   f.name {Factory.next(:name)}
   f.code {Factory.next(:code)}
@@ -17,6 +21,12 @@ Factory.define :project do |f|
   f.code {Factory.next(:code)}
   f.association :dep
 end
+
+Factory.define(:account) do |f|
+  f.name {Factory.next(:name)}
+  f.account_no {Factory.next(:no)}
+end
+
 
 Factory.define :settlement do |f|
   f.name {Factory.next(:name)}
@@ -164,7 +174,7 @@ Factory.define :inner_remittance do |f|
   f.description 'fasdfadag'
   f.remain_amount 223
   f.now_rate_price 23
-  f.associaiton :currency
+  f.association :currency
 end
 
 Factory.define :inner_transfer do |f|
@@ -205,6 +215,7 @@ Factory.define :rd_common_transport do |f|
   f.rate        234
   f.association  :dep
   f.association  :project
+  f.association :currency
   f.ori_amount  23
 end
 
@@ -217,11 +228,12 @@ Factory.define :rd_extra_work_car do |f|
   f.end_time    2.days.ago
   f.reason      'i like it'
   f.rate        23
+  f.ori_amount  200
   f.association :currency
 end
 
 Factory.define :rd_extra_work_meal do |f|
-  f.date  1.days.ago
+  f.work_date  1.days.ago
   f.is_sunday 1
   f.start_time  5.days.ago
   f.end_time    3.days.ago
@@ -243,6 +255,17 @@ Factory.define(:rd_lodging) do |f|
   f.end_date    3.days.ago
   f.association :region_type
 end
+
+Factory.define(:common_riem) do |f|
+  f.association :fee
+  f.association :dep
+  f.association :project
+  f.description 'ffffff'
+  f.association :currency
+  f.rate    233
+  f.ori_amount  23322
+end
+
 
 Factory.define(:rd_transport) do |f|
   f.start_position  'asdfaf'
@@ -288,12 +311,32 @@ Factory.define(:rec_notice_detail) do |f|
   f.company       'asdfafd'
   f.association :dep
   f.association :project
+  f.association :currency
   f.description 'asdfadfa'
   f.amount  233
   f.rate    23
   f.ori_amount  2323
 end
-  
+
+Factory.define(:buy_finance_product) do |f|
+  f.name  '32323'
+  f.rate  23
+  f.association :account
+  f.buy_date  2.days.ago
+  f.redeem_date 1.days.ago
+  f.description 'asdfasdfasdfasfasfda'
+  f.amount  223
+end
+
+Factory.define(:redeem_finance_product) do |f|
+  f.name  '32323'
+  f.rate  23
+  f.association :account
+  f.clear_date  2.days.ago
+  f.redeem_date 1.days.ago
+  f.description 'asdfasdfasdfasfasfda'
+  f.amount  223
+end 
 
 Factory.define :reciver do |f|
   f.bank 'reciver bank'

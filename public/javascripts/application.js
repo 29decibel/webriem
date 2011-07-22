@@ -222,40 +222,7 @@ function tokenize(content)
   });
 
 }
-//reference change
-function reference_change()
-{
-  //change the rate
-	if($(this).attr("id")=="currency_info")
-	{
-		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
-		//find the rate input 
-		var rate_input=$(this).closest("fieldset").find(".doc_rate");
-		if(rate_input.size()>0 && other_info!=null)
-		{
-			rate_input.val(other_info.split('_')[0]);
-			rate_input.change();
-		}
-	}
-  //change the bank and bank no
-	if($(this).attr("id")=="supplier_info")
-	{
-		var other_info=$(this).siblings(".ref_hidden_field").attr("data-other-info");
-    var infos=other_info.split(',');
-		//find the bank 
-		var bank=$(this).closest("fieldset.reciver").find(".bank");
-		if(bank.size()>0)
-		{
-			bank.val(infos[0]);
-		}
-    //find the bank no
-    var bank_no=$(this).closest("fieldset.reciver").find(".bank_no");
-    if(bank_no.size()>0)
-    {
-      bank_no.val(infos[1]);
-    }
-	}
-}
+
 
 
 //bind the change events
@@ -345,24 +312,7 @@ function removeSelected(remove_link)
 	return false;
 }
 //=================================select the approver when in the workflow someone begin apply approve
-function select_approver_or_begin_work_flow()
-{
-	if($('#approvers').size()==0)
-	{
-		make_bwf_request(-1);
-	}
-	else
-	{
-		//decide whether should choose a person to 
-		$.blockUI({ message: $('#approvers') });
-	}
 
-}
-function begin_work_flow(link)
-{
-	approver_id=$("input:checked.ref_select").siblings("#approver").val();
-	make_bwf_request(approver_id);
-}
 
 //make a ajax request to begin the work flow
 function make_bwf_request(approver_id)

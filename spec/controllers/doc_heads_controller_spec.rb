@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require	File.expand_path(File.dirname(__FILE__)	+	'/../factories' )
 describe  DocHeadsController do
   describe "print docs" do
-    it "borrow_doc_details should be ok" do
+    it "借款单打印功能 should be ok" do
       doc = Factory(:doc_head)
       Factory(:borrow_doc_detail,:ori_amount=>23,:doc_head=>doc)
       assign_others doc
@@ -11,7 +11,7 @@ describe  DocHeadsController do
       response.should be_success
     end
 
-    it "pay_doc_details should be ok" do
+    it "付款单打印功能 should be ok" do
       doc = Factory(:doc_head)
       Factory(:pay_doc_detail,:ori_amount=>23,:doc_head=>doc)
       assign_others doc
@@ -60,6 +60,65 @@ describe  DocHeadsController do
     it "福利费用的打印功能 should be ok" do
       doc = Factory(:doc_head,:doc_type=>13)
       Factory(:rd_benefit,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+
+
+    # -----------------内部单据--------------------
+
+    it "收款通知单的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>3)
+      Factory(:rec_notice_detail,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+
+    it "结汇单据的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>4)
+      Factory(:inner_remittance,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+
+    it "转账单据的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>5)
+      Factory(:inner_transfer,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+
+    it "现金提取的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>6)
+      Factory(:inner_cash_draw,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+    
+    it "购买理财产品的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>7)
+      Factory(:buy_finance_product,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+
+    it "赎回理财产品的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>8)
+      Factory(:redeem_finance_product,:doc_head=>doc)
+      assign_others doc
+      get "print",:doc_id=>doc.id
+      response.should be_success
+    end
+
+    it "固定资产单据的打印功能 should be ok" do
+      doc = Factory(:doc_head,:doc_type=>14)
+      Factory(:fixed_property,:doc_head=>doc)
       assign_others doc
       get "print",:doc_id=>doc.id
       response.should be_success

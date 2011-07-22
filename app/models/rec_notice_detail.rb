@@ -11,6 +11,7 @@ class RecNoticeDetail < ActiveRecord::Base
   belongs_to :doc_head
   belongs_to :currency
   validates_presence_of :dep_id
+  validates_presence_of :currency_id
   validates_presence_of :project_id
   validates_presence_of :ori_amount
   validates_numericality_of :ori_amount

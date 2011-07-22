@@ -48,7 +48,7 @@ Webreim::Application.routes.draw do
   get "doc_heads/batch_print"  
   get "doc_heads/doc_failed"  
   get "doc_heads/batch_approve"  
-  get "doc_heads/submit"
+  put "doc_heads/submit"
   get "doc_heads/mark"
   get "doc_heads/export_xls"
 

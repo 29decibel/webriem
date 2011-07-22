@@ -3,7 +3,7 @@ class XjtqPdf
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def self.to_pdf(pdf,doc)
-    pdf.font "#{RAILS_ROOT}/fonts/arialuni.ttf"
+    pdf.font "#{Rails.root}/fonts/arialuni.ttf"
     #title
     pdf.text "现金提取",:size=>18,:align=>:center
     #image
@@ -25,7 +25,7 @@ class XjtqPdf
       pdf.move_down 2
       pdf.table [
         ["提现账户",{:text => "#{doc.inner_cash_draw.account}", :colspan => 3, :align => :left}],
-        ["提现前余额",{:text => "#{doc.inner_cash_draw.now_remain_amout}", :colspan => 3, :align => :left}]],
+        ["提现前余额",{:text => "#{doc.inner_cash_draw.now_remain_amount}", :colspan => 3, :align => :left}]],
         :width=>pdf.margin_box.width,
         :border_style => :grid,:font_size => 11
       #现金提取详细
@@ -43,13 +43,13 @@ class XjtqPdf
     end
     #final render
     pdf.move_down 5
-    pdf.text "现金提取总金额:  "+"#{doc.total_fi_amount}", :size => 14,:align=>:right
+    pdf.text "现金提取总金额:  "+"#{doc.total_amount}", :size => 14,:align=>:right
     #work flow infos
     if doc.work_flow_infos.count>0
       pdf.move_down 10
       pdf.text "审批信息",:size=>12
       pdf.move_down 2
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
+      pdf.table doc.work_flow_infos.map {|w| ["#{w.approver}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,

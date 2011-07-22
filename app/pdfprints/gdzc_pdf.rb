@@ -3,7 +3,7 @@ class GdzcPdf
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def self.to_pdf(pdf,doc)
-    pdf.font "#{RAILS_ROOT}/fonts/arialuni.ttf"
+    pdf.font "#{Rails.root}/fonts/arialuni.ttf"
     #title
     pdf.text "固定资产入账单",:size=>18,:align=>:center
     #image

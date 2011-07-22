@@ -15,7 +15,6 @@ gem "rufus-scheduler"
 
 # sudo brew install freetds (on mac os)
 gem "tiny_tds", "~> 0.4.5"
-gem "activerecord-sqlserver-adapter", "~> 3.0.15"
 
 gem "meta_where"
 gem "meta_search"

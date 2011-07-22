@@ -3,7 +3,7 @@ class FlfyPdf
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def self.to_pdf(pdf,doc)
-    pdf.font "#{RAILS_ROOT}/fonts/arialuni.ttf"
+    pdf.font "#{Rails.root}/fonts/arialuni.ttf"
     #title
     pdf.text "福利费用报销单",:size=>18,:align=>:center
     #image
@@ -45,13 +45,13 @@ class FlfyPdf
     end
     #final render
     pdf.move_down 5
-    pdf.text "报销总金额:  "+"#{doc.total_fi_amount}", :size => 14,:align=>:right
+    pdf.text "报销总金额:  "+"#{doc.total_amount}", :size => 14,:align=>:right
     #work flow infos
     if doc.work_flow_infos.count>0
       pdf.move_down 10
       pdf.text "审批信息",:size=>12
       pdf.move_down 2
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
+      pdf.table doc.work_flow_infos.map {|w| ["#{w.approver}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,

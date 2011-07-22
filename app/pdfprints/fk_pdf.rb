@@ -9,7 +9,7 @@ class FkPdf
      #                        :bold_italic => "#{RAILS_ROOT}/fonts/arialuni.ttf",
      #                        :normal      => "#{RAILS_ROOT}/fonts/arialuni.ttf" })
     #font("MyFontFamily")
-    pdf.font "#{RAILS_ROOT}/fonts/arialuni.ttf"
+    pdf.font "#{Rails.root}/fonts/arialuni.ttf"
     #title
     pdf.text "付款单",:size=>18,:align=>:center
     #image

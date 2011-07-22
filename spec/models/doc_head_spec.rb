@@ -98,4 +98,90 @@ describe DocHead do
     @doc.work_flow_infos.first.approver_id.should ==@p1.id
     @doc.work_flow_infos.first.comments.should == 'not fine'
   end
+
+  it "if real person exist , should go the work flow from real person" do
+    #three person in the same dep
+    dep = Factory(:dep)
+    real_person_dep = Factory(:dep)
+
+    app_duty = Factory(:duty)
+    real_person_duty = Factory(:duty)
+
+    doc_meta_info = Factory(:doc_meta_info,:code=>'88')
+    #applyer
+    applyer = Factory(:person,:dep=>dep,:duty=>app_duty)
+    real_person = Factory(:person,:dep=>real_person_dep,:duty=>real_person_duty)
+
+    #create duty
+    duty1 = Factory(:duty)
+    duty2 = Factory(:duty)
+    #create person
+    p1 = Factory(:person,:duty=>duty1,:dep=>dep)
+    p2 = Factory(:person,:duty=>duty2,:dep=>dep)
+
+    p3 = Factory(:person,:duty=>duty1,:dep=>real_person_dep)
+    p4 = Factory(:person,:duty=>duty2,:dep=>real_person_dep)
+    #work flow steps here
+    step1 = Factory(:work_flow_step,:duty=>duty1,:is_self_dep=>true)
+    step2 = Factory(:work_flow_step,:duty=>duty2,:is_self_dep=>true)
+    #create work flow
+    wf = Factory(:work_flow)
+    wf.duties<<app_duty
+    wf.doc_meta_infos<<doc_meta_info
+    wf.work_flow_steps<<step1
+    wf.work_flow_steps<<step2
+
+    #create the doc
+    doc = Factory(:doc_head,:doc_type=>doc_meta_info.code.to_i,:person=>applyer,:real_person=>real_person)
+    doc.work_flow.should be_nil
+
+    # now can find the work_flow
+    wf.duties<<real_person_duty
+    doc.work_flow.should_not be_nil
+
+    doc.submit
+    doc.approvers.should == [p3.id,p4.id].join(',')
+    doc.current_approver_id.should == p3.id
+  end
+
+  it "should use the user selected person to approve" do
+    #three person in the same dep
+    dep = Factory(:dep)
+
+    app_duty = Factory(:duty)
+
+    doc_meta_info = Factory(:doc_meta_info,:code=>'88')
+    #applyer
+    applyer = Factory(:person,:dep=>dep,:duty=>app_duty)
+
+    #create duty
+    duty1 = Factory(:duty)
+    duty2 = Factory(:duty)
+    #create person
+    p1 = Factory(:person,:duty=>duty1,:dep=>dep)
+    p2 = Factory(:person,:duty=>duty2,:dep=>dep)
+    p3 = Factory(:person,:duty=>duty1,:dep=>dep)
+    p4 = Factory(:person,:duty=>duty1,:dep=>dep)
+    #work flow steps here
+    step1 = Factory(:work_flow_step,:duty=>duty1,:is_self_dep=>true)
+    step2 = Factory(:work_flow_step,:duty=>duty2,:is_self_dep=>true)
+    #create work flow
+    wf = Factory(:work_flow)
+    wf.duties<<app_duty
+    wf.doc_meta_infos<<doc_meta_info
+    wf.work_flow_steps<<step1
+    wf.work_flow_steps<<step2
+
+    #create the doc
+    doc = Factory(:doc_head,:doc_type=>doc_meta_info.code.to_i,:person=>applyer)
+
+    doc.approvers_from_work_flow_step(doc.work_flow.work_flow_steps.first).count.should == 3
+    doc.submit
+    doc.current_approver_id.should == p1.id
+
+    doc.reject
+    doc.update_attribute :selected_approver_id,p4.id
+    doc.submit
+    doc.current_approver_id.should == p4.id
+  end
 end

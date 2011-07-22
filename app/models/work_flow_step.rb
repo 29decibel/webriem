@@ -15,4 +15,5 @@ class WorkFlowStep < ActiveRecord::Base
       "由#{dep.name}的#{duty.name}进行审批"
     end
   end
+
 end

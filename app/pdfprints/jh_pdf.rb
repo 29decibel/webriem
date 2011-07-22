@@ -3,7 +3,7 @@ class JhPdf
   include ActionView::Helpers::NumberHelper
   attr_accessor :doc
   def self.to_pdf(pdf,doc)
-    pdf.font "#{RAILS_ROOT}/fonts/arialuni.ttf"
+    pdf.font "#{Rails.root}/fonts/arialuni.ttf"
     #title
     pdf.text "结汇单",:size=>18,:align=>:center
     #image
@@ -24,7 +24,7 @@ class JhPdf
       pdf.text "结汇申请详细",:size=>12
       pdf.move_down 2
       pdf.table [
-        ["申请金额","#{doc.inner_remittance.amount}","币种","#{doc.inner_remittance.currency.name}"],
+        ["申请金额","#{doc.inner_remittance.amount}","币种","#{doc.inner_remittance.currency.try(:name)}"],
         ["结汇账户","#{doc.inner_remittance.out_account}","结汇账户结汇后余额","#{doc.inner_remittance.remain_amount}$"],
         ["收款账户","#{doc.inner_remittance.in_account}","收款账户结汇后余额","#{doc.inner_remittance.in_amount_after}￥"],
         ["当日汇率",{:text => "#{doc.inner_remittance.now_rate_price}", :colspan => 3, :align => :left}],
@@ -37,7 +37,7 @@ class JhPdf
       pdf.move_down 10
       pdf.text "审批信息",:size=>12
       pdf.move_down 2
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
+      pdf.table doc.work_flow_infos.map {|w| ["#{w.approver}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,
