@@ -6,6 +6,8 @@ Database
 5.抽取roles中的menu_ids，到menus_roles中
 6.抽取work_flow中的doc_types到doc_meta_infos_work_flows
 
+旧的字段都有保留
+
 Data
 菜单预置，单据类型元数据预置，
 系统费用类型预置

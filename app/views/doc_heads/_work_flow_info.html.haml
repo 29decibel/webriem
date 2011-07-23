@@ -1,2 +1,2 @@
 -doc.work_flow_infos.each do  |wf|
-  .work_flow_info{:class=>"#{wf.is_ok==1 ? 'approve':'reject'}"}= "#{wf.approver.name}审批#{wf.is_ok ==1 ? '通过':'未通过'} [#{wf.comments}]"
+  .work_flow_info{:class=>"#{wf.is_ok==1 ? 'approve':'reject'}"}= "#{wf.approver.try(:name)}审批#{wf.is_ok ==1 ? '通过':'未通过'} [#{wf.comments}]"

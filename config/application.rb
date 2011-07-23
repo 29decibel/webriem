@@ -49,4 +49,6 @@ module Webreim
   end
 end
 I18n.locale = 'zh_cn'
+
+
 #I18n.locale = 'en-US'

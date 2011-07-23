@@ -7,7 +7,4 @@ class WorkFlow < ActiveRecord::Base
   has_and_belongs_to_many :duties
   accepts_nested_attributes_for :work_flow_steps ,:allow_destroy => true
 
-  def doc_types
-    doc_meta_infos.map(&:code)
-  end
 end

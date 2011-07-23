@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_type"
+    t.integer  "doc_state"  # just for update
     t.string  "state"
     t.integer  "project_id"
     t.integer  "is_split"
@@ -777,6 +778,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "menu_ids" # just for update
   end
 
 
@@ -948,6 +950,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "doc_head_id"
     t.integer  "is_ok"
     t.integer  "approver_id"
+    t.integer  "person_id"
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -967,6 +970,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   create_table "work_flows", :force => true do |t|
     t.string   "name"
+    t.string   "doc_types" # just for update
     t.datetime "created_at"
     t.datetime "updated_at"
   end
