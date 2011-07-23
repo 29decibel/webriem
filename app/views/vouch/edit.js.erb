@@ -4,3 +4,5 @@ $("#edit_vouch_<%= @vouch.id%>").html("<%= escape_javascript(render :partial => 
 $("#edit_vouch_<%= @vouch.id%>").show("slow");
 //append some events
 $("#edit_vouch_<%= @vouch.id%> input.datepicker").datepicker();
+//tokenize
+tokenize();

@@ -56,6 +56,7 @@ class Sk
   end
 
   def self.exist_vouch(doc_no)
+    return false if !Rails.env.production?
     select_cmd = "select count(*) from gl_accvouch where cdigest like '%#{doc_no}%'"
     self.exec_sql(select_cmd).first[""] > 0
   end

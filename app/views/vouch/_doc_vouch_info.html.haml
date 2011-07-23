@@ -24,9 +24,9 @@
     %th 附件张数
     %th U8凭证状态
   -doc.vouches.each do  |v|
-    %tr{id=>"vouch_row_#{v.id}"
+    %tr{'id'=>"vouch_row_#{v.id}"}
       = render :partial => "vouch_row_info",:locals=>{:v=>v}
     %tr
-      %td{colspan=>"14"
-        .edit_inline{id=>"edit_vouch_#{v.id}"
+      %td{"colspan"=>"14"}
+        .edit_inline{"id"=>"edit_vouch_#{v.id}"}
 

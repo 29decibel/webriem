@@ -29,7 +29,7 @@
     %span.value= f.text_field :doc_no 
   .form_field
     %span.label= f.label :citem_id 
-    %span.value= ts "item_id","Project",:text=>f.object.project.to_s,:value=>f.project.person_id,:f=>f
+    %span.value= ts "item_id","Project",:text=>f.object.project.to_s,:value=>f.object.item_id,:f=>f
   .form_field
     %span.label= f.label :ccode_equal 
     %span.value= f.text_field :ccode_equal 

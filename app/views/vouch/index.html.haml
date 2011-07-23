@@ -1,4 +1,4 @@
 .form_title 单据生成U8凭证预览
 -@docs.each do |doc|
-  .vouch_info{id=>doc.id}
+  .vouch_info{'id'=>doc.id}
     = render :partial=>"doc_vouch_info",:locals=>{:doc=>doc}
