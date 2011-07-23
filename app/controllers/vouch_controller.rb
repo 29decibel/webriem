@@ -3,7 +3,7 @@ class VouchController < ApplicationController
   #every doc has it's own way to generate the vouch
   #i put the logic into the doc itself
   def index
-    @docs=DocHead.where("id in (#{params[:doc_ids]}) and mark='ok'").all
+    @docs=DocHead.where("id in (#{params[:doc_ids]})").all
     rg_all=(params[:rg]=="true")
     @docs.each {|d| d.rg_vouches(current_user.person.name) if (rg_all or d.vouches.count==0) }
   end
@@ -27,13 +27,13 @@ class VouchController < ApplicationController
         #get current max vouch no and plus 1 as current vouch no
         vouch_no="test in dev"
         if RAILS_ENV=="production"
-          vouch_no=Sk.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
+          vouch_no=Sk.max_ino_id + 1
         end
         #begin generate
         @doc.vouches.each do |v|
           v.ino_id=vouch_no
           msg=Sk.generate_vouch_from_doc v
-          if msg!="OK"
+          if msg!="-1"
             @message<<"分录号#{v.inid}：#{get_specific_error msg} \n"
             return
           end
@@ -76,8 +76,8 @@ class VouchController < ApplicationController
     p_doc_ids=params[:doc_ids]
     #filter the docs which already generated
     doc_ids = p_doc_ids.select do |doc_id|
-      result=Sk.exist_vouch(doc_id)
-      !result["Exist"] #存在的都筛选掉了
+      # filter exists
+      !Sk.exist_vouch(doc_id)
     end
     #generate 
     doc_ids.each do |doc_id|

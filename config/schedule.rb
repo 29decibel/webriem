@@ -21,7 +21,15 @@ set :output, "~/projects/schedule.log"
 # Learn more: http://github.com/javan/whenever
 
 every :day,:at=>'10:03 pm' do
-  rake "schedule:update_gpm_projects"
+  rake "schedule:import_gpm_projects"
+end
+
+every :day,:at=>'10:30 pm' do
+  rake "schedule:import_u8_codes"
+end
+
+every :day,:at=>'10:45 pm' do
+  rake "schedule:import_u8_deps"
 end
 
 every :day, :at=>'10am' do

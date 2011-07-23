@@ -1,0 +1,12 @@
+Database
+1.[doc_heads] doc_state => state, integer=>string
+2.[r_benefits] add new columns rate,ori_amount，设置ori_amount等于apply_amount
+3.拆分cp_doc_detail到不同的表中
+4.拆分rd_work_meal到不同的表中
+5.抽取roles中的menu_ids，到menus_roles中
+6.抽取work_flow中的doc_types到doc_meta_infos_work_flows
+
+Data
+菜单预置，单据类型元数据预置，
+系统费用类型预置
+

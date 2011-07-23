@@ -402,11 +402,12 @@ class DocHead < ActiveRecord::Base
 
   ####################### vouch ##############################
   def exist_vouch?
-    Accvouch.exist? self.doc_no
-  end
-
-  def send_vouch
-    Accvouch.g_vouch self
+    begin
+      Sk.exist_vouch doc_no
+    rescue Exception=>msg
+      Rails.logger.error "u8 service exist vouch error ,error msg is #{msg}"
+      return false
+    end
   end
   #vouch infos
   #this is a massive method which contains a lot of logic 
@@ -482,7 +483,7 @@ class DocHead < ActiveRecord::Base
         self.vouches.clear
         #n条借方
         jcount=1
-        self.cp_doc_details.each do |cp|
+        self.borrow_doc_details.each do |cp|
            vj=get_v ({:inid=>"#{jcount}",
            :code=>fee_m_code.dcode,
            :cbill=>cbill,
@@ -852,8 +853,8 @@ class DocHead < ActiveRecord::Base
   def get_v(options)
     #get current max vouch no and plus 1 as current vouch no
     vouch_no="test in dev"
-    if RAILS_ENV=="production"
-      vouch_no=Sk.max_vouch_info(Time.now.month)["MaxNo"].to_i + 1
+    if Rails.env=="production"
+      vouch_no=Sk.max_ino_id + 1
     end
     #the time
     time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"

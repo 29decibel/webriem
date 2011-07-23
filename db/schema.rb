@@ -804,17 +804,6 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
   end
 
-  create_table "subjects", :force => true do |t|
-    t.integer  "fee_id"
-    t.integer  "dep_id"
-    t.string   "u8_fee_subject"
-    t.string   "u8_borrow_subject"
-    t.string   "u8_reim_subject"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "business_type_id"
-  end
-
   create_table "suppliers", :force => true do |t|
     t.string   "name"
     t.string   "code"
