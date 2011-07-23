@@ -33,5 +33,9 @@ every :day,:at=>'10:45 pm' do
 end
 
 every :day, :at=>'10am' do
-  rake "shedule:alert_docs_to_approve"
+  rake "schedule:alert_docs_to_approve"
+end
+
+every 4.hours do
+  rake "backup:mysql"
 end
