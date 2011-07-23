@@ -36,13 +36,14 @@ Webreim::Application.configure do
   #   :password => 'china123!'
   # }
   config.action_mailer.smtp_settings = {
-    :address => "mail.skccsystems.cn",
-    :enable_starttls_auto => true,
-    :port => 587,
-    :authentication =>:login,
-    :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
-    :password => 'china123!'
-  }
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => '114.113.150.227',
+    :user_name            => 'mike.d.1984',
+    :password             => 'jj19880718',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+
   #here is my delayed jobs
   config.autoload_paths << File.join(config.root, "lib")
 end

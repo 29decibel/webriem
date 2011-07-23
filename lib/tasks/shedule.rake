@@ -20,7 +20,7 @@ namespace :schedule do
     Rails.logger.info "send emails to docs approver..."
     person_doc={}
     #set the person and the docs he should approver
-    DocHead.where("doc_state=1").each do |doc|
+    DocHead.where("state='processing'").each do |doc|
       next if doc.current_approver_id==nil
       Rails.logger.info "+++++ doc id is #{doc.id}  begin ++++++"
       p = Person.find_by_id(doc.current_approver_id)
@@ -36,11 +36,11 @@ namespace :schedule do
     #send the mail
     para={}
     person_doc.each do |person,docs|
-      send_mail_address = Rails.env=="production" ? person.e_mail : "mike.d.1984@gmail.com" 
+      send_mail_address = Rails.env=="production" ? person.e_mail : "ldb1984@gmail.com" 
       Rails.logger.info "$$$$$$$$$ address:  #{send_mail_address}   $$$$$$"
       para[:email]= send_mail_address
       para[:docs_count]=docs.count
-      para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_apply_amount }
+      para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_amount }
       Rails.logger.info "sending email to #{para[:mail]} docs count is #{para[:docs_count]} docs total is #{para[:docs_total]}"
       #WorkFlowMailer.notice_docs_to_approve para
       Resque.enqueue(MailWorker, :notice_docs_to_approve,para)
