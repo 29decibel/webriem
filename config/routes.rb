@@ -41,23 +41,25 @@ Webreim::Application.routes.draw do
   get "ajax_service/getbudget"  
   get "ajax_service/remove_offset",:as=>:remove_offset  
   get "ajax_service/get_extrafee"
-    
-  get "doc_heads/output_to_txt(.:format)"  
-  get "doc_heads/output_to_txt_all(.:format)"
-  get "doc_heads/pay"  
-  get "doc_heads/print(.:format)"
-  get "doc_heads/recall"  
-  get "doc_heads/batch_pay"  
-  get "doc_heads/batch_print"  
-  get "doc_heads/doc_failed"  
-  get "doc_heads/batch_approve"  
-  put "doc_heads/submit"
-  get "doc_heads/mark"
-  get "doc_heads/export_xls"
 
   resources :doc_heads do
+    member do
+      put :adjust_amount
+    end
     collection do
       get :search
+      get :output_to_txt
+      get :output_to_txt_all
+      get :pay  
+      get :print
+      get :recall  
+      get :batch_pay  
+      get :batch_print  
+      get :doc_failed  
+      get :batch_approve  
+      put :submit
+      get :mark
+      get :export_xls
     end
   end
   resources :doc_rows

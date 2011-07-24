@@ -35,4 +35,15 @@ class RdTravel < ActiveRecord::Base
   def dep
     doc_head.afford_dep
   end
+
+  def adjust_amount(attr,amount)
+    if amount < self.apply_amount and self.respond_to?(attr)
+      self.update_attribute attr.to_symbol,amount
+      # update recivers
+      reciver_count = self.doc_head.recivers.count
+      self.doc_head.recivers.each do |r|
+        r.update_attribute attr.to_symbol,amount/reciver_count
+      end
+    end
+  end
 end

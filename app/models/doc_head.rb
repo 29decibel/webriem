@@ -242,9 +242,13 @@ class DocHead < ActiveRecord::Base
   #=====================================================
   #获得所有的审批流程
   def work_flow
+    @work_flow ||= find_work_flow
+  end
+
+  def find_work_flow
     which_duty = (real_person==nil ? person.duty : real_person.duty)
     wf=WorkFlow.all.select{|w| w.doc_meta_infos.map(&:code).include? doc_type.to_s and w.duties.include? which_duty }
-    wf.first
+    wf.first   
   end
 
   state_machine :state, :initial => :un_submit do
