@@ -24,10 +24,9 @@
     %span.label= "#{I18n.t('common_attr.amount')}"
     %span.value= d_item.amount
   <!--riem need the hr amount and finance amount-->
-  -if [9,11,13].include? 2
-    .show_field
-      %span.label= "#{I18n.t('common_attr.hr_amount')}"  
-      %span.value= d_item.hr_amount
-    .show_field
-      %span.label= "#{I18n.t('common_attr.fi_amount')}"    
-      %span.value= d_item.fi_amount
+  .show_field
+    %span.label= "#{I18n.t('common_attr.hr_amount')}"  
+    %span.value= d_item.hr_amount
+  .show_field
+    %span.label= "#{I18n.t('common_attr.fi_amount')}"    
+    %span.value= d_item.fi_amount

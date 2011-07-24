@@ -193,7 +193,7 @@ class DocHeadsController < ApplicationController
     @doc = DocHead.find(params[:id])
     # update fi or hr amount
     item = Kernel.const_get(params['resource_type']).send(:find,params[:resource_id])
-    item.update_attribute :hr_amount,params[:amount]
+    item.adjust_amount :hr_amount,params[:amount]
     respond_to do |wants|
       wants.js
     end
