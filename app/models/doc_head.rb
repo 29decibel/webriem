@@ -202,7 +202,8 @@ class DocHead < ActiveRecord::Base
       total+= amount_for :rd_benefits
     end
     if doc_type==14
-      total+=amount_for :fixed_properties
+      # todo
+      # total+=amount_for :fixed_properties
     end
     total
   end
@@ -401,7 +402,10 @@ class DocHead < ActiveRecord::Base
   #callbacks
   def set_total_amount
     #update the total_fi_amount
-    self.total_amount = get_total_apply_amount
+    # self.total_amount = get_total_apply_amount
+  end
+  def total_amount
+    get_total_apply_amount
   end
 
   ####################### vouch ##############################

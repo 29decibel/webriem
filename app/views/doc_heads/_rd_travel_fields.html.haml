@@ -1,6 +1,6 @@
 %fieldset
   %legend
-    = f.hidden_field(:_destroy) 
+    = f.hidden_field(:_destroy,:class=>'destroy_mark') 
     = hidden_field_tag :fee_type,f.object.class.name
     = link_to_remove 
   %span.sequence

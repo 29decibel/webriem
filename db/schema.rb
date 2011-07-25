@@ -320,7 +320,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   end
 
   create_table "fixed_properties", :force => true do |t|
-    t.string   "type"
+    t.string   "fp_type"
+    # t.string   "type"
     t.string   "name"
     t.string   "code"
     t.integer  "sequence"

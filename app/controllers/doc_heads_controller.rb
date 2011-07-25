@@ -39,6 +39,7 @@ class DocHeadsController < ApplicationController
     end
     respond_to do |format|
       format.xml  { render :xml => @doc }
+      format.html
       format.js # show.html.erb
     end
   end
@@ -193,7 +194,7 @@ class DocHeadsController < ApplicationController
     @doc = DocHead.find(params[:id])
     # update fi or hr amount
     item = Kernel.const_get(params['resource_type']).send(:find,params[:resource_id])
-    item.adjust_amount :hr_amount,params[:amount]
+    item.adjust_amount "#{current_person.person_type.code.downcase}_amount",params[:amount]
     respond_to do |wants|
       wants.js
     end

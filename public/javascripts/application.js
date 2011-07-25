@@ -270,10 +270,15 @@ function bind_is_split_change_events()
 
 function remove_fields(link) {
   if(!confirm("是否真的要删除?")) return;
-    $(link).prev("input[type=hidden]").val("true");  
+  if($(link).closest('fieldset').attr('class')!='new')
+  {
+    $(link).closest('fieldset').find('.destroy_mark').val("true");  
     $(link).closest("fieldset").hide(); 
-	//set_unique_sequence_num($(link).closest("table.form_input").find("input.table_row_sequence").not('input[value=true]'));
-	//invoke the calcalate number
+  }
+  else
+  {
+    $(link).closest('fieldset').remove();
+  }
 	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount,input.percent_amount").change();
 }
 
@@ -292,7 +297,8 @@ function add_fields(link, association, content) {
 	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
   $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().trigger('change:region_type_select');
-	//enable the enter to tab
+  $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().addClass('new');
+  //enable the enter to tab
 	add_enter_to_tab();
   //tokenize
   tokenize();

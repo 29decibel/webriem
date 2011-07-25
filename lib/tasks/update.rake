@@ -119,5 +119,50 @@ namespace :update do
     SystemConfig.create :key=>'casher_duty_code',:value=>'011' unless SystemConfig.find_by_key("casher_duty_code")
   end
 
+  desc "reset all users password"
+  task :reset_password => :environment do
+    User.all.each do |u|
+      u.reset_password '123456','123456'
+    end
+  end
+
+  desc "reset non use fi and hr adjust amount"
+  task :reset_adjust_amount => :clear_singles do
+    %w(RdTravel RdTransport RdLodging RdExtraWorkMeal RdExtraWorkCar OtherRiem RdBenefit).each do |resource|
+      rt = Kernel.const_get(resource)
+      rt.all.each do |item|
+        if item.hr_amount == item.apply_amount
+          item.update_attribute :hr_amount,nil
+        end
+        if item.fi_amount == item.apply_amount
+          item.update_attribute :fi_amount,nil
+        end
+      end
+    end
+    Reciver.all.each do |r|
+      if r.hr_amount == r.amount
+        r.update_attribute :hr_amount,nil
+      end
+      if r.fi_amount == r.amount
+        r.update_attribute :fi_amount,nil
+      end
+    end
+  end
+
+  desc "fetch old type column from fixed property table"
+  task :migrate_fixed_property => :environment do
+    FixedProperty.all.each {|f| f.update_attribute :fp_type,f.type}
+  end
+
+  desc "clear poor childs"
+  task :clear_singles => :environment do
+    %w(RdTravel RdTransport RdLodging RdExtraWorkMeal RdExtraWorkCar OtherRiem RdBenefit Reciver).each do |resource|
+      rt = Kernel.const_get(resource)
+      ok_doc_head_ids = rt.joins(:doc_head).map(&:doc_head_id)
+      delete_count = rt.where("doc_head_id not in (?)",ok_doc_head_ids).delete_all
+      puts "#{delete_count} #{resource} deleted......"
+    end   
+  end
+
 end
 

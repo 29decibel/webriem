@@ -215,7 +215,7 @@ describe DocHead do
 
     #create the doc
     doc = Factory(:doc_head,:doc_type=>doc_meta_info.code.to_i,:person=>applyer)
-    doc.borrow_doc_details << Factory(:borrow_doc_detail,:ori_amount=>1000,:rate=>7)
+    doc.borrow_doc_details << Factory(:borrow_doc_detail,:ori_amount=>1000,:rate=>7,:doc_head=>doc)
     doc.save
 
     doc.submit
@@ -225,7 +225,7 @@ describe DocHead do
     doc.reject
     doc.borrow_doc_details.first.update_attribute :apply_amount,9000
     doc.save
-    puts doc.total_amount
+    doc.reload
 
     doc.submit
     doc.approvers.split(',').count.should == 2

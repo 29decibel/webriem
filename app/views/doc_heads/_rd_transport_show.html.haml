@@ -1,3 +1,15 @@
+-if can_adjust_amount(d_item.doc_head,'HR') or can_adjust_amount(d_item.doc_head,'FI')
+  #adjust_amount_wrapper
+    #adjust_amount
+      -form_tag "/doc_heads/#{d_item.doc_head.id}/adjust_amount",:remote=>'true',:method=>:put do
+        =hidden_field_tag 'resource_id',d_item.id
+        =hidden_field_tag 'resource_type',d_item.class.name
+        %h2 请输入需要调整的金额
+        =text_field_tag 'amount'
+        =hidden_field_tag 'amount_type',current_user.person.duty.code
+        %br
+        =link_to content_tag(:span,"确定"),"#",:class=>'minibutton submit'
+
 %fieldset
   %span.sequence
   .show_field
@@ -32,4 +44,25 @@
   .show_field
     %span.label= "#{I18n.t('common_attr.apply_amount')}"
     %span.value= d_item.apply_amount
+  .show_field.hr_adjust
+    %span.label= "#{I18n.t('common_attr.hr_amount')}"
+    %span.value=  d_item.hr_amount || '无'
+    -if can_adjust_amount(d_item.doc_head,'HR')
+      =link_to "调整", "#adjust_amount",:class=>'pop'
+  .show_field.hr_adjust
+    %span.label= "#{I18n.t('common_attr.fi_amount')}"
+    %span.value=  d_item.fi_amount || '无'
+    -if can_adjust_amount(d_item.doc_head,'FI')
+      =link_to "调整", "#adjust_amount",:class=>'pop'
+:javascript
+  $(function(){
+    $("a.pop").fancybox({
+      'transitionIn'  : 'elastic',
+      'transitionOut' : 'elastic',
+      'speedIn'   : 600, 
+      'speedOut'    : 200, 
+      'overlayShow' : false,
+      'height'      : '400'
+    });
+  });
 

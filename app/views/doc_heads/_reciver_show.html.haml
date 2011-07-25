@@ -26,7 +26,7 @@
   <!--riem need the hr amount and finance amount-->
   .show_field
     %span.label= "#{I18n.t('common_attr.hr_amount')}"  
-    %span.value= d_item.hr_amount
+    %span.value= d_item.hr_amount || "无"
   .show_field
     %span.label= "#{I18n.t('common_attr.fi_amount')}"    
-    %span.value= d_item.fi_amount
+    %span.value= d_item.fi_amount || "无"
