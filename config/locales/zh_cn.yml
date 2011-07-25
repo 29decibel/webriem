@@ -753,6 +753,7 @@
     docs_to_pay: "需要付款的单据"
     docs_paid: "已经付款的单据"
     docs_approved: "审批过的单据"
+    doc_rows: "单据统计"
     roles: "权限设置"
     deps: "部门"
     duties: "职务"
