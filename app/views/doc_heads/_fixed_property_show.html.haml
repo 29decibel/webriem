@@ -2,7 +2,7 @@
   %span.sequence
   .show_field
     %span.label= "类型"
-    %span.value= d_item.type
+    %span.value= d_item.property_type.try(:name)
   .show_field
     %span.label= "名称"
     %span.value= d_item.name

@@ -147,8 +147,13 @@ Factory.define :rd_travel do |f|
   f.st_amount   233
 end
 
+Factory.define :property_type do |f|
+  f.name  {Factory.next(:name)}
+  f.code  {Factory.next(:code)}
+end
+
 Factory.define :fixed_property do |f|
-  f.type    'good'
+  f.association    :property_type
   f.name    'fine'
   f.code    'so nice'
   f.buy_unit  234

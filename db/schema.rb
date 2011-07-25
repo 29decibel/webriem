@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index "accounts", ["name"], :name => "index_accounts_on_name"
 
   create_table "budgets", :force => true do |t|
     t.integer  "fee_id"
@@ -151,6 +152,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
     t.decimal  "default_rate", :precision => 10, :scale => 4
   end
+  add_index "currencies",["name"],:name=>"index_currencies_on_name"
+  add_index "currencies",["code"],:name=>"index_currencies_on_code"
 
   create_table "deps", :force => true do |t|
     t.string   "code"
@@ -165,6 +168,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "u8_dep_id"
     t.integer  "status"
   end
+  add_index "deps",["name"],:name=>"index_deps_on_name"
+  add_index "deps",["code"],:name=>"index_deps_on_code"
 
   create_table "doc_heads", :force => true do |t|
     t.string   "doc_no"
@@ -318,10 +323,11 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
     t.integer  "parent_fee_id"
   end
+  add_index "fees",["name"],:name=>"index_fees_on_name"
+  add_index "fees",["code"],:name=>"index_fees_on_code"
 
   create_table "fixed_properties", :force => true do |t|
-    t.string   "fp_type"
-    # t.string   "type"
+    t.integer  "property_type_id"
     t.string   "name"
     t.string   "code"
     t.integer  "sequence"
@@ -380,6 +386,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index 'lodgings',['name'],:name=>'index_lodgings_on_name'
+  add_index 'lodgings',['code'],:name=>'index_lodgings_on_code'
 
   create_table "menu_categories", :force => true do |t|
     t.string   "name"
@@ -444,6 +452,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   add_index "people", ["duty_id"], :name => "index_people_on_duty_id"
   add_index "people", ["person_type_id"], :name => "index_people_on_person_type_id"
   add_index "people", ["role_id"], :name => "index_people_on_role_id"
+  add_index "people", ["name"], :name => "index_people_on_name"
+  add_index "people", ["code"], :name => "index_people_on_code"
 
   create_table "person_types", :force => true do |t|
     t.string   "name"
@@ -460,6 +470,15 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string  "status"
+  end
+  add_index "projects",['name'],:name=>'index_projects_on_name'
+  add_index "projects",['code'],:name=>'index_projects_on_code'
+
+  create_table "property_types", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rd_benefits", :force => true do |t|
@@ -737,6 +756,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "updated_at"
     t.integer  "region_type_id"
   end
+  add_index 'regions',['name'],:name=>'index_regions_on_name'
+  add_index 'regions',['code'],:name=>'index_regions_on_code'
 
   create_table "reim_details", :force => true do |t|
     t.integer  "sequence"
@@ -806,6 +827,9 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index 'settlements',['name'],:name=>'index_settlements_on_name'
+  add_index 'settlements',['code'],:name=>'index_settlements_on_code'
+  
 
   create_table "suppliers", :force => true do |t|
     t.string   "name"
@@ -815,6 +839,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index 'suppliers',['name'],:name=>'index_suppliers_on_name'
+  add_index 'suppliers',['code'],:name=>'index_suppliers_on_code'
 
   create_table "system_configs", :force => true do |t|
     t.string   "key"
@@ -823,6 +849,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index 'system_configs',['key'],:name=>'index_system_configs_on_key'
 
   create_table "transportations", :force => true do |t|
     t.string   "name"
@@ -830,6 +857,8 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index 'transportations',['name'],:name=>'index_transportations_on_name'
+  add_index 'transportations',['code'],:name=>'index_transportations_on_code'
 
   create_table "u8_deps", :force => true do |t|
     t.string   "cdepcode"

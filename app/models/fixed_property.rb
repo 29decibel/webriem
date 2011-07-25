@@ -3,4 +3,5 @@ class FixedProperty < ActiveRecord::Base
   belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
   belongs_to :project
   belongs_to :doc_head
+  belongs_to :property_type
 end

@@ -5,7 +5,7 @@
   %span.sequence
   .form_field
     %span.label= "类型"
-    %span.value= f.text_field :type,:class=>"normal" 
+    %span.value= f.select :property_type_id,PropertyType.all.map{|a|[a.name,a.id]}.to_a,:class=>"normal" 
   .form_field
     %span.label= "名称"
     %span.value= f.text_field :name,:class=>"normal" 
