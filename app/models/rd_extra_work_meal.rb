@@ -1,6 +1,7 @@
 #coding: utf-8
 class RdExtraWorkMeal < ActiveRecord::Base
   include DocIndex
+  include AdjustAmount
   before_validation :set_apply_amount
   def set_apply_amount
     self.apply_amount = self.rate * self.ori_amount

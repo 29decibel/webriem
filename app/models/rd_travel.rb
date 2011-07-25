@@ -1,6 +1,7 @@
 #coding: utf-8
 class RdTravel < ActiveRecord::Base
   include DocIndex
+  include AdjustAmount
   before_validation :set_apply_amount
   def set_apply_amount
     self.apply_amount = self.rate * self.ori_amount
@@ -34,25 +35,5 @@ class RdTravel < ActiveRecord::Base
   end
   def dep
     doc_head.afford_dep
-  end
-
-  def adjust_amount(attr,amount)
-    # 应该使用fi or hr金额的总和来计算
-    amount = amount.to_f
-    if amount < self.apply_amount and self.respond_to?(attr)
-      minus_amount = self.apply_amount - amount
-      self.update_attribute attr.to_sym,amount
-      # update recivers
-      # minus one by one
-      self.doc_head.recivers.each do |r|
-        if minus_amount < r.amount
-          r.update_attribute attr.to_sym,r.amount-minus_amount
-          break
-        else
-          r.update_attribute attr.to_sym,0
-          minus_amount = minus_amount - r.amount
-        end
-      end
-    end
   end
 end
