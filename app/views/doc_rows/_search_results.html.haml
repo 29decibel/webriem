@@ -3,13 +3,13 @@
   .amount_result= "报销总金额为 ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
   %table
     %tr
-      %th 单据号
-      %th 单据类型
-      %th 部门
-      %th 项目
-      %th 申请人
-      %th 申请日期
-      %th 报销金额
+      %th= sort_link @search,:doc_no
+      %th= sort_link @search,:resource_type
+      %th= sort_link @search, :dep_id
+      %th= sort_link @search, :project_id
+      %th= sort_link @search, :person_id
+      %th= sort_link @search, :apply_date
+      %th= sort_link @search, :apply_amount
     -@doc_rows.each do |dr|
       %tr
         %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true

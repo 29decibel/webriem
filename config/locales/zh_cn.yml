@@ -281,6 +281,14 @@
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
+      doc_row:
+        doc_no: 单据号
+        resource_type: 单据类型
+        dep_id: 费用部门
+        project_id: 项目
+        person_id: 申请人
+        apply_date: 申请日期
+        apply_amount: 申请金额
       work_flow_info:
         is_ok: "是否通过"
         people_id: "审批人"
