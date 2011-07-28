@@ -39,7 +39,7 @@ class WorkFlowInfosController < ApplicationController
   # POST /work_flow_infos.xml
   def create
     @doc = DocHead.find(params[:doc_id])
-    if params["work_flow_info"]["is_ok"] =='1'
+    if params["work_flow_info"]["is_ok"] =='true'
       @doc.next_approver params["work_flow_info"]["comments"]
       @doc.reload
     else

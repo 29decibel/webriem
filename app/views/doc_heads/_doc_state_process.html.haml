@@ -1,12 +1,13 @@
 #work_flow_progress
   -if (doc.un_submit? or doc.rejected?) and doc.approvers_select_list.count>1 and !doc.new_record?
-    #select_approvers
-      %h4 请选择审批人
-      -form_tag '/doc_heads/submit',:remote=>true,:method=>:put do
-        =hidden_field_tag 'doc_id',doc.id
-        =select 'selected_approver_id','',doc.approvers_select_list,:multiple=>false
-        %br
-        =link_to content_tag(:span,"确定"),"#",:class=>'minibutton submit'
+    #select_approvers_wrapper
+      #select_approvers
+        %h4 请选择审批人
+        -form_tag '/doc_heads/submit',:remote=>true,:method=>:put do
+          =hidden_field_tag 'doc_id',doc.id
+          =select 'selected_approver_id','',doc.approvers_select_list,:multiple=>false
+          %br
+          =link_to content_tag(:span,"确定"),"#",:class=>'minibutton submit'
       
   = hidden_field_tag "form_state",doc.state
   <!--hidden field to store the current looker of this doc mainly is HR or FI -->

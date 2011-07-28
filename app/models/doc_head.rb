@@ -186,7 +186,7 @@ class DocHead < ActiveRecord::Base
       end
     end
     if doc_type==10
-      total+=amount_for :rd_work_meals
+      total+=amount_for :rd_communicates
     end
     if doc_type==11
       %w(rd_extra_work_cars rd_extra_work_meals).each do |rd|
@@ -194,7 +194,7 @@ class DocHead < ActiveRecord::Base
       end
     end
     if doc_type==12
-      %w(rd_common_transports rd_communicates common_riems).each do |rd|
+      %w(rd_common_transports rd_work_meals common_riems).each do |rd|
         total+=amount_for rd
       end
     end
@@ -611,7 +611,7 @@ class DocHead < ActiveRecord::Base
         if rd_extra_work_meals.count>0
           jb_fcms<<fee_m_code_meal
           total=0
-          rd_extra_work_meals.each {|w_m| total=w_m.fi_amount+total}
+          rd_extra_work_meals.each {|w_m| total=w_m.final_amount+total}
           vj=get_v ({
             :inid=>"#{inid_count}",
             :code=>fee_m_code_meal.dcode,# dai kemu
@@ -630,7 +630,7 @@ class DocHead < ActiveRecord::Base
         if rd_extra_work_cars.count>0
           jb_fcms<<fee_m_code_car
           total=0
-          rd_extra_work_cars.each {|w_c| total=w_c.fi_amount+total}
+          rd_extra_work_cars.each {|w_c| total=w_c.final_amount+total}
           vj=get_v ({
             :inid=>"#{inid_count}",
             :code=>fee_m_code_car.dcode,# dai kemu
@@ -680,9 +680,9 @@ class DocHead < ActiveRecord::Base
           #到这里的时候已经确定了fee，用fee+dep+project作为key进行合并
           combine_key="#{fee_m_code.id}__#{b.dep.id}__#{b.project.id}"
           if combined_benefits[combine_key]
-            combined_benefits[combine_key][:amount]+=b.fi_amount
+            combined_benefits[combine_key][:amount]+=b.final_amount
           else
-            combined_benefits[combine_key]={:dep=>b.dep,:project=>b.project,:amount=>b.fi_amount,:fee=>fee_m_code}
+            combined_benefits[combine_key]={:dep=>b.dep,:project=>b.project,:amount=>b.final_amount,:fee=>fee_m_code}
           end
         end
         #这里进行真正的生成

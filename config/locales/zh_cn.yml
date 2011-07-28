@@ -120,6 +120,7 @@
     btn_ok: 确定
     btn_cancel_wf: 撤销审批
     btn_mydocs: 我的单据
+    btn_docs_to_approve: 其他待审单据
     btn_print: 打印
     btn_cancel: 撤销
     btn_update: 更新
@@ -130,7 +131,8 @@
   common_attr:
     write_note: 填写审批意见
     approve_info: 审批意见
-    pass: 是否通过
+    pass: 通过
+    no_pass: 驳回
     name: "名称"
     code: "编码"
     none: "无"

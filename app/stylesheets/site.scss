@@ -499,12 +499,17 @@ div#work_flow_progress{
     display: inline-block;	
     margin-top: 0px;
   }
-  #select_approvers{
-    padding:20px;
-    display:none;
-    .submit{
-      margin-top:9px;
-    }
+}
+#select_approvers_wrapper{
+  display:none;
+}
+#select_approvers{
+  padding:7px 7px 0px 7px;
+  select{
+    font-size:18px;
+  }
+  .submit{
+    margin-top:9px;
   }
 }
 div.work_flow_step{	
@@ -533,6 +538,20 @@ div.go_to{
 div.reim_details_by_fee_type{
 	display: inline-block;
 	background-color: #e9eef2;
+}
+
+form.new_work_flow_info{
+  .is_ok{
+    margin-bottom:15px;
+    font-size:14px;
+    .pass{color:green;}
+    .no_pass{color:red;}
+  }
+  .comments{
+    font-size:14px;
+    margin-bottom:4px;
+  }
+
 }
 /*===========================================devise relate staff=================*/
 div.login{
@@ -987,6 +1006,16 @@ div.list_item:hover .list_item_action span.action{
       position:absolute;
       bottom:10px;
       left:7px;
+    }
+    .doc_amount{
+      position:absolute;
+      padding:5px;
+      top:3px;
+      right:90px;
+      width:100px;
+      text-align:center;
+      color:white;
+      background:rgba(0,0,0,0.5);
     }
     .state{
       position:absolute;

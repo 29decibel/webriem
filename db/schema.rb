@@ -882,7 +882,9 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "year"
+    t.string     "name"
   end
+  add_index 'u8codes',['name'],:name=>'index_u8codes_on_name'
 
   create_table "u8service_configs", :force => true do |t|
     t.string   "dbname"
@@ -978,7 +980,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
-    t.integer  "is_ok"
+    t.boolean  "is_ok",:default=>true
     t.integer  "approver_id"
     t.integer  "person_id"
     t.text     "comments"

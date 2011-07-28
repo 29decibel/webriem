@@ -164,5 +164,10 @@ namespace :update do
     end   
   end
 
+  desc "update u8code name column"
+  task :u8code => :environment do
+    U8code.all.each {|u| u.update_attribute :name,"#{u.ccode},#{u.ccode_name}"}
+  end
+
 end
 

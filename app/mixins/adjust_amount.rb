@@ -23,6 +23,9 @@ module AdjustAmount
           end
         end
       end
+      def final_amount
+        fi_amount || hr_amount || apply_amount
+      end
     EOF
   end
 end

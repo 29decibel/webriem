@@ -1,9 +1,13 @@
 = form_for(@work_flow_info,:remote=>true) do |f| 
   =hidden_field_tag 'doc_id',@doc.id
-  .input_field
-    =f.label :is_ok
-    =f.check_box :is_ok
-  .input_field
+  .is_ok
+    .pass
+      =f.radio_button :is_ok,true
+      =I18n.t('common_attr.pass')
+    .no_pass
+      =f.radio_button :is_ok,false
+      =I18n.t('common_attr.no_pass')
+  .comments
     %p=f.label :comments
     %p=f.text_area :comments
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"
