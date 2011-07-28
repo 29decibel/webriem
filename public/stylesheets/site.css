@@ -1527,3 +1527,13 @@ div.empty_info {
 #adjust_amount_wrapper {
   display: none;
 }
+
+/* line 1115, ../../app/stylesheets/site.scss */
+.adjust_amount input {
+  margin-top: 7px;
+  padding: 3px;
+}
+/* line 1119, ../../app/stylesheets/site.scss */
+.adjust_amount a {
+  margin-top: 7px;
+}

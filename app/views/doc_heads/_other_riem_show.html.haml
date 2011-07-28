@@ -1,6 +1,6 @@
 -if can_adjust_amount(d_item.doc_head,'HR') or can_adjust_amount(d_item.doc_head,'FI')
   #adjust_amount_wrapper
-    #adjust_amount
+    .adjust_amount{'id'=>"adjust_amount_#{d_item.class.name}_#{d_item.id}"}
       -form_tag "/doc_heads/#{d_item.doc_head.id}/adjust_amount",:remote=>'true',:method=>:put do
         =hidden_field_tag 'resource_id',d_item.id
         =hidden_field_tag 'resource_type',d_item.class.name
@@ -30,12 +30,12 @@
     %span.label= "#{I18n.t('common_attr.hr_amount')}"
     %span.value=  d_item.hr_amount || '无'
     -if can_adjust_amount(d_item.doc_head,'HR')
-      =link_to "调整", "#adjust_amount",:class=>'pop'
+      =link_to "调整", "#adjust_amount_#{d_item.class.name}_#{d_item.id}",:class=>'pop'
   .show_field.hr_adjust
     %span.label= "#{I18n.t('common_attr.fi_amount')}"
     %span.value=  d_item.fi_amount || '无'
     -if can_adjust_amount(d_item.doc_head,'FI')
-      =link_to "调整", "#adjust_amount",:class=>'pop'
+      =link_to "调整", "#adjust_amount_#{d_item.class.name}_#{d_item.id}",:class=>'pop'
 
 :javascript
   $(function(){

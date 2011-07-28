@@ -4,7 +4,7 @@ class RdTravel < ActiveRecord::Base
   include AdjustAmount
   before_validation :set_apply_amount
   def set_apply_amount
-    self.apply_amount = self.rate * self.ori_amount
+    self.apply_amount = self.ori_amount / self.rate
   end
 
   after_initialize :set_default_days,:if => Proc.new { |travel| !travel.days and travel.new_record? }

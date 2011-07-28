@@ -15,7 +15,7 @@ $('fieldset').live('row:numberChanged',function(){
   //set every fieldset's value
   fds.each(function(){
     //begin set every value
-    var apply_amount = $(this).find('.doc_rate').val() * $(this).find('.doc_ori_amount').val();
+    var apply_amount =  $(this).find('.doc_ori_amount').val() / $(this).find('.doc_rate').val();
     $(this).find('.doc_apply_amount').text(apply_amount.toFixed(2));
     total_num+=apply_amount;
   });

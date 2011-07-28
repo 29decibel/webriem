@@ -4,7 +4,7 @@ class RdTransport < ActiveRecord::Base
   include AdjustAmount
   before_validation :set_apply_amount
   def set_apply_amount
-    self.apply_amount = self.rate * self.ori_amount
+    self.apply_amount = self.ori_amount / self.rate
   end
     belongs_to :reim_detail
     belongs_to :transportation, :class_name => "Transportation", :foreign_key => "transportation_id"

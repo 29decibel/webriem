@@ -4,7 +4,7 @@ class RdBenefit < ActiveRecord::Base
   include AdjustAmount
   before_validation :set_apply_amount
   def set_apply_amount
-    self.apply_amount = self.rate * self.ori_amount
+    self.apply_amount = self.ori_amount / self.rate
   end
   before_save :set_afford_dep
   def set_afford_dep
