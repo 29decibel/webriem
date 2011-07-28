@@ -37,6 +37,9 @@ gem "kaminari"
 
 gem 'newrelic_rpm'
 
+#gem 'rails-footnotes', '>= 3.7', :group => :development
+gem 'exception_notification'
+
 group :test do
   gem 'rspec-rails', '2.5.0'
   gem 'rspec', '2.5.0'

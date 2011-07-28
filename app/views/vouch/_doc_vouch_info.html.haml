@@ -1,12 +1,12 @@
 .form_title
   %h4
     ="单号"
-    = link_to "#{doc.doc_no}", doc_head_path(doc)
+    = link_to "#{doc.doc_no}", doc_head_path(doc),:remote=>true
     -if doc.vouches.count>0
       ="【LU_ #{ doc.vouches.order("updated_at desc").first.updated_at}】"
       = link_to image_tag("/images/icons/database_refresh.png"),{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true
       = link_to image_tag("/images/icons/door_in.png"),{:controller=>"vouch",:action=>"g_u8",:doc_id=>doc.id},:remote=>true
-%table.hor-zebra
+%table.oes_theme
   %tr
     %th/
     %th 凭证分录号
@@ -17,16 +17,12 @@
     %th 人员
     %th 借方金额
     %th 贷方金额
-    %th 币种
-    %th 汇率
     %th 凭证日期
-    %th 成单者
-    %th 附件张数
     %th U8凭证状态
   -doc.vouches.each do  |v|
     %tr{'id'=>"vouch_row_#{v.id}"}
       = render :partial => "vouch_row_info",:locals=>{:v=>v}
-    %tr
+    %tr.for_edit
       %td{"colspan"=>"14"}
         .edit_inline{"id"=>"edit_vouch_#{v.id}"}
 

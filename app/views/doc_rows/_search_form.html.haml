@@ -1,33 +1,36 @@
 .form_title 检索条件
 =form_for @search,:remote=>true do |f|
-  .search_field
-    %span.label 申请人
-    %span.value= ts 'person_id_eq','Person',:text=>Person.find_by_id(@search.search_attributes['person_id_equals']).try(:name),
-      :value=>@search.search_attributes['person_id_equals'],:f=>f
-  .search_field
-    %span.label 部门
-    %span.value= ts 'dep_id_eq','Dep',:text=>Dep.find_by_id(@search.search_attributes['dep_id_equals']).try(:name),
-      :value=>@search.search_attributes['dep_id_equals'],:f=>f
-  .search_field
-    %span.label 项目
-    %span.value= ts 'project_id_eq','Project',:text=>Project.find_by_id(@search.search_attributes['project_id_equals']).try(:name),
-      :value=>@search.search_attributes['project_id_equals'],:f=>f
-  .search_field
-    %span.label 单据类型
-    %span.value= f.select 'resource_type_eq',DocRow::DocResourceTypes.to_a,:include_blank=>true
-  .search_field
-    %span.label 单据状态
-    %span.value= f.select 'doc_state_eq',DocHead::Doc_State.map{|k,v| [v,k]},:include_blank=>true
-  .search_field.clear
-    %span.label 申请日期区间
-    %span.value
-      = f.text_field 'apply_date_gte',:class=>'datepicker'
-      = f.text_field 'apply_date_lte',:class=>'datepicker'
-  .search_field
-    %span.label 单据金额区间
-    %span.value
-      = f.text_field 'apply_amount_gte'
-      = f.text_field 'apply_amount_lte'
+  .search_area
+    .search_field
+      %span.label 申请人
+      %span.value= ts 'person_id_eq','Person',:text=>Person.find_by_id(@search.search_attributes['person_id_equals']).try(:name),
+        :value=>@search.search_attributes['person_id_equals'],:f=>f
+    .search_field
+      %span.label 部门
+      %span.value= ts 'dep_id_eq','Dep',:text=>Dep.find_by_id(@search.search_attributes['dep_id_equals']).try(:name),
+        :value=>@search.search_attributes['dep_id_equals'],:f=>f
+    .search_field
+      %span.label 项目
+      %span.value= ts 'project_id_eq','Project',:text=>Project.find_by_id(@search.search_attributes['project_id_equals']).try(:name),
+        :value=>@search.search_attributes['project_id_equals'],:f=>f
+  .search_area
+    .search_field.clear
+      %span.label 申请日期区间
+      %span.value
+        = f.text_field 'apply_date_gte',:class=>'datepicker'
+        = f.text_field 'apply_date_lte',:class=>'datepicker'
+    .search_field
+      %span.label 单据金额区间
+      %span.value
+        = f.text_field 'apply_amount_gte'
+        = f.text_field 'apply_amount_lte'
+  .search_area
+    .search_field
+      %span.label 单据类型
+      %span.value= f.select 'resource_type_eq',DocRow::DocResourceTypes.to_a,:include_blank=>true
+    .search_field
+      %span.label 单据状态
+      %span.value= f.select 'doc_state_eq',DocHead::Doc_State.map{|k,v| [v,k]},:include_blank=>true
   .actions
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_search')}"),{:href=>"#"},:class=>"submit minibutton"
 :javascript

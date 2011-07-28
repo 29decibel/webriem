@@ -10,9 +10,5 @@
 %td= v.cperson_id
 %td= v.md
 %td= v.mc
-%td= v.cexch_name
-%td= v.nfrat
 %td= v.dbill_date
-%td= v.cbill
-%td= v.idoc
-%td= image_tag (v.doc_head.exist_vouch? ? "/images/icons/accept.png" : "/images/icons/cross.png")
+%td{'class'=>v.doc_head.exist_vouch? ? "green":"red"}= v.doc_head.exist_vouch? ? "已生成" : "未生成"

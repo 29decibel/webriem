@@ -63,6 +63,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    exception_notification (2.4.1)
     factory_girl (1.3.3)
     formtastic (1.2.4)
       actionpack (>= 2.3.7)
@@ -217,6 +218,7 @@ DEPENDENCIES
   compass (>= 0.11.1)
   delayed_job
   devise (= 1.3.4)
+  exception_notification
   factory_girl (= 1.3.3)
   growl
   guard

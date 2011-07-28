@@ -1,7 +1,9 @@
 .form_title 查询结果
 -if @doc_rows
   .amount_result= "报销总金额为 ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
-  %table
+  .chart
+
+  %table.oes_theme
     %tr
       %th= sort_link @search,:doc_no
       %th= sort_link @search,:resource_type

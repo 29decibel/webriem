@@ -36,6 +36,10 @@ Webreim::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[OES_exception] ",
+    :sender_address => %{"oes" <oes@skccsystems.cn>},
+    :exception_recipients => %w{mike.d.1984@gmail.com}
 
   # Enable threaded mode
   # config.threadsafe!
