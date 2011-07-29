@@ -1581,3 +1581,8 @@ div.empty_info {
   margin-left: 20px;
   margin-top: 10px;
 }
+
+/* line 1157, ../../app/stylesheets/site.scss */
+.change_password_wrapper {
+  display: none;
+}

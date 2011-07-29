@@ -25,12 +25,20 @@
   %body
     .header
       =link_to "Expense System", root_path,:class=>"logo",:remote=>true
+      .change_password_wrapper
+        #change_password
+          =form_tag '/common/reset_p',:remote=>true do
+            =label_tag '新密码'
+            =password_field_tag :p
+            =label_tag '请再输入一遍'
+            =password_field_tag :p_c
+            = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"
       .user_nav
         -if user_signed_in?
           =current_user.name
           =current_user.person.name if current_user.person
           =link_to I18n.t('common_attr.sign_out'), destroy_user_session_path
-          =link_to I18n.t('common_attr.change_password'),"/common/new_reset_p"
+          =link_to I18n.t('common_attr.change_password'),"#change_password",:class=>'change_p'
           =link_to I18n.t('common_attr.admin_page'), "/admin",:target=>'blank'
           =select_tag "change_locale",options_for_select([['中文','zh_cn'],['English','en-US']],:selected=>"#{cookies['locale']||I18n.default_locale}"),:class=>'change_locale'
         -else
@@ -47,3 +55,14 @@
       #content
         =yield
     .footer
+:javascript
+  $(function(){
+     $("a.change_p").fancybox({
+      'transitionIn'  : 'elastic',
+      'transitionOut' : 'elastic',
+      'speedIn'   : 600, 
+      'speedOut'    : 200, 
+      'overlayShow' : false,
+      'height'      : '400'
+    });
+  });
