@@ -138,6 +138,12 @@
     apply_date_action: 按照时间汇总
     fee_action: 按照费用类型汇总
   common_attr:
+    sign_out: 注销
+    change_password: 修改密码
+    admin_page: 管理员界面
+    docs_to_approve: Docs to approve
+    empty_search_result: 请输入条件进行查询
+    search_criteria: 检索条件
     more: 查看更多...
     docs_to_pay: 需要进行付款的单据
     docs_to_approve: 需要您进行审批的单据
@@ -305,6 +311,7 @@
         person_id: 申请人
         apply_date: 申请日期
         apply_amount: 申请金额
+        doc_state: 单据状态
       work_flow_info:
         is_ok: "是否通过"
         people_id: "审批人"

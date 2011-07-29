@@ -9,6 +9,7 @@ Webreim::Application.routes.draw do
   devise_for :users,:controllers => { :sessions => "user_sessions"}
 
   get "home/index"
+  get "home/change_locale"
 
   get "doc_off_set/index"
   post "doc_off_set/search"

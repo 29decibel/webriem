@@ -216,7 +216,9 @@
     d_EntertainmentExpense: "EntExpense"
     d_OvertimeWork: "OvertimeWork"
     d_GeneralExpense: "GeneralExpense"
+    d_FixedProperty: FixedProperty
     d_Wage: "Wage"
+    doc_rows: "Doc Analasys"
   model_search:
     filter_txt: "FilterCondition"
     filter_btn: "Filter"
@@ -225,6 +227,15 @@
     btn_view: "View"
     btn_del: "Delete"
     delete_confirm: "Are you sure?"
+  chart:
+    project_action: By Project
+    person_action: By Person
+    apply_date_action: By ApplyDate
+    fee_action: By Fee Type
+    project_title: Apply Amount By Project 
+    person_title: Apply Amount By Person
+    apply_date_title: Apply Amount By Apply Date
+    fee_title: Apply Amount By Fee Type 
   common_op:
     btn_new: "Create"
     btn_return: "Back"
@@ -237,10 +248,23 @@
     btn_start_work_flow: Commit
     doc_not_valide_notice: Bill unqualified
     confirm_paid: ConfirmPaid
+    btn_docs_to_approve: DocsToApprove
+    approve: Approve
+    btn_search: Search
   common_attr:
+    join_together_person: Join Together
+    fixed_property: Fixed Property
+    sign_out: SignOut
+    change_password: ChangePassword
+    admin_page: Admin
+    docs_to_approve: Docs to approve
+    empty_search_result: Please Input Search Criteria And Search...
+    more: More...
+    search_criteria: Search Criteria
     write_note: Write Approve Info
     approve_info: "Notes"
-    pass: Passed ?
+    pass: Pass
+    no_pass: Unqualified
     name: "Name"
     code: "Code"
     none: "None"
@@ -332,7 +356,6 @@
     cash_draw_account: Cash Draw Account
     cash_draw_money_remain: Amount Remain
   activerecord:
-    #这里加入model的中文name
     models:
       dep: "Department"
       duty: "Job"
@@ -358,6 +381,15 @@
       business_type: "BusinessType"
       work_flow_step: "Add step"
     attributes:
+      doc_row:
+        doc_no: Doc NO
+        person_id: Applicant
+        dep_id: Dep
+        project_id: Project
+        resource_type: FeeType
+        apply_amount: Apply Amount Range
+        apply_date: Apply Date Range
+        doc_state: Doc State
       work_flow_info:
         is_ok: "approve"
         people_id: "Approver"

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     end
     error_msg
   end
+
   layout :layout_by_resource
   def layout_by_resource
     if devise_controller?
@@ -17,4 +18,11 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
+
+  before_filter :set_locale
+ 
+  def set_locale
+    I18n.locale = cookies[:locale] || I18n.default_locale
+  end
+
 end

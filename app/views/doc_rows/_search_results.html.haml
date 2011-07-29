@@ -1,6 +1,6 @@
 -if @doc_rows and @doc_rows.count>0
   .amount_result
-    = "报销总金额为 ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
+    = "#{I18n.t('common_attr.total_apply_amount')} ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
     .chart_action
       =link_to_function I18n.t('chart.project_action'),'draw_by_project()'
       =link_to_function I18n.t('chart.person_action'),'draw_by_person()'
@@ -26,7 +26,7 @@
         %td=dr.apply_date
         %td="￥#{dr.apply_amount}"
 -else
-  .empty_search_result 请输入条件进行查询
+  .empty_search_result= I18n.t('common_attr.empty_search_result')
 .clear
 :javascript
   $(document).ready(function() {

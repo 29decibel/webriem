@@ -4,4 +4,9 @@ class HomeController < ApplicationController
   def index
   end
 
+  def change_locale
+    cookies['locale'] = params[:locale]
+    redirect_to root_path
+  end
+
 end

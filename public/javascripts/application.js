@@ -524,4 +524,8 @@ function draw_chart(ele,title,data)
    });
 }
 
-
+$(function(){
+  $("#change_locale").change(function(){
+    window.location = '/home/change_locale?locale='+$("#change_locale").val();
+  });
+});

@@ -8,7 +8,7 @@
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel_wf')}"), {:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if !doc_head.new_record?
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_print')}"), {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"minibutton"
--if current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code
+-if doc_head.processing? and current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code
   = link_to content_tag(:span,"#{I18n.t('common_op.doc_not_valide_notice')}"), {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
 -if doc_head.person==current_user.person
   = link_to content_tag(:span,"#{I18n.t('common_op.btn_mydocs')}"), my_docs_path,:remote=>true,:class=>"minibutton"
