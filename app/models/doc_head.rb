@@ -15,6 +15,12 @@ class DocHead < ActiveRecord::Base
     end
   end
 
+  scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
+  scope :processing, where("state='processing'")
+  scope :un_submit, where("state='un_submit'")
+  scope :approved, where("state='approved'")
+  scope :paid, where("state='paid'")
+
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
@@ -115,7 +121,6 @@ class DocHead < ActiveRecord::Base
     #errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_fi_amount}") if is_split==1 and split_total_amount!=total_fi_amount
   end
   #############################################
-  scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
 
   #get amount for specific doc type
   #asumme every detail has a amount attribute

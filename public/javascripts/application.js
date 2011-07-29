@@ -484,4 +484,44 @@ if (history && history.pushState) {
   })  
 }  
 
+function draw_chart(ele,title,data)
+{
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: ele,
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+      credits:{enabled:false},
+      title: {
+        text: title
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: ￥'+ this.y ;
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               color: Highcharts.theme.textColor || '#000000',
+               connectorColor: Highcharts.theme.textColor || '#000000',
+               formatter: function() {
+                  return '<b>'+ this.point.name +'</b>: ￥'+ this.y ;
+               }
+            }
+         }
+      },
+       series: [{
+         type: 'pie',
+         name: 'Browser share',
+         data: data
+      }]
+   });
+}
+
 

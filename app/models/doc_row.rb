@@ -17,4 +17,8 @@ class DocRow < ActiveRecord::Base
       self.person_dep_id = person.dep_id
     end
   end
+
+  def resource_type_name
+    DocResourceTypes.select {|k,v| v==self.resource_type}.first
+  end
 end

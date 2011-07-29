@@ -3,21 +3,14 @@
   %head
     %title 网上报销系统
     = stylesheet_link_tag :all,:recursive => true 
-    = javascript_include_tag "jquery.min.js"
-    = javascript_include_tag "jquery.blockUI"
-    = javascript_include_tag "nested_form.js" 
-    = javascript_include_tag "jquery-ui-1.8.4.custom.min.js" 
-    = javascript_include_tag "jquery-ui-timepicker-addon.js" 	
-    = javascript_include_tag "datepicker_cn.js"
-    = javascript_include_tag "rails.js" 
+    = javascript_include_tag "lib/jquery-1.5.1.min.js"
+    = javascript_include_tag "lib/underscore-min.js"
+    = javascript_include_tag "lib/jquery.blockUI"
+    = javascript_include_tag "lib/jquery-ui-1.8.14.custom.min.js" 
+    = javascript_include_tag "lib/jquery-ui-timepicker-addon.js" 	
+    = javascript_include_tag "lib/jquery_ujs.js" 
     = javascript_include_tag "application.js" 
-    = javascript_include_tag "form_state.js" 
-    = javascript_include_tag "jquery_numeric.js" 
-    = javascript_include_tag "jquery.formatCurrency-1.4.0.js" 
-    = javascript_include_tag "doc_number_input_control.js" 
     = javascript_include_tag "enter_to_tab.js" 
-    = javascript_include_tag "facebox/facebox.js" 
-    = javascript_include_tag "facebox/init.js" 
     = csrf_meta_tag 
   %body
     .login

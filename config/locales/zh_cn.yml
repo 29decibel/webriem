@@ -128,7 +128,21 @@
     btn_start_work_flow: 提交审批
     doc_not_valide_notice: 单据不合格提醒
     confirm_paid: 确认付款
+  chart:
+    project_title: 各个项目花费汇总
+    person_title: 各个人员花费汇总
+    apply_date_title: 各个时间段内花费汇总
+    fee_title: 各个费用花费汇总
+    project_action: 按照项目汇总
+    person_action: 按照人员汇总
+    apply_date_action: 按照时间汇总
+    fee_action: 按照费用类型汇总
   common_attr:
+    more: 查看更多...
+    docs_to_pay: 需要进行付款的单据
+    docs_to_approve: 需要您进行审批的单据
+    my_approved_docs: 我的单据【审批通过】
+    my_recent_docs: 我最近的单据
     write_note: 填写审批意见
     approve_info: 审批意见
     pass: 通过

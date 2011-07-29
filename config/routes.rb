@@ -76,6 +76,6 @@ Webreim::Application.routes.draw do
   get "task/docs_paid"
   get "task/dashboard"
     
-  root :to=>"home#index"
+  root :to=>"task#dashboard"
 
 end

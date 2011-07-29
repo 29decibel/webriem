@@ -1,8 +1,12 @@
-.form_title 查询结果
--if @doc_rows
-  .amount_result= "报销总金额为 ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
-  .chart
-
+-if @doc_rows and @doc_rows.count>0
+  .amount_result
+    = "报销总金额为 ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
+    .chart_action
+      =link_to_function I18n.t('chart.project_action'),'draw_by_project()'
+      =link_to_function I18n.t('chart.person_action'),'draw_by_person()'
+      =link_to_function I18n.t('chart.apply_date_action'),'draw_by_apply_date()'
+      =link_to_function I18n.t('chart.fee_action'),'draw_by_fee()'
+  #chart
   %table.oes_theme
     %tr
       %th= sort_link @search,:doc_no
@@ -21,4 +25,31 @@
         %td=dr.person.try :name
         %td=dr.apply_date
         %td="￥#{dr.apply_amount}"
+-else
+  .empty_search_result 请输入条件进行查询
 .clear
+:javascript
+  $(document).ready(function() {
+    if($("#chart").size()>0)
+    {
+      draw_by_project();
+    }
+  });
+  function draw_by_project()
+  {
+    draw_chart('chart',"#{I18n.t('chart.project_title')}",#{@project_pie_data});
+  }
+  function draw_by_person()
+  {
+    draw_chart('chart',"#{I18n.t('chart.person_title')}",#{@person_pie_data});
+  }
+  function draw_by_apply_date()
+  {
+    draw_chart('chart',"#{I18n.t('chart.apply_date_title')}",#{@apply_date_pie_data});
+  }
+  function draw_by_fee()
+  {
+    draw_chart('chart',"#{I18n.t('chart.fee_title')}",#{@fee_pie_data});
+  }
+
+    

@@ -32,6 +32,12 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def casher?
+    sc = SystemConfig.find_by_key 'casher_duty_code'
+    return false if !sc
+    self.duty.code == sc.value
+  end
+
   def delete_user
     u = User.find_by_name :self.code
     u.destroy if u

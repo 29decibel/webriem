@@ -1,4 +1,24 @@
-.form_title
-  %h3= "我的单据列表"
-=render :partial => "doc_heads/doc_list_item",:collection=>@docs,:as=>:doc
-=paginate @docs
+-if @docs_to_pay.count>0 and current_user.person.casher?
+  .section
+    .form_title
+      %h3= I18n.t("common_attr.docs_to_pay")
+    =render :partial => "doc_heads/doc_list_item",:collection=>@docs_to_pay,:as=>:doc
+    .bottom_action
+      =link_to I18n.t('common_attr.more'), docs_to_pay_path,:remote=>true
+-if @docs_to_approve.count>0
+  .section
+    .form_title
+      %h3= I18n.t("common_attr.docs_to_approve")
+    =render :partial => "doc_heads/doc_list_item",:collection=>@docs_to_approve,:as=>:doc
+    .bottom_action
+      =link_to I18n.t('common_attr.more'), docs_to_approve_path,:remote=>true
+-if @my_approved_docs.count>0
+  .section
+    .form_title
+      %h3= I18n.t("common_attr.my_approved_docs")
+    =render :partial => "doc_heads/doc_list_item",:collection=>@my_approved_docs,:as=>:doc
+-if @my_recent_docs.count>0
+  .section
+    .form_title
+      %h3= I18n.t("common_attr.my_recent_docs")
+    =render :partial => "doc_heads/doc_list_item",:collection=>@my_recent_docs,:as=>:doc

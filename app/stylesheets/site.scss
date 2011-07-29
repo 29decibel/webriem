@@ -286,6 +286,18 @@ div.form_title{
 }
 .search_result{
   margin-top:20px;
+  .chart_action{
+    display:inline-block;
+    margin-left:20px;
+    a{
+      color:black;
+      margin-left:10px;
+      &:hover{
+        color:white;
+        background:black;
+      }
+    }
+  }
 }
 /*
 Pretty Table Styling
@@ -1118,5 +1130,27 @@ div.empty_info{
   }
   a{
     margin-top:7px;
+  }
+}
+#chart{
+  width:880px;
+  height:370px;
+  margin-left:20px;
+}
+.empty_search_result{
+  border:dashed 2px #ccc;
+  text-align:center;
+  float:left;
+  margin:20px;
+  padding-top:20px;
+  padding-bottom:20px;
+  font-size:17px;
+  width:900px;
+}
+.section{
+  margin-bottom:20px;
+  .bottom_action{
+    margin-left:20px;
+    margin-top:10px;
   }
 }
