@@ -50,5 +50,10 @@ class TaskController < ApplicationController
     @docs_to_approve=DocHead.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
     @my_approved_docs=DocHead.by_person(current_user.person.id).approved.order('created_at desc').limit(10)
     @my_recent_docs = DocHead.by_person(current_user.person.id).un_submit.processing.order('created_at desc').limit(10)
+    respond_to do |wants|
+      wants.js
+      wants.html
+      wants.mobile
+    end
   end
 end

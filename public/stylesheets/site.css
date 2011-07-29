@@ -859,11 +859,11 @@ div.login div.logo {
 }
 /* line 630, ../../app/stylesheets/site.scss */
 div.login div.logo.user {
-  background-image: url("../images/.png");
+  background-image: url("../images/sk_logo.png");
 }
 /* line 633, ../../app/stylesheets/site.scss */
 div.login div.logo.admin_user {
-  background-image: url("../images/.png");
+  background-image: url("../images/sk_logo.png");
 }
 
 /*+++++++++++++++++++++++++++*/

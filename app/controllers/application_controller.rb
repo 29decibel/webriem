@@ -25,4 +25,11 @@ class ApplicationController < ActionController::Base
     I18n.locale = cookies[:locale] || I18n.default_locale
   end
 
+  before_filter :set_mobile_format
+  def set_mobile_format
+    if request.format == :html && request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"][/(iPhone|iPod|Android)/]
+      request.format = :mobile
+    end
+  end
+
 end

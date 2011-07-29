@@ -1,0 +1,19 @@
+%h3= I18n.t('common_attr.docs_to_approve')
+.doc_list
+  -@docs_to_approve.each do |doc|
+    =link_to doc_head_path(doc) do
+      .doc_row
+        .doc_type= doc.doc_type_name
+        .doc_amount= "￥#{doc.total_amount}"
+        .doc_person= doc.person.name
+:javascript
+  $(function(){
+    $("a").live('touchstart',function(){
+      //alert('start');
+      $(this).addClass('touchstart');
+    });
+    //$("a").live('touchend',function(){
+      //alert('end');
+      //$(this).addClass('touchstart');
+    //});
+  });

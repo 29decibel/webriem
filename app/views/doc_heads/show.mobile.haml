@@ -1,0 +1,10 @@
+%h3
+  单据详细信息
+  =link_to "Back", root_path
+.doc_person= @doc.person.name
+.doc_amount= "￥#{@doc.total_amount}"
+.doc_type= @doc.doc_type_name
+=form_for @work_flow_info do  |f|
+  =f.check_box :is_ok,:text=>'aaa'
+  =f.text_area :comments
+  =f.submit 'OK'

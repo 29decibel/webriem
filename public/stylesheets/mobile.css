@@ -1,0 +1,26 @@
+/* line 1, ../../app/stylesheets/mobile.scss */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* line 5, ../../app/stylesheets/mobile.scss */
+.doc_list a {
+  text-decoration: none;
+}
+/* line 7, ../../app/stylesheets/mobile.scss */
+.doc_list a.touchstart .doc_row {
+  background: black;
+}
+/* line 12, ../../app/stylesheets/mobile.scss */
+.doc_list a.touchend .doc_row {
+  background: black;
+}
+/* line 17, ../../app/stylesheets/mobile.scss */
+.doc_list a .doc_row {
+  padding-top: 2px;
+  padding-left: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}

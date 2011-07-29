@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{'name'=>"viewport",'content'=>"width=device-width", 'initial-scale'=>1, 'maximum-scale'=>1}
+    %title 网上报销系统
+    = stylesheet_link_tag 'mobile' 
+    = javascript_include_tag "lib/jquery-1.6.1.min.js"
+    = javascript_include_tag "lib/underscore-min.js"
+    = javascript_include_tag "lib/jquery_ujs.js" 
+    = javascript_include_tag "mobile.js" 
+    = csrf_meta_tag 
+  %body
+    =yield
