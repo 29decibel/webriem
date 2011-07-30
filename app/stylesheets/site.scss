@@ -247,6 +247,14 @@ div.form_title{
   }
 }
 
+.list_info{
+  .action_bar{
+    margin:10px 20px;
+    padding-bottom:10px;
+    border-bottom:1px solid #ccc;
+  }
+}
+
 .work_flow_info{
   margin-bottom:8px;
   &.approve{color:green;}
@@ -1001,16 +1009,31 @@ div.list_item:hover .list_item_action span.action{
   display:inline-block;
 }
 .list_item{
+  position:relative;
+  &:hover .doc_show .check_mark{
+    display:block;
+  }
   .doc_show{
     float:left;
+    .check_mark{
+      position:absolute;
+      top:3px;
+      left:-5px;
+      display:none;
+      border:1px solid #ccc;
+      width:10px;
+      height:10px;
+    }
     .doc_type{
       font-size:14px;
       float:left;
+      width:130px;
       margin-top:3px;
       margin-left:5px;
     }
     .apply_date{
       float:left;
+      width:100px;
       margin-left:5px;
       margin-top:5px;
     }

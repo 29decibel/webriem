@@ -111,6 +111,8 @@
     select:
       prompt: "请选择"
   common_op:
+    btn_export_selected: 导出选择单据
+    btn_export_all: 导出全部
     btn_new: "新增"
     btn_return: "返回"
     btn_save: "保存"

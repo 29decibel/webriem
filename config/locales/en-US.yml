@@ -240,6 +240,7 @@
     btn_new: "Create"
     btn_return: "Back"
     btn_save: "Save"
+    btn_export_all: Export All
     btn_ok: Confirm
     btn_cancel: Cancel
     btn_mydocs: My documents
@@ -525,6 +526,7 @@
         apply_date: "Applicant date"
         dep_id: "Applicant Department"
         fee_id: "Expense Type"
+        real_person_id: Proxy Person
         created_at: "created date"
         updated_at: "updated date"
         doc_type: "Document Type"

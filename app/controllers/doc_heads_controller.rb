@@ -287,12 +287,8 @@ class DocHeadsController < ApplicationController
     send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
   end
   #==================================output to txt========================================
-  def output_to_txt_all
-    docs=DocHead.where("doc_state=2").all
-    #just redirect to output_to_txt
-    send_data docs_to_txt(docs), :filename => "person_accounts.txt",:type => 'text/plain'
-  end
-  def docs_to_txt(docs)
+
+  def to_txt_str(docs)
     #get these docs's reciver amount and return a string
     output_str=""
     #reciver's hash`
@@ -325,11 +321,20 @@ class DocHeadsController < ApplicationController
     end
     output_str
   end
-  def output_to_txt
-    docs=DocHead.where("id in (#{params[:ids]})").all
-    send_data docs_to_txt(docs), :filename => "person_accounts.txt",:type => 'text/plain'
+
+  def export_to_txt
+    docs = DocHead.scoped
+    if params[:scope]
+      docs = docs.send(params[:scope])
+    end
+    if params[:doc_ids]
+      docs=docs.where("id in (#{params[:doc_ids]})")
+    end
+    send_data to_txt_str(docs.all), :filename => "person_accounts.txt",:type => 'text/plain'
   end
-  def export_xls
+
+
+  def export_to_xls
     ids=params[:ids]
     @docs=[]
     DocHead.where("id in (#{ids})").each do |doc|
@@ -383,7 +388,8 @@ class DocHeadsController < ApplicationController
       when 10 then JjPdf.to_pdf(pdf,doc)
       when 11 then JbfPdf.to_pdf(pdf,doc)
       when 12 then PtfyPdf.to_pdf(pdf,doc)
-      else FlfyPdf.to_pdf(pdf,doc)
+      when 13 then FlfyPdf.to_pdf(pdf,doc)
+      else GdzcPdf.to_pdf(pdf,doc)
     end
   end
 end

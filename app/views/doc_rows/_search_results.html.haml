@@ -9,13 +9,13 @@
   #chart
   %table.oes_theme
     %tr
-      %th= sort_link @search,:doc_no
-      %th= sort_link @search,:resource_type
-      %th= sort_link @search, :dep_id
-      %th= sort_link @search, :project_id
-      %th= sort_link @search, :person_id
-      %th= sort_link @search, :apply_date
-      %th= sort_link @search, :apply_amount
+      %th= sort_link @search,:doc_no,{},:remote=>true
+      %th= sort_link @search,:resource_type,{},:remote=>true
+      %th= sort_link @search, :dep_id,{},:remote=>true
+      %th= sort_link @search, :project_id,{},:remote=>true
+      %th= sort_link @search, :person_id,{},:remote=>true
+      %th= sort_link @search, :apply_date,{},:remote=>true
+      %th= sort_link @search, :apply_amount,{},:remote=>true
     -@doc_rows.each do |dr|
       %tr
         %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true

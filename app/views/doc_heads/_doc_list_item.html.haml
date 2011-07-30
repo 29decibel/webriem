@@ -7,7 +7,7 @@
     .doc_amount= "￥#{doc.total_amount}"
     -if doc.processing? and doc.approver!=current_user.person
       .docinfo
-        ="当前等待#{doc.approver }审批(点击提醒)"
+        ="当前等待#{doc.approver }审批"
     .list_item_action
       %span.action= link_to "查看", doc_head_path(doc),:remote=>true
       -if doc.can_edit? current_user

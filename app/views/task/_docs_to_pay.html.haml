@@ -1,6 +1,8 @@
 .form_title
   %h3= "需要付款的单据列表"
 .list_info
+  .action_bar
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_export_all')}"),"/doc_heads/export_to_txt?scope=approved",:class=>"minibutton "
   -if docs.all.count>0
     =render :partial => "doc_heads/doc_list_item",:collection=>docs,:as=>:doc
   -else

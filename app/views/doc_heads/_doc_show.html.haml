@@ -38,7 +38,7 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=doc.amount_for(:rec_notice_details)
       .form_area
-        =render :partial=>"rec_notice_show",:collection=>doc.rec_notice_details,:as=>:d_item
+        =render :partial=>"rec_notice_detail_show",:collection=>doc.rec_notice_details,:as=>:d_item
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
         <!--结汇申请单-->
   -if doc.doc_type==4

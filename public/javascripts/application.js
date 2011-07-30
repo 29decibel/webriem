@@ -1,3 +1,7 @@
+var debugging = false; // or true
+if (typeof console == "undefined") var console = { log: function() {} }; 
+else if (!debugging || typeof console.log == "undefined") console.log = function() {};
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 function init_control()
@@ -479,7 +483,11 @@ if (history && history.pushState) {
     });  
     
     $(window).bind("popstate", function () {  
-      $.getScript(location.href);  
+      console.log(window.history);
+      wait();
+      $.getScript(location.href,function(){
+        $.unblockUI();
+      });  
     });  
   })  
 }  

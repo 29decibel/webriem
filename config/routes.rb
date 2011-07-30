@@ -4,8 +4,6 @@ Webreim::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get "doc_rows/index"
-
   devise_for :users,:controllers => { :sessions => "user_sessions"}
 
   get "home/index"
@@ -49,8 +47,7 @@ Webreim::Application.routes.draw do
     end
     collection do
       get :search
-      get :output_to_txt
-      get :output_to_txt_all
+      get :export_to_txt
       get :pay  
       get :print
       get :recall  
@@ -60,7 +57,7 @@ Webreim::Application.routes.draw do
       get :batch_approve  
       put :submit
       get :mark
-      get :export_xls
+      get :export_to_xls
     end
   end
   resources :doc_rows
