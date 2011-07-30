@@ -140,6 +140,7 @@
     apply_date_action: 按照时间汇总
     fee_action: 按照费用类型汇总
   common_attr:
+    proxy: 代
     sign_out: 注销
     change_password: 修改密码
     admin_page: 管理员界面

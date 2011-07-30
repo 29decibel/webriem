@@ -253,6 +253,7 @@
     approve: Approve
     btn_search: Search
   common_attr:
+    proxy: apply for 
     join_together_person: Join Together
     fixed_property: Fixed Property
     sign_out: SignOut
@@ -526,7 +527,7 @@
         apply_date: "Applicant date"
         dep_id: "Applicant Department"
         fee_id: "Expense Type"
-        real_person_id: Proxy Person
+        real_person_id: Apply For
         created_at: "created date"
         updated_at: "updated date"
         doc_type: "Document Type"

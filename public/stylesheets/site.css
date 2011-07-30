@@ -1420,23 +1420,29 @@ div.list_item:hover .list_item_action span.action {
   margin-top: 5px;
 }
 /* line 1040, ../../app/stylesheets/site.scss */
+.list_item .doc_show .apply_person {
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+/* line 1045, ../../app/stylesheets/site.scss */
 .list_item .doc_show .doc_no {
   float: left;
   margin: 3px 5px 0px 35px;
   padding-top: 2px;
 }
-/* line 1044, ../../app/stylesheets/site.scss */
+/* line 1049, ../../app/stylesheets/site.scss */
 .list_item .doc_show .doc_no a {
   text-decoration: none;
   color: #999;
 }
-/* line 1049, ../../app/stylesheets/site.scss */
+/* line 1054, ../../app/stylesheets/site.scss */
 .list_item .doc_show .docinfo {
   position: absolute;
   bottom: 10px;
   left: 7px;
 }
-/* line 1054, ../../app/stylesheets/site.scss */
+/* line 1059, ../../app/stylesheets/site.scss */
 .list_item .doc_show .doc_amount {
   position: absolute;
   padding: 5px;
@@ -1447,7 +1453,7 @@ div.list_item:hover .list_item_action span.action {
   color: white;
   background: rgba(0, 0, 0, 0.5);
 }
-/* line 1064, ../../app/stylesheets/site.scss */
+/* line 1069, ../../app/stylesheets/site.scss */
 .list_item .doc_show .state {
   position: absolute;
   top: 3px;
@@ -1459,43 +1465,43 @@ div.list_item:hover .list_item_action span.action {
   font-size: 13px;
   padding: 5px;
 }
-/* line 1074, ../../app/stylesheets/site.scss */
+/* line 1079, ../../app/stylesheets/site.scss */
 .list_item .doc_show .state.paid {
   background: green;
 }
-/* line 1075, ../../app/stylesheets/site.scss */
+/* line 1080, ../../app/stylesheets/site.scss */
 .list_item .doc_show .state.processing {
   background: #FFA435;
 }
-/* line 1076, ../../app/stylesheets/site.scss */
+/* line 1081, ../../app/stylesheets/site.scss */
 .list_item .doc_show .state.approved {
   background: green;
 }
-/* line 1077, ../../app/stylesheets/site.scss */
+/* line 1082, ../../app/stylesheets/site.scss */
 .list_item .doc_show .state.rejected {
   background: red;
 }
 
 /* for the pager*/
-/* line 1082, ../../app/stylesheets/site.scss */
+/* line 1087, ../../app/stylesheets/site.scss */
 .pagination {
   margin: 10px 20px 0px 22px;
   color: #515151;
 }
 
-/* line 1086, ../../app/stylesheets/site.scss */
+/* line 1091, ../../app/stylesheets/site.scss */
 .pagination a {
   color: #515151;
 }
 
-/* line 1089, ../../app/stylesheets/site.scss */
+/* line 1094, ../../app/stylesheets/site.scss */
 .pagination a:hover {
   background-color: #515151;
   color: white;
 }
 
 /* doc error message*/
-/* line 1094, ../../app/stylesheets/site.scss */
+/* line 1099, ../../app/stylesheets/site.scss */
 .doc_error .inline_error {
   margin-left: 10px;
   margin-right: 10px;
@@ -1505,38 +1511,38 @@ div.list_item:hover .list_item_action span.action {
   color: #8A1F11;
 }
 
-/* line 1102, ../../app/stylesheets/site.scss */
+/* line 1107, ../../app/stylesheets/site.scss */
 .doc_error ul {
   list-style: none;
 }
 
 /*doc show custom styles*/
-/* line 1106, ../../app/stylesheets/site.scss */
+/* line 1111, ../../app/stylesheets/site.scss */
 div.s_title {
   margin-bottom: 10px;
 }
 
-/* line 1109, ../../app/stylesheets/site.scss */
+/* line 1114, ../../app/stylesheets/site.scss */
 div.s_currency {
   margin-top: 10px;
   position: relative;
 }
 
-/* line 1113, ../../app/stylesheets/site.scss */
+/* line 1118, ../../app/stylesheets/site.scss */
 div.s_currency span {
   font-size: 13px;
   font-weight: bold;
 }
 
 /*the new show field*/
-/* line 1118, ../../app/stylesheets/site.scss */
+/* line 1123, ../../app/stylesheets/site.scss */
 div.show_field {
   display: inline-block;
   margin-left: 8px;
   margin-bottom: 6px;
 }
 
-/* line 1123, ../../app/stylesheets/site.scss */
+/* line 1128, ../../app/stylesheets/site.scss */
 div.show_field span.label {
   color: black;
   display: inline-block;
@@ -1544,7 +1550,7 @@ div.show_field span.label {
   width: 80px;
 }
 
-/* line 1129, ../../app/stylesheets/site.scss */
+/* line 1134, ../../app/stylesheets/site.scss */
 div.show_field span.value {
   border-bottom: 1px solid #aaa;
   display: inline-block;
@@ -1552,7 +1558,7 @@ div.show_field span.value {
 }
 
 /* for the empty_info*/
-/* line 1135, ../../app/stylesheets/site.scss */
+/* line 1140, ../../app/stylesheets/site.scss */
 div.empty_info {
   height: 80px;
   margin-top: 10px;
@@ -1565,29 +1571,29 @@ div.empty_info {
   border: 1px dashed #ccc;
 }
 
-/* line 1146, ../../app/stylesheets/site.scss */
+/* line 1151, ../../app/stylesheets/site.scss */
 #adjust_amount_wrapper {
   display: none;
 }
 
-/* line 1150, ../../app/stylesheets/site.scss */
+/* line 1155, ../../app/stylesheets/site.scss */
 .adjust_amount input {
   margin-top: 7px;
   padding: 3px;
 }
-/* line 1154, ../../app/stylesheets/site.scss */
+/* line 1159, ../../app/stylesheets/site.scss */
 .adjust_amount a {
   margin-top: 7px;
 }
 
-/* line 1158, ../../app/stylesheets/site.scss */
+/* line 1163, ../../app/stylesheets/site.scss */
 #chart {
   width: 880px;
   height: 370px;
   margin-left: 20px;
 }
 
-/* line 1163, ../../app/stylesheets/site.scss */
+/* line 1168, ../../app/stylesheets/site.scss */
 .empty_search_result {
   border: dashed 2px #ccc;
   text-align: center;
@@ -1599,17 +1605,17 @@ div.empty_info {
   width: 900px;
 }
 
-/* line 1173, ../../app/stylesheets/site.scss */
+/* line 1178, ../../app/stylesheets/site.scss */
 .section {
   margin-bottom: 20px;
 }
-/* line 1175, ../../app/stylesheets/site.scss */
+/* line 1180, ../../app/stylesheets/site.scss */
 .section .bottom_action {
   margin-left: 20px;
   margin-top: 10px;
 }
 
-/* line 1180, ../../app/stylesheets/site.scss */
+/* line 1185, ../../app/stylesheets/site.scss */
 .change_password_wrapper {
   display: none;
 }
