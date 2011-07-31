@@ -125,7 +125,7 @@
             = render :partial => "inner_transfer",:locals => { :f => builder,:detail_doc=>doc.inner_transfer }  
             <!--现金提取申请单-->
     -if doc.doc_type==6
-      .doc_detail
+      .doc_detail_cash
         .form_title
           %h3= I18n.t("common_attr.cash_draw_detail")
         #inner_cash_draw.form_area

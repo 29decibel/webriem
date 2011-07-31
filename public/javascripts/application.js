@@ -537,3 +537,5 @@ $(function(){
     window.location = '/home/change_locale?locale='+$("#change_locale").val();
   });
 });
+
+
