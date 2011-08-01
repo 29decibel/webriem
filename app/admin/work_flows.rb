@@ -3,7 +3,7 @@ ActiveAdmin.register WorkFlow do
   form do |f|
     f.inputs "基本信息" do
       f.input :name
-      f.inputs :doc_meta_infos,:as=>:check_boxes , :collection => ['aa','bb']
+      f.inputs :doc_meta_infos,:as=>:check_boxes 
       f.inputs :duties,:as=>:select,:collection => Duty.all
     end
     f.inputs "审批环节" do
