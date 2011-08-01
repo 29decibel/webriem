@@ -21,8 +21,8 @@ gem "meta_search"
 
 gem 'resque', :require => "resque/server"
 
-gem 'activeadmin'
-# gem 'activeadmin',:git=>'https://github.com/gregbell/active_admin.git'
+# gem 'activeadmin'
+gem 'activeadmin',:git=>'https://github.com/gregbell/active_admin.git'
 gem 'ruby-ole'
 gem 'rest-client'
 gem 'haml'
