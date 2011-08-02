@@ -77,6 +77,13 @@ namespace :update do
     end
   end
 
+  desc "update some fee's feetype"
+  task :fee_type => :environment do
+    Fee.find_by_code('0303').update_attribute(:fee_type,'RdTravel')
+    Fee.find_by_code('0302').update_attribute(:fee_type,'RdLodging')
+    Fee.find_by_code('0601').update_attribute(:fee_type,'RdExtraWorkMeal')
+  end
+
   desc "create menus"
   task :menus => :environment do
     MenuCategory.delete_all

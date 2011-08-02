@@ -8,7 +8,7 @@ ActiveAdmin.register WorkFlow do
     end
     f.inputs "审批环节" do
       f.has_many :work_flow_steps do |p|
-        p.input  :is_self_dep
+        p.input  :is_self_dep,:class=>'is_self_dep'
         p.input  :dep
         p.input  :duty
         p.input  :max_amount

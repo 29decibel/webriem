@@ -1,6 +1,6 @@
-var debugging = false; // or true
-if (typeof console == "undefined") var console = { log: function() {} }; 
-else if (!debugging || typeof console.log == "undefined") console.log = function() {};
+//var debugging = false; // or true
+//if (typeof console == "undefined") var console = { log: function() {} }; 
+//else if (!debugging || typeof console.log == "undefined") console.log = function() {};
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
@@ -145,6 +145,8 @@ $(function(){
     var fee_standard_text=$(this).find(".fee_standard_text");
     var fee_standard=$(this).find(".fee_standard");
     var fieldset = $(this);
+    if(fee_type!='RdExtraWorkMeal')
+      return;
     //make a ajax call and get the fee
     $.ajax({
       type: "GET",
@@ -300,7 +302,7 @@ function add_fields(link, association, content) {
 	//set reference readonly
 	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
-  $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().trigger('change:region_type_select');
+  $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().trigger('change:region_type');
   $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().addClass('new');
   //enable the enter to tab
 	add_enter_to_tab();
