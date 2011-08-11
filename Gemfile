@@ -6,7 +6,7 @@ gem "jquery-rails"
 gem "devise",'1.3.4'
 gem 'delayed_job'
 gem "pdfkit"
-gem "will_paginate", "~> 3.0.pre2"
+# gem "will_paginate", "~> 3.0.pre2"
 gem "paperclip"
 gem "prawn",'0.8.4'
 
@@ -21,8 +21,8 @@ gem "meta_search"
 
 gem 'resque', :require => "resque/server"
 
-gem 'activeadmin'
-# gem 'activeadmin',:git=>'git://github.com/gregbell/active_admin.git'
+#gem 'activeadmin'
+gem 'activeadmin',:git=>'git://github.com/gregbell/active_admin.git'
 gem 'ruby-ole'
 gem 'rest-client'
 gem 'haml'
