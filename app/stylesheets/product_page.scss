@@ -1,7 +1,6 @@
 *{margin:0px;}
 body{
   width:100%;
-  background-image:url(../images/bg.jpg) ;
   font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun";
 }
 $active-color:#D68C34;
@@ -68,60 +67,10 @@ $main-color:#39444A;
     .features{
       height:450px;
       margin-top:20px;
-      #stage{
-        height:400px;
-        width:700px;
-        float:left;
-        border:7px solid white;
-        padding:10px;
-        margin-left:10px;
-        .frame{
-          margin-top:0px;
-          img{
-            height:380px;
-            width:700px;
-            margin-bottom:10px;
-            margin-top:10px;
-          }
-        }
-        overflow:hidden;
-      }
-      ul.menu{
-        list-style:none;
-        margin-left:750px;
-        li{
-          padding-top:10px;
-          border-bottom:1px solid #dedede;
-          margin-top:5px;
-          height:40px;
-          a{
-            color:$main-color;
-            text-decoration:none;
-          }
-        }
-        a.demo{
-          display:inline-block;
-          margin-top:50px;
-        }
-      }
     }
-    .screenshots{
-      margin-top:10px;
-      height:600px;
-      margin-bottom:10px;
-      .box{
-        display:inline-block;
-      }
-
-      img{
-        float:left;
-        width:430px;
-        height:260px;
-        margin:10px;
-        border:6px solid #fff;
-        padding:3px;
-        @include shadow;
-      }
+    .actions{
+      margin-top:40px;
+      text-align:center;
     }
   }
   #footer{
