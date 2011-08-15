@@ -1,7 +1,15 @@
 class HomeController < ApplicationController
-  layout :false
+  layout "product"
   caches_page :index
   def index
+  end
+
+  def deployment
+    
+  end
+
+  def contact_us
+    
   end
 
   def change_locale

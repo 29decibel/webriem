@@ -81,18 +81,44 @@ body {
 }
 /* line 71, ../../app/stylesheets/product_page.scss */
 #wrapper #content .actions {
-  margin-top: 40px;
+  margin-top: 80px;
   text-align: center;
 }
-/* line 76, ../../app/stylesheets/product_page.scss */
+/* line 75, ../../app/stylesheets/product_page.scss */
+#wrapper #content .contact_info {
+  margin-top: 20px;
+  text-align: center;
+}
+/* line 78, ../../app/stylesheets/product_page.scss */
+#wrapper #content .contact_info .card {
+  position: relative;
+  width: 400px;
+  height: 110px;
+  margin-top: 30px;
+  font-size: 14px;
+  padding: 20px;
+  text-align: left;
+  border: 3px solid #ccc;
+}
+/* line 84, ../../app/stylesheets/product_page.scss */
+#wrapper #content .contact_info .card .name {
+  color: #0063DC;
+  font-size: 16px;
+}
+/* line 88, ../../app/stylesheets/product_page.scss */
+#wrapper #content .contact_info .card img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+/* line 99, ../../app/stylesheets/product_page.scss */
 #wrapper #footer {
-  background: url(../images/footer-bg.jpg);
   clear: both;
   height: 50px;
   width: 100%;
   text-align: center;
 }
-/* line 82, ../../app/stylesheets/product_page.scss */
+/* line 104, ../../app/stylesheets/product_page.scss */
 #wrapper #footer .copy_right {
   color: #d68c34;
   font-size: 13px;
@@ -100,7 +126,7 @@ body {
 }
 
 /**********/
-/* line 90, ../../app/stylesheets/product_page.scss */
+/* line 112, ../../app/stylesheets/product_page.scss */
 .button {
   display: inline-block;
   outline: none;
@@ -118,18 +144,18 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* line 106, ../../app/stylesheets/product_page.scss */
+/* line 128, ../../app/stylesheets/product_page.scss */
 .button:hover {
   text-decoration: none;
 }
 
-/* line 109, ../../app/stylesheets/product_page.scss */
+/* line 131, ../../app/stylesheets/product_page.scss */
 .button:active {
   position: relative;
   top: 1px;
 }
 
-/* line 113, ../../app/stylesheets/product_page.scss */
+/* line 135, ../../app/stylesheets/product_page.scss */
 .orange {
   color: #fef4e9;
   border: solid 1px #da7c0c;
@@ -139,7 +165,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
 }
 
-/* line 121, ../../app/stylesheets/product_page.scss */
+/* line 143, ../../app/stylesheets/product_page.scss */
 .orange:hover {
   background: #f47c20;
   background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
@@ -147,7 +173,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
 }
 
-/* line 127, ../../app/stylesheets/product_page.scss */
+/* line 149, ../../app/stylesheets/product_page.scss */
 .orange:active {
   color: #fcd3a5;
   background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));

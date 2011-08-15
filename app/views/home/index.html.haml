@@ -1,75 +1,16 @@
-!!! 5
-%html
-  %head
-    %meta(http-equiv="Content-type" content="text/html; charset=utf-8")
-    %meta(name="description" content="简洁高效的网上报销系统,支持对用友U8系统生成凭证,强大的费用管理统计,多组织支持,弹性的单据审批流设置")
-    %meta(name="keywords" content="费用报销系统,网上报销系统,费用管理软件,报销管理软件,费用报销,多组织费用报销,网上审批系统,审批流,国际化支持")
-    %title Online Expense System 网上报销系统
-    = stylesheet_link_tag "product_page","jquery.fancybox-1.3.4","nivo-slider","nivo",:cache=>"homepage"
-    = javascript_include_tag "lib/jquery-1.5.1.min.js"
-    = javascript_include_tag "lib/jquery.fancybox-1.3.4.pack.js"
-    = javascript_include_tag "lib/jquery.easing-1.3.pack.js"
-    = javascript_include_tag "lib/jquery.mousewheel-3.0.4.pack.js"
-    = javascript_include_tag "lib/jquery.nivo.slider.pack.js"
-
-    :css
-      #slider img {
-          position:absolute;
-          top:0px;
-          left:0px;
-          display:none;
-      }
-      #slider {
-          width:100%;
-          height:415px;
-          padding:10px;
-          border:4px solid #ccc;
-          position:relative;
-          background:url(/images/nivo/loading.gif) no-repeat 50% 50%;
-      }
-      
-    
-    :javascript
-      $(window).load(function() {
-         $("a.screenshot").fancybox({
-              'transitionIn'  : 'elastic',
-              'transitionOut' : 'elastic',
-              'speedIn'   : 300, 
-              'speedOut'    : 200, 
-              'overlayShow' : true,
-              'height'      : '400',
-              'hideOnContentClick':true
-          });
-
-          $('#slider').nivoSlider();
-          
-        });
-  %body
-    #wrapper
-      #header
-        .logo OES
-        .menu
-          %ul
-            %li.current= link_to "首页", "#"
-            %li= link_to "产品", "#"
-            %li= link_to "演示", "#"
-            %li= link_to "关于", "#"
-      #content
-        .short_intro
-          %h3 专注于最适合中小企业的在线报销系统
-        .features
-          .slider-wrapper.theme-default
-            #slider
-              =image_tag "product_images/features/feature1.png",:title=>"#caption1"
-              =image_tag "product_images/features/feature2.png",:title=>"#caption2"
-              =image_tag "product_images/features/feature3.png",:title=>"#caption3"
-              =image_tag "product_images/features/feature4.png",:title=>"#caption4"
-            #caption1.nivo-html-caption 灵活的单据审批流设置
-            #caption2.nivo-html-caption 与用友U8系统凭证的无缝集成
-            #caption3.nivo-html-caption 丰富的费用统计功能
-            #caption4.nivo-html-caption 多语言支持
-        .actions
-          =link_to "在线体验(员工)", "/task/dashboard",:class=>"button orange demo"
-          =link_to "在线体验(管理员)", "/admin",:class=>"button orange demo"
-      #footer
-        .copy_right 2010-2011 Online Expense System
+.short_intro
+  %h3 产品部分功能展示
+.features
+  .slider-wrapper.theme-default
+    #slider
+      =image_tag "product_images/features/feature2.png",:title=>"#caption2"
+      =image_tag "product_images/features/feature3.png",:title=>"#caption3"
+      =image_tag "product_images/features/feature4.png",:title=>"#caption4"
+      =image_tag "product_images/features/feature1.png",:title=>"#caption1"
+    #caption1.nivo-html-caption 与用友U8系统凭证的无缝集成
+    #caption2.nivo-html-caption 灵活的单据审批流设置
+    #caption3.nivo-html-caption 多语言支持
+    #caption4.nivo-html-caption 丰富的费用统计功能
+.actions
+  =link_to "在线体验(员工)", "/task/dashboard",:class=>"button orange demo"
+  =link_to "在线体验(管理员)", "/admin",:class=>"button orange demo"
