@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: 7e25a0771b164c150b8af58f6d3eee8fcfdd9051
+  revision: dbd838f597444aab4826a81bea23565a8c9087a7
   specs:
     activeadmin (0.2.2)
       devise (>= 1.1.2)
@@ -52,7 +52,7 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    chunky_png (1.2.0)
+    chunky_png (1.2.1)
     cocaine (0.1.0)
     compass (0.11.5)
       chunky_png (~> 1.2)
@@ -78,9 +78,9 @@ GEM
       i18n (~> 0.4)
     fssm (0.2.7)
     growl (1.0.3)
-    guard (0.5.1)
+    guard (0.6.0)
       thor (~> 0.14.6)
-    guard-rspec (0.4.0)
+    guard-rspec (0.4.1)
       guard (>= 0.4.0)
     haml (3.1.2)
     haml-rails (0.3.4)
@@ -94,7 +94,7 @@ GEM
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
-    jquery-rails (1.0.12)
+    jquery-rails (1.0.13)
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.5.3)
