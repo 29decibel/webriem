@@ -51,7 +51,7 @@ Webreim::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   #this settings is a must
   config.action_mailer.smtp_settings = {
-    :address => "mail.skccsystems.cn/owa",
+    :address => "mail.skccsystems.cn",
     :enable_starttls_auto => true,
     :port => 587,
     :authentication =>:login,
