@@ -17,4 +17,15 @@ class HomeController < ApplicationController
     redirect_to root_path
   end
 
+  def register_demo
+    demo_customer = DemoCustomer.create params[:demo_customer]
+    Demo.notice(demo_customer.email).deliver
+  end
+
+  def apply_demo
+    @demo_customer = DemoCustomer.new
+    respond_to do |wants|
+      wants.html { render :layout => false }
+    end
+  end
 end

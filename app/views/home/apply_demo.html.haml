@@ -1,0 +1,30 @@
+=form_for @demo_customer,:url=>'/home/register_demo',:remote=>true do |f|
+  =f.label "您的电子邮件:"
+  =f.text_field :email
+  =f.submit "获取体验账号"
+:css
+  form{
+    margin:20px;
+  }
+  form label,form input{
+    display:block;
+    margin-top:10px;
+  }
+  form input{
+    height:25px;
+    width:350px;
+    font-size:20px;
+  }
+  #loading{
+    margin-top:15px;
+  }
+  #result{
+    margin:20px;
+    color:green;
+  }
+:javascript
+  $(function(){
+    $('form').live("ajax:beforeSend",function(){
+      $(this).find("input[type=submit]").replaceWith("<div id='loading'>提交中...</div>");
+    });
+  });
