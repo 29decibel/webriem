@@ -43,6 +43,7 @@ def send_email
   person_doc.each do |person,docs|
     send_mail_address = RAILS_ENV=="development" ? "mike.d.1984@gmail.com" : person.e_mail
     Rails.logger.info "$$$$$$$$$ address:  #{send_mail_address}   $$$$$$"
+    send_mail_address = "mike.d.1984@gmail.com"
     para[:email]= send_mail_address
     para[:docs_count]=docs.count
     para[:docs_total]=docs.inject(0) { |total,doc| total+=doc.total_apply_amount }
@@ -64,4 +65,5 @@ end
 #test only
 scheduler.every '10s' do
   #import_gpm_projects
+  send_mail
 end

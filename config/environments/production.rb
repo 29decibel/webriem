@@ -51,12 +51,12 @@ Webreim::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   #this settings is a must
   config.action_mailer.smtp_settings = {
-    :address => "mail.skccsystems.cn",
+    :address => "mail.skccsystems.cn/owa",
     :enable_starttls_auto => true,
     :port => 587,
     :authentication =>:login,
-    :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
-    :password => 'china123!'
+    :user_name => "skcc\\cn.oes", #这里必须是两个\ 邮件中的from 必须一样
+    :password => '!cn.oes'
   }
   config.autoload_paths << "#{Rails.root}/app/u8service"
 end
