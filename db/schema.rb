@@ -78,6 +78,12 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
 
   add_index "cash_draw_items", ["inner_cash_draw_id"], :name => "index_cash_draw_items_on_inner_cash_draw_id"
 
+  create_table "demo_customers", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "common_riems", :force => true do |t|
     t.integer  "sequence"
     t.integer  "fee_id"

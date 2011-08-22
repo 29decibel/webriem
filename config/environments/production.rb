@@ -36,10 +36,6 @@ Webreim::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[OES_exception] ",
-    :sender_address => %{"oes" <oes@skccsystems.cn>},
-    :exception_recipients => %w{mike.d.1984@gmail.com}
 
   # Enable threaded mode
   # config.threadsafe!
@@ -51,15 +47,16 @@ Webreim::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   #set the mail config info
-  config.action_mailer.default_url_options = { :host => '114.113.150.227' }
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { :host => 'oesnow.com' }
+  config.action_mailer.raise_delivery_errors = false
   #this settings is a must
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "mail.skccsystems.cn",
-    :enable_starttls_auto => true,
-    :port => 587,
-    :authentication =>:login,
-    :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
-    :password => 'china123!'
-  }
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => 'mike.d.1984',
+    :password             => 'jj19880718',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+
 end

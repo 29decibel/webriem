@@ -10,6 +10,8 @@ Webreim::Application.routes.draw do
   get "home/change_locale"
   get "home/deployment"
   get "home/contact_us"
+  get "home/apply_demo"
+  post "home/register_demo"
 
   get "doc_off_set/index"
   post "doc_off_set/search"
