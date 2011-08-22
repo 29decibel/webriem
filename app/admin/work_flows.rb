@@ -12,6 +12,7 @@ ActiveAdmin.register WorkFlow do
         p.input  :dep
         p.input  :duty
         p.input  :max_amount
+        # p.input  :_destroy, :as => :boolean, :label => "Delete this picture" unless p.object.new_record?
       end
     end
     f.buttons

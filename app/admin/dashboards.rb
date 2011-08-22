@@ -1,3 +1,4 @@
+#coding: utf-8
 ActiveAdmin::Dashboards.build do
 
   # Define your dashboard sections here. Each block will be
@@ -14,6 +15,29 @@ ActiveAdmin::Dashboards.build do
   #       end
   #     end
   #   end
+  section "最近的变更的项目" do
+    ul do
+      Project.order(:updated_at).limit(10).collect do |project|
+        li link_to(project.name,admin_project_path(project))
+      end
+    end
+  end
+
+  section "最近变更的部门" do
+    ul do
+      Dep.order(:updated_at).limit(10).collect do |dep|
+        li link_to(dep.name,admin_dep_path(dep))
+      end
+    end
+  end
+
+  section "最近变更的员工" do
+    ul do
+      Person.order(:updated_at).limit(10).collect do |person|
+        li link_to(person.name,admin_person_path(person))
+      end
+    end   
+  end
   
   # == Render Partial Section
   # The block is rendererd within the context of the view, so you can
