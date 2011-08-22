@@ -11,7 +11,6 @@ gem "paperclip"
 gem "parseexcel"
 gem "excelsior"
 gem "prawn",'0.8.4'
-gem "rufus-scheduler"
 gem "activerecord-sqlserver-adapter"
 gem 'admin_data'
 gem 'ruby-ole'

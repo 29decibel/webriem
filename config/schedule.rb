@@ -24,6 +24,14 @@ every 2.hours do
   command "mysqldump --user=root --password=china123! --databases webreim_production > ~/mysql_baks/backup_#{time_stamp}.sql"
 end
 
+every 1.day, :at => '5:35 pm' do 
+  rake "send_mail"
+end
+
+every 1.day, :at => '6:30 pm' do 
+  rake "import_gpm"
+end
+
 # run this last
 # whenever --update-crontab backup
 
