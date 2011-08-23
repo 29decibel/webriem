@@ -1,15 +1,40 @@
 .short_intro
-  %h3 产品部分功能展示
-.features
-  .slider-wrapper.theme-default
-    #slider
-      =image_tag "product_images/features/feature2.png",:title=>"#caption2"
-      =image_tag "product_images/features/feature3.png",:title=>"#caption3"
-      =image_tag "product_images/features/feature4.png",:title=>"#caption4"
-      =image_tag "product_images/features/feature1.png",:title=>"#caption1"
-    #caption1.nivo-html-caption 与用友U8系统凭证的无缝集成
-    #caption2.nivo-html-caption 灵活的单据审批流设置
-    #caption3.nivo-html-caption 多语言支持
-    #caption4.nivo-html-caption 丰富的费用统计功能
-.actions
+  =image_tag 'product/main.jpg',:class=>'main'
+  %ul
+    %h4.title 主要特点
+    %li 单据审批控制
+    %li 界面中英文支持
+    %li 直接生成用友U8凭证
+    %li 单据费用统计
+    %li 邮件通知
+    %li 单据打印
+    %li Excel格式的导出
   =link_to "申请线体验", "/home/apply_demo",:class=>"button orange demo fancybox"
+.features
+  .title 网上报销系统特点介绍
+  .feature.left
+    =image_tag 'product/work_flow.jpg'
+    %p 个性化的审批流机制
+  .feature.right
+    =image_tag 'product/international.jpg'
+    %p 国际化支持
+  .feature.left
+    =image_tag 'product/u8_vouch.jpg'
+    %p u8 凭证的生成
+  .feature.right
+    =image_tag 'product/analyc.jpg'
+    %p 费用统计
+  .feature.left
+    =image_tag 'product/print.jpg'
+    %p 打印
+  .feature.right
+    =image_tag 'product/doc_types.jpg'
+    %p 多种报销单据的支持
+  .feature.left
+    =image_tag 'product/export.jpg'
+    %p 单据导出功能
+  .feature.right
+    =image_tag 'product/approve.jpg'
+    %p 方便的审批
+    
+
