@@ -51,9 +51,9 @@ Webreim::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   #this settings is a must
   config.action_mailer.smtp_settings = {
-    :address => "mail.skccsystems.cn",
-    :enable_starttls_auto => true,
-    :port => 587,
+    :address => "203.235.210.112",
+    # :enable_starttls_auto => true,
+    :port => 25,
     :authentication =>:login,
     :user_name => "skcc\\cn.oes", #这里必须是两个\ 邮件中的from 必须一样
     :password => '!cn.oes'

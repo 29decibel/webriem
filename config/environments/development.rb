@@ -35,13 +35,15 @@ Webreim::Application.configure do
   #   :user_name => "baoxiao_skccsystem@163.com",
   #   :password => 'china123!'
   # }
+  #this settings is a must
   config.action_mailer.smtp_settings = {
     :address => "mail.skccsystems.cn",
-    :enable_starttls_auto => true,
+    # :enable_starttls_auto => true,
     :port => 587,
+    :domain => 'skcc',
     :authentication =>:login,
-    :user_name => "skccsystems\\baoxiao", #这里必须是两个\ 邮件中的from 必须一样
-    :password => 'china123!'
+    :user_name => "cn.oes", #这里必须是两个\ 邮件中的from 必须一样
+    :password => '!cn.oes'
   }
   #here is my delayed jobs
   config.autoload_paths << "#{Rails.root}/app/jobs"
