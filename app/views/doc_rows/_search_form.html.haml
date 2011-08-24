@@ -27,10 +27,10 @@
   .search_area
     .search_field
       %span.label= I18n.t('activerecord.attributes.doc_row.resource_type')
-      %span.value= f.select 'resource_type_eq',DocRow::DocResourceTypes.to_a,:include_blank=>true
+      %span.value= f.select 'resource_type_eq',DocRow::DocResourceTypes.map{|t|[I18n.t("common_attr.#{t}"),t]},:include_blank=>true
     .search_field
       %span.label= I18n.t('activerecord.attributes.doc_row.doc_state')
-      %span.value= f.select 'doc_state_eq',DocHead::Doc_State.map{|k,v| [v,k]},:include_blank=>true
+      %span.value= f.select 'doc_state_eq',DocHead::Doc_State.map{|s| [I18n.t("common_attr.#{s}"),s]},:include_blank=>true
   .actions
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_search')}"),{:href=>"#"},:class=>"submit minibutton"
 :javascript

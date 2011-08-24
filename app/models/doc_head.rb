@@ -86,9 +86,12 @@ class DocHead < ActiveRecord::Base
   before_save :set_total_amount
   after_initialize :init_doc
 
-  Doc_State={'un_submit'=>"未提交",'processing'=>"审批中",'approved'=>"审批通过",'paid'=>"已付款",'rejected'=>'未通过'}
+  Doc_State = ['un_submit','processing','approved','paid','rejected']
   DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>"固定资产单据"}
-  DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",13=>"BXFL",14=>"GDZC"}
+  # combine doc_type to doc_type_prefix
+  DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",
+          7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",
+          13=>"BXFL",14=>"GDZC"}
 
   def init_doc
     return unless self.new_record?
@@ -399,7 +402,7 @@ class DocHead < ActiveRecord::Base
     DOC_TYPES[doc_type]
   end
   def doc_state_name
-    Doc_State[state]
+    I18n.t("common_attr.#{state}")
   end
   #minus reciver's amount
   def reduce_recivers_amount(amount)

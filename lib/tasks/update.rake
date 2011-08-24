@@ -119,6 +119,27 @@ namespace :update do
     Menu.create(:name=>"d_FixedProperty",:path=>"/doc_heads/new?doc_type=14",:menu_type=>1,:menu_category=>docs_cate3)
   end
 
+  DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",
+          7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",
+          13=>"BXFL",14=>"GDZC"}
+  desc "change doc type number to english prefix"
+  task :doc_type_prefix => :environment do
+    DocHead.all.each do |d|
+      d.update_attribute(:doc_type,DOC_TYPE_PREFIX[d.doc_type.to_i].downcase)
+    end
+  end
+
+  desc "fix doc type"
+  task :fix_doc_type => :environment do
+    DocHead.where("doc_type='nono'").all.each do |d|
+      doc_type = DOC_TYPE_PREFIX.select{|k,v| v==d.doc_no[0..-13]}.keys.first
+      d.update_attribute(:doc_type,doc_type)
+    end
+    #DocHead.all.each do |d|
+    #  d.update_attribute(:doc_type,d.doc_type.downcase)
+    #end
+  end
+
   desc "update system configs"
   task :system_config => :environment do
     SystemConfig.create :key=>'default_settlement',:value=>'01' unless SystemConfig.find_by_key("default_settlement")

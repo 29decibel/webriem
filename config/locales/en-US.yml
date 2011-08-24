@@ -252,6 +252,8 @@
     btn_docs_to_approve: DocsToApprove
     approve: Approve
     btn_search: Search
+    btn_delete: Delete
+    btn_edit: Edit
   common_attr:
     proxy: apply for 
     join_together_person: Join Together
@@ -298,7 +300,7 @@
     region_type: "District Level"
     other_place: "other places"
     travel_place: "Travel Sights"
-    transport_detail: "travel transportation detail"
+    transport_detail: "Travel transportation detail"
     transportation: "Transportation"
     people_count: "Numbers of People"
     live_together_person: "Sharing People"
@@ -357,6 +359,41 @@
     add_apply_item: Add Cash Item
     cash_draw_account: Cash Draw Account
     cash_draw_money_remain: Amount Remain
+    # doc resource types
+    BorrowDocDetail: Borrow
+    PayDocDetail: PayDoc
+    RdTravel: TravelExpense
+    RdTransport: TransportExpense
+    RdLodging: LodgingExpense
+    OtherRiem: OtherExpense
+    RdCommunicate: CommunicationExpense
+    RdExtraWorkCar: OvertimeWorkTransportation
+    RdExtraWorkMeal: OvertimeWorkMeal
+    CommonRiem: CommonExpense
+    RdWorkMeal: WorkMeal
+    RdCommonTransport: CommonTransport
+    RdBenefit: Benefits
+    # doc states
+    un_submit: UnSubmit
+    processing: Processing
+    approved: Approved
+    paid: Paid
+    rejected: Rejected
+    # doc types
+    jk: BorrowDoc
+    fk: PayDoc
+    sk: RecieveNotice
+    jh: Redeem
+    zh: Transfer
+    xj: CashDraw
+    gl: BuyFinProduct
+    sl: RedeemFinProduct
+    bxcl: TravelExpense
+    bxjj: EntExpense
+    bxjb: OvertimeWorkExpense
+    bxfy: GeneralExpense
+    bxfl: Wage
+    gdzc: FixProperty
   activerecord:
     models:
       dep: "Department"
