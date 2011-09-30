@@ -3,7 +3,6 @@ ActiveAdmin.register Person do
   menu :parent => '常用基础档案'
 
   index do
-    column :id
     column :name
     column :code
     column :dep,:sortable=>false
