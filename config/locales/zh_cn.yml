@@ -253,6 +253,41 @@
     cash_draw_account: 提现账户
     cash_draw_money_remain: 提现前余额
     btn_g_vouch: 生成U8凭证
+    # doc resource types
+    BorrowDocDetail: 借款单据
+    PayDocDetail: 付款单据
+    RdTravel: 差旅费
+    RdTransport: 交通费
+    RdLodging: 住宿费
+    OtherRiem: 其它费用
+    RdCommunicate: 交际费用
+    RdExtraWorkCar: 加班车费
+    RdExtraWorkMeal: 加班餐费
+    CommonRiem: 普通费用
+    RdWorkMeal: 工作餐费
+    RdCommonTransport: 业务交通费
+    RdBenefit: 福利费用
+    # doc states
+    un_submit: 未提交
+    processing: 审批中
+    approved: 审批通过
+    paid: 已付款
+    rejected: 未通过
+    # doc types
+    jk: 借款单
+    fk: 付款单
+    sk: 收款通知单
+    jh: 结汇
+    zh: 转账
+    xj: 现金提取
+    gl: 购买理财产品
+    sl: 赎回理财产品
+    bxcl: 差旅费报销
+    bxjj: 交际费报销
+    bxjb: 加班费报销
+    bxfy: 普通费用报销
+    bxfl: 福利费用报销
+    gdzc: 固定资产单据
   activerecord:
     #这里加入model的中文名称
     models:

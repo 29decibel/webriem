@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
     t.integer  "dep_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "doc_type"
+    t.integer   "doc_type"
     t.integer  "doc_state"  # just for update
     t.string  "state"
     t.integer  "project_id"

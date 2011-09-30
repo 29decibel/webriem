@@ -1,13 +1,10 @@
 #coding: utf-8
 class DocRow < ActiveRecord::Base
-  DocResourceTypes = 
-    { '借款单据'=>'BorrowDocDetail',
-      '付款单据'=>'PayDocDetail',
-      '差旅费'=>'RdTravel','交通费'=>'RdTransport','住宿费'=>'RdLodging','其它费用'=>'OtherRiem',
-      '交际费用'=>'RdCommunicate',
-      '加班车费'=>'RdExtraWorkCar','加班餐费'=>'RdExtraWorkMeal',
-      '普通费用'=>'CommonRiem','工作餐费'=>'RdWorkMeal','业务交通费'=>'RdCommonTransport',
-      '福利费用'=>'RdBenefit'}  
+  DocResourceTypes = ['BorrowDocDetail',
+      'PayDocDetail','RdTravel','RdTransport',
+      'RdLodging','OtherRiem','RdCommunicate',
+      'RdExtraWorkCar','RdExtraWorkMeal','CommonRiem',
+      'RdWorkMeal','RdCommonTransport','RdBenefit']
   belongs_to :person
   belongs_to :dep
   belongs_to :project
@@ -19,6 +16,6 @@ class DocRow < ActiveRecord::Base
   end
 
   def resource_type_name
-    DocResourceTypes.select {|k,v| v==self.resource_type}.first
+    I18n.t("common_attr.#{self.resource_type}")
   end
 end
