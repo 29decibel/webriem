@@ -1,0 +1,8 @@
+/* line 2, ../../app/stylesheets/custom_active_admin.scss */
+.doc_meta_infos li {
+  display: inline-block;
+}
+/* line 4, ../../app/stylesheets/custom_active_admin.scss */
+.doc_meta_infos li label {
+  display: inline;
+}

@@ -177,7 +177,15 @@ ActiveRecord::Schema.define(:version => 20110516164336) do
   add_index "deps",["name"],:name=>"index_deps_on_name"
   add_index "deps",["code"],:name=>"index_deps_on_code"
 
+  create_table :company_groups do |t|
+    t.string :name
+    t.string :code
+
+    t.timestamps
+  end
+
   create_table "doc_heads", :force => true do |t|
+    t.integer  "company_group_id"
     t.string   "doc_no"
     t.integer  "attach"
     t.integer  "person_id"

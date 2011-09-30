@@ -292,6 +292,7 @@
     #这里加入model的中文名称
     models:
       dep: "部门"
+      company_group: "集团"
       duty: "职务"
       person: "人员"
       system_config: "系统参数设置"
@@ -341,6 +342,9 @@
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
+      company_group:
+        name: 名称
+        code: 编码
       doc_row:
         doc_no: 单据号
         resource_type: 单据类型
@@ -489,15 +493,24 @@
         updated_at: "更新时间"
       fee_standard:
         project_id: "项目"
+        project: 项目
         region_type_id: "地区级次"
+        region_type: 地区级次
         duty_id: "职务"
+        duty: 职务
         lodging_id: "住宿方式"
+        lodging: 住宿方式
         transportation_id: "交通方式"
+        transportation: 交通方式
         business_type_id: "业务类型"
+        business_type: 业务类型
         amount: "金额"     
         currency_id: "币种" 
+        currency: 币种
         fee_id: "费用类型"
+        fee: 费用类型
         person_type_id: "人员属性"
+        person_type: 人员属性
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
@@ -538,8 +551,11 @@
         updated_at: "更新时间"
       fee_code_match:
         fee_id: 费用类型
+        fee: 费用类型
         dcode_id: 借方科目
+        dcode: 借方科目
         ccode_id: 贷方科目
+        ccode: 贷方科目
         description: 简要描述
         dperson: 指定借方人
         cperson: 指定贷方人
@@ -556,8 +572,11 @@
         end_date: "停止使用时间"
         version: "所属组织结构"
         parent_dep_id: "上级部门"
+        parent_dep: 上级部门
+        status: 状态
         u8dep_code: "对应U8编码"
         u8_dep_id: 对应的U8部门
+        u8_dep: 对应U8部门
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
@@ -572,7 +591,9 @@
         code: "编码"
         gender: "性别"
         dep_id: "所在部门"
+        dep: 部门
         duty_id: "职务"
+        duty: 职务
         boss_id: "上级领导"
         phone: "联系方式"
         e_mail: "电子邮件"
@@ -582,7 +603,9 @@
         end_date: "离职日期"
         credit_limit: "信用额度"
         role_id: "角色"
+        role: 角色
         person_type_id: "人员属性"
+        person_type: 人员属性
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
@@ -818,6 +841,7 @@
         body: "如下字段出现错误："
   menu:
     suppliers: "供应商"
+    company_groups: 集团
     my_docs: "我的单据"
     search_doc: "单据统计"
     docs_to_approve: "需要审批单据" 
