@@ -1,10 +1,11 @@
 Webreim::Application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  devise_for :users
+
   mount Resque::Server, :at => "/resque"
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-  devise_for :users,:controllers => { :sessions => "user_sessions"}
 
   get "home/index"
   get "home/change_locale"

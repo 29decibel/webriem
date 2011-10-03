@@ -10,15 +10,6 @@ class ApplicationController < ActionController::Base
     error_msg
   end
 
-  layout :layout_by_resource
-  def layout_by_resource
-    if devise_controller?
-      "devise_layout"
-    else
-      "application"
-    end
-  end
-
   before_filter :set_locale
  
   def set_locale

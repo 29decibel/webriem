@@ -5,12 +5,12 @@
   %span.sequence
   .form_field
     %span.label= "#{I18n.t('common_attr.settlement')}"
-    %span.value= ts "settlement_id","Settlement",:text=>f.object.settlement.to_s,:value=>f.object.settlement_id,:f=>f
+    %span.value= f.select "settlement_id",Settlement.all.map{|s|[s.name,s.id]}
   .form_field
     %span.label=@doc.doc_type==2 ?  "* #{I18n.t('common_attr.rec_company')}" : "* #{I18n.t('common_attr.rec_person')}"
     %span.value
       -if @doc.doc_type==2 
-        = ts "supplier_id","Supplier",:text=>f.object.supplier.to_s,:value=>f.object.supplier_id,:f=>f
+        = f.select "supplier_id",Supplier.all.map{|s|[s.name,s.id]}
       -else 
         =f.text_field :company,:class=> "normal"   
   .form_field

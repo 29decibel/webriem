@@ -1,25 +1,25 @@
-= link_to content_tag(:span,"#{I18n.t('common_op.btn_new')}"), new_doc_head_path(:doc_type=>doc_head.doc_type),:remote=>true,:class=>"minibutton"
+= link_to I18n.t('common_op.btn_new'), new_doc_head_path(:doc_type=>doc_head.doc_type),:remote=>true,:class=>"btn"
 -if !doc_head.new_record? and doc_head.person==current_user.person and (doc_head.un_submit? or doc_head.rejected?)
   -if doc_head.approvers_select_list.count>1
-    = link_to content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"),"#select_approvers",:class=>"minibutton pop"
+    = link_to I18n.t('common_op.btn_start_work_flow'),"#select_approvers",:class=>"btn"
   -else
-    = link_to content_tag(:span,"#{I18n.t('common_op.btn_start_work_flow')}"), {:controller=>"doc_heads",:action=>"submit",:doc_id=>doc_head.id },:method=>:put,:remote=>true,:class=>"minibutton"
+    = link_to I18n.t('common_op.btn_start_work_flow'), {:controller=>"doc_heads",:action=>"submit",:doc_id=>doc_head.id },:method=>:put,:remote=>true,:class=>"btn"
 -if doc_head.person==current_user.person and doc_head.processing?
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel_wf')}"), {:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
+  = link_to I18n.t('common_op.btn_cancel_wf'), {:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"btn"
 -if !doc_head.new_record?
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_print')}"), {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"minibutton"
+  = link_to I18n.t('common_op.btn_print'), {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"btn"
 -if doc_head.processing? and current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code
-  = link_to content_tag(:span,"#{I18n.t('common_op.doc_not_valide_notice')}"), {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
+  = link_to I18n.t('common_op.doc_not_valide_notice'), {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"btn"
 -if doc_head.person==current_user.person
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_mydocs')}"), my_docs_path,:remote=>true,:class=>"minibutton"
+  = link_to I18n.t('common_op.btn_mydocs'), my_docs_path,:remote=>true,:class=>"btn"
 -else
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_docs_to_approve')}"), docs_to_approve_path,:remote=>true,:class=>"minibutton"
+  = link_to I18n.t('common_op.btn_docs_to_approve'), docs_to_approve_path,:remote=>true,:class=>"btn"
 -if doc_head.approved? and current_user.casher?
-  = link_to content_tag(:span,"#{I18n.t('common_op.confirm_paid')}"),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"minibutton"
+  = link_to I18n.t('common_op.confirm_paid'),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"btn"
 -if doc_head.current_approver_id == current_user.person.id and doc_head.processing?
-  = link_to content_tag(:span,"#{I18n.t('common_op.approve')}"),{:controller=>"work_flow_infos",:action=>"new",:doc_id=>doc_head.id},:class=>"minibutton pop"
+  = link_to I18n.t('common_op.approve'),{:controller=>"work_flow_infos",:action=>"new",:doc_id=>doc_head.id},:class=>"btn pop"
 -if doc_head.can_destroy? current_user and !doc_head.new_record?
-  = link_to content_tag(:span,"#{I18n.t('common_op.btn_delete')}"), "/doc_heads/#{doc_head.id}",:remote=>true,:class=>"minibutton",:confirm=>'是否真的删除？',:method=>"DELETE"
+  = link_to I18n.t('common_op.btn_delete'), "/doc_heads/#{doc_head.id}",:remote=>true,:class=>"minibutton",:confirm=>'是否真的删除？',:method=>"DELETE"
 
 
 =yield :custom_actions
