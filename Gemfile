@@ -7,11 +7,11 @@ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-  gem "compass", "~> 0.11.5"
+  gem "compass", :git=>'https://github.com/chriseppstein/compass.git'
 end
 
 
-#gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' 
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' 
 
 gem "jquery-rails"
 
@@ -20,6 +20,8 @@ gem 'delayed_job'
 gem "pdfkit"
 gem "paperclip"
 gem "prawn",'0.8.4'
+
+gem "draper"
 
 gem 'whenever', :require => false
 # sudo brew install freetds (on mac os)

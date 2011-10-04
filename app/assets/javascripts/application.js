@@ -4,6 +4,7 @@
 //= require lib/jquery.fancybox-1.3.4
 //= require enter_to_tab
 //= reuqire lib/jquery.tokeninput
+//= reuqire lib/jquery.blockUI
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
@@ -196,16 +197,16 @@ $(function(){
 
 function wait()
 {
-  //$.blockUI({ css: { 
-  //    border: 'none', 
-  //    padding: '15px', 
-  //    backgroundColor: '#000', 
-  //    '-webkit-border-radius': '10px', 
-  //    '-moz-border-radius': '10px', 
-  //    opacity: .5, 
-  //    color: '#fff'
-  //},message:'请稍等',
-  //overlayCSS: { backgroundColor: 'transparent' }}); 
+  $.blockUI({ css: { 
+      border: 'none', 
+      padding: '15px', 
+      backgroundColor: '#000', 
+      '-webkit-border-radius': '10px', 
+      '-moz-border-radius': '10px', 
+      opacity: .5, 
+      color: '#fff'
+  },message:'请稍等',
+  overlayCSS: { backgroundColor: 'transparent' }}); 
 }
 
 function tokenize(content)

@@ -1,17 +1,5 @@
-UI设计原则
-1.消除横向滚动条
-2.减少描述性文字，尽量用图片和颜色说话
-3.不使用table（原因有两个：1.table本是一种展示说明，而不是一种结构说明，展示使用css，结构用div说明；2.table只能一行显示，否则就只能
-两行，折行对于样式控制很不好）
+使用原有的model设计
+重新使用twitter style
 
-
-后台设计
-1.过度到MongoDB数据库
-
-Remarkble gems
-delayed_jobs and so on
-
-some branch test--
-edit from sk server
-test this branch command:
-git branch --set-upstream sk_version origin/skversion
+不重复写view present
+利用draper
