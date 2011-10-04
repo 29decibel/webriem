@@ -168,9 +168,14 @@ form div.form_field span.value input{
   width:100%;
   padding:2px;
 }
-form div.form_field span.value select{
-  width:100%;
-  padding:2px;
+form div.form_field span.value {
+  select{
+    width:100%;
+    padding:2px;
+  }
+  &.date_select select{
+    width:80px;
+  }
 }
 /*doc show 's information*/
 div.doc_head_show div.form_field,div.show_only div.form_field{
@@ -185,28 +190,28 @@ div.form_area fieldset{
   margin-bottom:5px;
   border:0px;
   border-bottom:1px solid #ccc;
-}
-div.form_area fieldset legend{
-  display:none;
-  position:absolute;
-  top:2px;
-  right:1px;
+  legend{
+    display:none;
+    position:absolute;
+    top:2px;
+    right:1px;
+  }
+  span.sequence{
+    /*background-color:#fff9e5;*/
+    border-bottom:1px solid #ccc;
+    display:inline-block;
+    padding-left:2px;
+    z-index:20;
+    height:15px;
+    font-weight:bold;
+    font-size:14px;
+    position:absolute;
+    left:-8px;
+    top:0px;
+  }
 }
 div.form_area fieldset:hover legend{
   display:block;
-}
-div.form_area fieldset span.sequence{
-  /*background-color:#fff9e5;*/
-  border-bottom:1px solid #ccc;
-  display:inline-block;
-  padding-left:2px;
-  z-index:20;
-  height:15px;
-  font-weight:bold;
-  font-size:14px;
-  position:absolute;
-  left:-8px;
-  top:0px;
 }
 
 /*here is some special sizes*/
@@ -556,7 +561,7 @@ div.current_flow{
 	color:black;
 }
 div.go_to{
-	background-image: url("../images/arrow.png");
+	background-image: url("arrow.png");
 	background-repeat:no-repeat;
 	width:16px;
 	height:13px;
@@ -635,12 +640,6 @@ div.login_actions{
 	margin-top: 15px;
 }
 div.login div.logo{
-  &.user{
-    background-image:url("../images/sk_logo.png");
-  }
-  &.admin_user{
-    background-image:url("../images/sk_logo.png");
-  }
   background-repeat:no-repeat;
   float:right;
   margin-right:4px;
@@ -709,7 +708,7 @@ div.reference a{
 	top:0px;
 }
 span.reference{
-	background-image: url("../images/reference_icon.png");
+	background-image: url("reference_icon.png");
 	background-repeat: no-repeat;
 	display:inline-block;
 	position:absolute;
@@ -912,7 +911,7 @@ div.selection_area span.checkbox{
     font-weight:bold;
     color:#333;
     text-shadow:1px 1px 0 #fff; 
-    background:url(../images/minibutton_matrix.png) 0 0 no-repeat;
+    background:url(minibutton_matrix.png) 0 0 no-repeat;
     white-space:nowrap;
     border:none;
     overflow:visible;
@@ -925,7 +924,7 @@ div.selection_area span.checkbox{
     height:23px;
     padding:0 10px 0 8px;
     line-height:23px;
-    background:url(../images/minibutton_matrix.png) 100% 0 no-repeat;
+    background:url(minibutton_matrix.png) 100% 0 no-repeat;
   }
   
   a.minibutton:hover {
@@ -1132,6 +1131,9 @@ div.show_field span.value{
   border-bottom:1px solid #aaa;
   display:inline-block;
   min-width:100px;
+}
+.date_select select{
+  width:30px;
 }
 /* for the empty_info*/
 div.empty_info{

@@ -1,0 +1,128 @@
+/* Example tokeninput style #1: Token vertical list*/
+/* line 2, ../../app/assets/stylesheets/token-input.scss */
+ul.token-input-list {
+  overflow: hidden;
+  height: auto !important;
+  height: 1%;
+  width: 400px;
+  border: 1px solid #999;
+  cursor: text;
+  font-size: 12px;
+  font-family: Verdana;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  list-style-type: none;
+  clear: left;
+}
+
+/* line 19, ../../app/assets/stylesheets/token-input.scss */
+ul.token-input-list li {
+  list-style-type: none;
+}
+
+/* line 23, ../../app/assets/stylesheets/token-input.scss */
+ul.token-input-list li input {
+  border: 0;
+  width: 350px;
+  padding: 3px 8px;
+  background-color: white;
+  -webkit-appearance: caret;
+}
+
+/* line 31, ../../app/assets/stylesheets/token-input.scss */
+li.token-input-token {
+  overflow: hidden;
+  height: auto !important;
+  height: 1%;
+  margin: 3px;
+  padding: 3px 5px;
+  background-color: #d0efa0;
+  color: #000;
+  font-weight: bold;
+  cursor: default;
+  display: block;
+}
+
+/* line 44, ../../app/assets/stylesheets/token-input.scss */
+li.token-input-token p {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 50, ../../app/assets/stylesheets/token-input.scss */
+li.token-input-token span {
+  float: right;
+  color: #777;
+  cursor: pointer;
+}
+
+/* line 56, ../../app/assets/stylesheets/token-input.scss */
+li.token-input-selected-token {
+  background-color: #08844e;
+  color: #fff;
+}
+
+/* line 61, ../../app/assets/stylesheets/token-input.scss */
+li.token-input-selected-token span {
+  color: #bbb;
+}
+
+/* line 65, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown {
+  position: absolute;
+  width: 400px;
+  background-color: #fff;
+  overflow: hidden;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  cursor: default;
+  font-size: 12px;
+  font-family: Verdana;
+  z-index: 1;
+}
+
+/* line 79, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown p {
+  margin: 0;
+  padding: 5px;
+  font-weight: bold;
+  color: #777;
+}
+
+/* line 86, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 91, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown ul li {
+  background-color: #fff;
+  padding: 3px;
+  list-style-type: none;
+}
+
+/* line 97, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown ul li.token-input-dropdown-item {
+  background-color: #fafafa;
+}
+
+/* line 101, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown ul li.token-input-dropdown-item2 {
+  background-color: #fff;
+}
+
+/* line 105, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown ul li em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* line 110, ../../app/assets/stylesheets/token-input.scss */
+div.token-input-dropdown ul li.token-input-selected-dropdown-item {
+  background-color: #d0efa0;
+}

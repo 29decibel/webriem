@@ -1,0 +1,1614 @@
+/*clear some stuff*/
+/* line 2, ../../app/assets/stylesheets/site.css.scss */
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*whole style*/
+/* line 4, ../../app/assets/stylesheets/site.css.scss */
+body {
+  margin: auto;
+  /*font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
+  font-family: "Hiragino Sans GB","Microsoft Yahei","Simsun","Helvetica", "Arial", sans-serif;
+  /*background:url("../images/bck.jpg");*/
+  background-color: #eeeeee;
+  color: #999;
+  font-size: 12px;
+}
+
+/* line 13, ../../app/assets/stylesheets/site.css.scss */
+img {
+  border: 0px;
+}
+
+/* line 16, ../../app/assets/stylesheets/site.css.scss */
+a:hover {
+  background-color: transparent;
+  color: black;
+}
+
+/* line 20, ../../app/assets/stylesheets/site.css.scss */
+input {
+  border: 1px solid #AAA;
+  font-size: 1em;
+  height: 16px;
+}
+
+/*header*/
+/* line 26, ../../app/assets/stylesheets/site.css.scss */
+div.header {
+  position: relative;
+  margin-bottom: 10px;
+  height: 50px;
+  background-color: #515151;
+  border-top: none;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topleft: 0;
+  -moz-border-radius-topright: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 39, ../../app/assets/stylesheets/site.css.scss */
+div.header a.logo {
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 20px;
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+/* line 48, ../../app/assets/stylesheets/site.css.scss */
+div.header div.user_nav {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  color: white;
+}
+
+/* line 54, ../../app/assets/stylesheets/site.css.scss */
+div.header div.user_nav, div.header div.user_nav a {
+  color: white;
+  font-weight: bold;
+}
+
+/*===============================*/
+/* line 59, ../../app/assets/stylesheets/site.css.scss */
+div#main_area {
+  min-height: 800px;
+  position: relative;
+}
+
+/* line 64, ../../app/assets/stylesheets/site.css.scss */
+div#content {
+  position: relative;
+  margin: 0px 20px 20px 230px;
+  border: 1px solid #999;
+  background: #fff;
+  padding-bottom: 30px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* line 74, ../../app/assets/stylesheets/site.css.scss */
+div.sidebar {
+  float: left;
+}
+
+/*side panel*/
+/* line 78, ../../app/assets/stylesheets/site.css.scss */
+div.sidepanel {
+  width: 182px;
+  margin: 0px 0px 12px 20px;
+  background: #fff;
+  padding: 7px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* line 87, ../../app/assets/stylesheets/site.css.scss */
+div.sidepanel .title {
+  display: block;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  padding-left: 4px;
+  padding-top: 2px;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* line 98, ../../app/assets/stylesheets/site.css.scss */
+div.sidepanel ul {
+  list-style: none;
+}
+
+/* line 101, ../../app/assets/stylesheets/site.css.scss */
+div.sidepanel ul li {
+  display: block;
+  margin: 4px 4px 3px 4px;
+}
+
+/* line 105, ../../app/assets/stylesheets/site.css.scss */
+div.sidepanel a {
+  color: #515151;
+  font-size: 13px;
+}
+
+/* line 109, ../../app/assets/stylesheets/site.css.scss */
+div.sidepanel a:hover {
+  color: white;
+  background-color: #515151;
+}
+
+/* the footer */
+/* line 114, ../../app/assets/stylesheets/site.css.scss */
+div.footer {
+  margin-top: 30px;
+  color: #D5DED9;
+  position: relative;
+}
+
+/*=================================================================================*/
+/*form styles*/
+/* line 122, ../../app/assets/stylesheets/site.css.scss */
+form {
+  margin: 0 0 15px 0;
+  padding: 5px;
+  background: none;
+  color: black;
+}
+
+/* line 129, ../../app/assets/stylesheets/site.css.scss */
+div.form_area {
+  position: relative;
+  margin: 0px 15px 15px 15px;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  /*#4D4D4D;*/
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  overflow: auto;
+  position: relative;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* line 144, ../../app/assets/stylesheets/site.css.scss */
+form div.form_area a img {
+  border: 0px;
+}
+
+/* line 147, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field {
+  display: inline-block;
+  margin-bottom: 5px;
+  margin: 3px 5px 3px 5px;
+  position: relative;
+}
+
+/*normal size of form fields*/
+/* line 154, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field span.label {
+  width: 90px;
+  vertical-align: top;
+  text-align: right;
+  display: inline-block;
+  float: left;
+}
+
+/* line 161, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field span.value {
+  display: inline-block;
+  width: 250px;
+  float: left;
+  margin-left: 5px;
+}
+
+/* line 167, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field span.value input {
+  width: 100%;
+  padding: 2px;
+}
+
+/* line 172, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field span.value select {
+  width: 100%;
+  padding: 2px;
+}
+/* line 176, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field span.value.date_select select {
+  width: 80px;
+}
+
+/*doc show 's information*/
+/* line 181, ../../app/assets/stylesheets/site.css.scss */
+div.doc_head_show div.form_field, div.show_only div.form_field {
+  display: inline-block;
+  margin: 2px 2px 4px 2px;
+}
+
+/* ------end------------*/
+/* line 186, ../../app/assets/stylesheets/site.css.scss */
+div.form_area fieldset {
+  padding-bottom: 5px;
+  position: relative;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  border: 0px;
+  border-bottom: 1px solid #ccc;
+}
+/* line 193, ../../app/assets/stylesheets/site.css.scss */
+div.form_area fieldset legend {
+  display: none;
+  position: absolute;
+  top: 2px;
+  right: 1px;
+}
+/* line 199, ../../app/assets/stylesheets/site.css.scss */
+div.form_area fieldset span.sequence {
+  /*background-color:#fff9e5;*/
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  padding-left: 2px;
+  z-index: 20;
+  height: 15px;
+  font-weight: bold;
+  font-size: 14px;
+  position: absolute;
+  left: -8px;
+  top: 0px;
+}
+
+/* line 213, ../../app/assets/stylesheets/site.css.scss */
+div.form_area fieldset:hover legend {
+  display: block;
+}
+
+/*here is some special sizes*/
+/* line 218, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field.col-sp2 span.label {
+  width: 90px;
+}
+
+/* line 221, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field.col-sp2 span.value {
+  width: 508px;
+}
+
+/* line 225, ../../app/assets/stylesheets/site.css.scss */
+form div.form_field .input2 {
+  width: 100%;
+  height: 50px;
+  font-size: 12px;
+}
+
+/* line 231, ../../app/assets/stylesheets/site.css.scss */
+form div.input_area {
+  display: inline-block;
+}
+
+/* line 235, ../../app/assets/stylesheets/site.css.scss */
+div.form_title {
+  color: black;
+  margin: 7px 15px 5px 15px;
+  padding: 5px;
+  border-bottom: 1px solid #E4F0F2;
+  font-size: 16px;
+}
+/* line 241, ../../app/assets/stylesheets/site.css.scss */
+div.form_title a {
+  color: #000;
+}
+/* line 242, ../../app/assets/stylesheets/site.css.scss */
+div.form_title h3 {
+  position: relative;
+}
+/* line 244, ../../app/assets/stylesheets/site.css.scss */
+div.form_title h3 img {
+  margin-left: 5px;
+  margin-top: 7px;
+}
+/* line 249, ../../app/assets/stylesheets/site.css.scss */
+div.form_title span.doc_total_amount {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* line 256, ../../app/assets/stylesheets/site.css.scss */
+.list_info .action_bar {
+  margin: 10px 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* line 263, ../../app/assets/stylesheets/site.css.scss */
+.work_flow_info {
+  margin-bottom: 8px;
+}
+/* line 265, ../../app/assets/stylesheets/site.css.scss */
+.work_flow_info.approve {
+  color: green;
+}
+/* line 266, ../../app/assets/stylesheets/site.css.scss */
+.work_flow_info.reject {
+  color: red;
+}
+
+/* line 268, ../../app/assets/stylesheets/site.css.scss */
+.search_form {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+/* line 272, ../../app/assets/stylesheets/site.css.scss */
+.search_form form {
+  float: left;
+}
+/* line 273, ../../app/assets/stylesheets/site.css.scss */
+.search_form .search_area {
+  float: left;
+}
+/* line 275, ../../app/assets/stylesheets/site.css.scss */
+.search_form .search_area .search_field {
+  margin-top: 5px;
+  clear: left;
+  float: left;
+  margin-right: 12px;
+}
+/* line 278, ../../app/assets/stylesheets/site.css.scss */
+.search_form .search_area .search_field .label {
+  width: 90px;
+  float: left;
+  text-align: right;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+/* line 285, ../../app/assets/stylesheets/site.css.scss */
+.search_form .search_area .search_field .value {
+  float: left;
+  margin-left: 5px;
+}
+/* line 288, ../../app/assets/stylesheets/site.css.scss */
+.search_form .search_area .search_field .value input, .search_form .search_area .search_field .value select {
+  width: 100px;
+  margin: 2px 0px;
+  padding: 3px 0px;
+}
+/* line 298, ../../app/assets/stylesheets/site.css.scss */
+.search_form .actions {
+  float: left;
+  clear: left;
+}
+
+/* line 300, ../../app/assets/stylesheets/site.css.scss */
+.search_result {
+  margin-top: 20px;
+}
+/* line 302, ../../app/assets/stylesheets/site.css.scss */
+.search_result .chart_action {
+  display: inline-block;
+  margin-left: 20px;
+}
+/* line 305, ../../app/assets/stylesheets/site.css.scss */
+.search_result .chart_action a {
+  color: black;
+  margin-left: 10px;
+}
+/* line 308, ../../app/assets/stylesheets/site.css.scss */
+.search_result .chart_action a:hover {
+  color: white;
+  background: black;
+}
+
+/*
+Pretty Table Styling
+CSS Tricks also has a nice writeup: http://css-tricks.com/feature-table-design/
+*/
+/* line 320, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme {
+  overflow: hidden;
+  border: 1px solid #d3d3d3;
+  background: #fefefe;
+  width: 98%;
+  margin: 2% auto 0;
+  -moz-border-radius: 5px;
+  /* FF1+ */
+  -webkit-border-radius: 5px;
+  /* Saf3-4 */
+  border-radius: 5px;
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+/* line 332, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme th, table.oes_theme td {
+  padding: 8px 8px 8px;
+  text-align: center;
+}
+/* line 333, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme th {
+  padding-top: 10px;
+  text-shadow: 1px 1px 1px #fff;
+  background: #e8eaeb;
+}
+/* line 334, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td {
+  border-top: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+/* line 335, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr.odd-row td {
+  background: #f6f6f6;
+}
+/* line 336, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td.first, table.oes_theme th.first {
+  text-align: left;
+}
+/* line 337, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td.last {
+  border-right: none;
+}
+/* line 339, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td {
+  background: -moz-linear-gradient(100% 25% 90deg, #fefefe, #f9f9f9);
+  background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f9f9f9), to(#fefefe));
+}
+/* line 342, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td.red {
+  color: red;
+}
+/* line 343, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td.greem {
+  color: green;
+}
+/* line 344, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme td a {
+  color: black;
+}
+/* line 346, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr.odd-row td {
+  background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);
+  background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));
+}
+/* line 350, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme th {
+  background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
+  background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
+}
+/* line 353, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme th a {
+  color: black;
+}
+/* line 356, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr:hover > td {
+  background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
+  background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
+}
+/* line 361, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr:first-child th.first {
+  -moz-border-radius-topleft: 5px;
+  -webkit-border-top-left-radius: 5px;
+  /* Saf3-4 */
+}
+/* line 365, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr:first-child th.last {
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-right-radius: 5px;
+  /* Saf3-4 */
+}
+/* line 369, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr:last-child td.first {
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  /* Saf3-4 */
+}
+/* line 373, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr:last-child td.last {
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  /* Saf3-4 */
+}
+/* line 378, ../../app/assets/stylesheets/site.css.scss */
+table.oes_theme tr.for_edit td {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+/********************************************table end*************************************************/
+/* line 387, ../../app/assets/stylesheets/site.css.scss */
+.amount_result {
+  color: #000;
+  margin: 20px;
+  font-size: 14px;
+}
+
+/* line 392, ../../app/assets/stylesheets/site.css.scss */
+.clear {
+  clear: left;
+}
+
+/*footer*/
+/* line 396, ../../app/assets/stylesheets/site.css.scss */
+div#footer {
+  height: 40px;
+  border-top: 1px solid #999;
+  margin-top: 50px;
+  position: relative;
+}
+/* line 401, ../../app/assets/stylesheets/site.css.scss */
+div#footer img {
+  float: left;
+  margin-top: 5px;
+}
+/* line 405, ../../app/assets/stylesheets/site.css.scss */
+div#footer #desc {
+  float: left;
+  margin-top: 15px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+/*details form */
+/* line 413, ../../app/assets/stylesheets/site.css.scss */
+#details {
+  margin-top: 0 0 15px 0;
+  padding: 0px;
+}
+/* line 416, ../../app/assets/stylesheets/site.css.scss */
+#details .fields {
+  margin-bottom: 10px;
+}
+/* line 418, ../../app/assets/stylesheets/site.css.scss */
+#details .fields span {
+  display: inline-block;
+}
+/* line 421, ../../app/assets/stylesheets/site.css.scss */
+#details .fields span.attr {
+  width: 120px;
+  text-align: right;
+}
+/* line 425, ../../app/assets/stylesheets/site.css.scss */
+#details .fields span.value {
+  text-align: left;
+}
+
+/***********************************info notice and alert goes here***************************/
+/* line 431, ../../app/assets/stylesheets/site.css.scss */
+div.info {
+  border: 2px solid #DDD;
+  height: 20px;
+  padding: 0.8em;
+  margin-bottom: 5px;
+}
+
+/* line 437, ../../app/assets/stylesheets/site.css.scss */
+div.notice {
+  background: #E6EFC2;
+  border-color: #C6D880;
+  color: #264409;
+}
+
+/* line 442, ../../app/assets/stylesheets/site.css.scss */
+div.alert {
+  background: #FBE3E4;
+  border-color: #FBC2C4;
+  color: #8A1F11;
+}
+
+/***********************************************************************************************/
+/* line 448, ../../app/assets/stylesheets/site.css.scss */
+.d_fields {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* line 452, ../../app/assets/stylesheets/site.css.scss */
+.d_field {
+  float: left;
+}
+
+/*********************************** error messages in the form ***************************/
+/* line 456, ../../app/assets/stylesheets/site.css.scss */
+span.error_message {
+  background: #FBE3E4;
+  border-color: #FBC2C4;
+  color: #8A1F11;
+  display: inline-block;
+  border: 2px solid #DDD;
+  padding: 2px;
+}
+
+/* line 464, ../../app/assets/stylesheets/site.css.scss */
+input.required {
+  background: #FFF6BF;
+}
+
+/*+++++++++++++++++++++++++++++++*/
+/* line 469, ../../app/assets/stylesheets/site.css.scss */
+div.table_details, div.rdd_details, div.reim_split_details {
+  overflow: auto;
+  margin: 15px;
+  padding: 5px;
+  background-color: #FFF9E5;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+/*==============================================================*/
+/*actions area*/
+/* line 479, ../../app/assets/stylesheets/site.css.scss */
+div.actions {
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #E4F0F2;
+}
+
+/* Button2 */
+/* line 488, ../../app/assets/stylesheets/site.css.scss */
+div.button_wrapper {
+  background: -webkit-gradient(linear, 0% 40%, 0% 70%, from(#f9f9f9), to(#e3e3e3));
+  width: 120px;
+  height: 20px;
+}
+
+/* line 493, ../../app/assets/stylesheets/site.css.scss */
+a.button2 {
+  border: 1px solid #ccc;
+  padding: 3px 10px 3px;
+  color: black;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 30px;
+  background: #ddd;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: #fff 0px 1px 1px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc));
+  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc');
+}
+
+/* line 512, ../../app/assets/stylesheets/site.css.scss */
+a:active.button2 {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+  position: relative;
+  top: 1px;
+  left: 1px;
+}
+
+/*=================================work flow goes here==================================*/
+/* line 522, ../../app/assets/stylesheets/site.css.scss */
+div#work_flow_progress {
+  position: relative;
+  padding: 5px;
+  margin: 0 15px 15px 15px;
+  background-color: #FFF;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+/* line 532, ../../app/assets/stylesheets/site.css.scss */
+div#work_flow_progress span {
+  display: inline-block;
+  margin-top: 0px;
+}
+
+/* line 537, ../../app/assets/stylesheets/site.css.scss */
+#select_approvers_wrapper {
+  display: none;
+}
+
+/* line 540, ../../app/assets/stylesheets/site.css.scss */
+#select_approvers {
+  padding: 7px 7px 0px 7px;
+}
+/* line 542, ../../app/assets/stylesheets/site.css.scss */
+#select_approvers select {
+  font-size: 18px;
+}
+/* line 545, ../../app/assets/stylesheets/site.css.scss */
+#select_approvers .submit {
+  margin-top: 9px;
+}
+
+/* line 549, ../../app/assets/stylesheets/site.css.scss */
+div.work_flow_step {
+  display: inline-block;
+  margin-top: 0px;
+  margin-left: 7px;
+  padding: 0px;
+}
+
+/* line 555, ../../app/assets/stylesheets/site.css.scss */
+div.work_flow_step span {
+  margin: 0px;
+}
+
+/* line 558, ../../app/assets/stylesheets/site.css.scss */
+div.current_flow {
+  padding: 4px;
+  background-color: #FBCC7F;
+  color: black;
+}
+
+/* line 563, ../../app/assets/stylesheets/site.css.scss */
+div.go_to {
+  background-image: url("arrow.png");
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 13px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+/*the styles for the reim details by dropdownlist*/
+/* line 572, ../../app/assets/stylesheets/site.css.scss */
+div.reim_details_by_fee_type {
+  display: inline-block;
+  background-color: #e9eef2;
+}
+
+/* line 578, ../../app/assets/stylesheets/site.css.scss */
+form.new_work_flow_info .is_ok {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+/* line 581, ../../app/assets/stylesheets/site.css.scss */
+form.new_work_flow_info .is_ok .pass {
+  color: green;
+}
+/* line 582, ../../app/assets/stylesheets/site.css.scss */
+form.new_work_flow_info .is_ok .no_pass {
+  color: red;
+}
+/* line 584, ../../app/assets/stylesheets/site.css.scss */
+form.new_work_flow_info .comments {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+/*===========================================devise relate staff=================*/
+/* line 591, ../../app/assets/stylesheets/site.css.scss */
+div.login {
+  width: 500px;
+  position: relative;
+  margin: auto;
+  margin-top: 200px;
+  background-color: #fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+/* line 603, ../../app/assets/stylesheets/site.css.scss */
+div.login_error {
+  margin-top: 3px;
+  padding: 5px;
+  background-color: red;
+  color: black;
+  margin-bottom: 10px;
+}
+
+/* line 610, ../../app/assets/stylesheets/site.css.scss */
+div.login form {
+  padding: 20px;
+  padding-top: 30px;
+  position: relative;
+}
+
+/* line 615, ../../app/assets/stylesheets/site.css.scss */
+div.login h3 {
+  margin: 3px;
+  font-weight: bold;
+  color: #ccc;
+  font-size: 20px;
+  margin-left: 20px;
+  padding-top: 20px;
+}
+
+/* line 623, ../../app/assets/stylesheets/site.css.scss */
+div.login_field {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+/* line 627, ../../app/assets/stylesheets/site.css.scss */
+div.login_field .l_label {
+  width: 90px;
+  display: inline-block;
+}
+
+/* line 631, ../../app/assets/stylesheets/site.css.scss */
+div.login_field .l_value {
+  width: 260px;
+  display: inline-block;
+}
+
+/* line 635, ../../app/assets/stylesheets/site.css.scss */
+div.login_field .l_value input {
+  height: 20px;
+}
+
+/* line 638, ../../app/assets/stylesheets/site.css.scss */
+div.login_actions {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+/* line 642, ../../app/assets/stylesheets/site.css.scss */
+div.login div.logo {
+  background-repeat: no-repeat;
+  float: right;
+  margin-right: 4px;
+  margin-bottom: 10px;
+  width: 110px;
+  height: 54px;
+}
+
+/*+++++++++++++++++++++++++++*/
+/* line 651, ../../app/assets/stylesheets/site.css.scss */
+div.upload_item, div#add_uload_file {
+  background-color: #E4F0F2;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+}
+
+/* line 658, ../../app/assets/stylesheets/site.css.scss */
+div.delete_upload {
+  display: inline-block;
+  float: right;
+  margin-right: 3px;
+}
+
+/* line 663, ../../app/assets/stylesheets/site.css.scss */
+div.download {
+  display: inline-block;
+  float: right;
+  margin-right: 3px;
+}
+
+/*doc============*/
+/* line 669, ../../app/assets/stylesheets/site.css.scss */
+div#my_doc {
+  width: 49%;
+  display: inline-block;
+}
+
+/* line 673, ../../app/assets/stylesheets/site.css.scss */
+div#docs_to_approve {
+  width: 49%;
+  display: inline-block;
+}
+
+/* line 677, ../../app/assets/stylesheets/site.css.scss */
+div.filter {
+  margin: 0px 15px 0px 15px;
+  padding: 0px;
+  border-bottom: 1px solid #E4F0F2;
+  position: relative;
+}
+
+/* line 683, ../../app/assets/stylesheets/site.css.scss */
+div.filter form {
+  margin: 0px;
+}
+
+/* line 686, ../../app/assets/stylesheets/site.css.scss */
+div a.new_object {
+  margin-left: 30px;
+}
+
+/*=======================reference=========================================*/
+/* line 690, ../../app/assets/stylesheets/site.css.scss */
+div.reference {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+/* line 695, ../../app/assets/stylesheets/site.css.scss */
+div.reference input {
+  display: inline-block;
+  margin: 0px;
+  width: 100%;
+}
+
+/* line 701, ../../app/assets/stylesheets/site.css.scss */
+table div.reference input {
+  width: 100px;
+}
+
+/* line 704, ../../app/assets/stylesheets/site.css.scss */
+div.reference a {
+  display: inline-block;
+  position: absolute;
+  right: -1px;
+  top: 0px;
+}
+
+/* line 710, ../../app/assets/stylesheets/site.css.scss */
+span.reference {
+  background-image: url("reference_icon.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+}
+
+/***************************************** end reference*************************/
+/*approver list*/
+/* line 722, ../../app/assets/stylesheets/site.css.scss */
+div.approver_list {
+  max-height: 200px;
+  overflow: auto;
+}
+
+/*=================================disabled link style============================*/
+/*4work flow*/
+/* line 729, ../../app/assets/stylesheets/site.css.scss */
+div.form_field_4_work_flow {
+  margin-left: 32px;
+}
+
+/* line 732, ../../app/assets/stylesheets/site.css.scss */
+div.doc_type_check {
+  display: inline-block;
+}
+
+/*set the approvers margin to the larger size*/
+/* line 736, ../../app/assets/stylesheets/site.css.scss */
+div#approvers {
+  margin: 30px;
+}
+
+/*for the jquery datetime picker*/
+/* line 740, ../../app/assets/stylesheets/site.css.scss */
+.ui-timepicker-div .ui-widget-header {
+  margin-bottom: 8px;
+}
+
+/* line 741, ../../app/assets/stylesheets/site.css.scss */
+.ui-timepicker-div dl {
+  text-align: left;
+}
+
+/* line 742, ../../app/assets/stylesheets/site.css.scss */
+.ui-timepicker-div dl dt {
+  height: 25px;
+}
+
+/* line 743, ../../app/assets/stylesheets/site.css.scss */
+.ui-timepicker-div dl dd {
+  margin: -25px 0 10px 65px;
+}
+
+/* line 744, ../../app/assets/stylesheets/site.css.scss */
+.ui-timepicker-div td {
+  font-size: 90%;
+}
+
+/*+++++++++++++++++++++++++++updated button and links++++++++++++++++++++++++++*/
+/* BUTTONS */
+/* line 747, ../../app/assets/stylesheets/site.css.scss */
+.buttons a, .buttons button {
+  display: block;
+  float: left;
+  margin: 0 7px 0 0;
+  background-color: #f5f5f5;
+  border: 1px solid #dedede;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size: 100%;
+  line-height: 130%;
+  text-decoration: none;
+  font-weight: bold;
+  color: #565656;
+  cursor: pointer;
+  padding: 5px 10px 6px 7px;
+  /* Links */
+}
+
+/* line 765, ../../app/assets/stylesheets/site.css.scss */
+.buttons button {
+  width: auto;
+  overflow: visible;
+  padding: 4px 10px 3px 7px;
+  /* IE6 */
+}
+
+/* line 770, ../../app/assets/stylesheets/site.css.scss */
+.buttons button[type] {
+  padding: 5px 10px 5px 7px;
+  /* Firefox */
+  line-height: 17px;
+  /* Safari */
+}
+
+/* line 774, ../../app/assets/stylesheets/site.css.scss */
+.buttons button img, .buttons a img {
+  margin: 0 3px -3px 0 !important;
+  padding: 0;
+  border: none;
+  width: 16px;
+  height: 16px;
+}
+
+/*===================ADD Some Color=======*/
+/* STANDARD */
+/* line 785, ../../app/assets/stylesheets/site.css.scss */
+button:hover, .buttons a:hover {
+  background-color: #dff4ff;
+  border: 1px solid #c2e1ef;
+  color: #336699;
+}
+
+/* line 790, ../../app/assets/stylesheets/site.css.scss */
+.buttons a:active {
+  background-color: #6299c5;
+  border: 1px solid #6299c5;
+  color: #fff;
+}
+
+/* POSITIVE */
+/* line 798, ../../app/assets/stylesheets/site.css.scss */
+button.positive, .buttons a.positive {
+  color: #529214;
+}
+
+/* line 801, ../../app/assets/stylesheets/site.css.scss */
+.buttons a.positive:hover, button.positive:hover {
+  background-color: #E6EFC2;
+  border: 1px solid #C6D880;
+  color: #529214;
+}
+
+/* line 806, ../../app/assets/stylesheets/site.css.scss */
+.buttons a.positive:active {
+  background-color: #529214;
+  border: 1px solid #529214;
+  color: #fff;
+}
+
+/* NEGATIVE */
+/* line 814, ../../app/assets/stylesheets/site.css.scss */
+.buttons a.negative, button.negative {
+  color: #d12f19;
+}
+
+/* line 817, ../../app/assets/stylesheets/site.css.scss */
+.buttons a.negative:hover, button.negative:hover {
+  background: #fbe3e4;
+  border: 1px solid #fbc2c4;
+  color: #d12f19;
+}
+
+/* line 822, ../../app/assets/stylesheets/site.css.scss */
+.buttons a.negative:active {
+  background-color: #d12f19;
+  border: 1px solid #d12f19;
+  color: #fff;
+}
+
+/*the facebox*/
+/* line 828, ../../app/assets/stylesheets/site.css.scss */
+div#mark_the_doc {
+  height: 60px;
+  width: 150px;
+  margin: 2px;
+  padding: 0px;
+}
+
+/*the vouch info area*/
+/* line 835, ../../app/assets/stylesheets/site.css.scss */
+div.vouch_info {
+  margin-bottom: 5px;
+  padding: 3px;
+}
+
+/*div.vouch_info:hover{
+  background-color:#fff9e5;
+}*/
+/*redefine the image in the link in vouch*/
+/* line 843, ../../app/assets/stylesheets/site.css.scss */
+div.vouch_info a img {
+  border: 0px;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+/* line 848, ../../app/assets/stylesheets/site.css.scss */
+div.form_inline_actions {
+  display: block;
+  margin-top: 2px;
+  margin-left: 100px;
+}
+
+/* line 853, ../../app/assets/stylesheets/site.css.scss */
+tr span.d {
+  color: red;
+  font-weight: bold;
+}
+
+/* line 857, ../../app/assets/stylesheets/site.css.scss */
+tr span.c {
+  color: green;
+  font-weight: bold;
+}
+
+/* line 861, ../../app/assets/stylesheets/site.css.scss */
+div.edit_inline form {
+  margin: 5px;
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+/* for the error*/
+/* line 868, ../../app/assets/stylesheets/site.css.scss */
+div.edit_inline form div.inline_error {
+  margin: 2px 5px 2px 5px;
+  color: red;
+  font: 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* line 874, ../../app/assets/stylesheets/site.css.scss */
+div.edit_inline form div.inline_error ul {
+  list-style: none;
+  margin: 2px 5px 2px 5px;
+  color: red;
+  font: 12px;
+}
+
+/*docs by person offsets use*/
+/* line 881, ../../app/assets/stylesheets/site.css.scss */
+div.docs_by_person {
+  margin: 5px;
+  border: 1px solid #42aec2;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+/* line 887, ../../app/assets/stylesheets/site.css.scss */
+div.docs_by_person h4 {
+  margin-left: 20px;
+  margin-top: 3px;
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+}
+
+/* div selection area*/
+/* line 894, ../../app/assets/stylesheets/site.css.scss */
+div.selection_area {
+  margin: 2px 3px 3px 3px;
+  position: relative;
+}
+
+/* line 898, ../../app/assets/stylesheets/site.css.scss */
+div.selection_area span.checkbox {
+  display: inline-block;
+  float: left;
+  margin-left: 4px;
+  width: 125px;
+}
+
+/* for the mini button*/
+/* button basics */
+/* line 906, ../../app/assets/stylesheets/site.css.scss */
+a.minibutton {
+  display: inline-block;
+  height: 24px;
+  padding: 0 0 0 3px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  text-shadow: 1px 1px 0 #fff;
+  background: url(minibutton_matrix.png) 0 0 no-repeat;
+  white-space: nowrap;
+  border: none;
+  overflow: visible;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* line 922, ../../app/assets/stylesheets/site.css.scss */
+a.minibutton > span {
+  display: block;
+  height: 23px;
+  padding: 0 10px 0 8px;
+  line-height: 23px;
+  background: url(minibutton_matrix.png) 100% 0 no-repeat;
+}
+
+/* line 930, ../../app/assets/stylesheets/site.css.scss */
+a.minibutton:hover {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+  background-position: 0 -30px;
+}
+
+/* line 936, ../../app/assets/stylesheets/site.css.scss */
+a.minibutton:hover > span {
+  background-position: 100% -30px;
+}
+
+/* line 938, ../../app/assets/stylesheets/site.css.scss */
+a.minibutton.mousedown {
+  background-position: 0 -60px;
+}
+
+/* line 939, ../../app/assets/stylesheets/site.css.scss */
+a.minibutton.mousedown > span {
+  background-position: 100% -60px;
+}
+
+/* with icon */
+/* line 942, ../../app/assets/stylesheets/site.css.scss */
+a.btn-download .icon {
+  float: left;
+  margin-left: -4px;
+  width: 18px;
+  height: 22px;
+  background: url(http://github.com/images/modules/buttons/minibutton_icons.png?v20100306) 0 0 no-repeat;
+}
+
+/* line 949, ../../app/assets/stylesheets/site.css.scss */
+a.btn-download .icon {
+  background-position: -40px 0;
+}
+
+/* line 950, ../../app/assets/stylesheets/site.css.scss */
+a.btn-download:hover .icon, a.btn-download:focus .icon {
+  background-position: -40px -25px;
+}
+
+/*for the new haml file style*/
+/* line 953, ../../app/assets/stylesheets/site.css.scss */
+div.list_item {
+  margin-left: 22px;
+  margin-right: 22px;
+  padding: 2px;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  height: 45px;
+}
+
+/* line 961, ../../app/assets/stylesheets/site.css.scss */
+div.list_item:hover {
+  background-color: #f2f2f2;
+}
+
+/* line 964, ../../app/assets/stylesheets/site.css.scss */
+div.list_item:hover span.list_action_left {
+  display: inline-block;
+}
+
+/* line 967, ../../app/assets/stylesheets/site.css.scss */
+div.list_item:hover span.list_action_right {
+  display: inline-block;
+}
+
+/* line 970, ../../app/assets/stylesheets/site.css.scss */
+span.list_action_left {
+  float: left;
+  margin-left: -18px;
+  display: none;
+}
+
+/* line 975, ../../app/assets/stylesheets/site.css.scss */
+span.list_action_right {
+  float: right;
+  margin-right: -18px;
+  display: none;
+  clear: right;
+}
+
+/* line 981, ../../app/assets/stylesheets/site.css.scss */
+span.list_field {
+  display: block;
+  margin: 2px 3px 2px 3px;
+}
+
+/*new list action style*/
+/* line 986, ../../app/assets/stylesheets/site.css.scss */
+.list_item_action {
+  position: absolute;
+  height: 15px;
+  bottom: 2px;
+  right: 5px;
+}
+
+/* line 992, ../../app/assets/stylesheets/site.css.scss */
+.list_item_action span.action {
+  display: none;
+  float: right;
+  margin-left: 3px;
+}
+
+/* line 997, ../../app/assets/stylesheets/site.css.scss */
+.list_item_action span.action a {
+  color: #515151;
+}
+
+/* line 1000, ../../app/assets/stylesheets/site.css.scss */
+.list_item_action span.action a:hover {
+  background-color: #515151;
+  color: white;
+}
+
+/* line 1004, ../../app/assets/stylesheets/site.css.scss */
+div.list_item:hover .list_item_action span.action {
+  display: inline-block;
+}
+
+/* line 1007, ../../app/assets/stylesheets/site.css.scss */
+.list_item {
+  position: relative;
+}
+/* line 1009, ../../app/assets/stylesheets/site.css.scss */
+.list_item:hover .doc_show .check_mark {
+  display: block;
+}
+/* line 1012, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show {
+  float: left;
+}
+/* line 1014, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .check_mark {
+  position: absolute;
+  top: 3px;
+  left: -5px;
+  display: none;
+  border: 1px solid #ccc;
+  width: 10px;
+  height: 10px;
+}
+/* line 1023, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .doc_type {
+  font-size: 14px;
+  float: left;
+  width: 130px;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+/* line 1030, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .apply_date {
+  float: left;
+  width: 100px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+/* line 1036, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .apply_person {
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+/* line 1041, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .doc_no {
+  float: left;
+  margin: 3px 5px 0px 35px;
+  padding-top: 2px;
+}
+/* line 1045, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .doc_no a {
+  text-decoration: none;
+  color: #999;
+}
+/* line 1050, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .docinfo {
+  position: absolute;
+  bottom: 10px;
+  left: 7px;
+}
+/* line 1055, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .doc_amount {
+  position: absolute;
+  padding: 5px;
+  top: 3px;
+  right: 90px;
+  width: 100px;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+/* line 1065, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .state {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  width: 70px;
+  text-align: center;
+  background: #000;
+  color: white;
+  font-size: 13px;
+  padding: 5px;
+}
+/* line 1075, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .state.paid {
+  background: green;
+}
+/* line 1076, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .state.processing {
+  background: #FFA435;
+}
+/* line 1077, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .state.approved {
+  background: green;
+}
+/* line 1078, ../../app/assets/stylesheets/site.css.scss */
+.list_item .doc_show .state.rejected {
+  background: red;
+}
+
+/* for the pager*/
+/* line 1083, ../../app/assets/stylesheets/site.css.scss */
+.pagination {
+  margin: 10px 20px 0px 22px;
+  color: #515151;
+}
+
+/* line 1087, ../../app/assets/stylesheets/site.css.scss */
+.pagination a {
+  color: #515151;
+}
+
+/* line 1090, ../../app/assets/stylesheets/site.css.scss */
+.pagination a:hover {
+  background-color: #515151;
+  color: white;
+}
+
+/* doc error message*/
+/* line 1095, ../../app/assets/stylesheets/site.css.scss */
+.doc_error .inline_error {
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 2px solid #FBC2C4;
+  padding: 5px;
+  background: #FBE3E4;
+  color: #8A1F11;
+}
+
+/* line 1103, ../../app/assets/stylesheets/site.css.scss */
+.doc_error ul {
+  list-style: none;
+}
+
+/*doc show custom styles*/
+/* line 1107, ../../app/assets/stylesheets/site.css.scss */
+div.s_title {
+  margin-bottom: 10px;
+}
+
+/* line 1110, ../../app/assets/stylesheets/site.css.scss */
+div.s_currency {
+  margin-top: 10px;
+  position: relative;
+}
+
+/* line 1114, ../../app/assets/stylesheets/site.css.scss */
+div.s_currency span {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/*the new show field*/
+/* line 1119, ../../app/assets/stylesheets/site.css.scss */
+div.show_field {
+  display: inline-block;
+  margin-left: 8px;
+  margin-bottom: 6px;
+}
+
+/* line 1124, ../../app/assets/stylesheets/site.css.scss */
+div.show_field span.label {
+  color: black;
+  display: inline-block;
+  text-align: right;
+  width: 80px;
+}
+
+/* line 1130, ../../app/assets/stylesheets/site.css.scss */
+div.show_field span.value {
+  border-bottom: 1px solid #aaa;
+  display: inline-block;
+  min-width: 100px;
+}
+
+/* line 1135, ../../app/assets/stylesheets/site.css.scss */
+.date_select select {
+  width: 30px;
+}
+
+/* for the empty_info*/
+/* line 1139, ../../app/assets/stylesheets/site.css.scss */
+div.empty_info {
+  height: 80px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 60px;
+  border: 1px dashed #ccc;
+}
+
+/* line 1150, ../../app/assets/stylesheets/site.css.scss */
+#adjust_amount_wrapper {
+  display: none;
+}
+
+/* line 1154, ../../app/assets/stylesheets/site.css.scss */
+.adjust_amount input {
+  margin-top: 7px;
+  padding: 3px;
+}
+/* line 1158, ../../app/assets/stylesheets/site.css.scss */
+.adjust_amount a {
+  margin-top: 7px;
+}
+
+/* line 1162, ../../app/assets/stylesheets/site.css.scss */
+#chart {
+  width: 880px;
+  height: 370px;
+  margin-left: 20px;
+}
+
+/* line 1167, ../../app/assets/stylesheets/site.css.scss */
+.empty_search_result {
+  border: dashed 2px #ccc;
+  text-align: center;
+  float: left;
+  margin: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 17px;
+  width: 900px;
+}
+
+/* line 1177, ../../app/assets/stylesheets/site.css.scss */
+.section {
+  margin-bottom: 20px;
+}
+/* line 1179, ../../app/assets/stylesheets/site.css.scss */
+.section .bottom_action {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* line 1184, ../../app/assets/stylesheets/site.css.scss */
+.change_password_wrapper {
+  display: none;
+}

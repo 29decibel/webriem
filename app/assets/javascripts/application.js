@@ -4,15 +4,6 @@
 //= require lib/jquery.fancybox-1.3.4
 //= require enter_to_tab
 //= reuqire lib/jquery.tokeninput
-
-//= require bootstrap-alerts-1.3.0
-//= require bootstrap-dropdown-1.3.0
-//= require bootstrap-modal-1.3.0
-//= require bootstrap-twipsy-1.3.0
-//= require bootstrap-popover-1.3.0
-//= require bootstrap-scrollspy-1.3.0
-//= require bootstrap-tabs-1.3.0
-
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
