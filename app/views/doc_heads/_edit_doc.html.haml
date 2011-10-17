@@ -195,17 +195,6 @@
       .doc_detail
         .form_title
           %h3
-            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems 
-            = "#{I18n.t('common_attr.common_riem_desc')}"
-            = image_tag "currency_yuan.png"
-            %span.doc_total_amount.normal=doc.amount_for :common_riems
-        .form_area
-          = f.fields_for :common_riems do |builder| 
-            = render :partial => 'common_riem_fields',:locals => { :f => builder } 
-    -if doc.doc_type==12
-      .doc_detail
-        .form_title
-          %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_work_meals 
             = I18n.t('common_attr.work_meal')
             = image_tag "currency_yuan.png"
@@ -213,6 +202,29 @@
         .form_area
           = f.fields_for :rd_work_meals do |builder|  
             = render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  
+    -if doc.doc_type==12
+      .doc_detail
+        .form_title
+          %h3
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_common_transports 
+            = "#{I18n.t('common_attr.common_transport')}"
+            = image_tag "currency_yuan.png"
+            %span.doc_total_amount.normal=doc.amount_for :rd_common_transports
+        .form_area
+          = f.fields_for :rd_common_transports do |builder|  
+            = render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    -if doc.doc_type==12
+      .doc_detail
+        .form_title
+          %h3
+            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems 
+            = "#{I18n.t('common_attr.common_riem_desc')}"
+            = image_tag "currency_yuan.png"
+            %span.doc_total_amount.normal=doc.amount_for :common_riems
+        .form_area
+          = f.fields_for :common_riems do |builder| 
+            = render :partial => 'common_riem_fields',:locals => { :f => builder } 
     -if doc.doc_type==10 
       .doc_detail
         .form_title
@@ -246,18 +258,6 @@
         .form_area
           = f.fields_for :rd_extra_work_cars do |builder|  
             = render :partial => 'rd_extra_work_car_fields',:locals => { :f => builder }  
-        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    -if doc.doc_type==12
-      .doc_detail
-        .form_title
-          %h3
-            = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_common_transports 
-            = "#{I18n.t('common_attr.common_transport')}"
-            = image_tag "currency_yuan.png"
-            %span.doc_total_amount.normal=doc.amount_for :rd_common_transports
-        .form_area
-          = f.fields_for :rd_common_transports do |builder|  
-            = render :partial => 'rd_common_transport_fields',:locals => { :f => builder }  
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==13
       .doc_detail

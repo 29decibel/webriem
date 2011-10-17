@@ -114,15 +114,6 @@
         .form_area
           =render :partial=>"other_riem_show",:collection=>doc.other_riems,:as=>:d_item
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  -if doc.doc_type==12 and doc.common_riems.count>0
-    .doc_detail
-      .form_title
-        %h3
-          = "#{I18n.t('common_attr.common_riem_desc')}"
-          = image_tag "currency_yuan.png"
-          %span.doc_total_amount.normal=doc.amount_for(:common_riems)
-      .form_area
-        =render :partial=>"common_riem_show",:collection=>doc.common_riems,:as=>:d_item
   -if doc.doc_type==12 and doc.rd_work_meals.count>0
     .doc_detail
       .form_title
@@ -132,6 +123,25 @@
           %span.doc_total_amount.normal=doc.amount_for(:rd_work_meals)
       .form_area
         =render :partial=>"rd_work_meal_show",:collection=>doc.rd_work_meals,:as=>:d_item
+  -if doc.doc_type==12 and doc.rd_common_transports.count>0
+    .doc_detail
+      .form_title
+        %h3
+          = "#{I18n.t('common_attr.common_transport')}"
+          = image_tag "currency_yuan.png"
+          %span.doc_total_amount.normal=doc.amount_for(:rd_common_transports)
+      .form_area
+        =render :partial=>"rd_common_transport_show",:collection=>doc.rd_common_transports,:as=>:d_item
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  -if doc.doc_type==12 and doc.common_riems.count>0
+    .doc_detail
+      .form_title
+        %h3
+          = "#{I18n.t('common_attr.common_riem_desc')}"
+          = image_tag "currency_yuan.png"
+          %span.doc_total_amount.normal=doc.amount_for(:common_riems)
+      .form_area
+        =render :partial=>"common_riem_show",:collection=>doc.common_riems,:as=>:d_item
   -if doc.doc_type==10 and doc.rd_communicates.count>0
     .doc_detail
       .form_title
@@ -161,16 +171,6 @@
             %span.doc_total_amount.normal=doc.amount_for(:rd_extra_work_cars)
         .form_area
           =render :partial=>"rd_extra_work_car_show",:collection=>doc.rd_extra_work_cars,:as=>:d_item
-        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  -if doc.doc_type==12 and doc.rd_common_transports.count>0
-    .doc_detail
-      .form_title
-        %h3
-          = "#{I18n.t('common_attr.common_transport')}"
-          = image_tag "currency_yuan.png"
-          %span.doc_total_amount.normal=doc.amount_for(:rd_common_transports)
-      .form_area
-        =render :partial=>"rd_common_transport_show",:collection=>doc.rd_common_transports,:as=>:d_item
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   -if doc.doc_type==13 and doc.rd_benefits.count>0
     .doc_detail
