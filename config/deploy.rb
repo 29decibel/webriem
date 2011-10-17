@@ -35,7 +35,7 @@ namespace :deploy do
 
   task :update_code do
     run "cd #{deploy_to}/current; git fetch origin; git reset --hard #{branch}"
-    run "cd #{deploy_to}/current/public && rm uploads && ln -s #{deploy_to}/shared/uploads/ uploads"
+    run "cd #{deploy_to}/current/public && ln -nfs #{deploy_to}/shared/uploads/ uploads"
     run "cd #{deploy_to}/current && rm config/database.yml && ln -s #{deploy_to}/shared/database.yml config/database.yml"
   end
 
