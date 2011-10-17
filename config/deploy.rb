@@ -22,17 +22,21 @@ namespace :deploy do
     # you just told the cap where you what to put , and then the current,release and shared folder will created
     # for you
     set :deploy_to, "/home/ldb/dev/oes"
-    set :branch, "dev"
+    set :branch, "origin/dev"
     set :env, "production"
     
     transaction do
       update_code
-      symlink
-      copy_config
       migrate
     end
 
     restart
+  end
+
+  task :update_code do
+    run "cd #{deploy_to}/current; git fetch origin; git reset --hard #{branch}"
+    run "cd #{deploy_to}/current/public && rm uploads && ln -s #{deploy_to}/shared/uploads/ uploads"
+    run "cd #{deploy_to}/current && rm config/database.yml && ln -s #{deploy_to}/shared/database.yml config/database.yml"
   end
 
   desc "Rake database"
@@ -41,12 +45,9 @@ namespace :deploy do
     run "cd #{deploy_to}/current && RAILS_ENV=#{env} bundle exec rake db:schema:load"
   end
 
-  desc "copy configs"
-  task :copy_config do
-    run "cp #{deploy_to}/shared/database.yml #{deploy_to}/current/config/"
+  desc "Restart unicorn"
+  task :restart do
+    run "#{try_sudo} kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
   end
 
-  task :restart do
-    run "cd #{deploy_to}/current && touch tmp/restart.txt"
-  end
 end
