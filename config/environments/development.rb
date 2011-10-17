@@ -36,11 +36,11 @@ Webreim::Application.configure do
   #   :password => 'china123!'
   # }
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => '114.113.150.227',
-    :user_name            => 'mike.d.1984',
-    :password             => 'jj19880718',
+    :address              => "www.vrvmail.com.cn",
+    :port                 => 25,
+    :domain               => '211.154.169.179',
+    :user_name            => 'baoxiao',
+    :password             => 'baoxiao',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 
