@@ -37,6 +37,8 @@ gem "kaminari"
 
 gem 'newrelic_rpm'
 
+gem 'unicorn'
+
 #gem 'rails-footnotes', '>= 3.7', :group => :development
 gem 'exception_notification'
 
