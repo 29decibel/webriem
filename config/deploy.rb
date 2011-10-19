@@ -8,6 +8,8 @@ set :deploy_via, :remote_cache
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
+set :port, 1066
+
 role :web, "211.154.169.179"                  ,:primary => true        # Your HTTP server, Apache/etc
 role :app, "211.154.169.179"                          # This may be the same as your `Web` server
 role :db,  "211.154.169.179", :primary => true # This is where Rails migrations will run
