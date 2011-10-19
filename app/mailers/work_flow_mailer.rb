@@ -2,8 +2,8 @@
 #this mailer is used for work flow
 class WorkFlowMailer < ActionMailer::Base
   layout 'mailer_layout'
-  default :from => Rails.env=='production' ? "oes@skccsystems.cn" : "mike.d.1984@gmail.com" #注意 这里的东西必须和你的smtp登陆的邮件人一致
-  default_url_options[:host] = "114.113.150.227"
+  default :from => Rails.env=='production' ? "baoxiao@vrvmail.com.cn" : "mike.d.1984@gmail.com" #注意 这里的东西必须和你的smtp登陆的邮件人一致
+  default_url_options[:host] = "211.154.169.179"
   # 1.paid 已经付款 
   def doc_paid(para)
     @para=para
