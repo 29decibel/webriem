@@ -104,9 +104,9 @@ namespace :schedule do
     test_mails = ['79413824@qq.com','mike.d.1984@gmail.com','ldb1984@gmail.com']
     test_mails.each do |mail|
       para = {}
-      para[:email]= mail
-      para[:docs_count] = 332
-      para[:docs_total] = 23
+      para['email']= mail
+      para['docs_count'] = 332
+      para['docs_total'] = 23
       Resque.enqueue(MailWorker, :notice_docs_to_approve,para)     
     end
   end
