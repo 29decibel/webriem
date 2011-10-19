@@ -47,7 +47,7 @@ Webreim::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   #set the mail config info
-  config.action_mailer.default_url_options = { :host => 'oesnow.com' }
+  config.action_mailer.default_url_options = { :host => '211.154.169.179',:port=>1066 }
   config.action_mailer.raise_delivery_errors = false
   #this settings is a must
   config.action_mailer.delivery_method = :smtp
