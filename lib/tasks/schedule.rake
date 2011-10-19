@@ -99,4 +99,12 @@ namespace :schedule do
     end
   end
 
+  desc "test mail"
+  task :test_mail => :environment do
+    para = {}
+    para[:email]= 'mike.d.1984@gmail.com'
+    para[:docs_count] = 332
+    para[:docs_total] = 23
+    Resque.enqueue(MailWorker, :notice_docs_to_approve,para)
+  end
 end
