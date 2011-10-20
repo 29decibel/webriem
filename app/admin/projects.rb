@@ -1,6 +1,6 @@
 #coding: utf-8
 ActiveAdmin.register Project do
-  menu :parent => '常用基础档案'
+  menu :parent => '常用基础档案',:label=>'项目'
 
   index do
     column :name

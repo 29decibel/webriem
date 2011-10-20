@@ -1,5 +1,6 @@
 #coding: utf-8
 ActiveAdmin.register WorkFlow do
+  menu :label => '审批流设置'
   filter :name
 
   index do

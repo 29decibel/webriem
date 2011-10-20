@@ -10,7 +10,7 @@ gem "pdfkit"
 gem "paperclip"
 gem "prawn",'0.8.4'
 
-gem "rake", "0.8.7"
+gem "rake", "0.9.2"
 
 gem 'whenever', :require => false
 # sudo brew install freetds (on mac os)
