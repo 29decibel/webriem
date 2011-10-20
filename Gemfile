@@ -7,11 +7,12 @@ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-  gem "compass", :git=>'https://github.com/chriseppstein/compass.git'
+  #gem "compass", :git=>'https://github.com/chriseppstein/compass.git'
 end
 
 
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' 
+#gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' 
+gem 'twitter-bootstrap-rails'
 
 gem "jquery-rails"
 
@@ -32,8 +33,12 @@ gem "tiny_tds", "~> 0.4.5"
 
 gem 'resque', :require => "resque/server"
 
+group :development do
+  gem 'rails-dev-tweaks', '~> 0.5.1'
+end
+
 #gem 'activeadmin'
-gem 'activeadmin',:git=>'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin','0.3.2'
 gem 'ruby-ole'
 gem 'rest-client'
 
