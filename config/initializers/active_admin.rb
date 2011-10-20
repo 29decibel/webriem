@@ -5,7 +5,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Webreim"
+  config.site_title = "OES 后台管理"
 
   # Set the link url for the title. For example, to take 
   # users to your main site. Defaults to no link.
@@ -96,8 +96,8 @@ ActiveAdmin.setup do |config|
   # and feel.
   #
   # To load a stylesheet:
-  #   config.register_stylesheet 'my_stylesheet.css'
+  config.register_stylesheet 'custom_active_admin.css'
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+  config.register_javascript 'custom_active_admin.js'
 end

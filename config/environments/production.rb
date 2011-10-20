@@ -56,16 +56,17 @@ Webreim::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   #set the mail config info
-  config.action_mailer.default_url_options = { :host => 'oesnow.com' }
+  config.action_mailer.default_url_options = { :host => '211.154.169.179',:port=>1066 }
   config.action_mailer.raise_delivery_errors = false
   #this settings is a must
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => 'mike.d.1984',
-    :password             => 'jj19880718',
+    :address              => "www.vrvmail.com.cn",
+    :port                 => 25,
+    :domain               => '211.154.169.179',
+    :user_name            => 'baoxiao',
+    :password             => 'baoxiao',
     :authentication       => 'plain',
-    :enable_starttls_auto => true  }
+    :enable_starttls_auto => false  }
 
 end
