@@ -27,18 +27,18 @@
       = hidden_field_tag "pt_for_fee_standard",doc.person.person_type_id
     .form_field
       %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.apply_date')}#{mark_required(f.object,:apply_date)}",:class=>"" 
-      %span.value.date_select= f.date_select :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" 
+      %span.value= f.text_field :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" 
     -if doc.doc_type!=14
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.attach')}" 
         %span.value= f.text_field :attach,:class=>"input1"+ mark_required(doc, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}"   
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" 
-        %span.value= f.select :dep_id,Dep.all.map{|d|[d.name,d.id]}
+        %span.value= ts("dep_id","Dep",:value=>doc.dep_id,:text=>doc.dep,:f=>f)
     -if doc.doc_type!=14
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" 
-        %span.value= f.select :real_person_id,Person.all.map{|p|[p.name,p.id]}
+        %span.value= ts("real_person_id","Person",:value=>doc.real_person_id,:text=>doc.real_person,:f=>f)
     -if doc.doc_type==13
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" 
@@ -55,7 +55,7 @@
       -if doc.doc_type!=13
         .form_field
           %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
-          %span.value= f.select :project_id,Project.all.map{|p|[p.name,p.id]}
+          %span.value= ts("project_id","Project",:value=>doc.project_id,:text=>doc.project,:f=>f)
       .form_field
         %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.is_split')}" 
         %span.value= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"}

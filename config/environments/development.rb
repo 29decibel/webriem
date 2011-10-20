@@ -53,8 +53,5 @@ Webreim::Application.configure do
     :authentication       => 'plain',
     :enable_starttls_auto => false  }
 
-  #here is my delayed jobs
-  config.autoload_paths << File.join(config.root, "lib")
->>>>>>> vrv
 end
 

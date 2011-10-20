@@ -3,8 +3,8 @@
 //= require lib/jquery.blockUI
 //= require lib/jquery.fancybox-1.3.4
 //= require enter_to_tab
-//= reuqire lib/jquery.tokeninput
-//= reuqire lib/jquery.blockUI
+//= require lib/jquery.tokeninput
+//= require twitter/bootstrap
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
@@ -197,40 +197,40 @@ $(function(){
 
 function wait()
 {
-  $.blockUI({ css: { 
-      border: 'none', 
-      padding: '15px', 
-      backgroundColor: '#000', 
-      '-webkit-border-radius': '10px', 
-      '-moz-border-radius': '10px', 
-      opacity: .5, 
-      color: '#fff'
-  },message:'请稍等',
-  overlayCSS: { backgroundColor: 'transparent' }}); 
+  //$.blockUI({ css: { 
+  //    border: 'none', 
+  //    padding: '15px', 
+  //    backgroundColor: '#000', 
+  //    '-webkit-border-radius': '10px', 
+  //    '-moz-border-radius': '10px', 
+  //    opacity: .5, 
+  //    color: '#fff'
+  //},message:'请稍等',
+  //overlayCSS: { backgroundColor: 'transparent' }}); 
 }
 
 function tokenize(content)
 {
-  //$("input.token-input").each(function(){
-  //  if($(this).css('display')=='none') return;
-  //  $(this).tokenInput("/token_input/search?model="+$(this).data("model")
-  //  ,{
-  //    crossDomain: false,
-  //    prePopulate: $(this).data("pre"),
-  //    searchingText: "搜索中...",
-  //    hintText: "输入进行搜索",
-  //    noResultsText: "无符合条件的记录",
-  //    theme: "facebook",
-  //    preventDuplicates: true,
-  //    tokenLimit: 1,
-  //    onAdd:function(data){
-  //      $(this).trigger('token:add',data);
-  //    },
-  //    onDelete:function(data){
-  //      $(this).trigger('token:delete',data);
-  //    }
-  //  });  
-  //});
+  $("input.token-input").each(function(){
+    if($(this).css('display')=='none') return;
+    $(this).tokenInput("/token_input/search?model="+$(this).data("model")
+    ,{
+      crossDomain: false,
+      prePopulate: $(this).data("pre"),
+      searchingText: "搜索中...",
+      hintText: "输入进行搜索",
+      noResultsText: "无符合条件的记录",
+      theme: "facebook",
+      preventDuplicates: true,
+      tokenLimit: 1,
+      onAdd:function(data){
+        $(this).trigger('token:add',data);
+      },
+      onDelete:function(data){
+        $(this).trigger('token:delete',data);
+      }
+    });  
+  });
 
 }
 
