@@ -107,7 +107,8 @@ namespace :schedule do
       para['email']= mail
       para['docs_count'] = 332
       para['docs_total'] = 23
-      Resque.enqueue(MailWorker, :notice_docs_to_approve,para)     
+      # Resque.enqueue(MailWorker, :notice_docs_to_approve,para)     
+      WorkFlowMailer.notice_docs_to_approve(para).deliver
     end
   end
 end
