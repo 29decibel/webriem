@@ -17,7 +17,7 @@ ActiveAdmin::Dashboards.build do
   #   end
   section "最近的变更的项目" do
     ul do
-      Project.order(:updated_at).limit(10).collect do |project|
+      Project.order(:updated_at).limit(30).collect do |project|
         li link_to(project.name,admin_project_path(project))
       end
     end
@@ -25,7 +25,7 @@ ActiveAdmin::Dashboards.build do
 
   section "最近变更的部门" do
     ul do
-      Dep.order(:updated_at).limit(10).collect do |dep|
+      Dep.order(:updated_at).limit(30).collect do |dep|
         li link_to(dep.name,admin_dep_path(dep))
       end
     end
@@ -33,7 +33,7 @@ ActiveAdmin::Dashboards.build do
 
   section "最近变更的员工" do
     ul do
-      Person.order(:updated_at).limit(10).collect do |person|
+      Person.order(:updated_at).limit(30).collect do |person|
         li link_to(person.name,admin_person_path(person))
       end
     end   
