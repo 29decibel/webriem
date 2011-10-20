@@ -292,6 +292,7 @@
     #这里加入model的中文名称
     models:
       dep: "部门"
+      deps: '部门'
       company_group: "集团"
       duty: "职务"
       person: "人员"
