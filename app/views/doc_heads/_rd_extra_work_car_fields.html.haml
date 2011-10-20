@@ -4,35 +4,35 @@
     = hidden_field_tag :fee_type,f.object.class.name
     = link_to_remove 
   %span.sequence
-  .form_field
-    %span.label= "#{I18n.t('common_attr.is_sunday')}" 
-    %span.value= f.select :is_sunday, RdExtraWorkCar::ENUMS_IS_SUNDAY,{},{:class=>"normal"} 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.start_place')}"
-    %span.value= f.text_field :start_place,:class=>"normal" 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.end_place')}"
-    %span.value= f.text_field :end_place,:class=>"normal" 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.start_time')}"
+  .clearfix
+    =f.label "#{I18n.t('common_attr.is_sunday')}" 
+    .input= f.select :is_sunday, RdExtraWorkCar::ENUMS_IS_SUNDAY,{},{:class=>"normal"} 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.start_place')}"
+    .input= f.text_field :start_place,:class=>"normal" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.end_place')}"
+    .input= f.text_field :end_place,:class=>"normal" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.start_time')}"
     - start_time_string = f.object.start_time && f.object.start_time.to_s 
-    %span.value= f.text_field :start_time,:class=>"datetimepicker middle",:value => start_time_string 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.end_time')}"
+    .input= f.text_field :start_time,:class=>"datetimepicker middle",:value => start_time_string 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.end_time')}"
     - end_time_string = f.object.end_time && f.object.end_time.to_s 
-    %span.value= f.text_field :end_time,:class=>"datetimepicker middle",:value => end_time_string 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.reason')}"
-    %span.value= f.text_field :reason,:class=>"xlarge" 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.currency')}"
-    %span.value= ts "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
-  .form_field
-    %span.label= "#{I18n.t('common_attr.rate')}"
-    %span.value= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.ori_amount')}"
-    %span.value= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.apply_amount')}"
-    %span.value= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number" 
+    .input= f.text_field :end_time,:class=>"datetimepicker middle",:value => end_time_string 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.reason')}"
+    .input= f.text_field :reason,:class=>"xlarge" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.currency')}"
+    .input= ts "currency_id","Currency",:text=>f.object.currency.to_s,:value=>f.object.currency_id,:f=>f
+  .clearfix
+    =f.label "#{I18n.t('common_attr.rate')}"
+    .input= f.text_field :rate,:value=> f.object.rate ? f.object.rate : default_rate,:class=>"xsmall doc_rate number" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.ori_amount')}"
+    .input= f.text_field :ori_amount,:class=>"normal doc_ori_amount number" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.apply_amount')}"
+    .input= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number" 

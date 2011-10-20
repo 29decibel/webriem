@@ -3,22 +3,22 @@
     = f.hidden_field(:_destroy) 
     = link_to_remove 
   %span.sequence
-  .form_field
-    %span.label= "#{I18n.t('common_attr.settlement')}"
-    %span.value= ts "settlement_id","Settlement",:text=>f.object.settlement.to_s,:value=>f.object.settlement_id,:f=>f
-  .form_field
-    %span.label=@doc.doc_type==2 ?  "* #{I18n.t('common_attr.rec_company')}" : "* #{I18n.t('common_attr.rec_person')}"
-    %span.value
+  .clearfix
+    =f.label "#{I18n.t('common_attr.settlement')}"
+    .input= ts "settlement_id","Settlement",:text=>f.object.settlement.to_s,:value=>f.object.settlement_id,:f=>f
+  .clearfix
+    =f.label@doc.doc_type==2 ?  "* #{I18n.t('common_attr.rec_company')}" : "* #{I18n.t('common_attr.rec_person')}"
+    .input
       -if @doc.doc_type==2 
         = ts "supplier_id","Supplier",:text=>f.object.supplier.to_s,:value=>f.object.supplier_id,:f=>f
       -else 
         =f.text_field :company,:class=> "normal"   
-  .form_field
-    %span.label= "#{I18n.t('common_attr.bank')}"
-    %span.value= f.text_field :bank,:class => "large bank" 
-  .form_field
-    %span.label= "#{I18n.t('common_attr.bank_no')}"
-    %span.value= f.text_field :bank_no ,:class=>"large bank_no"
-  .form_field
-    %span.label= "#{I18n.t('common_attr.amount')}"
-    %span.value= f.text_field :amount,:class=>"normal reciver_ori_amount" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.bank')}"
+    .input= f.text_field :bank,:class => "large bank" 
+  .clearfix
+    =f.label "#{I18n.t('common_attr.bank_no')}"
+    .input= f.text_field :bank_no ,:class=>"large bank_no"
+  .clearfix
+    =f.label "#{I18n.t('common_attr.amount')}"
+    .input= f.text_field :amount,:class=>"normal reciver_ori_amount" 

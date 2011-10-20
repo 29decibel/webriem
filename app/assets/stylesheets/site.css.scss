@@ -8,4 +8,13 @@ body{
   font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun","Helvetica", "Arial", sans-serif; 
   /*background:url("../images/bck.jpg");*/
 }
+fieldset{
+  position:relative;
+  legend{
+    display:inline-block;
+    position:absolute;
+    right:0px;
+    top:0px;
+  }
+}
 

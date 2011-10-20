@@ -3,13 +3,13 @@
     = f.hidden_field(:_destroy) 
     = link_to_remove 
   %span.sequence
-  .form_field
-    %span.label= "#{I18n.t('common_attr.project')}"
-    %span.value= ts "project_id","Project",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
+  .clearfix
+    =f.label "#{I18n.t('common_attr.project')}"
+    .input= ts "project_id","Project",:text=>f.object.project.to_s,:value=>f.object.project_id,:f=>f
   -if 13 
-    .form_field
-      %span.label= "#{I18n.t('common_attr.fee')}"
-      %span.value= ts "fee_id","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
-  .form_field
-    %span.label= "#{I18n.t('common_attr.split_amount')}"
-    %span.value= f.text_field :percent_amount,:value=>f.object.percent_amount||0,:class=>"normal percent_amount" 
+    .clearfix
+      =f.label "#{I18n.t('common_attr.fee')}"
+      .input= ts "fee_id","Fee",:text=>f.object.fee.to_s,:value=>f.object.fee_id,:f=>f
+  .clearfix
+    =f.label "#{I18n.t('common_attr.split_amount')}"
+    .input= f.text_field :percent_amount,:value=>f.object.percent_amount||0,:class=>"normal percent_amount" 

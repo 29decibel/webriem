@@ -2,7 +2,7 @@
   %h3= "#{doc.doc_type_name}--#{doc.doc_no}"
 -content_for :custom_actions do
   -if !doc.new_record? and doc.un_submit?
-    = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc.id),:remote=>true,:class=>"minibutton"
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc.id),:remote=>true,:class=>"btn"
 #doc_head_actions.actions
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process

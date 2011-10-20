@@ -4,8 +4,8 @@
   .doc_error
     = render "shared/common_error",:resource=>doc
   -content_for :custom_actions do
-    = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit minibutton"
-    = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"), doc.new_record? ? my_docs_path : doc_head_path(doc),:remote=>true,:class=>"minibutton"
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit btn"
+    = link_to content_tag(:span,"#{I18n.t('common_op.btn_cancel')}"), doc.new_record? ? my_docs_path : doc_head_path(doc),:class=>"btn"
   #doc_head_actions.actions
     = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
   #doc_state_process
@@ -13,60 +13,60 @@
   .page-header
     %h3= "#{I18n.t('common_attr.basic_info')}"
   .form_area
-    .form_field
-      %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.doc_no')}#{mark_required(f.object,:doc_no)}",:class=>""
+    .clearfix
+      = f.label "#{I18n.t('activerecord.attributes.doc_head.doc_no')}#{mark_required(f.object,:doc_no)}",:class=>""
       = f.hidden_field :doc_no 
       = f.hidden_field :id
       = f.hidden_field :doc_type 
       %span.doc_no.value= doc.doc_no
-    .form_field
-      %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.person_id')}",:class=>"" 
+    .clearfix
+      = f.label "#{I18n.t('activerecord.attributes.doc_head.person_id')}",:class=>"" 
       = f.hidden_field :person_id 
-      %span.value= doc.person
+      .input= doc.person
       = hidden_field_tag "duty_for_fee_standard",doc.person.duty_id
       = hidden_field_tag "pt_for_fee_standard",doc.person.person_type_id
-    .form_field
-      %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.apply_date')}#{mark_required(f.object,:apply_date)}",:class=>"" 
-      %span.value= f.text_field :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" 
+    .clearfix
+      = f.label "#{I18n.t('activerecord.attributes.doc_head.apply_date')}#{mark_required(f.object,:apply_date)}",:class=>"" 
+      .input= f.text_field :apply_date,:class=>"datepicker input1 doc_apply_date",:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.apply_date')}" 
     -if doc.doc_type!=14
-      .form_field
-        %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.attach')}" 
-        %span.value= f.text_field :attach,:class=>"input1"+ mark_required(doc, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}"   
-      .form_field
-        %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" 
-        %span.value= ts("dep_id","Dep",:value=>doc.dep_id,:text=>doc.dep,:f=>f)
+      .clearfix
+        = f.label "#{I18n.t('activerecord.attributes.doc_head.attach')}" 
+        .input= f.text_field :attach,:class=>"input1"+ mark_required(doc, :attach),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.attach')}"   
+      .clearfix
+        = f.label "#{I18n.t('activerecord.attributes.doc_head.dep_id')}" 
+        .input= ts("dep_id","Dep",:value=>doc.dep_id,:text=>doc.dep,:f=>f)
     -if doc.doc_type!=14
-      .form_field
-        %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" 
-        %span.value= ts("real_person_id","Person",:value=>doc.real_person_id,:text=>doc.real_person,:f=>f)
+      .clearfix
+        = f.label "#{I18n.t('activerecord.attributes.doc_head.real_person_id')}" 
+        .input= ts("real_person_id","Person",:value=>doc.real_person_id,:text=>doc.real_person,:f=>f)
     -if doc.doc_type==13
-      .form_field
-        %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" 
-        %span.value
+      .clearfix
+        = f.label "#{I18n.t('activerecord.attributes.doc_head.upload')}" 
+        .input
           = f.hidden_field :doc_no
           -if doc.upload_file 
             = doc.upload_file.upload.original_filename
           = link_to_function("#{I18n.t('activerecord.attributes.doc_head.manage_upload')}","add_upload_files(this,'#{upload_files_path}')")
     -if doc.doc_type==1
-      .form_field
-        %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}"
-        %span.value= doc.cp_doc_remain_amount
+      .clearfix
+        = f.label "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}"
+        .input= doc.cp_doc_remain_amount
     -if ([9,11,13].include? doc.doc_type)
       -if doc.doc_type!=13
-        .form_field
-          %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
-          %span.value= ts("project_id","Project",:value=>doc.project_id,:text=>doc.project,:f=>f)
-      .form_field
-        %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.is_split')}" 
-        %span.value= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"}
+        .clearfix
+          = f.label "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
+          .input= ts("project_id","Project",:value=>doc.project_id,:text=>doc.project,:f=>f)
+      .clearfix
+        = f.label "#{I18n.t('activerecord.attributes.doc_head.is_split')}" 
+        .input= f.select :is_split, ReimDetail::ENUMS_IS_SPLIT,{},{:class=>"input1 is_split_reim"}
     %br
-    .form_field.col-sp2
-      %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.note')}" 
-      %span.value= f.text_area :note,:class=>"input2"+ mark_required(doc, :note),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.note')}" 
+    .clearfix
+      = f.label "#{I18n.t('activerecord.attributes.doc_head.note')}" 
+      .input= f.text_area :note,:class=>"xxlarge"+ mark_required(doc, :note),:placeholder=>"#{I18n.t('activerecord.attributes.doc_head.note')}" 
     %br
-    .form_field
-      %span.label= f.label "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
-      %span.value#total_riem= doc.total_amount
+    .clearfix
+      = f.label "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
+      .input#total_riem= doc.total_amount
     = f.hidden_field :doc_type
   <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!--根据不同的单据类型render不同的单据-->
