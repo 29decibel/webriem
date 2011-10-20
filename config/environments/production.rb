@@ -58,6 +58,6 @@ Webreim::Application.configure do
     :user_name            => 'baoxiao',
     :password             => 'baoxiao',
     :authentication       => 'plain',
-    :enable_starttls_auto => true  }
+    :enable_starttls_auto => false  }
 
 end
