@@ -1,5 +1,5 @@
 = form_for doc,:remote=>true,:html => {:class=>:doc_head} do |f| 
-  .form_title
+  .page-header
     %h3= doc.new_record? ? "新增#{doc.doc_type_name}" : "修改#{doc.doc_type_name}"
   .doc_error
     = render "shared/common_error",:resource=>doc
@@ -10,7 +10,7 @@
     = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
   #doc_state_process
     = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
-  .form_title
+  .page-header
     %h3= "#{I18n.t('common_attr.basic_info')}"
   .form_area
     .form_field
@@ -73,7 +73,7 @@
   #details
     -if doc.doc_type==1
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:borrow_doc_details 
             = I18n.t('activerecord.attributes.doc_head.cp_doc_details.c_doc')
@@ -84,7 +84,7 @@
             = render :partial => 'borrow_doc_detail_fields',:locals => { :f => builder,:doc=>doc } 
     -if doc.doc_type==2
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:pay_doc_details 
             = I18n.t('activerecord.attributes.doc_head.cp_doc_details.p_doc')
@@ -97,7 +97,7 @@
             <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==3
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rec_notice_details 
             = "#{I18n.t('common_attr.c_doc_detail')}"
@@ -110,7 +110,7 @@
             <!--结汇申请单-->
     -if doc.doc_type==4
       .doc_detail
-        .form_title
+        .page-header
           %h3= I18n.t("common_attr.remitance_detail")
         #inner_remittance.form_area
           = f.fields_for :inner_remittance do |builder|  
@@ -118,7 +118,7 @@
             <!--转帐申请单-->
     -if doc.doc_type==5
       .doc_detail
-        .form_title
+        .page-header
           %h3= I18n.t("common_attr.transfer_detail")
         #inner_transfer.form_area
           = f.fields_for :inner_transfer do |builder|  
@@ -126,7 +126,7 @@
             <!--现金提取申请单-->
     -if doc.doc_type==6
       .doc_detail_cash
-        .form_title
+        .page-header
           %h3= I18n.t("common_attr.cash_draw_detail")
         #inner_cash_draw.form_area
           = f.fields_for :inner_cash_draw do |builder|  
@@ -134,7 +134,7 @@
             <!--购买理财产品-->
     -if doc.doc_type==7
       .doc_detail
-        .form_title
+        .page-header
           %h3= I18n.t("common_attr.buy_fin_p_detail")
         #buy_finance_products.form_area
           = f.fields_for :buy_finance_product do |builder|  
@@ -142,7 +142,7 @@
             <!--赎回理财产品-->
     -if doc.doc_type==8
       .doc_detail
-        .form_title
+        .page-header
           %h3= I18n.t("common_attr.redeem_fin_p_detail")
         #redeem_finance_products#form_area
           = f.fields_for :redeem_finance_product do |builder|  
@@ -151,7 +151,7 @@
             <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==9
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_travels 
             = "#{I18n.t('common_attr.travel_desc')}"
@@ -161,7 +161,7 @@
           = f.fields_for :rd_travels do |builder| 
             = render :partial => 'rd_travel_fields',:locals => { :f => builder } 
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_transports 
             = "#{I18n.t('common_attr.transport_detail')}"
@@ -171,7 +171,7 @@
           = f.fields_for :rd_transports do |builder|  
             = render :partial => 'rd_transport_fields',:locals => { :f => builder }  
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_lodgings 
             = "#{I18n.t('common_attr.lodging_desc')}"
@@ -181,7 +181,7 @@
           = f.fields_for :rd_lodgings do |builder|  
             = render :partial => 'rd_lodging_fields',:locals => { :f => builder }  
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:other_riems 
             = "#{I18n.t('common_attr.other_riem_detail')}"
@@ -193,7 +193,7 @@
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==12
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_work_meals 
             = I18n.t('common_attr.work_meal')
@@ -204,7 +204,7 @@
             = render :partial => 'rd_work_meal_fields',:locals => { :f => builder }  
     -if doc.doc_type==12
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_common_transports 
             = "#{I18n.t('common_attr.common_transport')}"
@@ -216,7 +216,7 @@
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==12
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:common_riems 
             = "#{I18n.t('common_attr.common_riem_desc')}"
@@ -227,7 +227,7 @@
             = render :partial => 'common_riem_fields',:locals => { :f => builder } 
     -if doc.doc_type==10 
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_communicates
             = I18n.t('common_attr.transport_fee')
@@ -239,7 +239,7 @@
           <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==11
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_extra_work_meals 
             = "#{I18n.t('common_attr.extra_meal')}"
@@ -249,7 +249,7 @@
           = f.fields_for :rd_extra_work_meals do |builder|  
             = render :partial => 'rd_extra_work_meal_fields',:locals => { :f => builder }  
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_extra_work_cars 
             = "#{I18n.t('common_attr.extra_car')}"
@@ -261,7 +261,7 @@
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type==13
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:rd_benefits 
             = "#{I18n.t('common_attr.benefit_detail')}"
@@ -272,7 +272,7 @@
             = render :partial => 'rd_benefit_fields',:locals => { :f => builder }  
     -if doc.doc_type==14
       .doc_detail
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:fixed_properties 
             = I18n.t('common_attr.fixed_property')
@@ -285,7 +285,7 @@
     -if [9,11,13].include? doc.doc_type
       <!--分摊明细动态显示-->
       .doc_detail
-        .form_title.is_split_reim
+        .page-header.is_split_reim
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,:reim_split_details 
             = "#{I18n.t('common_attr.split_detail')}"
@@ -296,13 +296,13 @@
             = render :partial => "reim_split_detail_fields",:locals => { :f => builder,:doc=>doc }  
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!---if doc.doc_type>=9 and doc.doc_type<=12-->
-    <!--  .form_title-->
+    <!--  .page-header-->
     <!--    %h3= "#{I18n.t('common_attr.now_cp_docs')}"-->
     <!--  = render :partial => 'reim_cp_doc_offset',:locals => { :doc_head=>doc } --> 
     <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     -if doc.doc_type<3 or (doc.doc_type>=9 and doc.doc_type<=13)
       .doc_detail.recivers
-        .form_title
+        .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_reciver')}",f,:recivers 
             = doc.doc_type==2 ? "#{I18n.t('common_attr.rec_company')}" : "#{I18n.t('common_attr.rec_person')}" 
