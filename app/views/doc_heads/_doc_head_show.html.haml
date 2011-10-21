@@ -1,52 +1,49 @@
-.s_title
+.page-header
   %h3= doc.doc_no
-.show_field
+.row
   = hidden_field_tag :person_id,doc.person_id
-  %span.label= I18n.t('activerecord.attributes.doc_head.person_id')
-  %span.value= doc.person
+  .span3=label_tag I18n.t('activerecord.attributes.doc_head.person_id')
+  .span3= doc.person
   = hidden_field_tag "duty_for_fee_standard",doc.person.duty_id
   = hidden_field_tag "pt_for_fee_standard",doc.person.person_type_id
-.show_field
-  %span.label= I18n.t('activerecord.attributes.doc_head.apply_date')
-  %span.value= doc.apply_date
+.row
+  .span3=label_tag I18n.t('activerecord.attributes.doc_head.apply_date')
+  .span3= doc.apply_date
 -if doc.doc_type!=14
-  .show_field
-    %span.label=  I18n.t('activerecord.attributes.doc_head.attach')
-    %span.value= doc.attach
-  .show_field
-    %span.label=  I18n.t('activerecord.attributes.doc_head.dep_id')
-    %span.value= doc.dep.to_s
+  .row
+    .span3=label_tag  I18n.t('activerecord.attributes.doc_head.attach')
+    .span3= doc.attach
+  .row
+    .span3=label_tag  I18n.t('activerecord.attributes.doc_head.dep_id')
+    .span3= doc.dep.to_s
 -if doc.doc_type==9 or doc.doc_type==11
-  .show_field
-    %span.label= I18n.t('activerecord.attributes.doc_head.afford_dep_id')
-    %span.value= doc.afford_dep.to_s
+  .row
+    .span3=label_tag I18n.t('activerecord.attributes.doc_head.afford_dep_id')
+    .span3= doc.afford_dep.to_s
 -if doc.doc_type!=14 and doc.real_person
-  .show_field
-    %span.label= I18n.t('activerecord.attributes.doc_head.real_person_id') 
-    %span.value= doc.real_person
+  .row
+    .span3=label_tag I18n.t('activerecord.attributes.doc_head.real_person_id') 
+    .span3= doc.real_person
 -if doc.doc_type==13
-  .show_field
-    %span.label= I18n.t('activerecord.attributes.doc_head.upload')
-    %span.value
+  .row
+    .span3=label_tag I18n.t('activerecord.attributes.doc_head.upload')
+    .span3
       = hidden_field_tag :doc_no,doc.doc_no
       -if doc.upload_file 
         = doc.upload_file.upload.original_filename
 -if doc.doc_type==1
-  .show_field
-    %span.label=  "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}"
-    %span.value= doc.cp_doc_remain_amount
+  .row
+    .span3=label_tag  "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}"
+    .span3= doc.cp_doc_remain_amount
 -if ([9,11,13].include? doc.doc_type)
   -if doc.doc_type!=13
-    .show_field
-      %span.label= "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
-      %span.value= doc.project
-%br
-.show_field.col-sp2
-  %span.label=  "#{I18n.t('activerecord.attributes.doc_head.note')}" 
-  %span.value= doc.note
-%br
-.s_currency
-  %span.value#total_riem
-    ="#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
-    = "￥#{doc.total_amount}"
+    .row
+      .span3=label_tag "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
+      .span3= doc.project
+.row
+  .span3=label_tag  "#{I18n.t('activerecord.attributes.doc_head.note')}" 
+  .span13= doc.note
+.row
+  .span3=label_tag "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
+  .span13#total_riem= "￥#{doc.total_amount}"
 

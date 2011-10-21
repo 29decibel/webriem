@@ -5,9 +5,13 @@
         %h3=link_to "网上报销系统 v0.1", root_url
         -if current_user
           %ul
-            -Menu.offset(4).limit(7).each do |menu|
-              %li{'class'=>request.url=='' ? 'active':''}=link_to I18n.t("menu.#{menu.name}"), menu.path,:remote=>true
+            -MenuCategory.all.each do |mc|
+              %li.dropdown{'data-dropdown'=>"dropdown"}
+                =link_to mc.name, '#',:class=>'dropdown-toggle'
+                %ul.dropdown-menu
+                  -mc.grouped_menus.each do |v|
+                    -v.each do |m|
+                      %li=link_to I18n.t("menu.#{m.name}"),m.path,:remote=>true
           %ul.nav.secondary-nav
             %li=link_to "欢迎, #{current_user.person.name}",root_url
             %li=link_to "注销",destroy_user_session_path,:method=>:delete
-
