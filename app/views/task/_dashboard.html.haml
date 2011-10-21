@@ -1,24 +1,24 @@
 -if @docs_to_pay.count>0 and current_user.person.casher?
   .section
-    .form_title
+    .page-header
       %h3= I18n.t("common_attr.docs_to_pay")
-    =render :partial => "doc_heads/doc_list_item",:collection=>@docs_to_pay,:as=>:doc
+    =render :partial => "docs_table",:locals=>{:docs=>@docs_to_pay}
     .bottom_action
       =link_to I18n.t('common_attr.more'), docs_to_pay_path,:remote=>true
 -if @docs_to_approve.count>0
   .section
-    .form_title
+    .page-header
       %h3= I18n.t("common_attr.docs_to_approve")
-    =render :partial => "doc_heads/doc_list_item",:collection=>@docs_to_approve,:as=>:doc
+    =render :partial => "docs_table",:locals=>{:docs=>@docs_to_approve}
     .bottom_action
       =link_to I18n.t('common_attr.more'), docs_to_approve_path,:remote=>true
 -if @my_approved_docs.count>0
   .section
-    .form_title
+    .page-header
       %h3= I18n.t("common_attr.my_approved_docs")
-    =render :partial => "doc_heads/doc_list_item",:collection=>@my_approved_docs,:as=>:doc
+    =render :partial => "docs_table",:locals=>{:docs=>@my_approved_docs}
 -if @my_recent_docs.count>0
   .section
-    .form_title
+    .page-header
       %h3= I18n.t("common_attr.my_recent_docs")
-    =render :partial => "doc_heads/doc_list_item",:collection=>@my_recent_docs,:as=>:doc
+    =render :partial => "docs_table",:locals=>{:docs=>@my_recent_docs}

@@ -103,13 +103,13 @@ $(function(){
       url: "/ajax_service/getfee",
       data: "region_type_id="+region_type_id+"&duty_id="+duty_id+"&fee_type="+fee_type+"&pt="+pt,
       beforeSend: function(){
-        fee_standard_text.text("正在获取...");
+        fee_standard_text.html("正在获取...");
       },
       success: function(msg){
         var values=msg.split(",");
         //set fees
         fee_standard.val(values[0]);
-        fee_standard_text.text(values[0]);
+        fee_standard_text.html(values[0]);
         console.log('ok get the fees.....')
         if(values.length>1)
         {
@@ -123,7 +123,7 @@ $(function(){
         }
       },
       error: function(){
-        fee_standard_text.text("暂无*");
+        fee_standard_text.html("暂无*");
       }
     });
   });
@@ -158,11 +158,11 @@ $(function(){
       url: "/ajax_service/get_extrafee",
       data: "is_sunday="+data.is_sunday+"&start_time="+data.start_time+"&end_time="+data.end_time+"&fee_type="+fee_type,
       beforeSend: function(){
-        fee_standard_text.text("正在获取...");
+        fee_standard_text.html("正在获取...");
       },
       success: function(msg){
         //set fees
-        fee_standard_text.text(msg);
+        fee_standard_text.html(msg);
         fee_standard.val(msg);
         //alert(msg);
         var amount=parseFloat(msg);
@@ -247,13 +247,13 @@ function bind_is_split_change_events()
 		if(is_split==1)
 		{
 			//children.not("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
-			$("div.is_split_reim").show("slow");		
+			$(".doc_detail.is_split").show("slow");		
 		}
 		else
 		{
 			//$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
       $("fieldset.split legend input:hidden").val(true);//remove();
-			$("div.is_split_reim").hide("slow");		      
+			$(".doc_detail.is_split").hide("slow");		      
 		}
 		//set the doc head's project and afford dep readonly 
 		if($(this).val()==0)

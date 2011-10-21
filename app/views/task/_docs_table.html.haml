@@ -1,0 +1,14 @@
+%table
+  %tr
+    %th 单据类型
+    %th 申请日期
+    %th 单据号
+    %th 单据状态
+    %th 申请金额
+    %th 申请人
+    %th 当前审批人
+    %th 
+    %th 
+    %th
+  =render :partial => "doc_list_item",:collection=>docs,:as=>:doc
+

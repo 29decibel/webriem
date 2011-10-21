@@ -2,7 +2,7 @@
 *{margin:0px;padding:0px;}
 /*whole style*/
 body{
-  padding-top:80px;
+  padding-top:50px;
 	margin:auto;
 	/*font: 80% 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
   font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun","Helvetica", "Arial", sans-serif; 
@@ -10,6 +10,7 @@ body{
 }
 fieldset{
   position:relative;
+  border-bottom:1px solid #ccc;
   legend{
     display:inline-block;
     position:absolute;
@@ -17,4 +18,13 @@ fieldset{
     top:0px;
   }
 }
-
+#footer{
+  margin-top:50px;
+  color:white;
+  text-align:center;
+  padding:10px 0px;
+  background:black;
+}
+.doc_detail.is_split{
+  display:none;
+}

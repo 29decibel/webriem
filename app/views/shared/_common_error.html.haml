@@ -1,0 +1,4 @@
+-if resource.errors.any?
+  .alert-message.error
+    -resource.errors.full_messages.each do |msg|
+      %p= msg

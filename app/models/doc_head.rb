@@ -402,7 +402,7 @@ class DocHead < ActiveRecord::Base
     DOC_TYPES[doc_type]
   end
   def doc_state_name
-    I18n.t("common_attr.#{state}")
+    I18n.t("common_attr.#{state}") if state
   end
   #minus reciver's amount
   def reduce_recivers_amount(amount)

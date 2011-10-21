@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "baoxiao@vrvmail.com.cn"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -41,7 +41,6 @@ Devise.setup do |config|
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
   config.strip_whitespace_keys = [ :email ]
-  config.authentication_keys = [ :email ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -70,7 +69,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "5b7d4fb3754640f81e5502df462399209c54d70205ff0bab2712f69b6db1006f7a2675cab1e9627aa8a54d320a215fda574266418deff42a67970569180af01e"
+  # config.pepper = "83eda9b2a04618b9549ecbb01a5898b49ca0576128d400ea73a3fabbaff10de5e34d7f56ae02e62d1febd226c003d46130cf04898ed4cbe429bd7eb9359e5724"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -168,7 +167,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
