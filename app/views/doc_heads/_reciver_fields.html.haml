@@ -3,7 +3,7 @@
     = f.hidden_field(:_destroy) 
     = link_to_remove 
   %span.sequence
-  .clearfix
+  .clearfix.error
     =f.label "#{I18n.t('common_attr.settlement')}"
     .input= ts "settlement_id","Settlement",:text=>f.object.settlement.to_s,:value=>f.object.settlement_id,:f=>f
   .clearfix

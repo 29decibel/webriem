@@ -20,7 +20,8 @@
     .input= f.text_field :reason,:class=>"xlarge" 
   .clearfix
     =f.label "#{I18n.t('common_attr.extra_work_stan')}"
-    .input= label_tag 'fee_standard_text','',:class=>"normal fee_standard_text" 
+    .input
+      %span.uneditable-input.fee_standard_text 
     =f.hidden_field :st_amount,:class=>'fee_standard'
   .clearfix
     =f.label "#{I18n.t('common_attr.currency')}"

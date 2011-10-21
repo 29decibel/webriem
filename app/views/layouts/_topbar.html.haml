@@ -6,7 +6,7 @@
         -if current_user
           %ul
             -Menu.offset(4).limit(7).each do |menu|
-              %li{'class'=>request.url=='' ? 'active':''}=link_to I18n.t("menu.#{menu.name}"), menu.path
+              %li{'class'=>request.url=='' ? 'active':''}=link_to I18n.t("menu.#{menu.name}"), menu.path,:remote=>true
           %ul.nav.secondary-nav
             %li=link_to "欢迎, #{current_user.person.name}",root_url
             %li=link_to "注销",destroy_user_session_path,:method=>:delete

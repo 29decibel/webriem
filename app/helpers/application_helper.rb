@@ -1,16 +1,5 @@
 #coding: utf-8
 module ApplicationHelper
-  def reference_select(field_name,model_name,options={})
-    html=""
-    if options[:f]
-      html<<options[:f].hidden_field(field_name.to_sym,{:value=>options[:value],:class=>"ref_hidden_field"})
-    else
-      html<<hidden_field_tag(field_name,options[:value],:class=>"ref_hidden_field")
-    end
-    html<<text_field_tag("#{model_name}_info",options[:text],:class=>"ref")
-    html<<link_to(content_tag(:span,"",:class=>"reference"),"#",{"class-data"=>model_name})
-    content_tag(:div,raw(html),:class=>"reference")
-  end
   #token select control
   #model info
   #field name
@@ -26,6 +15,9 @@ module ApplicationHelper
     else
       text_field_tag field_name.to_sym,'',"data-model"=>model_name,"data-pre"=>options[:value],:class=>"token-input"
     end
+  end
+  def error_css?(object,att)
+    object and !object.errors[att].blank?
   end
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator

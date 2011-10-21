@@ -38,7 +38,7 @@ $('.doc_detail').live('area:numberChanged',function(){
     var num = parseFloat($(this).find('.doc_total_amount').text());
     total_num+=isNaN(num) ? 0.0 : num;
   });
-  $('#total_riem').text(total_num.toFixed(2));
+  $('#total_riem span').html(total_num.toFixed(2));
   if($('.recivers').find('fieldset').not(':hidden').size()==1)
   {
     $('.recivers').find('fieldset').first().find('.reciver_ori_amount').val(total_num.toFixed(2));

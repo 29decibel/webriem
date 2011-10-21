@@ -24,7 +24,8 @@
     .input= f.text_field :custom_place,:class=>"normal"  
   .clearfix
     =f.label "#{I18n.t('common_attr.fee_stan')}"
-    .input= label_tag 'fee_standard_text','',:class=>"normal fee_standard_text" 
+    .input
+      %span.uneditable-input.fee_standard_text 
     =f.hidden_field :st_amount,:class=>'fee_standard'
   .clearfix
     =f.label "#{I18n.t('common_attr.people_count')}"
@@ -43,4 +44,5 @@
     .input= f.text_field :ori_amount,:class=>"normal doc_ori_amount number"  
   .clearfix
     =f.label "#{I18n.t('common_attr.apply_amount')}"
-    .input= f.label f.object.apply_amount || 0,:class=>"doc_apply_amount normal number"  
+    .input
+      %span.uneditable-input.doc_apply_amount.number= f.object.apply_amount || 0
