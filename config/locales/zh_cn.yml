@@ -634,6 +634,12 @@
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
+      recivers:
+        amount: "收款人明细 收款金额"
+        bank: "收款人明细 银行名称"
+        settlement_id: "收款人明细 结算方式"
+        bank_no: "收款人明细 银行帐号"
+        company: "收款人明细 收款人"
       doc_head:
         real_person_id: 所代申请人
         doc_no: "单据号"

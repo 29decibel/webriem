@@ -2,6 +2,7 @@
 namespace :data do
   desc "init doc row meta infos"
   task :init_doc_meta => :environment do
+    DocRowMetaInfo.create :name=>'Reciver',:display_name=>'收款信息',:fi_adapt=>false,:hr_adapt=>false
     DocRowMetaInfo.create :name=>'BorrowDocDetail',:display_name=>'借款单明细',:fi_adapt=>false,:hr_adapt=>false
     DocRowMetaInfo.create :name=>'PayDocDetail',:display_name=>'付款单明细',:fi_adapt=>false,:hr_adapt=>false
     DocRowMetaInfo.create :name=>'RdTravel',:display_name=>'差旅费',:fi_adapt=>false,:hr_adapt=>false

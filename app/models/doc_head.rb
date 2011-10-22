@@ -189,6 +189,10 @@ class DocHead < ActiveRecord::Base
     cp_offset_docs=DocHead.where("person_id=? and doc_type=1 and cp_doc_remain_amount>0 and doc_state=3",current_person_id).all
     (cp_offset_docs+cp_docs.all).uniq
   end
+  READ_ONLY_ATTRS = ['doc_no','person_id']
+  def self.read_only_attr?(attr)
+    READ_ONLY_ATTRS.include?(attr)
+  end
   #reciver total amount
   def reciver_amount
     total=0
@@ -205,7 +209,7 @@ class DocHead < ActiveRecord::Base
 
   def find_work_flow
     which_duty = (real_person==nil ? person.duty : real_person.duty)
-    wf=WorkFlow.all.select{|w| w.doc_meta_infos.map(&:code).include? doc_type.to_s and w.duties.include? which_duty }
+    wf=WorkFlow.all.select{|w| w.doc_meta_infos.include? self.doc_meta_info and w.duties.include? which_duty }
     wf.first   
   end
 

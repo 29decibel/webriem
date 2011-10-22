@@ -16,6 +16,7 @@ class DocHeadsController < InheritedResources::Base
   def new
     @doc_head = DocHead.new :doc_meta_info=>DocMetaInfo.find(params[:doc_meta_info_id])
     @doc_head.person = current_person
+    @doc_head.dep = current_person.dep
     @doc_meta_info = @doc_head.doc_meta_info
     @doc = @doc_head
     new!

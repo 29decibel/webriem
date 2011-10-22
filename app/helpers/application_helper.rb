@@ -99,11 +99,26 @@ module ApplicationHelper
   end
 
   def tb_field(f,col_name)
-    content_tag :div,:class=>'clearfix' do
-      f.label(col_name) +
-      (content_tag :div,:class=>'input' do
+    value = (content_tag :div,:class=>'input' do
+      if f.object.class.try(:read_only_attr?,col_name)
+        content_tag :span,:class=>'uneditable-input' do
+          display_name(f,col_name)
+        end
+      else
         tinput(f,col_name)
-      end)
+      end
+    end)
+    content_tag :div,:class=>'clearfix' do
+      f.label(col_name) + value
+    end
+  end
+
+  def display_name(f,col_name)
+    ass = f.object.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
+    if ass
+      f.object.send(ass.name).try(:name)
+    else
+      f.object.send(col_name)
     end
   end
 
