@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021081918) do
+ActiveRecord::Schema.define(:version => 20111022045438) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -247,7 +247,6 @@ ActiveRecord::Schema.define(:version => 20111021081918) do
     t.integer  "dep_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "doc_type"
     t.integer  "project_id"
     t.integer  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
@@ -261,12 +260,11 @@ ActiveRecord::Schema.define(:version => 20111021081918) do
     t.string   "state"
     t.integer  "company_group_id"
     t.integer  "doc_state"
-    t.integer  "selected_approver_id"
+    t.integer  "doc_meta_info_id"
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
   add_index "doc_heads", ["dep_id"], :name => "index_doc_heads_on_dep_id"
-  add_index "doc_heads", ["doc_type"], :name => "index_doc_heads_on_doc_type"
   add_index "doc_heads", ["mark"], :name => "index_doc_heads_on_mark"
   add_index "doc_heads", ["person_id"], :name => "index_doc_heads_on_person_id"
   add_index "doc_heads", ["project_id"], :name => "index_doc_heads_on_project_id"
@@ -276,6 +274,8 @@ ActiveRecord::Schema.define(:version => 20111021081918) do
   create_table "doc_meta_infos", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.string   "display_name"
+    t.string   "doc_head_attrs"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20111021081918) do
       t.integer :doc_meta_info_id
       t.boolean :multiple
       t.integer :doc_row_meta_info_id
+      t.string  :doc_row_attrs
 
       t.timestamps
   end

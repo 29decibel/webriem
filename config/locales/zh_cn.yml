@@ -662,6 +662,8 @@
         afford_dep_id: "费用承担部门"
         total_apply_amount: "申请总金额"
         mark: 特殊标记
+        rd_travels_attributes:
+          other_fee: 其他资费
         reim_split_details:
           dep_id: "分摊详细信息 费用承担部门"
         cp_doc_details:

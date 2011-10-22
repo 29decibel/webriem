@@ -28,6 +28,7 @@ gem 'whenever', :require => false
 # sudo brew install freetds (on mac os)
 gem "tiny_tds", "~> 0.4.5"
 
+gem 'inherited_resources'
 #gem "meta_where"
 #gem "meta_search"
 

@@ -1,4 +1,6 @@
 Webreim::Application.routes.draw do
+  resource "doc_row_resource"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users

@@ -7,6 +7,7 @@ class DocHead < ActiveRecord::Base
   belongs_to :upload_file
   belongs_to :real_person, :class_name => "Person", :foreign_key => "real_person_id"
   belongs_to :project
+  belongs_to :doc_meta_info
 
   before_save :set_afford_dep
   def set_afford_dep
@@ -25,8 +26,8 @@ class DocHead < ActiveRecord::Base
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
-  validate :must_equal,:project_not_null_if_charge
-  validate :must_equal,:if => lambda { |doc| doc.processing? }
+  #validate :must_equal,:project_not_null_if_charge
+  #validate :must_equal,:if => lambda { |doc| doc.processing? }
   #has many recivers and cp_doc_details
 
   has_one :inner_remittance, :class_name => "InnerRemittance", :foreign_key => "doc_head_id",:dependent=>:destroy
@@ -87,15 +88,10 @@ class DocHead < ActiveRecord::Base
   after_initialize :init_doc
 
   Doc_State = ['un_submit','processing','approved','paid','rejected']
-  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>"固定资产单据"}
   # combine doc_type to doc_type_prefix
-  DOC_TYPE_PREFIX={1=>"JK",2=>"FK",3=>"SK",4=>"JH",5=>"ZH",6=>"XJ",
-          7=>"GL",8=>"SL",9=>"BXCL",10=>"BXJJ",11=>"BXJB",12=>"BXFY",
-          13=>"BXFL",14=>"GDZC"}
 
   def init_doc
     return unless self.new_record?
-    self.doc_type = 1 if !doc_type
     #set a number to
     doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0") 
     if doc_count_config.value==5000
@@ -104,7 +100,7 @@ class DocHead < ActiveRecord::Base
       doc_count_config.value=(doc_count_config.value.to_i+1).to_s
     end
     doc_count_config.save
-    self.doc_no=DOC_TYPE_PREFIX[self.doc_type]+Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
+    self.doc_no = doc_meta_info.code + Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
     #set date
     self.apply_date = Time.now
     #set current_approver
@@ -161,58 +157,10 @@ class DocHead < ActiveRecord::Base
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_total_apply_amount
-    total=0
-    if self.doc_type==1
-      total+= amount_for :borrow_doc_details
-    end
-    if doc_type==2
-      total+= amount_for :pay_doc_details
-    end
-    if doc_type==3
-      total+= amount_for :rec_notice_details
-    end
-    if doc_type==4 and inner_remittance!=nil
-      total=inner_remittance.amount || 0
-    end
-    if doc_type==5 and inner_transfer !=nil
-      total=inner_transfer.amount || 0
-    end
-    if doc_type==6 and inner_cash_draw!=nil
-      inner_cash_draw.cash_draw_items.each do |c_item|
-        next if c_item.apply_amount==nil or c_item.marked_for_destruction?
-        total+=c_item.apply_amount
-      end
-    end
-    if doc_type==7 and buy_finance_product!=nil
-      total=buy_finance_product.amount
-    end
-    if doc_type==8 and redeem_finance_product!=nil
-      total=redeem_finance_product.amount
-    end
-    if doc_type==9
-      %w(rd_travels rd_transports rd_lodgings other_riems).each do |rd|
-        total+=amount_for rd       
-      end
-    end
-    if doc_type==10
-      total+=amount_for :rd_communicates
-    end
-    if doc_type==11
-      %w(rd_extra_work_cars rd_extra_work_meals).each do |rd|
-        total+=amount_for rd
-      end
-    end
-    if doc_type==12
-      %w(rd_common_transports rd_work_meals common_riems).each do |rd|
-        total+=amount_for rd
-      end
-    end
-    if doc_type==13
-      total+= amount_for :rd_benefits
-    end
-    if doc_type==14
-      # todo
-      # total+=amount_for :fixed_properties
+    total = 0
+    doc_meta_info.doc_row_meta_infos.each do |dr_meta|
+      dr_datas = self.send(eval(dr_meta.name).table_name)
+      total += dr_datas.inject(0){|sum,dr_data|sum + get_amount(dr_data)}
     end
     total
   end
@@ -399,7 +347,7 @@ class DocHead < ActiveRecord::Base
   end
 
   def doc_type_name
-    DOC_TYPES[doc_type]
+    doc_meta_info.display_name
   end
   def doc_state_name
     I18n.t("common_attr.#{state}") if state

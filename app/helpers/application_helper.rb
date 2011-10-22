@@ -31,39 +31,34 @@ module ApplicationHelper
     link_to_function(image_tag('list-remove.png'),"remove_fields(this)",:class=>"detail_link")
   end
   #add fields to current form
-  def link_to_add_fields(name, f, association,default_values=[])
-    new_object = f.object.class.reflect_on_association(association).klass.new
+  def link_to_add_fields(name, f, doc_relation,default_values=[])
+    dr_meta = doc_relation.doc_row_meta_info
+    association = eval(dr_meta.name).table_name
+    new_object = eval(dr_meta.name).new
     #set the default values
     default_values.each do |default_attr|
       new_object.send("#{default_attr}=",f.object.send("#{default_attr}")) if f.object.respond_to? default_attr and new_object.respond_to? default_attr
     end
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
-      render(association.to_s.singularize + "_fields", :f => builder)
+      fields_str = ''
+      doc_relation.doc_row_attrs.split(',').each do |col|
+        fields_str << tb_field(builder,col)
+      end
+      raw fields_str
     end
     #注意了兄弟们,在这里一定要去掉h()对整个文本的转义,否则就会js报错啦~~~~
     link_to_function(image_tag("icons/add.png"), "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")",:class=>"detail_link")
-  end
-  def doc_type_name(num)
-    num=num.to_i if num.class==String
-    DOC_TYPES[num]
   end
   #get the current request uri
   def current_uri
     request.request_uri
   end
-  DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>"固定资产单据"}
   #to display a nice format date
   def display_date(input_date)
     return '' if input_date==nil
     input_date.strftime("%Y-%m-%d")
   end
-  #=============mini button github style=======
-  def mini_link_to
-     #href="javascript:;" class="minibutton"><span>Basic Button</span></a>
-  end
-  def mini_link_to_function
-    
-  end
+
   #====================================core stuff==================================================
   def default_rate
     1.0
@@ -74,6 +69,42 @@ module ApplicationHelper
     subdomain += "." unless subdomain.empty?
     [subdomain, request.domain, request.port_string].join  
   end
-  
+
+  def tinput(f,col_name)
+    col = f.object.class.columns.select{|c|c.name==col_name}.first
+    results = ''
+    klass = f.object.class
+    results << 
+    case col.type
+    when :integer
+      # belnogs_to
+      ass = klass.reflect_on_all_associations(:belongs_to).select{|ass|ass.primary_key_name==col.name}.first
+      if ass
+        ts(col.name,ass.klass)
+      else
+        f.text_field(col_name)
+      end
+    when :string
+      f.text_field(col_name)
+    when :text
+      f.text_area(col_name)
+    when :decimal
+      f.text_field(col_name)
+    when :datetime
+      f.datetime_select col_name,{},:class=>'small'
+    when :date
+      f.date_select col_name,{},:class=>'small'
+    end
+    raw results
+  end
+
+  def tb_field(f,col_name)
+    content_tag :div,:class=>'clearfix' do
+      f.label(col_name) +
+      (content_tag :div,:class=>'input' do
+        tinput(f,col_name)
+      end)
+    end
+  end
 
 end
