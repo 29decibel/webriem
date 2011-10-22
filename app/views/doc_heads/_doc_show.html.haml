@@ -8,7 +8,10 @@
 #doc_state_process
   = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
 .form_area.doc_head_show
-  =render "doc_head_show",:doc=>doc
+.page-header
+  %h3= doc.doc_no
+-doc.doc_meta_info.doc_head_attrs.each do |cn|
+  =tb_show_field(doc,cn)
 #details.show_only
   -doc.doc_meta_info.doc_relations.each do  |doc_relation|
     .doc_detail
@@ -18,6 +21,9 @@
           = image_tag "currency_yuan.png"
           %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
       .form_area
+        -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
+          -doc_relation.doc_row_attrs.split(',').each do |col|
+            =tb_show_field(row_data,col)
 -if doc.work_flow_infos.count>0
   .page-header
     %h3 审批信息

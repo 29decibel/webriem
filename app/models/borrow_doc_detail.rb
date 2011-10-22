@@ -1,11 +1,6 @@
 #coding: utf-8
 class BorrowDocDetail < ActiveRecord::Base
-
   include DocIndex
-  before_validation :set_apply_amount
-  def set_apply_amount
-    self.apply_amount = self.rate * self.ori_amount
-  end
 
   after_initialize  :set_default_value
   def set_default_value

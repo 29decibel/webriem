@@ -42,7 +42,7 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       fields_str = ''
       doc_relation.doc_row_attrs.split(',').each do |col|
-        fields_str << tb_field(builder,col)
+        fields_str << tb_input_field(builder,col)
       end
       raw fields_str
     end
@@ -98,18 +98,31 @@ module ApplicationHelper
     raw results
   end
 
-  def tb_field(f,col_name)
+  def tb_input_field(f,col_name)
     value = (content_tag :div,:class=>'input' do
       if f.object.class.try(:read_only_attr?,col_name)
-        content_tag :span,:class=>'uneditable-input' do
+        f.hidden_field(col_name) + 
+        (content_tag :span,:class=>'uneditable-input' do
           display_name(f,col_name)
-        end
+        end)
       else
         tinput(f,col_name)
       end
     end)
     content_tag :div,:class=>'clearfix' do
       f.label(col_name) + value
+    end
+  end
+
+  def tb_show_field(obj,col_name)
+    ass = obj.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
+    content_tag :div,:class=>'row' do
+      (content_tag :div,:class => 'span4' do
+        col_name
+      end) +
+      (content_tag :div,:class => 'span6' do
+        ass ? obj.send(ass.name).try(:name) : obj.send(col_name)
+      end)
     end
   end
 
