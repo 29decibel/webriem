@@ -21,6 +21,13 @@ class DocHeadsController < InheritedResources::Base
     new!
   end
 
+  def destroy
+    destroy! do |format|
+      @docs=DocHead.by_person(current_user.person.id).order('created_at desc').page(params[:page]).per(12)
+    end
+  end
+  
+
   #将单据进入审批阶段
   def submit
     @doc = DocHead.find(params[:doc_id]) 

@@ -78,9 +78,9 @@ module ApplicationHelper
     case col.type
     when :integer
       # belnogs_to
-      ass = klass.reflect_on_all_associations(:belongs_to).select{|ass|ass.primary_key_name==col.name}.first
+      ass = klass.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col.name}.first
       if ass
-        ts(col.name,ass.klass)
+        ts(col.name,ass.klass.name,:f=>f,:value=>f.object.try(col_name),:text=>f.object.try(ass.name).to_s)
       else
         f.text_field(col_name)
       end

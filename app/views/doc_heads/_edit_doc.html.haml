@@ -1,7 +1,7 @@
 = form_for doc,:remote=>true,:html => {:class=>:doc_head} do |f| 
   =f.hidden_field :doc_meta_info_id
   .page-header
-    %h3= doc.new_record? ? "新增#{@doc_meta_info.display_name}" : "修改#{@doc_meta_info.display_name}"
+    %h3= doc.new_record? ? "新增#{doc.doc_meta_info.display_name}" : "修改#{doc.doc_meta_info.display_name}"
   = render "shared/common_error",:resource=>doc
   -content_for :custom_actions do
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_save')}"),{:href=>"#"},:class=>"submit btn"
@@ -13,11 +13,11 @@
   .page-header
     %h3= "#{I18n.t('common_attr.basic_info')}"
   .form_area
-    -@doc_meta_info.doc_head_attrs.split(',').each do |cn|
+    -doc.doc_meta_info.doc_head_attrs.split(',').each do |cn|
       =tb_field(f,cn)
   <!--根据不同的单据类型render不同的单据-->
   #details
-    -@doc_meta_info.doc_relations.each do  |doc_relation|
+    -doc.doc_meta_info.doc_relations.each do  |doc_relation|
       .doc_detail
         .page-header
           %h3

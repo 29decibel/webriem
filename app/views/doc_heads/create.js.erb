@@ -1,1 +1,1 @@
-$("#doc_stage").html("<%= escape_javascript(render 'show')%>");
+$("#content").html("<%= escape_javascript(render "doc_show",:doc=>@doc_head)%>");

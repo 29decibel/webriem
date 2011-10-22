@@ -9,40 +9,10 @@
 .row
   .span3=label_tag I18n.t('activerecord.attributes.doc_head.apply_date')
   .span3= doc.apply_date
--if doc.doc_type!=14
+-doc.doc_meta_info.doc_head_attrs.split(',').each do |cn|
   .row
-    .span3=label_tag  I18n.t('activerecord.attributes.doc_head.attach')
-    .span3= doc.attach
-  .row
-    .span3=label_tag  I18n.t('activerecord.attributes.doc_head.dep_id')
-    .span3= doc.dep.to_s
--if doc.doc_type==9 or doc.doc_type==11
-  .row
-    .span3=label_tag I18n.t('activerecord.attributes.doc_head.afford_dep_id')
-    .span3= doc.afford_dep.to_s
--if doc.doc_type!=14 and doc.real_person
-  .row
-    .span3=label_tag I18n.t('activerecord.attributes.doc_head.real_person_id') 
-    .span3= doc.real_person
--if doc.doc_type==13
-  .row
-    .span3=label_tag I18n.t('activerecord.attributes.doc_head.upload')
-    .span3
-      = hidden_field_tag :doc_no,doc.doc_no
-      -if doc.upload_file 
-        = doc.upload_file.upload.original_filename
--if doc.doc_type==1
-  .row
-    .span3=label_tag  "#{I18n.t('activerecord.attributes.doc_head.cp_doc_remain_amount')}"
-    .span3= doc.cp_doc_remain_amount
--if ([9,11,13].include? doc.doc_type)
-  -if doc.doc_type!=13
-    .row
-      .span3=label_tag "#{I18n.t('activerecord.attributes.doc_head.project_id')}" 
-      .span3= doc.project
-.row
-  .span3=label_tag  "#{I18n.t('activerecord.attributes.doc_head.note')}" 
-  .span13= doc.note
+    .span3=label_tag I18n.t("activerecord.attributes.doc_head.#{cn}")
+    .span3=doc.send(cn)
 .row
   .span3=label_tag "#{I18n.t('activerecord.attributes.doc_head.total_apply_amount')}" 
   .span13#total_riem= "￥#{doc.total_amount}"

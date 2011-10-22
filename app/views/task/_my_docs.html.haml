@@ -1,7 +1,7 @@
 .page-header
   %h3= "我的单据列表"
--if docs.all.count>0
-  =render :partial => "docs_table",:locals=>{:docs=>docs}
+-if docs.count>0
+  =render :partial => "doc_heads/docs_table",:locals=>{:docs=>docs}
 -else
   .empty_info="您还没有申请过任何单据"
 =paginate docs,:remote=>true
