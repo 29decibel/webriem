@@ -22,7 +22,7 @@
           %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
       .form_area
         -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
-          -doc_relation.doc_row_attrs.split(',').each do |col|
+          -doc_relation.doc_row_attrs.each do |col|
             =tb_show_field(row_data,col)
 -if doc.work_flow_infos.count>0
   .page-header

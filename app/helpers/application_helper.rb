@@ -41,7 +41,7 @@ module ApplicationHelper
     end
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       fields_str = ''
-      doc_relation.doc_row_attrs.split(',').each do |col|
+      doc_relation.doc_row_attrs.each do |col|
         fields_str << tb_input_field(builder,col)
       end
       raw fields_str
@@ -110,7 +110,7 @@ module ApplicationHelper
       end
     end)
     content_tag :div,:class=>'clearfix' do
-      f.label(col_name) + value
+      f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")) + value
     end
   end
 
@@ -118,7 +118,7 @@ module ApplicationHelper
     ass = obj.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
     content_tag :div,:class=>'row' do
       (content_tag :div,:class => 'span4' do
-        col_name
+        label_tag I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{col_name}")
       end) +
       (content_tag :div,:class => 'span6' do
         ass ? obj.send(ass.name).try(:name) : obj.send(col_name)
