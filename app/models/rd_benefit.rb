@@ -22,6 +22,11 @@ class RdBenefit < ActiveRecord::Base
   validates_presence_of :ori_amount
   validates_presence_of :fee_id
   validates_presence_of :project_id
+
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
+
   def fcm
     fee_m_code=FeeCodeMatch.find_by_fee_code("04")
     if fee

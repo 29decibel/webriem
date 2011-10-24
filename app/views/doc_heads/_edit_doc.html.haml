@@ -18,7 +18,7 @@
   <!--根据不同的单据类型render不同的单据-->
   #details
     -doc.doc_meta_info.doc_relations.each do  |doc_relation|
-      .doc_detail
+      .doc_detail{'class'=>"#{doc_relation.doc_row_meta_info.name}"}
         .page-header
           %h3
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,doc_relation
@@ -31,6 +31,9 @@
               -doc_relation.doc_row_attrs.each do |dr_col|
                 =tb_input_field(builder,dr_col)
 :javascript
+  $(".ori_amount__input").live('change',function(){
+    $(this).closest('.doc_row').trigger('row:numberChanged');
+  });
   $(function(){
     tokenize();
   });

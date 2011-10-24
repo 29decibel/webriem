@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111022134625) do
+ActiveRecord::Schema.define(:version => 20111024091319) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -249,7 +249,7 @@ ActiveRecord::Schema.define(:version => 20111022134625) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
-    t.integer  "is_split"
+    t.boolean  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
     t.integer  "afford_dep_id"
     t.integer  "upload_file_id"
@@ -303,6 +303,7 @@ ActiveRecord::Schema.define(:version => 20111022134625) do
     t.string   "display_name"
     t.boolean  "fi_adapt"
     t.boolean  "hr_adapt"
+    t.string   "read_only_attrs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

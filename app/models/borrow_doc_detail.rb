@@ -31,7 +31,9 @@ class BorrowDocDetail < ActiveRecord::Base
   validates_presence_of :currency_id
   validates_presence_of :rate
   validates_presence_of :used_for
-
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
   def amount
     self.apply_amount
   end

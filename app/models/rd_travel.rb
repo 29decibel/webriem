@@ -27,6 +27,9 @@ class RdTravel < ActiveRecord::Base
   def must_have_a_place
     errors.add(:base,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
   end
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
   def fcm
     return FeeCodeMatch.find_by_fee_code("03")
   end

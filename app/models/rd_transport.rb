@@ -28,6 +28,9 @@ class RdTransport < ActiveRecord::Base
         errors.add(:end_date,"请检查填写的日期或时间") if end_date>Time.now
       end
     end
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
     def fcm
       return FeeCodeMatch.find_by_fee_code("03")
     end

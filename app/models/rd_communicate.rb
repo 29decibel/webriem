@@ -27,6 +27,9 @@ class RdCommunicate < ActiveRecord::Base
   validates_presence_of :rate
   validates_presence_of :dep_id
   validates_presence_of :project_id
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
   def fcm
     FeeCodeMatch.find_by_fee_code("02")
   end

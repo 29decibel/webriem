@@ -24,6 +24,11 @@ class CommonRiem < ActiveRecord::Base
   def amount
     apply_amount
   end
+
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
+
   def fcm
     fee_code_match= FeeCodeMatch.find_by_fee_code("01")
     if fee

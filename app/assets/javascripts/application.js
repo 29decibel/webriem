@@ -15,17 +15,17 @@ function init_control()
 	//$(".datepicker").datepicker();
 	//$(".datetimepicker").datetimepicker();
   //fire it once
-  $("select.is_split_reim").change();
+  $("#doc_head_is_split").change();
 }
 
-$('fieldset').live('row:numberChanged',function(){
-  var fds = $(this).closest('.form_area').find('fieldset').not(':hidden');
+$('.doc_row').live('row:numberChanged',function(){
+  var fds = $(this).closest('.form_area').find('.doc_row').not(':hidden');
   var total_num = 0.0;
   //set every fieldset's value
   fds.each(function(){
     //begin set every value
-    var apply_amount =  $(this).find('.doc_ori_amount').val() / $(this).find('.doc_rate').val();
-    $(this).find('.doc_apply_amount').text(apply_amount.toFixed(2));
+    var apply_amount =  $(this).find('.ori_amount__input').val() / $(this).find('.rate__input').val();
+    $(this).find('.apply_amount__input').html(apply_amount.toFixed(2));
     total_num+=apply_amount;
   });
   $(this).closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));
@@ -34,14 +34,15 @@ $('fieldset').live('row:numberChanged',function(){
 
 $('.doc_detail').live('area:numberChanged',function(){
   var total_num = 0.0;
-  $('.doc_detail').each(function(){
+  $('.doc_detail').not('.Reciver').each(function(){
     var num = parseFloat($(this).find('.doc_total_amount').text());
     total_num+=isNaN(num) ? 0.0 : num;
   });
   $('#total_riem span').html(total_num.toFixed(2));
-  if($('.recivers').find('fieldset').not(':hidden').size()==1)
+  if($('.Reciver').find('.doc_row').not(':hidden').size()==1)
   {
-    $('.recivers').find('fieldset').first().find('.reciver_ori_amount').val(total_num.toFixed(2));
+    $('.Reciver').find('.doc_row').first().find('.amount__input').val(total_num.toFixed(2));
+    $('.Reciver .doc_total_amount').text(total_num.toFixed(2));
   }
 });
 

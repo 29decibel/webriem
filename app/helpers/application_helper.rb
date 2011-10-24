@@ -67,10 +67,12 @@ module ApplicationHelper
     [subdomain, request.domain, request.port_string].join  
   end
 
-  def tinput(f,col_name)
+  def tinput(f,col_name,options={})
     col = f.object.class.columns.select{|c|c.name==col_name}.first
     results = ''
     klass = f.object.class
+    # set defualt class options 
+    options[:class]="#{col_name}__input"
     results << 
     case col.type
     when :integer
@@ -79,18 +81,20 @@ module ApplicationHelper
       if ass
         ts(col.name,ass.klass.name,:f=>f,:value=>f.object.try(col_name),:text=>f.object.try(ass.name).to_s)
       else
-        f.text_field(col_name)
+        f.text_field(col_name,options)
       end
     when :string
-      f.text_field(col_name)
+      f.text_field(col_name,options)
     when :text
-      f.text_area(col_name)
+      f.text_area(col_name,options)
     when :decimal
-      f.text_field(col_name)
+      f.text_field(col_name,options)
     when :datetime
-      f.datetime_select col_name,{},:class=>'small'
+      f.datetime_select col_name,{},:class=>"small #{options[:class]}"
+    when :boolean
+      f.check_box(col_name,options)
     when :date
-      f.date_select col_name,{},:class=>'small'
+      f.date_select col_name,{},:class=>"small #{options[:class]}"
     end
     raw results
   end
@@ -106,7 +110,7 @@ module ApplicationHelper
     value = (content_tag :div,:class=>'input' do
       if f.object.class.try(:read_only_attr?,col_name)
         f.hidden_field(col_name) + 
-        (content_tag :span,:class=>'uneditable-input' do
+        (content_tag :span,:class=>"uneditable-input #{col_name}__input" do
           display_name(f,col_name)
         end)
       else

@@ -29,6 +29,9 @@ class RdLodging < ActiveRecord::Base
   def amout_validation
     errors.add(:base,"差旅住宿费中原币金额不能大于 天数*费用标准*人数") if st_amount&&ori_amount&&people_count&&days and ori_amount>people_count*st_amount*days
   end
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
   def fcm
     return FeeCodeMatch.find_by_fee_code("03")
   end
