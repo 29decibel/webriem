@@ -44,7 +44,9 @@ module ApplicationHelper
       doc_relation.doc_row_attrs.each do |col|
         fields_str << tb_input_field(builder,col)
       end
-      raw fields_str
+      content_tag :div,:class=>'doc_row' do
+        raw fields_str
+      end
     end
     #注意了兄弟们,在这里一定要去掉h()对整个文本的转义,否则就会js报错啦~~~~
     link_to_function(image_tag("icons/add.png"), "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")",:class=>"detail_link")
@@ -57,11 +59,6 @@ module ApplicationHelper
   def display_date(input_date)
     return '' if input_date==nil
     input_date.strftime("%Y-%m-%d")
-  end
-
-  #====================================core stuff==================================================
-  def default_rate
-    1.0
   end
 
   def with_subdomain(subdomain='')
@@ -99,6 +96,13 @@ module ApplicationHelper
   end
 
   def tb_input_field(f,col_name)
+    # error message
+    error_msg = f.object.errors[col_name]
+    # inline help message
+    help = (content_tag :span,:class=>'help-inline' do
+      error_msg.first
+    end)
+    # value field
     value = (content_tag :div,:class=>'input' do
       if f.object.class.try(:read_only_attr?,col_name)
         f.hidden_field(col_name) + 
@@ -106,10 +110,11 @@ module ApplicationHelper
           display_name(f,col_name)
         end)
       else
-        tinput(f,col_name)
+        tinput(f,col_name) + help
       end
     end)
-    content_tag :div,:class=>'clearfix' do
+    # combine
+    content_tag :div,:class=>"clearfix #{'error' if error_msg.count>0}" do
       f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")) + value
     end
   end
@@ -121,7 +126,7 @@ module ApplicationHelper
         label_tag I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{col_name}")
       end) +
       (content_tag :div,:class => 'span6' do
-        ass ? obj.send(ass.name).try(:name) : obj.send(col_name)
+        ass ? obj.send(ass.name).try(:name) : obj.send(col_name).try(:to_s)
       end)
     end
   end

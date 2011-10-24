@@ -17,7 +17,8 @@ class Reciver < ActiveRecord::Base
     return unless self.new_record?
     sc = SystemConfig.find_by_key 'default_settlement'
     if sc and sc.value
-      self.settlement = Settlement.find_by_code(sc.value)
+      default_settlement = Settlement.find_by_code(sc.value)
+      self.settlement = default_settlement if default_settlement
     end
   end
 

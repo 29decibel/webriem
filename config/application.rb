@@ -61,6 +61,5 @@ module Webreim
   end
 end
 I18n.locale = 'zh_cn'
-
-
-#I18n.locale = 'en-US'
+# fuck up field_error_proc
+ActionView::Base.field_error_proc = proc { |input, instance| input }

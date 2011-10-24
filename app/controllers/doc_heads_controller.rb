@@ -1,34 +1,111 @@
 #coding: utf-8
 #require "ruby-debug"
 require 'prawn/layout'
-#借款单—JK  付款单—FK  报销单—BX  收款通知单—SK  结汇申请单—JH  转账申请单—ZH  现金提取申请单—XJ  购买理财产品通知单—GL  赎回理财产品通知单—SL
-#9=>"差旅费报销",10=>"交通费报销",11=>"住宿费报销",12=>"工作餐费报销",13=>"加班餐费报销",14=>"加班交通费报销",15=>"业务交通费报销",16=>"福利费用报销"
-#DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销"}
-class DocHeadsController < InheritedResources::Base
-  respond_to :html, :json, :js
+class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
   def current_person
     person=Person.find_by_code(current_user.name)
   end
-
-
-  def new
-    @doc_head = DocHead.new :doc_meta_info=>DocMetaInfo.find(params[:doc_meta_info_id])
-    @doc_head.person = current_person
-    @doc_head.dep = current_person.dep
-    @doc_meta_info = @doc_head.doc_meta_info
-    @doc = @doc_head
-    new!
-  end
-
-  def destroy
-    destroy! do |format|
-      @docs=DocHead.by_person(current_user.person.id).order('created_at desc').page(params[:page]).per(12)
+  # GET /doc_heads
+  # GET /doc_heads.xml
+  # the entry of all about 's filter and order by
+  def index
+    #get the specific docs by the doc_type passed by querystring
+    #just get all docs of currenct person by test
+    @docs = DocHead.where("doc_type=?",params[:doc_type].to_i).all
+    @doc_type=params[:doc_type].to_i
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @docs }
     end
   end
-  
 
+  # GET /doc_heads/1
+  # GET /doc_heads/1.xml
+  def show
+    @doc = DocHead.find(params[:id])
+    #if the doc is current needed to be approved by current person,then new a @work_flow_info
+    if @doc.processing?
+      if @doc.current_approver_id==current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
+      end
+    end
+    respond_to do |format|
+      format.xml  { render :xml => @doc }
+      format.html
+      format.js # show.html.erb
+    end
+  end
+
+  def edit
+    @doc = DocHead.find(params[:id])
+    #if the doc is current needed to be approved by current person,then new a @work_flow_info
+    if @doc.processing?
+      if @doc.current_approver_id==current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
+      end
+    end
+  end
+
+  # GET /doc_heads/new
+  # GET /doc_heads/new.xml
+  def new
+    @doc = DocHead.new :doc_meta_info=>DocMetaInfo.find(params[:doc_meta_info_id])
+    @doc.dep=current_person.dep
+    @doc.person=current_person
+    reciver=@doc.recivers.build
+  end
+
+
+  # POST /doc_heads
+  # POST /doc_heads.xml
+  def create
+    @doc = DocHead.new(params[:doc_head])
+    @doc.cp_doc_remain_amount=@doc.total_amount
+    #add the offset info
+    if params[:offset_info]
+      params[:offset_info].each_value do |value|
+        @doc.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
+      end
+    end
+    if @doc.save
+      redirect_to doc_head_path(@doc)
+    else
+      render "new"
+    end
+  end
+
+  # PUT /doc_heads/1
+  # PUT /doc_heads/1.xml
+  def update
+    #debugger
+    @doc = DocHead.find(params[:id])
+    #add the offset info
+    if params[:offset_info]
+      params[:offset_info].each_value do |value|
+        @doc.reim_cp_offsets.build(value) if (value["amount"].to_i != 0)
+      end
+    end
+    if @doc.update_attributes(params[:doc_head])
+      @doc.update_attribute(:cp_doc_remain_amount,@doc.total_amount)
+      @message="#{I18n.t('controller_msg.update_ok')}"
+      if @doc.current_approver_id == current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
+      end
+      @doc.reload
+    else
+      render "edit"
+    end
+  end
+
+  # DELETE /doc_heads/1
+  # DELETE /doc_heads/1.xml
+  def destroy
+    doc = DocHead.find_by_id params[:id]
+    doc.destroy
+    @docs=DocHead.by_person(current_user.person.id).order('created_at desc').page(params[:page]).per(12)
+  end
   #将单据进入审批阶段
   def submit
     @doc = DocHead.find(params[:doc_id]) 
