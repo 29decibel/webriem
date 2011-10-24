@@ -693,23 +693,27 @@
         bank_no: "收款人明细 银行帐号"
         company: "收款人明细 收款人"
       rd_common_transport:
-        ori_amount: "业务交通费明细 原币金额"
-        start_place: "业务交通费明细 开始地点"
-        end_place: "业务交通费明细 结束地点"
-        start_time: "业务交通费明细 开始时间"
-        end_time: "业务交通费明细 结束时间"
-        reason: "业务交通费明细 事由"
-        currency_id: "业务交通费明细 币种"
-        rate: "业务交通费明细 汇率"
-        dep_id: "业务交通费明细 费用承担部门"
+        ori_amount: "原币金额"
+        start_place: "开始地点"
+        end_place: "结束地点"
+        start_time: "开始时间"
+        end_time: "结束时间"
+        reason: "事由"
+        currency_id: "币种"
+        rate: "汇率"
+        dep_id: "费用承担部门"
+        apply_amount: 申请金额
+        project_id: 项目
+        work_date: 时间
       common_riem:
-        fee_id: "普通费用报销明细 费用类型"
-        dep_id: "普通费用报销明细 费用承担部门"
-        project_id: "普通费用报销明细 项目"
-        description: "普通费用报销明细 费用描述"
-        ori_amount: "普通费用报销明细 原币金额"
-        rate: "普通费用报销明细 汇率"
-        currency_id: "普通费用报销明细 币种"
+        fee_id: "费用类型"
+        dep_id: "费用承担部门"
+        project_id: "项目"
+        description: "费用描述"
+        ori_amount: "原币金额"
+        rate: "汇率"
+        currency_id: "币种"
+        apply_amount: 申请金额
       rec_notice_details:
         ori_amount: "收款明细 原币金额"
         project_id: "收款明细 项目"
@@ -718,24 +722,26 @@
         amount: "收款金额"
         total_amount: "收款金额合计"
       reim_cp_offsets:
-      rd_extra_work_meals:
-        ori_amount: "加班餐费明细 原币金额"
-        start_time: "加班餐费明细 开始时间"
-        end_time: "加班餐费明细 结束时间"
-        reason: "加班餐费明细 事由"
-        currency_id: "加班餐费明细 币种"
-        rate: "加班餐费明细 汇率"
-      rd_extra_work_cars:
-        ori_amount: "加班车费明细 原币金额"
-        start_place: "加班车费明细 开始地点"
-        end_place: "加班车费明细 结束地点"
-        start_time: "加班车费明细 开始时间"
-        end_time: "加班车费明细 结束时间"
-        reason: "加班车费明细 事由"
-        currency_id: "加班车费明细 币种"
-        rate: "加班车费明细 汇率"
+      rd_extra_work_meal:
+        ori_amount: "原币金额"
+        start_time: "开始时间"
+        end_time: "结束时间"
+        apply_amount: 申请金额
+        reason: "事由"
+        currency_id: "币种"
+        rate: "汇率"
+      rd_extra_work_car:
+        ori_amount: "原币金额"
+        start_place: "开始地点"
+        end_place: "结束地点"
+        start_time: "开始时间"
+        end_time: "结束时间"
+        reason: "事由"
+        currency_id: "币种"
+        rate: "汇率"
       rd_work_meal:
         ori_amount: "原币金额"
+        apply_amount: 申请金额
         person_names: "参与人姓名"
         place: "地点"
         meal_date: "日期"
@@ -748,36 +754,82 @@
       rd_travel:
         days: "出差天数"
         reason: "出差事由"
+        region_id: 地区
         ori_amount: "原币金额"
-        base: " "          
+        other_fee: 其他费用
+        other_fee_description: 其他费用说明
+        apply_amount: 申请金额
+        ori_amount: 原币金额
+        hr_amount: HR调整金额
+        fi_amount: 财务调整金额
+        rate: 汇率
+        currency_id: 币种
+        custom_place: 其它地点
+        region_type_id: 地区级次
+        st_amount: 费用标准
       rd_transport:
-        ori_amount: "交通费明细 原币金额"
-        currency_id: "交通费明细 币种"
-        rate: "交通费明细 汇率"   
-        transportation_id: "交通费明细 交通工具"
-        reason: "交通费明细 出差事由"
-        start_position: "交通费明细 出发地"
-        end_position: "交通费明细 目的地"
-        start_date: "交通费明细 开始时间"
-        end_date: "交通费明细 到达时间"       
+        apply_amount: 申请金额
+        ori_amount: 原币金额
+        hr_amount: HR调整金额
+        fi_amount: 财务调整金额
+        rate: 汇率
+        currency_id: 币种
+        transportation_id: "交通工具"
+        reason: "出差事由"
+        start_position: "出发地"
+        end_position: "目的地"
+        start_date: "开始时间"
+        end_date: "到达时间"       
       rd_lodging:
-        ori_amount: "住宿费明细 原币金额"
-        currency_id: "住宿费明细 币种"
-        rate: "住宿费明细 汇率"
-        base: "住宿费明细 "
-        start_date: "住宿费明细 开始日期"
-        end_date: "住宿费明细 结束日期"
-        days: "住宿费明细 住宿天数"
-        people_count: "住宿费明细 住宿人数"
+        apply_amount: 申请金额
+        ori_amount: 原币金额
+        region_id: 地区
+        hr_amount: HR调整金额
+        fi_amount: 财务调整金额
+        rate: 汇率
+        person_names: 合住人
+        currency_id: 币种
+        start_date: "开始日期"
+        end_date: "结束日期"
+        days: "住宿天数"
+        people_count: "住宿人数"
+        custom_place: 其它地点
+        region_type_id: 地区级次
+        st_amount: 费用标准
       rd_benefit:
-        project_id: "福利费用明细 项目"
-        dep_id: "福利费用明细 费用承担部门"
-        fee_id: "福利费用明细 费用类型"
-        apply_amount: "福利费用明细 申请金额"
+        project_id: "项目"
+        dep_id: "费用承担部门"
+        fee_id: "费用类型"
+        apply_amount: "申请金额"
+        reim_date: 日期
+        fee_time_span: 费用期间
+        people_count: 人数
+        hr_amount: HR调整金额
+        fi_amount: 财务调整金额
+        rate: 汇率
+        ori_amount: 原币金额
       other_riem:
-        currency_id: "其他费用明细 币种"
-        rate: "其他费用明细 汇率"
-        description: "其他费用明细 费用描述"
+        currency_id: "币种"
+        rate: "汇率"
+        description: "费用描述"
+        apply_amount: 申请金额
+        ori_amount: 原币金额
+        hr_amount: HR调整金额
+        fi_amount: 财务调整金额
+      rd_communicate:
+        dep_id: 部门
+        project_id: 项目
+        reason: 事由
+        person_names: 参与人
+        people_count: 人数
+        place: 地点
+        meal_date: 时间
+        apply_amount: 申请金额
+        ori_amount: 原币金额
+        hr_amount: HR调整金额
+        fi_amount: 财务调整金额
+        rate: 汇率
+        currency_id: 币种
       buy_finance_product:
         name: "理财产品名称"
         rate: "理财产品利率"      
