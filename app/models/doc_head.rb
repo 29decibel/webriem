@@ -159,7 +159,7 @@ class DocHead < ActiveRecord::Base
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def get_total_apply_amount
     total = 0
-    doc_meta_info.doc_row_meta_infos.each do |dr_meta|
+    doc_meta_info.doc_row_meta_infos.reject{|a|%w(Reciver ReimSplitDetail).include? a.name}.each do |dr_meta|
       dr_datas = self.send(eval(dr_meta.name).table_name)
       total += dr_datas.inject(0){|sum,dr_data|sum + get_amount(dr_data)}
     end

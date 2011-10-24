@@ -20,6 +20,7 @@ function init_control()
 
 $('.doc_row').live('row:numberChanged',function(){
   var fds = $(this).closest('.form_area').find('.doc_row').not(':hidden');
+  console.log(fds);
   var total_num = 0.0;
   //set every fieldset's value
   fds.each(function(){
@@ -38,7 +39,8 @@ $('.doc_detail').live('area:numberChanged',function(){
     var num = parseFloat($(this).find('.doc_total_amount').text());
     total_num+=isNaN(num) ? 0.0 : num;
   });
-  $('#total_riem span').html(total_num.toFixed(2));
+  //set total amount
+  $('.total_amount__input').html(total_num.toFixed(2));
   if($('.Reciver').find('.doc_row').not(':hidden').size()==1)
   {
     $('.Reciver').find('.doc_row').first().find('.amount__input').val(total_num.toFixed(2));
@@ -282,16 +284,30 @@ function bind_is_split_change_events()
 
 function remove_fields(link) {
   if(!confirm("是否真的要删除?")) return;
-  if($(link).closest('fieldset').attr('class')!='new')
+  // get form area first
+  var form_area = $(link).closest('.form_area');
+  // remove
+  if($(link).closest('.doc_row').hasClass('exist'))
   {
-    $(link).closest('fieldset').find('.destroy_mark').val("true");  
-    $(link).closest("fieldset").hide(); 
+    $(link).closest('.doc_row').find('.destroy_mark').val("true");  
+    $(link).closest(".doc_row").hide(); 
   }
   else
   {
-    $(link).closest('fieldset').remove();
+    $(link).closest('.doc_row').remove();
   }
-	$("input.doc_ori_amount,input.doc_rate,input.doc_HR_amount,input.doc_FI_amount,input.percent_amount").change();
+  // recalculate
+  var fds = form_area.find('.doc_row').not(':hidden');
+  var total_num = 0.0;
+  //set every fieldset's value
+  fds.each(function(){
+    //begin set every value
+    var apply_amount =  $(this).find('.ori_amount__input').val() / $(this).find('.rate__input').val();
+    $(this).find('.apply_amount__input').html(apply_amount.toFixed(2));
+    total_num+=apply_amount;
+  });
+  form_area.closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));
+  form_area.closest('.doc_detail').trigger('area:numberChanged');
 }
 
 function add_fields(link, association, content) {

@@ -25,7 +25,7 @@ class RdTravel < ActiveRecord::Base
   validates_presence_of :currency_id
   validate :must_have_a_place
   def must_have_a_place
-    errors.add(:base,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
+    errors.add(region_id ? :custom_place : :region_id,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
   end
   def self.read_only_attr?(attr)
     %w(apply_amount fi_amount hr_amount).include?(attr)

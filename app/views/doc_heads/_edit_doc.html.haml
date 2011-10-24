@@ -27,7 +27,9 @@
             %span.doc_total_amount.normal=doc.amount_for(:borrow_doc_details)
         .form_area
           =f.fields_for eval(doc_relation.doc_row_meta_info.name).table_name do |builder|
-            .doc_row
+            .doc_row.exist
+              =link_to_remove
+              = builder.hidden_field(:_destroy,:class=>'destroy_mark') 
               -doc_relation.doc_row_attrs.each do |dr_col|
                 =tb_input_field(builder,dr_col)
 :javascript

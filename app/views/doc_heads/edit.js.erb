@@ -1,1 +1,2 @@
 $("#content").html("<%= escape_javascript(render "edit_doc",:doc=>@doc)%>");
+$(".ori_amount__input").each(function(){$(this).change();});

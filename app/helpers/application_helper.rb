@@ -45,7 +45,7 @@ module ApplicationHelper
         fields_str << tb_input_field(builder,col)
       end
       content_tag :div,:class=>'doc_row' do
-        raw fields_str
+        link_to_remove + builder.hidden_field(:_destroy,:class=>'destroy_mark') +raw(fields_str)
       end
     end
     #注意了兄弟们,在这里一定要去掉h()对整个文本的转义,否则就会js报错啦~~~~

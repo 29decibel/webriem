@@ -14,6 +14,9 @@ class OtherRiem < ActiveRecord::Base
   def fcm
     return FeeCodeMatch.find_by_fee_code("03")
   end
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
   def project
     doc_head.project
   end
