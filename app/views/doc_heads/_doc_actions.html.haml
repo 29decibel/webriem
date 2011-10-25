@@ -1,6 +1,6 @@
 = link_to I18n.t('common_op.btn_new'), new_doc_head_path(:doc_meta_info_id=>doc_head.doc_meta_info.id ),:remote=>true,:class=>"btn"
 -if !doc_head.new_record? and doc_head.person==current_user.person and (doc_head.un_submit? or doc_head.rejected?)
-  -if doc_head.approvers_select_list.count>1
+  -if false and doc_head.approvers_select_list.count>1
     = link_to I18n.t('common_op.btn_start_work_flow'),"#select_approvers",:class=>"btn pop"
   -else
     = link_to I18n.t('common_op.btn_start_work_flow'), {:controller=>"doc_heads",:action=>"submit",:doc_id=>doc_head.id },:method=>:put,:remote=>true,:class=>"btn"
