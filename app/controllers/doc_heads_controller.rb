@@ -55,6 +55,7 @@ class DocHeadsController < ApplicationController
     @doc.dep=current_person.dep
     @doc.person=current_person
     reciver=@doc.recivers.build
+    reciver.init_from_person(current_person)
   end
 
 

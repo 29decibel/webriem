@@ -23,7 +23,10 @@ class RdTravel < ActiveRecord::Base
   validates_presence_of :reason
   validates_presence_of :rate
   validates_presence_of :currency_id
+  REASON_TYPES = %w(实施 非实施)
+  validates_inclusion_of :reason_type, :in => REASON_TYPES
   validate :must_have_a_place
+
   def must_have_a_place
     errors.add(region_id ? :custom_place : :region_id,"出差地点或者其他地点必须录入一个") if region_id==nil and custom_place.blank?
   end

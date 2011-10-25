@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111025062508) do
+ActiveRecord::Schema.define(:version => 20111025074418) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -792,6 +792,7 @@ ActiveRecord::Schema.define(:version => 20111025062508) do
     t.decimal  "days",                  :precision => 8,  :scale => 2
     t.integer  "region_id"
     t.string   "reason"
+    t.string   "reason_type"
     t.string   "other_fee"
     t.string   "other_fee_description"
     t.decimal  "apply_amount",          :precision => 16, :scale => 2, :default => 0

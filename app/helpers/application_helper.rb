@@ -33,6 +33,10 @@ module ApplicationHelper
       'important'
     end
   end
+  def smart_select_field(f,col_name,validator)
+    collection = validator.options[:in]
+    f.select col_name,collection,{ :include_blank => false }
+  end
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
         "*"
@@ -98,7 +102,12 @@ module ApplicationHelper
         f.text_field(col_name,options)
       end
     when :string
-      f.text_field(col_name,options)
+      include_validator = f.object.class.validators_on(col_name).select{|v|v.class==ActiveModel::Validations::InclusionValidator}.first
+      if include_validator
+        smart_select_field(f,col_name,include_validator)
+      else
+        f.text_field(col_name,options)
+      end
     when :text
       f.text_area(col_name,options)
     when :decimal
@@ -133,7 +142,7 @@ module ApplicationHelper
     end)
     # combine
     content_tag :div,:class=>"clearfix #{'error' if error_msg.count>0}" do
-      f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")) + value
+      f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")+mark_required(f.object,col_name)) + value
     end
   end
 

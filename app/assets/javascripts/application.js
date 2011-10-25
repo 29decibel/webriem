@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require lib/jquery.blockUI
 //= require enter_to_tab
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap
@@ -9,6 +8,12 @@
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+if (typeof console == "undefined" || typeof console.log == "undefined") 
+{
+   var console = { log: function() {} }; 
+}
+console.log = function() {}
+//------------------------------------------------------------------------
 function init_control()
 {
   //wrap the datatime picker
@@ -48,6 +53,16 @@ $('.doc_detail').live('area:numberChanged',function(){
   }
 });
 
+function wait()
+{
+	$("#loading").show();
+}
+function back()
+{
+	$("#loading").hide();
+}
+
+
 //here we bind the data picker control
 $(function(){
   init_control();	
@@ -77,8 +92,7 @@ $(function(){
     wait();
   });
   $("form,a").live("ajax:complete",function(){
-    $.unblockUI();
-    //init_control();	
+    back();
   });
   //bind the submit link
   $("a.submit").live("click",function(){
@@ -196,20 +210,6 @@ $(function(){
   });
 
 });
-
-function wait()
-{
-  //$.blockUI({ css: { 
-  //    border: 'none', 
-  //    padding: '15px', 
-  //    backgroundColor: '#000', 
-  //    '-webkit-border-radius': '10px', 
-  //    '-moz-border-radius': '10px', 
-  //    opacity: .5, 
-  //    color: '#fff'
-  //},message:'请稍等',
-  //overlayCSS: { backgroundColor: 'transparent' }}); 
-}
 
 function tokenize(content)
 {
@@ -509,7 +509,7 @@ if (history && history.pushState) {
       console.log(window.history);
       wait();
       $.getScript(location.href,function(){
-        $.unblockUI();
+        back();
       });  
     });  
   })  

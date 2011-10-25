@@ -22,6 +22,12 @@ class Reciver < ActiveRecord::Base
     end
   end
 
+  def init_from_person(person)
+    self.company = person.name
+    self.bank = person.bank
+    self.bank_no = person.bank_no
+  end
+
   #add supplier 
   def company_name
     if supplier

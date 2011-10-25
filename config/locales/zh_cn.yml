@@ -769,6 +769,7 @@
         custom_place: 其它地点
         region_type_id: 地区级次
         st_amount: 费用标准
+        reason_type: 是否实施项目
       rd_transport:
         apply_amount: 申请金额
         ori_amount: 原币金额
