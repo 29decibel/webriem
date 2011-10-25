@@ -134,12 +134,12 @@ class DocHeadsController < ApplicationController
   #付款
   def pay
     #debugger
-    @doc=DocHead.find(params[:doc_id].to_i)
+    @doc=DocHead.find(params[:id])
     @doc.pay
     #send email
     para={}
     para[:email]=@doc.person.e_mail #person.e_mail  @doc.person.e_mail
-    para[:docs_total]=@doc.total_apply_amount
+    para[:docs_total]=@doc.total_amount
     para[:doc_id]=@doc.id
     #WorkFlowMailer.notice_docs_to_approve para
     Resque.enqueue(MailWorker, :doc_paid,para)

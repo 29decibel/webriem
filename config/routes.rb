@@ -38,6 +38,7 @@ Webreim::Application.routes.draw do
     resources :work_flow_infos
     member do
       put :adjust_amount
+      put :pay
     end
     collection do
       get :search
@@ -63,7 +64,7 @@ Webreim::Application.routes.draw do
   get "task/my_docs",:as=>:my_docs  
   get "task/docs_to_approve",:as=>:docs_to_approve  
   get "task/docs_approved"  
-  get "task/docs_to_pay"  
+  get "task/docs_to_pay"  ,:as => :docs_to_pay
   get "task/docs_paid"
   get "task/dashboard"
     

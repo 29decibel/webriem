@@ -18,7 +18,7 @@ class TaskController < ApplicationController
   end
   #the docs need to pay
   def docs_to_pay
-    @docs=DocHead.approved.payable.page(params[:page]).per(20)
+    @docs=DocHead.approved.page(params[:page]).per(20)
     respond_to do |format|
       format.js { render 'show_docs'}
       format.html

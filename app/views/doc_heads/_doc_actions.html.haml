@@ -15,7 +15,7 @@
 -else
   = link_to I18n.t('common_op.btn_docs_to_approve'), docs_to_approve_path,:remote=>true,:class=>"btn"
 -if doc_head.approved? and current_user.casher?
-  = link_to I18n.t('common_op.confirm_paid'),{:controller=>"doc_heads",:action=>"pay",:doc_id=>doc_head.id},:remote=>true,:class=>"btn"
+  = link_to I18n.t('common_op.confirm_paid'),pay_doc_head_path(doc_head),:remote=>true,:class=>"btn",:method=>'PUT'
 -if doc_head.current_approver_id == current_user.person.id and doc_head.processing?
   = link_to I18n.t('common_op.approve'),'#',:class=>"btn pop",'data-controls-modal'=>"doc_head_approve",'data-backdrop'=>"true",'data-keyboard'=>true
 -if doc_head.can_destroy? current_user and !doc_head.new_record?

@@ -21,7 +21,6 @@ class DocHead < ActiveRecord::Base
   scope :un_submit, where("state='un_submit'")
   scope :approved, where("state='approved'")
   scope :paid, where("state='paid'")
-  scope :payable, where('(doc_type>=9 and doc_type<=13) or doc_type=1')
 
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
