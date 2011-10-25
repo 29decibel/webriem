@@ -1,14 +1,20 @@
 %table.zebra-striped
-  %tr
-    %th 单据类型
-    %th 申请日期
-    %th 单据号
-    %th 单据状态
-    %th 申请金额
-    %th 申请人
-    %th 当前审批人
-    %th 
-    %th 
-    %th
-  =render :partial => "doc_heads/doc_list_item",:collection=>docs,:as=>:doc
+  %thead
+    %tr
+      %th.blue 单据类型
+      %th.blue 申请日期
+      %th.blue 单据号
+      %th.blue 单据状态
+      %th.blue 申请金额
+      %th.blue 申请人
+      %th.blue 当前审批人
+      %th 
+      %th 
+      %th
+  %tbody
+    =render :partial => "doc_heads/doc_list_item",:collection=>docs,:as=>:doc
+:javascript
+  $(function(){
+    $("table").tablesorter();
+  });
 

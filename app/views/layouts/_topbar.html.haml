@@ -2,7 +2,7 @@
   .topbar
     .fill
       .container
-        %h3=link_to "网上报销系统", root_url
+        %h3=link_to "网上报销系统", root_url,:remote=>true
         -if current_user
           %ul
             %li.dropdown{'data-dropdown'=>"dropdown"}

@@ -4,6 +4,7 @@
 //= require enter_to_tab
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap
+//= require lib/jquery.tablesorter.min
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
@@ -50,7 +51,6 @@ $('.doc_detail').live('area:numberChanged',function(){
 //here we bind the data picker control
 $(function(){
   init_control();	
-
   //bind the is_split change events
   bind_is_split_change_events();
 
