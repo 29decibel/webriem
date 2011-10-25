@@ -91,6 +91,7 @@ module ApplicationHelper
     klass = f.object.class
     # set defualt class options 
     options[:class]="#{col_name}__input"
+    logger.info "###################{f.object.class}#{col_name}"
     results << 
     case col.type
     when :integer

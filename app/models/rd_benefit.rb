@@ -15,6 +15,7 @@ class RdBenefit < ActiveRecord::Base
   belongs_to :reim_detail
   belongs_to :dep
   belongs_to :fee
+  belongs_to :currency
   belongs_to :project
   belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
   #validates_attachment_content_type :doc, :content_type => ['application/doc'] 

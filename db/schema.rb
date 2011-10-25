@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111025074418) do
+ActiveRecord::Schema.define(:version => 20111025094737) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -637,6 +637,7 @@ ActiveRecord::Schema.define(:version => 20111025074418) do
     t.integer  "fee_id"
     t.integer  "project_id"
     t.decimal  "rate",          :precision => 10, :scale => 4, :default => 1.0
+    t.integer  "currency_id"
     t.decimal  "ori_amount",    :precision => 16, :scale => 2, :default => 0
   end
 

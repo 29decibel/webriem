@@ -811,6 +811,7 @@
         fi_amount: 财务调整金额
         rate: 汇率
         ori_amount: 原币金额
+        currency_id: 币种
       other_riem:
         currency_id: "币种"
         rate: "汇率"
