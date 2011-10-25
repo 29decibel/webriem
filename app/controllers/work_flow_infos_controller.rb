@@ -1,5 +1,6 @@
 #coding: utf-8
 class WorkFlowInfosController < ApplicationController
+  before_filter :get_doc
   # GET /work_flow_infos
   # GET /work_flow_infos.xml
   layout false
@@ -38,14 +39,14 @@ class WorkFlowInfosController < ApplicationController
   # POST /work_flow_infos
   # POST /work_flow_infos.xml
   def create
-    @doc = DocHead.find(params[:doc_id])
-    if params["work_flow_info"]["is_ok"] =='true'
-      @doc.next_approver params["work_flow_info"]["comments"]
-      @doc.reload
+    if params["commit"]=='通过'
+      @doc_head.next_approver params["work_flow_info"]["comments"]
+      @doc_head.reload
     else
-      @doc.decline params["work_flow_info"]["comments"]
-      @doc.reload
+      @doc_head.decline params["work_flow_info"]["comments"]
+      @doc_head.reload
     end
+    redirect_to @doc_head
   end
 
   # PUT /work_flow_infos/1
@@ -71,5 +72,9 @@ class WorkFlowInfosController < ApplicationController
       format.html { redirect_to(work_flow_infos_url) }
       format.xml  { head :ok }
     end
+  end
+  private
+  def get_doc
+    @doc_head = DocHead.find(params[:doc_head_id])
   end
 end

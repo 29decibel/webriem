@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require lib/jquery.blockUI
-//= require lib/jquery.fancybox-1.3.4
 //= require enter_to_tab
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap

@@ -7,7 +7,6 @@
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process
   = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
-.form_area.doc_head_show
 .page-header
   %h3= doc.doc_no
 -doc.doc_meta_info.doc_head_attrs.each do |cn|

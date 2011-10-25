@@ -1128,7 +1128,6 @@ ActiveRecord::Schema.define(:version => 20111024091319) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "approver_id"
-    t.integer  "person_id"
   end
 
   create_table "work_flow_relate_steps", :force => true do |t|

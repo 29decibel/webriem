@@ -3,11 +3,11 @@
   %td=doc.apply_date
   %td=link_to doc.doc_no,doc_head_path(doc),:remote=>true
   %td 
-    %span.label=doc.doc_state_name
+    %span.label{'class'=>doc_state_css(doc)}=doc.doc_state_name
   %td= "￥#{doc.total_amount}"
   %td= "#{doc.person} #{doc.real_person ? (I18n.t('common_attr.proxy') + ' '+ doc.real_person.name) : ''}"
   %td
-    -if doc.processing? and doc.approver!=current_user.person
+    -if doc.processing? 
       ="当前等待#{doc.approver }审批"
   %td= link_to "查看", doc_head_path(doc),:remote=>true
   %td

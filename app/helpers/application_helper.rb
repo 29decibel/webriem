@@ -19,6 +19,20 @@ module ApplicationHelper
   def error_css?(object,att)
     object and !object.errors[att].blank?
   end
+  def doc_state_css(doc)
+    case doc.state
+    when 'unsubmit'
+      ''
+    when 'approved'
+      'notice'
+    when 'paid'
+      'success'
+    when 'processing'
+      'warning'
+    when 'rejected'
+      'important'
+    end
+  end
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
         "*"

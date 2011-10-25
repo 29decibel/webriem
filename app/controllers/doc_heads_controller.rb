@@ -144,14 +144,6 @@ class DocHeadsController < ApplicationController
     #WorkFlowMailer.notice_docs_to_approve para
     Resque.enqueue(MailWorker, :doc_paid,para)
   end
-  def approve
-    @doc = DocHead.find(params[:id])
-    if params[:ok]
-      @doc.next_approver params[:comments]
-    else
-      @doc.decline params[:comments]
-    end
-  end
 
 
   def adjust_amount

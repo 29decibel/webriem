@@ -17,8 +17,8 @@
     .page-header
       %h3= I18n.t("common_attr.my_approved_docs")
     =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@my_approved_docs}
--if @my_recent_docs.count>0
+-if @my_docs.count>0
   .section
     .page-header
       %h3= I18n.t("common_attr.my_recent_docs")
-    =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@my_recent_docs}
+    =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@my_docs}

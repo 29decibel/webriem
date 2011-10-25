@@ -3,22 +3,8 @@ class BorrowDocDetail < ActiveRecord::Base
   include DocIndex
 
   after_initialize  :set_default_value
-  def set_default_value
-    if !currency
-      sysconfig = SystemConfig.find_by_key 'default_currency'
-      if sysconfig
-        self.currency = Currency.find_by_code sysconfig.value
-        self.rate = self.currency.default_rate if self.currency
-      end
-    end
-  end
-
   before_save :set_afford_dep
-  def set_afford_dep
-    if project
-      self.dep = project.dep
-    end
-  end
+  before_validation :set_apply_amount
 
   belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
   belongs_to :dep
@@ -34,9 +20,6 @@ class BorrowDocDetail < ActiveRecord::Base
   def self.read_only_attr?(attr)
     %w(apply_amount fi_amount hr_amount).include?(attr)
   end
-  def amount
-    self.apply_amount
-  end
   #for the vouch info
   def fcm
     return nil if doc_head==nil
@@ -48,5 +31,24 @@ class BorrowDocDetail < ActiveRecord::Base
       end
     end
     return fee_m_code
+  end
+
+  private
+  def set_afford_dep
+    if project
+      self.dep = project.dep
+    end
+  end
+  def set_apply_amount
+    self.apply_amount = self.ori_amount / self.rate
+  end
+  def set_default_value
+    if !currency
+      sysconfig = SystemConfig.find_by_key 'default_currency'
+      if sysconfig
+        self.currency = Currency.find_by_code sysconfig.value
+        self.rate = self.currency.default_rate if self.currency
+      end
+    end
   end
 end

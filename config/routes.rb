@@ -29,26 +29,13 @@ Webreim::Application.routes.draw do
   match "vouch/update"=>"vouch#update"
   match "vouch/g_u8"=>"vouch#g_u8"
 
-  get "common/new_reset_p"
-  post "common/reset_p"
-  
-  get "pri_task/reset_pw"
-  get "pri_task/adapt_menu"
-  get "pri_task/fuck_date"
-  post "pri_task/fuck_p"
-  get "/pri_task/cmds"
-  get "pri_task/import_project"
-  get "pri_task/import_person"
-  get "pri_task/test_curb"
-  get "pri_task/import_u8_codes"
-  get "pri_task/import_u8_deps"
-
   get "ajax_service/getfee"  
   get "ajax_service/getbudget"  
   get "ajax_service/remove_offset",:as=>:remove_offset  
   get "ajax_service/get_extrafee"
 
   resources :doc_heads do
+    resources :work_flow_infos
     member do
       put :adjust_amount
     end
@@ -69,7 +56,6 @@ Webreim::Application.routes.draw do
   end
   resources :doc_rows
   resources :currency
-  resources :work_flow_infos
 
   get "token_input/search"
   resources :upload_files
