@@ -143,7 +143,10 @@ module ApplicationHelper
     end)
     # value field
     value = (content_tag :div,:class=>'input' do
-      if f.object.class.try(:read_only_attr?,col_name)
+      logger.info '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+      logger.info f.object.class.name
+      logger.info '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+      if f.object.class.respond_to?(:read_only_attr?) and f.object.class.try(:read_only_attr?,col_name)
         f.hidden_field(col_name) + 
         (content_tag :span,:class=>"uneditable-input #{col_name}__input" do
           display_name(f,col_name)
