@@ -94,7 +94,14 @@ function back()
 	$(".datetime_select").datetimepicker({ dateFormat: 'yy-mm-dd' });
 }
 
-
+$(".start_date__input,.end_date__input").live('change',function(){
+	var start = new Date($(this).closest('.doc_row').find('.start_date__input').val());
+	var end = new Date($(this).closest('.doc_row').find('.end_date__input').val());
+	// get days
+	var days = (end-start)/1000/60/60/24;
+	$(this).closest('.doc_row').find('.days__input').val(days);
+	
+});
 //here we bind the data picker control
 $(function(){
 	$(".date_select").datepicker({ dateFormat: 'yy-mm-dd' });

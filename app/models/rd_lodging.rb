@@ -46,6 +46,6 @@ class RdLodging < ActiveRecord::Base
   end
 
   def set_days
-    self.days = ((end_date-start_date)/1.day).to_int
+    self.days = ((end_date-start_date)/1.day).to_int if self.days.blank?
   end
 end
