@@ -39,18 +39,16 @@ Webreim::Application.routes.draw do
     member do
       put :adjust_amount
       put :pay
+      put :recall  
+      put :submit
+      get :print_preview
     end
     collection do
       get :search
       get :export_to_txt
-      get :pay  
-      get :print
-      get :recall  
       get :batch_pay  
-      get :batch_print  
       get :doc_failed  
       get :batch_approve  
-      put :submit
       get :mark
       get :export_to_xls
     end

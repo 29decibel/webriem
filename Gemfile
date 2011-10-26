@@ -20,7 +20,7 @@ gem "devise"
 gem 'delayed_job'
 gem "pdfkit"
 gem "paperclip"
-gem "prawn",'0.8.4'
+#gem "prawn"
 
 gem "draper"
 

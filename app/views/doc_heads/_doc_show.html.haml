@@ -1,8 +1,11 @@
-.page-header
+.page-header.doc_title
   %h3= "#{doc.doc_type_name}--#{doc.doc_no}"
 -content_for :custom_actions do
   -if !doc.new_record? and doc.un_submit?
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc.id),:remote=>true,:class=>"btn"
+  = link_to_function I18n.t('common_op.btn_print'),"print_doc()",:class=>"btn"
+  = link_to I18n.t('common_op.btn_print_preview'),print_preview_doc_head_path(doc),:class=>"btn",:target => "_blank"
+
 #doc_head_actions.actions
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process

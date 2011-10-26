@@ -4,6 +4,7 @@
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap
 //= require lib/jquery.tablesorter.min
+//= require site
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here

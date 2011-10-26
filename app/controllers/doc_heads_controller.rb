@@ -109,7 +109,7 @@ class DocHeadsController < ApplicationController
   end
   #将单据进入审批阶段
   def submit
-    @doc = DocHead.find(params[:doc_id]) 
+    @doc = DocHead.find(params[:id]) 
     if params[:selected_approver_id] and params[:selected_approver_id].first
       @doc.update_attribute :selected_approver_id,params[:selected_approver_id].first
     end
@@ -125,7 +125,7 @@ class DocHeadsController < ApplicationController
   end
   #撤销单据的审批
   def recall
-  	@doc = DocHead.find(params[:doc_id])
+  	@doc = DocHead.find(params[:id])
     @doc.recall
   	@message="#{I18n.t('controller_msg.doc_approve_failed')}"
     respond_to do |format|
@@ -216,34 +216,21 @@ class DocHeadsController < ApplicationController
     render :json=>"#{I18n.t('controller_msg.batch_approve_ok')}"
     #redirect_to :controller=>:tasks,:action=>:docs_to_approve,:notice=>"批量审批完成",:status => 301
   end
-  #print goes here
-  def print
-    doc=DocHead.find(params[:doc_id])
-    pdf=Prawn::Document.new
-    pdf=to_pdf(pdf,doc)
-    send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
-  end
-  def batch_print
-    pdf=Prawn::Document.new
-    #get the doc ids and pay it
-    params[:doc_ids].split("_").each_with_index do |doc_id,index|
-      if !doc_id.blank?
-        doc=DocHead.find(doc_id.to_i)
-        pdf=to_pdf(pdf,doc)
-        pdf.start_new_page if index!=params[:doc_ids].split("_").count-1
+
+  #==================================output to txt========================================
+
+  def print_preview
+    @doc = DocHead.find(params[:id])
+    #if the doc is current needed to be approved by current person,then new a @work_flow_info
+    if @doc.processing?
+      if @doc.current_approver_id==current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
       end
     end
-    #debugger
-    #pdf.number_pages "第<page>页 共<total>页", [pdf.bounds.right - 50, 0]
-     #pdf.page_count.times do |i|
-     #  pdf.go_to_page(i+1)
-     #  pdf.lazy_bounding_box([pdf.bounds.right-50, pdf.bounds.bottom + 25], :width => 50) {
-     #    pdf.text "#{i+1} / #{page_count}"
-     #  }.draw
-     #end
-    send_data pdf.render, :filename => "hello.pdf",:type => "application/pdf"
+    respond_to do |want|
+      want.html {render :show,:layout=>'doc_print'}
+    end
   end
-  #==================================output to txt========================================
 
   def to_txt_str(docs)
     #get these docs's reciver amount and return a string
@@ -330,6 +317,7 @@ class DocHeadsController < ApplicationController
     end
     render :json=>"ok"
   end
+
   private
   def to_pdf(pdf,doc)
     pdf=case doc.doc_type

@@ -2,9 +2,7 @@
 #the menus
 MenuCategory.delete_all
 basic_cate=MenuCategory.create :name=>"我的单据",:description=>"here is the category of basic settings"
-docs_cate1=MenuCategory.create :name=>"借付款单",:description=>"here is the category of create docs"
-docs_cate2=MenuCategory.create :name=>"报销单据",:description=>"here is the category of create docs"
-docs_cate3=MenuCategory.create :name=>"内部单据",:description=>"here is the category of create docs"
+docs_cate1=MenuCategory.create :name=>"添加报销单",:description=>"here is the category of create docs"
 
 Menu.delete_all
 Menu.create(:name=>'my_docs',:path=>'/task/my_docs',:menu_type=>1,:menu_category=>basic_cate)
@@ -13,28 +11,6 @@ Menu.create(:name=>'docs_to_pay',:path=>'/task/docs_to_pay',:menu_type=>1,:menu_
 Menu.create(:name=>'docs_paid',:path=>'/task/docs_paid',:menu_type=>1,:menu_category=>basic_cate)
 Menu.create(:name=>'docs_approved',:path=>'/task/docs_approved',:menu_type=>1,:menu_category=>basic_cate)
 
-#docs 1
-Menu.create(:name=>"d_Borrow",:path=>"/doc_heads/new?doc_type=1",:menu_type=>1,:menu_category=>docs_cate1)
-Menu.create(:name=>"d_PayDoc",:path=>"/doc_heads/new?doc_type=2",:menu_type=>1,:menu_category=>docs_cate1)
-#docs 3
-Menu.create(:name=>"d_TravelExpense",:path=>"/doc_heads/new?doc_type=9",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"d_EntertainmentExpense",:path=>"/doc_heads/new?doc_type=10",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"d_OvertimeWork",:path=>"/doc_heads/new?doc_type=11",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"d_GeneralExpense",:path=>"/doc_heads/new?doc_type=12",:menu_type=>1,:menu_category=>docs_cate2)
-Menu.create(:name=>"d_Wage",:path=>"/doc_heads/new?doc_type=13",:menu_type=>1,:menu_category=>docs_cate2)
-#docs 2
-Menu.create(:name=>"d_ReciveNotice",:path=>"/doc_heads/new?doc_type=3",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"d_Redeem",:path=>"/doc_heads/new?doc_type=4",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"d_Transfer",:path=>"/doc_heads/new?doc_type=5",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"d_CashDraw",:path=>"/doc_heads/new?doc_type=6",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"d_BuyFinanceProduct",:path=>"/doc_heads/new?doc_type=7",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"d_RedeemFinanceProduct",:path=>"/doc_heads/new?doc_type=8",:menu_type=>1,:menu_category=>docs_cate3)
-Menu.create(:name=>"d_FixedProperty",:path=>"/doc_heads/new?doc_type=14",:menu_type=>1,:menu_category=>docs_cate3)
-
-
-#docs menu goes here
-DOC_TYPES = {1=>"借款单",2=>"付款单",3=>"收款通知单",4=>"结汇",5=>"转账",6=>"现金提取",7=>"购买理财产品",8=>"赎回理财产品",9=>"差旅费报销",10=>"交际费报销",11=>"加班费报销",12=>"普通费用报销",13=>"福利费用报销",14=>'固定资产单据'}
-DOC_TYPES_EN = {1=>"d_Borrow",2=>"d_PayDoc",3=>"d_ReciveNotice",4=>"d_Redeem",5=>"d_Transfer",6=>"d_CashDraw",7=>"d_BuyFinanceProduct",8=>"d_RedeemFinanceProduct",9=>"d_TravelExpense",10=>"d_EntertainmentExpense",11=>"d_OvertimeWork",12=>"d_GeneralExpense",13=>"d_Wage",14=>'d_FixedProperty'}
 
 #region typesde
 RegionType.delete_all
@@ -66,16 +42,15 @@ ConfigHelper.delete_all
 ConfigHelper.create(:key=>"doc_count",:value=>"0")
 #create the admin user
 AdminUser.delete_all
-AdminUser.create(:name=>"admin",:email=>"mike.d.198411@gmail.com",:password=>"123456",:password_confirmation=>"123456")
+AdminUser.create(:name=>"admin",:email=>"admin@oesnow.com",:password=>"123456",:password_confirmation=>"123456")
 #the default user
-User.delete_all
-User.create(:name=>"staff",:email=>"mike.d.198411@gmail.com",:password=>"123456",:password_confirmation=>"123456")
 #create duty
 Duty.delete_all
 duty=Duty.create :name=>"AdminUseOnly",:code=>"admin_use_only"
 #create person
+User.delete_all
 Person.delete_all
-Person.create :name=>"staff",:duty=>duty,:code=>"staff",:phone=>"123456",:e_mail=>"mike.d.1984@gmail.com",:ID_card=>"aaa",:bank_no=>"1111",:bank=>"CNNC"
+Person.create :name=>"staff",:duty=>duty,:code=>"staff",:phone=>"123456",:e_mail=>"staff@oesnow.com",:ID_card=>"aaa",:bank_no=>"1111",:bank=>"CNNC"
 # create system config
 # system config can only be edit value
 # but not change key and delete

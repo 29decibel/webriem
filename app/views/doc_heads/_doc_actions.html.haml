@@ -3,11 +3,9 @@
   -if false and doc_head.approvers_select_list.count>1
     = link_to I18n.t('common_op.btn_start_work_flow'),"#select_approvers",:class=>"btn pop"
   -else
-    = link_to I18n.t('common_op.btn_start_work_flow'), {:controller=>"doc_heads",:action=>"submit",:doc_id=>doc_head.id },:method=>:put,:remote=>true,:class=>"btn"
+    = link_to I18n.t('common_op.btn_start_work_flow'), submit_doc_head_path(doc_head),:remote=>true,:class=>"btn",:method=>'PUT'
 -if doc_head.person==current_user.person and doc_head.processing?
-  = link_to I18n.t('common_op.btn_cancel_wf') ,{:controller=>"doc_heads",:action=>"recall",:doc_id=>doc_head.id},:remote=>true,:class=>"btn"
--if !doc_head.new_record?
-  = link_to I18n.t('common_op.btn_print'), {:controller=>"doc_heads",:action=>"print",:doc_id=>doc_head.id},:class=>"btn"
+  = link_to I18n.t('common_op.btn_cancel_wf') ,recall_doc_head_path(doc_head),:remote=>true,:class=>"btn",:method=>'PUT'
 -if doc_head.processing? and current_user.person.person_type and  ["CA","HR","FI"].include? current_user.person.person_type.code
   = link_to I18n.t('common_op.doc_not_valide_notice'), {:controller=>"doc_heads",:action=>"doc_failed",:doc_id=>doc_head.id},:remote=>true,:class=>"btn"
 -if doc_head.person==current_user.person

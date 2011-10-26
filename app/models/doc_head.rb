@@ -372,6 +372,7 @@ class DocHead < ActiveRecord::Base
     self[:is_split] ? "是" : '否'
   end
 
+
   ####################### vouch ##############################
   def exist_vouch?
     begin

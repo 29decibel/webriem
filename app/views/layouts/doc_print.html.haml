@@ -1,0 +1,13 @@
+!!!!
+%html
+  %head
+    %title 网上报销系统
+    = stylesheet_link_tag "print",:media=>'print'
+    = stylesheet_link_tag "print"
+    = javascript_include_tag "application" 
+  %body
+    =render :partial => "layouts/topbar"
+    .container#content
+      = yield
+    =render :partial => "layouts/footer"
+    #loading

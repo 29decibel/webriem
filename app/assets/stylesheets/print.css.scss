@@ -1,0 +1,51 @@
+.topbar_wrapper,.actions{
+  display:none;
+}
+.container{
+  width:800px;
+  margin:auto;
+}
+#footer{
+  width:800px;
+  margin:auto;
+  margin-top:20px;
+  background:#000;
+  color:white;
+  padding:8px 0px;
+  text-align:center;
+}
+.span4{
+  display:inline-block;
+  width:200px;
+}
+.span6{
+  display:inline-block;
+
+}
+#doc_state_process{
+  text-align:center;
+  padding:5px;
+  font-size:14px;
+  border:1px solid #ccc;
+  span{
+    font-size:14px;
+  }
+}
+.doc_title{
+  h3{
+  background:black;
+  color:white;
+  text-align:center;
+  border:none;
+  padding:7px 0px;}
+}
+.row{
+  font-size:13px;
+  margin:3px;
+}
+.page-header{
+  h3{
+    border-bottom:1px solid #ccc;
+    padding-bottom:0px;
+  } 
+}
