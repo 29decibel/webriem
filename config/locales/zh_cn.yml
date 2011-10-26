@@ -675,8 +675,10 @@
         total_apply_amount: "申请总金额"
         mark: 特殊标记
         total_amount: 申请总金额
-      reim_split_details:
-        dep_id: "分摊详细信息 费用承担部门"
+      reim_split_detail:
+        dep_id: "费用承担部门"
+        project_id: 项目
+        percent_amount: 分摊金额
       borrow_doc_detail:
         sequence: "序号"
         project_id: "项目"

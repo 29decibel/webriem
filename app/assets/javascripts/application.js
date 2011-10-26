@@ -4,6 +4,8 @@
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap
 //= require lib/jquery.tablesorter.min
+//= require chart/highcharts
+//= require chart/themes/gray
 //= require site
 //= require_self
 

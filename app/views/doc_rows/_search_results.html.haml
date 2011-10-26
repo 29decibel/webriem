@@ -1,30 +1,32 @@
 -if @doc_rows and @doc_rows.count>0
   .amount_result
     = "#{I18n.t('common_attr.total_apply_amount')} ￥#{@doc_rows.sum { |d| d.apply_amount || 0 }}"
-    .chart_action
-      =link_to_function I18n.t('chart.project_action'),'draw_by_project()'
-      =link_to_function I18n.t('chart.person_action'),'draw_by_person()'
-      =link_to_function I18n.t('chart.apply_date_action'),'draw_by_apply_date()'
-      =link_to_function I18n.t('chart.fee_action'),'draw_by_fee()'
+  .chart_action
+    =link_to_function I18n.t('chart.project_action'),'draw_by_project()'
+    =link_to_function I18n.t('chart.person_action'),'draw_by_person()'
+    =link_to_function I18n.t('chart.apply_date_action'),'draw_by_apply_date()'
+    =link_to_function I18n.t('chart.fee_action'),'draw_by_fee()'
   #chart
-  %table.oes_theme
-    %tr
-      %th= sort_link @search,:doc_no,{},:remote=>true
-      %th= sort_link @search,:resource_type,{},:remote=>true
-      %th= sort_link @search, :dep_id,{},:remote=>true
-      %th= sort_link @search, :project_id,{},:remote=>true
-      %th= sort_link @search, :person_id,{},:remote=>true
-      %th= sort_link @search, :apply_date,{},:remote=>true
-      %th= sort_link @search, :apply_amount,{},:remote=>true
-    -@doc_rows.each do |dr|
+  %table.zebra-striped.doc_row_search
+    %thead
       %tr
-        %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true
-        %td= I18n.t("common_attr.#{dr.resource_type}")
-        %td=dr.dep.try :name
-        %td=dr.project.try :name
-        %td=dr.person.try :name
-        %td=dr.apply_date
-        %td="￥#{dr.apply_amount}"
+        %th.header= sort_link @search,:doc_no,{},:remote=>true
+        %th.header= sort_link @search,:resource_type,{},:remote=>true
+        %th.header= sort_link @search, :dep_id,{},:remote=>true
+        %th.header= sort_link @search, :project_id,{},:remote=>true
+        %th.header= sort_link @search, :person_id,{},:remote=>true
+        %th.header= sort_link @search, :apply_date,{},:remote=>true
+        %th.header= sort_link @search, :apply_amount,{},:remote=>true
+    %tbody
+      -@doc_rows.each do |dr|
+        %tr
+          %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true
+          %td= I18n.t("common_attr.#{dr.resource_type}")
+          %td=dr.dep.try :name
+          %td=dr.project.try :name
+          %td=dr.person.try :name
+          %td=dr.apply_date
+          %td="￥#{dr.apply_amount}"
 -else
   .empty_search_result= I18n.t('common_attr.empty_search_result')
 .clear

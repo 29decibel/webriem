@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026030859) do
+ActiveRecord::Schema.define(:version => 20111026042342) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -249,7 +249,6 @@ ActiveRecord::Schema.define(:version => 20111026030859) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
-    t.boolean  "is_split"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
     t.integer  "afford_dep_id"
     t.integer  "upload_file_id"
@@ -902,23 +901,6 @@ ActiveRecord::Schema.define(:version => 20111026030859) do
 
   add_index "regions", ["code"], :name => "index_regions_on_code"
   add_index "regions", ["name"], :name => "index_regions_on_name"
-
-  create_table "reim_details", :force => true do |t|
-    t.integer  "sequence"
-    t.integer  "fee_id"
-    t.integer  "dep_id"
-    t.integer  "project_id"
-    t.string   "description"
-    t.decimal  "amount",      :precision => 16, :scale => 2
-    t.integer  "currency_id"
-    t.decimal  "ori_amount",  :precision => 16, :scale => 2
-    t.decimal  "rate",        :precision => 14, :scale => 4
-    t.decimal  "real_amount", :precision => 16, :scale => 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "doc_head_id"
-    t.integer  "is_split"
-  end
 
   create_table "reim_split_details", :force => true do |t|
     t.integer  "doc_head_id"

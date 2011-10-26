@@ -49,6 +49,25 @@ textarea#work_flow_info_comments{
     right:10px;
   }
 }
+.search_result{
+  .amount_result{
+    border:1px solid #ccc;
+    padding:7px;
+    font-size:15px;
+  }
+  .chart_action{
+    padding:7px;
+    text-align:center;
+  }
+  .doc_row_search{
+    margin-top:15px;
+  }
+  .empty_search_result{
+    padding:10px;
+    border:1px dashed #ccc;
+    text-align:center;
+  }
+}
 #doc_state_process{
   .label{
     font-size:12px;

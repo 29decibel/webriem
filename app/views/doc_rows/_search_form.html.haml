@@ -1,38 +1,40 @@
-.form_title= I18n.t('common_attr.search_criteria')
+.page-header
+  %h3
+    =link_to_function I18n.t('common_attr.search_criteria'),'toggle_search()'
 =form_for @search,:remote=>true do |f|
-  .search_area
-    .search_field
-      %span.label= I18n.t('activerecord.attributes.doc_row.person_id')
-      %span.value= ts 'person_id_eq','Person',:text=>Person.find_by_id(@search.search_attributes['person_id_equals']).try(:name),
-        :value=>@search.search_attributes['person_id_equals'],:f=>f
-    .search_field
-      %span.label= I18n.t('activerecord.attributes.doc_row.dep_id')
-      %span.value= ts 'dep_id_eq','Dep',:text=>Dep.find_by_id(@search.search_attributes['dep_id_equals']).try(:name),
-        :value=>@search.search_attributes['dep_id_equals'],:f=>f
-    .search_field
-      %span.label= I18n.t('activerecord.attributes.doc_row.project_id')
-      %span.value= ts 'project_id_eq','Project',:text=>Project.find_by_id(@search.search_attributes['project_id_equals']).try(:name),
-        :value=>@search.search_attributes['project_id_equals'],:f=>f
-  .search_area
-    .search_field.clear
-      %span.label= I18n.t('activerecord.attributes.doc_row.apply_date')
-      %span.value
-        = f.text_field 'apply_date_gte',:class=>'datepicker'
-        = f.text_field 'apply_date_lte',:class=>'datepicker'
-    .search_field
-      %span.label= I18n.t('activerecord.attributes.doc_row.apply_amount')
-      %span.value
-        = f.text_field 'apply_amount_gte'
-        = f.text_field 'apply_amount_lte'
-  .search_area
-    .search_field
-      %span.label= I18n.t('activerecord.attributes.doc_row.resource_type')
-      %span.value= f.select 'resource_type_eq',DocRow::DocResourceTypes.map{|t|[I18n.t("common_attr.#{t}"),t]},:include_blank=>true
-    .search_field
-      %span.label= I18n.t('activerecord.attributes.doc_row.doc_state')
-      %span.value= f.select 'doc_state_eq',DocHead::Doc_State.map{|s| [I18n.t("common_attr.#{s}"),s]},:include_blank=>true
+  .clearfix
+    =f.label I18n.t('activerecord.attributes.doc_row.person_id')
+    .input= ts 'person_id_eq','Person',:text=>Person.find_by_id(@search.search_attributes['person_id_equals']).try(:name),
+      :value=>@search.search_attributes['person_id_equals'],:f=>f
+  .clearfix
+    =f.label I18n.t('activerecord.attributes.doc_row.dep_id')
+    .input= ts 'dep_id_eq','Dep',:text=>Dep.find_by_id(@search.search_attributes['dep_id_equals']).try(:name),
+      :value=>@search.search_attributes['dep_id_equals'],:f=>f
+  .clearfix
+    =f.label I18n.t('activerecord.attributes.doc_row.project_id')
+    .input= ts 'project_id_eq','Project',:text=>Project.find_by_id(@search.search_attributes['project_id_equals']).try(:name),
+      :value=>@search.search_attributes['project_id_equals'],:f=>f
+  .clearfix.clear
+    =f.label I18n.t('activerecord.attributes.doc_row.apply_date')
+    .input
+      = f.date_select 'apply_date_gte',{},:class=>'small'
+      到
+      = f.date_select 'apply_date_lte',{},:class=>'small'
+  .clearfix
+    =f.label I18n.t('activerecord.attributes.doc_row.apply_amount')
+    .input
+      = f.text_field 'apply_amount_gte'
+      = f.text_field 'apply_amount_lte'
+  .clearfix
+    =f.label I18n.t('activerecord.attributes.doc_row.resource_type')
+    .input= f.select 'resource_type_eq',DocRow::DocResourceTypes.map{|t|[I18n.t("common_attr.#{t}"),t]},:include_blank=>true
+  .clearfix
+    =f.label I18n.t('activerecord.attributes.doc_row.doc_state')
+    .input= f.select 'doc_state_eq',DocHead::Doc_State.map{|s| [I18n.t("common_attr.#{s}"),s]},:include_blank=>true
   .actions
-    = link_to content_tag(:span,"#{I18n.t('common_op.btn_search')}"),{:href=>"#"},:class=>"submit minibutton"
+    =f.submit I18n.t('common_op.btn_search'),:class=>"submit btn"
 :javascript
   tokenize();
-  $(function(){$(".datepicker").datepicker();});
+  function toggle_search(){
+    $(".search_form form").toggle('slow');
+  }
