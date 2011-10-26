@@ -10,7 +10,7 @@ group :assets do
   #gem "compass", :git=>'https://github.com/chriseppstein/compass.git'
 end
 
-
+gem 'sass-rails', "  ~> 3.1.0"
 #gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' 
 gem 'twitter-bootstrap-rails'
 
