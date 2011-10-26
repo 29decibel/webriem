@@ -17,14 +17,6 @@
 //}
 //console.log = function() {}
 //------------------------------------------------------------------------
-function init_control()
-{
-  //wrap the datatime picker
-	//$(".datepicker").datepicker();
-	//$(".datetimepicker").datetimepicker();
-  //fire it once
-  $("#doc_head_is_split").change();
-}
 
 $('.doc_row').live('row:numberChanged',function(){
   var fds = $(this).closest('.form_area').find('.doc_row').not(':hidden');
@@ -41,9 +33,10 @@ $('.doc_row').live('row:numberChanged',function(){
   $(this).closest('.doc_detail').trigger('area:numberChanged');
 });
 
+
 $('.doc_detail').live('area:numberChanged',function(){
   var total_num = 0.0;
-  $('.doc_detail').not('.Reciver').each(function(){
+  $('.doc_detail').not('.Reciver').not('.ReimSplitDetail').each(function(){
     var num = parseFloat($(this).find('.doc_total_amount').text());
     total_num+=isNaN(num) ? 0.0 : num;
   });
@@ -55,6 +48,38 @@ $('.doc_detail').live('area:numberChanged',function(){
     $('.Reciver .doc_total_amount').text(total_num.toFixed(2));
   }
 });
+
+$('.ReimSplitDetail .doc_row').live('row:numberChanged',function(){
+  var fds = $(this).closest('.form_area').find('.doc_row').not(':hidden');
+  console.log(fds);
+  var total_num = 0.0;
+  //set every fieldset's value
+  fds.each(function(){
+    //begin set every value
+    var percent_amount =  parseFloat($(this).find('.percent_amount__input').val());
+    $(this).find('.percent_amount__input').html(percent_amount.toFixed(2));
+    total_num+=percent_amount;
+  });
+  $(this).closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));
+
+});
+
+$('.ReimSplitDetail.doc_detail').live('area:numberChanged',function(){
+ var fds = $(this).find('.doc_row').not(':hidden');
+  console.log(fds);
+  var total_num = 0.0;
+  //set every fieldset's value
+  fds.each(function(){
+    //begin set every value
+    var percent_amount =  parseFloat($(this).find('.percent_amount__input').val());
+    $(this).find('.percent_amount__input').html(percent_amount.toFixed(2));
+    total_num+=percent_amount;
+  });
+  $(this).closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));
+
+});
+
+
 
 function wait()
 {
@@ -68,10 +93,6 @@ function back()
 
 //here we bind the data picker control
 $(function(){
-  init_control();	
-  //bind the is_split change events
-  bind_is_split_change_events();
-
   //bind ajax event 
   $("form").live("ajax:beforeSend",function(){
     var offset_amounts=$(this).find("input.offset_amount");
@@ -239,50 +260,6 @@ function tokenize(content)
 
 }
 
-
-
-//bind the change events
-function bind_is_split_change_events()
-{
-	$("select.is_split_reim").live("change",function(){
-		//alert($(this).children("option:selected").text());
-		//$(this).parent
-    console.log("select change");
-		is_split=$("select.is_split_reim").children("option:selected").val();
-		if(is_split==1)
-		{
-			//children.not("div.reim_split_details").find("table tr.fields").hide().find("td:last input").val("true");
-			$(".doc_detail.is_split").show("slow");		
-		}
-		else
-		{
-			//$("div.is_split_reim").find("table tr.fields").hide().find("td:last input").val("true");
-      $("fieldset.split legend input:hidden").val(true);//remove();
-			$(".doc_detail.is_split").hide("slow");		      
-		}
-		//set the doc head's project and afford dep readonly 
-		if($(this).val()==0)
-		{
-			//set project
-			$(this).closest("div.form_block").find("div.project input").removeAttr("disabled");
-			$(this).closest("div.form_block").find("div.project a").show();
-			//set afford dep 
-			$("div.afford_dep input").removeAttr("disabled");
-			$("div.afford_dep a").show();			
-		}
-		else
-		{
-			//set project
-			$(this).closest("div.form_block").find("div.project input").val("");
-			$(this).closest("div.form_block").find("div.project input").attr("readonly","true");
-			$(this).closest("div.form_block").find("div.project a").hide();
-			//set afford dep
-			$("div.afford_dep input").val("");
-			$("div.afford_dep input").attr("readonly","true");
-			$("div.afford_dep a").hide();			
-		}
-	});
-}
 
 function remove_fields(link) {
   if(!confirm("是否真的要删除?")) return;

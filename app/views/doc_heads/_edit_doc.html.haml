@@ -33,7 +33,14 @@
               -doc_relation.doc_row_attrs.each do |dr_col|
                 =tb_input_field(builder,dr_col)
 :javascript
-  $(".ori_amount__input").live('change',function(){
+  $(".ori_amount__input,.rate__input,.percent_amount__input").live('change',function(){
+    // make sure self is float
+    var num = parseFloat($(this).val());
+    if(isNaN(num))
+    {
+      num=0;
+    }
+    $(this).val(num);
     $(this).closest('.doc_row').trigger('row:numberChanged');
   });
   $(function(){
