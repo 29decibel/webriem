@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111025094737) do
+ActiveRecord::Schema.define(:version => 20111026030859) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -790,7 +790,7 @@ ActiveRecord::Schema.define(:version => 20111025094737) do
 
   create_table "rd_travels", :force => true do |t|
     t.integer  "sequence"
-    t.decimal  "days",                  :precision => 8,  :scale => 2
+    t.float  "days"
     t.integer  "region_id"
     t.string   "reason"
     t.string   "reason_type"

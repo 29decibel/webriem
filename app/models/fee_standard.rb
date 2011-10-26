@@ -11,26 +11,7 @@ class FeeStandard < ActiveRecord::Base
   belongs_to :person_type
 
   validates_presence_of :fee_id
-  #enum_attr :busitype,[['借款',0],['报销',1],['其他',2]]
-  #===================================================================================
-  CUSTOM_QUERY={
-      'project_id'=>{:include=>:project,:conditions=>'projects.name like ?'},
-      'region_type_id'=>{:include=>:region_type,:conditions=>'region_types.name like ?'},
-      'duty_id'=>{:include=>:duty,:conditions=>'duties.name like ?'},
-      'lodging_id'=>{:include=>:lodging,:conditions=>'lodgings.name like ?'},
-      'transportation_id'=>{:include=>:transportation,:conditions=>'transportations.name like ?'},
-      'business_type_id'=>{:include=>:business_type,:conditions=>'business_types.name like ?'},
-      'currency_id'=>{:include=>:currency,:conditions=>'currencies.name like ?'},
-      'fee_id'=>{:include=>:fee,:conditions=>'fees.name like ?'},
-      'person_type_id'=>{:include=>:person_type,:conditions=>'person_types.name like ?'},
-  }
-  def self.custom_query(column_name,filter_text)
-    if CUSTOM_QUERY.has_key? column_name
-      CUSTOM_QUERY[column_name]
-    else
-      nil
-    end
-  end
+
   def to_s
     "#{name}"
   end

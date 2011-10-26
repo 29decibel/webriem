@@ -1,6 +1,5 @@
 #coding: utf-8
 #require "ruby-debug"
-require 'prawn/layout'
 class DocHeadsController < ApplicationController
   #get the current login user and fetch the person info by the user name 
   #and this user name is stored in the person table as person.code
