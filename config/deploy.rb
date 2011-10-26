@@ -24,7 +24,7 @@ namespace :deploy do
     # you just told the cap where you what to put , and then the current,release and shared folder will created
     # for you
     set :deploy_to, "/home/fin/app"
-    set :branch, "origin/vrv"
+    set :branch, "origin/doc_meta"
     set :env, "production"
     
     transaction do
@@ -44,7 +44,7 @@ namespace :deploy do
   desc "Rake database"
   task :migrate do
     run "cd #{deploy_to}/current && bundle install --deployment"
-    run "cd #{deploy_to}/current && RAILS_ENV=#{env} bundle exec rake db:schema:load"
+    run "cd #{deploy_to}/current && RAILS_ENV=#{env} bundle exec rake db:auto:migrate"
   end
 
   desc "Restart unicorn"
