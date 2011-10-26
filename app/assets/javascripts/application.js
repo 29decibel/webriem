@@ -476,7 +476,7 @@ function cancel_edit_form (cancel_link) {
 // just for ajax history state
 if (history && history.pushState) {  
   $(function () {  
-    $('a[data-remote=true]').live('click', function () {  
+    $('a[data-remote=true]').not('data-method=PUT').live('click', function () {  
       //var link = $(this);
       console.log('push to history state');
       history.pushState(null, document.title, this.href);  
