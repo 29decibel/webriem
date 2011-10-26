@@ -51,4 +51,10 @@ namespace :data do
     DocRelation.create :doc_meta_info => fl,:doc_row_meta_info => rd_split,:doc_row_attrs=>%w(dep_id project_id percent_amount)
     DocRelation.create :doc_meta_info => fl,:doc_row_meta_info => reciver,:doc_row_attrs=>%w(settlement_id company bank bank_no amount)
   end
+
+  desc "clear data"
+  task :clear => :environment do
+    models = %w(DocHead DocRow) + DocRowMetaInfo.all.map(&:name)
+    models.each {|m|eval(m).delete_all}
+  end
 end
