@@ -1,2 +1,12 @@
--doc.work_flow_infos.each do  |wf|
-  .work_flow_info{:class=>"#{wf.is_ok ? 'approve':'reject'}"}= "#{wf.approver.try(:name)}审批#{wf.is_ok ? '通过':'未通过'} [#{wf.comments}]"
+%table.zebra-striped
+  %thead
+    %th.header 审批人
+    %th.header 审批结果
+    %th.header 评语
+  %tbody
+    -doc.work_flow_infos.each do  |wf|
+      %tr
+        %td= wf.approver.try(:name)
+        %td
+          %span.label{'class'=>wf.is_ok ? 'success' : 'important'}=wf.is_ok ? '通过':'未通过'
+        %td= wf.comments

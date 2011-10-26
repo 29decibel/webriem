@@ -15,3 +15,7 @@
   .actions
     = f.submit "登录",:class=>'btn primary'
 = render :partial => "devise/shared/links" 
+:javascript
+  $(function(){
+    back();
+  });
