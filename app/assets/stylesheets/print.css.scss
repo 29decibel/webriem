@@ -24,11 +24,19 @@
 }
 #doc_state_process{
   text-align:center;
-  padding:5px;
+  padding:9px;
   font-size:14px;
   border:1px solid #ccc;
   span{
     font-size:14px;
+  }
+  .label{
+    padding:3px 6px;
+    font-size:12;
+    color:white;
+    background:#BFBFBF;
+    &.success{background:#46A546;}
+    &.warning{background:#F89406;}
   }
 }
 .doc_title{

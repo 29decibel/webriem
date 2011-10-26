@@ -112,16 +112,7 @@ module ApplicationHelper
     when :text
       f.text_area(col_name,options)
     when :decimal
-      if col.scale == 2
-        content_tag :div,:class=>'input-prepend' do
-          (content_tag :span,:class=>'add-on' do
-            "￥"
-          end) + 
-          f.text_field(col_name,options)
-        end
-      else
-        f.text_field(col_name,options)
-      end
+      f.text_field(col_name,options)
     when :datetime
       f.datetime_select col_name,{},:class=>"small #{options[:class]}"
     when :boolean
@@ -134,13 +125,22 @@ module ApplicationHelper
     raw results
   end
 
+  def currency_prepend(symbol,&block)
+    content_tag :div,:class=>'input-prepend' do
+      (content_tag :span,:class=>'add-on' do
+        symbol
+      end) + block.call
+    end
+  end
+
   def tb_input_field(f,col_name)
+    col = f.object.class.columns.select{|c|c.name==col_name}.first
     # error message
     error_msg = f.object.errors[col_name]
     # inline help message
-    help = (content_tag :span,:class=>'help-inline' do
+    help = error_msg.first ? (content_tag :span,:class=>'help-inline' do
       error_msg.first
-    end)
+    end) : ''
     # value field
     value = (content_tag :div,:class=>'input' do
       logger.info '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
@@ -152,7 +152,13 @@ module ApplicationHelper
           display_name(f,col_name)
         end)
       else
-        tinput(f,col_name) + help
+        if col.type==:decimal and col.scale==2
+          currency_prepend '￥' do
+            tinput(f,col_name) + help
+          end
+        else
+          tinput(f,col_name) + help
+        end
       end
     end)
     # combine
@@ -180,6 +186,7 @@ module ApplicationHelper
     end
   end
 
+  private
   def display_name(f,col_name)
     ass = f.object.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
     if ass

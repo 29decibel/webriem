@@ -27,7 +27,7 @@
       = f.text_field 'apply_amount_lte'
   .clearfix
     =f.label I18n.t('activerecord.attributes.doc_row.resource_type')
-    .input= f.select 'resource_type_eq',DocRow::DocResourceTypes.map{|t|[I18n.t("common_attr.#{t}"),t]},:include_blank=>true
+    .input= f.select 'resource_type_eq',DocRowMetaInfo.all.map{|r_meta|[r_meta.display_name,r_meta.name]},:include_blank=>true
   .clearfix
     =f.label I18n.t('activerecord.attributes.doc_row.doc_state')
     .input= f.select 'doc_state_eq',DocHead::Doc_State.map{|s| [I18n.t("common_attr.#{s}"),s]},:include_blank=>true

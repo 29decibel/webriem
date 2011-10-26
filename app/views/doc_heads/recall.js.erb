@@ -1,2 +1,3 @@
-$("#doc_state_process").html("<%= escape_javascript(render(:partial=>'doc_state_process',:locals=>{:doc=>@doc}))%>");
-$("#doc_head_actions").html("<%= escape_javascript(render(:partial=>'doc_actions',:locals=>{:doc_head=>@doc}))%>");
+//$("#doc_state_process").html("<%= escape_javascript(render(:partial=>'doc_state_process',:locals=>{:doc=>@doc}))%>");
+//$("#doc_head_actions").html("<%= escape_javascript(render(:partial=>'doc_actions',:locals=>{:doc_head=>@doc}))%>");
+$("#content").html("<%= escape_javascript(render "doc_show",:doc=>@doc)%>");

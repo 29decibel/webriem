@@ -21,7 +21,7 @@
       -@doc_rows.each do |dr|
         %tr
           %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true
-          %td= I18n.t("common_attr.#{dr.resource_type}")
+          %td= DocRowMetaInfo.find_by_name(dr.resource_type).display_name
           %td=dr.dep.try :name
           %td=dr.project.try :name
           %td=dr.person.try :name

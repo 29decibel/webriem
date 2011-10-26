@@ -14,8 +14,8 @@ body{
 #loading{
   display:none;
   position:fixed;
-  top:100px;
-  left:150px;
+  top:40px;
+  left:0px;
   width:54px;
   height:55px;
 }
@@ -67,11 +67,6 @@ textarea#work_flow_info_comments{
     text-align:center;
   }
 }
-#doc_state_process{
-  .label{
-    font-size:12px;
-  }
-}
 #footer{
   margin-top:50px;
   color:white;
@@ -86,4 +81,7 @@ textarea#work_flow_info_comments{
   padding:15px 20px;
   text-align:center;
   border:1px solid #ccc;
+  .label{
+    font-size:12px;
+  }
 }
