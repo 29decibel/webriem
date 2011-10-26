@@ -1,2 +1,0 @@
-module WorkFlowInfosHelper
-end

@@ -14,14 +14,23 @@
   = hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""
 -if doc.work_flow
   = hidden_field_tag "doc_id",doc.id
-  %span.label 单据状态
-  %span.label(class= "#{doc.un_submit? ? 'current_flow' : ''}") 未提交
+  %span.label(class= "#{doc.un_submit? ? 'success' : ''}") 未提交
   -if !doc.un_submit? and !doc.rejected? and doc.approvers and doc.approvers.split(',').count>0
     -doc.approvers.split(',').each do |approver_id|
-      %span.label(class= "#{doc.current_approver_id==approver_id.to_i && 'current_flow'}")= Person.find(approver_id).name
+      %span.label(class= "#{doc.current_approver_id==approver_id.to_i && 'warning'}")= Person.find(approver_id).name
   -else
     %span.label ---没有审批人信息---
-    %span.label(class="#{doc.approved? && 'current_flow'}") 审批通过
-    %span.label(class="#{doc.paid? && 'current_flow'}") 已经付款
+  %span.label(class="#{doc.approved? && 'success'}") 审批通过
+  %span.label(class="#{doc.paid? && 'success'}") 已经付款
 -else
   ="该单据没有对应的审批流，设置后才能提交审批"
+:javascript
+  //make warn or success label 's previous to success, i love js
+  $(function(){
+    var pre = $('span.label.warning,span.label.success').prev();
+    while(pre.hasClass('label')){
+      console.log(pre);
+      pre.addClass('success');
+      pre = pre.prev();
+      }
+  });

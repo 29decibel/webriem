@@ -1,5 +1,7 @@
 .page-header.doc_title
-  %h3= "#{doc.doc_type_name}--#{doc.doc_no}"
+  %h3
+    ="#{doc.doc_type_name}--#{doc.doc_no}"
+    %span.label{:class=>doc_state_css(doc)}= doc.doc_state_name
 -content_for :custom_actions do
   -if !doc.new_record? and doc.un_submit?
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc.id),:remote=>true,:class=>"btn"

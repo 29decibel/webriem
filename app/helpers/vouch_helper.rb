@@ -1,2 +1,0 @@
-module VouchHelper
-end

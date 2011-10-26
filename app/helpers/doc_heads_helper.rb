@@ -5,4 +5,5 @@ module DocHeadsHelper
     current_user.person.person_type and 
     current_user.person.person_type.code == person_type and doc.processing?
   end
+
 end
