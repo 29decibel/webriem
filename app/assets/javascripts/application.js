@@ -1,5 +1,8 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require lib/jquery-ui-timepicker-addon
+//= require lib/jquery-ui-timepicker-zh-CN
 //= require enter_to_tab
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap
@@ -87,11 +90,15 @@ function wait()
 function back()
 {
 	$("#loading").hide();
+	$(".date_select").datepicker({ dateFormat: 'yy-mm-dd' });
+	$(".datetime_select").datetimepicker({ dateFormat: 'yy-mm-dd' });
 }
 
 
 //here we bind the data picker control
 $(function(){
+	$(".date_select").datepicker({ dateFormat: 'yy-mm-dd' });
+	$(".datetime_select").datetimepicker({ dateFormat: 'yy-mm-dd' });
   //bind ajax event 
   $("form").live("ajax:beforeSend",function(){
     var offset_amounts=$(this).find("input.offset_amount");
@@ -293,14 +300,6 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g");
   $(link).closest("div.doc_detail").find("div.form_area").append(content.replace(regexp, new_id));
   //set unique num of doc detail
-  //set_sequence_num();
-	//wrap the datatime picker
-	//$(".datepicker").datepicker();
-	//$(".datetimepicker").datetimepicker();
-	//set the doc state
-	//set_form_state();
-	//set reference readonly
-	$("input.ref").attr("readonly",true);
 	//set the fee standard readonly
   $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().trigger('change:region_type');
   $(link).closest('.doc_detail').find('fieldset').not(':hidden').last().addClass('new');
@@ -308,6 +307,8 @@ function add_fields(link, association, content) {
 	add_enter_to_tab();
   //tokenize
   tokenize();
+	$(".date_select").datepicker({ dateFormat: 'yy-mm-dd' });
+	$(".datetime_select").datetimepicker({ dateFormat: 'yy-mm-dd' });
 }
 
 

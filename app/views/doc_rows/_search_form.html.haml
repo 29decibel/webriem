@@ -17,9 +17,9 @@
   .clearfix.clear
     =f.label I18n.t('activerecord.attributes.doc_row.apply_date')
     .input
-      = f.date_select 'apply_date_gte',{},:class=>'small'
+      = f.text_field 'apply_date_gte',:class=>' date_select'
       到
-      = f.date_select 'apply_date_lte',{},:class=>'small'
+      = f.text_field 'apply_date_lte',:class=>' date_select' 
   .clearfix
     =f.label I18n.t('activerecord.attributes.doc_row.apply_amount')
     .input

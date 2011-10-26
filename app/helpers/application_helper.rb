@@ -114,11 +114,11 @@ module ApplicationHelper
     when :decimal
       f.text_field(col_name,options)
     when :datetime
-      f.datetime_select col_name,{},:class=>"small #{options[:class]}"
+      f.text_field col_name,:class=>"datetime_select #{options[:class]}"
     when :boolean
       f.check_box(col_name,options)
     when :date
-      f.date_select col_name,{},:class=>"small #{options[:class]}"
+      f.text_field col_name,:class=>"date_select #{options[:class]}"
     else
       f.text_field(col_name,options)
     end

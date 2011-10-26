@@ -2,10 +2,8 @@
 class RdLodging < ActiveRecord::Base
   include DocIndex
   include AdjustAmount
-  before_validation :set_apply_amount
-  def set_apply_amount
-    self.apply_amount = self.ori_amount / self.rate
-  end
+  before_validation :set_apply_amount,:set_days
+
   belongs_to :region
   belongs_to :reim_detail
   belongs_to :currency
@@ -40,5 +38,14 @@ class RdLodging < ActiveRecord::Base
   end
   def dep
     doc_head.afford_dep
+  end
+
+  private
+  def set_apply_amount
+    self.apply_amount = self.ori_amount / self.rate
+  end
+
+  def set_days
+    self.days = ((end_date-start_date)/1.day).to_int
   end
 end
