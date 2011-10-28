@@ -27,7 +27,7 @@ class DocHead < ActiveRecord::Base
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
   validates_associated :borrow_doc_details
   # add validation of association
-  validate :apply_amount_must_equal,:reciver_amount_can_not_be_zero
+  validate :total_amount_can_not_be_zero
   #validate :must_equal,:if => lambda { |doc| doc.processing? }
   #has many recivers and cp_doc_details
 
@@ -69,7 +69,6 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :common_riems , :allow_destroy => true
   accepts_nested_attributes_for :other_riems , :allow_destroy => true
 
-  before_save :set_total_amount
   after_initialize :init_doc
 
   Doc_State = ['un_submit','processing','approved','paid','rejected']
@@ -132,11 +131,11 @@ class DocHead < ActiveRecord::Base
     end
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
-  def get_total_apply_amount
+  def total_apply_amount
     total = 0
-    doc_meta_info.doc_row_meta_infos.reject{|a|%w(Reciver ReimSplitDetail).include? a.name}.each do |dr_meta|
+    doc_meta_info.doc_row_meta_infos.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
       dr_datas = self.send(eval(dr_meta.name).table_name)
-      total += dr_datas.inject(0){|sum,dr_data|sum + get_amount(dr_data)}
+      total += dr_datas.inject(0){|sum,dr_data|sum + dr_data.apply_amount}
     end
     total
   end
@@ -333,12 +332,8 @@ class DocHead < ActiveRecord::Base
     recivers.first.reduce_amount(amount)
   end
   #callbacks
-  def set_total_amount
-    #update the total_fi_amount
-    # self.total_amount = get_total_apply_amount
-  end
   def total_amount
-    get_total_apply_amount
+    total_apply_amount
   end
   def is_split
     self[:is_split] ? "是" : '否'
@@ -781,6 +776,8 @@ class DocHead < ActiveRecord::Base
       end
     end
   end
+
+
   private
   def cdigest_info(fee_code_match)
     cdigest_info=""
@@ -820,11 +817,7 @@ class DocHead < ActiveRecord::Base
     default_opt.merge! options
   end
 
-  private
-  def reciver_amount_can_not_be_zero
-    errors.add(:base,'单据金额必须大于0') if reciver_amount<=0
-  end
-  def apply_amount_must_equal
-    errors.add(:base,"报销金额必须和收款金额相同，收款金额为#{reciver_amount}，报销金额为#{get_total_apply_amount}") if reciver_amount!=get_total_apply_amount
+  def total_amount_can_not_be_zero
+    errors.add(:base,'单据金额必须大于0') if total_apply_amount<=0
   end
 end
