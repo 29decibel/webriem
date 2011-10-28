@@ -53,7 +53,7 @@ class DocHeadsController < ApplicationController
     @doc = DocHead.new :doc_meta_info=>DocMetaInfo.find(params[:doc_meta_info_id])
     @doc.dep=current_person.dep
     @doc.person=current_person
-    reciver=@doc.recivers.build
+    reciver=@doc.build_reciver
     reciver.init_from_person(current_person)
   end
 

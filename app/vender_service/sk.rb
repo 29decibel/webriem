@@ -1,5 +1,5 @@
 #coding: utf-8
-class Sk
+class U8Vouch
   ProjectsServiceURL="http://gpm.skcc.com/getAllProjectsInformationFromGPM.do"
   EmployeesServiceURL="http://10.120.108.97:7001/web2011/GetEmployeeInformations.do"
   U8ServiceURL="http://10.120.128.28:8008/Service1.asmx"
@@ -20,7 +20,7 @@ class Sk
   #end
   def self.generate_vouch_from_doc(vmodel)
     insert_cmd = "insert into GL_accvouch (iperiod,csign,isignseq,ino_id,inid,dbill_date,idoc,cbill,cdigest,ccode,cexch_name,md,mc, md_f, mc_f, nfrat,cdept_id,cperson_id,citem_id, citem_class, ccode_equal,iyear,iYPeriod) 
-            values('#{Time.now.month}',N'记','1','#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}',N'#{vmodel.cbill}',N'OES_V0.1:#{vmodel.doc_no}','#{vmodel.ccode}',N'#{vmodel.cexch_name}',#{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id.blank? ? 'null' : "'#{vmodel.cperson_id}'"},'#{vmodel.citem_id}','00','#{vmodel.ccode_equal}','#{Time.now.year}','#{Time.now.strftime('%Y%m')}')"
+            values('#{Time.now.month}',N'记','1','#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}',N'#{vmodel.cbill}',N'OES_V0.1:#{vmodel.doc_no}','#{vmodel.ccode}',N'#{vmodel.cexch_name}',#{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id.blank? ? 'null' : "'#{vmodel.cperson_id}'"},'#{vmodel.citem_id}','#{vmodel.citem_class}','#{vmodel.ccode_equal}','#{Time.now.year}','#{Time.now.strftime('%Y%m')}')"
     puts '## begin insert into u8 database of vouch .....'
     puts "## #{insert_cmd}"
     result_msg = ''
@@ -35,6 +35,8 @@ class Sk
     end
     result_msg
   end
+
+
 
   def self.exec_sql(sql)
     client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'',:encoding=>'GBK')

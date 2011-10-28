@@ -642,7 +642,7 @@
         bank: "银行名称"
         settlement_id: "结算方式"
         bank_no: " 银行帐号"
-        company: " 收款人"
+        name: " 收款人"
         hr_amount: 人事调整金额
         fi_amount: 财务调整金额
         supplier_id: 供应商

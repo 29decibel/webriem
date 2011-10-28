@@ -33,11 +33,6 @@ Currency.create :name=>"人民币",:code=>"RMB",:default_rate=>1
 Currency.create :name=>"美元",:code=>"USD",:default_rate=>6
 Currency.create :name=>"韩币",:code=>"KON",:default_rate=>200
 #create doc meta infos here
-DocMetaInfo.delete_all
-DOC_TYPES.each_pair do |k,v|
-  DocMetaInfo.create :name=>v,:code=>k
-end
-#here is the config helper
 ConfigHelper.delete_all
 ConfigHelper.create(:key=>"doc_count",:value=>"0")
 #create the admin user

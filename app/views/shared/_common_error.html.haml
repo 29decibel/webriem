@@ -1,5 +1,5 @@
 -if resource.errors.any?
   .alert-message.error
     %p 有错误发生，请检查输入
-    -resource.errors.full_messages.each do |msg|
+    -resource.errors[:base].each do |msg|
       %p= msg

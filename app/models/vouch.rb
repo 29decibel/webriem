@@ -16,9 +16,19 @@ class Vouch < ActiveRecord::Base
     end
     dep==nil ? "1010" : dep.code
   end
+
   def citem_id
-    project==nil ? "" : project.code
+    if project and citem_valid(project.code)
+      project.code
+    else
+      ''
+    end
   end
+
+  def citem_class
+    self.citem_id.blank? ? '' : '00'
+  end
+
   def cperson_id
     if s_cperson_id and !s_cperson_id.blank?
       return s_cperson_id
@@ -33,7 +43,13 @@ class Vouch < ActiveRecord::Base
   def ccode
     code==nil ? "" : code.ccode
   end
+
   def p_name
     person==nil ? "" : person.name
+  end
+
+  def citem_valid?(citem)
+    sql = "select count(*) as count from fitemss00 where citemcode='#{citem}'"
+    U8Vouch.exec_sql(sql)[0]['count'] > 0
   end
 end

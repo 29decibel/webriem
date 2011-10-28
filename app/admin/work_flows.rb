@@ -30,7 +30,7 @@ ActiveAdmin.register WorkFlow do
         p.input  :dep,:wrapper_html=>{:class=>'dep'}
         p.input  :duty
         p.input  :max_amount
-        # p.input  :_destroy, :as => :boolean, :label => "Delete this picture" unless p.object.new_record?
+        p.input  :can_change_amount
       end
     end
     f.buttons

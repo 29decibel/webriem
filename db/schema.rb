@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026093924) do
+ActiveRecord::Schema.define(:version => 20111028051736) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -262,6 +262,7 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.integer  "doc_state"
     t.integer  "doc_meta_info_id"
     t.integer  "selected_approver_id"
+    t.integer  "reciver_id"
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
@@ -300,8 +301,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
   create_table "doc_row_meta_infos", :force => true do |t|
     t.string   "name"
     t.string   "display_name"
-    t.boolean  "fi_adapt"
-    t.boolean  "hr_adapt"
     t.string   "read_only_attrs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -341,11 +340,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "duties_work_flows", :id => false, :force => true do |t|
-    t.integer "work_flow_id"
-    t.integer "duty_id"
   end
 
   create_table "extra_work_standards", :force => true do |t|
@@ -526,8 +520,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.integer  "doc_head_id"
     t.decimal  "ori_amount",   :precision => 16, :scale => 2, :default => 0
     t.decimal  "apply_amount", :precision => 16, :scale => 2, :default => 0
-    t.decimal  "hr_amount",    :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",    :precision => 16, :scale => 2, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -630,8 +622,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "hr_amount",     :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",     :precision => 16, :scale => 2, :default => 0
     t.integer  "dep_id"
     t.integer  "fee_id"
     t.integer  "project_id"
@@ -703,8 +693,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2, :default => 0
-    t.decimal  "hr_amount",    :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",    :precision => 16, :scale => 2, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "rate",         :precision => 14, :scale => 4, :default=>1
@@ -724,8 +712,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2, :default => 0
-    t.decimal  "hr_amount",    :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",    :precision => 16, :scale => 2, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "rate",         :precision => 14, :scale => 4, :default=>1
@@ -745,8 +731,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.integer  "people_count"
     t.string   "person_names"
     t.decimal  "apply_amount",   :precision => 16, :scale => 2, :default => 0
-    t.decimal  "hr_amount",      :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",      :precision => 16, :scale => 2, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "rate",           :precision => 14, :scale => 4, :default=>1
@@ -774,8 +758,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.integer  "transportation_id"
     t.string   "reason"
     t.decimal  "apply_amount",      :precision => 16, :scale => 2, :default => 0
-    t.decimal  "hr_amount",         :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",         :precision => 16, :scale => 2, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "rate",              :precision => 14, :scale => 4, :default=>1
@@ -796,8 +778,6 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.string   "other_fee"
     t.string   "other_fee_description"
     t.decimal  "apply_amount",          :precision => 16, :scale => 2, :default => 0
-    t.decimal  "hr_amount",             :precision => 16, :scale => 2, :default => 0
-    t.decimal  "fi_amount",             :precision => 16, :scale => 2, :default => 0
     t.integer  "doc_head_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -856,16 +836,13 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
   create_table "recivers", :force => true do |t|
     t.integer  "sequence"
     t.integer  "settlement_id"
-    t.string   "company"
+    t.string   "name"
     t.string   "bank"
     t.string   "bank_no"
     t.decimal  "amount",        :precision => 16, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doc_head_id"
-    t.decimal  "hr_amount",     :precision => 16, :scale => 2
-    t.decimal  "fi_amount",     :precision => 16, :scale => 2
-    t.integer  "supplier_id"
   end
 
   add_index "recivers", ["doc_head_id"], :name => "index_recivers_on_doc_head_id"
@@ -1131,6 +1108,12 @@ ActiveRecord::Schema.define(:version => 20111026093924) do
     t.decimal  "max_amount",   :precision => 8, :scale => 2
     t.boolean  "user_select",                                :default => false
     t.integer  "work_flow_id"
+    t.boolean  "can_change_amount",:default => true
+  end
+
+  create_table "duties_work_flows", :id => false, :force => true do |t|
+    t.integer  "work_flow_id"
+    t.integer  "duty_id"
   end
 
   create_table "work_flows", :force => true do |t|

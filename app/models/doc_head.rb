@@ -25,22 +25,14 @@ class DocHead < ActiveRecord::Base
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
+  validates_associated :borrow_doc_details
   # add validation of association
-  #validate :must_equal,:project_not_null_if_charge
+  validate :apply_amount_must_equal,:reciver_amount_can_not_be_zero
   #validate :must_equal,:if => lambda { |doc| doc.processing? }
   #has many recivers and cp_doc_details
 
-  has_one :inner_remittance, :class_name => "InnerRemittance", :foreign_key => "doc_head_id",:dependent=>:destroy
-  has_one :inner_transfer, :class_name => "InnerTransfer", :foreign_key => "doc_head_id",:dependent=>:destroy
-  has_one :inner_cash_draw, :class_name => "InnerCashDraw", :foreign_key => "doc_head_id",:dependent=>:destroy
-  has_one :buy_finance_product, :class_name => "BuyFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
-  has_one :redeem_finance_product, :class_name => "RedeemFinanceProduct", :foreign_key => "doc_head_id",:dependent=>:destroy
-
-
-  has_many :recivers, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
+  has_one :reciver, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
-  has_many :pay_doc_details, :class_name => "PayDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
-  has_many :rec_notice_details,:class_name=>"RecNoticeDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_travels, :class_name => "RdTravel", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_transports, :class_name => "RdTransport", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_lodgings, :class_name => "RdLodging",:foreign_key=>"doc_head_id",:dependent=>:destroy
@@ -53,7 +45,7 @@ class DocHead < ActiveRecord::Base
   has_many :reim_split_details, :class_name => "ReimSplitDetail",:foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :common_riems, :class_name => "CommonRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
   has_many :other_riems, :class_name => "OtherRiem", :foreign_key => "doc_head_id",:dependent=>:destroy
-  has_many :fixed_properties,:class_name=>"FixedProperty",:foreign_key=>"doc_head_id",:dependent=>:destroy
+
   has_many :reim_cp_offsets,:class_name => "RiemCpOffset",:foreign_key=>"reim_doc_head_id",:dependent=>:destroy
   has_many :cp_docs,:through=>:reim_cp_offsets,:source=>:cp_doc_head
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
@@ -61,15 +53,9 @@ class DocHead < ActiveRecord::Base
   has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
 
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
-  accepts_nested_attributes_for :recivers, :allow_destroy => true
+  accepts_nested_attributes_for :reciver, :allow_destroy => true
+
   accepts_nested_attributes_for :borrow_doc_details , :allow_destroy => true
-  accepts_nested_attributes_for :pay_doc_details , :allow_destroy => true
-  accepts_nested_attributes_for :rec_notice_details , :allow_destroy => true
-  accepts_nested_attributes_for :inner_remittance , :allow_destroy => true
-  accepts_nested_attributes_for :inner_transfer , :allow_destroy => true
-  accepts_nested_attributes_for :inner_cash_draw , :allow_destroy => true
-  accepts_nested_attributes_for :buy_finance_product ,:allow_destroy => true
-  accepts_nested_attributes_for :redeem_finance_product , :allow_destroy => true
   accepts_nested_attributes_for :reim_split_details , :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals , :allow_destroy => true
   accepts_nested_attributes_for :rd_benefits , :allow_destroy => true
@@ -82,7 +68,6 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_transports , :allow_destroy => true
   accepts_nested_attributes_for :common_riems , :allow_destroy => true
   accepts_nested_attributes_for :other_riems , :allow_destroy => true
-  accepts_nested_attributes_for :fixed_properties ,:allow_destroy => true
 
   before_save :set_total_amount
   after_initialize :init_doc
@@ -111,15 +96,6 @@ class DocHead < ActiveRecord::Base
     Person.where('id=?',current_approver_id).first
   end
 
-  def project_not_null_if_charge
-    errors.add(:base,"收款单明细 项目不能为空") if doc_type==2 and borrow_doc_details.size>0 and !borrow_doc_details.all? {|c| c.project_id!=nil}
-  end
-  def must_equal
-    #errors.add(:base, "报销总金额#{total_fi_amount}，- 冲抵总金额#{offset_amount}，不等于 收款总金额#{reciver_amount}") if total_fi_amount-offset_amount!=reciver_amount and doc_type>=9 and doc_type<=12
-    #errors.add(:base,"借款总金额#{total_fi_amount} 不等于 收款总金额#{reciver_amount}") if total_fi_amount!=reciver_amount and doc_type<=2
-    ##the amount of issplit should be equal to total_fi_amount
-    #errors.add(:base,"分摊总金额#{split_total_amount} 不等于 单据总金额#{total_fi_amount}") if is_split==1 and split_total_amount!=total_fi_amount
-  end
   #############################################
 
   #get amount for specific doc type
@@ -141,10 +117,10 @@ class DocHead < ActiveRecord::Base
   end
   def get_amount(d)
     # mark_for_destroy check
-    if d.respond_to? :amount
-      d.amount || 0
-    elsif d.respond_to? :apply_amount
+    if d.respond_to? :apply_amount
       d.apply_amount || 0
+    elsif d.respond_to? :amount
+      d.amount || 0
     elsif d.respond_to? :buy_unit
       d.buy_unit || 0
     elsif d.respond_to? :total_amount
@@ -195,11 +171,7 @@ class DocHead < ActiveRecord::Base
   end
   #reciver total amount
   def reciver_amount
-    total=0
-    recivers.each do |r|
-      total+=(r.amount || 0)
-    end
-    total
+    reciver.amount
   end
   #=====================================================
   #获得所有的审批流程
@@ -846,5 +818,13 @@ class DocHead < ActiveRecord::Base
       :citem_id=>nil,#project code should select
       :ccode_equal=>""}
     default_opt.merge! options
+  end
+
+  private
+  def reciver_amount_can_not_be_zero
+    errors.add(:base,'单据金额必须大于0') if reciver_amount<=0
+  end
+  def apply_amount_must_equal
+    errors.add(:base,"报销金额必须和收款金额相同，收款金额为#{reciver_amount}，报销金额为#{get_total_apply_amount}") if reciver_amount!=get_total_apply_amount
   end
 end
