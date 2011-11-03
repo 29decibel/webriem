@@ -13,7 +13,12 @@
   }
   a{
     padding:5px;
+    height:20px;
     display:block;
+    &.current{
+      background:url(vrv_project_current.png) no-repeat;
+      color:white;
+    }
   }
 }
 .details_container{
