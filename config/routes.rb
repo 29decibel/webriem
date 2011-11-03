@@ -1,6 +1,11 @@
 Webreim::Application.routes.draw do
 
   resources :vrv_projects do
+    member do
+      put :submit
+      put :approve
+      put :reject
+    end
     resources :customer_contacts
     resources :implement_activities
     resources :bill_afters

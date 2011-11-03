@@ -9,6 +9,8 @@
 //= require lib/jquery.tablesorter.min
 //= require chart/highcharts
 //= require chart/themes/gray
+//= require jquery.pjax
+//= require vrv_projects
 //= require site
 //= require_self
 
