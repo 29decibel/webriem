@@ -8,6 +8,7 @@
   %body
     =render :partial => "layouts/topbar"
     .container#content.vrv_project{"data-pjax-container"=>''}
+      =image_tag 'loading_new.gif',:style=>'display:none',:id=>'loading',:class=>'loader'
       .side_bar
         =render "layouts/project_sidebar",:project=>@vrv_project
       .details_container

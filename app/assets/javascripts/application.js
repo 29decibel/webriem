@@ -87,6 +87,7 @@ $('.ReimSplitDetail.doc_detail').live('area:numberChanged',function(){
 
 function wait()
 {
+  $('#loading').css('left',($(window).width()-$('.container').width())/2 - 60);
 	$("#loading").show();
 }
 function back()
@@ -475,35 +476,41 @@ function cancel_edit_form (cancel_link) {
   $(cancel_link).closest(".list_item").find("div.show").show("slow");
 }
 
-// just for ajax history state
-if (history && history.pushState) {  
-  $(function () {  
-    $('a[data-remote=true]').live('click', function () {  
-			if($(this).attr('data-method')=='PUT') return;
-      //var link = $(this);
-      console.log('push to history state');
-      history.pushState(null, document.title, this.href);  
-      return false;  
-    });  
-    
-    $('.search_form a').live('click',function () {  
-      console.log('get form data and save state...');
-      var action = $('.search_form form').attr('action');  
-      var formData = $('.search_form form').serialize();  
-      //$.get(action, formData, null, 'script');  
-      history.replaceState(null, document.title, action + "?" + formData);  
-      return false;  
-    });  
-    
-    $(window).bind("popstate", function () {  
-      console.log(window.history);
-      wait();
-      $.getScript(location.href,function(){
-        back();
-      });  
-    });  
-  })  
-}  
+$(function(){
+	// just for ajax history state
+	if (history && history.pushState) {  
+		$(function () {  
+			$('a[data-remote=true]').live('click', function () {  
+				if($(this).attr('data-method')=='PUT') return;
+				//var link = $(this);
+				console.log('push to history state');
+				history.pushState(null, document.title, this.href);  
+				return false;  
+			});  
+			
+			$('.search_form a').live('click',function () {  
+				console.log('get form data and save state...');
+				var action = $('.search_form form').attr('action');  
+				var formData = $('.search_form form').serialize();  
+				//$.get(action, formData, null, 'script');  
+				history.replaceState(null, document.title, action + "?" + formData);  
+				return false;  
+			});  
+			var popped = ('state' in window.history), initialURL = location.href;
+			$(window).bind("popstate", function () {  
+				var initialPop = !popped && location.href == initialURL;
+  			popped = true;
+  			if ( initialPop ) return;
+				console.log(window.history);
+				wait();
+				$.getScript(location.href,function(){
+					back();
+				});  
+			});  
+			
+		})  
+	}  
+});
 
 function draw_chart(ele,title,data)
 {
