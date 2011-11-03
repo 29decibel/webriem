@@ -1,21 +1,10 @@
-%h1 Listing product_tests
+.page-header
+  %h3 产品测试信息
 
 %table
   %tr
     %th Date
     %th Customer
-    %th Sample
-    %th Sample state
-    %th Customer attitude
-    %th Test result
-    %th Has tech people
-    %th Our tech guy
-    %th Our tech phone
-    %th Tech people point
-    %th Test product order
-    %th Customer like
-    %th Others
-    %th Vrv project
     %th
     %th
     %th
@@ -24,22 +13,8 @@
     %tr
       %td= product_test.date
       %td= product_test.customer
-      %td= product_test.sample
-      %td= product_test.sample_state
-      %td= product_test.customer_attitude
-      %td= product_test.test_result
-      %td= product_test.has_tech_people
-      %td= product_test.our_tech_guy
-      %td= product_test.our_tech_phone
-      %td= product_test.tech_people_point
-      %td= product_test.test_product_order
-      %td= product_test.customer_like
-      %td= product_test.others
-      %td= product_test.vrv_project_id
       %td= link_to 'Show', [@vrv_project,product_test]
       %td= link_to 'Edit', edit_vrv_project_product_test_path(@vrv_project,product_test)
       %td= link_to 'Destroy', [@vrv_project,product_test], :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Product test', new_vrv_project_product_test_path(@vrv_project)
+.actions
+  = link_to '添加产品测试', new_vrv_project_product_test_path(@vrv_project),:class=>"btn primary"

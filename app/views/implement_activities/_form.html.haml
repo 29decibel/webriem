@@ -1,25 +1,6 @@
-= form_for @implement_activity do |f|
-  -if @implement_activity.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@implement_activity.errors.count, "error")} prohibited this implement_activity from being saved:"
-      %ul
-        - @implement_activity.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :engineer
-    = f.text_field :engineer
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .field
-    = f.label :days
-    = f.text_field :days
-  .field
-    = f.label :vrv_project_id
-    = f.number_field :vrv_project_id
+= form_for [@vrv_project,@implement_activity] do |f|
+  -f.object.class.column_names.reject{|cn|%w(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+    =tb_input_field(f,cn)
   .actions
-    = f.submit 'Save'
+    = f.submit '保存',:class=>'btn primary'
+    =link_to "放弃", vrv_project_implement_activities_path(@vrv_project),:class=>'btn'

@@ -1,48 +1,8 @@
+-@product_test.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@product_test,cn)
 %p#notice= notice
+.actions
+  =link_to "返回", vrv_project_product_tests_path(@vrv_project),:class=>'btn'
+  = link_to '修改', edit_vrv_project_product_test_path(@vrv_project,@product_test),:class=>'btn'
+  =link_to "增加产品测试", new_vrv_project_product_test_path(@vrv_project),:class=>'btn'
 
-%p
-  %b Date:
-  = @product_test.date
-%p
-  %b Customer:
-  = @product_test.customer
-%p
-  %b Sample:
-  = @product_test.sample
-%p
-  %b Sample state:
-  = @product_test.sample_state
-%p
-  %b Customer attitude:
-  = @product_test.customer_attitude
-%p
-  %b Test result:
-  = @product_test.test_result
-%p
-  %b Has tech people:
-  = @product_test.has_tech_people
-%p
-  %b Our tech guy:
-  = @product_test.our_tech_guy
-%p
-  %b Our tech phone:
-  = @product_test.our_tech_phone
-%p
-  %b Tech people point:
-  = @product_test.tech_people_point
-%p
-  %b Test product order:
-  = @product_test.test_product_order
-%p
-  %b Customer like:
-  = @product_test.customer_like
-%p
-  %b Others:
-  = @product_test.others
-%p
-  %b Vrv project:
-  = @product_test.vrv_project_id
-
-= link_to 'Edit', edit_product_test_path(@product_test)
-\|
-= link_to 'Back', product_tests_path

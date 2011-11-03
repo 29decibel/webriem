@@ -1,24 +1,5 @@
-%p#notice= notice
+-@contract_predict.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@contract_predict,cn)
 
-%p
-  %b Product:
-  = @contract_predict.product
-%p
-  %b Package num:
-  = @contract_predict.package_num
-%p
-  %b Points:
-  = @contract_predict.points
-%p
-  %b Price:
-  = @contract_predict.price
-%p
-  %b Sign date:
-  = @contract_predict.sign_date
-%p
-  %b Vrv project:
-  = @contract_predict.vrv_project_id
-
-= link_to 'Edit', edit_contract_predict_path(@contract_predict)
-\|
-= link_to 'Back', contract_predicts_path
+.actions
+  = link_to '修改', edit_vrv_project_contract_predict_path(@vrv_project,@contract_predict),:class=>'btn'

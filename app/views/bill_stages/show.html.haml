@@ -1,24 +1,5 @@
-%p#notice= notice
+-@bill_stage.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@bill_stage,cn)
 
-%p
-  %b Sample choose:
-  = @bill_stage.sample_choose
-%p
-  %b Points:
-  = @bill_stage.points
-%p
-  %b Price cal way:
-  = @bill_stage.price_cal_way
-%p
-  %b Price sample:
-  = @bill_stage.price_sample
-%p
-  %b Others:
-  = @bill_stage.others
-%p
-  %b Vrv project:
-  = @bill_stage.vrv_project_id
-
-= link_to 'Edit', edit_bill_stage_path(@bill_stage)
-\|
-= link_to 'Back', bill_stages_path
+.actions
+  = link_to '修改', edit_vrv_project_bill_stage_path(@vrv_project,@bill_stage),:class=>'btn'

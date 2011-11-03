@@ -1,12 +1,12 @@
-%h1 Listing implement_activities
+.page-header
+  %h3 实施活动
 
 %table
   %tr
-    %th Engineer
-    %th Start date
-    %th End date
-    %th Days
-    %th Vrv project
+    %th 工程师
+    %th 开始时间
+    %th 结束时间
+    %th 天数
     %th
     %th
     %th
@@ -17,11 +17,8 @@
       %td= implement_activity.start_date
       %td= implement_activity.end_date
       %td= implement_activity.days
-      %td= implement_activity.vrv_project_id
       %td= link_to 'Show', [@vrv_project,implement_activity]
       %td= link_to 'Edit', edit_vrv_project_implement_activity_path(@vrv_project,implement_activity)
       %td= link_to 'Destroy', [@vrv_project,implement_activity], :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Implement activity', new_vrv_project_implement_activity_path(@vrv_project)
+.actions
+  = link_to '添加实施活动', new_vrv_project_implement_activity_path(@vrv_project),:class=>'btn primary'

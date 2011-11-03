@@ -1,30 +1,8 @@
+-@busi_communication.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@busi_communication,cn)
 %p#notice= notice
+.actions
+  =link_to "返回", vrv_project_busi_communications_path(@vrv_project),:class=>'btn'
+  = link_to '修改', edit_vrv_project_busi_communication_path(@vrv_project,@busi_communication),:class=>'btn'
+  =link_to "增加商务交流", new_vrv_project_busi_communication_path(@vrv_project),:class=>'btn'
 
-%p
-  %b Date:
-  = @busi_communication.date
-%p
-  %b Person:
-  = @busi_communication.person
-%p
-  %b Duty:
-  = @busi_communication.duty
-%p
-  %b Phone:
-  = @busi_communication.phone
-%p
-  %b Way:
-  = @busi_communication.way
-%p
-  %b Feedback:
-  = @busi_communication.feedback
-%p
-  %b Others:
-  = @busi_communication.others
-%p
-  %b Vrv project:
-  = @busi_communication.vrv_project_id
-
-= link_to 'Edit', edit_busi_communication_path(@busi_communication)
-\|
-= link_to 'Back', busi_communications_path
