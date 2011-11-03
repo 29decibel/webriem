@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111028051736) do
+ActiveRecord::Schema.define(:version => 20111103063158) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1130,4 +1130,162 @@ ActiveRecord::Schema.define(:version => 20111028051736) do
     t.datetime "updated_at"
   end
 
+  #-------------------------------------------
+
+  create_table :vrv_projects do |t|
+    t.string :customer
+    t.string :place
+    t.string :website
+    t.string :phone
+    t.string :email
+    t.date :start_date
+    t.string :scale
+    t.string :amount
+    t.string :industry
+    t.integer :agent
+    t.string :agent_contact
+    t.string :channel
+    t.string :duty_description
+    t.string :state
+    t.string :system_star
+    t.string :human_star
+
+    t.timestamps
+  end
+
+  create_table :competitors do |t|
+    t.string :name
+    t.string :agent
+    t.float :price
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :network_conditions do |t|
+    t.string :ip_address
+    t.string :hub
+    t.string :dns_server
+    t.string :windows_domain
+    t.string :network_connection
+    t.string :physical_keep
+    t.string :port_listen
+    t.string :network_inside
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :tech_communications do |t|
+    t.date :date
+    t.string :phone
+    t.string :duty
+    t.string :contents
+    t.string :feedback
+    t.date :customer_project_start_date
+    t.boolean :has_tech_people
+    t.string :our_tech_guy
+    t.string :tech_level
+    t.string :tech_attitude
+    t.text :others
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :busi_communications do |t|
+    t.date :date
+    t.string :person
+    t.string :duty
+    t.string :phone
+    t.string :way
+    t.string :feedback
+    t.text :others
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+  create_table :product_tests do |t|
+    t.date :date
+    t.string :customer
+    t.string :sample
+    t.string :sample_state
+    t.string :customer_attitude
+    t.string :test_result
+    t.boolean :has_tech_people
+    t.string :our_tech_guy
+    t.string :our_tech_phone
+    t.string :tech_people_point
+    t.string :test_product_order
+    t.string :customer_like
+    t.text :others
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :bill_prepares do |t|
+    t.string :sample_choose
+    t.string :price_point
+    t.string :price_cal_way
+    t.text :others
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+  create_table :contract_predicts do |t|
+    t.string :product
+    t.integer :package_num
+    t.float :points
+    t.float :price
+    t.date :sign_date
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :bill_stages do |t|
+    t.string :sample_choose
+    t.string :points
+    t.string :price_cal_way
+    t.string :price_sample
+    t.text :others
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :bill_afters do |t|
+    t.string :bill_state
+    t.string :contract
+    t.string :money_back
+    t.date :pay_date
+    t.date :begin_implement_date
+    t.date :end_implement_date
+    t.date :accept_date
+    t.text :others
+    t.float :bill_price
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :implement_activities do |t|
+    t.string :engineer
+    t.date :start_date
+    t.date :end_date
+    t.float :days
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
+
+  create_table :customer_contacts do |t|
+    t.string :name
+    t.string :duty
+    t.string :phone
+    t.integer :vrv_project_id
+
+    t.timestamps
+  end
 end

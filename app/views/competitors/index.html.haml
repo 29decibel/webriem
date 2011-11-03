@@ -1,0 +1,21 @@
+.page-header
+  %h3 竞争情况
+%table
+  %tr
+    %th 对手名称
+    %th 代理商
+    %th 价格
+    %th
+    %th
+    %th
+
+  - @competitors.each do |competitor|
+    %tr
+      %td= competitor.name
+      %td= competitor.agent
+      %td= competitor.price
+      %td= link_to '查看', [@vrv_project,competitor]
+      %td= link_to '修改', edit_vrv_project_competitor_path(@vrv_project,competitor)
+      %td= link_to '删除', [@vrv_project,competitor], :confirm => '确定删除?', :method => :delete
+.actions
+  = link_to '添加竞争对手信息', new_vrv_project_competitor_path(@vrv_project),:class=>"btn primary"

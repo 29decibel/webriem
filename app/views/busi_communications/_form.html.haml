@@ -1,0 +1,5 @@
+= form_for [@vrv_project,@busi_communication] do |f|
+  -f.object.class.column_names.reject{|cn|%w(id created_at updated_at).include? cn}.each do |cn|
+    =tb_input_field(f,cn)
+  .actions
+    = f.submit 'Save'

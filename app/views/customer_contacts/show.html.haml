@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @customer_contact.name
+%p
+  %b Duty:
+  = @customer_contact.duty
+%p
+  %b Phone:
+  = @customer_contact.phone
+%p
+  %b Vrv project:
+  = @customer_contact.vrv_project_id
+
+= link_to 'Edit', edit_customer_contact_path(@customer_contact)
+\|
+= link_to 'Back', customer_contacts_path

@@ -1,0 +1,24 @@
+// Place all the styles related to the VrvProjects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.side_bar{
+  float:left;
+  padding:20px;
+  width:180px;
+  background:white;
+  .project_info{
+    border:1px solid #ccc;
+    padding:5px;
+    margin-bottom:20px;
+  }
+  a{
+    padding:5px;
+    display:block;
+  }
+}
+.details_container{
+  background:white;
+  float:right;
+  width:670px;
+  padding:20px;
+}

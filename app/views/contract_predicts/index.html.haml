@@ -1,0 +1,29 @@
+%h1 Listing contract_predicts
+
+%table
+  %tr
+    %th Product
+    %th Package num
+    %th Points
+    %th Price
+    %th Sign date
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @contract_predicts.each do |contract_predict|
+    %tr
+      %td= contract_predict.product
+      %td= contract_predict.package_num
+      %td= contract_predict.points
+      %td= contract_predict.price
+      %td= contract_predict.sign_date
+      %td= contract_predict.vrv_project_id
+      %td= link_to 'Show', contract_predict
+      %td= link_to 'Edit', edit_contract_predict_path(contract_predict)
+      %td= link_to 'Destroy', contract_predict, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Contract predict', new_contract_predict_path

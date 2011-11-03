@@ -1,0 +1,21 @@
+-if !@vrv_project.new_record?
+  .project_info
+    .name= link_to project.customer,project
+    .start_date= project.start_date
+    .state= project.state
+    .system_star= project.system_star
+    .human_star= project.human_star
+.links
+  -if !@vrv_project.new_record?
+    = link_to '编辑项目信息', edit_vrv_project_path(project)
+    = link_to "竞争情况", vrv_project_competitors_path(project)
+    = link_to "网络环境", project.network_condition ? [project,project.network_condition] : new_vrv_project_network_condition_path(project)
+    = link_to "技术交流", vrv_project_tech_communications_path(project)
+    = link_to "商务交流", vrv_project_busi_communications_path(project)
+    = link_to "产品测试", vrv_project_product_tests_path(project)
+    = link_to "招标准备", project.bill_prepare ? [project,project.bill_prepare] : new_vrv_project_bill_prepare_path(project)
+    = link_to "合同预测", project.contract_predict ? [project,project.contract_predict] : new_vrv_project_contract_predict_path(project)
+    = link_to "投标阶段", project.bill_stage ? [project,project.bill_stage] : new_vrv_project_bill_stage_path(project)
+    = link_to "投标后", project.bill_after ? [project,project.bill_after] : new_vrv_project_bill_after_path(project)
+    = link_to "实施活动", vrv_project_implement_activities_path(project)
+  = link_to '返回项目列表', vrv_projects_path

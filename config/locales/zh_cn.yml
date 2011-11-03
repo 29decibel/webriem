@@ -837,39 +837,117 @@
         fi_amount: 财务调整金额
         rate: 汇率
         currency_id: 币种
-      buy_finance_product:
-        name: "理财产品名称"
-        rate: "理财产品利率"      
-        account_id: "购买账户"
-        buy_date: "预计购买日期"
-        redeem_date: "预计赎回日期"
-        description: "申请购买原因及预期收益"
-        amount: "申请购买金额"
-      redeem_finance_product:
-        name: "理财产品名称"
-        rate: "理财产品利率"
-        account_id: "赎回账户"
-        clear_date: "预计赎回日期"
-        redeem_date: "申请赎回日期"
-        description: "申请赎回原因"
-        amount: "申请赎回金额"
-      inner_remittance:
-        out_account_id: "结汇账户"
-        amount: "申请金额"  
-        description: "申请原因"
-        remain_amount: "结汇账户结汇后余额"
-        now_rate_price: "当日汇率"
-        currency_id: "币种"
-        in_account_id: "收款账户"  
-        in_amount_after: "收款账户结汇后余额"
-      inner_transfer:
-        out_account_id: "转出账户"
-        out_amount_before: "转出账户转帐前余额"
-        in_amount_before: ""
-        amount: "申请金额" 
-        description: "转帐申请原因"
-        in_account_id: "转入账户"
-        in_amount_after: "转入账户转帐后余额"
+      vrv_project:
+        customer: 用户全称
+        place: 项目所在地
+        website: 网站
+        phone: 电话
+        email: 电子邮件
+        start_date: 开始日期
+        scale: 项目规模
+        amount: 项目预计金额
+        industry: 项目所在行业
+        agent: 代理商
+        agent_contact: 代理商联系人
+        channel: 渠道管理
+        duty_description: 该成员职责描述
+        human_star: 系统星级
+        system_star: 真实星级
+        state: 项目状态
+      customer_contact:
+        name: 姓名
+        duty: 职务
+        phone: 手机
+        vrv_project_id: 项目
+      competitor:
+        name: 竞争对手产品名称
+        agent: 代理商
+        price: 预计价格
+        vrv_project_id: 
+      network_condition:
+        ip_address: 客户IP地址情况
+        hub: 
+        dns_server: 
+        windows_domain: 
+        network_connection: 
+        physical_keep: 
+        port_listen: 
+        network_inside: 
+        vrv_project_id: 
+      tech_communication:
+        date: 
+        phone: 
+        duty: 
+        contents: 
+        feedback: 
+        customer_project_start_date: 
+        has_tech_people: 
+        our_tech_guy: 
+        tech_level: 
+        tech_attitude: 
+        others: 
+        vrv_project_id: 
+      busi_communication:
+        date: 
+        person: 
+        duty: 
+        phone: 
+        way: 
+        feedback: 
+        others: 
+        vrv_project_id: 
+      product_test:
+        date: 
+        customer: 
+        sample: 
+        sample_state: 
+        customer_attitude: 
+        test_result: 
+        has_tech_people: 
+        our_tech_guy: 
+        our_tech_phone: 
+        tech_people_point: 
+        test_product_order: 
+        customer_like: 
+        others: 
+        vrv_project_id: 
+      bill_prepare:
+        sample_choose:
+        price_point:
+        price_cal_way:
+        others:
+        vrv_project_id:
+      contract_predict:
+        product: 
+        package_num: 
+        points: 
+        price: 
+        sign_date: 
+        vrv_project_id: 
+      bill_stage:
+        sample_choose: 
+        points: 
+        price_cal_way: 
+        price_sample: 
+        others: 
+        vrv_project_id: 
+      bill_after:
+        bill_state: 
+        contract: 
+        money_back: 
+        pay_date: 
+        begin_implement_date: 
+        end_implement_date: 
+        accept_date: 
+        others: 
+        bill_price: 
+        vrv_project_id: 
+      implement_activitie:
+        engineer: 
+        start_date: 
+        end_date: 
+        days: 
+        vrv_project_id: 
     errors:
       template: # ~ 2.3.5 backward compatible
         header:

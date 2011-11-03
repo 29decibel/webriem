@@ -1,0 +1,37 @@
+= form_for [@vrv_project,@network_condition] do |f|
+  -if @network_condition.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@network_condition.errors.count, "error")} prohibited this network_condition from being saved:"
+      %ul
+        - @network_condition.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :ip_address
+    = f.text_field :ip_address
+  .field
+    = f.label :hub
+    = f.text_field :hub
+  .field
+    = f.label :dns_server
+    = f.text_field :dns_server
+  .field
+    = f.label :windows_domain
+    = f.text_field :windows_domain
+  .field
+    = f.label :network_connection
+    = f.text_field :network_connection
+  .field
+    = f.label :physical_keep
+    = f.text_field :physical_keep
+  .field
+    = f.label :port_listen
+    = f.text_field :port_listen
+  .field
+    = f.label :network_inside
+    = f.text_field :network_inside
+  .field
+    = f.label :vrv_project_id
+    = f.number_field :vrv_project_id
+  .actions
+    = f.submit 'Save'

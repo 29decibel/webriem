@@ -1,4 +1,19 @@
 Webreim::Application.routes.draw do
+
+  resources :vrv_projects do
+    resources :customer_contacts
+    resources :implement_activities
+    resources :bill_afters
+    resources :bill_stages
+    resources :contract_predicts
+    resources :bill_prepares
+    resources :product_tests
+    resources :busi_communications
+    resources :tech_communications
+    resources :network_conditions
+    resources :competitors
+  end
+
   resource "doc_row_resource"
 
   devise_for :admin_users, ActiveAdmin::Devise.config

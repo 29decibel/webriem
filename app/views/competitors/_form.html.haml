@@ -1,0 +1,6 @@
+= form_for [@vrv_project,@competitor] do |f|
+  -f.object.class.column_names.reject{|cn|%w(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+    =tb_input_field(f,cn)
+  .actions
+    = f.submit '保存',:class=>'btn primary'
+    =link_to "放弃", vrv_project_competitors_path(@vrv_project),:class=>'btn'

@@ -1,0 +1,33 @@
+%h1 Listing busi_communications
+
+%table
+  %tr
+    %th Date
+    %th Person
+    %th Duty
+    %th Phone
+    %th Way
+    %th Feedback
+    %th Others
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @busi_communications.each do |busi_communication|
+    %tr
+      %td= busi_communication.date
+      %td= busi_communication.person
+      %td= busi_communication.duty
+      %td= busi_communication.phone
+      %td= busi_communication.way
+      %td= busi_communication.feedback
+      %td= busi_communication.others
+      %td= busi_communication.vrv_project_id
+      %td= link_to 'Show', [@vrv_project,busi_communication]
+      %td= link_to 'Edit', edit_vrv_project_busi_communication_path(@vrv_project,busi_communication)
+      %td= link_to 'Destroy', [@vrv_project,busi_communication], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Busi communication', new_vrv_project_busi_communication_path(@vrv_project)

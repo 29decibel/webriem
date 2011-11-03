@@ -7,6 +7,7 @@
 *= require site
 *= require token-input
 *= require token-input-facebook
+*= require vrv_projects
 *= require_self
 */
 

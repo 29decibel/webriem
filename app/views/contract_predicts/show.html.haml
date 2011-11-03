@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Product:
+  = @contract_predict.product
+%p
+  %b Package num:
+  = @contract_predict.package_num
+%p
+  %b Points:
+  = @contract_predict.points
+%p
+  %b Price:
+  = @contract_predict.price
+%p
+  %b Sign date:
+  = @contract_predict.sign_date
+%p
+  %b Vrv project:
+  = @contract_predict.vrv_project_id
+
+= link_to 'Edit', edit_contract_predict_path(@contract_predict)
+\|
+= link_to 'Back', contract_predicts_path

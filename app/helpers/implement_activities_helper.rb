@@ -1,0 +1,2 @@
+module ImplementActivitiesHelper
+end

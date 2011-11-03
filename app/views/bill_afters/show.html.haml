@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Bill state:
+  = @bill_after.bill_state
+%p
+  %b Contract:
+  = @bill_after.contract
+%p
+  %b Money back:
+  = @bill_after.money_back
+%p
+  %b Pay date:
+  = @bill_after.pay_date
+%p
+  %b Begin implement date:
+  = @bill_after.begin_implement_date
+%p
+  %b End implement date:
+  = @bill_after.end_implement_date
+%p
+  %b Accept date:
+  = @bill_after.accept_date
+%p
+  %b Others:
+  = @bill_after.others
+%p
+  %b Bill price:
+  = @bill_after.bill_price
+%p
+  %b Vrv project:
+  = @bill_after.vrv_project_id
+
+= link_to 'Edit', edit_bill_after_path(@bill_after)
+\|
+= link_to 'Back', bill_afters_path

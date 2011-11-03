@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Sample choose:
+  = @bill_stage.sample_choose
+%p
+  %b Points:
+  = @bill_stage.points
+%p
+  %b Price cal way:
+  = @bill_stage.price_cal_way
+%p
+  %b Price sample:
+  = @bill_stage.price_sample
+%p
+  %b Others:
+  = @bill_stage.others
+%p
+  %b Vrv project:
+  = @bill_stage.vrv_project_id
+
+= link_to 'Edit', edit_bill_stage_path(@bill_stage)
+\|
+= link_to 'Back', bill_stages_path

@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Ip address:
+  = @network_condition.ip_address
+%p
+  %b Hub:
+  = @network_condition.hub
+%p
+  %b Dns server:
+  = @network_condition.dns_server
+%p
+  %b Windows domain:
+  = @network_condition.windows_domain
+%p
+  %b Network connection:
+  = @network_condition.network_connection
+%p
+  %b Physical keep:
+  = @network_condition.physical_keep
+%p
+  %b Port listen:
+  = @network_condition.port_listen
+%p
+  %b Network inside:
+  = @network_condition.network_inside
+%p
+  %b Vrv project:
+  = @network_condition.vrv_project_id
+
+= link_to 'Edit', edit_vrv_project_network_condition_path(@vrv_project,@network_condition)
+\|
+= link_to 'Back', @vrv_project

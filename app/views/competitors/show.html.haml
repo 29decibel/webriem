@@ -1,0 +1,9 @@
+.page-header
+  %h3=@competitor.name
+-@competitor.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@competitor,cn)
+%p#notice= notice
+.actions
+  =link_to "返回", vrv_project_competitors_path(@vrv_project),:class=>'btn'
+  =link_to "增加竞争对手信息", new_vrv_project_competitor_path(@vrv_project),:class=>'btn'
+

@@ -1,0 +1,42 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @tech_communication.date
+%p
+  %b Phone:
+  = @tech_communication.phone
+%p
+  %b Duty:
+  = @tech_communication.duty
+%p
+  %b Contents:
+  = @tech_communication.contents
+%p
+  %b Feedback:
+  = @tech_communication.feedback
+%p
+  %b Customer project start date:
+  = @tech_communication.customer_project_start_date
+%p
+  %b Has tech people:
+  = @tech_communication.has_tech_people
+%p
+  %b Our tech guy:
+  = @tech_communication.our_tech_guy
+%p
+  %b Tech level:
+  = @tech_communication.tech_level
+%p
+  %b Tech attitude:
+  = @tech_communication.tech_attitude
+%p
+  %b Others:
+  = @tech_communication.others
+%p
+  %b Vrv project:
+  = @tech_communication.vrv_project_id
+
+= link_to 'Edit', edit_tech_communication_path(@tech_communication)
+\|
+= link_to 'Back', tech_communications_path

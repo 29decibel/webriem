@@ -1,0 +1,5 @@
+-@bill_prepare.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@bill_prepare,cn)
+
+.actions
+  = link_to '修改', edit_vrv_project_bill_prepare_path(@vrv_project,@bill_prepare),:class=>'btn'

@@ -1,0 +1,2 @@
+module BillPreparesHelper
+end

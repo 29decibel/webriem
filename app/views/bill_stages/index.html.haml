@@ -1,0 +1,29 @@
+%h1 Listing bill_stages
+
+%table
+  %tr
+    %th Sample choose
+    %th Points
+    %th Price cal way
+    %th Price sample
+    %th Others
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @bill_stages.each do |bill_stage|
+    %tr
+      %td= bill_stage.sample_choose
+      %td= bill_stage.points
+      %td= bill_stage.price_cal_way
+      %td= bill_stage.price_sample
+      %td= bill_stage.others
+      %td= bill_stage.vrv_project_id
+      %td= link_to 'Show', bill_stage
+      %td= link_to 'Edit', edit_bill_stage_path(bill_stage)
+      %td= link_to 'Destroy', bill_stage, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Bill stage', new_bill_stage_path

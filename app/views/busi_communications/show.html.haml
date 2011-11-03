@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @busi_communication.date
+%p
+  %b Person:
+  = @busi_communication.person
+%p
+  %b Duty:
+  = @busi_communication.duty
+%p
+  %b Phone:
+  = @busi_communication.phone
+%p
+  %b Way:
+  = @busi_communication.way
+%p
+  %b Feedback:
+  = @busi_communication.feedback
+%p
+  %b Others:
+  = @busi_communication.others
+%p
+  %b Vrv project:
+  = @busi_communication.vrv_project_id
+
+= link_to 'Edit', edit_busi_communication_path(@busi_communication)
+\|
+= link_to 'Back', busi_communications_path

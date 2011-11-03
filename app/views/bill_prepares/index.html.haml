@@ -1,0 +1,27 @@
+%h1 Listing bill_prepares
+
+%table
+  %tr
+    %th Sample choose
+    %th Price point
+    %th Price cal way
+    %th Others
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @bill_prepares.each do |bill_prepare|
+    %tr
+      %td= bill_prepare.sample_choose
+      %td= bill_prepare.price_point
+      %td= bill_prepare.price_cal_way
+      %td= bill_prepare.others
+      %td= bill_prepare.vrv_project_id
+      %td= link_to 'Show', bill_prepare
+      %td= link_to 'Edit', edit_bill_prepare_path(bill_prepare)
+      %td= link_to 'Destroy', bill_prepare, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Bill prepare', new_bill_prepare_path

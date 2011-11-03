@@ -1,0 +1,35 @@
+%h1 Listing network_conditions
+
+%table
+  %tr
+    %th Ip address
+    %th Hub
+    %th Dns server
+    %th Windows domain
+    %th Network connection
+    %th Physical keep
+    %th Port listen
+    %th Network inside
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @network_conditions.each do |network_condition|
+    %tr
+      %td= network_condition.ip_address
+      %td= network_condition.hub
+      %td= network_condition.dns_server
+      %td= network_condition.windows_domain
+      %td= network_condition.network_connection
+      %td= network_condition.physical_keep
+      %td= network_condition.port_listen
+      %td= network_condition.network_inside
+      %td= network_condition.vrv_project_id
+      %td= link_to 'Show', network_condition
+      %td= link_to 'Edit', edit_network_condition_path(network_condition)
+      %td= link_to 'Destroy', network_condition, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Network condition', new_network_condition_path

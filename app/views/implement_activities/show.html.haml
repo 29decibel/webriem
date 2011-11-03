@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Engineer:
+  = @implement_activity.engineer
+%p
+  %b Start date:
+  = @implement_activity.start_date
+%p
+  %b End date:
+  = @implement_activity.end_date
+%p
+  %b Days:
+  = @implement_activity.days
+%p
+  %b Vrv project:
+  = @implement_activity.vrv_project_id
+
+= link_to 'Edit', edit_implement_activity_path(@implement_activity)
+\|
+= link_to 'Back', implement_activities_path

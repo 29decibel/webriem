@@ -1,0 +1,2 @@
+module ContractPredictsHelper
+end

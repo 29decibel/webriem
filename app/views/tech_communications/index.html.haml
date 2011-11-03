@@ -1,0 +1,41 @@
+%h1 Listing tech_communications
+
+%table
+  %tr
+    %th Date
+    %th Phone
+    %th Duty
+    %th Contents
+    %th Feedback
+    %th Customer project start date
+    %th Has tech people
+    %th Our tech guy
+    %th Tech level
+    %th Tech attitude
+    %th Others
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @tech_communications.each do |tech_communication|
+    %tr
+      %td= tech_communication.date
+      %td= tech_communication.phone
+      %td= tech_communication.duty
+      %td= tech_communication.contents
+      %td= tech_communication.feedback
+      %td= tech_communication.customer_project_start_date
+      %td= tech_communication.has_tech_people
+      %td= tech_communication.our_tech_guy
+      %td= tech_communication.tech_level
+      %td= tech_communication.tech_attitude
+      %td= tech_communication.others
+      %td= tech_communication.vrv_project_id
+      %td= link_to 'Show', tech_communication
+      %td= link_to 'Edit', [@vrv_project,tech_communication]
+      %td= link_to 'Destroy', [@vrv_project,tech_communication], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Tech communication', new_vrv_project_tech_communication_path(@vrv_project)

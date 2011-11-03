@@ -1,0 +1,43 @@
+%h1 Listing vrv_projects
+
+%table
+  %tr
+    %th Customer
+    %th Place
+    %th Website
+    %th Phone
+    %th Email
+    %th Start date
+    %th Scale
+    %th Amount
+    %th Industry
+    %th Agent
+    %th Agent contact
+    %th Channel
+    %th Duty description
+    %th
+    %th
+    %th
+
+  - @vrv_projects.each do |vrv_project|
+    %tr
+      %td= vrv_project.customer
+      %td= vrv_project.place
+      %td= vrv_project.website
+      %td= vrv_project.phone
+      %td= vrv_project.email
+      %td= vrv_project.start_date
+      %td= vrv_project.scale
+      %td= vrv_project.amount
+      %td= vrv_project.industry
+      %td= vrv_project.agent
+      %td= vrv_project.agent_contact
+      %td= vrv_project.channel
+      %td= vrv_project.duty_description
+      %td= link_to 'Show', vrv_project
+      %td= link_to 'Edit', edit_vrv_project_path(vrv_project)
+      %td= link_to 'Destroy', vrv_project, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Vrv project', new_vrv_project_path

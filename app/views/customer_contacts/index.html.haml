@@ -1,0 +1,25 @@
+%h1 Listing customer_contacts
+
+%table
+  %tr
+    %th Name
+    %th Duty
+    %th Phone
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @customer_contacts.each do |customer_contact|
+    %tr
+      %td= customer_contact.name
+      %td= customer_contact.duty
+      %td= customer_contact.phone
+      %td= customer_contact.vrv_project_id
+      %td= link_to 'Show', customer_contact
+      %td= link_to 'Edit', edit_customer_contact_path(customer_contact)
+      %td= link_to 'Destroy', customer_contact, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Customer contact', new_customer_contact_path

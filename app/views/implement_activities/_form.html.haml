@@ -1,0 +1,25 @@
+= form_for @implement_activity do |f|
+  -if @implement_activity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@implement_activity.errors.count, "error")} prohibited this implement_activity from being saved:"
+      %ul
+        - @implement_activity.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :engineer
+    = f.text_field :engineer
+  .field
+    = f.label :start_date
+    = f.date_select :start_date
+  .field
+    = f.label :end_date
+    = f.date_select :end_date
+  .field
+    = f.label :days
+    = f.text_field :days
+  .field
+    = f.label :vrv_project_id
+    = f.number_field :vrv_project_id
+  .actions
+    = f.submit 'Save'

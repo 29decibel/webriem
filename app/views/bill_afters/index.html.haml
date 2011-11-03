@@ -1,0 +1,37 @@
+%h1 Listing bill_afters
+
+%table
+  %tr
+    %th Bill state
+    %th Contract
+    %th Money back
+    %th Pay date
+    %th Begin implement date
+    %th End implement date
+    %th Accept date
+    %th Others
+    %th Bill price
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @bill_afters.each do |bill_after|
+    %tr
+      %td= bill_after.bill_state
+      %td= bill_after.contract
+      %td= bill_after.money_back
+      %td= bill_after.pay_date
+      %td= bill_after.begin_implement_date
+      %td= bill_after.end_implement_date
+      %td= bill_after.accept_date
+      %td= bill_after.others
+      %td= bill_after.bill_price
+      %td= bill_after.vrv_project_id
+      %td= link_to 'Show', bill_after
+      %td= link_to 'Edit', edit_bill_after_path(bill_after)
+      %td= link_to 'Destroy', bill_after, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Bill after', new_bill_after_path

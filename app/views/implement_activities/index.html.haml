@@ -1,0 +1,27 @@
+%h1 Listing implement_activities
+
+%table
+  %tr
+    %th Engineer
+    %th Start date
+    %th End date
+    %th Days
+    %th Vrv project
+    %th
+    %th
+    %th
+
+  - @implement_activities.each do |implement_activity|
+    %tr
+      %td= implement_activity.engineer
+      %td= implement_activity.start_date
+      %td= implement_activity.end_date
+      %td= implement_activity.days
+      %td= implement_activity.vrv_project_id
+      %td= link_to 'Show', [@vrv_project,implement_activity]
+      %td= link_to 'Edit', edit_vrv_project_implement_activity_path(@vrv_project,implement_activity)
+      %td= link_to 'Destroy', [@vrv_project,implement_activity], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Implement activity', new_vrv_project_implement_activity_path(@vrv_project)
