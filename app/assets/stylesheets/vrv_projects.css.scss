@@ -15,7 +15,7 @@
     padding:5px;
     height:20px;
     display:block;
-    &.current{
+    &.current,&:hover{
       background:url(vrv_project_current.png) no-repeat;
       color:white;
     }

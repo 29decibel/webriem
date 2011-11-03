@@ -1,42 +1,8 @@
+-@tech_communication.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
+  =tb_show_field(@tech_communication,cn)
 %p#notice= notice
+.actions
+  =link_to "返回", vrv_project_tech_communications_path(@vrv_project),:class=>'btn'
+  = link_to '修改', edit_vrv_project_tech_communication_path(@vrv_project,@tech_communication),:class=>'btn'
+  =link_to "增加技术交流", new_vrv_project_tech_communication_path(@vrv_project),:class=>'btn'
 
-%p
-  %b Date:
-  = @tech_communication.date
-%p
-  %b Phone:
-  = @tech_communication.phone
-%p
-  %b Duty:
-  = @tech_communication.duty
-%p
-  %b Contents:
-  = @tech_communication.contents
-%p
-  %b Feedback:
-  = @tech_communication.feedback
-%p
-  %b Customer project start date:
-  = @tech_communication.customer_project_start_date
-%p
-  %b Has tech people:
-  = @tech_communication.has_tech_people
-%p
-  %b Our tech guy:
-  = @tech_communication.our_tech_guy
-%p
-  %b Tech level:
-  = @tech_communication.tech_level
-%p
-  %b Tech attitude:
-  = @tech_communication.tech_attitude
-%p
-  %b Others:
-  = @tech_communication.others
-%p
-  %b Vrv project:
-  = @tech_communication.vrv_project_id
-
-= link_to 'Edit', edit_tech_communication_path(@tech_communication)
-\|
-= link_to 'Back', tech_communications_path

@@ -1,4 +1,5 @@
-%h1 Listing busi_communications
+.page-header
+  %h3 商务交流
 
 %table
   %tr
@@ -9,7 +10,6 @@
     %th Way
     %th Feedback
     %th Others
-    %th Vrv project
     %th
     %th
     %th
@@ -23,11 +23,9 @@
       %td= busi_communication.way
       %td= busi_communication.feedback
       %td= busi_communication.others
-      %td= busi_communication.vrv_project_id
-      %td= link_to 'Show', [@vrv_project,busi_communication]
-      %td= link_to 'Edit', edit_vrv_project_busi_communication_path(@vrv_project,busi_communication)
-      %td= link_to 'Destroy', [@vrv_project,busi_communication], :confirm => 'Are you sure?', :method => :delete
+      %td= link_to '查看', [@vrv_project,busi_communication]
+      %td= link_to '编辑', edit_vrv_project_busi_communication_path(@vrv_project,busi_communication)
+      %td= link_to '删除', [@vrv_project,busi_communication], :confirm => '确定删除?', :method => :delete
 
-%br
-
-= link_to 'New Busi communication', new_vrv_project_busi_communication_path(@vrv_project)
+.actions
+  = link_to '增加商务交流', new_vrv_project_busi_communication_path(@vrv_project),:class=>'btn primary'
