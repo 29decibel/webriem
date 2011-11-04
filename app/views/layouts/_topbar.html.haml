@@ -15,6 +15,7 @@
                 -DocMetaInfo.all.each do |dm|
                   %li=link_to dm.display_name,"/doc_heads/new?doc_meta_info_id=#{dm.id}",:remote=>true
             %li=link_to '单据统计',doc_rows_path,:remote=>'true'
+            %li=link_to '项目报备',vrv_projects_path
           %ul.nav.secondary-nav
             %li=link_to "欢迎, #{current_user.person.name}",root_url
             %li=link_to "注销",destroy_user_session_path,:method=>:delete

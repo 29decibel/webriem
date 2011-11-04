@@ -12,7 +12,7 @@
     = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
   .page-header
     %h3= "#{I18n.t('common_attr.basic_info')}"
-  .form_area
+  .doc_head_infos
     -doc.doc_meta_info.doc_head_attrs.each do |cn|
       =tb_input_field(f,cn)
   <!--根据不同的单据类型render不同的单据-->

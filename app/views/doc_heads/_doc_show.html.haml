@@ -12,37 +12,38 @@
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process
   = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
-.page-header
-  %h3= doc.doc_no
--doc.doc_meta_info.doc_head_attrs.each do |cn|
-  =tb_show_field(doc,cn)
-#details.show_only
-  -doc.doc_meta_info.doc_relations.each do  |doc_relation|
+.doc_infos
+  .page-header
+    %h3= doc.doc_no
+  -doc.doc_meta_info.doc_head_attrs.each do |cn|
+    =tb_show_field(doc,cn)
+  #details.show_only
+    -doc.doc_meta_info.doc_relations.each do  |doc_relation|
+      .doc_detail
+        .page-header
+          %h3
+            = doc_relation.doc_row_meta_info.display_name
+            = image_tag "currency_yuan.png"
+            %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
+        .form_area
+          -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
+            -doc_relation.doc_row_attrs.each do |col|
+              =tb_show_field(row_data,col)
+  #details.show_only
     .doc_detail
       .page-header
         %h3
-          = doc_relation.doc_row_meta_info.display_name
+          收款人明细
           = image_tag "currency_yuan.png"
-          %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
+          %span.doc_total_amount.normal=doc.reciver_amount
       .form_area
-        -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
-          -doc_relation.doc_row_attrs.each do |col|
-            =tb_show_field(row_data,col)
-#details.show_only
-  .doc_detail
+        =tb_show_field(doc.reciver,'name')
+        =tb_show_field(doc.reciver,'settlement_id')
+        =tb_show_field(doc.reciver,'bank')
+        =tb_show_field(doc.reciver,'bank_no')
+        =tb_show_field(doc.reciver,'amount')
+  -if doc.work_flow_infos.count>0
     .page-header
-      %h3
-        收款人明细
-        = image_tag "currency_yuan.png"
-        %span.doc_total_amount.normal=doc.reciver_amount
-    .form_area
-      =tb_show_field(doc.reciver,'name')
-      =tb_show_field(doc.reciver,'settlement_id')
-      =tb_show_field(doc.reciver,'bank')
-      =tb_show_field(doc.reciver,'bank_no')
-      =tb_show_field(doc.reciver,'amount')
--if doc.work_flow_infos.count>0
-  .page-header
-    %h3 审批信息
-  .form_area.doc_head_show
-    =render :partial => "work_flow_info",:locals=>{:doc=>doc}
+      %h3 审批信息
+    .form_area.doc_head_show
+      =render :partial => "work_flow_info",:locals=>{:doc=>doc}

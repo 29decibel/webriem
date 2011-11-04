@@ -33,10 +33,7 @@ module ApplicationHelper
       'important'
     end
   end
-  def smart_select_field(f,col_name,validator)
-    collection = validator.options[:in]
-    f.select col_name,collection,{ :include_blank => false }
-  end
+
   def mark_required(object, attribute)  
       if object.class.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
         "*"
@@ -83,6 +80,31 @@ module ApplicationHelper
     subdomain = (subdomain || "")
     subdomain += "." unless subdomain.empty?
     [subdomain, request.domain, request.port_string].join  
+  end
+
+  def smart_select_field(f,col_name,validator)
+    collection = validator.options[:in]
+    f.select col_name,collection,{ :include_blank => false }
+  end
+
+  def radio_select_field(f,col_name,validator)
+    collection = validator.options[:in]
+    content_tag :ul,:class=>'inputs-list' do
+      collection.inject('') do |lis,option|
+        (content_tag :li do
+          content_tag :label do
+            radio_button_tag(option, option, option==f.object.send(col_name))+
+              (content_tag :span do
+                option
+              end)
+          end
+        end) + lis
+      end
+    end
+  end
+
+  def checkbox_select_field(f,col_name,validator)
+    
   end
 
   def tinput(f,col_name,options={})
@@ -133,7 +155,7 @@ module ApplicationHelper
     end
   end
 
-  def tb_input_field(f,col_name)
+  def tb_input_field(f,col_name,options={})
     col = f.object.class.columns.select{|c|c.name==col_name}.first
     # error message
     error_msg = f.object.errors[col_name]
@@ -157,7 +179,7 @@ module ApplicationHelper
             tinput(f,col_name) + help
           end
         else
-          tinput(f,col_name) + help
+          tinput(f,col_name,options) + help
         end
       end
     end)
