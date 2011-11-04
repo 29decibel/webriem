@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103115227) do
+ActiveRecord::Schema.define(:version => 20111104001609) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1178,13 +1178,16 @@ ActiveRecord::Schema.define(:version => 20111103115227) do
 
   create_table :tech_communications do |t|
     t.date :date
-    t.string :phone
+    t.string :customer
+    t.string :customer_work_phone
+    t.string :customer_cell
     t.string :duty
     t.string :contents
     t.string :feedback
     t.date :customer_project_start_date
     t.boolean :has_tech_people
     t.string :our_tech_guy
+    t.string :our_tech_guy_contact
     t.string :tech_level
     t.string :tech_attitude
     t.text :others
@@ -1214,7 +1217,7 @@ ActiveRecord::Schema.define(:version => 20111103115227) do
     t.string :test_result
     t.boolean :has_tech_people
     t.string :our_tech_guy
-    t.string :our_tech_phone
+    t.string :our_tech_guy_contact
     t.string :tech_people_point
     t.string :test_product_order
     t.string :customer_like

@@ -1,4 +1,4 @@
-= form_for [@vrv_project,@network_condition] do |f|
+= form_for [@vrv_project,@network_condition],:html=>{:class=>'form-stacked'} do |f|
   -f.object.class.column_names.reject{|cn|%w(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
     =tb_input_field(f,cn)
   .actions

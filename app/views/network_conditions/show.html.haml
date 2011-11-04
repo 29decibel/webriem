@@ -1,5 +1,5 @@
 -@network_condition.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
-  =tb_show_field(@network_condition,cn)
+  =tb_show_field(@network_condition,cn,:label_css=>'span8',:value_css=>'span3')
 %p#notice= notice
 .actions
   =link_to "修改", edit_vrv_project_network_condition_path(@vrv_project,@network_condition),:class=>'btn'

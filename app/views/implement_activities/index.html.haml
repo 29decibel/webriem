@@ -17,8 +17,8 @@
       %td= implement_activity.start_date
       %td= implement_activity.end_date
       %td= implement_activity.days
-      %td= link_to 'Show', [@vrv_project,implement_activity]
-      %td= link_to 'Edit', edit_vrv_project_implement_activity_path(@vrv_project,implement_activity)
-      %td= link_to 'Destroy', [@vrv_project,implement_activity], :confirm => 'Are you sure?', :method => :delete
+      %td= link_to '查看', [@vrv_project,implement_activity]
+      %td= link_to '修改', edit_vrv_project_implement_activity_path(@vrv_project,implement_activity)
+      %td= link_to '删除', [@vrv_project,implement_activity], :confirm => '确定删除?', :method => :delete
 .actions
   = link_to '添加实施活动', new_vrv_project_implement_activity_path(@vrv_project),:class=>'btn primary'

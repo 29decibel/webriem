@@ -866,87 +866,90 @@
         vrv_project_id: 
       network_condition:
         ip_address: 客户IP地址情况
-        hub: 
-        dns_server: 
-        windows_domain: 
-        network_connection: 
-        physical_keep: 
-        port_listen: 
-        network_inside: 
+        hub: 客户交换机对我们产品中接入管理的支持程度
+        dns_server: 客户系统内部是否有自己的DNS服务器
+        windows_domain: 客户网络是否基于windwos域管理
+        network_connection: 客户的网络是否需要级联
+        physical_keep: 客户网络是否与互联网物理隔离
+        port_listen: 接入INTERNET的网关是否有侦听接口，能做到侦听模式
+        network_inside: 客户网络中是否存在网中网的情况，即（大网络ping不到小网络中的ip）
         vrv_project_id: 
       tech_communication:
-        date: 
-        phone: 
-        duty: 
-        contents: 
-        feedback: 
-        customer_project_start_date: 
-        has_tech_people: 
-        our_tech_guy: 
-        tech_level: 
-        tech_attitude: 
-        others: 
+        date: 拜访日期
+        customer: 被拜访人姓名
+        customer_work_phone: 被拜访人办公电话
+        customer_cell: 被拜访人手机
+        duty: 被拜访人职位
+        contents: 技术交流内容
+        feedback: 交流反馈信息
+        customer_project_start_date: 客户项目预计启动时间
+        has_tech_people: 技术人员
+        our_tech_guy: 同去的我方技术人员是
+        our_tech_guy_contact: 技术人员联系方式
+        tech_level: 技术人员水平
+        tech_attitude: 技术人员态度
+        others: 其他
         vrv_project_id: 
       busi_communication:
-        date: 
-        person: 
-        duty: 
-        phone: 
-        way: 
-        feedback: 
-        others: 
+        date: 交流时间
+        person: 交流人姓名
+        duty: 交流人职位
+        phone: 交流人联系方式
+        way: 交流方式
+        feedback: 交流反馈意见
+        others: 其他，请补充
         vrv_project_id: 
       product_test:
-        date: 
-        customer: 
-        sample: 
-        sample_state: 
-        customer_attitude: 
-        test_result: 
-        has_tech_people: 
-        our_tech_guy: 
-        our_tech_phone: 
-        tech_people_point: 
-        test_product_order: 
-        customer_like: 
-        others: 
+        date: 测试时间
+        customer: 对方参与测试的人员
+        sample: 指标选定
+        sample_state: 已发出指标情况
+        customer_attitude: 客户测试人员态度
+        test_result: 测试结果
+        has_tech_people: 技术人员
+        our_tech_guy: 我方技术人员
+        our_tech_guy_contact: 技术人员联系方式
+        tech_people_point: 技术人员表现
+        test_product_order: 测试产品排名
+        customer_like: 用户倾向于哪家代理商
+        others: 其他，请补充
         vrv_project_id: 
       bill_prepare:
-        sample_choose:
-        price_point:
-        price_cal_way:
-        others:
-        vrv_project_id:
+        sample_choose: 指标选定
+        price_point: 价格分
+        price_cal_way: 价格分数计算方法
+        others: 其他，请补充
+        vrv_project_id: 
       contract_predict:
-        product: 
-        package_num: 
-        points: 
-        price: 
-        sign_date: 
+        product: 产品
+        package_num: 套数
+        points: 点数
+        price: 金额
+        sign_date: 预计签约时间
         vrv_project_id: 
       bill_stage:
-        sample_choose: 
-        points: 
-        price_cal_way: 
-        price_sample: 
-        others: 
+        sample_choose: 指标选定
+        points: 价格分
+        price_cal_way: 价格分数计算方法
+        price_sample: 标书包含的价格指标
+        others: 其他，请补充
         vrv_project_id: 
       bill_after:
-        bill_state: 
-        contract: 
-        money_back: 
-        pay_date: 
-        begin_implement_date: 
-        end_implement_date: 
-        accept_date: 
-        others: 
-        bill_price: 
+        bill_state: 中标情况
+        contract: 关于合同
+        money_back: 回款情况
+        pay_date: 产品交付完毕日期
+        begin_implement_date: 开始实施日期
+        end_implement_date: 实施完毕日期
+        accept_date: 验收完毕日期
+        others: 其他请补充
+        bill_price: 中标金额
         vrv_project_id: 
-      implement_activitie:
-        engineer: 
-        start_date: 
-        end_date: 
-        days: 
+      implement_activity:
+        engineer: 工程师
+        start_date: 开始日期
+        end_date: 结束日期
+        days: 实施天数
         vrv_project_id: 
     errors:
       template: # ~ 2.3.5 backward compatible

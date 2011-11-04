@@ -167,14 +167,14 @@ module ApplicationHelper
     end
   end
 
-  def tb_show_field(obj,col_name)
+  def tb_show_field(obj,col_name,options={})
     col = obj.class.columns.select{|c|c.name==col_name}.first
     ass = obj.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
     content_tag :div,:class=>'row' do
-      (content_tag :div,:class => 'span4' do
-        label_tag I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{col_name}")
+      (content_tag :div,:class => (options[:label_css] || 'span4') do
+        I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{col_name}")
       end) +
-      (content_tag :div,:class => 'span6' do
+      (content_tag :div,:class => (options[:value_css] || 'span6') do
         if ass
           obj.send(ass.name).try(:name)
         elsif col.type==:decimal and col.scale==2

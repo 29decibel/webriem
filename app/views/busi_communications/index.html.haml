@@ -3,13 +3,9 @@
 
 %table
   %tr
-    %th Date
-    %th Person
-    %th Duty
-    %th Phone
-    %th Way
-    %th Feedback
-    %th Others
+    %th 交流时间
+    %th 人员
+    %th 职务
     %th
     %th
     %th
@@ -19,10 +15,6 @@
       %td= busi_communication.date
       %td= busi_communication.person
       %td= busi_communication.duty
-      %td= busi_communication.phone
-      %td= busi_communication.way
-      %td= busi_communication.feedback
-      %td= busi_communication.others
       %td= link_to '查看', [@vrv_project,busi_communication]
       %td= link_to '编辑', edit_vrv_project_busi_communication_path(@vrv_project,busi_communication)
       %td= link_to '删除', [@vrv_project,busi_communication], :confirm => '确定删除?', :method => :delete
