@@ -1,3 +1,5 @@
+.page-header
+  %h3 投标阶段
 -@bill_stage.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
   =tb_show_field(@bill_stage,cn)
 

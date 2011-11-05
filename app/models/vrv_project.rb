@@ -18,6 +18,10 @@ class VrvProject < ActiveRecord::Base
   validates :scale,:inclusion => SCALE
   validates :amount,:inclusion => AMOUNT
 
+  accepts_nested_attributes_for :customer_contact, :allow_destroy => true
+
+  after_initialize :set_contact
+
   def star
     human_star || system_star
   end
@@ -31,6 +35,13 @@ class VrvProject < ActiveRecord::Base
     end
     event :approve do
       transition [:processing] => :approved
+    end
+  end
+
+  private
+  def set_contact
+    if !customer_contact
+      self.customer_contact = CustomerContact.new
     end
   end
 end

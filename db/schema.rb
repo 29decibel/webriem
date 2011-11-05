@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111105050511) do
+ActiveRecord::Schema.define(:version => 20111105083336) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1196,7 +1196,7 @@ ActiveRecord::Schema.define(:version => 20111105050511) do
     t.string :contents
     t.string :feedback
     t.date :customer_project_start_date
-    t.boolean :has_tech_people
+    t.string :has_tech_people
     t.string :our_tech_guy
     t.string :our_tech_guy_contact
     t.string :tech_level
@@ -1226,7 +1226,7 @@ ActiveRecord::Schema.define(:version => 20111105050511) do
     t.string :sample_state
     t.string :customer_attitude
     t.string :test_result
-    t.boolean :has_tech_people
+    t.string :has_tech_people
     t.string :our_tech_guy
     t.string :our_tech_guy_contact
     t.string :tech_people_point
@@ -1260,7 +1260,7 @@ ActiveRecord::Schema.define(:version => 20111105050511) do
 
   create_table :bill_stages do |t|
     t.string :sample_choose
-    t.string :points
+    t.string :price_point
     t.string :price_cal_way
     t.string :price_sample
     t.text :others

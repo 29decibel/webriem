@@ -929,7 +929,7 @@
         vrv_project_id: 
       bill_stage:
         sample_choose: 指标选定
-        points: 价格分
+        price_point: 价格分
         price_cal_way: 价格分数计算方法
         price_sample: 标书包含的价格指标
         others: 其他，请补充

@@ -1,6 +1,6 @@
 = form_for [@vrv_project,@bill_prepare] do |f|
   -f.object.class.column_names.reject{|cn|%w(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
-    =tb_input_field(f,cn)
+    =tb_input_field(f,cn,:as=>'radio')
   .actions
     = f.submit '保存',:class=>'btn primary'
     =link_to "放弃", [@vrv_project,@bill_prepare],:class=>'btn'

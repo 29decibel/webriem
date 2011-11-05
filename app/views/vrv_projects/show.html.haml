@@ -2,5 +2,10 @@
   %h3= @vrv_project.customer
 -@vrv_project.class.column_names.reject{|cn|%(id created_at updated_at).include? cn}.each do |cn|
   =tb_show_field(@vrv_project,cn)
+-if @vrv_project.customer_contact
+  .page-header
+    %h5 联系人信息
+  -%w(name duty phone).each do |field|
+    =tb_show_field(@vrv_project.customer_contact,field)
 .actions
   =link_to "修改", edit_vrv_project_path(@vrv_project),:class=>'btn primary'
