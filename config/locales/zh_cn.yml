@@ -873,7 +873,7 @@
         physical_keep: 客户网络是否与互联网物理隔离
         port_listen: 接入INTERNET的网关是否有侦听接口，能做到侦听模式
         network_inside: 客户网络中是否存在网中网的情况，即（大网络ping不到小网络中的ip）
-        vrv_project_id: 
+        products: 客户关注我们的那一种产品
       tech_communication:
         date: 拜访日期
         customer: 被拜访人姓名

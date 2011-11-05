@@ -17,6 +17,8 @@ class NetworkCondition < ActiveRecord::Base
   validates :port_listen,:inclusion => PORT_LISTEN
   validates :network_inside,:inclusion => NETWORK_INSIDE
 
+  has_and_belongs_to_many :products
+
   %w(ip_address hub dns_server windows_domain network_connection physical_keep port_listen network_inside).each do |m_name|
     define_method m_name do
       self[m_name] || '不知道'

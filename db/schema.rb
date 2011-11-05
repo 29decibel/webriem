@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104001609) do
+ActiveRecord::Schema.define(:version => 20111105050511) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1174,6 +1174,17 @@ ActiveRecord::Schema.define(:version => 20111104001609) do
     t.integer :vrv_project_id
 
     t.timestamps
+  end
+
+  create_table :products do |t|
+    t.string :name
+
+    t.timestamps
+  end
+
+  create_table "network_conditions_products", :id => false, :force => true do |t|
+    t.integer "network_condition_id"
+    t.integer "product_id"
   end
 
   create_table :tech_communications do |t|

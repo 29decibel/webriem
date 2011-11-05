@@ -103,45 +103,41 @@ module ApplicationHelper
   end
 
   def tinput(f,col_name,options={})
-    col = f.object.class.columns.select{|c|c.name==col_name}.first
-    results = ''
-    klass = f.object.class
-    # set defualt class options 
     options[:class]="#{col_name}__input"
-    logger.info "###################{f.object.class}#{col_name}"
-    results << 
-    case col.type
-    when :integer
-      # belnogs_to
-      ass = klass.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col.name}.first
-      if ass
-        ts(col.name,ass.klass.name,:f=>f,:value=>f.object.try(col_name),:text=>f.object.try(ass.name).to_s)
-      else
-        f.text_field(col_name,options)
-      end
-    when :string
-      logger.info '************************* begin string render'
-      include_validator = f.object.class.validators_on(col_name).select{|v|v.class==ActiveModel::Validations::InclusionValidator}.first
-      if include_validator
-        logger.info '%%%%%%%%%%%%%%%% common ......'
-        smart_select_field(f,col_name,include_validator,options)
-      else
-        f.text_field(col_name,options)
-      end
-    when :text
-      f.text_area(col_name,options)
-    when :decimal
-      f.text_field(col_name,options)
-    when :datetime
-      f.text_field col_name,:class=>"datetime_select #{options[:class]}"
-    when :boolean
-      f.check_box(col_name,options)
-    when :date
-      f.text_field col_name,:class=>"date_select #{options[:class]}"
+
+    ass = f.object.class.reflect_on_all_associations.select{|ass|ass.foreign_key==col_name}.first
+    options[:ass] = ass
+
+    if ass
+      tb_association_field(f,col_name,options)
     else
-      f.text_field(col_name,options)
+      col = f.object.class.columns.select{|c|c.name==col_name}.first
+      # set defualt class options 
+      logger.info "###################{f.object.class}#{col_name}"
+      case col.type
+      when :integer
+        f.text_field(col_name,options)
+      when :string
+        include_validator = f.object.class.validators_on(col_name).select{|v|v.class==ActiveModel::Validations::InclusionValidator}.first
+        if include_validator
+          smart_select_field(f,col_name,include_validator,options)
+        else
+          f.text_field(col_name,options)
+        end
+      when :text
+        f.text_area(col_name,options)
+      when :decimal
+        f.text_field(col_name,options)
+      when :datetime
+        f.text_field col_name,:class=>"datetime_select #{options[:class]}"
+      when :boolean
+        f.check_box(col_name,options)
+      when :date
+        f.text_field col_name,:class=>"date_select #{options[:class]}"
+      else
+        f.text_field(col_name,options)
+      end
     end
-    raw results
   end
 
   def currency_prepend(symbol,&block)
@@ -171,7 +167,7 @@ module ApplicationHelper
           _display_name(f,col_name)
         end)
       else
-        if col.type==:decimal and col.scale==2
+        if col and col.type==:decimal and col.scale==2
           currency_prepend '￥' do
             tinput(f,col_name) + help
           end
@@ -183,6 +179,28 @@ module ApplicationHelper
     # combine
     content_tag :div,:class=>"clearfix #{'error' if error_msg.count>0}" do
       f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")+mark_required(f.object,col_name)) + value
+    end
+  end
+
+  def tb_association_field(f,col_name,options={})
+    ass = options[:ass]
+    case ass.macro
+    when :belongs_to
+      ts(col_name,ass.klass.name,:f=>f,:value=>f.object.try(col_name),:text=>f.object.try(ass.name).to_s)
+    when :has_and_belongs_to_many
+      content_tag :ul,:class=>'inputs-list' do
+        eval(ass.class_name).all.inject('') do |result,record|
+          raw(result) + (content_tag :li do
+            content_tag :label do
+              f.check_box("#{col_name}[]",record.id) + (content_tag :span do
+                record.try(:name) if record.respond_to?(:name)
+              end)
+            end
+          end)
+        end
+      end
+    else
+      f.text_field col_name,options
     end
   end
 
