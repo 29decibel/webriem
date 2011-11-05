@@ -2,7 +2,5 @@
   =tb_show_field(@product_test,cn)
 %p#notice= notice
 .actions
-  =link_to "返回", vrv_project_product_tests_path(@vrv_project),:class=>'btn'
   = link_to '修改', edit_vrv_project_product_test_path(@vrv_project,@product_test),:class=>'btn'
-  =link_to "增加产品测试", new_vrv_project_product_test_path(@vrv_project),:class=>'btn'
 

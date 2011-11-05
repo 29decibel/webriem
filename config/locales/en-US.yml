@@ -420,6 +420,8 @@
       business_type: "BusinessType"
       work_flow_step: "Add step"
     attributes:
+      network_condition:
+        ip_address: aaa
       doc_row:
         doc_no: Doc NO
         person_id: Applicant

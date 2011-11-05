@@ -82,29 +82,24 @@ module ApplicationHelper
     [subdomain, request.domain, request.port_string].join  
   end
 
-  def smart_select_field(f,col_name,validator)
+  def smart_select_field(f,col_name,validator,options={})
     collection = validator.options[:in]
-    f.select col_name,collection,{ :include_blank => false }
-  end
-
-  def radio_select_field(f,col_name,validator)
-    collection = validator.options[:in]
-    content_tag :ul,:class=>'inputs-list' do
-      collection.inject('') do |lis,option|
-        (content_tag :li do
-          content_tag :label do
-            radio_button_tag(option, option, option==f.object.send(col_name))+
-              (content_tag :span do
+    logger.info '^^^^^^^^^^^^ begin smart select ^^^^^^^^^^'
+    if options[:as] == 'radio'
+      content_tag :ul,:class=>'inputs-list' do
+        collection.inject('') do |result,option|
+          raw(result) + (content_tag :li do
+            content_tag :label do
+              f.radio_button(col_name,option) + (content_tag :span do
                 option
               end)
-          end
-        end) + lis
+            end
+          end)
+        end
       end
+    else
+      f.select col_name,collection,{ :include_blank => false }
     end
-  end
-
-  def checkbox_select_field(f,col_name,validator)
-    
   end
 
   def tinput(f,col_name,options={})
@@ -125,9 +120,11 @@ module ApplicationHelper
         f.text_field(col_name,options)
       end
     when :string
+      logger.info '************************* begin string render'
       include_validator = f.object.class.validators_on(col_name).select{|v|v.class==ActiveModel::Validations::InclusionValidator}.first
       if include_validator
-        smart_select_field(f,col_name,include_validator)
+        logger.info '%%%%%%%%%%%%%%%% common ......'
+        smart_select_field(f,col_name,include_validator,options)
       else
         f.text_field(col_name,options)
       end
@@ -171,7 +168,7 @@ module ApplicationHelper
       if f.object.class.respond_to?(:read_only_attr?) and f.object.class.try(:read_only_attr?,col_name)
         f.hidden_field(col_name) + 
         (content_tag :span,:class=>"uneditable-input #{col_name}__input" do
-          display_name(f,col_name)
+          _display_name(f,col_name)
         end)
       else
         if col.type==:decimal and col.scale==2
@@ -209,7 +206,7 @@ module ApplicationHelper
   end
 
   private
-  def display_name(f,col_name)
+  def _display_name(f,col_name)
     ass = f.object.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
     if ass
       f.object.send(ass.name).try(:name)

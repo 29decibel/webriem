@@ -4,7 +4,7 @@ class VrvProject < ActiveRecord::Base
   has_many :competitors
   has_many :busi_communications
   has_many :tech_communications
-  has_many :product_tests
+  has_one :product_test
   has_one :bill_prepare
   has_one :contract_predict
   has_one :bill_stage

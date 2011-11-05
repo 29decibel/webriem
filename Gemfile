@@ -56,8 +56,6 @@ gem "state_machine", '0.10.4'
 
 gem "kaminari"
 
-gem 'newrelic_rpm'
-
 gem 'unicorn'
 
 #gem 'rails-footnotes', '>= 3.7', :group => :development
