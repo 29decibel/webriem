@@ -204,6 +204,25 @@ module ApplicationHelper
     end
   end
 
+  def tb_has_many_field(f,col_name,options={})
+    ass = f.object.class.reflect_on_all_associations.select{|ass|ass.name==col_name}.first
+    value = (content_tag :ul,:class=>'inputs-list' do
+      eval(ass.class_name).all.inject('') do |result,record|
+        raw(result) + (content_tag :li do
+          content_tag :label do
+            check_box_tag("#{f.object.class.name.underscore}[#{ass.association_foreign_key}s][]", record.id, f.object.try(col_name).include?(record)) + (content_tag :span do
+              record.try(:name) if record.respond_to?(:name)
+            end)
+          end
+        end)
+      end
+    end)
+    error_msg = f.object.errors[col_name]
+    content_tag :div,:class=>"clearfix #{'error' if error_msg.count>0}" do
+      f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")+mark_required(f.object,col_name)) + value
+    end
+  end
+
   def tb_show_field(obj,col_name,options={})
     col = obj.class.columns.select{|c|c.name==col_name}.first
     ass = obj.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first

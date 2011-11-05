@@ -1,15 +1,7 @@
 = form_for [@vrv_project,@network_condition],:html=>{:class=>'form-stacked'} do |f|
   -f.object.class.column_names.reject{|cn|%w(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
     =tb_input_field(f,cn,:as=>'radio')
-  .clearfix
-    =f.label :products
-    .input
-      %ul.inputs-list
-        -Product.all.each do |p|
-          %li
-            %label
-              = check_box_tag "network_condition[product_ids][]", p.id, @network_condition.products.include?(p)
-              %span= p.name
-    .actions
+  =tb_has_many_field(f,:products)
+  .actions
     = f.submit '保存',:class=>'btn primary'
     =link_to "放弃", [@vrv_project,@network_condition],:class=>'btn'

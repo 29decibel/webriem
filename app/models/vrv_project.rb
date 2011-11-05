@@ -1,3 +1,4 @@
+#coding: utf-8
 class VrvProject < ActiveRecord::Base
   has_one :customer_contact
   has_one :network_condition
@@ -10,6 +11,12 @@ class VrvProject < ActiveRecord::Base
   has_one :bill_stage
   has_one :bill_after
   has_many :implement_activities
+
+  SCALE = %w(150-300)
+  AMOUNT = %w(10万以下)
+
+  validates :scale,:inclusion => SCALE
+  validates :amount,:inclusion => AMOUNT
 
   def star
     human_star || system_star
