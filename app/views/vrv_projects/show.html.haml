@@ -9,3 +9,5 @@
     =tb_show_field(@vrv_project.customer_contact,field)
 .actions
   =link_to "修改", edit_vrv_project_path(@vrv_project),:class=>'btn primary'
+  -if @vrv_project.un_submit?
+    =link_to "提交", submit_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'

@@ -25,7 +25,7 @@ class VrvProject < ActiveRecord::Base
   def star
     human_star || system_star
   end
-
+  #未提交，审核中，星级状态，中标状态，未中标状态，报废
   state_machine :state, :initial => :un_submit do
     event :submit do
       transition [:rejected,:un_submit] => :processing
@@ -34,7 +34,16 @@ class VrvProject < ActiveRecord::Base
       transition [:processing] => :rejected
     end
     event :approve do
-      transition [:processing] => :approved
+      transition [:processing] => :star
+    end
+    event :win do
+      transition [:star] => :bid_success
+    end
+    event :lost do
+      transition [:star] => :bid_fail
+    end
+    event :disable do
+      transition [:star] => :invalide
     end
   end
 
