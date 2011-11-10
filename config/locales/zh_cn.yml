@@ -854,6 +854,10 @@
         human_star: 系统星级
         system_star: 真实星级
         state: 项目状态
+        states:
+          un_submit: 未提交
+          processing: 审批中
+          started: 星级状态
       customer_contact:
         name: 姓名
         duty: 职务

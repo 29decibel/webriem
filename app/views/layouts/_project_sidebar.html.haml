@@ -2,7 +2,7 @@
   .project_info
     .name= link_to project.customer,project
     .start_date= project.start_date
-    .state= project.state
+    .state= t("activerecord.attributes.vrv_project.states.#{project.state}")
     .system_star= project.system_star
     .human_star= project.human_star
 .links
