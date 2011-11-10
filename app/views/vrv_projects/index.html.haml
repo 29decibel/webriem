@@ -3,11 +3,11 @@
 
 %table
   %tr
-    %th Customer
-    %th Start date
-    %th Amount
-    %th Industry
-    %th Agent
+    %th= t("activerecord.attributes.vrv_project.customer")
+    %th= t("activerecord.attributes.vrv_project.start_date")
+    %th= t("activerecord.attributes.vrv_project.amount")
+    %th= t("activerecord.attributes.vrv_project.industry")
+    %th= t("activerecord.attributes.vrv_project.agent")
     %th
     %th
     %th
@@ -19,9 +19,11 @@
       %td= vrv_project.amount
       %td= vrv_project.industry
       %td= vrv_project.agent
-      %td= link_to 'Show', vrv_project
-      %td= link_to 'Edit', edit_vrv_project_path(vrv_project)
-      %td= link_to 'Destroy', vrv_project, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to '查看', vrv_project
+      %td= link_to '修改', edit_vrv_project_path(vrv_project)
+      %td
+        -if vrv_project.un_submit?
+          = link_to '删除', vrv_project, :confirm => "确定删除项目#{vrv_project.customer}?", :method => :delete
 
 .actions
   = link_to '申请立项', new_vrv_project_path,:class=>'btn'
