@@ -1,23 +1,14 @@
--if false and (doc.un_submit? or doc.rejected?) and doc.approvers_select_list.count>1 and !doc.new_record?
-  #select_approvers_wrapper
-    #select_approvers
-      %h4 请选择审批人
-      -form_tag '/doc_heads/submit',:remote=>true,:method=>:put do
-        =hidden_field_tag 'doc_id',doc.id
-        =select 'selected_approver_id','',doc.approvers_select_list,:multiple=>false
-        %br
-        =link_to content_tag(:span,"确定"),"#",:class=>'minibutton submit'
-    
 = hidden_field_tag "form_state",doc.state
 <!--hidden field to store the current looker of this doc mainly is HR or FI -->
--if doc.current_approver_id ==current_user.person.id or (current_user.person.person_type and current_user.person.person_type.code=="CA")
-  = hidden_field_tag "looker",current_user.person.person_type ? current_user.person.person_type.code : ""
 -if doc.work_flow
   = hidden_field_tag "doc_id",doc.id
   %span.label(class= "#{doc.un_submit? ? 'success' : ''}") 未提交
-  -if !doc.un_submit? and !doc.rejected? and doc.approvers and doc.approvers.split(',').count>0
-    -doc.approvers.split(',').each do |approver_id|
-      %span.label(class= "#{doc.current_approver_id==approver_id.to_i && 'warning'}")= Person.find(approver_id).name
+  -if !doc.un_submit? and !doc.rejected? and doc.approver_infos.count>0
+    -doc.approver_infos.each do |approver_info|
+      -if approver_info.person
+        %span.label(class= "#{doc.current_approver_id==approver_info.person_id && 'warning'}")= approver_info.person.try(:name)
+      -else
+        %span.label(class='error')= "无法确定职务为#{approver_info.work_flow_step.duty.try(:name)},部门为#{approver_info.work_flow_step.dep.try(:name)}的审批人"
   -else
     %span.label ---没有审批人信息---
   %span.label(class="#{doc.approved? && 'success'}") 审批通过

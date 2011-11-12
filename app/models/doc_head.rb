@@ -4,17 +4,12 @@ class DocHead < ActiveRecord::Base
   belongs_to :dep
   belongs_to :person
   belongs_to :afford_dep, :class_name => "Dep", :foreign_key => "afford_dep_id"
-  belongs_to :upload_file
   belongs_to :real_person, :class_name => "Person", :foreign_key => "real_person_id"
   belongs_to :project
   belongs_to :doc_meta_info
 
-  before_save :set_afford_dep
-  def set_afford_dep
-    if project
-      self.afford_dep = project.dep
-    end
-  end
+  before_save :set_afford_dep,:set_current_approver_id
+  before_validation :set_doc_no
 
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
   scope :processing, where("state='processing'")
@@ -27,9 +22,10 @@ class DocHead < ActiveRecord::Base
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
   validates_associated :borrow_doc_details
   # add validation of association
-  validate :total_amount_can_not_be_zero
-  #validate :must_equal,:if => lambda { |doc| doc.processing? }
-  #has many recivers and cp_doc_details
+  #validate :total_amount_can_not_be_zero
+
+  has_many :approver_infos
+  belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
 
   has_one :reciver, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
@@ -69,30 +65,19 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :common_riems , :allow_destroy => true
   accepts_nested_attributes_for :other_riems , :allow_destroy => true
 
-  after_initialize :init_doc
 
   Doc_State = ['un_submit','processing','approved','paid','rejected']
   # combine doc_type to doc_type_prefix
+  def name
+    doc_no
+  end
 
-  def init_doc
-    return unless self.new_record?
-    #set a number to
-    doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0") 
-    if doc_count_config.value==5000
-      doc_count_config.value="0"
-    else
-      doc_count_config.value=(doc_count_config.value.to_i+1).to_s
-    end
-    doc_count_config.save
-    self.doc_no = doc_meta_info.code + Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
-    #set date
-    self.apply_date = Time.now
-    #set current_approver
-    self.current_approver_id = -3
+  def apply_date
+    self[:apply_date] || Time.now
   end
 
   def approver
-    Person.where('id=?',current_approver_id).first
+    current_approver_info.person if current_approver_info
   end
 
   #############################################
@@ -208,67 +193,38 @@ class DocHead < ActiveRecord::Base
   #approve
   def next_approver(comments='OK')
     return unless self.processing?
-    approver_array = approvers.split(',')
-    current_index = approver_array.index current_approver_id.to_s
+    approver_array = approver_infos.map(&:id)
+    current_index = approver_array.index current_approver_info_id
 
+    # TODO should skip the disabled ones
     if current_index!=nil
       self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
       if current_index+1<approver_array.count
-        self.update_attribute :current_approver_id,approver_array[current_index+1]
+        self.current_approver_info_id = approver_array[current_index+1]
+        self.save
       else
-        self.update_attribute :current_approver_id,-520
+        self.current_approver_info = nil
+        self.save
         self.approve
       end
-    else
-      self.update_attribute :current_approver_id,-1000
     end
   end
 
   # 在单据开始审批的时候设置所有审批人员
   # 只有第一个环节当审批人超过一个人的时候允许选择审批人
+  # create a bunch of approver infos by every work_flow_step
+  #
   def set_approvers(user_selected=nil)
-    approvers_ids = []
     if (work_flow and work_flow.work_flow_steps.count > 0)
       work_flow.work_flow_steps.each_with_index do |w,index|
-        next if (w.max_amount and self.total_amount < w.max_amount)
-        candidates = approvers_from_work_flow_step(w)
-        # decide choose one 
-        if index==0 and selected_approver_id and selected_approver_id>0 and (candidates.include? selected_approver_id)
-          approvers_ids << selected_approver_id
-        else
-          approvers_ids << candidates.first if candidates.first
-        end
+        approver_info = approver_infos.build(:work_flow_step => w,:doc_head => self)
+        approver_info.enabled = false if (w.max_amount and self.total_amount < w.max_amount)
+        approver_info.save
       end #block end
     end
-    self.update_attribute :approvers,approvers_ids.join(',')
-    self.update_attribute(:current_approver_id,approvers_ids.first)
-  end
-
-  def approvers_from_work_flow_step(work_flow_step)
-    return [] if !work_flow_step
-    if work_flow_step.is_self_dep
-      dep = real_person.try(:dep) || person.dep # only is_self_dep need the change dep accord the real person
-      while dep do
-        ps = Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id).map(&:id)
-        if ps.count>0
-          return ps
-        end
-        dep = dep.parent_dep
-      end #end while
-      []
-    else
-      Person.where("dep_id = ? and duty_id =?",work_flow_step.dep_id,work_flow_step.duty_id).map(&:id)
-    end #end is self dep
-  end
-
-  def approvers_select_list
-    if self.work_flow and self.work_flow.work_flow_steps.count>0
-      approvers_from_work_flow_step(self.work_flow.work_flow_steps.first).map do |p_id|
-        p = Person.find p_id
-        [p.name,p.id]
-      end
-    else
-      []
+    if approver_infos.count>0
+      self.current_approver_info = approver_infos.first
+      self.save
     end
   end
 
@@ -277,12 +233,8 @@ class DocHead < ActiveRecord::Base
     #终止单据
     self.work_flow_infos << WorkFlowInfo.create(:is_ok=>false,:comments=>comments,:approver_id=>current_approver_id) 
     self.reject
-    self.approvers = nil
-    self.current_approver_id = nil
-  end
-  #uploads 
-  def uploads
-    UploadFile.find_by_doc_no(self.doc_no)
+    self.approver_infos.clear
+    self.current_approver_info = nil
   end
   #==================================about filter================================
 
@@ -311,10 +263,6 @@ class DocHead < ActiveRecord::Base
   end
   def can_edit? user
     (self.un_submit? or self.rejected?) and user.person==self.person
-  end
-
-  def approver_persons
-    self.approvers.split(',').map { |approver| Person.find_by_id(approver)}
   end
 
   def person_dep
@@ -819,5 +767,33 @@ class DocHead < ActiveRecord::Base
 
   def total_amount_can_not_be_zero
     errors.add(:base,'单据金额必须大于0') if total_apply_amount<=0
+  end
+
+  def first_approver_exist
+    errors.add(:base,'不能确定第一个审批人，请联系财务人员') if !approver_infos.first.person_id
+  end
+
+  def set_afford_dep
+    if project
+      self.afford_dep = project.dep
+    end
+  end
+
+  def set_current_approver_id
+    self.current_approver_id = current_approver_info.person_id if current_approver_info
+  end
+
+  def set_doc_no
+    if self.new_record?
+      #set a number to
+      doc_count_config=ConfigHelper.find_by_key(:doc_count) || ConfigHelper.create(:key=>"doc_count",:value=>"0") 
+      if doc_count_config.value==5000
+        doc_count_config.value="0"
+      else
+        doc_count_config.value=(doc_count_config.value.to_i+1).to_s
+      end
+      doc_count_config.save
+      self.doc_no = doc_meta_info.code + Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
+    end
   end
 end

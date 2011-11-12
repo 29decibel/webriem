@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111105124709) do
+ActiveRecord::Schema.define(:version => 20111112085343) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -255,7 +255,7 @@ ActiveRecord::Schema.define(:version => 20111105124709) do
     t.decimal  "total_amount",         :precision => 16, :scale => 2
     t.integer  "real_person_id"
     t.integer  "current_approver_id"
-    t.string   "approvers"
+    t.integer  "current_approver_info_id"
     t.string   "mark"
     t.string   "state"
     t.integer  "company_group_id"
@@ -1103,12 +1103,22 @@ ActiveRecord::Schema.define(:version => 20111105124709) do
     t.integer  "dep_id"
     t.boolean  "is_self_dep"
     t.integer  "duty_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "step_code"
     t.decimal  "max_amount",   :precision => 8, :scale => 2
-    t.boolean  "user_select",                                :default => false
+    t.string   "can_change_approver_steps"
     t.integer  "work_flow_id"
     t.boolean  "can_change_amount",:default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table :approver_infos do |t|
+    t.integer :work_flow_step_id
+    t.boolean :enabled,:default => true
+    t.integer :person_id
+    t.integer :doc_head_id
+
+    t.timestamps
   end
 
   create_table "duties_work_flows", :id => false, :force => true do |t|

@@ -106,7 +106,7 @@ end
 
 # ------------------ docs here ---------------------
 Factory.define :doc_head do |f|
-  f.doc_type          1
+  f.association :doc_meta_info
   f.association :dep
   f.association :person
   f.afford_dep {|u| u.association(:dep)}
