@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111112111433) do
+ActiveRecord::Schema.define(:version => 20111113035856) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1114,7 +1114,7 @@ ActiveRecord::Schema.define(:version => 20111112111433) do
 
   create_table :approver_infos do |t|
     t.integer :work_flow_step_id
-    t.boolean :enabled,:default => true
+    t.boolean :skip,:default => false
     t.integer :person_id
     t.integer :doc_head_id
 

@@ -23,25 +23,32 @@
 
 -if doc_head.processing? and doc_head.current_approver_id==current_user.person.id
   #doc_head_approve.modal.hide.fade.in.doc_head_approve
-    %ul
-      -doc_head.approver_infos.each do |info|
-        %li{'id'=>info.id}
-          -if info.person
-            =info.person.name
-          -else
-            =form_for info,:remote=>true do |f|
-              =f.select :person_id,info.candidates.map{|c|[c.name,c.id]}
-              =f.check_box :enabled
-              =f.submit "确定",:class=>'btn'
-    =form_for [doc_head,doc_head.work_flow_infos.build],:remote=>true do |f|
-      .modal-header
-        =link_to "X", "#",:class=>'close'
-        %h3="单据#{doc_head.doc_no}审批"
-      .modal-body
+    .modal-header
+      =link_to "X", "#",:class=>'close'
+      %h3="单据#{doc_head.doc_no}审批"
+    .modal-body
+      .page-header
+        %h5 请先对下一级审批人进行指派
+      %ul
+        -doc_head.approver_infos.each do |info|
+          %li{'id'=>info.id}
+            -if info.person
+              %span="#{info.person.name}"
+            -else
+              =form_for info,:remote=>true do |f|
+                %span
+                  =f.select :person_id,info.candidates.map{|c|[c.name,c.id]}
+                %span
+                  =f.check_box :skip
+                  跳过此环节
+                =f.submit "确定",:class=>'btn'
+      .page-header
+        %h5 审批说明
+      =form_for [doc_head,doc_head.work_flow_infos.build],:remote=>true do |f|
         =f.text_area :comments,:class=>'approve_info'
-      .modal-footer
-        =f.submit "拒绝",:class=>'btn danger'
-        =f.submit "通过",:class=>'btn success'
+        .modal-footer
+          =f.submit "拒绝",:class=>'btn danger'
+          =f.submit "通过",:class=>'btn success'
 :javascript
   $(function(){
     $("form.new_work_flow_info").live("ajax:beforeSend",function(){
