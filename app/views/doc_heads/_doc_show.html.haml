@@ -30,8 +30,9 @@
         .form_area
           -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
             .doc_row_show
-              .amount_changes
-                =render "doc_amount_changes/index",:resource=>row_data
+              -if doc.processing? and doc.current_approver_id == current_user.person.id
+                .amount_changes
+                  =render "doc_amount_changes/index",:resource=>row_data
               -doc_relation.doc_row_attrs.each do |col|
                 =tb_show_field(row_data,col)
   #details.show_only
