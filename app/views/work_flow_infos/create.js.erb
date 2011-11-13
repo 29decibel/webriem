@@ -1,7 +1,8 @@
-$('#doc_head_approve').modal('hide');
-$("#doc_state_process").html("<%= escape_javascript(render(:partial=>'doc_heads/doc_state_process',:locals=>{:doc=>@doc_head}))%>");
-$("#doc_head_actions").html("<%= escape_javascript(render(:partial=>'doc_heads/doc_actions',:locals=>{:doc_head=>@doc_head}))%>");
 $('#doc_head_approve').bind('hidden', function () {
   $('#doc_head_approve').remove();
+  $("#doc_state_process").html("<%= escape_javascript(render(:partial=>'doc_heads/doc_state_process',:locals=>{:doc=>@doc_head}))%>");
+  $("#doc_head_actions").html("<%= escape_javascript(render(:partial=>'doc_heads/doc_actions',:locals=>{:doc_head=>@doc_head}))%>");
 })
+$('#doc_head_approve').modal('hide');
+
 
