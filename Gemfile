@@ -39,7 +39,7 @@ group :development do
 end
 
 #gem 'activeadmin'
-gem 'activeadmin',:git=>'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin','0.3.4'
 gem 'ruby-ole'
 gem 'rest-client'
 
