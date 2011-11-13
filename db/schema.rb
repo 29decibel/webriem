@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113035856) do
+ActiveRecord::Schema.define(:version => 20111113110606) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -304,6 +304,26 @@ ActiveRecord::Schema.define(:version => 20111113035856) do
     t.string   "read_only_attrs"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table :fee_rules do |t|
+    t.string :factors
+    t.string :period
+    t.string :fee_class
+    t.decimal :amount
+    t.integer :parent_fee_rule
+
+    t.timestamps
+  end
+
+  create_table :doc_amount_changes do |t|
+    t.string :resource_class
+    t.integer :resource_id
+    t.decimal :new_amount
+    t.integer :person_id
+    t.integer :doc_head_id
+
+    t.timestamps
   end
 
   create_table "doc_rows", :force => true do |t|

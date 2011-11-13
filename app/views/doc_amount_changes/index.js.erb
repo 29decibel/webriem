@@ -1,0 +1,2 @@
+$('#<%="#{@doc_amount_change.resource_class}__#{@doc_amount_change.resource_id}_list"%>').replaceWith('<%= escape_javascript(render('doc_amount_changes/list',:resource=>@doc_amount_change.resource))%>');
+$('#new_<%="#{@doc_amount_change.resource_class}__#{@doc_amount_change.resource_id}"%>').modal('hide');

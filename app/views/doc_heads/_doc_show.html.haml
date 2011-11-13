@@ -15,6 +15,8 @@
 .doc_infos
   .page-header
     %h3= doc.doc_no
+  .page-header
+    %h7= "申请总金额为￥#{doc.total_apply_amount}，调整后金额为￥#{doc.final_amount}"
   -doc.doc_meta_info.doc_head_attrs.each do |cn|
     =tb_show_field(doc,cn)
   #details.show_only
@@ -27,8 +29,11 @@
             %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
         .form_area
           -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
-            -doc_relation.doc_row_attrs.each do |col|
-              =tb_show_field(row_data,col)
+            .doc_row_show
+              .amount_changes
+                =render "doc_amount_changes/index",:resource=>row_data
+              -doc_relation.doc_row_attrs.each do |col|
+                =tb_show_field(row_data,col)
   #details.show_only
     .doc_detail
       .page-header

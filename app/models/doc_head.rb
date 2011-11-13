@@ -118,13 +118,22 @@ class DocHead < ActiveRecord::Base
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def total_apply_amount
+    get_total_amount {|resource| resource.apply_amount}
+  end
+
+  def final_amount
+    get_total_amount {|resource| DocAmountChange.final_amount(resource)}
+  end
+
+  def get_total_amount(&block)
     total = 0
     doc_meta_info.doc_row_meta_infos.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
       dr_datas = self.send(eval(dr_meta.name).table_name)
-      total += dr_datas.inject(0){|sum,dr_data|sum + dr_data.apply_amount}
+      total += dr_datas.inject(0){|sum,dr_data|sum + block.call(dr_data)}
     end
     total
   end
+
   #the split total amount
   def split_total_amount
     total=0

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Resource class:
+  = @doc_amount_change.resource_class
+%p
+  %b Resource:
+  = @doc_amount_change.resource_id
+%p
+  %b New amount:
+  = @doc_amount_change.new_amount
+%p
+  %b Person:
+  = @doc_amount_change.person_id
+%p
+  %b Doc head:
+  = @doc_amount_change.doc_head_id
+
+= link_to 'Edit', edit_doc_amount_change_path(@doc_amount_change)
+\|
+= link_to 'Back', doc_amount_changes_path

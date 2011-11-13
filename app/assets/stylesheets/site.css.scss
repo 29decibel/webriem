@@ -41,6 +41,18 @@ textarea#work_flow_info_comments{
   padding:20px;
   margin-top:20px;
 }
+.amount_changes{
+  position:absolute;
+  right:0px;
+  top:0px;
+  padding:5px 10px;
+  border:1px solid #ccc;
+  table{
+    width:200px;
+  }
+  span.person{display:inline-block;width:50px;}
+  span.new_amount{display:inline-block;width:50px;}
+}
 .doc_row{
   background:white;
   margin:10px 10px;
@@ -54,6 +66,12 @@ textarea#work_flow_info_comments{
     top:10px;
     right:10px;
   }
+}
+.doc_row_show{
+  position:relative;
+  margin-bottom:10px;
+  border:1px solid #ccc;
+  padding:20px;
 }
 .search_result{
   .amount_result{

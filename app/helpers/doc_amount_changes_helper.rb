@@ -1,0 +1,2 @@
+module DocAmountChangesHelper
+end

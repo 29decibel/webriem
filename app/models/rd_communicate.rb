@@ -2,15 +2,9 @@
 class RdCommunicate < ActiveRecord::Base
   include DocIndex
   before_validation :set_apply_amount
-  def set_apply_amount
-    self.apply_amount = self.rate * self.ori_amount
-  end
+
   before_save :set_afford_dep
-  def set_afford_dep
-    if project
-      self.dep = project.dep
-    end
-  end
+
   belongs_to :reim_detail
   belongs_to :currency
   belongs_to :project
@@ -32,5 +26,23 @@ class RdCommunicate < ActiveRecord::Base
   end
   def fcm
     FeeCodeMatch.find_by_fee_code("02")
+  end
+
+  #这个人（职务）在这个月（期间）内项目招待费不能超过3000
+  #这个人（职务）这个月在这种项目类型上的招待费不能超过700
+  def test_rule
+    result = {}
+    rules = FeeRule.of_class(self.class.name).select{|r|r.match?(self)}
+  end
+
+
+  def set_afford_dep
+    if project
+      self.dep = project.dep
+    end
+  end
+
+  def set_apply_amount
+    self.apply_amount = self.rate * self.ori_amount
   end
 end

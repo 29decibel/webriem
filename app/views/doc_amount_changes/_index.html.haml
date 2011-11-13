@@ -1,0 +1,19 @@
+.page-header
+  %h7 金额调整记录
+=render "doc_amount_changes/list",:resource=>resource
+%div.modal.hide.fade.in{'id'=>"new_#{resource.class.name}__#{resource.id}"}
+  .modal-header
+    =link_to "X", "#",:class=>'close'
+    %h3="调整金额"
+  .modal-body
+    .page-header
+      %h5 调整金额为
+    =form_for DocAmountChange.new,:remote=>true do |f|
+      =f.hidden_field :person_id,:value=>current_user.person.id
+      =f.hidden_field :resource_class,:value=>resource.class.name
+      =f.hidden_field :resource_id,:value=>resource.id
+      .clearfix
+        =f.label '￥'
+        .input=f.text_field :new_amount
+      .modal-footer= f.submit "确定",:class=>'btn success'
+= link_to '调整报销金额','#', :class=>"pop",'data-controls-modal'=>"new_#{resource.class.name}__#{resource.id}",'data-backdrop'=>"true",'data-keyboard'=>true

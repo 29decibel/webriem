@@ -1,0 +1,25 @@
+= form_for @doc_amount_change do |f|
+  -if @doc_amount_change.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@doc_amount_change.errors.count, "error")} prohibited this doc_amount_change from being saved:"
+      %ul
+        - @doc_amount_change.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :resource_class
+    = f.text_field :resource_class
+  .field
+    = f.label :resource_id
+    = f.number_field :resource_id
+  .field
+    = f.label :new_amount
+    = f.text_field :new_amount
+  .field
+    = f.label :person_id
+    = f.number_field :person_id
+  .field
+    = f.label :doc_head_id
+    = f.number_field :doc_head_id
+  .actions
+    = f.submit 'Save'

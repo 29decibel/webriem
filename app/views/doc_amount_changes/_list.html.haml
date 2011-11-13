@@ -1,0 +1,7 @@
+%ul{'id'=>"#{resource.class.name}__#{resource.id}_list"}
+  - DocAmountChange.where("resource_class=? and resource_id=?",resource.class.name,resource.id).each do |doc_amount_change|
+    %li
+      %span.person= doc_amount_change.person.name
+      %span.new_amount= "￥#{doc_amount_change.new_amount}"
+      %span.delete= link_to '删除',doc_amount_change,:confirm=>'确定删除这条调整记录？',:method=>'DELETE',:remote=>true
+

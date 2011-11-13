@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :doc_amount_changes
+
   resources :vrv_projects do
     member do
       put :submit
