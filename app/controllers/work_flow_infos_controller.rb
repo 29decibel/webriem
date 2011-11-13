@@ -46,7 +46,7 @@ class WorkFlowInfosController < ApplicationController
       @doc_head.decline params["work_flow_info"]["comments"]
       @doc_head.reload
     end
-    redirect_to @doc_head
+    #redirect_to @doc_head
   end
 
   # PUT /work_flow_infos/1

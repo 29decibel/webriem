@@ -75,6 +75,7 @@ Webreim::Application.routes.draw do
   end
   resources :doc_rows
   resources :currency
+  resources :approver_infos
 
   get "token_input/search"
   resources :upload_files

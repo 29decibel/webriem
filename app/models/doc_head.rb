@@ -23,6 +23,7 @@ class DocHead < ActiveRecord::Base
   validates_associated :borrow_doc_details
   # add validation of association
   #validate :total_amount_can_not_be_zero
+  validate :processing_doc_current_info_must_one_candidate
 
   has_many :approver_infos
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
@@ -173,6 +174,11 @@ class DocHead < ActiveRecord::Base
     after_transition [:rejected,:un_submit] => :processing do |doc_head, transition|
       doc_head.set_approvers
     end    
+    after_transition [:processing] => [:un_submit,:rejected] do |doc_head,transition|
+      doc_head.approver_infos.delete_all
+      doc_head.current_approver_info = nil
+      doc_head.save
+    end
     event :submit do
       transition [:rejected,:un_submit] => :processing
     end
@@ -193,14 +199,14 @@ class DocHead < ActiveRecord::Base
   #approve
   def next_approver(comments='OK')
     return unless self.processing?
-    approver_array = approver_infos.map(&:id)
-    current_index = approver_array.index current_approver_info_id
+    approver_array = approver_infos
+    current_index = approver_array.index current_approver_info
 
     # TODO should skip the disabled ones
     if current_index!=nil
       self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
       if current_index+1<approver_array.count
-        self.current_approver_info_id = approver_array[current_index+1]
+        self.current_approver_info = approver_array[current_index+1]
         self.save
       else
         self.current_approver_info = nil
@@ -233,8 +239,6 @@ class DocHead < ActiveRecord::Base
     #终止单据
     self.work_flow_infos << WorkFlowInfo.create(:is_ok=>false,:comments=>comments,:approver_id=>current_approver_id) 
     self.reject
-    self.approver_infos.clear
-    self.current_approver_info = nil
   end
   #==================================about filter================================
 
@@ -795,5 +799,9 @@ class DocHead < ActiveRecord::Base
       doc_count_config.save
       self.doc_no = doc_meta_info.code + Time.now.strftime("%Y%m%d")+doc_count_config.value.rjust(4,"0")
     end
+  end
+
+  def processing_doc_current_info_must_one_candidate
+    errors.add(:base,'当前审批人不确定') if (self.processing? and self.current_approver_info and self.current_approver_info.candidates.count>1 and !self.current_approver_info.person_id)
   end
 end

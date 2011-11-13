@@ -26,9 +26,11 @@ ActiveAdmin.register WorkFlow do
     end
     f.inputs "审批环节" do
       f.has_many :work_flow_steps,:label=>'添加审批环节' do |p|
+        p.input  :step_code
         p.input  :is_self_dep,:wrapper_html=>{:class=>'is_self_dep'}
         p.input  :dep,:wrapper_html=>{:class=>'dep'}
         p.input  :duty
+        p.input  :can_change_approver_steps
         p.input  :max_amount
         p.input  :can_change_amount
       end
