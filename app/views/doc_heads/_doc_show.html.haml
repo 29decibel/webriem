@@ -35,19 +35,6 @@
                   =render "doc_amount_changes/index",:resource=>row_data
               -doc_relation.doc_row_attrs.each do |col|
                 =tb_show_field(row_data,col)
-  #details.show_only
-    .doc_detail
-      .page-header
-        %h3
-          收款人明细
-          = image_tag "currency_yuan.png"
-          %span.doc_total_amount.normal=doc.reciver_amount
-      .form_area
-        =tb_show_field(doc.reciver,'name')
-        =tb_show_field(doc.reciver,'settlement_id')
-        =tb_show_field(doc.reciver,'bank')
-        =tb_show_field(doc.reciver,'bank_no')
-        =tb_show_field(doc.reciver,'amount')
   -if doc.work_flow_infos.count>0
     .page-header
       %h3 审批信息

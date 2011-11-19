@@ -32,22 +32,6 @@
               = builder.hidden_field(:_destroy,:class=>'destroy_mark') 
               -doc_relation.doc_row_attrs.each do |dr_col|
                 =tb_input_field(builder,dr_col)
-  #reciver
-    .doc_detail{'class'=>"Reciver"}
-      .page-header
-        %h3
-          收款人信息
-          = image_tag "currency_yuan.png"
-          %span.doc_total_amount.normal=doc.reciver_amount
-      .form_area
-        =f.fields_for :reciver do |builder|
-          .doc_row.exist
-            = builder.hidden_field(:_destroy,:class=>'destroy_mark') 
-            =tb_input_field(builder,'name')
-            =tb_input_field(builder,'settlement_id')
-            =tb_input_field(builder,'bank')
-            =tb_input_field(builder,'bank_no')
-            =tb_input_field(builder,'amount')
 :javascript
   $(".ori_amount__input,.rate__input,.percent_amount__input").live('change',function(){
     // make sure self is float

@@ -28,7 +28,6 @@ class DocHead < ActiveRecord::Base
   has_many :approver_infos
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
 
-  has_one :reciver, :class_name => "Reciver", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :rd_travels, :class_name => "RdTravel", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_transports, :class_name => "RdTransport", :foreign_key=>"doc_head_id",:dependent=>:destroy
@@ -50,7 +49,6 @@ class DocHead < ActiveRecord::Base
   has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
 
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
-  accepts_nested_attributes_for :reciver, :allow_destroy => true
 
   accepts_nested_attributes_for :borrow_doc_details , :allow_destroy => true
   accepts_nested_attributes_for :reim_split_details , :allow_destroy => true
@@ -162,10 +160,6 @@ class DocHead < ActiveRecord::Base
 
   def self.read_only_attr?(attr)
     %w(doc_no person_id total_amount).include?(attr)
-  end
-  #reciver total amount
-  def reciver_amount
-    reciver.amount
   end
   #=====================================================
   #获得所有的审批流程
@@ -287,10 +281,6 @@ class DocHead < ActiveRecord::Base
   end
   def doc_state_name
     I18n.t("common_attr.#{state}") if state
-  end
-  #minus reciver's amount
-  def reduce_recivers_amount(amount)
-    recivers.first.reduce_amount(amount)
   end
   #callbacks
   def total_amount
