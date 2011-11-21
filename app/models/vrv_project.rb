@@ -11,6 +11,7 @@ class VrvProject < ActiveRecord::Base
   has_one :bill_stage
   has_one :bill_after
   has_many :implement_activities
+  belongs_to :person
 
   SCALE = %w(150-300)
   AMOUNT = %w(10万以下)
@@ -22,11 +23,18 @@ class VrvProject < ActiveRecord::Base
 
   after_initialize :set_contact
 
+  def system_star
+    self[:system_star] || 0
+  end
+
   def star
     human_star || system_star
   end
   #未提交，审核中，星级状态，中标状态，未中标状态，报废
   state_machine :state, :initial => :un_submit do
+    after_transition [:processing] => :star do |project,transition|
+      project.update_attribute :system_star,1
+    end
     event :submit do
       transition [:rejected,:un_submit] => :processing
     end

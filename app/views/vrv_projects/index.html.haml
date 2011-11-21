@@ -8,6 +8,7 @@
     %th= t("activerecord.attributes.vrv_project.amount")
     %th= t("activerecord.attributes.vrv_project.industry")
     %th= t("activerecord.attributes.vrv_project.agent")
+    %th= t("activerecord.attributes.vrv_project.star")
     %th
     %th
     %th
@@ -19,6 +20,9 @@
       %td= vrv_project.amount
       %td= vrv_project.industry
       %td= vrv_project.agent
+      %td
+        - vrv_project.star.times do
+          =image_tag('small_star.png')
       %td= link_to '查看', vrv_project
       %td= link_to '修改', edit_vrv_project_path(vrv_project)
       %td

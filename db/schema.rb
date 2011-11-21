@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113110606) do
+ActiveRecord::Schema.define(:version => 20111119025217) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1177,8 +1177,9 @@ ActiveRecord::Schema.define(:version => 20111113110606) do
     t.string :channel
     t.string :duty_description
     t.string :state
-    t.string :system_star
-    t.string :human_star
+    t.integer :system_star
+    t.integer :human_star
+    t.integer :person_id
 
     t.timestamps
   end

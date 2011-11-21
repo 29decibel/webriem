@@ -3,8 +3,11 @@
     .name= link_to project.customer,project
     .start_date= project.start_date
     .state= t("activerecord.attributes.vrv_project.states.#{project.state}")
-    .system_star= project.system_star
-    .human_star= project.human_star
+    .system_star
+      .page-header
+        %h6 星级
+      - project.star.times do
+        =image_tag('star.png')
 .links
   -if !@vrv_project.new_record?
     = link_to '编辑项目信息', edit_vrv_project_path(project),:class=>(controller_name=='vrv_projects'&&action_name=='edit' ? 'current':'')
