@@ -12,6 +12,9 @@
     =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@docs_to_approve}
     .bottom_action
       =link_to I18n.t('common_attr.more'), docs_to_approve_path,:remote=>true
+- if @vrv_projects.count > 0
+  .section
+    =render "vrv_projects"
 -if @my_approved_docs.count>0
   .section
     .page-header

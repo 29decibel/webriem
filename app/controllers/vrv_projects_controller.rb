@@ -1,5 +1,11 @@
 class VrvProjectsController < InheritedResources::Base
+  before_filter :authenticate_user!
   layout :vrv_project
+
+  def index
+    @vrv_projects = current_user.person.vrv_projects
+  end
+
   def create
     create!
     @vrv_project.person = current_user.person

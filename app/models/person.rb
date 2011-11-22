@@ -6,6 +6,8 @@ class Person < ActiveRecord::Base
   belongs_to :role, :class_name => "Role", :foreign_key => "role_id"
   belongs_to :person_type, :class_name => "PersonType", :foreign_key => "person_type_id"
 
+  has_many :vrv_projects
+
   validates_presence_of :duty_id,:name,:code,:phone,:e_mail,:ID_card,:bank_no,:bank
   validates_uniqueness_of :name,:code,:e_mail
 

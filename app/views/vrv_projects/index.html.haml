@@ -2,32 +2,37 @@
   %h3 立项列表
 
 %table
-  %tr
-    %th= t("activerecord.attributes.vrv_project.customer")
-    %th= t("activerecord.attributes.vrv_project.start_date")
-    %th= t("activerecord.attributes.vrv_project.amount")
-    %th= t("activerecord.attributes.vrv_project.industry")
-    %th= t("activerecord.attributes.vrv_project.agent")
-    %th= t("activerecord.attributes.vrv_project.star")
-    %th
-    %th
-    %th
-
-  - @vrv_projects.each do |vrv_project|
+  %thead
     %tr
-      %td= vrv_project.customer
-      %td= vrv_project.start_date
-      %td= vrv_project.amount
-      %td= vrv_project.industry
-      %td= vrv_project.agent
-      %td
-        - vrv_project.star.times do
-          =image_tag('small_star.png')
-      %td= link_to '查看', vrv_project
-      %td= link_to '修改', edit_vrv_project_path(vrv_project)
-      %td
-        -if vrv_project.un_submit?
-          = link_to '删除', vrv_project, :confirm => "确定删除项目#{vrv_project.customer}?", :method => :delete
+      %th= t("activerecord.attributes.vrv_project.customer")
+      %th= t("activerecord.attributes.vrv_project.start_date")
+      %th= t("activerecord.attributes.vrv_project.amount")
+      %th= t("activerecord.attributes.vrv_project.industry")
+      %th= t("activerecord.attributes.vrv_project.agent")
+      %th= t("activerecord.attributes.vrv_project.star")
+      %th
+      %th
+      %th
+  %tbody
+    - @vrv_projects.each do |vrv_project|
+      %tr
+        %td= vrv_project.customer
+        %td= vrv_project.start_date
+        %td= vrv_project.amount
+        %td= vrv_project.industry
+        %td= vrv_project.agent
+        %td
+          - vrv_project.star.times do
+            =image_tag('small_star.png')
+        %td= link_to '查看', vrv_project
+        %td= link_to '修改', edit_vrv_project_path(vrv_project)
+        %td
+          -if vrv_project.un_submit?
+            = link_to '删除', vrv_project, :confirm => "确定删除项目#{vrv_project.customer}?", :method => :delete
 
 .actions
   = link_to '申请立项', new_vrv_project_path,:class=>'btn'
+:javascript
+  $(function(){
+    $("table").tablesorter();
+  });

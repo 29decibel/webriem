@@ -23,6 +23,8 @@ class VrvProject < ActiveRecord::Base
   validates :scale,:inclusion => SCALE
   validates :amount,:inclusion => AMOUNT
 
+  scope :processing, where("state='processing'")
+
   accepts_nested_attributes_for :customer_contact, :allow_destroy => true
 
   after_initialize :set_contact

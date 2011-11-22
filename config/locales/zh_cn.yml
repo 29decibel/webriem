@@ -845,6 +845,7 @@
         email: 电子邮件
         start_date: 开始日期
         scale: 项目规模
+        person_id: 申请人
         amount: 项目预计金额
         industry: 项目所在行业
         agent: 代理商

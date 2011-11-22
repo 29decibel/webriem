@@ -48,6 +48,7 @@ class TaskController < ApplicationController
   def dashboard
     @docs_to_pay=DocHead.approved.limit(10)
     @docs_to_approve=DocHead.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
+    @vrv_projects=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
     @my_approved_docs=DocHead.by_person(current_user.person.id).approved.order('created_at desc').limit(10)
     @my_docs = DocHead.by_person(current_user.person.id).order('created_at desc').limit(10)
     respond_to do |wants|
