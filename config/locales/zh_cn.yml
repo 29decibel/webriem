@@ -386,6 +386,8 @@
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"   
+        step_code: 环节编码
+        can_change_approver_steps: 可以更改的环节编码
       region_type:
         name: "名称"
         id: "唯一标识"
@@ -406,6 +408,7 @@
         doc_meta_infos: "单据类型"
         duties: "职务"
         id: "唯一标识"
+        category: 适用系统
         created_at: "创建时间"
         updated_at: "更新时间"
       vouch:
