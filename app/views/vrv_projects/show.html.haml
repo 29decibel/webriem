@@ -1,6 +1,6 @@
 .page-header
   %h3= @vrv_project.customer
--@vrv_project.class.column_names.reject{|cn|%(id created_at updated_at).include? cn}.each do |cn|
+-@vrv_project.class.column_names.reject{|cn|%(id created_at updated_at person_id current_approver_id current_approver_info_id human_star system_star state).include? cn}.each do |cn|
   =tb_show_field(@vrv_project,cn)
 -if @vrv_project.customer_contact
   .page-header

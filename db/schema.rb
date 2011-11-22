@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111119025217) do
+ActiveRecord::Schema.define(:version => 20111122091753) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -261,8 +261,6 @@ ActiveRecord::Schema.define(:version => 20111119025217) do
     t.integer  "company_group_id"
     t.integer  "doc_state"
     t.integer  "doc_meta_info_id"
-    t.integer  "selected_approver_id"
-    t.integer  "reciver_id"
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
@@ -1104,6 +1102,7 @@ ActiveRecord::Schema.define(:version => 20111119025217) do
 
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
+    t.integer  "vrv_project_id"
     t.boolean  "is_ok",       :default => true
     t.text     "comments"
     t.datetime "created_at"
@@ -1137,6 +1136,7 @@ ActiveRecord::Schema.define(:version => 20111119025217) do
     t.boolean :skip,:default => false
     t.integer :person_id
     t.integer :doc_head_id
+    t.integer :vrv_project_id
 
     t.timestamps
   end
@@ -1151,6 +1151,7 @@ ActiveRecord::Schema.define(:version => 20111119025217) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "doc_types"
+    t.string   "category"
   end
 
   create_table "work_flows_doc_meta_infos", :id => false, :force => true do |t|
@@ -1180,6 +1181,8 @@ ActiveRecord::Schema.define(:version => 20111119025217) do
     t.integer :system_star
     t.integer :human_star
     t.integer :person_id
+    t.integer  "current_approver_id"
+    t.integer  "current_approver_info_id"
 
     t.timestamps
   end

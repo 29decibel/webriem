@@ -20,7 +20,7 @@ role :db,  "211.154.169.179", :primary => true # This is where Rails migrations 
 namespace :deploy do
 
   desc "deploy the dev app"
-  task :dev do
+  task :production do
     # you just told the cap where you what to put , and then the current,release and shared folder will created
     # for you
     set :deploy_to, "/home/fin/app"

@@ -23,6 +23,7 @@ ActiveAdmin.register WorkFlow do
       f.input :name
       f.input :doc_meta_infos,:as=>:check_boxes,:wrapper_html=>{:class=>'doc_meta_infos'} 
       f.input :duties,:as=>:check_boxes
+      f.input :category,:as=>:select,:collection => WorkFlow::CATEGORY,:include_blank => false
     end
     f.inputs "审批环节" do
       f.has_many :work_flow_steps,:label=>'添加审批环节' do |p|

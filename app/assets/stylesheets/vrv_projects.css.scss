@@ -10,15 +10,22 @@
     border:1px solid #ccc;
     padding:5px;
     margin-bottom:20px;
+    .system_star{
+      height:90px;
+    }
   }
   .links a{
     padding:5px;
     height:20px;
     display:block;
+    border:1px solid white;
     text-decoration:none;
-    &.current,&:hover{
+    &.current{
       background:url(vrv_project_current.png) no-repeat;
       color:white;
+    }
+    &:hover{
+      border-bottom:1px solid #ccc;
     }
   }
 }

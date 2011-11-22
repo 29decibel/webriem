@@ -169,7 +169,7 @@ class DocHead < ActiveRecord::Base
 
   def find_work_flow
     which_duty = (real_person==nil ? person.duty : real_person.duty)
-    wf=WorkFlow.all.select{|w| w.doc_meta_infos.include? self.doc_meta_info and w.duties.include? which_duty }
+    wf=WorkFlow.oes.all.select{|w| w.doc_meta_infos.include? self.doc_meta_info and w.duties.include? which_duty }
     wf.first   
   end
 

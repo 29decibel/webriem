@@ -1,5 +1,6 @@
 class ApproverInfo < ActiveRecord::Base
   belongs_to :doc_head
+  belongs_to :vrv_project
   belongs_to :work_flow_step
   belongs_to :person
 
