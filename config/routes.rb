@@ -3,6 +3,7 @@ Webreim::Application.routes.draw do
   resources :doc_amount_changes
 
   resources :vrv_projects do
+    resources :work_flow_infos
     member do
       put :submit
       put :approve

@@ -39,12 +39,13 @@ class WorkFlowInfosController < ApplicationController
   # POST /work_flow_infos
   # POST /work_flow_infos.xml
   def create
+    @resource = (@doc_head || @vrv_project)
     if params["commit"]=='通过'
-      @doc_head.next_approver params["work_flow_info"]["comments"]
-      @doc_head.reload
+      @resource.next_approver params["work_flow_info"]["comments"]
+      @resource.reload
     else
-      @doc_head.decline params["work_flow_info"]["comments"]
-      @doc_head.reload
+      @resource.decline params["work_flow_info"]["comments"]
+      @resource.reload
     end
     #redirect_to @doc_head
   end
@@ -75,6 +76,7 @@ class WorkFlowInfosController < ApplicationController
   end
   private
   def get_doc
-    @doc_head = DocHead.find(params[:doc_head_id])
+    @doc_head = DocHead.find_by_id(params[:doc_head_id])
+    @vrv_project = VrvProject.find_by_id(params[:vrv_project_id])
   end
 end

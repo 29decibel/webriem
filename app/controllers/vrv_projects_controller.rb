@@ -1,5 +1,10 @@
 class VrvProjectsController < InheritedResources::Base
   layout :vrv_project
+  def create
+    create!
+    @vrv_project.person = current_user.person
+    @vrv_project.save
+  end
 
   def submit
     @vrv_project = VrvProject.find(params[:id])

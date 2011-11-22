@@ -1,5 +1,5 @@
 = form_for @vrv_project do |f|
-  -f.object.class.column_names.reject{|cn|%w(id created_at updated_at human_star system_star state).include? cn}.each do |cn|
+  -f.object.class.column_names.reject{|cn|%w(id created_at updated_at human_star system_star state person_id current_approver_id current_approver_info_id ).include? cn}.each do |cn|
     =tb_input_field(f,cn)
   .page-header
     %h5 联系人信息

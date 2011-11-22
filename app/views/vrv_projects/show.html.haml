@@ -9,5 +9,36 @@
     =tb_show_field(@vrv_project.customer_contact,field)
 .actions
   =link_to "修改", edit_vrv_project_path(@vrv_project),:class=>'btn primary'
-  -if @vrv_project.un_submit?
+  -if @vrv_project.un_submit? or @vrv_project.rejected?
     =link_to "提交", submit_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
+  -if @vrv_project.current_approver_id == @vrv_project.person.id and @vrv_project.processing?
+    = link_to I18n.t('common_op.approve'),'#',:class=>"btn pop",'data-controls-modal'=>"doc_head_approve",'data-backdrop'=>"true",'data-keyboard'=>true
+
+-if @vrv_project.processing? and @vrv_project.current_approver_id==current_user.person.id
+  #doc_head_approve.modal.hide.fade.in.doc_head_approve
+    .modal-header
+      =link_to "X", "#",:class=>'close'
+      %h3="项目立项审批"
+    .modal-body
+      .page-header
+        %h5 请先对下一级审批人进行指派
+      %ul
+        -@vrv_project.approver_infos.each do |info|
+          %li{'id'=>info.id}
+            -if info.person
+              %span="#{info.person.name}"
+            -else
+              =form_for info,:remote=>true do |f|
+                %span
+                  =f.select :person_id,info.candidates.map{|c|[c.name,c.id]}
+                %span
+                  =f.check_box :skip
+                  跳过此环节
+                =f.submit "确定",:class=>'btn'
+      .page-header
+        %h5 审批说明
+      =form_for [@vrv_project,@vrv_project.work_flow_infos.build],:remote=>true do |f|
+        =f.text_area :comments,:class=>'approve_info'
+        .modal-footer
+          =f.submit "拒绝",:class=>'btn danger'
+          =f.submit "通过",:class=>'btn success'

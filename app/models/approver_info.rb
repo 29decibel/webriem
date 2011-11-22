@@ -6,9 +6,17 @@ class ApproverInfo < ActiveRecord::Base
 
   before_create :set_person_select
 
+  def dep
+    @dep || (
+    if doc_head
+      @dep = doc_head.real_person.try(:dep) || doc_head.person.dep # only is_self_dep need the change dep accord the real person
+    else
+      @dep = vrv_project.person.dep
+    end)
+  end
+
   def candidates
     if work_flow_step.is_self_dep
-      dep = doc_head.real_person.try(:dep) || doc_head.person.dep # only is_self_dep need the change dep accord the real person
       while dep do
         ps = Person.where("dep_id=? and duty_id=?",dep.id,work_flow_step.duty_id)
         if ps.count>0

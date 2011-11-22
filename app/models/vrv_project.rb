@@ -15,7 +15,7 @@ class VrvProject < ActiveRecord::Base
 
   has_many :approver_infos
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
-  has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
+  has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "vrv_project_id",:dependent=>:destroy
 
   SCALE = %w(150-300)
   AMOUNT = %w(10万以下)
@@ -26,6 +26,7 @@ class VrvProject < ActiveRecord::Base
   accepts_nested_attributes_for :customer_contact, :allow_destroy => true
 
   after_initialize :set_contact
+  before_save :set_current_approver_id
 
   def system_star
     self[:system_star] || 0
@@ -86,7 +87,7 @@ class VrvProject < ActiveRecord::Base
 
     # TODO should skip the disabled ones
     if current_index!=nil
-      self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
+      self.work_flow_infos << self.work_flow_infos.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
       if current_index+1<approver_array.count
         self.current_approver_info = approver_array[current_index+1]
         self.save
@@ -105,7 +106,7 @@ class VrvProject < ActiveRecord::Base
   def set_approvers(user_selected=nil)
     if (work_flow and work_flow.work_flow_steps.count > 0)
       work_flow.work_flow_steps.each_with_index do |w,index|
-        approver_info = approver_infos.build(:work_flow_step => w,:doc_head => self)
+        approver_info = approver_infos.build(:work_flow_step => w,:vrv_project => self)
         approver_info.enabled = false if (w.max_amount and self.total_amount < w.max_amount)
         approver_info.save
       end #block end
@@ -128,5 +129,9 @@ class VrvProject < ActiveRecord::Base
     if !customer_contact
       self.customer_contact = CustomerContact.new
     end
+  end
+
+  def set_current_approver_id
+    self.current_approver_id = current_approver_info.person_id if current_approver_info
   end
 end
