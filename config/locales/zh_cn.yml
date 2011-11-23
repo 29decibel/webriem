@@ -616,6 +616,12 @@
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"
+        start_date: 入职日期
+        birthday: 生日
+        employ_category: 员工类别
+        duty_level: 岗位级别
+        duty_category: 岗位类别
+        duty_name: 岗位名称
       menu:
         name: "名称"
         title: "标题"

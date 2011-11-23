@@ -8,8 +8,8 @@ class Person < ActiveRecord::Base
 
   has_many :vrv_projects
 
-  validates_presence_of :duty_id,:name,:code,:phone,:e_mail,:ID_card,:bank_no,:bank
-  validates_uniqueness_of :name,:code,:e_mail
+  validates_presence_of :name,:code,:e_mail
+  validates_uniqueness_of :code,:e_mail
 
   after_save :update_user
   after_destroy :delete_user

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123021905) do
+ActiveRecord::Schema.define(:version => 20111123060049) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -575,12 +575,18 @@ ActiveRecord::Schema.define(:version => 20111123021905) do
     t.string   "ID_card"
     t.string   "bank_no"
     t.string   "bank"
+    t.date     "start_date"
     t.date     "end_date"
+    t.date     "birthday"
     t.integer  "credit_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "role_id"
     t.integer  "person_type_id"
+    t.string   "employ_category"
+    t.string   "duty_level"
+    t.string   "duty_category"
+    t.string   "duty_name"
   end
 
   add_index "people", ["code"], :name => "index_people_on_code"
