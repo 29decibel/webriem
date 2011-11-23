@@ -2,9 +2,11 @@
 ActiveAdmin.register WorkFlow do
   menu :label => '审批流设置'
   filter :name
+  filter :category
 
   index do
     column :name
+    column :category
     column :doc_meta_infos do |work_flow|
       raw work_flow.doc_meta_infos.map(&:name).join(',')
     end
@@ -42,7 +44,9 @@ ActiveAdmin.register WorkFlow do
   end
 
   show do |wf|
-    h3 wf.name
+    h3 "#{wf.name}【#{wf.category}】"
+    h5 "申请人职务：#{wf.duties.map(&:name).join(',')}"
+    h5("申请单据类型：#{wf.doc_meta_infos.map(&:name).join(',')}") if wf.category=='报销系统'
     div do
       raw wf.work_flow_steps.map(&:name).join(' => ')
     end
