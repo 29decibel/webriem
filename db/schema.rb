@@ -309,7 +309,6 @@ ActiveRecord::Schema.define(:version => 20111123021905) do
     t.string :period
     t.string :fee_class
     t.decimal :amount
-    t.integer :parent_fee_rule
 
     t.timestamps
   end
