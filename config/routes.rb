@@ -8,6 +8,7 @@ Webreim::Application.routes.draw do
       put :submit
       put :approve
       put :reject
+      put :recall
     end
     resources :customer_contacts
     resources :implement_activities

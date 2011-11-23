@@ -15,6 +15,8 @@
     =link_to "提交", submit_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
   -if @vrv_project.current_approver_id == @vrv_project.person.id and @vrv_project.processing?
     = link_to I18n.t('common_op.approve'),'#',:class=>"btn pop",'data-controls-modal'=>"doc_head_approve",'data-backdrop'=>"true",'data-keyboard'=>true
+  -if @vrv_project.processing?
+    =link_to "撤回申请", recall_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
 
 -if @vrv_project.processing? and @vrv_project.current_approver_id==current_user.person.id
   #doc_head_approve.modal.hide.fade.in.doc_head_approve
@@ -26,7 +28,7 @@
         %h5 请先对下一级审批人进行指派
       %ul
         -@vrv_project.approver_infos.each do |info|
-          %li{'id'=>info.id}
+          %li{'class'=>"approver_info_#{info.id}"}
             -if info.person
               %span="#{info.person.name}"
             -else
@@ -44,3 +46,5 @@
         .modal-footer
           =f.submit "拒绝",:class=>'btn danger'
           =f.submit "通过",:class=>'btn success'
+.work_flow_infos
+  =render "doc_heads/work_flow_info",:doc=>@vrv_project

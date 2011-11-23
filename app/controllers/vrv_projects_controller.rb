@@ -30,6 +30,12 @@ class VrvProjectsController < InheritedResources::Base
     redirect_to @vrv_project   
   end
 
+  def recall
+    @vrv_project = VrvProject.find(params[:id])
+    @vrv_project .recall
+    redirect_to @vrv_project   
+  end
+
   private
   def vrv_project
     action_name == 'index' ? "application" : 'vrv_project'

@@ -31,7 +31,7 @@
         %h5 请先对下一级审批人进行指派
       %ul
         -doc_head.approver_infos.each do |info|
-          %li{'id'=>info.id}
+          %li{'class'=>"approver_info_#{info.id}"}
             -if info.person
               %span="#{info.person.name}"
             -else

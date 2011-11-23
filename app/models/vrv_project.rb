@@ -45,7 +45,7 @@ class VrvProject < ActiveRecord::Base
     after_transition [:rejected,:un_submit] => :processing do |vrv_project, transition|
       vrv_project.set_approvers
     end    
-    after_transition [:processing] => [:rejected] do |vrv_project,transition|
+    after_transition [:processing] => [:rejected,:un_submit] do |vrv_project,transition|
       vrv_project.approver_infos.delete_all
       vrv_project.current_approver_info = nil
       vrv_project.save
@@ -56,6 +56,9 @@ class VrvProject < ActiveRecord::Base
     end
     event :reject do
       transition [:processing] => :rejected
+    end
+    event :recall do
+      transition [:processing] => :un_submit
     end
     event :approve do
       transition [:processing] => :star
