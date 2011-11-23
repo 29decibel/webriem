@@ -5,12 +5,14 @@
         %h3=link_to "网上报销系统", root_url,:remote=>true
         -if current_user
           %ul
-            -current_user.person.role.menus.all.group_by(&:group_name).each do |g_name,menus|
+            -current_user.person.role.menus.has_group.all.group_by(&:group_name).each do |g_name,menus|
               %li.dropdown{'data-dropdown'=>"dropdown"}
                 =link_to g_name,'#',:class=>'dropdown-toggle'
                 %ul.dropdown-menu
                   -menus.each do |menu|
                     %li=link_to menu.name,menu.path,:remote=>true
+            -current_user.person.role.menus.solo.each do |menu|
+              %li=link_to menu.name,menu.path,:remote=>'true'
           %ul.nav.secondary-nav
             %li=link_to "欢迎, #{current_user.person.name}",root_url
             %li=link_to "注销",destroy_user_session_path,:method=>:delete
