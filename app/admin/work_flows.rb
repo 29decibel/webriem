@@ -34,6 +34,8 @@ ActiveAdmin.register WorkFlow do
         p.input  :can_change_approver_steps
         p.input  :max_amount
         p.input  :can_change_amount
+        p.input  :_destroy, :as => :boolean, :label => "删除此环节" unless p.object.new_record?
+        p.form_buffers.last
       end
     end
     f.buttons

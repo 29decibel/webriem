@@ -14,6 +14,8 @@ ActiveAdmin.register DocMetaInfo do
         dr.input :doc_row_meta_info
         dr.input :multiple
         dr.input :doc_row_attrs
+        dr.input  :_destroy, :as => :boolean, :label => "删除此环节" unless dr.object.new_record?
+        dr.form_buffers.last
       end
     end
     f.buttons
