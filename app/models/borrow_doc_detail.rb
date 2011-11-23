@@ -2,9 +2,19 @@
 class BorrowDocDetail < ActiveRecord::Base
   include DocIndex
 
-  after_initialize  :set_default_value
   before_save :set_afford_dep
   before_validation :set_apply_amount
+
+  after_initialize  :set_default_value
+  def set_default_value
+    if !currency
+      sysconfig = SystemConfig.find_by_key 'default_currency'
+      if sysconfig
+        self.currency = Currency.find_by_code sysconfig.value
+        self.rate = self.currency.default_rate if self.currency
+      end
+    end
+  end
 
   belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
   belongs_to :dep
@@ -42,13 +52,5 @@ class BorrowDocDetail < ActiveRecord::Base
   def set_apply_amount
     self.apply_amount = self.ori_amount / self.rate
   end
-  def set_default_value
-    if !currency
-      sysconfig = SystemConfig.find_by_key 'default_currency'
-      if sysconfig
-        self.currency = Currency.find_by_code sysconfig.value
-        self.rate = self.currency.default_rate if self.currency
-      end
-    end
-  end
+
 end
