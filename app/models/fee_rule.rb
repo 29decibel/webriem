@@ -31,22 +31,19 @@
 # if the previous values of factors equals the values setting
 # 如果这个规则上所有属性都等于预先设定的值
 class FeeRule < ActiveRecord::Base
-  scope :of_class,lambda {|class_name| where("fee_class=?",class_name)}
+  scope :fee,lambda {|class_name| where("fee_class=?",class_name)}
+  scope :rule,    lambda {|rule| where("factors like %#{rule}%")}
+  default_scope order('priority desc')
 
-  def match?(resource)
-    result = true
-    factors_hash.each do |key,value|
-      result = result && resource.send(key)==value
-      break if !result
-    end
-    result
+  before_save :reorder_factors
+
+  def self.match(person,fee_class)
+    
   end
 
-  def factors_hash
-    self.factors.split(';').inject({}) do |hash,f|
-      key,value = f.split(':')
-      hash[key] = value
-    end
+  private
+  def reorder_factors
+    self.factors = self.factors.split(',').sort.join(',')
   end
 
 end

@@ -286,10 +286,10 @@ class DocHead < ActiveRecord::Base
   def total_amount
     total_apply_amount
   end
-  def is_split
-    self[:is_split] ? "是" : '否'
-  end
 
+  def rules
+    
+  end
 
   ####################### vouch ##############################
   def exist_vouch?

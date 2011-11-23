@@ -22,6 +22,10 @@ class Person < ActiveRecord::Base
     ['男','女']
   end
 
+  def doc_amount(fee,year,month)
+    fee.where('person_id=? and year(apply_date)=? and month(apply_date)=?',self.id,year,month).sum(:apply_amount)
+  end
+
   # if there is no user of current person
   # then create one with person's code
   def update_user

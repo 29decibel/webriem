@@ -22,6 +22,7 @@ class VrvProject < ActiveRecord::Base
 
   validates :scale,:inclusion => SCALE
   validates :amount,:inclusion => AMOUNT
+  validates :name,:presence=>true,:uniqueness=>true
 
   scope :processing, where("state='processing'")
 

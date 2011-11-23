@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123060049) do
+ActiveRecord::Schema.define(:version => 20111123133152) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -305,8 +305,8 @@ ActiveRecord::Schema.define(:version => 20111123060049) do
   end
 
   create_table :fee_rules do |t|
+    t.integer :priority ,:default => 1
     t.string :factors
-    t.string :period
     t.string :fee_class
     t.decimal :amount
 
@@ -437,60 +437,6 @@ ActiveRecord::Schema.define(:version => 20111123060049) do
   add_index "fees", ["code"], :name => "index_fees_on_code"
   add_index "fees", ["name"], :name => "index_fees_on_name"
 
-  create_table "fixed_properties", :force => true do |t|
-    t.string   "name"
-    t.string   "code"
-    t.integer  "sequence"
-    t.decimal  "buy_unit",         :precision => 16, :scale => 2
-    t.integer  "buy_count"
-    t.decimal  "original_value",   :precision => 16, :scale => 2
-    t.integer  "keeper_id"
-    t.string   "place"
-    t.integer  "afford_dep_id"
-    t.integer  "project_id"
-    t.integer  "doc_head_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "seq_no"
-    t.integer  "property_type_id"
-  end
-
-  create_table "inner_cash_draws", :force => true do |t|
-    t.integer  "account_id"
-    t.text     "description"
-    t.integer  "doc_head_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "now_remain_amount", :precision => 16, :scale => 2
-  end
-
-  create_table "inner_remittances", :force => true do |t|
-    t.integer  "out_account_id"
-    t.decimal  "amount",          :precision => 16, :scale => 2
-    t.text     "description"
-    t.decimal  "remain_amount",   :precision => 16, :scale => 2
-    t.decimal  "now_rate_price",  :precision => 14, :scale => 4
-    t.integer  "doc_head_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "currency_id"
-    t.integer  "in_account_id"
-    t.decimal  "in_amount_after", :precision => 16, :scale => 2
-  end
-
-  create_table "inner_transfers", :force => true do |t|
-    t.integer  "out_account_id"
-    t.decimal  "out_amount_before", :precision => 16, :scale => 2
-    t.decimal  "in_amount_before",  :precision => 16, :scale => 2
-    t.decimal  "amount",            :precision => 16, :scale => 2
-    t.text     "description"
-    t.integer  "doc_head_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "in_account_id"
-    t.decimal  "in_amount_after",   :precision => 16, :scale => 2
-  end
-
   create_table "lodgings", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -501,27 +447,14 @@ ActiveRecord::Schema.define(:version => 20111123060049) do
   add_index "lodgings", ["code"], :name => "index_lodgings_on_code"
   add_index "lodgings", ["name"], :name => "index_lodgings_on_name"
 
-  create_table "menu_categories", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "menu_rights", :force => true do |t|
-    t.integer  "role_id"
-    t.integer  "menu_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "menus", :force => true do |t|
     t.string   "name"
     t.string   "path"
+    t.string   "group_name"
+    t.integer  "priority",:default =>1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "menu_type"
-    t.integer  "menu_category_id"
   end
 
   create_table "menus_roles", :id => false, :force => true do |t|
@@ -1169,6 +1102,7 @@ ActiveRecord::Schema.define(:version => 20111123060049) do
   #-------------------------------------------
 
   create_table :vrv_projects do |t|
+    t.string :name
     t.string :customer
     t.string :place
     t.string :website
@@ -1217,6 +1151,18 @@ ActiveRecord::Schema.define(:version => 20111123060049) do
 
   create_table :products do |t|
     t.string :name
+    t.string :code
+
+    t.timestamps
+  end
+
+  create_table :contract_items do |t|
+    t.integer :product_id
+    t.integer :quantity
+    t.decimal :price,      :precision => 16, :scale => 2
+    t.float :service_year
+    t.decimal :amount,      :precision => 16, :scale => 2
+    t.integer :doc_head_id
 
     t.timestamps
   end
