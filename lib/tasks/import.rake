@@ -12,7 +12,7 @@ namespace :vrv do
   desc "import deps"
   task :import_deps => :environment do
     csv = File.expand_path('../../../db/dep.csv',__FILE__)
-    File.opne(csv,'r') do |file|
+    File.open(csv,'r') do |file|
       while (line=file.gets)
         name,code = line.splits(',')
         dep = Dep.build(:name=>name,:code=>code)
