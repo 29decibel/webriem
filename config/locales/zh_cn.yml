@@ -847,6 +847,7 @@
         rate: 汇率
         currency_id: 币种
       vrv_project:
+        name: 项目名称
         customer: 客户全称
         place: 项目所在地
         website: 网站

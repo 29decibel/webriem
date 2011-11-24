@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123133152) do
+ActiveRecord::Schema.define(:version => 20111124060311) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20111123133152) do
     t.integer  "company_group_id"
     t.integer  "doc_state"
     t.integer  "doc_meta_info_id"
+    t.integer  "vrv_project_id"
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
