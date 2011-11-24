@@ -3,7 +3,7 @@
     .fill
       .container
         %h3=link_to "网上报销系统", root_url
-        -if current_user
+        -if current_user and current_user.person and current_user.person.role
           %ul
             -current_user.person.role.menus.has_group.all.group_by(&:group_name).each do |g_name,menus|
               %li.dropdown{'data-dropdown'=>"dropdown"}
