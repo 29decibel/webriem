@@ -846,6 +846,12 @@
         fi_amount: 财务调整金额
         rate: 汇率
         currency_id: 币种
+      contract_item:
+        product_id: 产品
+        quantity: 数量
+        price: 单价
+        service_year: 服务年限
+        amount: 总金额
       vrv_project:
         name: 项目名称
         customer: 客户全称

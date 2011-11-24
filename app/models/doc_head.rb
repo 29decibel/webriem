@@ -64,6 +64,7 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :rd_transports , :allow_destroy => true
   accepts_nested_attributes_for :common_riems , :allow_destroy => true
   accepts_nested_attributes_for :other_riems , :allow_destroy => true
+  accepts_nested_attributes_for :contract_items , :allow_destroy => true
 
 
   Doc_State = ['un_submit','processing','approved','paid','rejected']
