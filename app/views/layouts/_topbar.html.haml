@@ -2,7 +2,7 @@
   .topbar
     .fill
       .container
-        %h3=link_to "网上报销系统", root_url,:remote=>true
+        %h3=link_to "网上报销系统", root_url
         -if current_user
           %ul
             -current_user.person.role.menus.has_group.all.group_by(&:group_name).each do |g_name,menus|
@@ -10,9 +10,9 @@
                 =link_to g_name,'#',:class=>'dropdown-toggle'
                 %ul.dropdown-menu
                   -menus.each do |menu|
-                    %li=link_to menu.name,menu.path,:remote=>true
+                    %li=link_to menu.name,menu.path
             -current_user.person.role.menus.solo.each do |menu|
-              %li=link_to menu.name,menu.path,:remote=>'true'
+              %li=link_to menu.name,menu.path
           %ul.nav.secondary-nav
             %li=link_to "欢迎, #{current_user.person.name}",root_url
             %li=link_to "注销",destroy_user_session_path,:method=>:delete
