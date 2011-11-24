@@ -684,6 +684,31 @@
         total_apply_amount: "申请总金额"
         mark: 特殊标记
         total_amount: 申请总金额
+        v_chanel: 行业归属
+        v_district: 区域归属
+        v_customer: 用户全称
+        v_work_phone: 办公电话
+        v_contact_person: 联系人
+        v_duty: 联系人职务
+        v_cellphone: 联系人手机
+        v_email: 联系人email
+        v_bill_date: 中标日期
+        v_bill_name: 中标单位
+        v_bill_amount: 中标金额
+        v_bill_info: 中标方
+        v_contract_info: 项目执行合同签约方
+        v_product_price: 我方产品总价
+        v_agent: 代理商
+        v_agent_phone: 代理商电话
+        v_agent_contact_name: 代理商联系人
+        v_agent_contact_duty: 代理商联系人职务
+        v_agent_contact_phone: 代理商联系人电话
+        v_agent_contact_email: 代理商联系人邮件
+        v_ip_address: IP地址情况
+        v_pay_info: 付款说明
+        v_buy_info: 采购模块及其他
+        v_deploy_info: 工程实施
+        v_project_info: 项目说明
       reim_split_detail:
         dep_id: "费用承担部门"
         project_id: 项目

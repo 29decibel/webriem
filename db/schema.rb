@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124060311) do
+ActiveRecord::Schema.define(:version => 20111124072547) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -262,6 +262,32 @@ ActiveRecord::Schema.define(:version => 20111124060311) do
     t.integer  "doc_state"
     t.integer  "doc_meta_info_id"
     t.integer  "vrv_project_id"
+    ###############################################
+    t.string  'v_chanel'
+    t.string  "v_district"
+    t.string  'v_customer'
+    t.string  'v_work_phone'
+    t.string  'v_contact_person'
+    t.string  'v_duty'
+    t.string  'v_cellphone'
+    t.string  'v_email'
+    t.date    'v_bill_date'
+    t.string  'v_bill_name'
+    t.string  'v_bill_amount'
+    t.string  'v_bill_info'
+    t.string  'v_contract_info'
+    t.decimal 'v_product_price'
+    t.string  'v_agent'
+    t.string  'v_agent_phone'
+    t.string  'v_agent_contact_name'
+    t.string  'v_agent_contact_duty'
+    t.string  'v_agent_contact_phone'
+    t.string  'v_agent_contact_email'
+    t.string  'v_ip_address'
+    t.string  'v_pay_info'
+    t.string  'v_buy_info'
+    t.string  'v_deploy_info'
+    t.string  'v_project_info'
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
