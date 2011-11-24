@@ -7,7 +7,7 @@ ActiveAdmin.register DocMetaInfo do
       f.input :name
       f.input :code
       f.input :display_name
-      f.input :doc_head_attrs,:as=>:check_boxes,:collection => DocHead.column_names.map{|n|[n,n]}
+      f.input :doc_head_attrs
     end
     f.inputs "单据行信息" do
       f.has_many :doc_relations,:label => '单据行信息' do |dr|
