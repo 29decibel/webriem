@@ -56,7 +56,7 @@ gem "state_machine", '0.10.4'
 
 gem "kaminari"
 
-gem 'unicorn'
+gem 'unicorn','4.1.1'
 
 #gem 'rails-footnotes', '>= 3.7', :group => :development
 #gem 'exception_notification'

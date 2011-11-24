@@ -285,6 +285,6 @@ DEPENDENCIES
   turn
   twitter-bootstrap-rails
   uglifier
-  unicorn
+  unicorn (= 4.1.1)
   webrat
   whenever
