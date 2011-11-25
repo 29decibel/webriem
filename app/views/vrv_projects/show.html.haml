@@ -17,6 +17,8 @@
     = link_to I18n.t('common_op.approve'),'#',:class=>"btn pop",'data-controls-modal'=>"doc_head_approve",'data-backdrop'=>"true",'data-keyboard'=>true
   -if @vrv_project.processing?
     =link_to "撤回申请", recall_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
+  -if @vrv_project.star?
+    =link_to "根据项目生成销售合同", generate_contract_doc_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
 
 -if @vrv_project.processing? and @vrv_project.current_approver_id==current_user.person.id
   #doc_head_approve.modal.hide.fade.in.doc_head_approve

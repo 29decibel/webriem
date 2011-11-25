@@ -36,6 +36,12 @@ class VrvProjectsController < InheritedResources::Base
     redirect_to @vrv_project   
   end
 
+  def generate_contract_doc
+    @vrv_project = VrvProject.find(params[:id])
+    doc = @vrv_project.generate_contract_doc
+    redirect_to edit_doc_head_path(doc)
+  end
+
   private
   def vrv_project
     action_name == 'index' ? "application" : 'vrv_project'

@@ -39,7 +39,14 @@ class VrvProject < ActiveRecord::Base
   end
 
   def generate_contract_doc
-    
+    doc_meta_info = DocMetaInfo.find_by_code 'HT'
+    doc = DocHead.new :doc_meta_info=>doc_meta_info
+    doc.person = self.person
+    doc.build_contract_doc
+    doc.contract_doc.customer = self.customer
+    doc.apply_date = Time.now
+    doc.save
+    doc
   end
 
   def star
