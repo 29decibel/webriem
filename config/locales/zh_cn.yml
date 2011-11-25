@@ -685,7 +685,7 @@
         mark: 特殊标记
         total_amount: 申请总金额
       contract_doc:
-        chanel: 行业归属
+        channel: 行业归属
         district: 区域归属
         customer: 用户全称
         work_phone: 办公电话
