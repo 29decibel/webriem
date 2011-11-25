@@ -10,6 +10,7 @@ class DocHead < ActiveRecord::Base
 
   before_save :set_afford_dep,:set_current_approver_id
   before_validation :set_doc_no
+  after_initialize :set_up_has_one
 
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
   scope :processing, where("state='processing'")
@@ -27,6 +28,9 @@ class DocHead < ActiveRecord::Base
 
   has_many :approver_infos
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
+
+  has_one :contract_doc,:class_name => 'ContractDoc',:foreign_key => 'doc_head_id'
+  accepts_nested_attributes_for :contract_doc , :allow_destroy => true
 
   has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :rd_travels, :class_name => "RdTravel", :foreign_key=>"doc_head_id",:dependent=>:destroy
@@ -118,7 +122,7 @@ class DocHead < ActiveRecord::Base
   end
   #get doc amount by type ---apply_amount? hr_amount? fi_amount?
   def total_apply_amount
-    get_total_amount {|resource| resource.apply_amount}
+    get_total_amount {|resource| resource.respond_to?(:apply_amount) ? resource.apply_amount : 0}
   end
 
   def final_amount
@@ -127,7 +131,7 @@ class DocHead < ActiveRecord::Base
 
   def get_total_amount(&block)
     total = 0
-    doc_meta_info.doc_row_meta_infos.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
+    doc_meta_info.doc_relations.multi(true).map(&:doc_row_meta_info).compact.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
       dr_datas = self.send(eval(dr_meta.name).table_name)
       total += dr_datas.inject(0){|sum,dr_data|sum + block.call(dr_data)}
     end
@@ -804,5 +808,11 @@ class DocHead < ActiveRecord::Base
 
   def processing_doc_current_info_must_one_candidate
     errors.add(:base,'当前审批人不确定') if (self.processing? and self.current_approver_info and self.current_approver_info.candidates.count>1 and !self.current_approver_info.person_id)
+  end
+
+  def set_up_has_one
+    if self.new_record?
+      self.build_contract_doc
+    end
   end
 end

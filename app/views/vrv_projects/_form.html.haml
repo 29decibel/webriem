@@ -1,6 +1,20 @@
 = form_for @vrv_project do |f|
-  -f.object.class.column_names.reject{|cn|%w(id created_at updated_at human_star system_star state person_id current_approver_id current_approver_info_id ).include? cn}.each do |cn|
-    =tb_input_field(f,cn)
+  =tb_input_field(f,'name')
+  =tb_input_field(f,'customer')
+  =tb_input_field(f,'customer_industry')
+  =tb_input_field(f,'place')
+  =tb_input_field(f,'website')
+  =tb_input_field(f,'phone')
+  =tb_input_field(f,'email')
+  =tb_input_field(f,'start_date')
+  =tb_input_field(f,'source')
+  =tb_input_field(f,'scale')
+  =tb_input_field(f,'amount')
+  =tb_input_field(f,'agent')
+  =tb_input_field(f,'agent_industry')
+  =tb_input_field(f,'agent_contact')
+  =tb_input_field(f,'channel')
+  =tb_input_field(f,'duty_description')
   .page-header
     %h5 联系人信息
   =f.fields_for :customer_contact do |form|

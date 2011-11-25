@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124072547) do
+ActiveRecord::Schema.define(:version => 20111125035837) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -261,33 +261,6 @@ ActiveRecord::Schema.define(:version => 20111124072547) do
     t.integer  "company_group_id"
     t.integer  "doc_state"
     t.integer  "doc_meta_info_id"
-    t.integer  "vrv_project_id"
-    ###############################################
-    t.string  'v_chanel'
-    t.string  "v_district"
-    t.string  'v_customer'
-    t.string  'v_work_phone'
-    t.string  'v_contact_person'
-    t.string  'v_duty'
-    t.string  'v_cellphone'
-    t.string  'v_email'
-    t.date    'v_bill_date'
-    t.string  'v_bill_name'
-    t.string  'v_bill_amount'
-    t.string  'v_bill_info'
-    t.string  'v_contract_info'
-    t.decimal 'v_product_price'
-    t.string  'v_agent'
-    t.string  'v_agent_phone'
-    t.string  'v_agent_contact_name'
-    t.string  'v_agent_contact_duty'
-    t.string  'v_agent_contact_phone'
-    t.string  'v_agent_contact_email'
-    t.string  'v_ip_address'
-    t.string  'v_pay_info'
-    t.string  'v_buy_info'
-    t.string  'v_deploy_info'
-    t.string  'v_project_info'
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
@@ -297,6 +270,36 @@ ActiveRecord::Schema.define(:version => 20111124072547) do
   add_index "doc_heads", ["project_id"], :name => "index_doc_heads_on_project_id"
   add_index "doc_heads", ["real_person_id"], :name => "index_doc_heads_on_real_person_id"
   add_index "doc_heads", ["state"], :name => "index_doc_heads_on_doc_state"
+
+
+  create_table :contract_docs,:force => true do |t|
+    t.integer 'doc_head_id'
+    t.string  'chanel'
+    t.string  "district"
+    t.string  'customer'
+    t.string  'work_phone'
+    t.string  'contact_person'
+    t.string  'duty'
+    t.string  'cellphone'
+    t.string  'email'
+    t.date    'bill_date'
+    t.string  'bill_name'
+    t.string  'bill_amount'
+    t.string  'bill_info'
+    t.string  'contract_info'
+    t.decimal 'product_price'
+    t.string  'agent'
+    t.string  'agent_phone'
+    t.string  'agent_contact_name'
+    t.string  'agent_contact_duty'
+    t.string  'agent_contact_phone'
+    t.string  'agent_contact_email'
+    t.string  'ip_address'
+    t.string  'pay_info'
+    t.string  'buy_info'
+    t.string  'deploy_info'
+    t.string  'project_info'
+  end
 
   create_table "doc_meta_infos", :force => true do |t|
     t.string   "name"
@@ -1138,9 +1141,11 @@ ActiveRecord::Schema.define(:version => 20111124072547) do
     t.date :start_date
     t.string :scale
     t.string :amount
-    t.string :industry
+    t.string :customer_industry
+    t.string :source
     t.integer :agent
     t.string :agent_contact
+    t.string :agent_industry
     t.string :channel
     t.string :duty_description
     t.string :state
@@ -1260,12 +1265,13 @@ ActiveRecord::Schema.define(:version => 20111124072547) do
     t.timestamps
   end
   create_table :contract_predicts do |t|
-    t.string :product
+    t.text :product
     t.integer :package_num
     t.float :points
     t.float :price
     t.date :sign_date
     t.integer :vrv_project_id
+    t.string :bill_percent
 
     t.timestamps
   end
@@ -1301,6 +1307,7 @@ ActiveRecord::Schema.define(:version => 20111124072547) do
     t.date :start_date
     t.date :end_date
     t.float :days
+    t.integer :doc_head_id
     t.integer :vrv_project_id
 
     t.timestamps

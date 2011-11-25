@@ -11,16 +11,24 @@
   #doc_state_process
     = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
   .page-header
-    %h3= "#{I18n.t('common_attr.basic_info')}"
+    %h5= "#{I18n.t('common_attr.basic_info')}"
   .doc_head_infos
     -doc.doc_meta_info.doc_head_attrs.each do |cn|
       =tb_input_field(f,cn)
+  -doc.doc_meta_info.doc_relations.multi(false).each do |doc_relation|
+    .page-header
+      %h5= "#{doc_relation.doc_row_meta_info.display_name}"
+    .doc_extra_info
+      =f.fields_for doc_relation.doc_row_meta_info.name.underscore do |builder|
+        .doc_row.exist
+          -doc_relation.doc_row_attrs.each do |dr_col|
+            =tb_input_field(builder,dr_col)
   <!--根据不同的单据类型render不同的单据-->
   #details
-    -doc.doc_meta_info.doc_relations.each do  |doc_relation|
+    -doc.doc_meta_info.doc_relations.multi(true).each do  |doc_relation|
       .doc_detail{'class'=>"#{doc_relation.doc_row_meta_info.name}"}
         .page-header
-          %h3
+          %h5
             = link_to_add_fields "#{I18n.t('common_attr.add_detail')}",f,doc_relation
             = doc_relation.doc_row_meta_info.display_name
             = image_tag "currency_yuan.png"

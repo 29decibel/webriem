@@ -11,7 +11,6 @@ Webreim::Application.routes.draw do
       put :recall
     end
     resources :customer_contacts
-    resources :implement_activities
     resources :bill_afters
     resources :bill_stages
     resources :contract_predicts
@@ -22,6 +21,8 @@ Webreim::Application.routes.draw do
     resources :network_conditions
     resources :competitors
   end
+
+  resources :implement_activities
 
   resource "doc_row_resource"
 

@@ -17,12 +17,15 @@ class VrvProject < ActiveRecord::Base
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "vrv_project_id",:dependent=>:destroy
 
-  SCALE = %w(150-300)
-  AMOUNT = %w(10万以下)
-
+  SCALE = %w(5万以下 5-10万以下 10-30万以下 30-50万以下 50万及其以上)
+  SOURCE = %w(直单 经销)
+  
   validates :scale,:inclusion => SCALE
-  validates :amount,:inclusion => AMOUNT
+  validates :source,:inclusion => SOURCE
   validates :name,:presence=>true,:uniqueness=>true
+  validates :customer,:presence=>true,:uniqueness=>true
+  validates :customer_industry,:presence=>true
+  validates :agent_industry,:presence=>true
 
   scope :processing, where("state='processing'")
 

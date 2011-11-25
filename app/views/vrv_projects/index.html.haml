@@ -4,11 +4,10 @@
 %table
   %thead
     %tr
+      %th= t("activerecord.attributes.vrv_project.name")
       %th= t("activerecord.attributes.vrv_project.customer")
       %th= t("activerecord.attributes.vrv_project.start_date")
       %th= t("activerecord.attributes.vrv_project.amount")
-      %th= t("activerecord.attributes.vrv_project.industry")
-      %th= t("activerecord.attributes.vrv_project.agent")
       %th= t("activerecord.attributes.vrv_project.star")
       %th
       %th
@@ -16,11 +15,10 @@
   %tbody
     - @vrv_projects.each do |vrv_project|
       %tr
+        %td= vrv_project.name
         %td= vrv_project.customer
         %td= vrv_project.start_date
         %td= vrv_project.amount
-        %td= vrv_project.industry
-        %td= vrv_project.agent
         %td
           - vrv_project.star.times do
             =image_tag('small_star.png')

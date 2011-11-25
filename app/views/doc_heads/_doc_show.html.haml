@@ -19,8 +19,18 @@
     %h7= "申请总金额为￥#{doc.total_apply_amount}，调整后金额为￥#{doc.final_amount}"
   -doc.doc_meta_info.doc_head_attrs.each do |cn|
     =tb_show_field(doc,cn)
+  -doc.doc_meta_info.doc_relations.multi(false).each do  |doc_relation|
+    .doc_extra
+      .page-header
+        %h3
+          = doc_relation.doc_row_meta_info.display_name
+      .form_area
+        -extra = doc.send(doc_relation.doc_row_meta_info.name.underscore)
+        .doc_row_show
+          -doc_relation.doc_row_attrs.each do |col|
+            =tb_show_field(extra,col)
   #details.show_only
-    -doc.doc_meta_info.doc_relations.each do  |doc_relation|
+    -doc.doc_meta_info.doc_relations.multi(true).each do  |doc_relation|
       .doc_detail
         .page-header
           %h3

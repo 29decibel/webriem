@@ -2,6 +2,8 @@ class DocRelation < ActiveRecord::Base
   belongs_to :doc_row_meta_info
   belongs_to :doc_meta_info
 
+  scope :multi,lambda {|multi| where('multiple=?',multi)}
+
   def doc_row_attrs
     if !self[:doc_row_attrs].blank?
       self[:doc_row_attrs].split(',')

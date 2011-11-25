@@ -684,31 +684,32 @@
         total_apply_amount: "申请总金额"
         mark: 特殊标记
         total_amount: 申请总金额
-        v_chanel: 行业归属
-        v_district: 区域归属
-        v_customer: 用户全称
-        v_work_phone: 办公电话
-        v_contact_person: 联系人
-        v_duty: 联系人职务
-        v_cellphone: 联系人手机
-        v_email: 联系人email
-        v_bill_date: 中标日期
-        v_bill_name: 中标单位
-        v_bill_amount: 中标金额
-        v_bill_info: 中标方
-        v_contract_info: 项目执行合同签约方
-        v_product_price: 我方产品总价
-        v_agent: 代理商
-        v_agent_phone: 代理商电话
-        v_agent_contact_name: 代理商联系人
-        v_agent_contact_duty: 代理商联系人职务
-        v_agent_contact_phone: 代理商联系人电话
-        v_agent_contact_email: 代理商联系人邮件
-        v_ip_address: IP地址情况
-        v_pay_info: 付款说明
-        v_buy_info: 采购模块及其他
-        v_deploy_info: 工程实施
-        v_project_info: 项目说明
+      contract_doc:
+        chanel: 行业归属
+        district: 区域归属
+        customer: 用户全称
+        work_phone: 办公电话
+        contact_person: 联系人
+        duty: 联系人职务
+        cellphone: 联系人手机
+        email: 联系人email
+        bill_date: 中标日期
+        bill_name: 中标单位
+        bill_amount: 中标金额
+        bill_info: 中标方
+        contract_info: 项目执行合同签约方
+        product_price: 我方产品总价
+        agent: 代理商
+        agent_phone: 代理商电话
+        agent_contact_name: 代理商联系人
+        agent_contact_duty: 代理商联系人职务
+        agent_contact_phone: 代理商联系人电话
+        agent_contact_email: 代理商联系人邮件
+        ip_address: IP地址情况
+        pay_info: 付款说明
+        buy_info: 采购模块及其他
+        deploy_info: 工程实施
+        project_info: 项目说明
       reim_split_detail:
         dep_id: "费用承担部门"
         project_id: 项目
@@ -888,7 +889,8 @@
         scale: 项目规模
         person_id: 申请人
         amount: 项目预计金额
-        industry: 项目所在行业
+        customer_industry: 客户所在行业
+        agent_industry: 代理商所在行业
         agent: 代理商
         agent_contact: 代理商联系人
         channel: 渠道管理
@@ -897,6 +899,7 @@
         star: 星级
         system_star: 真实星级
         state: 项目状态
+        source: 直单/经销
         states:
           un_submit: 未提交
           processing: 审批中
@@ -968,11 +971,12 @@
         others: 其他，请补充
         vrv_project_id: 
       contract_predict:
-        product: 产品
+        product: 产品描述
         package_num: 套数
         points: 点数
         price: 金额
         sign_date: 预计签约时间
+        bill_percent: 把握度
         vrv_project_id: 
       bill_stage:
         sample_choose: 指标选定
@@ -997,6 +1001,7 @@
         start_date: 开始日期
         end_date: 结束日期
         days: 实施天数
+        doc_head_id: 合同号
         vrv_project_id: 
     errors:
       template: # ~ 2.3.5 backward compatible

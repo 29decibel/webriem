@@ -4,20 +4,18 @@
 %table
   %thead
     %tr
+      %th.blue= t("activerecord.attributes.vrv_project.name")
       %th.blue= t("activerecord.attributes.vrv_project.customer")
       %th.blue= t("activerecord.attributes.vrv_project.start_date")
       %th.blue= t("activerecord.attributes.vrv_project.amount")
-      %th.blue= t("activerecord.attributes.vrv_project.industry")
-      %th.blue= t("activerecord.attributes.vrv_project.agent")
       %th.blue= t("activerecord.attributes.vrv_project.person_id")
       %th
   %tbody
     - @vrv_projects.each do |vrv_project|
       %tr
+        %td= vrv_project.name
         %td= vrv_project.customer
         %td= vrv_project.start_date
         %td= vrv_project.amount
-        %td= vrv_project.industry
-        %td= vrv_project.agent
         %td= vrv_project.person.name
         %td= link_to '查看', vrv_project
