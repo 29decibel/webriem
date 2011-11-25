@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125091220) do
+ActiveRecord::Schema.define(:version => 20111125095242) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -274,7 +274,7 @@ ActiveRecord::Schema.define(:version => 20111125091220) do
 
   create_table :contract_docs,:force => true do |t|
     t.integer 'doc_head_id'
-    t.string  'chanel'
+    t.string  'channel'
     t.string  "district"
     t.string  'customer'
     t.string  'work_phone'
@@ -283,9 +283,9 @@ ActiveRecord::Schema.define(:version => 20111125091220) do
     t.string  'cellphone'
     t.string  'email'
     t.date    'bill_date'
+    t.string  :source
     t.string  'bill_name'
     t.string  'bill_amount'
-    t.string  'bill_info'
     t.string  'contract_info'
     t.decimal 'product_price'
     t.string  'agent'

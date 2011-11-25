@@ -696,7 +696,6 @@
         bill_date: 中标日期
         bill_name: 中标单位
         bill_amount: 中标金额
-        bill_info: 中标方
         contract_info: 项目执行合同签约方
         product_price: 我方产品总价
         agent: 代理商

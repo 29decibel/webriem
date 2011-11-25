@@ -43,9 +43,15 @@ class VrvProject < ActiveRecord::Base
     doc = DocHead.new :doc_meta_info=>doc_meta_info
     doc.person = self.person
     doc.build_contract_doc
+    # copy attributes
+    doc.contract_doc.source = self.source
     doc.contract_doc.customer = self.customer
+    doc.contract_doc.email = self.email
+    doc.contract_doc.work_phone = self.phone
+    doc.contract_doc.channel = self.channel
     doc.apply_date = Time.now
     doc.save
+    logger.info doc.errors.full_messages
     doc
   end
 
