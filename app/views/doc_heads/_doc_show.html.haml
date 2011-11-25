@@ -22,18 +22,19 @@
   -doc.doc_meta_info.doc_relations.multi(false).each do  |doc_relation|
     .doc_extra
       .page-header
-        %h3
+        %h5
           = doc_relation.doc_row_meta_info.display_name
       .form_area
         -extra = doc.send(doc_relation.doc_row_meta_info.name.underscore)
-        .doc_row_show
-          -doc_relation.doc_row_attrs.each do |col|
-            =tb_show_field(extra,col)
+        -if extra
+          .doc_row_show
+            -doc_relation.doc_row_attrs.each do |col|
+              =tb_show_field(extra,col)
   #details.show_only
     -doc.doc_meta_info.doc_relations.multi(true).each do  |doc_relation|
       .doc_detail
         .page-header
-          %h3
+          %h5
             = doc_relation.doc_row_meta_info.display_name
             = image_tag "currency_yuan.png"
             %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
@@ -47,6 +48,6 @@
                 =tb_show_field(row_data,col)
   -if doc.work_flow_infos.count>0
     .page-header
-      %h3 审批信息
+      %h5 审批信息
     .form_area.doc_head_show
       =render :partial => "work_flow_info",:locals=>{:doc=>doc}

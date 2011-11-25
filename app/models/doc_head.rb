@@ -10,7 +10,6 @@ class DocHead < ActiveRecord::Base
 
   before_save :set_afford_dep,:set_current_approver_id
   before_validation :set_doc_no
-  after_initialize :set_up_has_one
 
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
   scope :processing, where("state='processing'")
@@ -810,9 +809,4 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,'当前审批人不确定') if (self.processing? and self.current_approver_info and self.current_approver_info.candidates.count>1 and !self.current_approver_info.person_id)
   end
 
-  def set_up_has_one
-    if self.new_record?
-      self.build_contract_doc
-    end
-  end
 end

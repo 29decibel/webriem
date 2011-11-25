@@ -52,6 +52,12 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads/new.xml
   def new
     @doc = DocHead.new :doc_meta_info=>DocMetaInfo.find(params[:doc_meta_info_id])
+    @doc.doc_meta_info.doc_relations.multi(false).each do |dr|
+      relation_name = dr.doc_row_meta_info.name.underscore
+      if !@doc.send(relation_name)
+        @doc.send("build_#{relation_name}")
+      end
+    end
     @doc.dep=current_person.dep
     @doc.apply_date = Time.now.to_date
     @doc.person=current_person
