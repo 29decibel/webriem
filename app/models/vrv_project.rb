@@ -38,6 +38,10 @@ class VrvProject < ActiveRecord::Base
     self[:system_star] || 0
   end
 
+  def generate_contract_doc
+    
+  end
+
   def star
     human_star || system_star
   end

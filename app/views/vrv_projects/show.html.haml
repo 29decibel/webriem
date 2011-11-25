@@ -13,7 +13,7 @@
   =link_to "修改", edit_vrv_project_path(@vrv_project),:class=>'btn primary'
   -if @vrv_project.un_submit? or @vrv_project.rejected?
     =link_to "提交", submit_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
-  -if @vrv_project.current_approver_id == @vrv_project.person.id and @vrv_project.processing?
+  -if @vrv_project.current_approver_id == current_user.person.id and @vrv_project.processing?
     = link_to I18n.t('common_op.approve'),'#',:class=>"btn pop",'data-controls-modal'=>"doc_head_approve",'data-backdrop'=>"true",'data-keyboard'=>true
   -if @vrv_project.processing?
     =link_to "撤回申请", recall_vrv_project_path(@vrv_project),:class=>'btn',:method=>'PUT'
