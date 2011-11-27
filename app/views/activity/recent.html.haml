@@ -12,4 +12,4 @@
       -if act[:change]
         .changes
           -act[:change].each do |col,c|
-            .change= "把#{col}从#{c[:from]}改为#{c[:to]}"
+            .change= "把#{col}从#{c[0]}改为#{c[1]}"
