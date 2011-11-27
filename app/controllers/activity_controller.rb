@@ -24,12 +24,7 @@ class ActivityController < ApplicationController
         changes[col] = {:from =>a.try(col),:to=>b.try(col)}
       end
     end
-    logger.info '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
-    logger.info a
-    logger.info '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
-    logger.info b
-    logger.info changes
-    logger.info '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
+
     changes
   end
 

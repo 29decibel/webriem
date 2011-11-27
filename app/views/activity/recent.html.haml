@@ -9,4 +9,7 @@
       %span.time
         时间:
         =act[:time]
-      %span.changes=act[:change]
+      -if act[:change]
+        .changes
+          -act[:change].each do |col,c|
+            .change= "把#{col}从#{c[:from]}改为#{c[:to]}"
