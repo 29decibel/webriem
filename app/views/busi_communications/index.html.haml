@@ -20,4 +20,5 @@
       %td= link_to '删除', [@vrv_project,busi_communication], :confirm => '确定删除?', :method => :delete
 
 .actions
-  = link_to '增加商务交流', new_vrv_project_busi_communication_path(@vrv_project),:class=>'btn primary'
+  -if @vrv_project.star?
+    = link_to '增加商务交流', new_vrv_project_busi_communication_path(@vrv_project),:class=>'btn primary'

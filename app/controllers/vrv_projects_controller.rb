@@ -6,6 +6,7 @@ class VrvProjectsController < InheritedResources::Base
     @vrv_projects = current_user.person.vrv_projects
   end
 
+
   def create
     create!
     @vrv_project.person = current_user.person

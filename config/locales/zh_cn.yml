@@ -27,7 +27,11 @@
       first: 第一页
       last: 最后一页
       truncate: "&hellip;" 
-  
+  actions:
+    update: 更新了
+    destroy: 删除了
+    create: 创建了
+
   datetime:
     distance_in_words:
       half_a_minute: "半分钟"
@@ -879,26 +883,22 @@
         amount: 总金额
       vrv_project:
         name: 项目名称
+        code: 项目编码
         customer: 客户全称
-        place: 项目所在地
+        place: 最终用户所在地
         website: 网站
-        phone: 电话
-        email: 电子邮件
+        phone: 固定电话
         start_date: 开始日期
-        scale: 项目规模
+        scale: 项目规模点数
         person_id: 申请人
         amount: 项目预计金额
         customer_industry: 客户所在行业
-        agent_industry: 代理商所在行业
-        agent: 代理商
         agent_contact: 代理商联系人
-        channel: 渠道管理
-        duty_description: 该成员职责描述
         human_star: 系统星级
         star: 星级
         system_star: 真实星级
         state: 项目状态
-        source: 直单/经销
+        source: 直单/代理
         states:
           un_submit: 未提交
           processing: 审批中
@@ -906,6 +906,7 @@
       customer_contact:
         name: 姓名
         duty: 职务
+        email: 电子邮件
         phone: 手机
         vrv_project_id: 项目
       competitor:

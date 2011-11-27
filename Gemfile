@@ -23,6 +23,8 @@ gem "paperclip"
 
 gem "draper"
 
+gem 'paper_trail', '~> 2'
+
 gem 'whenever', :require => false
 # sudo brew install freetds (on mac os)
 gem "tiny_tds", "~> 0.4.5"

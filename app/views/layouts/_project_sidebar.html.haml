@@ -10,9 +10,10 @@
         =image_tag('star.png')
 .links
   -if !@vrv_project.new_record?
-    = link_to '编辑项目信息', edit_vrv_project_path(project),:class=>(controller_name=='vrv_projects'&&action_name=='edit' ? 'current':'')
-    = link_to "竞争情况(#{project.competitors.count})", vrv_project_competitors_path(project),:class=>(controller_name=='competitors' ? 'current':'')
+    = link_to '基本信息', vrv_project_path(project),:class=>(controller_name=='vrv_projects' ? 'current':'')
     = link_to "网络环境", project.network_condition&&!project.network_condition.new_record? ? [project,project.network_condition] : new_vrv_project_network_condition_path(project),:class=>(controller_name=='network_conditions' ? 'current':'')
+  -if @vrv_project.star?
+    = link_to "竞争情况(#{project.competitors.count})", vrv_project_competitors_path(project),:class=>(controller_name=='competitors' ? 'current':'')
     = link_to "技术交流(#{project.tech_communications.count})", vrv_project_tech_communications_path(project),:class=>(controller_name=='tech_communications' ? 'current':'')
     = link_to "商务交流(#{project.busi_communications.count})", vrv_project_busi_communications_path(project),:class=>(controller_name=='busi_communications' ? 'current':'')
     = link_to "产品测试", project.product_test&&!project.product_test.new_record? ? [project,project.product_test] : new_vrv_project_product_test_path(project),:class=>(controller_name=='product_tests' ? 'current':'')

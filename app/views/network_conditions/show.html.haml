@@ -6,4 +6,5 @@
   .span5= t('activerecord.attributes.network_condition.products')
   .span8= @network_condition.products.map(&:name).join(',')
 .actions
-  =link_to "修改", edit_vrv_project_network_condition_path(@vrv_project,@network_condition),:class=>'btn'
+  -if @vrv_project.un_submit? or @vrv_project.rejected?
+    =link_to "修改", edit_vrv_project_network_condition_path(@vrv_project,@network_condition),:class=>'btn'

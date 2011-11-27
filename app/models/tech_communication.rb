@@ -1,5 +1,6 @@
 #coding: utf-8
 class TechCommunication < ActiveRecord::Base
+  has_paper_trail
   belongs_to :vrv_project
 
   DUTY = %w(基层技术人员 项目负责人/项目主管(处长级) 主管主任(司局级) 采购部门 总裁级(单位最高领导人级))
@@ -15,4 +16,6 @@ class TechCommunication < ActiveRecord::Base
   validates :tech_level,:inclusion => TECH_LEVEL
   validates :tech_attitude,:inclusion => TECH_ATTITUDE
   validates :has_tech_people,:inclusion => HAS_TECH_PEOPLE
+
+  validates_presence_of :date,:customer,:customer_work_phone,:customer_cell,:duty,:contents,:feedback,:customer_project_start_date,:has_tech_people,:our_tech_guy,:our_tech_guy_contact,:tech_level,:tech_attitude
 end

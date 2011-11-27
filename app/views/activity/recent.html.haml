@@ -1,0 +1,12 @@
+.page-header
+  %h3 近30天项目变更明细
+.activities
+  -@activities.each do |act|
+    .activity
+      %span.label= act[:user]
+      =act[:event]
+      =act[:current_item]
+      %span.time
+        时间:
+        =act[:time]
+      %span.changes=act[:change]

@@ -1,5 +1,6 @@
 #coding: utf-8
 class BillAfter < ActiveRecord::Base
+  has_paper_trail
   belongs_to :vrv_project
 
   BILL_STATE = %w(我方中标 我方未中标)

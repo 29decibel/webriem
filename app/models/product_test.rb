@@ -1,5 +1,6 @@
 #coding: utf-8
 class ProductTest < ActiveRecord::Base
+  has_paper_trail
   belongs_to :vrv_project
   CUSTOMER = %w(技术工程师 主管主任 其他)
   SAMPLE = %w(我们可建议用户以我方高技术指标为标准 用户自行选定标准，无法控制 以其他产品技术指标为准)

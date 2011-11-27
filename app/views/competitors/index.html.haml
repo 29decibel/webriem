@@ -18,4 +18,5 @@
       %td= link_to '修改', edit_vrv_project_competitor_path(@vrv_project,competitor)
       %td= link_to '删除', [@vrv_project,competitor], :confirm => '确定删除?', :method => :delete
 .actions
-  = link_to '添加竞争对手信息', new_vrv_project_competitor_path(@vrv_project),:class=>"btn primary"
+  -if @vrv_project.star?
+    = link_to '添加竞争对手信息', new_vrv_project_competitor_path(@vrv_project),:class=>"btn primary"

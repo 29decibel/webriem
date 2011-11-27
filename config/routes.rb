@@ -1,9 +1,14 @@
 Webreim::Application.routes.draw do
 
+  get "activity/recent"
+
   resources :doc_amount_changes
+
+  get 'vrv_projects/activities'
 
   resources :vrv_projects do
     resources :work_flow_infos
+
     member do
       put :submit
       put :approve

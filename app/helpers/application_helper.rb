@@ -233,7 +233,7 @@ module ApplicationHelper
       (content_tag :div,:class => (options[:value_css] || 'span6') do
         if ass
           obj.send(ass.name).try(:name)
-        elsif col.type==:decimal and col.scale==2
+        elsif col and col.type==:decimal and col.scale==2
           "￥#{obj.send(col_name).try(:to_s)}"
         else
           obj.send(col_name).try(:to_s)

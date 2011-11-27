@@ -1,5 +1,7 @@
 #coding: utf-8
 class NetworkCondition < ActiveRecord::Base
+  has_paper_trail
+
   IP_ADDRESS = %w(静态 动态 不知道)
   HUB= %w(支持 不支持 不知道)
   DNS_SERVER = %w(有 没有 不知道)

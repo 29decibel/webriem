@@ -1,5 +1,7 @@
 #coding: utf-8
 class VrvProject < ActiveRecord::Base
+  has_paper_trail
+
   has_one :customer_contact
   has_one :network_condition
   has_many :competitors
@@ -17,25 +19,46 @@ class VrvProject < ActiveRecord::Base
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "vrv_project_id",:dependent=>:destroy
 
-  SCALE = %w(5万以下 5-10万以下 10-30万以下 30-50万以下 50万及其以上)
-  SOURCE = %w(直单 经销)
+  AMOUNT = %w(5万以下 5-10万以下 10-30万以下 30-50万以下 50-100万以下 100万及其以上)
+  SOURCE = %w(直单 代理)
   
-  validates :scale,:inclusion => SCALE
+  validates :amount,:inclusion => AMOUNT
   validates :source,:inclusion => SOURCE
-  validates :name,:presence=>true,:uniqueness=>true
   validates :customer,:presence=>true,:uniqueness=>true
   validates :customer_industry,:presence=>true
-  validates :agent_industry,:presence=>true
+  validates :code,:uniqueness => true
+  validates :agent_contact,:presence => true,:if => :agent_way?
+  validates_presence_of :place
+  validates_presence_of :scale
+  validates_presence_of :phone_pre,:phone_sur
 
   scope :processing, where("state='processing'")
 
   accepts_nested_attributes_for :customer_contact, :allow_destroy => true
+  accepts_nested_attributes_for :network_condition, :allow_destroy => true
 
-  after_initialize :set_contact
+  after_initialize :set_has_one
+  before_validation :set_code
   before_save :set_current_approver_id
 
   def system_star
     self[:system_star] || 0
+  end
+
+  def agent_way?
+    self.source == '代理'
+  end
+
+  def website
+    self[:website] || 'http://'
+  end
+
+  def phone
+    "#{phone_pre}-#{phone_sur}"
+  end
+
+  def start_date
+    self[:start_date] || Time.now.to_date
   end
 
   def generate_contract_doc
@@ -70,6 +93,10 @@ class VrvProject < ActiveRecord::Base
       vrv_project.approver_infos.delete_all
       vrv_project.current_approver_info = nil
       vrv_project.save
+    end
+
+    before_transition [:un_submit,:rejected] => :processing do |project,transition|
+      project.errors.add(:base,'项目提交审批之前需要填写网络环境信息') if !project.network_condition
     end
 
     event :submit do
@@ -151,7 +178,7 @@ class VrvProject < ActiveRecord::Base
   end
 
   private
-  def set_contact
+  def set_has_one
     if !customer_contact
       self.customer_contact = CustomerContact.new
     end
@@ -160,4 +187,12 @@ class VrvProject < ActiveRecord::Base
   def set_current_approver_id
     self.current_approver_id = current_approver_info.person_id if current_approver_info
   end
+
+  def set_code
+    if !self.code
+      current_num = VrvProject.where('year(created_at)=?',Time.now.year).count
+      self.code = "XM#{Time.now.year}#{(current_num+1).to_s.rjust(5,'0')}"
+    end
+  end
+
 end

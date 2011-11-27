@@ -1,5 +1,6 @@
 #coding: utf-8
 class BillPrepare < ActiveRecord::Base
+  has_paper_trail
   belongs_to :vrv_project
   SAMPLE_CHOOSE = %w(以我们的技术指标为标准 综合各家的技术指标 倾向于其他厂家 不知道)
   PRICE_POINT = %w(分值小于总分的20% 分值在总分的20%-35% 分值占总分值的35%以上 不知道)

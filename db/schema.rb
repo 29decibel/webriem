@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125095242) do
+ActiveRecord::Schema.define(:version => 20111127093252) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1133,21 +1133,18 @@ ActiveRecord::Schema.define(:version => 20111125095242) do
 
   create_table :vrv_projects do |t|
     t.string :name
+    t.string :code
     t.string :customer
     t.string :place
     t.string :website
-    t.string :phone
-    t.string :email
+    t.string :phone_pre
+    t.string :phone_sur
     t.date :start_date
     t.string :scale
     t.string :amount
     t.string :customer_industry
     t.string :source
-    t.integer :agent
     t.string :agent_contact
-    t.string :agent_industry
-    t.string :channel
-    t.string :duty_description
     t.string :state
     t.integer :system_star
     t.integer :human_star
@@ -1317,8 +1314,19 @@ ActiveRecord::Schema.define(:version => 20111125095242) do
     t.string :name
     t.string :duty
     t.string :phone
+    t.string :email
     t.integer :vrv_project_id
 
     t.timestamps
   end
+
+  create_table :versions do |t|
+    t.string   :item_type, :null => false
+    t.integer  :item_id,   :null => false
+    t.string   :event,     :null => false
+    t.string   :whodunnit
+    t.text     :object
+    t.datetime :created_at
+  end
+  add_index :versions, [:item_type, :item_id]
 end
