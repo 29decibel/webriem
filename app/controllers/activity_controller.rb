@@ -10,7 +10,7 @@ class ActivityController < ApplicationController
       current_item = eval(v.item_type).send(:find,v.item)
       change = v.changeset if v.event=='update'
       time = v.created_at.strftime(('%Y-%m-%d %H:%M:%S'))
-      @activities << {:user=>user,:event=>event,:current_item=>current_item,:change=>change,:time=>time}
+      @activities << {:user=>user,:event=>event,:current_item=>current_item,:change=>change,:time=>time,:v=>v}
     end
   end
 
