@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127122248) do
+ActiveRecord::Schema.define(:version => 20111127123608) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1328,6 +1328,8 @@ ActiveRecord::Schema.define(:version => 20111127122248) do
     t.text     :object
     t.datetime :created_at
     t.text     :object_changes
+    t.string   :ip
+    t.text     :user_agent
   end
   add_index :versions, [:item_type, :item_id]
 end
