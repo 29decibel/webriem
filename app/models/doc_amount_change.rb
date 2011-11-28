@@ -3,6 +3,7 @@ class DocAmountChange < ActiveRecord::Base
   belongs_to :person
   validate :can_not_greater
   after_save :index_doc_row
+  after_destroy :index_doc_row
 
   def resource
     @res ||= eval(self.resource_class).find(self.resource_id)

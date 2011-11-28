@@ -481,7 +481,8 @@ $(function(){
 	if (history && history.pushState) {  
 		$(function () {  
 			$('a[data-remote=true]').live('click', function () {  
-				if($(this).attr('data-method')=='PUT') return;
+				if($(this).attr('data-method').toUpperCase()=='PUT') return;
+				if($(this).attr('data-method').toUpperCase()=='DELETE') return;
 				//var link = $(this);
 				console.log('push to history state');
 				history.pushState(null, document.title, this.href);  
