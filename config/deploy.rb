@@ -31,7 +31,6 @@ namespace :deploy do
       update_code
       migrate
       assets
-      update_data
     end
 
     restart

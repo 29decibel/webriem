@@ -2,9 +2,10 @@
 class DocAmountChange < ActiveRecord::Base
   belongs_to :person
   validate :can_not_greater
+  after_save :index_doc_row
 
   def resource
-    eval(self.resource_class).find(self.resource_id)
+    @res ||= eval(self.resource_class).find(self.resource_id)
   end
 
   class << self
@@ -19,5 +20,9 @@ class DocAmountChange < ActiveRecord::Base
     previous = DocAmountChange.where("resource_class=? and resource_id=?",self.resource_class,self.resource_id).last
     amount = previous.try(:new_amount) || resource.apply_amount || 0
     errors.add(:base,'调整金额不能大于前一个金额') if self.new_amount>=amount
+  end
+
+  def index_doc_row
+    resource.index_doc_row if resource.respond_to?(:index_doc_row)
   end
 end

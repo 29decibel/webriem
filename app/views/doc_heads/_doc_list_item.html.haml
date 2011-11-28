@@ -5,6 +5,7 @@
   %td 
     %span.label{'class'=>doc_state_css(doc)}=doc.doc_state_name
   %td= "￥#{doc.total_amount}"
+  %td= "￥#{doc.final_amount}"
   %td= "#{doc.person} #{doc.real_person ? (I18n.t('common_attr.proxy') + ' '+ doc.real_person.name) : ''}"
   %td
     -if doc.processing? 

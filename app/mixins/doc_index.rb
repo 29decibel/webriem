@@ -34,7 +34,8 @@ module DocIndex
         dr.doc_state     = self.doc_head.state
         dr.resource_id = self.id
         dr.resource_type = self.class.name
-
+        # get changed amount
+        dr.changed_amount = DocAmountChange.final_amount(self)
         dr.save
         logger.info 'index over ----------------'
       end
