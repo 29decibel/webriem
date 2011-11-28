@@ -55,7 +55,8 @@ namespace :deploy do
 
   desc "Restart unicorn"
   task :restart do
-    run "#{try_sudo} kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    run "cd #{deploy_to}/current && touch tmp/restart"
+    #run "#{try_sudo} kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
   end
 
   desc "update"
