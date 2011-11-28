@@ -14,4 +14,12 @@ class BillAfter < ActiveRecord::Base
   validates :bill_state,:inclusion => BILL_STATE
   validates :contract,:inclusion => CONTRACT
   validates :money_back,:inclusion => MONEY_BACK
+  after_save :set_star
+
+  private
+  def set_star
+    if self.valid? and self.vrv_project.system_star<4 and self.bill_state=='我方中标'
+      self.vrv_project.update_attribute :system_star,4
+    end
+  end
 end

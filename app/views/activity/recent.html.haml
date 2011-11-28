@@ -23,6 +23,5 @@
         .changes.details
           -act[:change].each do |col,c|
             .change
-              将
               %span.label.notice=I18n.t("activerecord.attributes.#{act[:v].item_type.underscore}.#{col}")
-              ="从“#{c[0]}”改为“#{c[1]}”"
+              ="由“#{c[0]}”更新为“#{c[1]}”"

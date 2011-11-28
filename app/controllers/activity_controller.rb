@@ -22,19 +22,4 @@ class ActivityController < ApplicationController
     end
   end
 
-
-
-  # private
-  # def changes(a,b)
-  #   cols = a.class.column_names.reject{|a| %w(updated_at created_at).include? a}
-  #   changes = {}
-  #   cols.each do |col|
-  #     if a.try(col)!=b.try(col)
-  #       changes[col] = {:from =>a.try(col),:to=>b.try(col)}
-  #     end
-  #   end
-
-  #   changes
-  # end
-
 end

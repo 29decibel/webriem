@@ -923,7 +923,7 @@
         start_date: 开始时间
         human_star: 系统星级
         star: 星级
-        system_star: 真实星级
+        system_star: 系统星级
         state: 项目状态
         source: 直单/代理
         states:
