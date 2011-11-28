@@ -13,6 +13,7 @@ class Person < ActiveRecord::Base
 
   after_save :update_user
   after_destroy :delete_user
+  before_save :set_factors
 
   def to_s
     "#{name}"
@@ -47,6 +48,15 @@ class Person < ActiveRecord::Base
   def delete_user
     u = User.find_by_name :self.code
     u.destroy if u
+  end
+
+  private
+  def set_factors
+    f_array = []
+    %w(dep duty name code employ_category duty_level duty_category duty_name).each do |col|
+      f_array << "#{I18n.t("activerecord.attributes.person.#{col}")}:#{self.send(col).try(:to_s)}"
+    end
+    self.factors = f_array.sort.join(',')
   end
 
 end

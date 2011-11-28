@@ -1,7 +1,7 @@
 #coding: utf-8
 class OtherRiem < ActiveRecord::Base
   include DocIndex
-  include AdjustAmount
+  include FeeType
   before_validation :set_apply_amount
   after_initialize  :set_default_value
   def set_default_value

@@ -9,6 +9,7 @@ class DocHead < ActiveRecord::Base
   belongs_to :doc_meta_info
 
   before_save :set_afford_dep,:set_current_approver_id
+  after_save  :index_doc_rows
   before_validation :set_doc_no
 
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
@@ -25,7 +26,7 @@ class DocHead < ActiveRecord::Base
   #validate :total_amount_can_not_be_zero
   validate :processing_doc_current_info_must_one_candidate
 
-  has_many :approver_infos
+  has_many :approver_infos,:dependent=>:destroy
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
 
   has_one :contract_doc,:class_name => 'ContractDoc',:foreign_key => 'doc_head_id'
@@ -173,8 +174,8 @@ class DocHead < ActiveRecord::Base
   end
 
   def find_work_flow
-    which_duty = (real_person==nil ? person.duty : real_person.duty)
-    wf=WorkFlow.oes.all.select{|w| w.doc_meta_infos.include? self.doc_meta_info and w.duties.include? which_duty }
+    p = real_person || person
+    wf=WorkFlow.oes.order('priority desc').all.select{|w| w.doc_meta_infos.include? self.doc_meta_info and w.match_factors?(p.factors) }
     wf.first   
   end
 
@@ -807,6 +808,13 @@ class DocHead < ActiveRecord::Base
 
   def processing_doc_current_info_must_one_candidate
     errors.add(:base,'当前审批人不确定') if (self.processing? and self.current_approver_info and self.current_approver_info.candidates.count>1 and !self.current_approver_info.person_id)
+  end
+
+  def index_doc_rows
+    doc_meta_info.doc_relations.multi(true).map(&:doc_row_meta_info).compact.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
+      dr_datas = self.send(eval(dr_meta.name).table_name)
+      dr_datas.each {|dr| dr.index_doc_row if dr.respond_to?(:index_doc_row)}
+    end
   end
 
 end

@@ -10,9 +10,8 @@ ActiveAdmin.register WorkFlow do
     column :doc_meta_infos do |work_flow|
       raw work_flow.doc_meta_infos.map(&:name).join(',')
     end
-    column :duties do |work_flow|
-      raw work_flow.duties.map(&:name).join(',')
-    end
+    column :factors
+    column :priority
     column :work_flow_steps do |wf|
       raw wf.work_flow_steps.map(&:name).join(' => ')
     end
@@ -24,7 +23,8 @@ ActiveAdmin.register WorkFlow do
     f.inputs "基本信息" do
       f.input :name
       f.input :doc_meta_infos,:as=>:check_boxes,:wrapper_html=>{:class=>'doc_meta_infos'} 
-      f.input :duties,:as=>:check_boxes
+      f.input :factors
+      f.input :priority
       f.input :category,:as=>:select,:collection => WorkFlow::CATEGORY,:include_blank => false
     end
     f.inputs "审批环节" do
@@ -45,7 +45,7 @@ ActiveAdmin.register WorkFlow do
 
   show do |wf|
     h3 "#{wf.name}【#{wf.category}】"
-    h5 "申请人职务：#{wf.duties.map(&:name).join(',')}"
+    h5 "申请人：#{wf.factors}"
     h5("申请单据类型：#{wf.doc_meta_infos.map(&:name).join(',')}") if wf.category=='报销系统'
     div do
       raw wf.work_flow_steps.map(&:name).join(' => ')

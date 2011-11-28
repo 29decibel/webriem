@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127123608) do
+ActiveRecord::Schema.define(:version => 20111128051024) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -329,6 +329,7 @@ ActiveRecord::Schema.define(:version => 20111127123608) do
   create_table "doc_row_meta_infos", :force => true do |t|
     t.string   "name"
     t.string   "display_name"
+    t.integer  "fee_id"
     t.string   "read_only_attrs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -337,7 +338,7 @@ ActiveRecord::Schema.define(:version => 20111127123608) do
   create_table :fee_rules do |t|
     t.integer :priority ,:default => 1
     t.string :factors
-    t.string :fee_class
+    t.integer :fee_id
     t.decimal :amount
 
     t.timestamps
@@ -550,6 +551,7 @@ ActiveRecord::Schema.define(:version => 20111127123608) do
     t.string   "duty_level"
     t.string   "duty_category"
     t.string   "duty_name"
+    t.string   "factors"
   end
 
   add_index "people", ["code"], :name => "index_people_on_code"
@@ -1061,13 +1063,6 @@ ActiveRecord::Schema.define(:version => 20111127123608) do
     t.string   "s_cperson_id"
   end
 
-  create_table "work_flow_duties", :force => true do |t|
-    t.integer  "work_flow_id"
-    t.integer  "duty_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "work_flow_infos", :force => true do |t|
     t.integer  "doc_head_id"
     t.integer  "vrv_project_id"
@@ -1109,13 +1104,10 @@ ActiveRecord::Schema.define(:version => 20111127123608) do
     t.timestamps
   end
 
-  create_table "duties_work_flows", :id => false, :force => true do |t|
-    t.integer  "work_flow_id"
-    t.integer  "duty_id"
-  end
-
   create_table "work_flows", :force => true do |t|
     t.string   "name"
+    t.string   "factors"
+    t.integer  "priority"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "doc_types"

@@ -1,7 +1,7 @@
 #coding: utf-8
 class RdLodging < ActiveRecord::Base
   include DocIndex
-  include AdjustAmount
+  include FeeType
   before_validation :set_apply_amount,:set_days
   after_initialize  :set_default_value
   def set_default_value

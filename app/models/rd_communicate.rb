@@ -1,6 +1,7 @@
 #coding: utf-8
 class RdCommunicate < ActiveRecord::Base
   include DocIndex
+  include FeeType
   before_validation :set_apply_amount
 
   before_save :set_afford_dep

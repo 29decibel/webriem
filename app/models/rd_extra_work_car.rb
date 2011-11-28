@@ -1,7 +1,7 @@
 #coding: utf-8
 class RdExtraWorkCar < ActiveRecord::Base
   include DocIndex
-  include AdjustAmount
+  include FeeType
   before_validation :set_apply_amount
   def set_apply_amount
     self.apply_amount = self.ori_amount / self.rate

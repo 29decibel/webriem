@@ -1,4 +1,4 @@
--if vrv_project.work_flow
+-if vrv_project.approver_infos.count>0
   = hidden_field_tag "vrv_project_id",vrv_project.id
   %span.label(class= "#{vrv_project.un_submit? ? 'success' : ''}") 未提交
   -if !vrv_project.un_submit? and !vrv_project.rejected? and vrv_project.approver_infos.count>0
@@ -10,8 +10,11 @@
   -else
     %span.label ---没有审批人信息---
   %span.label(class="#{vrv_project.star? && 'success'}") 星级
+-elsif !vrv_project.work_flow
+  .alert-message
+    %p 没有找到审批流，请联系财务人员设置您申请单据对应的审批流程
 -else
-  ="该单据没有对应的审批流，设置后才能提交审批"
+  暂无审批流信息
 :javascript
   //make warn or success label 's previous to success, i love js
   $(function(){

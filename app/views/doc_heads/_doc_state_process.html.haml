@@ -1,6 +1,6 @@
 = hidden_field_tag "form_state",doc.state
 <!--hidden field to store the current looker of this doc mainly is HR or FI -->
--if doc.work_flow
+-if doc.approver_infos.count>0
   = hidden_field_tag "doc_id",doc.id
   %span.label(class= "#{doc.un_submit? ? 'success' : ''}") 未提交
   -if !doc.un_submit? and !doc.rejected? and doc.approver_infos.count>0
@@ -13,8 +13,11 @@
     %span.label ---没有审批人信息---
   %span.label(class="#{doc.approved? && 'success'}") 审批通过
   %span.label(class="#{doc.paid? && 'success'}") 已经付款
+-elsif !doc.work_flow
+  .alert-message
+    %p 没有找到审批流，请联系财务人员设置您申请单据对应的审批流程
 -else
-  ="该单据没有对应的审批流，设置后才能提交审批"
+  暂无审批流信息
 :javascript
   //make warn or success label 's previous to success, i love js
   $(function(){

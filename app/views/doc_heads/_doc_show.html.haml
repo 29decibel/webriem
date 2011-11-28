@@ -7,18 +7,15 @@
     = link_to content_tag(:span,"#{I18n.t('common_op.btn_edit')}"), edit_doc_head_path(doc.id),:remote=>true,:class=>"btn"
   = link_to_function I18n.t('common_op.btn_print'),"print_doc()",:class=>"btn"
   = link_to I18n.t('common_op.btn_print_preview'),print_preview_doc_head_path(doc),:class=>"btn",:target => "_blank"
-
 #doc_head_actions.actions
   = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
 #doc_state_process
   = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
 .doc_infos
   .page-header
-    %h3= doc.doc_no
-  .page-header
-    %h7= "申请总金额为￥#{doc.total_apply_amount}，调整后金额为￥#{doc.final_amount}"
+    %h5= "申请总金额为￥#{doc.total_apply_amount}，调整后金额为￥#{doc.final_amount}"
   -doc.doc_meta_info.doc_head_attrs.each do |cn|
-    =tb_show_field(doc,cn)
+    =tb_show_field(doc,cn,:label_css=>'span2')
   -doc.doc_meta_info.doc_relations.multi(false).each do  |doc_relation|
     .doc_extra
       .page-header
@@ -29,7 +26,7 @@
         -if extra
           .doc_row_show
             -doc_relation.doc_row_attrs.each do |col|
-              =tb_show_field(extra,col)
+              =tb_show_field(extra,col,:label_css=>'span2')
   #details.show_only
     -doc.doc_meta_info.doc_relations.multi(true).each do  |doc_relation|
       .doc_detail
@@ -40,12 +37,26 @@
             %span.doc_total_amount.normal=doc.amount_for(eval(doc_relation.doc_row_meta_info.name).table_name)
         .form_area
           -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
+            -if row_data.respond_to?(:fee_type) and row_data.try(:fee_type)
+              -rule = FeeRule.where('fee_id=?',row_data.fee_type.id).order('priority').all.select{|r|r.match_factors?(current_user.person.factors)}.last
+              -if rule
+                .alert-message
+                  %p
+                    %strong= rule.to_s
+                  %p
+                    您此项费用本月已经申请金额为￥
+                    =current_amount = DocRow.year(Time.now.year).month(Time.now.month).with_fee(rule.fee).valid.with_person(current_user.person).sum(:apply_amount)
+                    可申请金额为￥
+                    =rule.amount-current_amount
+                -if current_amount>rule.amount
+                  .alert-message.error
+                    %p 费用超过预算
             .doc_row_show
               -if doc.processing? and doc.current_approver_id == current_user.person.id
                 .amount_changes
                   =render "doc_amount_changes/index",:resource=>row_data
               -doc_relation.doc_row_attrs.each do |col|
-                =tb_show_field(row_data,col)
+                =tb_show_field(row_data,col,:label_css=>'span2')
   -if doc.work_flow_infos.count>0
     .page-header
       %h5 审批信息

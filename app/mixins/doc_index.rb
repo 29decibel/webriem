@@ -24,8 +24,8 @@ module DocIndex
         else
           dr.project_id = self.doc_head.project_id
         end
-        if self.respond_to?  :fee_id
-          dr.fee_id = self.fee_id
+        if self.respond_to?  :fee_type
+          dr.fee_id = self.fee_type.try(:id)
         end
         dr.apply_date = self.doc_head.apply_date
         dr.doc_total_amount = self.doc_head.total_amount

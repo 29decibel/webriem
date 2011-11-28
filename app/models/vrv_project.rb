@@ -2,20 +2,20 @@
 class VrvProject < ActiveRecord::Base
   has_paper_trail
 
-  has_one :customer_contact
-  has_one :network_condition
-  has_many :competitors
-  has_many :busi_communications
-  has_many :tech_communications
-  has_one :product_test
-  has_one :bill_prepare
-  has_one :contract_predict
-  has_one :bill_stage
-  has_one :bill_after
-  has_many :implement_activities
+  has_one :customer_contact,:dependent=>:destroy
+  has_one :network_condition,:dependent=>:destroy
+  has_many :competitors,:dependent=>:destroy
+  has_many :busi_communications,:dependent=>:destroy
+  has_many :tech_communications,:dependent=>:destroy
+  has_one :product_test,:dependent=>:destroy
+  has_one :bill_prepare,:dependent=>:destroy
+  has_one :contract_predict,:dependent=>:destroy
+  has_one :bill_stage,:dependent=>:destroy
+  has_one :bill_after,:dependent=>:destroy
+  has_many :implement_activities,:dependent=>:destroy
   belongs_to :person
 
-  has_many :approver_infos
+  has_many :approver_infos,:dependent=>:destroy
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "vrv_project_id",:dependent=>:destroy
 
@@ -128,7 +128,7 @@ class VrvProject < ActiveRecord::Base
   end
 
   def find_work_flow
-    wf=WorkFlow.project.all.select{|w| w.duties.include? person.duty }
+    wf=WorkFlow.project.order('priority desc').all.select{|w| w.match_factors?(person.factors) }
     wf.first   
   end
 
