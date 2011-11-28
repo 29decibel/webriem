@@ -8,6 +8,14 @@ class TaskController < ApplicationController
       format.html
     end
   end
+
+  def my_projects
+    @vrv_projects = VrvProject.where('person_id=?',current_user.person.id)
+    respond_to do |format|
+      format.js 
+      format.html
+    end
+  end
   #docs need to approve
   def docs_to_approve
     @docs=DocHead.where("state='processing' and current_approver_id=#{current_user.person.id}").page(params[:page]).per(20)

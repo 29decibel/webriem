@@ -3,9 +3,13 @@ class VrvProjectsController < InheritedResources::Base
   layout :vrv_project
 
   def index
-    @vrv_projects = current_user.person.vrv_projects
+    @search = VrvProject.search(params[:search])
+    @vrv_projects = params[:search] ?  @search.all : []
+    respond_to do |wants|
+      wants.js
+      wants.html
+    end
   end
-
 
   def create
     create!

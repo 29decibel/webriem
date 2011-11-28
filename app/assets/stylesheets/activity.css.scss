@@ -2,7 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .activity{
-  margin:5px 0px;
+  margin:10px 0px;
   border:1px solid #ccc;
+  border-left:8px solid #ccc;
   padding:5px;
+  &.create{border-color:#5DB75D;}
+  &.destroy{border-color:#DD504B;}
+  &.update{border-color:#4DB3D1;}
+  .time{
+    float:right;
+  }
+  .details{
+    padding-left:10px;
+    border-left:1px solid #ccc;
+  }
+  
 }

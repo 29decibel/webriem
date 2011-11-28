@@ -4,8 +4,6 @@ Webreim::Application.routes.draw do
 
   resources :doc_amount_changes
 
-  get 'vrv_projects/activities'
-
   resources :vrv_projects do
     resources :work_flow_infos
 
@@ -92,6 +90,7 @@ Webreim::Application.routes.draw do
   resources :upload_files
   
   get "task/my_docs",:as=>:my_docs  
+  get "task/my_projects",:as=>:my_docs  
   get "task/docs_to_approve",:as=>:docs_to_approve  
   get "task/docs_approved"  
   get "task/docs_to_pay"  ,:as => :docs_to_pay

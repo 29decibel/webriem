@@ -1,6 +1,10 @@
 #coding: utf-8
 class NetworkCondition < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :class_name=>'VrvProjectVersion',
+    :meta=>{:vrv_project_id => Proc.new{|r|r.vrv_project.id},
+            :person_id => Proc.new{|r|r.vrv_project.person_id} }
+
+  belongs_to :vrv_project
 
   IP_ADDRESS = %w(静态 动态 不知道)
   HUB= %w(支持 不支持 不知道)

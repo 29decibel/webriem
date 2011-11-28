@@ -1,6 +1,8 @@
 #coding: utf-8
 class TechCommunication < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :class_name=>'VrvProjectVersion',
+    :meta=>{:vrv_project_id => Proc.new{|r|r.vrv_project.id},
+            :person_id => Proc.new{|r|r.vrv_project.person_id} }
   belongs_to :vrv_project
 
   DUTY = %w(基层技术人员 项目负责人/项目主管(处长级) 主管主任(司局级) 采购部门 总裁级(单位最高领导人级))

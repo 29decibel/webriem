@@ -1,6 +1,6 @@
 #coding: utf-8
 class VrvProject < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :ignore => [:updated_at, :current_approver_info_id,:current_approver_id,:person_id],:class_name=>'VrvProjectVersion',:meta=>{:vrv_project_id=>:id,:person_id=>:person_id}
 
   has_one :customer_contact,:dependent=>:destroy
   has_one :network_condition,:dependent=>:destroy
@@ -40,9 +40,18 @@ class VrvProject < ActiveRecord::Base
   after_initialize :set_has_one
   before_validation :set_code
   before_save :set_current_approver_id
+  before_save :set_star
 
   def system_star
     self[:system_star] || 0
+  end
+
+  def star
+    self[:star] || human_star || system_star
+  end
+
+  def to_s
+    customer
   end
 
   def agent_way?
@@ -78,9 +87,7 @@ class VrvProject < ActiveRecord::Base
     doc
   end
 
-  def star
-    human_star || system_star
-  end
+
   #未提交，审核中，星级状态，中标状态，未中标状态，报废
   state_machine :state, :initial => :un_submit do
     after_transition [:processing] => :star do |project,transition|
@@ -193,6 +200,10 @@ class VrvProject < ActiveRecord::Base
       current_num = VrvProject.where('year(created_at)=?',Time.now.year).count
       self.code = "XM#{Time.now.year}#{(current_num+1).to_s.rjust(5,'0')}"
     end
+  end
+
+  def set_star
+    self.star = (human_star || system_star)
   end
 
 end

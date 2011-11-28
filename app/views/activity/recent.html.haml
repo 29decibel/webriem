@@ -1,15 +1,28 @@
 .page-header
-  %h3 近30天项目变更明细
+  %h3 项目近期变更明细
 .activities
   -@activities.each do |act|
-    .activity
-      %span.label= act[:user]
+    .activity{'class'=>act[:v].event}
+      %span= act[:user]
       =act[:event]
-      =act[:current_item]
+      -if act[:v].event!='delete'
+        -if act[:current_item].respond_to?(:vrv_project)
+          =link_to "#{act[:current_item].vrv_project.to_s}中的#{I18n.t("activerecord.models.#{act[:current_item].class.name.underscore}")}", (act[:current_item].is_a?(CustomerContact) ? act[:current_item].vrv_project : [act[:current_item].vrv_project,act[:current_item]])
+        -else
+          =link_to act[:current_item].to_s, act[:current_item]
+      -else
+        资源名称（已经删除）
       %span.time
         时间:
         =act[:time]
+      -if act[:v].event=='destroy'
+        .destroyed_item.details
+          -act[:current_item].class.column_names.reject{|a|%w(id created_at updated_at vrv_project_id).include? a}.each do |col_name|
+            =tb_show_field(act[:current_item],col_name,:label_css=>'span3')
       -if act[:change]
-        .changes
+        .changes.details
           -act[:change].each do |col,c|
-            .change= "把#{I18n.t("activerecord.attributes.#{act[:v].item_type.underscore}.#{col}")}从#{c[0]}改为#{c[1]}"
+            .change
+              将
+              %span.label.notice=I18n.t("activerecord.attributes.#{act[:v].item_type.underscore}.#{col}")
+              ="从“#{c[0]}”改为“#{c[1]}”"

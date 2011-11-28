@@ -1,0 +1,32 @@
+.page-header
+  %h4 立项检索
+.vrv_project_search_form
+  =form_for @search,:remote=>true do |f|
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.vrv_project.customer')
+      .input
+        = f.text_field 'customer_like'
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.vrv_project.name')
+      .input
+        = f.text_field 'name_like'
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.vrv_project.code')
+      .input
+        = f.text_field 'code_like'
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.vrv_project.star')
+      .input
+        = f.text_field 'star_eq'
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.vrv_project.amount')
+      .input
+        = f.text_field 'amount_like'
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.vrv_project.start_date')
+      .input
+        = f.text_field 'start_date_gte',:class=>' date_select'
+        到
+        = f.text_field 'start_date_lte',:class=>' date_select' 
+    .actions
+      =f.submit '搜索',:class=>'btn'

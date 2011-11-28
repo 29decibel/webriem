@@ -331,6 +331,16 @@
       u8_dep: U8部门
       fee_code_match: "生成U8凭证设置"
       doc_meta_info: "单据管理"
+      vrv_project: 项目
+      network_condition: 网络环境
+      customer_contact: 联系人信息
+      tech_communication: 技术交流
+      competitor: 竞争对手
+      contract_predict: 合同预测
+      bill_prepare: 招标准备
+      product_test: 产品测试
+      bill_after: 投标后
+      bill_stage: 投标阶段
     attributes:
       doc_meta_info:
         name: "单据名称"
@@ -642,6 +652,7 @@
       menu:
         name: "名称"
         title: "标题"
+        group_name: 下拉分组名称
         path: "地址"
         id: "唯一标识"
         created_at: "创建时间"
@@ -901,12 +912,15 @@
         place: 最终用户所在地
         website: 网站
         phone: 固定电话
+        phone_pre: 固定电话区号
+        phone_sur: 固定电话
         start_date: 开始日期
         scale: 项目规模点数
         person_id: 申请人
         amount: 项目预计金额
         customer_industry: 客户所在行业
         agent_contact: 代理商联系人
+        start_date: 开始时间
         human_star: 系统星级
         star: 星级
         system_star: 真实星级

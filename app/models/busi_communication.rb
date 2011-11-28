@@ -1,6 +1,8 @@
 #coding: utf-8
 class BusiCommunication < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :class_name=>'VrvProjectVersion',
+    :meta=>{:vrv_project_id => Proc.new{|r|r.vrv_project.id},
+            :person_id => Proc.new{|r|r.vrv_project.person_id} }
   belongs_to :vrv_project
   
   WAY = %w(送达资料 电话沟通 商务会谈 约定下次交流)

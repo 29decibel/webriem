@@ -242,6 +242,22 @@ module ApplicationHelper
     end
   end
 
+  def nice_show(obj)
+    descripts = []
+    obj.class.column_names.each do |col_name|
+      next if col_name=='vrv_project'
+      value = obj.send(col_name)
+      ass = obj.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first
+      if ass
+        value = obj.send(ass.name).try(:name)
+      end
+      if !value.blank?
+        descripts << [I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{col_name}"),value]
+      end
+    end
+    descripts
+  end
+
   private
   def _display_name(f,col_name)
     ass = f.object.class.reflect_on_all_associations(:belongs_to).select{|ass|ass.foreign_key==col_name}.first

@@ -1,0 +1,30 @@
+%table
+  %thead
+    %tr
+      %th= t("activerecord.attributes.vrv_project.name")
+      %th= t("activerecord.attributes.vrv_project.code")
+      %th= t("activerecord.attributes.vrv_project.customer")
+      %th= t("activerecord.attributes.vrv_project.start_date")
+      %th= t("activerecord.attributes.vrv_project.amount")
+      %th= t("activerecord.attributes.vrv_project.star")
+      %th
+      %th
+      %th
+  %tbody
+    - vrv_projects.each do |vrv_project|
+      %tr
+        %td= truncate(vrv_project.name,:length=>10)
+        %td= vrv_project.code
+        %td= truncate(vrv_project.customer,:length=>10)
+        %td= vrv_project.start_date
+        %td= vrv_project.amount
+        %td
+          - vrv_project.star.times do
+            =image_tag('small_star.png')
+        %td= link_to '查看', vrv_project
+        %td
+          -if (vrv_project.un_submit? or vrv_project.rejected?) and vrv_project.person==current_user.person
+            = link_to '修改', edit_vrv_project_path(vrv_project)
+        %td
+          -if vrv_project.un_submit?
+            = link_to '删除', vrv_project, :confirm => "确定删除项目#{vrv_project.customer}?", :method => :delete

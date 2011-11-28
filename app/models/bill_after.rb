@@ -1,6 +1,10 @@
 #coding: utf-8
 class BillAfter < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :class_name=>'VrvProjectVersion',
+    :meta=>{:vrv_project_id => Proc.new{|r|r.vrv_project.id},
+            :person_id => Proc.new{|r|r.vrv_project.person_id} }
+
+
   belongs_to :vrv_project
 
   BILL_STATE = %w(我方中标 我方未中标)

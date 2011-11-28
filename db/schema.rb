@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128074000) do
+ActiveRecord::Schema.define(:version => 20111128101807) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1140,6 +1140,7 @@ ActiveRecord::Schema.define(:version => 20111128074000) do
     t.string :state
     t.integer :system_star
     t.integer :human_star
+    t.integer :star
     t.integer :person_id
     t.integer  "current_approver_id"
     t.integer  "current_approver_info_id"
@@ -1312,7 +1313,7 @@ ActiveRecord::Schema.define(:version => 20111128074000) do
     t.timestamps
   end
 
-  create_table :versions do |t|
+  create_table :vrv_project_versions do |t|
     t.string   :item_type, :null => false
     t.integer  :item_id,   :null => false
     t.string   :event,     :null => false
@@ -1322,6 +1323,8 @@ ActiveRecord::Schema.define(:version => 20111128074000) do
     t.text     :object_changes
     t.string   :ip
     t.text     :user_agent
+    t.integer  :vrv_project_id
+    t.integer  :person_id
   end
-  add_index :versions, [:item_type, :item_id]
+  add_index :vrv_project_versions, [:item_type, :item_id]
 end

@@ -342,10 +342,10 @@ $(function(){
 				return false;  
 			});  
 			
-			$('.search_form a').live('click',function () {  
+			$('.search_form form,.vrv_project_search_form form').live('submit',function () {  
 				console.log('get form data and save state...');
-				var action = $('.search_form form').attr('action');  
-				var formData = $('.search_form form').serialize();  
+				var action = $(this).attr('action');  
+				var formData = $(this).serialize();  
 				//$.get(action, formData, null, 'script');  
 				history.replaceState(null, document.title, action + "?" + formData);  
 				return false;  
