@@ -3,7 +3,7 @@ class WorkFlow < ActiveRecord::Base
   CATEGORY = %w(报销系统 立项系统)
 
   validates :category,:inclusion => CATEGORY
-  validates_presence_of :name,:factors,:doc_meta_infos
+  validates_presence_of :name,:factors
   has_many :work_flow_steps,:class_name=>"WorkFlowStep",:foreign_key => 'work_flow_id'
            
   has_and_belongs_to_many :doc_meta_infos
@@ -20,6 +20,7 @@ class WorkFlow < ActiveRecord::Base
     puts p_fac.merge(r_fac)
     p_fac.merge(r_fac)==p_fac
   end
+
 
   private
 

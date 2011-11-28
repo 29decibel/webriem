@@ -394,10 +394,8 @@
         created_at: "创建时间"
         updated_at: "更新时间"
       work_flow_step:
-        dep_id: "部门"
-        dep: "部门"
         is_self_dep: "来自申请者所在部门"
-        duty_id: "职务"
+        factors: 审批人条件
         duty: "职务"
         max_amount: "审批金额超过"   
         id: "唯一标识"
@@ -418,6 +416,8 @@
         created_at: "创建时间"
         updated_at: "更新时间"
       work_flow:
+        factors: 申请人条件
+        priority: 优先级
         name: "审批名称"
         doc_types: "单据类型"
         duty: "申请人的职务"
@@ -614,7 +614,7 @@
         name: "姓名"
         code: "编码"
         gender: "性别"
-        dep_id: "所在部门"
+        dep_id: "部门"
         dep: 部门
         duty_id: "职务"
         duty: 职务

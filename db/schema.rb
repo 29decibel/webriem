@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128051024) do
+ActiveRecord::Schema.define(:version => 20111128061917) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(:version => 20111128051024) do
     t.string  'bill_name'
     t.string  'bill_amount'
     t.string  'contract_info'
-    t.decimal 'product_price'
+    t.decimal 'product_price',         :precision => 16, :scale => 2
     t.string  'agent'
     t.string  'agent_phone'
     t.string  'agent_contact_name'
@@ -339,7 +339,7 @@ ActiveRecord::Schema.define(:version => 20111128051024) do
     t.integer :priority ,:default => 1
     t.string :factors
     t.integer :fee_id
-    t.decimal :amount
+    t.decimal :amount,         :precision => 16, :scale => 2
 
     t.timestamps
   end
@@ -347,7 +347,7 @@ ActiveRecord::Schema.define(:version => 20111128051024) do
   create_table :doc_amount_changes do |t|
     t.string :resource_class
     t.integer :resource_id
-    t.decimal :new_amount
+    t.decimal :new_amount,         :precision => 16, :scale => 2
     t.integer :person_id
     t.integer :doc_head_id
 
@@ -1082,9 +1082,8 @@ ActiveRecord::Schema.define(:version => 20111128051024) do
   end
 
   create_table "work_flow_steps", :force => true do |t|
-    t.integer  "dep_id"
+    t.string   "factors"
     t.boolean  "is_self_dep"
-    t.integer  "duty_id"
     t.string   "step_code"
     t.decimal  "max_amount",   :precision => 8, :scale => 2
     t.string   "can_change_approver_steps"

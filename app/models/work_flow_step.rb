@@ -4,15 +4,13 @@ class WorkFlowStep < ActiveRecord::Base
   has_many :work_flows,:through => :work_flow_relate_steps
   has_many :work_flow_relate_steps
 
-  belongs_to :dep
-  belongs_to :duty
-  validates_presence_of :duty_id
+  validates_presence_of :factors
 
   def name
     if is_self_dep
-      "由所在部门的#{duty.try(:name)}进行审批"
+      "由所在部门的#{factors}进行审批"
     else
-      "由#{dep.try(:name)}的#{duty.try(:name)}进行审批"
+      "由#{factors}进行审批"
     end
   end
 

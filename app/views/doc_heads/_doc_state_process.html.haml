@@ -8,7 +8,7 @@
       -if approver_info.person
         %span.label(class= "#{doc.current_approver_id==approver_info.person_id && 'warning'}")= approver_info.person.try(:name)
       -else
-        %span.label(class='error')= "无法确定职务为#{approver_info.work_flow_step.duty.try(:name)},部门为#{approver_info.work_flow_step.dep.try(:name)}的审批人"
+        %span.label(class='error')= "无法确定#{approver_info.work_flow_step.name}的审批人"
   -else
     %span.label ---没有审批人信息---
   %span.label(class="#{doc.approved? && 'success'}") 审批通过
