@@ -11,6 +11,10 @@ class VrvProjectsController < InheritedResources::Base
     end
   end
 
+  def preview
+    @vrv_project = VrvProject.find(params[:id])
+  end
+
   def create
     create!
     @vrv_project.person = current_user.person

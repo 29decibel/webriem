@@ -1,0 +1,11 @@
+.page-header
+  %h3= @vrv_project.name || @vrv_project.customer
+.vrv_project_show_basic
+  -%w(code name customer customer_industry place phone website scale amount source agent_contact).each do |cn|
+    =tb_show_field(@vrv_project,cn,:label_css=>'span2')
+-if @vrv_project.customer_contact
+  .page-header
+    %h5 联系人信息
+  -%w(name duty phone).each do |field|
+    =tb_show_field(@vrv_project.customer_contact,field,:label_css=>'span2')
+

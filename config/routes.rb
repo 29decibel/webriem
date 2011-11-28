@@ -13,6 +13,7 @@ Webreim::Application.routes.draw do
       put :reject
       put :recall
       put :generate_contract_doc
+      get :preview
     end
     resources :customer_contacts
     resources :bill_afters
