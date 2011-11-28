@@ -18,12 +18,13 @@ class ApproverInfo < ActiveRecord::Base
 
   def candidates
     if work_flow_step.is_self_dep
-      while dep do
-        ps = Person.where("dep_id=? and #{where_clause}",dep.id)
+      root_dep = dep
+      while root_dep do
+        ps = Person.where("dep_id=? and #{where_clause}",root_dep.id)
         if ps.count>0
           return ps
         end
-        dep = dep.parent_dep
+        root_dep = root_dep.parent_dep
       end #end while
       []
     else

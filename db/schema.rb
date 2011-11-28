@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128101807) do
+ActiveRecord::Schema.define(:version => 20111128131344) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1325,6 +1325,7 @@ ActiveRecord::Schema.define(:version => 20111128101807) do
     t.text     :user_agent
     t.integer  :vrv_project_id
     t.integer  :person_id
+    t.string   :state
   end
   add_index :vrv_project_versions, [:item_type, :item_id]
 end

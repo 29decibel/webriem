@@ -180,8 +180,9 @@ class DocHead < ActiveRecord::Base
   end
 
   state_machine :state, :initial => :un_submit do
-    after_transition [:rejected,:un_submit] => :processing do |doc_head, transition|
+    before_transition [:rejected,:un_submit] => :processing do |doc_head, transition|
       doc_head.set_approvers
+      doc_head.errors.add(:base,'无法确定第一个审批人') if !doc_head.current_approver_id
     end    
     after_transition [:processing] => [:un_submit,:rejected] do |doc_head,transition|
       doc_head.approver_infos.delete_all

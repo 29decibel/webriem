@@ -1,6 +1,7 @@
 #coding: utf-8
 class VrvProject < ActiveRecord::Base
-  has_paper_trail :ignore => [:updated_at, :current_approver_info_id,:current_approver_id,:person_id],:class_name=>'VrvProjectVersion',:meta=>{:vrv_project_id=>:id,:person_id=>:person_id}
+  has_paper_trail :ignore => [:updated_at, :current_approver_info_id,:current_approver_id,:person_id],:class_name=>'VrvProjectVersion',
+    :meta=>{:vrv_project_id=>:id,:person_id=>:person_id,:state=>:state}
 
   has_one :customer_contact,:dependent=>:destroy
   has_one :network_condition,:dependent=>:destroy
@@ -91,10 +92,11 @@ class VrvProject < ActiveRecord::Base
   #未提交，审核中，星级状态，中标状态，未中标状态，报废
   state_machine :state, :initial => :un_submit do
     after_transition [:processing] => :star do |project,transition|
-      project.update_attribute :system_star,1
+      project.update_attribute(:system_star,1) if self.system_star<1
     end
-    after_transition [:rejected,:un_submit] => :processing do |vrv_project, transition|
+    before_transition [:rejected,:un_submit] => :processing do |vrv_project, transition|
       vrv_project.set_approvers
+      vrv_project.errors.add(:base,'无法确定第一个审批人') if !vrv_project.current_approver_id
     end    
     after_transition [:processing] => [:rejected,:un_submit] do |vrv_project,transition|
       vrv_project.approver_infos.delete_all
