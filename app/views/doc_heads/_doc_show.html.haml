@@ -44,9 +44,9 @@
                   %p
                     %strong= rule.to_s
                   %p
-                    您此项费用本月已经申请金额为￥
-                    =current_amount = DocRow.year(Time.now.year).month(Time.now.month).with_fee(rule.fee).valid.with_person(current_user.person).sum(:changed_amount)
-                    可申请金额为￥
+                    ="您此项费用#{doc.apply_date.year}年#{doc.apply_date.month}月已经申请金额为￥"
+                    =current_amount = DocRow.year(doc.apply_date.year).month(doc.apply_date.month).with_fee(rule.fee).valid.with_person(current_user.person).sum(:changed_amount)
+                    可申请金额为每月￥
                     =rule.amount-current_amount
                 -if current_amount>rule.amount
                   .alert-message.error
