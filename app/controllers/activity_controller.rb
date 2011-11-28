@@ -5,7 +5,7 @@ class ActivityController < ApplicationController
     @versions = VrvProjectVersion.from_web.order('created_at desc').limit(100)
     @activities = []
     @versions.each do |v|
-      user = User.find(v.whodunnit).name
+      user = User.find(v.whodunnit).person.try(:name)
       event = I18n.t("actions.#{v.event}")
       current_item = (eval(v.item_type).send(:find_by_id,v.item) || v.reify || v.next.reify)
       change = v.changeset if v.event=='update'
