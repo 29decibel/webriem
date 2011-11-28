@@ -31,6 +31,7 @@ namespace :deploy do
       update_code
       migrate
       assets
+      update
     end
 
     restart
@@ -56,6 +57,11 @@ namespace :deploy do
   desc "Restart unicorn"
   task :restart do
     run "#{try_sudo} kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+  end
+
+  desc "update"
+  task :update_data do
+    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake update:factors"
   end
 
 end

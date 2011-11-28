@@ -394,7 +394,7 @@
         created_at: "创建时间"
         updated_at: "更新时间"
       work_flow_step:
-        is_self_dep: "来自申请者所在部门"
+        is_self_dep: "根据申请人自动判断部门"
         factors: 审批人条件
         duty: "职务"
         max_amount: "审批金额超过"   
