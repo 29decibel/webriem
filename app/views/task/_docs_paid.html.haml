@@ -1,8 +1,7 @@
-.form_title
+.page-header
   %h3= "已经付款的单据列表"
-.list_info
-  -if docs.all.count>0
-    =render :partial => "doc_heads/doc_list_item",:collection=>docs,:as=>:doc
-  -else
-    .empty_info="没有已经付款的单据"
+-if docs.all.count>0
+  =render :partial => "doc_heads/docs_table",:locals=>{:docs=>docs}
+-else
+  .empty_info="没有已经付款的单据"
 =paginate docs,:remote=>true
