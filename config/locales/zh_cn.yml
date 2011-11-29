@@ -298,6 +298,7 @@
   activerecord:
     #这里加入model的中文名称
     models:
+      message: 系统公告
       fee_rules: 费用预算规则
       doc_row_meta_infos: 单据费用模块
       dep: "部门"
@@ -343,6 +344,10 @@
       bill_after: 投标后
       bill_stage: 投标阶段
     attributes:
+      message:
+        content: 公告内容
+        start_time: 开始时间
+        end_time: 结束时间
       doc_meta_info:
         name: "单据名称"
         code: "单据编码"
@@ -378,6 +383,8 @@
       doc_row_meta_info:
         name: 名称（资源）
         display_name: 显示名称
+        can_adjust_amount: 支持审批人调整金额
+        read_only_attrs: 只读的字段设置
         fee_id: 费用类型
         fee: 费用类型
       fee_rule:

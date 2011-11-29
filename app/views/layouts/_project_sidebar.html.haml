@@ -7,7 +7,7 @@
       .page-header
         %h6 星级
       - project.star.times do
-        =image_tag('star.png')
+        =image_tag('small_star.png')
 .links
   -if !@vrv_project.new_record?
     = link_to '基本信息', vrv_project_path(project),:class=>(controller_name=='vrv_projects' ? 'current':'')

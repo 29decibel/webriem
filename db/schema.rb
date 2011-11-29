@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128131344) do
+ActiveRecord::Schema.define(:version => 20111129001958) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -330,6 +330,7 @@ ActiveRecord::Schema.define(:version => 20111128131344) do
     t.string   "name"
     t.string   "display_name"
     t.integer  "fee_id"
+    t.boolean  "can_adjust_amount",:default => false
     t.string   "read_only_attrs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -343,6 +344,9 @@ ActiveRecord::Schema.define(:version => 20111128131344) do
 
     t.timestamps
   end
+
+  add_index :fee_rules, :factors
+  add_index :fee_rules, :fee_id
 
   create_table :doc_amount_changes do |t|
     t.string :resource_class
@@ -1094,6 +1098,9 @@ ActiveRecord::Schema.define(:version => 20111128131344) do
     t.datetime "updated_at"
   end
 
+  add_index :work_flow_steps, :factors
+  add_index :work_flow_steps, :is_self_dep
+
   create_table :approver_infos do |t|
     t.integer :work_flow_step_id
     t.boolean :skip,:default => false
@@ -1113,6 +1120,9 @@ ActiveRecord::Schema.define(:version => 20111128131344) do
     t.string   "doc_types"
     t.string   "category"
   end
+
+  add_index :work_flows, :factors
+  add_index :work_flows, :category
 
   create_table "work_flows_doc_meta_infos", :id => false, :force => true do |t|
     t.integer  "work_flow_id"
@@ -1313,6 +1323,15 @@ ActiveRecord::Schema.define(:version => 20111128131344) do
     t.timestamps
   end
 
+  create_table :messages do |t|
+    t.text :content
+    t.datetime :start_time
+    t.datetime :end_time
+
+    t.timestamps
+  end
+  
+
   create_table :vrv_project_versions do |t|
     t.string   :item_type, :null => false
     t.integer  :item_id,   :null => false
@@ -1328,4 +1347,7 @@ ActiveRecord::Schema.define(:version => 20111128131344) do
     t.string   :state
   end
   add_index :vrv_project_versions, [:item_type, :item_id]
+  add_index :vrv_project_versions, :vrv_project_id
+  add_index :vrv_project_versions, :person_id
+  add_index :vrv_project_versions, :state
 end

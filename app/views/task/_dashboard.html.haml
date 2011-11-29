@@ -1,3 +1,10 @@
+-messages = Message.available.all
+-if messages.count>0
+  .alert-message
+    -messages.each do |m|
+      %p
+        =m.content
+        %span.label="#{m.created_at}"
 -if @docs_to_pay.count>0 and current_user.person.casher?
   .section
     .page-header
@@ -12,9 +19,13 @@
     =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@docs_to_approve}
     .bottom_action
       =link_to I18n.t('common_attr.more'), docs_to_approve_path,:remote=>true
-- if @vrv_projects.count > 0
+- if @projects_to_approve.count > 0
   .section
-    =render "vrv_projects"
+    .page-header
+      %h3 需要审批的立项申请
+    =render "vrv_projects/index",:vrv_projects=>@projects_to_approve.limit(5)
+    .bottom_action
+      =link_to I18n.t('common_attr.more'), projects_to_approve_path,:remote=>true
 -if @my_approved_docs.count>0
   .section
     .page-header
@@ -25,3 +36,10 @@
     .page-header
       %h3= I18n.t("common_attr.my_recent_docs")
     =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@my_docs}
+- if @my_projects.count > 0
+  .section
+    .page-header
+      %h3 我的立项申请
+    =render "vrv_projects/index",:vrv_projects=>@my_projects.limit(5)
+    .bottom_action
+      =link_to I18n.t('common_attr.more'), my_projects_path,:remote=>true

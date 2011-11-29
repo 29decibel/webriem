@@ -52,7 +52,7 @@
                   .alert-message.error
                     %p 费用超过预算
             .doc_row_show
-              -if doc.processing? and doc.current_approver_id == current_user.person.id
+              -if doc.processing? and doc.current_approver_id == current_user.person.id and doc_relation.doc_row_meta_info.can_adjust_amount
                 .amount_changes
                   =render "doc_amount_changes/index",:resource=>row_data
               -doc_relation.doc_row_attrs.each do |col|

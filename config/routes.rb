@@ -91,7 +91,8 @@ Webreim::Application.routes.draw do
   resources :upload_files
   
   get "task/my_docs",:as=>:my_docs  
-  get "task/my_projects",:as=>:my_docs  
+  get "task/my_projects",:as=>:my_projects  
+  get "task/projects_to_approve",:as=>:projects_to_approve  
   get "task/docs_to_approve",:as=>:docs_to_approve  
   get "task/docs_approved"  
   get "task/docs_to_pay"  ,:as => :docs_to_pay

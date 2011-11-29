@@ -48,6 +48,13 @@ class TaskController < ApplicationController
       format.html
     end
   end
+
+  def projects_to_approve
+    @vrv_projects=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
+    respond_to do |format|
+      format.html
+    end
+  end
   # 每个人的dashboard会有所不同
   # 如果是出纳则有一个待付款列表
   # 未审批单据
@@ -56,9 +63,10 @@ class TaskController < ApplicationController
   def dashboard
     @docs_to_pay=DocHead.approved.limit(10)
     @docs_to_approve=DocHead.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
-    @vrv_projects=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
+    @projects_to_approve=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
     @my_approved_docs=DocHead.by_person(current_user.person.id).approved.order('created_at desc').limit(10)
     @my_docs = DocHead.by_person(current_user.person.id).order('created_at desc').limit(10)
+    @my_projects = VrvProject.where('person_id=?',current_user.person.id)
     respond_to do |wants|
       wants.js
       wants.html
