@@ -41,7 +41,7 @@ class U8Service
     end
   end
 
-  def config(name)
+  def self.config(name)
     @cached_config = {}
     @cached_config[name] ||=SystemConfig.value(name)
   end
