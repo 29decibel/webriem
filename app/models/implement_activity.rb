@@ -8,11 +8,11 @@ class ImplementActivity < ActiveRecord::Base
   belongs_to :doc_head
   after_validation :set_project
 
-  validates_presence_of :doc_head_id
+  validates_presence_of :doc_head_id,:engineer,:start_date,:end_date,:days
 
   private
   def set_project
-    self.vrv_project = doc_head.try(:vrv_project)
+    self.vrv_project = doc_head.contract_doc.try(:vrv_project) if doc_head
   end
 
 end

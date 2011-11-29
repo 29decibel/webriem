@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129001958) do
+ActiveRecord::Schema.define(:version => 20111129043013) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -274,26 +274,26 @@ ActiveRecord::Schema.define(:version => 20111129001958) do
 
   create_table :contract_docs,:force => true do |t|
     t.integer 'doc_head_id'
-    t.string  'channel'
-    t.string  "district"
+    t.integer 'vrv_project_id'
     t.string  'customer'
-    t.string  'work_phone'
+    t.string  "place"
+    t.string  'customer_industry'
+    t.string :phone
     t.string  'contact_person'
-    t.string  'duty'
-    t.string  'cellphone'
-    t.string  'email'
+    t.string  'contact_duty'
+    t.string  'contact_phone'
+    t.string  'contact_email'
     t.date    'bill_date'
     t.string  :source
     t.string  'bill_name'
-    t.string  'bill_amount'
+    t.decimal  'bill_price',  :precision => 16, :scale => 2
     t.string  'contract_info'
     t.decimal 'product_price',         :precision => 16, :scale => 2
     t.string  'agent'
     t.string  'agent_phone'
-    t.string  'agent_contact_name'
-    t.string  'agent_contact_duty'
-    t.string  'agent_contact_phone'
-    t.string  'agent_contact_email'
+    t.string  'agent_name'
+    t.string  'agent_duty'
+    t.string  'agent_email'
     t.string  'ip_address'
     t.string  'pay_info'
     t.string  'buy_info'
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(:version => 20111129001958) do
       t.integer :doc_meta_info_id
       t.boolean :multiple
       t.integer :doc_row_meta_info_id
-      t.string  :doc_row_attrs
+      t.text  :doc_row_attrs
 
       t.timestamps
   end

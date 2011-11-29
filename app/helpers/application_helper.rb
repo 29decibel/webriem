@@ -150,6 +150,7 @@ module ApplicationHelper
 
   def tb_input_field(f,col_name,options={})
     col = f.object.class.columns.select{|c|c.name==col_name}.first
+    return if !col
     # error message
     error_msg = f.object.errors[col_name]
     # inline help message
@@ -264,7 +265,7 @@ module ApplicationHelper
     if ass
       f.object.send(ass.name).try(:name)
     else
-      f.object.send(col_name)
+      f.object.send(col_name).try(:to_s)
     end
   end
 

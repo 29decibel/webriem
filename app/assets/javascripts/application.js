@@ -23,7 +23,7 @@ if (typeof console == "undefined" || typeof console.log == "undefined")
 }
 //------------------------------------------------------------------------
 
-$('.doc_row').live('row:numberChanged',function(){
+$('.doc_row').live('row:numberChanged',function(e,amount_field){
   var fds = $(this).closest('.form_area').find('.doc_row').not(':hidden');
   console.log(fds);
   var total_num = 0.0;
@@ -32,6 +32,11 @@ $('.doc_row').live('row:numberChanged',function(){
     //begin set every value
     var apply_amount =  $(this).find('.ori_amount__input').val() / $(this).find('.rate__input').val();
     $(this).find('.apply_amount__input').html(apply_amount.toFixed(2));
+		console.log(amount_field);
+		if(amount_field!=undefined)
+		{
+			apply_amount = parseFloat($(this).find(amount_field).val());
+		}
     total_num+=apply_amount;
   });
   $(this).closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));

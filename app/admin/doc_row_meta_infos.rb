@@ -7,5 +7,10 @@ ActiveAdmin.register DocRowMetaInfo do
     column :fee
     default_actions
   end
+
+  show do |dr|
+    h3 dr.name
+    p dr.all_attributes
+  end
   
 end

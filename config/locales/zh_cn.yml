@@ -721,29 +721,28 @@
         mark: 特殊标记
         total_amount: 申请总金额
       contract_doc:
-        channel: 行业归属
-        district: 区域归属
         customer: 用户全称
+        customer_industry: 行业归属
+        place: 区域归属
+        phone: 用户办公电话
         source: 直单/代理
-        work_phone: 办公电话
         contact_person: 联系人
-        duty: 联系人职务
-        cellphone: 联系人手机
-        email: 联系人email
+        contact_duty: 联系人职务
+        contact_phone: 联系人电话
+        contact_email: 联系人email
         bill_date: 中标日期
         bill_name: 中标单位
-        bill_amount: 中标金额
+        bill_price: 中标金额
         contract_info: 项目执行合同签约方
         product_price: 我方产品总价
         agent: 代理商
         agent_phone: 代理商电话
-        agent_contact_name: 代理商联系人
-        agent_contact_duty: 代理商联系人职务
-        agent_contact_phone: 代理商联系人电话
-        agent_contact_email: 代理商联系人邮件
-        ip_address: IP地址情况
+        agent_name: 代理商联系人
+        agent_duty: 代理商联系人职务
+        agent_email: 代理商联系人邮件
+        ip_address: IP地址备注
         pay_info: 付款说明
-        buy_info: 采购模块及其他
+        buy_info: 采购模块及其他说明
         deploy_info: 工程实施
         project_info: 项目说明
       reim_split_detail:
@@ -910,7 +909,7 @@
         currency_id: 币种
       contract_item:
         product_id: 产品
-        quantity: 数量
+        quantity: 点数
         price: 单价
         service_year: 服务年限
         amount: 总金额

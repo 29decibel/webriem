@@ -20,5 +20,7 @@ ActiveAdmin.register DocMetaInfo do
     end
     f.buttons
   end
+
+
   
 end

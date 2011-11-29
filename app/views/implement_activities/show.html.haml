@@ -1,8 +1,10 @@
+.page-header
+  %h3 实施活动
 -@implement_activity.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
   =tb_show_field(@implement_activity,cn)
 %p#notice= notice
 .actions
-  =link_to "返回", vrv_project_implement_activities_path(@vrv_project),:class=>'btn'
-  = link_to '修改', edit_vrv_project_implement_activity_path(@vrv_project,@implement_activity),:class=>'btn'
-  =link_to "增加实施活动", new_vrv_project_implement_activity_path(@vrv_project),:class=>'btn'
+  =link_to "返回", implement_activities_path,:class=>'btn'
+  = link_to '修改', edit_implement_activity_path(@implement_activity),:class=>'btn'
+  =link_to "增加实施活动", new_implement_activity_path,:class=>'btn'
 

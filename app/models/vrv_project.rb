@@ -80,12 +80,26 @@ class VrvProject < ActiveRecord::Base
     doc = DocHead.new :doc_meta_info=>doc_meta_info
     doc.person = self.person
     doc.build_contract_doc
-    # copy attributes
+    # copy attributes 项目信息
     doc.contract_doc.source = self.source
     doc.contract_doc.customer = self.customer
-    doc.contract_doc.email = self.email
-    doc.contract_doc.work_phone = self.phone
-    doc.contract_doc.channel = self.channel
+    doc.contract_doc.place = self.place
+    doc.contract_doc.customer_industry = self.customer_industry
+    doc.contract_doc.phone = self.phone
+    doc.contract_doc.vrv_project = self
+    #中标信息
+    if self.bill_after
+      doc.contract_doc.product_price = self.bill_after.bill_price
+      doc.contract_doc.bill_date = self.bill_after.created_at
+      doc.contract_doc.bill_price = self.bill_after.bill_price
+    end
+    #联系人信息
+    doc.contract_doc.contact_person = self.customer_contact.name
+    doc.contract_doc.contact_duty = self.customer_contact.duty
+    doc.contract_doc.contact_phone = self.customer_contact.phone
+    doc.contract_doc.contact_email = self.customer_contact.email
+    doc.contract_doc.deploy_info = ContractDoc::DEPLOY_INFO.first
+    # 其他信息
     doc.apply_date = Time.now
     doc.save
     logger.info doc.errors.full_messages

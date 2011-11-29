@@ -54,3 +54,21 @@
   $(function(){
     tokenize();
   });
+-if doc.doc_meta_info.code='HT'
+  :css
+    .doc_extra_info .clearfix{
+      min-width:450px;
+      display:inline-block;
+    }
+  :javascript
+    $(".amount__input,.quantity__input").live('change',function(){
+      var amount = parseFloat($(this).closest('.doc_row').find('.amount__input').val());
+      var quantity= parseFloat($(this).closest('.doc_row').find('.quantity__input').val());
+      if(isNaN(amount))
+      {
+      }
+      if(isNaN(quantity))
+      {}
+      $(this).closest('.doc_row').find('.price__input').html((amount/quantity).toFixed(2));
+      $(this).closest('.doc_row').trigger('row:numberChanged','.amount__input');
+    });

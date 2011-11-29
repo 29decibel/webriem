@@ -4,13 +4,15 @@ class DocRelation < ActiveRecord::Base
 
   scope :multi,lambda {|multi| where('multiple=?',multi)}
 
+
   def doc_row_attrs
     if !self[:doc_row_attrs].blank?
-      self[:doc_row_attrs].split(',')
+      self[:doc_row_attrs].split(',').map{|a|a.strip}
     else
       eval(doc_row_meta_info.name).column_names.reject{|cn|%w(id doc_head_id sequence created_at updated_at).include? cn} if doc_row_meta_info
     end
   end
+
   def doc_row_attrs=(value)
     if value.is_a? Array
       self[:doc_row_attrs] = value.join(',')
