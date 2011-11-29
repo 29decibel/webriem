@@ -36,6 +36,8 @@
     .page-header
       %h3= I18n.t("common_attr.my_recent_docs")
     =render :partial => "doc_heads/docs_table",:locals=>{:docs=>@my_docs}
+    .bottom_action
+      =link_to I18n.t('common_attr.more'), my_docs_path,:remote=>true
 - if @my_projects.count > 0
   .section
     .page-header
