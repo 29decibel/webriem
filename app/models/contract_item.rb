@@ -1,7 +1,7 @@
 class ContractItem < ActiveRecord::Base
   belongs_to :doc_head
   belongs_to :product
-  validates_presence_of :amount,:service_year,:price,:product_id,:quantity
+  validates_presence_of :amount,:service_year,:product_id,:quantity
   validates :quantity,:numericality => {:greater_than => 0}
   validates :amount,:numericality => {:greater_than => 0}
 

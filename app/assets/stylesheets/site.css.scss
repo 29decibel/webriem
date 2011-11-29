@@ -59,12 +59,19 @@ textarea#work_flow_info_comments{
   border:1px solid #ccc;
   padding:15px 0px;
   position:relative;
-  &:hover{a.detail_link{display:block;}}
-  a.detail_link{
+  &:hover{a.remove_doc_row{display:block;}}
+  a.remove_doc_row{
     display:none;
     position:absolute;
     top:10px;
     right:10px;
+  }
+  &:hover{a.add_doc_row{display:block;}}
+  a.add_doc_row{
+    display:none;
+    position:absolute;
+    top:10px;
+    left:10px;
   }
 }
 .doc_row_show{

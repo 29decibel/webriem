@@ -251,6 +251,18 @@ function add_fields(link, association, content) {
 }
 
 
+$(function(){
+	$('.doc_row').live('hover',function(){
+		var link = $(this).find('a.add_doc_row');
+		if(link.size()==0)
+		{
+			link = $(this).closest('.doc_detail').find('a.add_doc_row').clone();
+		}
+		$(this).append(link);
+	});
+});
+
+
 function add_upload_files(current,path)
 {
 	sFeatures="dialogHeight: 300px; dialogWidth: 600px;dialogTop: 190px;dialogLeft: 220px; edge:Raised;border:thin;location:no; center: Yes;help: No; resizable: No; status: No;"

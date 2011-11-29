@@ -43,7 +43,7 @@ module ApplicationHelper
   end
   #function to remove a link
   def link_to_remove
-    link_to_function(image_tag('list-remove.png'),"remove_fields(this)",:class=>"detail_link")
+    link_to_function(image_tag('list-remove.png'),"remove_fields(this)",:class=>"remove_doc_row")
   end
   #add fields to current form
   def link_to_add_fields(name, f, doc_relation,default_values=[])
@@ -64,7 +64,7 @@ module ApplicationHelper
       end
     end
     #注意了兄弟们,在这里一定要去掉h()对整个文本的转义,否则就会js报错啦~~~~
-    link_to_function(image_tag("icons/add.png"), "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")",:class=>"detail_link")
+    link_to_function(image_tag("icons/add.png"), "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")",:class=>"add_doc_row")
   end
   #get the current request uri
   def current_uri
