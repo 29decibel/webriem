@@ -1350,4 +1350,30 @@ ActiveRecord::Schema.define(:version => 20111129043013) do
   add_index :vrv_project_versions, :vrv_project_id
   add_index :vrv_project_versions, :person_id
   add_index :vrv_project_versions, :state
+  
+  create_table :u8_districts do |t|
+    t.string :code
+    t.string :name
+    t.string :grade
+    t.boolean :end
+
+    t.timestamps
+  end
+
+  create_table :u8_trades do |t|
+    t.string :code
+    t.string :name
+    t.string :grade
+    t.boolean :end
+
+    t.timestamps
+  end
+
+  create_table :u8_customers do |t|
+    t.string :code
+    t.string :name
+
+    t.timestamps
+  end
+  
 end

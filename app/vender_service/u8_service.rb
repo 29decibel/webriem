@@ -33,12 +33,17 @@ class U8Service
   end
 
   def self.exec_sql(sql)
-    client = TinyTds::Client.new(:host=>'10.120.128.28',:database=>'UFDATA_500_2011',:username=>'sa',:password=>'',:encoding=>'GBK')
+    client = TinyTds::Client.new(:host=>config('u8_host'),:database=>config('u8_database'),:username=>config('u8_username'),:password=>config('u8_password'),:encoding=>'GBK')
     if sql.start_with? 'select'
       client.execute(sql.encode('GBK')).each
     else
       client.execute(sql.encode('GBK')).do
     end
+  end
+
+  def config(name)
+    @cached_config = {}
+    @cached_config[name] ||=SystemConfig.value(name)
   end
 
   def self.remove_vouch doc_no
