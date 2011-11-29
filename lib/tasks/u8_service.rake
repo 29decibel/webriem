@@ -9,6 +9,7 @@ namespace :u8_service do
     results = U8Service.exec_sql(sql)
     puts results
     results.each do |dr|
+      d = U8District.find_by_code(dr['code']) || U8District.new
       d = U8District.new :code=>dr['code'],:name=>dr['name'],:grade=>dr['grade'],:end=>dr['end']
       d.save
     end

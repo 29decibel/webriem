@@ -8,7 +8,9 @@ module DocIndex
         logger.info 'begin index doc row'
         return if !doc_head
         # remove exist index
-        DocRow.where('resource_type=? and resource_id=?',self.class.name,self.id).delete_all
+        logger.info 'begin delete previouse'
+        num = DocRow.where('resource_type=? and resource_id=?',self.class.name,self.id).delete_all
+        logger.info "#{num} deleted"
         # create index row record
         dr = DocRow.new
 
@@ -36,7 +38,8 @@ module DocIndex
         dr.resource_type = self.class.name
         # get changed amount
         dr.changed_amount = DocAmountChange.final_amount(self)
-        dr.save
+        result = dr.save
+        logger.info "index result : #{result}"
         logger.info 'index over ----------------'
       end
       def delete_doc_row
