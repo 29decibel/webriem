@@ -27,7 +27,7 @@ ActiveAdmin.register WorkFlow do
       f.input :priority,:hint=>'数值越大越会被先应用'
       f.input :category,:as=>:select,:collection => WorkFlow::CATEGORY,:include_blank => false
     end
-    f.inputs "审批环节" do
+    f.inputs "审批环节(请确保第一个审批环节为一个人，否则员工无法提交审批)" do
       f.has_many :work_flow_steps,:label=>'添加审批环节' do |p|
         p.input :factors,:hint=>'职务:总裁助理,部门:金融能源,姓名:张三（条件之间使用逗号隔开，冒号和逗号都需要为半角字符）'
         p.input  :step_code
