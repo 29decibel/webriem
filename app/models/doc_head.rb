@@ -9,7 +9,6 @@ class DocHead < ActiveRecord::Base
   belongs_to :doc_meta_info
 
   before_save :set_afford_dep,:set_current_approver_id
-  after_save  :index_doc_rows
   before_validation :set_doc_no
 
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
@@ -207,6 +206,9 @@ class DocHead < ActiveRecord::Base
       transition [:processing] => :rejected
     end
   end
+
+  # put after state transi
+  after_save  :index_doc_rows
 
   #approve
   def next_approver(comments='OK')
