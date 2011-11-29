@@ -724,6 +724,7 @@
         channel: 行业归属
         district: 区域归属
         customer: 用户全称
+        source: 直单/代理
         work_phone: 办公电话
         contact_person: 联系人
         duty: 联系人职务
@@ -1037,7 +1038,7 @@
         end_date: 结束日期
         days: 实施天数
         doc_head_id: 合同号
-        vrv_project_id: 
+        vrv_project_id: 项目
     errors:
       template: # ~ 2.3.5 backward compatible
         header:

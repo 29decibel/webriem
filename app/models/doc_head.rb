@@ -21,7 +21,6 @@ class DocHead < ActiveRecord::Base
   validates_presence_of :doc_no, :on => :create, :message => "单据号必输"
   validates_presence_of :apply_date, :on => :create, :message => "申请日期必须输入"
   validates_uniqueness_of :doc_no, :on => :create, :message => "已经存在相同的单据号"
-  validates_associated :borrow_doc_details
   # add validation of association
   #validate :total_amount_can_not_be_zero
   validate :processing_doc_current_info_must_one_candidate
@@ -181,8 +180,11 @@ class DocHead < ActiveRecord::Base
 
   state_machine :state, :initial => :un_submit do
     before_transition [:rejected,:un_submit] => :processing do |doc_head, transition|
+      Rails.logger.info '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
       doc_head.set_approvers
+      doc_head.current_approver_info
       doc_head.errors.add(:base,'无法确定第一个审批人') if !doc_head.current_approver_id
+      Rails.logger.info '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
     end    
     after_transition [:processing] => [:un_submit,:rejected] do |doc_head,transition|
       doc_head.approver_infos.delete_all
@@ -226,21 +228,28 @@ class DocHead < ActiveRecord::Base
     end
   end
 
-  # 在单据开始审批的时候设置所有审批人员
-  # 只有第一个环节当审批人超过一个人的时候允许选择审批人
   # create a bunch of approver infos by every work_flow_step
-  #
   def set_approvers(user_selected=nil)
     if (work_flow and work_flow.work_flow_steps.count > 0)
       work_flow.work_flow_steps.each_with_index do |w,index|
         approver_info = approver_infos.build(:work_flow_step => w,:doc_head => self)
         approver_info.enabled = false if (w.max_amount and self.total_amount < w.max_amount)
         approver_info.save
+        Rails.logger.info approver_info
       end #block end
     end
+    Rails.logger.info approver_infos.count
     if approver_infos.count>0
+      Rails.logger.info '!!!!!!!!!!!!!!!!!!!!!'
       self.current_approver_info = approver_infos.first
       self.save
+      Rails.logger.info self.errors.full_messages
+    end
+  end
+
+  def test_approver_infos
+    if (work_flow and work_flow.work_flow_steps.count > 0)
+      work_flow.work_flow_steps.map {|w| approver_info = approver_infos.build(:work_flow_step => w,:doc_head => self)}
     end
   end
 

@@ -3,6 +3,7 @@
 //= require jquery-ui
 //= require lib/jquery-ui-timepicker-addon
 //= require lib/jquery-ui-timepicker-zh-CN
+//= require lib/jquery.ui.datepicker-zh-CN
 //= require enter_to_tab
 //= require lib/jquery.tokeninput
 //= require twitter/bootstrap
@@ -158,27 +159,43 @@ $(function(){
 
 });
 
-function tokenize(content)
+function tokenize(selector,options)
 {
-  $("input.token-input").each(function(){
+	if(selector==undefined)
+	{
+		selector="input.token-input";
+	}
+	if(options==undefined)
+	{
+		options={};
+	}
+
+  $(selector).each(function(){
     if($(this).css('display')=='none') return;
-    $(this).tokenInput("/token_input/search?model="+$(this).data("model")
-    ,{
-      crossDomain: false,
-      prePopulate: $(this).data("pre"),
-      searchingText: "搜索中...",
-      hintText: "输入进行搜索",
-      noResultsText: "无符合条件的记录",
-      theme: "facebook",
-      preventDuplicates: true,
-      tokenLimit: 1,
-      onAdd:function(data){
-        $(this).trigger('token:add',data);
-      },
-      onDelete:function(data){
-        $(this).trigger('token:delete',data);
-      }
-    });  
+		var default_options = {
+				crossDomain: false,
+				prePopulate: $(this).data("pre"),
+				searchingText: "搜索中...",
+				hintText: "输入进行搜索",
+				noResultsText: "无符合条件的记录",
+				theme: "facebook",
+				preventDuplicates: true,
+				tokenLimit: 1,
+				onAdd:function(data){
+					$(this).trigger('token:add',data);
+				},
+				onDelete:function(data){
+					$(this).trigger('token:delete',data);
+				}
+			};
+		//set new option
+		jQuery.extend(options,default_options);
+		//get url
+		var data_url = "/token_input/search?model="+$(this).data("model");
+		if (options.search_col){data_url+="&search_col="+options.search_col;}
+		if (options.custom_q){data_url+="&custom_q="+options.custom_q;}
+		//token it
+    $(this).tokenInput(data_url,options);  
   });
 
 }

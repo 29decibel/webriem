@@ -51,6 +51,10 @@ class VrvProject < ActiveRecord::Base
     self[:star] || human_star || system_star
   end
 
+  #def self.token_filter(q)
+  #  VrvProject.where('name like ? or customer like ?',"%#{q}%","%#{q}%")
+  #end
+
   def to_s
     customer
   end
@@ -92,7 +96,7 @@ class VrvProject < ActiveRecord::Base
   #未提交，审核中，星级状态，中标状态，未中标状态，报废
   state_machine :state, :initial => :un_submit do
     after_transition [:processing] => :star do |project,transition|
-      project.update_attribute(:system_star,1) if self.system_star<1
+      project.update_attribute(:system_star,1) if project.system_star<1
     end
     before_transition [:rejected,:un_submit] => :processing do |vrv_project, transition|
       vrv_project.set_approvers

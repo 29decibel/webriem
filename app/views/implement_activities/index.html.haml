@@ -3,6 +3,7 @@
 
 %table
   %tr
+    %th 合同号
     %th 工程师
     %th 开始时间
     %th 结束时间
@@ -13,12 +14,13 @@
 
   - @implement_activities.each do |implement_activity|
     %tr
+      %td= implement_activity.doc_head.try(:doc_no)
       %td= implement_activity.engineer
       %td= implement_activity.start_date
       %td= implement_activity.end_date
       %td= implement_activity.days
-      %td= link_to '查看', [@vrv_project,implement_activity]
-      %td= link_to '修改', edit_vrv_project_implement_activity_path(@vrv_project,implement_activity)
-      %td= link_to '删除', [@vrv_project,implement_activity], :confirm => '确定删除?', :method => :delete
+      %td= link_to '查看', implement_activity
+      %td= link_to '修改', edit_implement_activity_path(implement_activity)
+      %td= link_to '删除', implement_activity, :confirm => '确定删除?', :method => :delete
 .actions
-  = link_to '添加实施活动', new_vrv_project_implement_activity_path(@vrv_project),:class=>'btn primary'
+  = link_to '添加实施活动', new_implement_activity_path,:class=>'btn primary'
