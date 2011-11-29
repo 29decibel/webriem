@@ -6,7 +6,7 @@
       %span= act[:user]
       =act[:event]
       -if act[:v].event!='delete'
-        -if act[:current_item].respond_to?(:vrv_project)
+        -if act[:current_item].respond_to?(:vrv_project) and act[:v].item_type!='ImplementActivity'
           =link_to "#{act[:current_item].vrv_project.to_s}中的#{I18n.t("activerecord.models.#{act[:current_item].class.name.underscore}")}", (act[:current_item].is_a?(CustomerContact) ? act[:current_item].vrv_project : [act[:current_item].vrv_project,act[:current_item]])
         -else
           =link_to act[:current_item].to_s, act[:current_item]
