@@ -6,21 +6,36 @@ namespace :u8_service do
   desc "sync districts"
   task :sync_districts => :environment do
     sql = 'select cDCCode as code,cDCName as name,iDCGrade as grade,bDCEnd as end from DistrictClass'
-    puts U8Service.exec_sql(sql)
+    results = U8Service.exec_sql(sql)
+    puts results
+    results.each do |dr|
+      d = U8District.new :code=>dr['code'],:name=>dr['name'],:grade=>dr['grade'],:end=>dr['end']
+      d.save
+    end
   end
 
 
   desc "sync districts"
   task :sync_trades => :environment do
     sql = 'select cTradeCCode as code,cTradeCName as name,iTradeCGrade as grade,bTradeCEnd as end from tradeclass'
-    puts U8Service.exec_sql(sql)
+    results = U8Service.exec_sql(sql)
+    puts results
+    results.each do |dr|
+      d = U8Trade.new :code=>dr['code'],:name=>dr['name'],:grade=>dr['grade'],:end=>dr['end']
+      d.save
+    end
   end
 
 
   desc "sync districts"
   task :sync_customers => :environment do
     sql = 'select cCusCode as code,cCusAbbName as name from customer'
-    puts U8Service.exec_sql(sql)
+    results = U8Service.exec_sql(sql)
+    puts results
+    results.each do |dr|
+      d = U8Customer.new :code=>dr['code'],:name=>dr['name']
+      d.save
+    end
   end
 
 end
