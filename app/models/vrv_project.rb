@@ -217,7 +217,7 @@ class VrvProject < ActiveRecord::Base
 
   def set_code
     if !self.code
-      current_num = VrvProject.where('year(created_at)=?',Time.now.year).count
+      current_num = VrvProject.where('year(created_at)=?',Time.now.year).order('created_at').last.code[-5..-1].to_i
       self.code = "XM#{Time.now.year}#{(current_num+1).to_s.rjust(5,'0')}"
     end
   end

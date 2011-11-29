@@ -61,7 +61,7 @@ namespace :deploy do
 
   desc "update"
   task :update_data do
-    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake update:factors"
+    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake data:factors"
   end
 
 end

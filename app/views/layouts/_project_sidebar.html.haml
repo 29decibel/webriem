@@ -21,4 +21,4 @@
     = link_to "合同预测", project.contract_predict&&!project.contract_predict.new_record? ? [project,project.contract_predict] : new_vrv_project_contract_predict_path(project),:class=>(controller_name=='contract_predicts' ? 'current':'')
     = link_to "投标阶段", project.bill_stage&&!project.bill_stage.new_record? ? [project,project.bill_stage] : new_vrv_project_bill_stage_path(project),:class=>(controller_name=='bill_stages' ? 'current':'')
     = link_to "投标后", project.bill_after&&!project.bill_after.new_record? ? [project,project.bill_after] : new_vrv_project_bill_after_path(project),:class=>(controller_name=='bill_afters' ? 'current':'')
-  = link_to '返回项目列表', vrv_projects_path
+  = link_to '返回项目列表', my_projects_path

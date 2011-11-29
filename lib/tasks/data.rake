@@ -48,7 +48,7 @@ namespace :data do
 
   desc "clear data"
   task :clear => :environment do
-    models = %w(DocHead DocRow) + DocRowMetaInfo.all.map(&:name)
+    models = %w(DocHead DocRow VrvProject ApproverInfo WorkFlowInfo) + DocRowMetaInfo.all.map(&:name)
     models.each {|m|eval(m).delete_all}
   end
 end

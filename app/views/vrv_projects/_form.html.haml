@@ -1,3 +1,7 @@
+-if Rails.env=='development'
+  .alert-message.error
+    %p= @vrv_project.errors.full_messages
+    %p=@vrv_project.code
 = form_for @vrv_project do |f|
   =tb_input_field(f,'name')
   =tb_input_field(f,'customer')
