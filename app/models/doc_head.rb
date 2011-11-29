@@ -212,6 +212,13 @@ class DocHead < ActiveRecord::Base
     end
   end
 
+  def index_doc_rows
+    doc_meta_info.doc_relations.multi(true).map(&:doc_row_meta_info).compact.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
+      dr_datas = self.send(eval(dr_meta.name).table_name)
+      dr_datas.each {|dr| dr.index_doc_row if dr.respond_to?(:index_doc_row)}
+    end
+  end
+
   # put after state transi
   after_save  :index_doc_rows
 
@@ -827,11 +834,6 @@ class DocHead < ActiveRecord::Base
     errors.add(:base,'当前审批人不确定') if (self.processing? and self.current_approver_info and self.current_approver_info.candidates.count>1 and !self.current_approver_info.person_id)
   end
 
-  def index_doc_rows
-    doc_meta_info.doc_relations.multi(true).map(&:doc_row_meta_info).compact.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
-      dr_datas = self.send(eval(dr_meta.name).table_name)
-      dr_datas.each {|dr| dr.index_doc_row if dr.respond_to?(:index_doc_row)}
-    end
-  end
+
 
 end
