@@ -6,7 +6,8 @@ module DocIndex
       def index_doc_row
         logger.info '----------------------'
         logger.info 'begin index doc row'
-        return if !doc_head
+        return if !self.doc_head
+        self.doc_head.reload
         # remove exist index
         logger.info 'begin delete previouse'
         num = DocRow.where('resource_type=? and resource_id=?',self.class.name,self.id).delete_all
