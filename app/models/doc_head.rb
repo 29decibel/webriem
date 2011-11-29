@@ -187,7 +187,7 @@ class DocHead < ActiveRecord::Base
     end
 
     after_transition [:rejected,:un_submit] => :processing do |doc_head, transition|
-      index_doc_rows
+      doc_head.index_doc_rows
     end
 
     after_transition [:processing] => [:un_submit,:rejected] do |doc_head,transition|
