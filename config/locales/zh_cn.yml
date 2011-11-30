@@ -342,6 +342,7 @@
       bill_prepare: 招标准备
       product_test: 产品测试
       bill_after: 投标后
+      common_riem: 普通费用
       bill_stage: 投标阶段
     attributes:
       message:

@@ -8,7 +8,7 @@ class DocMetaInfo < ActiveRecord::Base
   end
 
   def print_attrs
-    self[:print_attrs].split(',') if self[:print_attrs]	
+    self[:print_attrs] ? self[:print_attrs].split(',') : []
   end
 
 end

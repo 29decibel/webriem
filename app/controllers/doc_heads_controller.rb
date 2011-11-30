@@ -1,4 +1,5 @@
 #coding: utf-8
+require 'prawn/layout'
 #require "ruby-debug"
 class DocHeadsController < ApplicationController
   before_filter :authenticate_user!
@@ -329,7 +330,7 @@ class DocHeadsController < ApplicationController
     doc = DocHead.find(params[:id])
     pdf = Prawn::Document.new
     pdf = NormalDoc.to_pdf(pdf,doc)
-    send_data(pdf.render, :filename => "hello.pdf",:type => "application/pdf")
+    send_data(pdf.render, :filename => "#{doc.doc_no}.pdf",:type => "application/pdf")
   end
 
 end
