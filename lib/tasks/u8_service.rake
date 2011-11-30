@@ -48,4 +48,60 @@ namespace :u8_service do
     end
   end
 
+  desc "import u8 codes"
+  task :sync_codes => :environment do
+    begin
+      sql = 'select cclass,ccode,ccode_name,igrade,bend,cexch_name,bperson,bitem,bdept from code'
+      u8codes= U8Service.exec_sql sql
+      #never delete 
+      this_time_count=0
+      puts u8codes
+      u8codes.each do |u8_model|
+        #current year not exist then create
+        model = U8code.where("year =#{Time.now.year} and ccode=#{u8_model["ccode"]}").first || U8code.new
+        model.cclass=u8_model["cclass"]
+        model.ccode=u8_model["ccode"]
+        model.ccode_name=u8_model["ccode_name"]
+        model.igrade=u8_model["igrade"]
+        model.bend=u8_model["bend"]
+        model.cexch_name=u8_model["cexch_name"]
+        model.bperson=u8_model["bperson"]
+        model.bitem=u8_model["bitem"]
+        model.bdept=u8_model["bdept"]
+        model.year=Time.now.year
+        model.save
+        this_time_count=this_time_count+1
+      end
+    rescue Exception=>msg
+      Rails.logger.error "^^^^^^^^^^^^^^^can't get the u8 serivce to get the codes info"
+      Rails.logger.error "#{msg}"
+    end
+  end
+
+
+  desc "import u8 deps"
+  task :sync_deps => :environment do
+    U8Dep.delete_all
+     begin
+      sql = 'select cDepCode,bDepEnd,cDepName,iDepGrade from Department'
+      u8deps= U8Service.exec_sql sql
+      #never delete 
+      this_time_count=0
+      puts u8deps
+      u8deps.each do |u8_model|
+        model = U8Dep.find_by_cdepcode(u8_model['cDepCode']) || U8Dep.new
+        model.cdepcode=u8_model["cDepCode"]
+        model.bdepend=u8_model["bDepEnd"]
+        model.cdepname=u8_model["cDepName"]
+        model.idepgrade=u8_model["iDepGrade"]
+        model.save
+        this_time_count=this_time_count+1
+      end
+    rescue Exception=>msg
+      Rails.logger.error "^^^^^^^^^^^^^^^can't get the u8 serivce to get the departments info"
+      Rails.logger.error "#{msg}"
+    end
+  end
+
+
 end

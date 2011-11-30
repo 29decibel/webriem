@@ -332,7 +332,7 @@ class DocHead < ActiveRecord::Base
   ####################### vouch ##############################
   def exist_vouch?
     begin
-      Sk.exist_vouch doc_no
+      U8Service.exist_vouch doc_no
     rescue Exception=>msg
       Rails.logger.error "u8 service exist vouch error ,error msg is #{msg}"
       return false

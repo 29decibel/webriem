@@ -65,6 +65,7 @@ class U8Service
     select_cmd = "select count(*) from gl_accvouch where cdigest like '%#{doc_no}%'"
     self.exec_sql(select_cmd).first[""] > 0
   end
+  
   def self.max_ino_id
     return 123456788 if Rails.env.development?
     select_cmd = "select max(ino_id) from GL_accvouch where iperiod='#{Time.now.month}'"

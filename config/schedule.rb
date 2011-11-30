@@ -37,6 +37,8 @@ every :day,:at=>'10:55 pm' do
   rake "u8_service:sync_districts"
   rake "u8_service:sync_trades"
   rake "u8_service:sync_customers"
+  rake "u8_service:sync_codes"
+  rake "u8_service:sync_deps"
 end
 
 every :day, :at=>'10am' do
