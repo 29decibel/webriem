@@ -20,6 +20,9 @@ class VrvProject < ActiveRecord::Base
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "vrv_project_id",:dependent=>:destroy
 
+  belongs_to :u8_customer
+  belongs_to :u8_trade
+
   AMOUNT = %w(5万以下 5-10万以下 10-30万以下 30-50万以下 50-100万以下 100万及其以上)
   SOURCE = %w(直单 代理)
   
@@ -83,6 +86,7 @@ class VrvProject < ActiveRecord::Base
     # copy attributes 项目信息
     doc.contract_doc.source = self.source
     doc.contract_doc.customer = self.customer
+    doc.contract_doc.name = self.customer
     doc.contract_doc.place = self.place
     doc.contract_doc.customer_industry = self.customer_industry
     doc.contract_doc.phone = self.phone
@@ -111,6 +115,8 @@ class VrvProject < ActiveRecord::Base
   state_machine :state, :initial => :un_submit do
     after_transition [:processing] => :star do |project,transition|
       project.update_attribute(:system_star,1) if project.system_star<1
+      # send to u8
+      project.send_to_u8
     end
     before_transition [:rejected,:un_submit] => :processing do |vrv_project, transition|
       vrv_project.set_approvers
@@ -202,6 +208,26 @@ class VrvProject < ActiveRecord::Base
     #终止单据
     self.work_flow_infos << WorkFlowInfo.create(:is_ok=>false,:comments=>comments,:approver_id=>current_approver_id) 
     self.reject
+  end
+
+  # i_id       序号              自增长
+  # citemcode  项目号
+  # citemname  项目名称
+  # citemccode 项目分类编码  默认为000
+  # bclose     是否结算      默认为 false
+  # 总部归属   总部归属      文本
+  # 行业       行业          文本
+  def send_to_u8
+    sql = "insert into fitemss01(citemcode,citemname,citemccode,bclose,总部归属,行业) values(
+          '#{self.code}','#{self.name}','#{SystemConfig.value('citemccode')||'000'}',
+          '#{SystemConfig.value('bclose')||false}','#{self.office_district}','#{self.u8_trade.try(:name)}')"
+    U8Service.exec_sql(sql)
+  end
+
+  def exist_in_u8?
+    sql = 'select count(*) from fitemss01'
+    result = U8Service.exec_sql(sql)
+    result.count>0 and result.first['']>0
   end
 
   private

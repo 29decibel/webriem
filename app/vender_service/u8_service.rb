@@ -19,25 +19,29 @@ class U8Service
             values('#{Time.now.month}',N'记','1','#{vmodel.ino_id}','#{vmodel.inid}','#{Time.now.to_date}','#{vmodel.idoc}',N'#{vmodel.cbill}',N'OES_V0.1:#{vmodel.doc_no}','#{vmodel.ccode}',N'#{vmodel.cexch_name}',#{vmodel.md},#{vmodel.mc},#{vmodel.md_f},#{vmodel.mc_f},#{vmodel.nfrat},'#{vmodel.cdept_id}',#{vmodel.cperson_id.blank? ? 'null' : "'#{vmodel.cperson_id}'"},'#{vmodel.citem_id}','#{vmodel.citem_class}','#{vmodel.ccode_equal}','#{Time.now.year}','#{Time.now.strftime('%Y%m')}')"
     puts '## begin insert into u8 database of vouch .....'
     puts "## #{insert_cmd}"
-    result_msg = ''
     begin 
-      result_msg = exec_sql(insert_cmd).to_s
+      exec_sql(insert_cmd).to_s
     rescue Exception => error
       puts "!! error when insert #{error}"
       puts "begin delete all vouches of current doc #{vmodel.doc_no}"
       delete_result = self.remove_vouch(vmodel.doc_no)
       puts "delete result is #{delete_result}"
-      result_msg = error
+      error
     end
-    result_msg
   end
 
   def self.exec_sql(sql)
-    client = TinyTds::Client.new(:host=>config('u8_host'),:database=>config('u8_database'),:username=>config('u8_username'),:password=>config('u8_password'),:encoding=>'GBK')
-    if sql.start_with? 'select'
-      client.execute(sql.encode('GBK')).each
-    else
-      client.execute(sql.encode('GBK')).do
+    begin
+      puts sql
+      client = TinyTds::Client.new(:host=>config('u8_host'),:database=>config('u8_database'),:username=>config('u8_username'),:password=>config('u8_password'),:encoding=>'GBK')
+      if sql.start_with? 'select'
+        client.execute(sql.encode('GBK')).each
+      else
+        client.execute(sql.encode('GBK')).do
+      end
+    rescue Exception => error
+      puts error
+      error
     end
   end
 

@@ -1,11 +1,11 @@
--if Rails.env=='development'
+-if Rails.env=='development' and @vrv_project.errors.count>0
   .alert-message.error
     %p= @vrv_project.errors.full_messages
     %p=@vrv_project.code
 = form_for @vrv_project do |f|
   =tb_input_field(f,'name')
   =tb_input_field(f,'customer')
-  =tb_input_field(f,'customer_industry')
+  =tb_input_field(f,'u8_trade_id')
   =tb_input_field(f,'place')
   =tb_input_field(f,'website',:value=>f.object.website)
   .clearfix{'class'=>(!f.object.errors[:phone_pre].blank? || !f.object.errors[:phone_sur].blank?) ? 'error' : ''}
@@ -17,9 +17,11 @@
         =f.text_field :phone_sur,:style=>'width:155px'
         -if !f.object.errors[:phone_pre].blank? || !f.object.errors[:phone_sur].blank?
           %span.help-inline= f.object.errors[:phone_pre].first || f.object.errors[:phone_sur].first
+  =tb_input_field(f,'office_district')
   =tb_input_field(f,'scale')
   =tb_input_field(f,'amount')
   =tb_input_field(f,'source')
+  =tb_input_field(f,'u8_customer_id')
   =tb_input_field(f,'agent_contact')
   .page-header
     %h5 联系人信息
@@ -31,3 +33,19 @@
   .actions
     = f.submit '保存',:class=>'btn primary'
     =link_to "放弃", @vrv_project,:class=>'btn'
+:javascript
+  $(function(){
+    tokenize();
+    $("#vrv_project_source").live('change',function(){
+      if($(this).val()=='代理')
+      {
+        $('.vrv_project__u8_customer_id').show('slow');
+        $('.vrv_project__agent_contact').show('slow');
+      }else
+      {
+        $('.vrv_project__u8_customer_id').hide('slow');
+        $('.vrv_project__agent_contact').hide('slow');
+      }
+    });
+    $("#vrv_project_source").change();
+  });

@@ -178,7 +178,7 @@ module ApplicationHelper
       end
     end)
     # combine
-    content_tag :div,:class=>"clearfix #{'error' if error_msg.count>0}" do
+    content_tag :div,:class=>"#{f.object.class.name.underscore}__#{col_name} clearfix #{'error' if error_msg.count>0}" do
       f.label(I18n.t("activerecord.attributes.#{f.object.class.name.underscore}.#{col_name}")+mark_required(f.object,col_name)) + value
     end
   end

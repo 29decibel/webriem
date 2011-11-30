@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130062834) do
+ActiveRecord::Schema.define(:version => 20111130112908) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -274,6 +274,7 @@ ActiveRecord::Schema.define(:version => 20111130062834) do
   create_table :contract_docs,:force => true do |t|
     t.integer 'doc_head_id'
     t.integer 'vrv_project_id'
+    t.string  'name'
     t.string  'customer'
     t.string  "place"
     t.string  'customer_industry'
@@ -1129,6 +1130,7 @@ ActiveRecord::Schema.define(:version => 20111130062834) do
     t.string :code
     t.string :customer
     t.string :place
+    t.string :office_district
     t.string :website
     t.string :phone_pre
     t.string :phone_sur
@@ -1143,6 +1145,8 @@ ActiveRecord::Schema.define(:version => 20111130062834) do
     t.integer :human_star
     t.integer :star
     t.integer :person_id
+    t.integer :u8_customer_id
+    t.integer :u8_trade_id
     t.integer  "current_approver_id"
     t.integer  "current_approver_info_id"
 

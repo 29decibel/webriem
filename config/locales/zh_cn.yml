@@ -730,6 +730,7 @@
         mark: 特殊标记
         total_amount: 申请总金额
       contract_doc:
+        name: 合同名称
         customer: 用户全称
         customer_industry: 行业归属
         place: 区域归属
@@ -935,6 +936,7 @@
         service_year: 服务年限
         amount: 总金额
       vrv_project:
+        office_district: 总部归属
         name: 项目名称
         code: 项目编码
         customer: 客户全称
@@ -947,7 +949,8 @@
         scale: 项目规模点数
         person_id: 申请人
         amount: 项目预计金额
-        customer_industry: 客户所在行业
+        u8_trade_id: 客户所在行业
+        u8_customer_id: 代理商
         agent_contact: 代理商联系人
         start_date: 开始时间
         human_star: 系统星级

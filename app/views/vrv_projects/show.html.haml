@@ -6,7 +6,7 @@
 .page-header
   %h3= @vrv_project.name || @vrv_project.customer
 .vrv_project_show_basic
-  -%w(code name customer customer_industry place phone website scale amount source agent_contact).each do |cn|
+  -%w(code name customer u8_trade_id place phone office_district website scale amount source u8_customer_id agent_contact).each do |cn|
     =tb_show_field(@vrv_project,cn,:label_css=>'span2')
 -if @vrv_project.customer_contact
   .page-header

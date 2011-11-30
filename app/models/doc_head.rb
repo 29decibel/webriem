@@ -201,6 +201,11 @@ class DocHead < ActiveRecord::Base
       doc_head.current_approver_info = nil
       doc_head.save
     end
+
+    after_transition [:processing] => [:approved] do |doc_head,transition|
+      doc_head.send_ht_to_u8
+    end
+
     event :submit do
       transition [:rejected,:un_submit] => :processing
     end
@@ -279,26 +284,26 @@ class DocHead < ActiveRecord::Base
     self.work_flow_infos << WorkFlowInfo.create(:is_ok=>false,:comments=>comments,:approver_id=>current_approver_id) 
     self.reject
   end
-  #==================================about filter================================
 
-  #the budget fee
-  def budget_fee_id
-    if doc_type==9
-      #差旅费
-      Fee.find_by_code('03').id
-    elsif doc_type==10
-      #交际费用
-      Fee.find_by_code('02').id
-    elsif doc_type==11
-      #加班费用
-      Fee.find_by_code('06').id      
-    elsif doc_type==13
-      Fee.find_by_code('04').id
-    else
-      #其他
-      -1
-    end
+  #citemcode  销售合同号
+  #citemname  合同名称
+  #citemccode 项目分类编码  默认为000
+  #bclose     是否结算      默认为 false
+  #对应立项号 对应立项号      文本--插入合同审批表中的项目立项号
+  def send_ht_to_u8
+    return if self.doc_meta_info.code!='HT'
+    # insert into first table
+    sql = "insert into fitemss00(citemcode,citemname,citemccode,bclose,对应立项号)
+          values('#{self.doc_no}','#{self.contract_doc.name}','#{'000'}','#{false}','#{self.contract_doc.vrv_project.try(:code)}')"
+    U8Service.exec_sql sql
   end
+
+  def exist_ht_in_u8?
+    sql = "select count(*) from fitemss00 where citemcode='#{self.doc_no}'"
+    result = U8Service.exec_sql sql
+    result.count>0 and result.first['']>0
+  end
+  #==================================about filter================================
 
   #can delete depands on two things
   def can_destroy? user
@@ -323,9 +328,6 @@ class DocHead < ActiveRecord::Base
     total_apply_amount
   end
 
-  def rules
-    
-  end
 
   ####################### vouch ##############################
   def exist_vouch?
