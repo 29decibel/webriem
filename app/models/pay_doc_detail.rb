@@ -24,6 +24,9 @@ class PayDocDetail < ActiveRecord::Base
       self.dep = project.dep
     end
   end
+  def self.read_only_attr?(attr)
+    %w(apply_amount fi_amount hr_amount).include?(attr)
+  end
 
   belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
   belongs_to :dep
