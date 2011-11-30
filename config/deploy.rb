@@ -31,6 +31,7 @@ namespace :deploy do
       update_code
       migrate
       assets
+      update_crontab
     end
 
     restart
@@ -51,6 +52,11 @@ namespace :deploy do
   desc "preco"
   task :assets do
     run "cd #{deploy_to}/current && bundle exec rake assets:precompile"
+  end
+
+  desc "update crontab"
+  task :update_crontab do
+    run "cd #{deploy_to}/current && whenever --update-crontab"
   end
 
   desc "Restart unicorn"
