@@ -3,7 +3,7 @@ class DocRowsController < ApplicationController
     # trim the empty doc_type
     #if params[:search] 
       #params[:search].delete 'resource_type_eq' if params[:search]['resource_type_eq'].first.blank?
-      @search = DocRow.search(params[:search])
+      @search = DocRow.valid.search(params[:search])
       @doc_rows = params[:search] ?  @search.all : []
       @project_pie_data = @doc_rows.group_by {|a| a.project}.map {|k,v| ["#{k.try(:name)}",v.sum(&:apply_amount).to_f]}
       @person_pie_data = @doc_rows.group_by {|a| a.person}.map {|k,v| ["#{k.try(:name)}",v.sum(&:apply_amount).to_f]}
