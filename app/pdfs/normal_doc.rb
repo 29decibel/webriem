@@ -12,12 +12,16 @@ class NormalDoc
   end
 
   def self.single_table(pdf,obj,print_attrs)
+    return if obj.blank?
     head_data = print_attrs.in_groups_of(2).map{|g| [
       I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{g[0]}"),
       human_name(obj,g[0]),
       g[1] ? I18n.t("activerecord.attributes.#{obj.class.name.underscore}.#{g[1]}") : '',
       g[1] ? human_name(obj,g[1]) : ''
     ]}
+    return if head_data.blank?
+    Rails.logger.info 'get the loged data here......'
+    Rails.logger.info head_data
     # draw table
     pdf.table head_data,:column_widths=>{0=>80,1=>190,2=>80,3=>190},
       :width=>pdf.margin_box.width,:border_style => :grid,:font_size => 11
@@ -38,15 +42,18 @@ class NormalDoc
     Rails.logger.info rows
     Rails.logger.info table_data
     Rails.logger.info '##############################'
-    pdf.move_down 10
-    pdf.text I18n.t("activerecord.models.#{class_name.underscore}"),:size=>12
-    pdf.move_down 5
     pdf.table table_data,:headers => header_info,
         :column_widths=>col_width_hash,
         :width=>pdf.margin_box.width,
         :border_style => :grid,
         :header=>true,:font_size => 10,
         :row_colors => ["FFFFFF", "DDDDDD"]
+  end
+
+  def self.header(pdf,name)
+    pdf.move_down 10
+    pdf.text name,:size=>12
+    pdf.move_down 5
   end
 
   def self.to_pdf(pdf,doc)
@@ -64,12 +71,18 @@ class NormalDoc
     end
     # draw one-one relation, same with above
     doc_meta.doc_relations.each do |dr|
+      next if dr.print_attrs.count==0
       if !dr.multiple
         data = doc.send(dr.doc_row_meta_info.name.underscore)
-        single_table(data,dr.print_attrs)
+        Rails.logger.info data
+        if !data.blank? 
+          header(pdf,dr.doc_row_meta_info.display_name)
+          single_table(pdf,data,dr.print_attrs)
+        end
       else
         rows = doc.send(eval(dr.doc_row_meta_info.name).table_name)
         if rows.count>0
+          header(pdf,dr.doc_row_meta_info.display_name)
           index_table(pdf,dr.doc_row_meta_info.name,rows,dr.print_attrs)
         end
       end
@@ -82,7 +95,7 @@ class NormalDoc
       pdf.move_down 10
        pdf.text "审批信息",:size=>12
       pdf.move_down 2
-      pdf.table doc.work_flow_infos.map {|w| ["#{w.person}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
+      pdf.table doc.work_flow_infos.map {|w| ["#{w.approver}","#{w.created_at}","#{w.is_ok==1 ? "通过" : "否决"}","#{w.comments}"]},
         :headers => ["审批人","审批时间","是否通过","批语"],
         :width=>pdf.margin_box.width,
         :border_style => :grid,

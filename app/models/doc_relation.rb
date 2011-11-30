@@ -22,6 +22,6 @@ class DocRelation < ActiveRecord::Base
   end
 
   def print_attrs
-    self[:print_attrs] ? self[:print_attrs].split(',') : []
+    self[:print_attrs] ? self[:print_attrs].split(',').map{|a|a.strip} : []
   end
 end
