@@ -29,6 +29,8 @@ class DocHead < ActiveRecord::Base
 
   has_one :contract_doc,:class_name => 'ContractDoc',:foreign_key => 'doc_head_id'
   accepts_nested_attributes_for :contract_doc , :allow_destroy => true
+  has_one :outware_doc_detail,:class_name => 'OutwareDocDetail',:foreign_key => 'doc_head_id'
+  accepts_nested_attributes_for :outware_doc_detail , :allow_destroy => true
 
   has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :pay_doc_details, :class_name => "PayDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy

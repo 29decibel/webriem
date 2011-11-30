@@ -771,6 +771,8 @@
         currency_id: 币种
         apply_amount: 申请金额
         ori_amount: 原币金额
+      outware_doc_detail:
+        serial_no: 序列号信息
       recivers:
         amount: "收款人明细 收款金额"
         bank: "收款人明细 银行名称"

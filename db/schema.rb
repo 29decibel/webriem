@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130013351) do
+ActiveRecord::Schema.define(:version => 20111130034438) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1368,6 +1368,13 @@ ActiveRecord::Schema.define(:version => 20111130013351) do
   create_table :doc_extras do |t|
     t.integer :doc_head_id
     t.string  :file
+
+    t.timestamps
+  end
+
+  create_table :outware_doc_details do |t|
+    t.text :serial_no
+    t.integer :doc_head_id
 
     t.timestamps
   end
