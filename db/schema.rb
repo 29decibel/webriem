@@ -305,6 +305,7 @@ ActiveRecord::Schema.define(:version => 20111130034438) do
     t.string   "code"
     t.string   "display_name"
     t.string   "doc_head_attrs"
+    t.text  :print_attrs
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -315,6 +316,7 @@ ActiveRecord::Schema.define(:version => 20111130034438) do
       t.boolean :multiple
       t.integer :doc_row_meta_info_id
       t.text  :doc_row_attrs
+      t.text  :print_attrs
 
       t.timestamps
   end
