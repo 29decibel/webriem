@@ -72,6 +72,7 @@ Webreim::Application.routes.draw do
       put :recall  
       put :submit
       get :print_preview
+      get :print_pdf
     end
     collection do
       get :search

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130034438) do
+ActiveRecord::Schema.define(:version => 20111130062834) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1346,7 +1346,7 @@ ActiveRecord::Schema.define(:version => 20111130034438) do
     t.string :code
     t.string :name
     t.string :grade
-    t.boolean :end
+    t.boolean :is_end
 
     t.timestamps
   end
@@ -1355,7 +1355,7 @@ ActiveRecord::Schema.define(:version => 20111130034438) do
     t.string :code
     t.string :name
     t.string :grade
-    t.boolean :end
+    t.boolean :is_end
 
     t.timestamps
   end

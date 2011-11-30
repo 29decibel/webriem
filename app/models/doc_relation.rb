@@ -20,4 +20,8 @@ class DocRelation < ActiveRecord::Base
       self[:doc_row_attrs] = value
     end
   end
+
+  def print_attrs
+    self[:print_attrs].split(',') if self[:print_attrs]	
+  end
 end

@@ -5,12 +5,15 @@
 namespace :u8_service do
   desc "sync districts"
   task :sync_districts => :environment do
-    sql = 'select cDCCode as code,cDCName as name,iDCGrade as grade,bDCEnd as end from DistrictClass'
+    sql = 'select cDCCode as code,cDCName as name,iDCGrade as grade,bDCEnd as is_end from DistrictClass'
     results = U8Service.exec_sql(sql)
     puts results
     results.each do |dr|
       d = U8District.find_by_code(dr['code']) || U8District.new
-      d = U8District.new :code=>dr['code'],:name=>dr['name'],:grade=>dr['grade'],:end=>dr['end']
+      d.code=dr['code']
+      d.name=dr['name']
+      d.grade=dr['grade']
+      d.is_end=dr['is_end']
       d.save
     end
   end
@@ -18,11 +21,15 @@ namespace :u8_service do
 
   desc "sync districts"
   task :sync_trades => :environment do
-    sql = 'select cTradeCCode as code,cTradeCName as name,iTradeCGrade as grade,bTradeCEnd as end from tradeclass'
+    sql = 'select cTradeCCode as code,cTradeCName as name,iTradeCGrade as grade,bTradeCEnd as is_end from tradeclass'
     results = U8Service.exec_sql(sql)
     puts results
     results.each do |dr|
-      d = U8Trade.new :code=>dr['code'],:name=>dr['name'],:grade=>dr['grade'],:end=>dr['end']
+      d = U8Trade.find_by_code(dr['code']) || U8Trade.new
+      d.code=dr['code']
+      d.name=dr['name']
+      d.grade=dr['grade']
+      d.is_end=dr['is_end']
       d.save
     end
   end
@@ -34,7 +41,9 @@ namespace :u8_service do
     results = U8Service.exec_sql(sql)
     puts results
     results.each do |dr|
-      d = U8Customer.new :code=>dr['code'],:name=>dr['name']
+      d = U8Customer.find_by_code(dr['code']) || U8Customer.new
+      d.code=dr['code']
+      d.name=dr['name']
       d.save
     end
   end

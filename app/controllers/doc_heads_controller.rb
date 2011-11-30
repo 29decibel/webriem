@@ -298,6 +298,7 @@ class DocHeadsController < ApplicationController
       format.xls
     end
   end
+
   def doc_failed
     doc=DocHead.find(params[:doc_id])
     @message="#{I18n.t('controller_msg.message_sent')}"
@@ -311,6 +312,7 @@ class DocHeadsController < ApplicationController
       format.js { render "shared/show_result"}
     end
   end
+
   def mark
     ids=params[:doc_ids]
     mark_info=params[:mark]
@@ -323,23 +325,11 @@ class DocHeadsController < ApplicationController
     render :json=>"ok"
   end
 
-  private
-  def to_pdf(pdf,doc)
-    pdf=case doc.doc_type
-      when 1 then JkPdf.to_pdf(pdf,doc)
-      when 2 then FkPdf.to_pdf(pdf,doc)
-      when 3 then SktzPdf.to_pdf(pdf,doc)
-      when 4 then JhPdf.to_pdf(pdf,doc)
-      when 5 then ZzPdf.to_pdf(pdf,doc)
-      when 6 then XjtqPdf.to_pdf(pdf,doc)
-      when 7 then GmlcPdf.to_pdf(pdf,doc)
-      when 8 then ShlcPdf.to_pdf(pdf,doc)
-      when 9 then ClPdf.to_pdf(pdf,doc)
-      when 10 then JjPdf.to_pdf(pdf,doc)
-      when 11 then JbfPdf.to_pdf(pdf,doc)
-      when 12 then PtfyPdf.to_pdf(pdf,doc)
-      when 13 then FlfyPdf.to_pdf(pdf,doc)
-      else GdzcPdf.to_pdf(pdf,doc)
-    end
+  def print_pdf
+    doc = DocHead.find(params[:id])
+    pdf = Prawn::Document.new
+    pdf = NormalDoc.to_pdf(pdf,doc)
+    send_data(pdf.render, :filename => "hello.pdf",:type => "application/pdf")
   end
+
 end

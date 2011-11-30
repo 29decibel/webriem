@@ -14,6 +14,7 @@ gem 'sass-rails', "  ~> 3.1.0"
 gem 'twitter-bootstrap-rails'
 
 gem "jquery-rails"
+gem "prawn",'0.8.4'
 
 gem "devise"
 gem 'delayed_job'

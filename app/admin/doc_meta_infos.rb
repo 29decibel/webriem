@@ -8,12 +8,14 @@ ActiveAdmin.register DocMetaInfo do
       f.input :code
       f.input :display_name
       f.input :doc_head_attrs
+      f.input :print_attrs
     end
     f.inputs "单据行信息" do
       f.has_many :doc_relations,:label => '单据行信息' do |dr|
         dr.input :doc_row_meta_info
         dr.input :multiple
         dr.input :doc_row_attrs
+        dr.input :print_attrs
         dr.input  :_destroy, :as => :boolean, :label => "删除此环节" unless dr.object.new_record?
         dr.form_buffers.last
       end
