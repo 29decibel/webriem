@@ -67,13 +67,5 @@ class U8Service
     self.exec_sql(select_cmd).first[""]
   end
 
-  #here is the config info of current year's info
-  def self.dbname
-    config=SystemConfig.find_by_key("u8dbname")
-    if config and config.value
-      return config.value
-    end
-    Rails.logger.error("请配置u8数据库的名称")
-    ""
-  end
+
 end

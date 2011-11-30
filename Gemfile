@@ -18,7 +18,7 @@ gem "jquery-rails"
 gem "devise"
 gem 'delayed_job'
 gem "pdfkit"
-gem "paperclip"
+gem 'carrierwave'
 #gem "prawn"
 
 gem "draper"

@@ -31,6 +31,7 @@ class DocHead < ActiveRecord::Base
   accepts_nested_attributes_for :contract_doc , :allow_destroy => true
 
   has_many :borrow_doc_details, :class_name => "BorrowDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
+  has_many :pay_doc_details, :class_name => "PayDocDetail", :foreign_key => "doc_head_id",:dependent => :destroy
   has_many :rd_travels, :class_name => "RdTravel", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_transports, :class_name => "RdTransport", :foreign_key=>"doc_head_id",:dependent=>:destroy
   has_many :rd_lodgings, :class_name => "RdLodging",:foreign_key=>"doc_head_id",:dependent=>:destroy
@@ -50,10 +51,13 @@ class DocHead < ActiveRecord::Base
   has_many :work_flow_infos, :class_name => "WorkFlowInfo", :foreign_key => "doc_head_id",:dependent=>:destroy
   #here is for the vouch info
   has_many :vouches,:class_name=>"Vouch",:foreign_key=>"doc_head_id",:dependent=>:destroy
+  has_many :doc_extras,:class_name => 'DocExtra',:dependent => :destroy
+  accepts_nested_attributes_for :doc_extras , :allow_destroy => true
 
   #warn 这里最好不要都reject,因为reject的根本就不会进行校验，而且不会爆出任何错误信息
 
   accepts_nested_attributes_for :borrow_doc_details , :allow_destroy => true
+  accepts_nested_attributes_for :pay_doc_details , :allow_destroy => true
   accepts_nested_attributes_for :reim_split_details , :allow_destroy => true
   accepts_nested_attributes_for :rd_extra_work_meals , :allow_destroy => true
   accepts_nested_attributes_for :rd_benefits , :allow_destroy => true
