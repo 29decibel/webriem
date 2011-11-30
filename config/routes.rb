@@ -88,7 +88,6 @@ Webreim::Application.routes.draw do
   resources :approver_infos
 
   get "token_input/search"
-  resources :upload_files
   
   get "task/my_docs",:as=>:my_docs  
   get "task/my_projects",:as=>:my_projects  

@@ -251,7 +251,6 @@ ActiveRecord::Schema.define(:version => 20111130013351) do
     t.integer  "project_id"
     t.decimal  "cp_doc_remain_amount", :precision => 16, :scale => 2
     t.integer  "afford_dep_id"
-    t.integer  "upload_file_id"
     t.decimal  "total_amount",         :precision => 16, :scale => 2
     t.integer  "real_person_id"
     t.integer  "current_approver_id"
@@ -1006,16 +1005,6 @@ ActiveRecord::Schema.define(:version => 20111130013351) do
     t.datetime "updated_at"
   end
 
-  create_table "upload_files", :force => true do |t|
-    t.integer  "p_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
-    t.integer  "upload_file_size"
-    t.datetime "upload_updated_at"
-    t.string   "doc_no"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
