@@ -761,6 +761,16 @@
         apply_amount: 申请金额
         rate: "汇率"
         used_for: "费用用途"
+      pay_doc_detail:
+        sequence: 编号
+        dep_id: 部门
+        fee_id: 费用类型
+        project_id: 项目
+        used_for: 用途
+        rate: 汇率
+        currency_id: 币种
+        apply_amount: 申请金额
+        ori_amount: 原币金额
       recivers:
         amount: "收款人明细 收款金额"
         bank: "收款人明细 银行名称"
