@@ -1,0 +1,2 @@
+alert('生成成功');
+$(".vouches_info").html('#{escape_javascript(render('vouches/index',:vouches=>@doc.vouches,:doc_head=>@doc))}');

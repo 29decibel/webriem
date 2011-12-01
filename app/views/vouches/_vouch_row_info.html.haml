@@ -1,0 +1,14 @@
+%td
+  %span{'class'=>v.md=='0' ? 'c' : 'd'}
+    = (v.md and v.md.to_i>0) ? "借" : "贷"
+  = link_to '修改',{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true
+%td= v.inid
+%td= v.cdept_id
+%td= truncate(v.ccode,:length=>10)
+%td= truncate(v.ccode_equal,:length=>10)
+%td= v.citem_id
+%td= v.cperson_id
+%td= v.md
+%td= v.mc
+%td= v.dbill_date
+%td{'class'=>v.doc_head.exist_vouch? ? "green":"red"}= v.doc_head.exist_vouch? ? "已生成" : "未生成"

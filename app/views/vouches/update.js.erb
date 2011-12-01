@@ -1,0 +1,16 @@
+////close the facebox and update the partial stuff
+//$(document).trigger("close.facebox");
+////current we just update the whole doc vouch info
+//$("#vd_<%= @doc.id%>").html("<%= escape_javascript(render(:partial=>"doc_vouch_info",:locals=>{:doc=>@doc}))%>");
+////only bind the replaced html's facebox effect
+////add the facebox effect
+//$("#vd_<%= @doc.id%> a.facebox").facebox();
+
+//just hide it
+$("#edit_vouch_<%= @vouch.id%>").hide("slow");
+//refresh the doc info
+$("tr.#vouch_row_<%= @vouch.id%>").html("<%= escape_javascript(render(:partial=>"vouch_row_info",:locals=>{:v=>@vouch}))%>");
+
+
+
+

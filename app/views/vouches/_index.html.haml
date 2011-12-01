@@ -1,0 +1,34 @@
+%table.oes_theme
+  %tr
+    %th/
+    %th 凭证分录号
+    %th 部门
+    %th 科目
+    %th 对方科目
+    %th 项目
+    %th 人员
+    %th 借方金额
+    %th 贷方金额
+    %th 凭证日期
+    %th U8凭证状态
+    %th
+  -vouches.each do  |v|
+    %tr{'id'=>"vouch_row_#{v.id}"}
+      %td= (v.md and v.md.to_i>0) ? "借" : "贷"
+      %td= v.inid
+      %td= v.cdept_id
+      %td= truncate(v.ccode,:length=>10)
+      %td= truncate(v.ccode_equal,:length=>10)
+      %td= v.citem_id
+      %td= v.cperson_id
+      %td= v.md
+      %td= v.mc
+      %td= v.dbill_date
+      %td{'class'=>v.doc_head.exist_vouch? ? "green":"red"}= v.doc_head.exist_vouch? ? "已生成" : "未生成"
+      %td=link_to '修改',edit_doc_head_vouch_path(v.doc_head,v)
+.actions
+  -if doc_head.exist_vouch?
+    =link_to "删除U8凭证", d_vouch_doc_head_path(doc_head),:class=>'btn',:remote=>true,:method=>:put
+  -else
+    =link_to "生成凭证到U8", g_vouch_doc_head_path(doc_head),:class=>'btn',:remote=>true,:method=>:put
+

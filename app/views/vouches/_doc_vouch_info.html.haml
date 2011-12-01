@@ -1,0 +1,28 @@
+.form_title
+  %h4
+    ="单号"
+    = link_to "#{doc.doc_no}", doc_head_path(doc),:remote=>true
+    -if doc.vouches.count>0
+      ="【LU_ #{ doc.vouches.order("updated_at desc").first.updated_at}】"
+      = link_to '重新生成',{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true
+      = link_to '推送到u8',{:controller=>"vouch",:action=>"g_u8",:doc_id=>doc.id},:remote=>true
+%table.oes_theme
+  %tr
+    %th/
+    %th 凭证分录号
+    %th 部门
+    %th 科目
+    %th 对方科目
+    %th 项目
+    %th 人员
+    %th 借方金额
+    %th 贷方金额
+    %th 凭证日期
+    %th U8凭证状态
+  -doc.vouches.each do  |v|
+    %tr{'id'=>"vouch_row_#{v.id}"}
+      = render :partial => "vouch_row_info",:locals=>{:v=>v}
+    %tr.for_edit
+      %td{"colspan"=>"14"}
+        .edit_inline{"id"=>"edit_vouch_#{v.id}"}
+
