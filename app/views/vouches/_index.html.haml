@@ -16,9 +16,9 @@
     %tr{'id'=>"vouch_row_#{v.id}"}
       %td
         -if (v.md and v.md.to_i>0)
-          %span.success 借
+          %span.label.success 借方
         -else
-          %span.warning 贷
+          %span.label.warning 贷方
       %td= v.inid
       %td= v.cdept_id
       %td= truncate(v.ccode,:length=>10)
@@ -35,4 +35,5 @@
     =link_to "删除U8凭证", d_vouch_doc_head_path(doc_head),:class=>'btn',:remote=>true,:method=>:put
   -else
     =link_to "生成凭证到U8", g_vouch_doc_head_path(doc_head),:class=>'btn',:remote=>true,:method=>:put
+  =link_to "返回单据", doc_head,:class=>'btn'
 
