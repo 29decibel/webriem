@@ -11,4 +11,8 @@ class Fee < ActiveRecord::Base
   def to_s
     "#{name}[#{code}]"
   end
+
+  def name
+    "[#{code}]#{name}"
+  end
 end
