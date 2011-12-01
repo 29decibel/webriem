@@ -51,7 +51,6 @@ namespace :u8_service do
   desc "sync districts"
   task :sync_products => :environment do
     sql = "select cinvcode as code,cinvname as name,cinvstd as std,cinvccode as category from inventory WHERE (cInvCCode LIKE '01%')"
-    Product.where("category not like '01%'").delete_all
     results = U8Service.exec_sql(sql)
     puts results
     results.each do |dr|
