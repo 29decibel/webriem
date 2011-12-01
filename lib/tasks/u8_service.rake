@@ -73,7 +73,7 @@ namespace :u8_service do
       puts u8codes
       u8codes.each do |u8_model|
         #current year not exist then create
-        model = U8code.where("year =#{Time.now.year} and ccode=#{u8_model["ccode"]}").first || U8code.new
+        model = U8code.where("ccode=#{u8_model["ccode"]}").first || U8code.new
         model.cclass=u8_model["cclass"]
         model.ccode=u8_model["ccode"]
         model.ccode_name=u8_model["ccode_name"]

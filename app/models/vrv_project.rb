@@ -117,6 +117,7 @@ class VrvProject < ActiveRecord::Base
       project.update_attribute(:system_star,1) if project.system_star<1
       # send to u8
       project.send_to_u8
+      project.create_oes_project
     end
     before_transition [:rejected,:un_submit] => :processing do |vrv_project, transition|
       vrv_project.set_approvers
@@ -222,6 +223,10 @@ class VrvProject < ActiveRecord::Base
           '#{self.code}','#{self.name}','#{SystemConfig.value('citemccode')||'000'}',
           '#{SystemConfig.value('bclose')||false}','#{self.office_district}','#{self.u8_trade.try(:name)}')"
     U8Service.exec_sql(sql)
+  end
+
+  def create_oes_project
+     Project.find_by_code(self.code) || Project.create(:code=>self.code,:name=>self.name)
   end
 
   def exist_in_u8?
