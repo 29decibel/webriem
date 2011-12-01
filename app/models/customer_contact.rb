@@ -10,6 +10,6 @@ class CustomerContact < ActiveRecord::Base
   belongs_to :vrv_project
 
   def phone_no_valid
-    errors.add(:phone,'号码不合法') if self.phone.size!=11
+    errors.add(:phone,'号码不合法') if self.phone.try(:size)!=11
   end
 end

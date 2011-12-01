@@ -232,7 +232,7 @@ class VrvProject < ActiveRecord::Base
 
   private
   def set_has_one
-    if !customer_contact
+    if !customer_contact and !self.destroyed? and self.new_record?
       self.customer_contact = CustomerContact.new
     end
   end

@@ -45,6 +45,13 @@ class VrvProjectsController < InheritedResources::Base
     redirect_to @vrv_project   
   end
 
+  def destroy
+    destroy! do
+      redirect_to my_projects_path
+      return
+    end
+  end
+
   def generate_contract_doc
     @vrv_project = VrvProject.find(params[:id])
     doc = @vrv_project.generate_contract_doc
