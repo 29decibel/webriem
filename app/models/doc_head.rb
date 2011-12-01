@@ -643,7 +643,8 @@ class DocHead < ActiveRecord::Base
   end
 
   def destroy_vouch
-    
+    delete_cmd = "delete gl_accvouch where cdigest like '%#{self.doc_no}%'"
+    U8Service.exec_sql delete_cmd
   end
  
   private

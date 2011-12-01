@@ -74,7 +74,7 @@ class Vouch < ActiveRecord::Base
   def remove_vouch doc_no
     # make sure the doc_no is valid
     if doc_no.length > 8
-      delete_cmd = "delete gl_accvouch where cdigest like '%#{doc_no}%'"
+      delete_cmd = "delete gl_accvouch where cdigest like '%#{self.doc_head.doc_no}%'"
       U8Service.exec_sql delete_cmd
     else
       "doc no is not valid, please check if it ok"
