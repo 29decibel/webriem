@@ -14,7 +14,11 @@
     %th
   -vouches.each do  |v|
     %tr{'id'=>"vouch_row_#{v.id}"}
-      %td= (v.md and v.md.to_i>0) ? "借" : "贷"
+      %td
+        -if (v.md and v.md.to_i>0)
+          %span.success 借
+        -else
+          %span.warning 贷
       %td= v.inid
       %td= v.cdept_id
       %td= truncate(v.ccode,:length=>10)
