@@ -31,7 +31,7 @@ class VrvProject < ActiveRecord::Base
   validates :customer,:presence=>true,:uniqueness=>true
   validates :u8_trade_id,:presence=>true
   validates :code,:uniqueness => true
-  validates :agent_contact,:presence => true,:if => :agent_way?
+  validates :u8_customer_id,:presence => true,:if => :agent_way?
   validates_presence_of :place
   validates_presence_of :scale
   validates_presence_of :phone_pre,:phone_sur
