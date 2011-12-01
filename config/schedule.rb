@@ -46,6 +46,6 @@ every :day, :at=>'10am' do
   # rake "schedule:alert_docs_to_approve"
 end
 
-every 4.hours do
+every 10.minutes do
   rake "backup:mysql"
 end
