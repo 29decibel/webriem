@@ -32,6 +32,7 @@ namespace :deploy do
       migrate
       assets
       update_crontab
+      update_data
     end
 
     restart
@@ -67,7 +68,7 @@ namespace :deploy do
 
   desc "update"
   task :update_data do
-    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake update:person_deps"
+    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake update:factors"
   end
 
 end
