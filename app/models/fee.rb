@@ -12,7 +12,4 @@ class Fee < ActiveRecord::Base
     "#{name}[#{code}]"
   end
 
-  def name
-    "[#{code}]#{name}"
-  end
 end
