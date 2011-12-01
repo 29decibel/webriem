@@ -1,3 +1,4 @@
+#coding: utf-8
 class Vouch < ActiveRecord::Base
   belongs_to :doc_head
   belongs_to :dep
@@ -78,9 +79,9 @@ class Vouch < ActiveRecord::Base
       :citem_class=>citem_class, 
       :ccode_equal=>ccode_equal,
       :iyear=>Time.now.year,
-      :iYPeriod=>Time.now.strftime('%Y%m')) 
+      :iYPeriod=>Time.now.strftime('%Y%m') 
     }
-    sql = "insert"
+    sql = "insert #{table}"
     begin 
       U8Service.exec_sql(insert_cmd).to_s
     rescue Exception => error
@@ -90,8 +91,7 @@ class Vouch < ActiveRecord::Base
       puts "delete result is #{delete_result}"
       error
     end
-    U8Service.exec_sql 
-
+    U8Service.exec_sql sql
   end
 
   def remove_vouch doc_no
