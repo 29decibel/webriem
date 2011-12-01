@@ -1,7 +1,7 @@
 %td
   %span{'class'=>v.md=='0' ? 'c' : 'd'}
-    = v.md=="0" ? "贷" : "借"
-  = link_to image_tag("/images/icons/page_edit.png"),{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true
+    = (v.md and v.md.to_i>0) ? "借" : "贷"
+  = link_to '修改',{:controller=>"vouch",:action=>"edit",:vouch_id=>v.id},:remote=>true
 %td= v.inid
 %td= v.cdept_id
 %td= truncate(v.ccode,:length=>10)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111201013006) do
+ActiveRecord::Schema.define(:version => 20111201103008) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(:version => 20111201013006) do
     t.integer  "company_group_id"
     t.integer  "doc_state"
     t.integer  "doc_meta_info_id"
+    t.integer  "settlement_id"
   end
 
   add_index "doc_heads", ["afford_dep_id"], :name => "index_doc_heads_on_afford_dep_id"
@@ -413,23 +414,7 @@ ActiveRecord::Schema.define(:version => 20111201013006) do
     t.datetime "updated_at"
   end
 
-  create_table "fee_code_matches", :force => true do |t|
-    t.integer  "fee_id"
-    t.integer  "dcode_id"
-    t.integer  "ccode_id"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "fee_code"
-    t.string   "dperson"
-    t.string   "ddep"
-    t.string   "cperson"
-    t.string   "cdep"
-  end
 
-  add_index "fee_code_matches", ["ccode_id"], :name => "index_fee_code_matches_on_ccode_id"
-  add_index "fee_code_matches", ["dcode_id"], :name => "index_fee_code_matches_on_dcode_id"
-  add_index "fee_code_matches", ["fee_id"], :name => "index_fee_code_matches_on_fee_id"
 
   create_table "fee_standards", :force => true do |t|
     t.integer  "project_id"
@@ -470,6 +455,7 @@ ActiveRecord::Schema.define(:version => 20111201013006) do
     t.datetime "updated_at"
     t.integer  "parent_fee_id"
     t.string   "fee_type"
+    t.integer  "ccode_id"
   end
 
   add_index "fees", ["code"], :name => "index_fees_on_code"
@@ -922,6 +908,7 @@ ActiveRecord::Schema.define(:version => 20111201013006) do
     t.string   "code"
     t.string   "name"
     t.string   "subject"
+    t.integer  'u8code_id'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1037,24 +1024,26 @@ ActiveRecord::Schema.define(:version => 20111201013006) do
     t.string   "idoc"
     t.string   "cbill"
     t.string   "doc_no"
-    t.string   "ccode"
     t.string   "cexch_name"
-    t.string   "md"
-    t.string   "mc"
-    t.string   "md_f"
-    t.string   "mc_f"
+    t.decimal   "md",      :precision => 16, :scale => 2
+    t.decimal   "mc",      :precision => 16, :scale => 2
+    t.decimal   "md_f",      :precision => 16, :scale => 2
+    t.decimal   "mc_f",      :precision => 16, :scale => 2
     t.string   "nfrat"
     t.string   "cdept_id"
     t.string   "cperson_id"
     t.string   "citem_id"
+    t.string   "ccode"
     t.string   "ccode_equal"
+    t.string   'cdigest'
     t.datetime "created_at"
     t.datetime "updated_at"
+    # refer
     t.integer  "doc_head_id"
     t.integer  "dep_id"
     t.integer  "item_id"
-    t.integer  "code_id"
-    t.integer  "code_equal_id"
+    t.integer  "r_ccode_id"
+    t.integer  "r_ccode_equal_id"
     t.integer  "person_id"
     t.string   "s_cdept_id"
     t.string   "s_cperson_id"

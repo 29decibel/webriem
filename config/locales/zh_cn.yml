@@ -594,6 +594,8 @@
       fee:
         name: "名称"  
         code: "编码"
+        ccode: 借方科目
+        parent_fee: 父费用类型
         end_date: "停用日期"
         attr: "费用属性"
         parent_fee_id: "所属费用类型"

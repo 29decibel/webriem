@@ -4,8 +4,8 @@
     = link_to "#{doc.doc_no}", doc_head_path(doc),:remote=>true
     -if doc.vouches.count>0
       ="【LU_ #{ doc.vouches.order("updated_at desc").first.updated_at}】"
-      = link_to image_tag("/images/icons/database_refresh.png"),{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true
-      = link_to image_tag("/images/icons/door_in.png"),{:controller=>"vouch",:action=>"g_u8",:doc_id=>doc.id},:remote=>true
+      = link_to '重新生成',{:controller=>"vouch",:action=>"rg_vouch",:doc_id=>doc.id},:remote=>true
+      = link_to '推送到u8',{:controller=>"vouch",:action=>"g_u8",:doc_id=>doc.id},:remote=>true
 %table.oes_theme
   %tr
     %th/

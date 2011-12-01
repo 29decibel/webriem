@@ -7,6 +7,7 @@ class DocHead < ActiveRecord::Base
   belongs_to :real_person, :class_name => "Person", :foreign_key => "real_person_id"
   belongs_to :project
   belongs_to :doc_meta_info
+  belongs_to :settlement
 
   before_save :set_afford_dep,:set_current_approver_id
   before_validation :set_doc_no
@@ -581,67 +582,71 @@ class DocHead < ActiveRecord::Base
 
   ####################### vouch ##############################
   def exist_vouch
-    return false if !Rails.env.production?
     select_cmd = "select count(*) from gl_accvouch where cdigest like '%#{doc_no}%'"
     U8Service.exec_sql(select_cmd).first[""] > 0
   end
 
   def max_ino_id
-    return 123456788 if Rails.env.development?
     select_cmd = "select max(ino_id) from GL_accvouch where iperiod='#{Time.now.month}'"
-    U8Service.exec_sql(select_cmd).first[""]
+    puts select_cmd
+    U8Service.exec_sql(select_cmd).first[""]||0
   end
                                  
   def generate_vouch_v2
+    self.vouches.clear
     # get all datas
-    all_data = {}
     doc_meta_info.doc_relations.each do |dr|
       next if !dr.multiple
       data_rows = self.send(eval(dr.doc_row_meta_info.name).table_name)
       data_rows.each do |row|
-        if all_data[row.fee_type]
-          all_data[row.fee_type] << row
-        else
-          all_data[row.fee_type] = [row]
-        end
+        d = (row.respond_to?(:afford_dep) && row.try(:afford_dep)) || (row.respond_to?(:dep)&&row.try(:dep)) || self.afford_dep || self.person.dep
+        p = (row.respond_to?(:project) && row.try(:project)) || self.project
+        # 借
+        puts row
+        puts 'begin create vouch '
+        self.vouches.create(
+          :dep=>dep,
+          :project=>p,
+          :person=>person,
+          :r_ccode=>row.fee_type.ccode,
+          :r_ccode_equal=>self.settlement.ccode,
+          :md => DocAmountChange.final_amount(row),
+          :md_f=>DocAmountChange.final_amount(row))
+        # 贷
+        self.vouches.create(
+          :dep=>dep,
+          :project=>p,
+          :person=>person,
+          :r_ccode=>self.settlement.ccode,
+          :r_ccode_equal=>row.fee_type.ccode,
+          :mc => DocAmountChange.final_amount(row),
+          :mc_f=>DocAmountChange.final_amount(row))
       end
     end
-    # 生成借方
-    count = 0
-    all_data.each_pair do |fee,rows|
-      fcm = fee.fee_code_match
-      rows_amount = rows_amount(rows)
-      vj=default_v ({
-        :inid=>"#{count}",
-        :code=>fcm.dcode,# dai kemu
-        :md=>rows_amount,:md_f=>rows_amount,
-        :dep=>r[:dep],# dep code
-        :project=>r[:project],#project code
-        :person=>nil,
-        :doc_no=>cdigest_info(fee_y_code),
-        :s_cdept_id=>fee_y_code.ddep,
-        :s_cperson_id=>fee_y_code.dperson,
-        :ccode_equal=>fee_y_code.ccode.to_s})
-      self.vouches.create(vj)
-      count+=1
-    end
-    # 生成贷方
-    vd=default_v ({
-      :inid=>"#{count}",
-      :code=>fee_m_code.ccode,# dai kemu
-      :mc=>total_amount,:mc_f=>total_amount,
-      :dep=>nil,# dep code should select
-      :project=>nil,#project code should select
-      :s_cdept_id=>fee_m_code.cdep,
-      :doc_no=>cdigest_info(fcms),
-      :s_cperson_id=>fee_m_code.cperson,
-      :ccode_equal=>vd_codes.join(',')})
-    self.vouches.create(vd)
   end
 
+  def send_vouch_to_u8
+    ino_id = max_ino_id + 1
+    count = 1
+    if vouches.count>0
+      self.vouches.jie.each do |v,i|
+        result = v.send_to_u8(ino_id,count)
+        break if result!='1'
+        count+=1
+      end
+      self.vouches.dai.each do |v,i|
+        result = v.send_to_u8(ino_id,count)
+        break if result!='1'
+        count+=1
+      end
+    end
+  end
 
+  def destroy_vouch
+    
+  end
+ 
   private
-
   def rows_amount(rows)
     rows.inject(0){|sum,row| sum + DocAmountChange.final_amount(row) }
   end
@@ -660,26 +665,6 @@ class DocHead < ActiveRecord::Base
     return cdigest_info
   end
 
-  def default_v(options)
-    vouch_no=U8Service.max_ino_id + 1
-    #the time
-    time="#{Time.now.year}-#{Time.now.month}-#{Time.now.day}"
-    #default options
-    #get the default from system config
-    default_opt={
-      :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-      :idoc=>"0",:cbill=>(SystemConfig.value('cbill') || "OES"),
-      :doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
-      :ccode=>"",# dai kemu
-      :cexch_name=>"人民币",#currency name
-      :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",
-      :nfrat=>"1",# currency rate
-      :cdept_id=>"00001",# dep code should select
-      :person=>person,#person code
-      :citem_id=>nil,#project code should select
-      :ccode_equal=>""}
-    default_opt.merge! options
-  end
 
   def total_amount_can_not_be_zero
     errors.add(:base,'单据金额必须大于0') if total_apply_amount<=0

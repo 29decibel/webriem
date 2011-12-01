@@ -9,4 +9,5 @@ ActiveAdmin.register Fee do
     column :fee_type
     default_actions
   end
+
 end

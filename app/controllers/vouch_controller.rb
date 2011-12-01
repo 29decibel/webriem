@@ -1,5 +1,6 @@
 #coding: utf-8
 class VouchController < ApplicationController
+  respond_to :html,:js
   #every doc has it's own way to generate the vouch
   #i put the logic into the doc itself
   def index
@@ -58,6 +59,7 @@ class VouchController < ApplicationController
   #so this will return a js template
   def edit
     @vouch=Vouch.find(params[:vouch_id])
+    respond_with @vouch
   end
   #update the value and update the vouch_info div
   def update
