@@ -48,6 +48,21 @@ namespace :u8_service do
     end
   end
 
+  desc "sync districts"
+  task :sync_products => :environment do
+    sql = 'select cinvcode as code,cinvname as name,cinvstd as std,cinvccode as category from inventory'
+    results = U8Service.exec_sql(sql)
+    puts results
+    results.each do |dr|
+      d = Product.find_by_code(dr['code']) || Product.new
+      d.code=dr['code']
+      d.name=dr['name']
+      d.category=dr['category']
+      d.std=dr['std']
+      d.save
+    end
+  end
+
   desc "import u8 codes"
   task :sync_codes => :environment do
     begin

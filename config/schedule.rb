@@ -39,6 +39,7 @@ every :day,:at=>'10:55 pm' do
   rake "u8_service:sync_customers"
   rake "u8_service:sync_codes"
   rake "u8_service:sync_deps"
+  rake "u8_service:sync_products"
 end
 
 every :day, :at=>'10am' do

@@ -285,17 +285,267 @@ class DocHead < ActiveRecord::Base
     self.reject
   end
 
+  def send_ht_to_u8
+    return if self.doc_meta_info.code!='HT'
+    result = []
+    result << "fitemss00[#{send_ht_to_u8_fitem}]"
+    result << "CM_Contract_Main[#{send_ht_to_u8_contract_main}]"
+    result << "CM_Contract_B[#{send_ht_to_u8_contract_b}]"
+    result << "CM_Contract_Item_B[#{send_ht_to_u8_item}]"
+    result.join(',')
+  end
+
   #citemcode  销售合同号
   #citemname  合同名称
   #citemccode 项目分类编码  默认为000
   #bclose     是否结算      默认为 false
   #对应立项号 对应立项号      文本--插入合同审批表中的项目立项号
-  def send_ht_to_u8
-    return if self.doc_meta_info.code!='HT'
+  def send_ht_to_u8_fitem
     # insert into first table
     sql = "insert into fitemss00(citemcode,citemname,citemccode,bclose,对应立项号)
           values('#{self.doc_no}','#{self.contract_doc.name}','#{'000'}','#{false}','#{self.contract_doc.vrv_project.try(:code)}')"
-    U8Service.exec_sql sql
+    U8Service.exec_sql(sql).to_s
+  end
+
+  def send_ht_to_u8_contract_main
+    table = 'CM_Contract_Main'
+    conditions = {
+      :strContractID=>doc_no,
+      :strRel=>'0', 
+      :strSource=>'1', 
+      :intDetail=>'0', 
+      :intMustDetail=>'0', 
+      :strTempleteShowID=>'',
+      :strTempletePrintID=>'', 
+      :intKL=>'0', 
+      :strSpare1=>'1', 
+      :strSpare2=>'日常合同默认模板组',
+      :strSpare3=>'1',
+      :dblPreAPARCurrency=>'0', 
+      :dblPreAPARCurrencyRMB=>'0', 
+      :strTaxRatio=>''
+    }
+    sql = "insert into #{table}#{conditions_sql(conditions)}"
+    puts sql
+    U8Service.exec_sql(sql).to_s
+  end
+
+  def send_ht_to_u8_contract_b
+    table = 'CM_Contract_B'
+    conditions = {
+      :Guid =>['NEWID()'],
+      :strContractName => contract_doc.name,
+      :strBisectionPerson => contract_doc.contact_person,
+      :strcontractorderdate => apply_date,
+      :strContractStartDate => Time.now,
+      :strContractEndDate => Time.now,
+      :strSetupPerson => person.try(:name),
+      :strSetupDate => apply_date,
+      :strDeptID => dep.try(:code),
+      :strPersonID => person.try(:code),
+      :dblTotalCurrency => total_amount,
+      :dtCreateTime => Time.now,
+      :strcontractid => doc_no,
+      :strBisectionUnit => '',
+      :strContractType =>'0101',
+      :strContractKind =>'0101',
+      :strParentID => '',
+      :strRepair =>'',
+      :strContractDesc => '',
+      :dblMassassureScale =>0,
+      :dblMassassure =>0,
+      :cDefine1 =>'',
+      :cDefine2 =>'',
+      :cdefine3 =>'',
+      :cdefine4 =>nil,
+      :cdefine5 =>0,
+      :cDefine6 =>nil,
+      :cDefine7 =>0,
+      :cDefine8 =>'',
+      :cDefine9 =>'',
+      :cDefine10 =>'',
+      :cDefine11 =>'',
+      :cDefine12 =>'',
+      :cDefine13 =>'',
+      :cDefine14 =>'',
+      :cDefine15 =>0,
+      :cDefine16 =>0,
+      :strEndCasePerson =>'',
+      :strEndCaseDate =>nil,
+      :strInurePerson =>'',
+      :strInureDate =>nil,
+      :intVaryID =>nil,
+      :strVaryCauseID =>nil,
+      :dtVaryDate =>nil,
+      :strVaryPersonID =>nil,
+      :strVaryPassPersonID =>nil,
+      :intPre =>0,
+      :strWay => '收',
+      :strCurrency => '人民币',
+      :dblExchange => '1',
+      :strVaryPerson =>nil,
+      :strSpare1 =>nil,
+      :strSpare2 =>nil,
+      :strSpare3 =>nil,
+      :strSource => 'C',
+      :dblExecCurrency =>0,
+      :dblTotalQuantity =>0,
+      :dblExecQuqantity =>0,
+      :cbustype => '普通销售',
+      :cSCCode =>nil,
+      :cGatheringPlan =>'',
+      :iswfcontrolled =>0,
+      :iverifystate =>0,
+      :ireturncount =>0,
+      :intAuditSymbol =>0,
+      :cZbjComputeMode => 'total',
+      :dtZbjStartDate =>nil,
+      :dtZbjEndDate =>nil,
+      :bUseStage =>0,
+      :cStageGroupCode =>'',
+      :dtModifyTime =>nil,
+      :dtModifyDate =>nil,
+      :dteffecttime =>nil,
+      :cModifer =>'',
+      :dtVaryCreateDate =>nil,
+      :dtVaryCreateTime =>nil,
+      :dtVaryModifyTime =>nil,
+      :dtVaryModifyDate =>nil,
+      :dtVaryEffectTime =>nil,
+      :cVaryModifer =>nil
+    }
+    sql = "insert into #{table}#{conditions_sql(conditions)}"
+    puts sql
+    U8Service.exec_sql(sql).to_s
+  end
+
+  def u8_ht_guid
+    sql = "select GUID from CM_Contract_B where(strcontractid='#{doc_no}')"
+    U8Service.exec_sql(sql).first['GUID']
+  end
+
+  def send_ht_to_u8_item
+    results = ''
+    ht_guid = u8_ht_guid
+    return if ht_guid.blank?
+    table = 'CM_Contract_Item_B'
+    tax = SystemConfig.value('contract_tax') || 4.5
+    contract_items.each_with_index do |item,index|
+      conditions = {
+        :Guid => u8_ht_guid,
+        :strcode =>"#{item.product.category}#{item.product.code}",
+        :strname => item.product.name,
+        :dblquantity => [item.quantity],
+        :strmeasureunit => '个',
+        :dbltaxratio => [tax],
+        :dbluntaxprice => [(item.amount-(item.amount*tax/100))/item.quantity],
+        :dbluntaxpricermb => [(item.amount-(item.amount*tax/100))/item.quantity],
+        :dblprice => [item.price],
+        :dblpricermb => [item.price],
+        :dbluntaxsum => [item.amount-(item.amount*tax/100)],
+        :dbluntaxsumrmb => [item.amount-(item.amount*tax/100)],
+        :dblsum => [item.amount],
+        :dblsumrmb => [item.amount],
+        :strchief => item.product.code,
+        :strinvoiceid => item.product.code,
+        :strMemo => contract_doc.contract_info,
+        :strxmdl => "#{item.product.category}#{item.product.code},#{item.product.category}#{item.product.code},#{index+1}",
+        :strcontractid =>  doc_no,
+        :rowguid => ['NEWID()'],
+        :intflag =>0,
+        :dbluntaxexecsum =>0,
+        :dbluntaxexecsumrmb =>0,
+        :dblexecsum =>0,
+        :dblexecsumrmb =>0,
+        :dtStartDate =>nil,
+        :dtEndDate =>nil,
+        :strcorrsource => '存货',
+        :strCorrItemID =>nil,
+        :dblDiscountRatio => '100',
+        :cdefine22 =>nil,
+        :cdefine23 =>nil,
+        :cDefine24 =>nil,
+        :cdefine25 => '',
+        :cDefine26 =>nil,
+        :cDefine27 =>nil,
+        :cDefine28 =>nil,
+        :cDefine29 =>nil,
+        :cDefine30 =>nil,
+        :cDefine31 =>nil,
+        :cDefine32 =>nil,
+        :cDefine33 =>nil,
+        :cdefine34 =>nil,
+        :cDefine35 =>nil,
+        :cDefine36 =>nil,
+        :cDefine37 =>nil,
+        :dblExecQuantity =>0,
+        :intend => '1',
+        :strSpare1 =>nil,
+        :strSpare2 =>nil,
+        :strSpare3 =>nil,
+        :cFree1 =>nil,
+        :cFree2 =>nil,
+        :cFree3 =>nil,
+        :cFree4 =>nil,
+        :cFree5 =>nil,
+        :cFree6 =>nil,
+        :cFree7 =>nil,
+        :cFree8 =>nil,
+        :cFree9 =>nil,
+        :cFree10 =>nil,
+        :cInvDefine1 =>nil,
+        :cInvDefine2 =>nil,
+        :cInvDefine3 =>nil,
+        :cInvDefine4 =>nil,
+        :cInvDefine5 =>nil,
+        :cInvDefine6 =>nil,
+        :cInvDefine7 =>nil,
+        :cInvDefine8 =>nil,
+        :cInvDefine9 =>nil,
+        :cInvDefine10 =>nil,
+        :cInvDefine11 =>nil,
+        :cInvDefine12 =>nil,
+        :cInvDefine13 =>nil,
+        :cInvDefine14 =>nil,
+        :cInvDefine15 =>nil,
+        :cInvDefine16 =>nil,
+        :cinvstd =>nil,
+        :ccuscode =>nil,
+        :cvencode =>nil,
+        :AuxMeasureUnit => '',
+        :ConversionRate =>0,
+        :PieceNum =>0,
+        :ExecPieceNum =>0,
+        :iInvRCost =>0,
+        :cinvaddcode =>0,
+        :decZbjRatio =>0,
+        :decNoRateZbjMoney =>0,
+        :decNoRateZbjBenBiMoney =>0,
+        :decZbjMoney =>0,
+        :decZbjBenbiMoney =>nil,
+        :dtZbjStartDate =>nil,
+        :dtZbjEndDate =>nil,
+        :iAppIds =>nil,
+        :cAppCode =>nil
+      }
+      sql = "insert into #{table}#{conditions_sql(conditions)}"
+      results << U8Service.exec_sql(sql).to_s
+    end
+    results
+  end
+
+  def conditions_sql(conditions)
+    cols = []
+    values = []
+    conditions.each_pair do |k,v|
+      cols << k.to_s
+      if v
+        values << (v.is_a?(Array) ? v.first : "'#{v.to_s}'")
+      else
+        values << 'null'
+      end
+    end
+    "(#{cols.join(',')}) values(#{values.join(',')})"
   end
 
   def exist_ht_in_u8?
@@ -782,6 +1032,17 @@ class DocHead < ActiveRecord::Base
     return cdigest_info
   end
   def get_v(options)
+  #            :inid=>"#{inid_count}",
+  #            :code=>fee_y_code.dcode,# dai kemu
+  #            :cbill=>cbill,
+  #            :md=>r[:amount],:md_f=>r[:amount],
+  #            :dep=>r[:dep],# dep code
+  #            :project=>r[:project],#project code
+  #            :person=>nil,
+  #            :doc_no=>cdigest_info(fee_y_code),
+  #            :s_cdept_id=>fee_y_code.ddep,
+  #            :s_cperson_id=>fee_y_code.dperson,
+  #            :ccode_equal=>fee_y_code.ccode.to_s})
     #get current max vouch no and plus 1 as current vouch no
     vouch_no="test in dev"
     if Rails.env=="production"
@@ -794,7 +1055,8 @@ class DocHead < ActiveRecord::Base
     config_cbill=SystemConfig.find_by_key("cbill")
     default_opt={
       :ino_id=>"#{vouch_no}",:inid=>"1",:dbill_date=>time,
-      :idoc=>"0",:cbill=>(config_cbill ? config_cbill.value : "OES"),:doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
+      :idoc=>"0",:cbill=>(config_cbill ? config_cbill.value : "OES"),
+      :doc_no=>"#{person.name},#{doc_type_name}[#{doc_no}]",
       :ccode=>"",# dai kemu
       :cexch_name=>"人民币",#currency name
       :md=>"0",:mc=>"0",:md_f=>"0",:mc_f=>"0",
