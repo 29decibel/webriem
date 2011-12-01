@@ -52,4 +52,55 @@ class Vouch < ActiveRecord::Base
     sql = "select count(*) as count from fitemss00 where citemcode='#{citem}'"
     U8Vouch.exec_sql(sql)[0]['count'] > 0
   end
+
+  def send_to_u8
+    table = 'GL_accvouch'
+    conditions = {
+      :iperiod=>Time.now.month,
+      :csign=>'记',
+      :isignseq=>1,
+      :ino_id=>ino_id,
+      :inid=>inid,
+      :dbill_date=>Time.now.to_date,
+      :idoc=>idoc,
+      :cbill=>cbill,
+      :cdigest=>"OES,#{doc_no}",
+      :ccode=>ccode,
+      :cexch_name=>cexch_name,
+      :md=>md,
+      :mc=>mc, 
+      :md_f=>md_f, 
+      :mc_f=>mc_f, 
+      :nfrat=>nfrat,
+      :cdept_id=>cdep_id,
+      :cperson_id=>cperson_id.blank? ? nil : vmodel.cperson_id,
+      :citem_id=>citem_id, 
+      :citem_class=>citem_class, 
+      :ccode_equal=>ccode_equal,
+      :iyear=>Time.now.year,
+      :iYPeriod=>Time.now.strftime('%Y%m')) 
+    }
+    sql = "insert"
+    begin 
+      U8Service.exec_sql(insert_cmd).to_s
+    rescue Exception => error
+      puts "!! error when insert #{error}"
+      puts "begin delete all vouches of current doc #{vmodel.doc_no}"
+      delete_result = remove_vouch(doc_no)
+      puts "delete result is #{delete_result}"
+      error
+    end
+    U8Service.exec_sql 
+
+  end
+
+  def remove_vouch doc_no
+    # make sure the doc_no is valid
+    if doc_no.length > 8
+      delete_cmd = "delete gl_accvouch where cdigest like '%#{doc_no}%'"
+      U8Service.exec_sql delete_cmd
+    else
+      "doc no is not valid, please check if it ok"
+    end
+  end
 end

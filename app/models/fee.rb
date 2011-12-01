@@ -2,6 +2,7 @@
 class Fee < ActiveRecord::Base
   belongs_to :parent_fee, :class_name => "Fee", :foreign_key => "parent_fee_id"
   has_many :fees, :class_name => "Fee", :foreign_key => "parent_fee_id"
+  has_one :fee_code_match
 
   scope :system,where("fee_type is not null")
 

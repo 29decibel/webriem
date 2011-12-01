@@ -29,7 +29,7 @@ class VrvProject < ActiveRecord::Base
   validates :amount,:inclusion => AMOUNT
   validates :source,:inclusion => SOURCE
   validates :customer,:presence=>true,:uniqueness=>true
-  validates :customer_industry,:presence=>true
+  validates :u8_trade_id,:presence=>true
   validates :code,:uniqueness => true
   validates :agent_contact,:presence => true,:if => :agent_way?
   validates_presence_of :place
