@@ -5,7 +5,8 @@
 
 # Example:
 #
-set :output, Rails.root.join("log/schedule.log")
+# set :output, Rails.root.join("log/schedule.log")
+set :output, "~/app/ever_schedule.log"
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
