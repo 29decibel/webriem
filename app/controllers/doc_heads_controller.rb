@@ -163,6 +163,22 @@ class DocHeadsController < ApplicationController
     end
   end
 
+  def g_vouch
+    @doc = DocHead.find(params[:id])
+    @doc.send_vouch_to_u8
+    respond_to do |wants|
+      wants.js
+    end
+  end
+
+  def d_vouch
+    @doc = DocHead.find(params[:id])
+    @doc.destroy_vouch
+    respond_to do |wants|
+      wants.js
+    end
+  end
+
   #batch pay
   def batch_pay
     #get the doc ids and pay it

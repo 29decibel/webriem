@@ -51,13 +51,6 @@ Webreim::Application.routes.draw do
   get "doc_off_set/remove_offset"
   post "doc_off_set/do_offset"
 
-  #post "vouch/update" i don't know why this doesn't work???
-  get "vouch/index"
-  get "vouch/generate"
-  get "vouch/rg_vouch"
-  match "vouch/edit"=>"vouch#edit"
-  match "vouch/update"=>"vouch#update"
-  match "vouch/g_u8"=>"vouch#g_u8"
 
   get "ajax_service/getfee"  
   get "ajax_service/getbudget"  
@@ -66,6 +59,7 @@ Webreim::Application.routes.draw do
 
   resources :doc_heads do
     resources :work_flow_infos
+    resources :vouches
     member do
       put :adjust_amount
       put :pay
@@ -73,6 +67,8 @@ Webreim::Application.routes.draw do
       put :submit
       get :print_preview
       get :print_pdf
+      put :g_vouch
+      put :d_vouch
     end
     collection do
       get :search

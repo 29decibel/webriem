@@ -581,7 +581,7 @@ class DocHead < ActiveRecord::Base
 
 
   ####################### vouch ##############################
-  def exist_vouch
+  def exist_vouch?
     select_cmd = "select count(*) from gl_accvouch where cdigest like '%#{doc_no}%'"
     U8Service.exec_sql(select_cmd).first[""] > 0
   end
@@ -609,7 +609,7 @@ class DocHead < ActiveRecord::Base
           :project=>p,
           :person=>person,
           :r_ccode=>row.fee_type.ccode,
-          :r_ccode_equal=>self.settlement.ccode,
+          :r_ccode_equal=>self.settlement.try(:ccode)||U8code.find_by_ccode(SystemConfig.value('default_ccode')),
           :md => DocAmountChange.final_amount(row),
           :md_f=>DocAmountChange.final_amount(row))
         # 贷
@@ -617,7 +617,7 @@ class DocHead < ActiveRecord::Base
           :dep=>dep,
           :project=>p,
           :person=>person,
-          :r_ccode=>self.settlement.ccode,
+          :r_ccode=>self.settlement.try(:ccode)||U8code.find_by_ccode(SystemConfig.value('default_ccode')),
           :r_ccode_equal=>row.fee_type.ccode,
           :mc => DocAmountChange.final_amount(row),
           :mc_f=>DocAmountChange.final_amount(row))
