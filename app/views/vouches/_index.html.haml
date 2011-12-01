@@ -16,9 +16,9 @@
     %tr{'id'=>"vouch_row_#{v.id}"}
       %td
         -if (v.md and v.md.to_i>0)
-          %span.label.success 借方
+          %span.label.success 借
         -else
-          %span.label.warning 贷方
+          %span.label.warning 贷
       %td= v.inid
       %td= v.cdept_id
       %td= truncate(v.ccode,:length=>10)
