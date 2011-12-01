@@ -10,6 +10,7 @@ class VouchesController < InheritedResources::Base
     if @doc_head.vouches.count==0
       @doc_head.generate_vouch_v2
     end
+    @vouches = @doc_head.vouches
   end
 
   def update
