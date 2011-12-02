@@ -179,6 +179,14 @@ class DocHeadsController < ApplicationController
     end
   end
 
+  def generate_ck_doc
+    @doc = DocHead.find(params[:id])
+    ck_doc = @doc.generate_ck_doc
+    resource = ck_doc || @doc
+    redirect_to resource
+    return
+  end
+
   #batch pay
   def batch_pay
     #get the doc ids and pay it

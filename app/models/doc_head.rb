@@ -646,6 +646,16 @@ class DocHead < ActiveRecord::Base
     delete_cmd = "delete gl_accvouch where cdigest like '%#{self.doc_no}%'"
     U8Service.exec_sql delete_cmd
   end
+
+  # 生成出库申请单
+  def generate_ck_doc
+    return nil if doc_meta_info.code!='HT'
+    doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code('CK'),:person=>self.person,:apply_date=>Time.now
+    self.contract_items.each do |ci|
+      doc.contract_items.create :product_id=>ci.product_id,:quantity=>ci.quantity
+    end
+    doc
+  end
  
   private
   def rows_amount(rows)

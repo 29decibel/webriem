@@ -69,6 +69,7 @@ Webreim::Application.routes.draw do
       get :print_pdf
       put :g_vouch
       put :d_vouch
+      put :generate_ck_doc
     end
     collection do
       get :search

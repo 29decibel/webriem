@@ -3,7 +3,7 @@ class WorkFlow < ActiveRecord::Base
   CATEGORY = %w(报销系统 立项系统)
 
   validates :category,:inclusion => CATEGORY
-  validates_presence_of :name,:factors
+  validates_presence_of :name
   has_many :work_flow_steps,:class_name=>"WorkFlowStep",:foreign_key => 'work_flow_id'
            
   has_and_belongs_to_many :doc_meta_infos
@@ -13,6 +13,7 @@ class WorkFlow < ActiveRecord::Base
   scope :project,where('category=?','立项系统')
 
   def match_factors?(p_factors_string)
+    return true if self.factors.blank?
     p_fac = factor_hash(p_factors_string)
     r_fac = factor_hash(self.factors||'')
     puts p_fac
