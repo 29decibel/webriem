@@ -23,7 +23,6 @@ gem 'carrierwave'
 #gem "prawn"
 
 gem "draper"
-gem 'best_in_place'
 
 gem 'paper_trail', '~> 2'
 
