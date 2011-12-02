@@ -14,6 +14,7 @@ class WorkFlowInfo < ActiveRecord::Base
     puts last
     if last.approver_id==self.approver_id and last.is_ok==self.is_ok and last.comments==self.comments
       puts 'some errors '
+      logger.info 'can not create workflow some errors'
       self.errors.add(:base,'不要重复提交审批')
     end
   end

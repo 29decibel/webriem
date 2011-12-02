@@ -368,8 +368,12 @@ $(function(){
 	if (history && history.pushState) {  
 		$(function () {  
 			$('a[data-remote=true]').live('click', function () {  
-				if($(this).attr('data-method').toUpperCase()=='PUT') return;
-				if($(this).attr('data-method').toUpperCase()=='DELETE') return;
+				if($(this).attr('data-method')!=undefined)
+				{
+					if($(this).attr('data-method').toUpperCase()=='PUT') return;
+					if($(this).attr('data-method').toUpperCase()=='DELETE') return;
+				}
+				if($(this).hasClass('ghost')) return;
 				//var link = $(this);
 				console.log('push to history state');
 				history.pushState(null, document.title, this.href);  

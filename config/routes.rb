@@ -57,6 +57,8 @@ Webreim::Application.routes.draw do
   get "ajax_service/remove_offset",:as=>:remove_offset  
   get "ajax_service/get_extrafee"
 
+  resources :outware_doc_details
+
   resources :doc_heads do
     resources :work_flow_infos
     resources :vouches

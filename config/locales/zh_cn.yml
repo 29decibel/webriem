@@ -786,6 +786,19 @@
         ori_amount: 原币金额
       outware_doc_detail:
         serial_no: 序列号信息
+        contract_no: 合同编号
+        customer: 客户全称
+        phone: 电话
+        ip_address: IP地址信息
+        contact_person: 联系人
+        notes: 备注
+        other_products: 其他产品信息
+        agent: 代理商
+        agent_phone: 代理商电话
+        agent_name: 代理商姓名
+        agent_address: 代理商地址
+        pay_info: 付款说明
+        service_info: 服务说明
       recivers:
         amount: "收款人明细 收款金额"
         bank: "收款人明细 银行名称"

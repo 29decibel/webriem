@@ -14,7 +14,7 @@
 -if (doc_head.approved? or doc_head.paid?) and doc_head.doc_meta_info.support_vouch
   =link_to "凭证信息",doc_head_vouches_path(doc_head),:class=>'btn'
 -if (doc_head.person==current_user.person and doc_head.doc_meta_info.code='HT' and doc_head.approved?)
-  =link_to "生成出库申请单", generate_ck_doc_doc_head_path(doc_head),:class=>'btn'
+  =link_to "生成出库申请单", generate_ck_doc_doc_head_path(doc_head),:class=>'btn',:method=>:put
 -if doc_head.current_approver_id == current_user.person.id and doc_head.processing?
   = link_to I18n.t('common_op.approve'),'#',:class=>"btn pop",'data-controls-modal'=>"doc_head_approve",'data-backdrop'=>"true",'data-keyboard'=>true
 -if doc_head.can_destroy? current_user and !doc_head.new_record?

@@ -242,7 +242,7 @@ class DocHead < ActiveRecord::Base
 
     # TODO should skip the disabled ones
     if current_index!=nil
-      self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
+      self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>self.current_approver_id) 
       if current_index+1<approver_array.count
         self.current_approver_info = approver_array[current_index+1]
         self.save
@@ -650,9 +650,16 @@ class DocHead < ActiveRecord::Base
   # 生成出库申请单
   def generate_ck_doc
     return nil if doc_meta_info.code!='HT'
-    doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code('CK'),:person=>self.person,:apply_date=>Time.now
+    doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code('CK'),
+      :person=>self.person,:apply_date=>Time.now
+    outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
+      :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
+      :contact_person=>self.contract_doc.contact_person,:agent=>self.contract_doc.agent,
+      :agent_phone=>self.contract_doc.agent_phone,:agent_name=>self.contract_doc.agent_name,
+      :pay_info=>self.contract_doc.pay_info
+    # create sub items
     self.contract_items.each do |ci|
-      doc.contract_items.create :product_id=>ci.product_id,:quantity=>ci.quantity
+      doc.contract_items.create :product_id=>ci.product_id,:quantity=>ci.quantity,:price=>ci.price,:amount=>ci.amount,:service_year=>ci.service_year
     end
     doc
   end

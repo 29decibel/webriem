@@ -24,6 +24,6 @@ class ContractItem < ActiveRecord::Base
   end
 
   def set_price
-    self.price = amount/quantity
+    self.price = amount/quantity if self.is_ht?
   end
 end

@@ -61,3 +61,17 @@
       %h5 审批信息
     .form_area.doc_head_show
       =render :partial => "work_flow_info",:locals=>{:doc=>doc}
+-if doc.doc_meta_info.code='CK'
+  .outware_doc_detail
+    =render "outware_doc_details/show",:ck=>doc.outware_doc_detail
+  :javascript
+    $('.outware_doc_detail form a.cancle').live('click',function(){
+      $(this).closest('form').hide('fast');
+      $(this).closest('form').remove();
+      return false;
+    });
+  :css
+    .edit_outware_doc_detail textarea
+    {
+      width:700px;
+    }

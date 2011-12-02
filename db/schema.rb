@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111202021704) do
+ActiveRecord::Schema.define(:version => 20111202063659) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1373,6 +1373,19 @@ ActiveRecord::Schema.define(:version => 20111202021704) do
   create_table :outware_doc_details do |t|
     t.text :serial_no
     t.integer :doc_head_id
+    t.string :contract_no
+    t.string :customer
+    t.string :phone
+    t.string :ip_address
+    t.string :contact_person
+    t.string :notes
+    t.string   :other_products
+    t.string  'agent'
+    t.string  'agent_phone'
+    t.string  'agent_name'
+    t.string  'agent_address'
+    t.string  'pay_info'
+    t.string  'service_info'
 
     t.timestamps
   end
