@@ -1064,14 +1064,7 @@
         vrv_project_id: 
       bill_after:
         bill_state: 中标情况
-        contract: 关于合同
-        money_back: 回款情况
-        pay_date: 产品交付完毕日期
-        begin_implement_date: 开始实施日期
-        end_implement_date: 实施完毕日期
-        accept_date: 验收完毕日期
-        others: 其他请补充
-        bill_price: 中标金额
+        reason: 未中标原因
         vrv_project_id: 
       implement_activity:
         engineer: 工程师

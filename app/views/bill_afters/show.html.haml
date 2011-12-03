@@ -1,7 +1,8 @@
 .page-header
   %h3 投标后
--@bill_after.class.column_names.reject{|cn|%(id created_at updated_at vrv_project_id).include? cn}.each do |cn|
-  =tb_show_field(@bill_after,cn)
+=tb_show_field(@bill_after,'bill_state')
+-if @bill_after.bill_state=='我方未中标'
+  =tb_show_field(@bill_after,'reason')
 
 .actions
   = link_to '修改', edit_vrv_project_bill_after_path(@vrv_project,@bill_after),:class=>'btn'

@@ -91,12 +91,6 @@ class VrvProject < ActiveRecord::Base
     doc.contract_doc.customer_industry = self.customer_industry
     doc.contract_doc.phone = self.phone
     doc.contract_doc.vrv_project = self
-    #中标信息
-    if self.bill_after
-      doc.contract_doc.product_price = self.bill_after.bill_price
-      doc.contract_doc.bill_date = self.bill_after.created_at
-      doc.contract_doc.bill_price = self.bill_after.bill_price
-    end
     #联系人信息
     doc.contract_doc.contact_person = self.customer_contact.name
     doc.contract_doc.contact_duty = self.customer_contact.duty

@@ -13,8 +13,6 @@ class BillAfter < ActiveRecord::Base
   MONEY_BACK = %w(一次付清 分批付款)
 
   validates :bill_state,:inclusion => BILL_STATE
-  validates :contract,:inclusion => CONTRACT
-  validates :money_back,:inclusion => MONEY_BACK
   after_save :set_star
 
   private

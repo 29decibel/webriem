@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111202063659) do
+ActiveRecord::Schema.define(:version => 20111203074402) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1276,14 +1276,7 @@ ActiveRecord::Schema.define(:version => 20111202063659) do
 
   create_table :bill_afters do |t|
     t.string :bill_state
-    t.string :contract
-    t.string :money_back
-    t.date :pay_date
-    t.date :begin_implement_date
-    t.date :end_implement_date
-    t.date :accept_date
-    t.text :others
-    t.float :bill_price
+    t.text :reason
     t.integer :vrv_project_id
 
     t.timestamps
