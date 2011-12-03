@@ -1,9 +1,8 @@
 .serial_no_text
   .page-header
-    %h5 序列号信息
+    %h5 文字信息
   .serial_no
     =ck.serial_no || '没有序列号信息'
   .actions
-    =link_to "修改序列号信息", edit_outware_doc_detail_path(ck),:remote=>true,:class=>'btn ghost'
-.search_no_files
+    =link_to "修改序列号信息", edit_outware_doc_detail_path(ck),:remote=>true,:class=>'btn ghost primary'
   

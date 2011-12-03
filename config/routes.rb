@@ -62,6 +62,7 @@ Webreim::Application.routes.draw do
   resources :doc_heads do
     resources :work_flow_infos
     resources :vouches
+    resources :doc_extras
     member do
       put :adjust_amount
       put :pay

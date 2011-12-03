@@ -1,0 +1,16 @@
+.attach_files
+  .page-header
+    %h5 文件信息
+  .list
+    -doc.doc_extras.each do |extra|
+      -if extra.file
+        .serial_no_file
+          =link_to File.basename(extra.file.url), extra.file.url
+          =link_to "删除",[doc,extra],:method=>:delete,:confirm=>'是否真的删除附件？',:class=>'btn delete_file'
+  .form
+    =form_for [doc,doc.doc_extras.build],:html=>{:multipart=>true} do |f|
+      .clearfix
+        =f.label :file
+        .input=f.file_field :file
+      .actions
+        =f.submit "上传" ,:class=>'btn primary'

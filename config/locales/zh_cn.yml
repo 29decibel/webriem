@@ -951,6 +951,8 @@
         price: 单价
         service_year: 服务年限
         amount: 总金额
+      doc_extra:
+        file: 选择上传的文件
       vrv_project:
         office_district: 总部归属
         name: 项目名称

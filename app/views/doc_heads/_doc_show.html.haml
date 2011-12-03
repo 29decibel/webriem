@@ -62,8 +62,13 @@
     .form_area.doc_head_show
       =render :partial => "work_flow_info",:locals=>{:doc=>doc}
 -if doc.outware_doc_detail
-  .outware_doc_detail
-    =render "outware_doc_details/show",:ck=>doc.outware_doc_detail
+  .serial_infos
+    .page-header
+      %h4 序列号信息
+    .outware_doc_detail
+      =render "outware_doc_details/show",:ck=>doc.outware_doc_detail
+    .serial_no_files
+      =render "doc_extras/index",:doc=>doc
   :javascript
     $('.outware_doc_detail form a.cancle').live('click',function(){
       $(this).closest('form').hide('fast');
@@ -71,6 +76,20 @@
       return false;
     });
   :css
+    .serial_infos
+    {
+      margin-top:20px;
+      background:white;
+      padding:10px;
+    }
+    .attach_files form{
+      margin-top:20px;
+      border:1px dashed #ccc;
+      padding:5px;
+    }
+    .attach_files .delete_file{
+      margin-left:20px;
+    }
     .edit_outware_doc_detail textarea
     {
       width:700px;
