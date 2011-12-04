@@ -11,4 +11,13 @@ class BusiCommunication < ActiveRecord::Base
   validates :way,:inclusion => WAY
   validates :feedback,:inclusion => FEEDBACK
   validates_presence_of :date,:person,:duty,:phone,:way,:feedback
+
+  after_save :set_star
+
+  private 
+  def set_star
+    if self.valid? and self.vrv_project.star<2
+      self.vrv_project.update_attribute(:system_star,2) 
+    end
+  end
 end

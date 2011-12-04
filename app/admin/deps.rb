@@ -6,6 +6,7 @@ ActiveAdmin.register Dep do
     column :code
     column :status
     column :parent_dep
+    column :org
     default_actions
   end
 end

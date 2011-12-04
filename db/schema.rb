@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111203074402) do
+ActiveRecord::Schema.define(:version => 20111203093107) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -225,7 +225,6 @@ ActiveRecord::Schema.define(:version => 20111203074402) do
   create_table "deps", :force => true do |t|
     t.string   "code"
     t.string   "name"
-    t.string   "version"
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "u8dep_code"
@@ -234,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20111203074402) do
     t.integer  "parent_dep_id"
     t.integer  "u8_dep_id"
     t.integer  "status"
+    t.string   "organization"
   end
 
   add_index "deps", ["code"], :name => "index_deps_on_code"

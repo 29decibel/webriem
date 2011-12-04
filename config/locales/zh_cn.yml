@@ -624,13 +624,14 @@
         code: "编码"
         start_date: "启用时间"
         end_date: "停止使用时间"
-        version: "所属组织结构"
         parent_dep_id: "上级部门"
         parent_dep: 上级部门
         status: 状态
         u8dep_code: "对应U8编码"
         u8_dep_id: 对应的U8部门
         u8_dep: 对应U8部门
+        organization: 所属组织结构
+        org: 所属组织结构
         id: "唯一标识"
         created_at: "创建时间"
         updated_at: "更新时间"

@@ -10,4 +10,14 @@ class Dep < ActiveRecord::Base
   def to_s
     "#{name}"
   end
+
+  def org
+    o = self.organization
+    p_dep = self.parent_dep
+    while o.blank? and p_dep
+      o = p_dep.organization
+      p_dep = p_dep.parent_dep
+    end
+    o
+  end
 end

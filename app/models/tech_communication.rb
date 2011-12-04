@@ -21,4 +21,13 @@ class TechCommunication < ActiveRecord::Base
   validates :has_tech_people,:inclusion => HAS_TECH_PEOPLE
 
   validates_presence_of :date,:customer,:customer_work_phone,:customer_cell,:duty,:contents,:feedback,:customer_project_start_date,:has_tech_people,:our_tech_guy,:our_tech_guy_contact,:tech_level,:tech_attitude
+
+  after_save :set_star
+
+  private 
+  def set_star
+    if self.valid? and self.vrv_project.star<2
+      self.vrv_project.update_attribute(:system_star,2) 
+    end
+  end
 end
