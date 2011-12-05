@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20111203093107) do
   create_table "deps", :force => true do |t|
     t.string   "code"
     t.string   "name"
+    t.string   "version"
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "u8dep_code"
