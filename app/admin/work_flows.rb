@@ -3,6 +3,7 @@ ActiveAdmin.register WorkFlow do
   menu :label => '审批流设置'
   filter :name
   filter :category
+  filter :factors
 
   index do
     column :name
