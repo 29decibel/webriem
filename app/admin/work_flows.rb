@@ -6,6 +6,7 @@ ActiveAdmin.register WorkFlow do
   filter :factors
 
   index do
+    column :id
     column :name
     column :category
     column :doc_meta_infos do |work_flow|
