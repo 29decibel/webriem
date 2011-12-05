@@ -32,6 +32,7 @@ namespace :deploy do
       migrate
       assets
       update_crontab
+      update_data
     end
 
     restart

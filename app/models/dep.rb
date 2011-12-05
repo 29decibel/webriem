@@ -7,6 +7,8 @@ class Dep < ActiveRecord::Base
   validates :code,:uniqueness=>{:scope=>:version}
   has_many :people, :class_name => "Person", :foreign_key => "dep_id"
 
+  after_save :update_person_factors
+
   def to_s
     "#{name}"
   end
@@ -19,5 +21,10 @@ class Dep < ActiveRecord::Base
       p_dep = p_dep.parent_dep
     end
     o
+  end
+
+  private
+  def update_person_factors
+    people.each {|p| p.save}
   end
 end
