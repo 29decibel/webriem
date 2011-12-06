@@ -1,3 +1,4 @@
+#coding: utf-8
 namespace :vrv do
   desc "import people"
   task :import_people => :environment do
@@ -44,6 +45,50 @@ namespace :vrv do
         else
           puts "error from #{line};#{dep.errors.full_messages}"
         end
+      end
+    end
+  end
+
+
+
+  desc "import work flows"
+  task :import_wfs => :environment do
+    csv = File.expand_path('../../../db/work_flows.csv',__FILE__)
+    File.open(csv,'r') do |file|
+      while (line=file.gets)
+        infos = line.split(',')
+        # 广东产品服务中心-普通员工-借款jr,JK,1,报销系统,
+        # 部门:广东产品服务中心,岗位级别:普通员工
+        # ,
+        # 部门:广东产品服务中心,岗位级别:二级部门经理
+        # ,
+        # 部门:金融能源管理部,岗位级别:总监,岗位名称:项目总监
+        # ,
+        # 部门:金融能源管理部,岗位级别:一级部门副总经理
+        # ,
+        # 部门:金融能源管理部,岗位级别:一级部门总经理
+        # ,编码:vrv970002,,
+        name = infos[0]
+        wf = WorkFlow.find_by_name name
+        next if wf
+        wf = WorkFlow.new :name=>name,:priority=>infos[2],:factors=>infos[4].gsub('^',','),:category=>infos[3]
+        # add doc types
+        infos[1].split('^').each do |d_code|
+          d_meta = DocMetaInfo.find_by_code d_code
+          wf.doc_meta_infos << d_meta if d_meta
+        end
+        # add work flow steps
+        infos[5..-1].each do |step|
+          next if step.blank?
+          ws = wf.work_flow_steps.new :factors=>step.gsub('^',',')
+        end
+        wf.save
+
+        puts wf.inspect
+        wf.work_flow_steps.each do |s|
+          puts s.inspect
+        end
+        
       end
     end
   end
