@@ -23,9 +23,9 @@
   .section
     .page-header
       %h3 需要审批的立项申请
-    =render "vrv_projects/index",:vrv_projects=>@projects_to_approve.limit(5)
+    =render "vrv_projects/index",:vrv_projects=>@projects_to_approve
     .bottom_action
-      =link_to I18n.t('common_attr.more'), projects_to_approve_path,:remote=>true
+      =link_to I18n.t('common_attr.more'), projects_to_approve_path
 -if @my_approved_docs.count>0
   .section
     .page-header
@@ -42,6 +42,6 @@
   .section
     .page-header
       %h3 我的立项申请
-    =render "vrv_projects/index",:vrv_projects=>@my_projects.limit(5)
+    =render "vrv_projects/index",:vrv_projects=>@my_projects
     .bottom_action
-      =link_to I18n.t('common_attr.more'), my_projects_path,:remote=>true
+      =link_to I18n.t('common_attr.more'), my_projects_path

@@ -117,3 +117,13 @@ textarea#work_flow_info_comments{
     font-size:12px;
   }
 }
+.pagination{
+  float:right;
+  border:1px solid #ccc;
+  span{
+    float:left;
+    &.current{
+      padding:8px 15px;
+    }
+  }
+}

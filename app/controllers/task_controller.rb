@@ -10,7 +10,7 @@ class TaskController < ApplicationController
   end
 
   def my_projects
-    @vrv_projects = VrvProject.where('person_id=?',current_user.person.id)
+    @vrv_projects = VrvProject.where('person_id=?',current_user.person.id).page(params[:page]).per(5)
     respond_to do |format|
       format.js 
       format.html
@@ -50,7 +50,7 @@ class TaskController < ApplicationController
   end
 
   def projects_to_approve
-    @vrv_projects=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
+    @vrv_projects=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").page(params[:page]).per(5)
     respond_to do |format|
       format.html
     end
@@ -66,7 +66,7 @@ class TaskController < ApplicationController
     @projects_to_approve=VrvProject.processing.where("current_approver_id=#{current_user.person.id}").limit(10)
     @my_approved_docs=DocHead.by_person(current_user.person.id).approved.order('created_at desc').limit(10)
     @my_docs = DocHead.by_person(current_user.person.id).order('created_at desc').limit(10)
-    @my_projects = VrvProject.where('person_id=?',current_user.person.id)
+    @my_projects = VrvProject.where('person_id=?',current_user.person.id).limit(10)
     respond_to do |wants|
       wants.js
       wants.html
