@@ -239,9 +239,10 @@ class DocHead < ActiveRecord::Base
     logger.info '~~~~~~ gogogogogogog'
     return unless self.processing?
     logger.info "~~~~~~~#{'begin set next approver'}"
-    approver_array = approver_infos.enabled
+    approver_array = approver_infos.enabled.all
     logger.info "~~~~~~~approver_array is #{approver_array}"
     current_index = approver_array.index current_approver_info
+    logger.info "~~~~~~~cuttent approver info is #{current_approver_info}"
     logger.info "~~~~~~~cuttent index is #{current_index}"
 
     # TODO should skip the disabled ones
