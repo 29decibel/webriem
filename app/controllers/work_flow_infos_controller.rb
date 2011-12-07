@@ -40,7 +40,9 @@ class WorkFlowInfosController < ApplicationController
   # POST /work_flow_infos.xml
   def create
     @resource = (@doc_head || @vrv_project)
+    logger.info '~~~~~~~~~~~  controller ..............'
     if params["commit"]=='通过'
+      logger.info '~~~~~~~~~~~  approve ..............'
       @resource.next_approver params["work_flow_info"]["comments"]
       @resource.reload
     else
