@@ -286,6 +286,14 @@ class DocHead < ActiveRecord::Base
     self.reject
   end
 
+  def destroy_ht_in_u8
+    d_sqls= [ "delete from fitemss00 where citemcode='#{self.doc_no}'",
+      "delete from CM_Contract_Main where strContractID='#{self.doc_no}'",
+      "delete from CM_Contract_B where strcontractid='#{self.doc_no}'",
+      "delete from CM_Contract_Item_B where strcontractid='#{self.doc_no}'"]
+    d_sqls.each {|s| U8Service.exec_sql s}
+  end
+
   def send_ht_to_u8
     # check customer
     return '客户编码不存在' if self.contract_doc.customer_code.blank?
