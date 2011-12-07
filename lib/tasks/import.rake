@@ -53,7 +53,7 @@ namespace :vrv do
 
   desc "import work flows"
   task :import_wfs => :environment do
-    files = %w(ht_work_flows lx_work_flows )
+    files = %w(ck_work_flows)
     files.each do |f|
       csv = File.expand_path("../../../db/#{f}.csv",__FILE__)
       File.open(csv,'r') do |file|
