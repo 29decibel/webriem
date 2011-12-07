@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111203093107) do
+ActiveRecord::Schema.define(:version => 20111207103604) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1075,6 +1075,7 @@ ActiveRecord::Schema.define(:version => 20111203093107) do
     t.string   "step_code"
     t.decimal  "max_amount",   :precision => 8, :scale => 2
     t.string   "can_change_approver_steps"
+    t.boolean  "can_skip",:default=>false
     t.integer  "work_flow_id"
     t.boolean  "can_change_amount",:default => true
     t.datetime "created_at"
