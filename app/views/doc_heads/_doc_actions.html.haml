@@ -34,7 +34,7 @@
         -doc_head.approver_infos.each do |info|
           %li{'class'=>"approver_info_#{info.id}"}
             -if info.person
-              %span="#{info.person.name}"
+              %span="#{info.person.name}#{info.skip ? '(跳过)' : ''}"
             -else
               =form_for info,:remote=>true do |f|
                 %span
