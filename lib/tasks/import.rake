@@ -53,38 +53,43 @@ namespace :vrv do
 
   desc "import work flows"
   task :import_wfs => :environment do
-    csv = File.expand_path('../../../db/work_flows.csv',__FILE__)
-    File.open(csv,'r') do |file|
-      while (line=file.gets)
-        infos = line.split(',')
-        name = infos[0]
-        wf = WorkFlow.find_by_name name
-        next if wf
-        wf = WorkFlow.new :name=>name,:priority=>infos[2],:factors=>infos[4].gsub('^',','),:category=>infos[3]
-        # add doc types
-        if !infos[1].blank?
-          infos[1].split('^').each do |d_code|
-            d_meta = DocMetaInfo.find_by_code d_code
-            wf.doc_meta_infos << d_meta if d_meta
+    files = %w(ht_work_flows lx_work_flows )
+    files.each do |f|
+      csv = File.expand_path("../../../db/#{f}.csv",__FILE__)
+      File.open(csv,'r') do |file|
+        while (line=file.gets)
+          infos = line.split(',')
+          name = infos[0]
+          wf = WorkFlow.find_by_name name
+          next if wf
+          wf = WorkFlow.new :name=>name,:priority=>infos[2],:factors=>infos[4].gsub('^',','),:category=>infos[3]
+          # add doc types
+          if !infos[1].blank?
+            infos[1].split('^').each do |d_code|
+              d_meta = DocMetaInfo.find_by_code d_code
+              wf.doc_meta_infos << d_meta if d_meta
+            end
           end
-        end
-        # add work flow steps
-        infos[5..-1].each do |step|
-          next if step.blank?
-          can_skip = false
-          if step[0]=='*'
-            can_skip = true
+          # add work flow steps
+          infos[5..-1].each do |step|
+            next if step.blank?
+            can_skip = false
+            if step[0]=='*'
+              can_skip = true
+            end
+            ws = wf.work_flow_steps.new :factors=>step.gsub('^',',').gsub('*',''),:can_skip=>can_skip
           end
-          ws = wf.work_flow_steps.new :factors=>step.gsub('^',',').gsub('*',''),:can_skip=>can_skip
-        end
-        wf.save
+          wf.save
 
-        puts wf.inspect
-        wf.work_flow_steps.each do |s|
-          puts s.inspect
+          puts wf.inspect
+          wf.work_flow_steps.each do |s|
+            puts s.inspect
+          end
+          
         end
-        
       end
     end
+
+
   end
 end
