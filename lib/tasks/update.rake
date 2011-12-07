@@ -20,4 +20,10 @@ namespace :update do
       end
     end
   end
+
+  desc "set default role"
+  task :set_roles => :environment do
+    r_id = Role.first.id
+    Person.all.each {|p| p.update_attribute :role_id,r_id}
+  end
 end
