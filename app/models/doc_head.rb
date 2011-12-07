@@ -236,17 +236,23 @@ class DocHead < ActiveRecord::Base
 
   #approve
   def next_approver(comments='OK')
+    logger.info '~~~~~~ gogogogogogog'
     return unless self.processing?
+    logger.info "~~~~~~~#{'begin set next approver'}"
     approver_array = approver_infos.enabled
+    logger.info "~~~~~~~approver_array is #{approver_array}"
     current_index = approver_array.index current_approver_info
+    logger.info "~~~~~~~cuttent index is #{current_index}"
 
     # TODO should skip the disabled ones
     if current_index!=nil
       self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>self.current_approver_id) 
       if current_index+1<approver_array.count
+        logger.info '~~~~~~~~ next approver'
         self.current_approver_info = approver_array[current_index+1]
         self.save
       else
+        logger.info '~~~~~~~~ approver end ~~~~~~'
         self.current_approver_info = nil
         self.save
         self.approve
