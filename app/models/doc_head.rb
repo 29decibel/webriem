@@ -669,9 +669,9 @@ class DocHead < ActiveRecord::Base
   end
 
   # 生成出库申请单
-  def generate_ck_doc
+  def generate_ck_doc(type='S')
     return nil if doc_meta_info.code!='HT'
-    doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code('CK'),
+    doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_#{type}"),
       :person=>self.person,:apply_date=>Time.now
     outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
       :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
