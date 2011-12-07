@@ -162,6 +162,7 @@ class VrvProject < ActiveRecord::Base
 
   #approve
   def next_approver(comments='OK')
+    logger.info '~~~~~~ gogogogogogog'
     return unless self.processing?
     logger.info "~~~~~~~#{'begin set next approver'}"
     approver_array = approver_infos.enabled
