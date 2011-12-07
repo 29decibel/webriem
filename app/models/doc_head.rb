@@ -242,8 +242,8 @@ class DocHead < ActiveRecord::Base
     approver_array = approver_infos.enabled.all
     logger.info "~~~~~~~approver_array is #{approver_array}"
     current_index = approver_array.index current_approver_info
-    logger.info "~~~~~~~cuttent approver info is #{self.current_approver_info}"
-    logger.info "~~~~~~~cuttent index is #{self.current_index}"
+    logger.info "~~~~~~~cuttent approver info is #{current_approver_info}"
+    logger.info "~~~~~~~cuttent index is #{current_index}"
 
     # TODO should skip the disabled ones
     if current_index!=nil
