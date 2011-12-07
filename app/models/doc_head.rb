@@ -303,6 +303,7 @@ class DocHead < ActiveRecord::Base
   end
 
   def send_ht_to_u8
+    return '合同信息不存在' if self.contract_doc.blank?
     # check customer
     return '客户编码不存在' if self.contract_doc.customer_code.blank?
     return if self.doc_meta_info.code!='HT'
