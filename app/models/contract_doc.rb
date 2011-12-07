@@ -14,7 +14,7 @@ class ContractDoc < ActiveRecord::Base
       result = U8Service.exec_sql sql
       result.first['code']
     else
-      self.vrv_project.u8_customer.code
+      self.vrv_project.u8_customer.try(:code)
     end
   end
 
