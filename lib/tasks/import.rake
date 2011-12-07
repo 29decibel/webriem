@@ -57,17 +57,6 @@ namespace :vrv do
     File.open(csv,'r') do |file|
       while (line=file.gets)
         infos = line.split(',')
-        # 广东产品服务中心-普通员工-借款jr,JK,1,报销系统,
-        # 部门:广东产品服务中心,岗位级别:普通员工
-        # ,
-        # 部门:广东产品服务中心,岗位级别:二级部门经理
-        # ,
-        # 部门:金融能源管理部,岗位级别:总监,岗位名称:项目总监
-        # ,
-        # 部门:金融能源管理部,岗位级别:一级部门副总经理
-        # ,
-        # 部门:金融能源管理部,岗位级别:一级部门总经理
-        # ,编码:vrv970002,,
         name = infos[0]
         wf = WorkFlow.find_by_name name
         next if wf
