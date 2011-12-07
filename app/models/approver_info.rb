@@ -5,6 +5,8 @@ class ApproverInfo < ActiveRecord::Base
   belongs_to :work_flow_step
   belongs_to :person
 
+  scope :enabled,where('skip=false')
+
   before_create :set_person_select
 
   def dep

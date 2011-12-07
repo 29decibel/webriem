@@ -163,7 +163,7 @@ class VrvProject < ActiveRecord::Base
   #approve
   def next_approver(comments='OK')
     return unless self.processing?
-    approver_array = approver_infos
+    approver_array = approver_infos.enabled
     current_index = approver_array.index current_approver_info
 
     # TODO should skip the disabled ones
