@@ -287,6 +287,8 @@ class DocHead < ActiveRecord::Base
   end
 
   def send_ht_to_u8
+    # check customer
+    return '客户编码不存在' if self.contract_doc.customer_code.blank?
     return if self.doc_meta_info.code!='HT'
     result = []
     result << "fitemss00[#{send_ht_to_u8_fitem}]"
@@ -331,6 +333,8 @@ class DocHead < ActiveRecord::Base
     U8Service.exec_sql(sql).to_s
   end
 
+
+
   def send_ht_to_u8_contract_b
     table = 'CM_Contract_B'
     conditions = {
@@ -347,7 +351,7 @@ class DocHead < ActiveRecord::Base
       :dblTotalCurrency => total_amount,
       :dtCreateTime => Time.now,
       :strcontractid => doc_no,
-      :strBisectionUnit => contract_doc.customer,
+      :strBisectionUnit => self.contract_doc.customer_code,
       :strContractType =>'0101',
       :strContractKind =>'销售类合同',
       :strParentID => '',
@@ -355,7 +359,7 @@ class DocHead < ActiveRecord::Base
       :strContractDesc => '',
       :dblMassassureScale =>0,
       :dblMassassure =>0,
-      :cDefine1 =>'',
+      :cDefine1 =>self.contract_doc.vrv_project.u8_customer.try(:name),
       :cDefine2 =>'',
       :cdefine3 =>'',
       :cdefine4 =>nil,
@@ -363,7 +367,7 @@ class DocHead < ActiveRecord::Base
       :cDefine6 =>nil,
       :cDefine7 =>0,
       :cDefine8 =>'',
-      :cDefine9 =>'',
+      :cDefine9 =>self.contract_doc.vrv_project.u8_customer.try(:code),
       :cDefine10 =>'',
       :cDefine11 =>'',
       :cDefine12 =>'',
