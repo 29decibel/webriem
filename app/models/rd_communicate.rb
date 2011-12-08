@@ -29,7 +29,6 @@ class RdCommunicate < ActiveRecord::Base
   validates_presence_of :ori_amount
   validates_presence_of :currency_id
   validates_presence_of :rate
-  validates_presence_of :dep_id
   validates_presence_of :project_id
   def self.read_only_attr?(attr)
     %w(apply_amount fi_amount hr_amount).include?(attr)

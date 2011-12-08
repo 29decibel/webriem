@@ -9,6 +9,9 @@ body{
   font-family:"Hiragino Sans GB","Microsoft Yahei","Simsun","Helvetica", "Arial", sans-serif; 
   /*background:url("../images/bck.jpg");*/
 }
+.debug_infos{
+  display:none;
+}
 #content{
   min-height:500px;
 }
