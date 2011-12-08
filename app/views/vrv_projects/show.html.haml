@@ -36,7 +36,7 @@
       %ul
         -@vrv_project.approver_infos.each do |info|
           %li{'class'=>"approver_info_#{info.id}"}
-            -if info.person and info.passed
+            -if info.person
               %span="#{info.person.name}"
             -else
               =form_for info,:remote=>true do |f|
