@@ -247,6 +247,8 @@ class DocHead < ActiveRecord::Base
 
     # TODO should skip the disabled ones
     if current_index!=nil
+      # update current_approver_info
+      self.current_approver_info.update_attribute :passed,true
       self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>self.current_approver_id) 
       if current_index+1<approver_array.count
         logger.info '~~~~~~~~ next approver'

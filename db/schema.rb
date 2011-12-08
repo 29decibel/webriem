@@ -1091,6 +1091,7 @@ ActiveRecord::Schema.define(:version => 20111208043726) do
     t.integer :person_id
     t.integer :doc_head_id
     t.integer :vrv_project_id
+    t.boolean :passed,:default=>false
 
     t.timestamps
   end

@@ -173,6 +173,9 @@ class VrvProject < ActiveRecord::Base
 
     # TODO should skip the disabled ones
     if current_index!=nil
+      # update current_approver_info
+      self.current_approver_info.update_attribute :passed,true
+      # create workflow
       self.work_flow_infos << self.work_flow_infos.create(:is_ok=>true,:comments=>comments,:approver_id=>current_approver_id) 
       if current_index+1<approver_array.count
         logger.info '~~~~~~~~ next approver'
