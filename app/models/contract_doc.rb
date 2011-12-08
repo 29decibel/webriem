@@ -10,9 +10,13 @@ class ContractDoc < ActiveRecord::Base
 
   def customer_code
     if self.source=='直单'
-      sql = "SELECT  cCusCode as code, cCusName as name FROM Customer where cCusName='#{customer_name}'"
+      sql = "SELECT  cCusCode as code, cCusName as name FROM Customer where cCusName='#{customer}'"
       result = U8Service.exec_sql sql
-      result.first['code']
+      if !result.blank? and result.is_a?(Array) and !result.first.blank?
+        result.first['code']
+      else
+        ''
+      end
     else
       self.vrv_project.u8_customer.try(:code)
     end

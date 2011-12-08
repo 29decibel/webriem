@@ -34,7 +34,7 @@ class U8Service
     begin
       puts sql
       client = TinyTds::Client.new(:host=>config('u8_host'),:database=>config('u8_database'),:username=>config('u8_username'),:password=>config('u8_password'),:encoding=>'GBK')
-      if sql.start_with? 'select'
+      if sql.strip.upcase.start_with? 'SELECT'
         client.execute(sql.encode('GBK')).each
       else
         client.execute(sql.encode('GBK')).do
