@@ -681,7 +681,7 @@ class DocHead < ActiveRecord::Base
     if s_cis.count>0
       s_doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_S"),
         :person=>self.person,:apply_date=>Time.now
-      s_outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
+      s_outware_doc = s_doc.create_outware_doc_detail :contract_no=>self.doc_no,
         :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
         :contact_person=>self.contract_doc.contact_person,:agent=>self.contract_doc.agent,
         :agent_phone=>self.contract_doc.agent_phone,:agent_name=>self.contract_doc.agent_name,
@@ -696,7 +696,7 @@ class DocHead < ActiveRecord::Base
     if h_cis.count>0
       h_doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_H"),
         :person=>self.person,:apply_date=>Time.now
-      h_outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
+      h_outware_doc = h_doc.create_outware_doc_detail :contract_no=>self.doc_no,
         :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
         :contact_person=>self.contract_doc.contact_person,:agent=>self.contract_doc.agent,
         :agent_phone=>self.contract_doc.agent_phone,:agent_name=>self.contract_doc.agent_name,
