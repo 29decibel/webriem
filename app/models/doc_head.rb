@@ -250,8 +250,11 @@ class DocHead < ActiveRecord::Base
       self.work_flow_infos << WorkFlowInfo.create(:is_ok=>true,:comments=>comments,:approver_id=>self.current_approver_id) 
       if current_index+1<approver_array.count
         logger.info '~~~~~~~~ next approver'
-        self.current_approver_info = approver_array[current_index+1]
-        self.save
+        next_approver_info = approver_array[current_index+1]
+        if next_approver_info.person_id
+          self.current_approver_info = next_approver_info
+          self.save
+        end
       else
         logger.info '~~~~~~~~ approver end ~~~~~~'
         self.current_approver_info = nil
