@@ -671,6 +671,8 @@ class DocHead < ActiveRecord::Base
   # 生成出库申请单
   def generate_ck_doc(type='S')
     return nil if doc_meta_info.code!='HT'
+    software_ps = self.contract_items.map(&:product).software
+    software_ps = self.contract_items.map(&:product).hardware
     doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_#{type}"),
       :person=>self.person,:apply_date=>Time.now
     outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,

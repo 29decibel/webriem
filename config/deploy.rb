@@ -68,7 +68,6 @@ namespace :deploy do
 
   desc "update"
   task :update_data do
-    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake update:projects"
     run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake u8_service:sync_products"
   end
 

@@ -69,6 +69,11 @@
       =render "outware_doc_details/show",:ck=>doc.outware_doc_detail
     .serial_no_files
       =render "doc_extras/index",:doc=>doc
+.debug_infos
+  =doc.approver_infos.inspect
+  =doc.current_approver_info
+  =doc.current_approver_id
+
   :javascript
     $('.outware_doc_detail form a.cancle').live('click',function(){
       $(this).closest('form').hide('fast');
@@ -93,4 +98,7 @@
     .edit_outware_doc_detail textarea
     {
       width:700px;
+    }
+    .debug_infos{
+      display:none;
     }
