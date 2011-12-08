@@ -1,7 +1,7 @@
 -if resource.errors.any?
   .alert-message.error
     %p 有错误发生，请检查输入
-    -if Rails.env=='development'
+    .debug_infos
       %p= resource.errors.full_messages
     -resource.errors[:base].each do |msg|
       %p= msg
