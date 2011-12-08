@@ -60,6 +60,7 @@ class DocHeadsController < ApplicationController
       end
     end
     @doc.dep=current_person.dep
+    @doc.afford_dep=current_person.dep
     @doc.apply_date = Time.now.to_date
     @doc.person=current_person
   end
