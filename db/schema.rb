@@ -308,8 +308,9 @@ ActiveRecord::Schema.define(:version => 20111208043726) do
     t.string   "code"
     t.string   "display_name"
     t.string   "doc_head_attrs"
-    t.text  :print_attrs
+    t.text     :print_attrs
     t.boolean  :support_vouch
+    t.boolean  :payable,:default=>true
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"

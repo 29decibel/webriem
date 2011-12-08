@@ -12,7 +12,8 @@
   -else
     %span.label ---没有审批人信息---
   %span.label(class="#{doc.approved? && 'success'}") 审批通过
-  %span.label(class="#{doc.paid? && 'success'}") 已经付款
+  -if doc.doc_meta_info.payable
+    %span.label(class="#{doc.paid? && 'success'}") 已经付款
 -elsif !doc.work_flow
   .alert-message
     %p 没有找到审批流，请联系财务人员设置您申请单据对应的审批流程
