@@ -1173,6 +1173,7 @@ ActiveRecord::Schema.define(:version => 20111208043726) do
     t.string :code
     t.string :category
     t.string :std
+    t.string :p_type
 
     t.timestamps
   end

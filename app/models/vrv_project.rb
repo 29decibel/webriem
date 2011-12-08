@@ -37,6 +37,7 @@ class VrvProject < ActiveRecord::Base
   validates_presence_of :phone_pre,:phone_sur
 
   scope :processing, where("state='processing'")
+  scope :star, where("state='star'")
 
   accepts_nested_attributes_for :customer_contact, :allow_destroy => true
   accepts_nested_attributes_for :network_condition, :allow_destroy => true

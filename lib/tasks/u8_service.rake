@@ -50,7 +50,7 @@ namespace :u8_service do
 
   desc "sync districts"
   task :sync_products => :environment do
-    sql = "select cinvcode as code,cinvname as name,cinvstd as std,cinvccode as category from inventory WHERE (cInvCCode LIKE '01%')"
+    sql = "select cinvcode as code,cinvname as name,cinvstd as std,cinvccode as category,cInvDefine1 as p_type from inventory WHERE (cInvCCode LIKE '01%')"
     results = U8Service.exec_sql(sql)
     puts results
     results.each do |dr|
@@ -59,6 +59,7 @@ namespace :u8_service do
       d.name=dr['name']
       d.category=dr['category']
       d.std=dr['std']
+      d.p_type = dr['p_type']
       d.save
     end
   end

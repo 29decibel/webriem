@@ -26,4 +26,9 @@ namespace :update do
     r_id = Role.first.id
     Person.all.each {|p| p.update_attribute :role_id,r_id}
   end
+
+  desc "update projects"
+  task :projects => :environment do
+    VrvProject.star.each {|a| a.create_oes_project}
+  end
 end
