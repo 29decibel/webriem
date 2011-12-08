@@ -676,20 +676,36 @@ class DocHead < ActiveRecord::Base
   # 生成出库申请单
   def generate_ck_doc(type='S')
     return nil if doc_meta_info.code!='HT'
-    #software_ps = self.contract_items.map(&:product).software
-    #software_ps = self.contract_items.map(&:product).hardware
-    doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_#{type}"),
-      :person=>self.person,:apply_date=>Time.now
-    outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
-      :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
-      :contact_person=>self.contract_doc.contact_person,:agent=>self.contract_doc.agent,
-      :agent_phone=>self.contract_doc.agent_phone,:agent_name=>self.contract_doc.agent_name,
-      :pay_info=>self.contract_doc.pay_info
-    # create sub items
-    self.contract_items.each do |ci|
-      doc.contract_items.create :product_id=>ci.product_id,:quantity=>ci.quantity,:price=>ci.price,:amount=>ci.amount,:service_year=>ci.service_year
+    #########################################
+    s_cis = self.contract_items.select{|c|c.product.p_type=='纯软件'}
+    if s_cis.count>0
+      s_doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_S"),
+        :person=>self.person,:apply_date=>Time.now
+      s_outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
+        :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
+        :contact_person=>self.contract_doc.contact_person,:agent=>self.contract_doc.agent,
+        :agent_phone=>self.contract_doc.agent_phone,:agent_name=>self.contract_doc.agent_name,
+        :pay_info=>self.contract_doc.pay_info
+      # create sub items
+      s_cis.each do |ci|
+        s_doc.contract_items.create :product_id=>ci.product_id,:quantity=>ci.quantity,:price=>ci.price,:amount=>ci.amount,:service_year=>ci.service_year
+      end
     end
-    doc
+    ###################################
+    h_cis = self.contract_items.select{|c|c.product.p_type=='含硬件'}
+    if h_cis.count>0
+      h_doc = DocHead.create :doc_meta_info=>DocMetaInfo.find_by_code("CK_H"),
+        :person=>self.person,:apply_date=>Time.now
+      h_outware_doc = doc.create_outware_doc_detail :contract_no=>self.doc_no,
+        :customer=>self.contract_doc.customer,:ip_address=>self.contract_doc.ip_address,
+        :contact_person=>self.contract_doc.contact_person,:agent=>self.contract_doc.agent,
+        :agent_phone=>self.contract_doc.agent_phone,:agent_name=>self.contract_doc.agent_name,
+        :pay_info=>self.contract_doc.pay_info
+      # create sub items
+      h_cis.each do |ci|
+        h_doc.contract_items.create :product_id=>ci.product_id,:quantity=>ci.quantity,:price=>ci.price,:amount=>ci.amount,:service_year=>ci.service_year
+      end
+    end
   end
  
   private
