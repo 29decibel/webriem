@@ -182,9 +182,8 @@ class DocHeadsController < ApplicationController
 
   def generate_ck_doc
     @doc = DocHead.find(params[:id])
-    ck_doc = @doc.generate_ck_doc
-    resource = ck_doc || @doc
-    redirect_to resource
+    @doc.generate_ck_doc
+    redirect_to my_docs_path
     return
   end
 
