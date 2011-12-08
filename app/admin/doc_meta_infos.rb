@@ -10,6 +10,7 @@ ActiveAdmin.register DocMetaInfo do
       f.input :doc_head_attrs
       f.input :print_attrs
       f.input :support_vouch
+      f.input :payable
     end
     f.inputs "单据行信息" do
       f.has_many :doc_relations,:label => '单据行信息' do |dr|
