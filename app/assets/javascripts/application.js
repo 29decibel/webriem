@@ -32,6 +32,7 @@ $('.doc_row').live('row:numberChanged',function(e,amount_field){
     //begin set every value
     var apply_amount =  $(this).find('.ori_amount__input').val() / $(this).find('.rate__input').val();
     $(this).find('.apply_amount__input').html(apply_amount.toFixed(2));
+    $(this).find('.apply_amount__input').siblings().val(apply_amount.toFixed(2));
 		console.log(amount_field);
 		if(amount_field!=undefined)
 		{
@@ -228,6 +229,7 @@ function remove_fields(link) {
     //begin set every value
     var apply_amount =  $(this).find('.ori_amount__input').val() / $(this).find('.rate__input').val();
     $(this).find('.apply_amount__input').html(apply_amount.toFixed(2));
+    $(this).find('.apply_amount__input').siblings().val(apply_amount.toFixed(2));
     total_num+=apply_amount;
   });
   form_area.closest('.doc_detail').find('.doc_total_amount').text(total_num.toFixed(2));

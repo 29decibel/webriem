@@ -24,6 +24,7 @@ class DocHead < ActiveRecord::Base
   # add validation of association
   #validate :total_amount_can_not_be_zero
   validate :processing_doc_current_info_must_one_candidate
+  validate :split_amount_equal_total_apply_amount
 
   has_many :approver_infos,:dependent=>:destroy
   belongs_to :current_approver_info,:class_name => 'ApproverInfo',:foreign_key => 'current_approver_info_id'
@@ -137,6 +138,7 @@ class DocHead < ActiveRecord::Base
   def get_total_amount(&block)
     total = 0
     doc_meta_info.doc_relations.multi(true).map(&:doc_row_meta_info).compact.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
+      logger.info '$$$$$$$$$$$$$$$$$$$$$$$'
       dr_datas = self.send(eval(dr_meta.name).table_name)
       total += dr_datas.inject(0){|sum,dr_data|sum + block.call(dr_data)}
     end
@@ -762,6 +764,10 @@ class DocHead < ActiveRecord::Base
 
   def processing_doc_current_info_must_one_candidate
     errors.add(:base,'当前审批人不确定') if (self.processing? and self.current_approver_info and self.current_approver_info.candidates.count>1 and !self.current_approver_info.person_id)
+  end
+
+  def split_amount_equal_total_apply_amount
+    errors.add(:base,"分摊金额总和￥#{split_total_amount}不等于申请总金额￥#{total_apply_amount}") if split_total_amount!=total_apply_amount
   end
 
 
