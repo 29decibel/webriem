@@ -117,14 +117,16 @@ class DocHeadsController < ApplicationController
   #将单据进入审批阶段
   def submit
     @doc = DocHead.find(params[:id]) 
-    if params[:selected_approver_id] and params[:selected_approver_id].first
-      @doc.update_attribute :selected_approver_id,params[:selected_approver_id].first
-    end
-    @doc.submit
-    #notice the person who need to approve this doc
-    @message="#{I18n.t('controller_msg.start_approve')}"
-    if @doc.current_approver_id == current_user.person.id
-      @work_flow_info=WorkFlowInfo.new
+    if @doc.total_amount>0
+      if params[:selected_approver_id] and params[:selected_approver_id].first
+        @doc.update_attribute :selected_approver_id,params[:selected_approver_id].first
+      end
+      @doc.submit
+      #notice the person who need to approve this doc
+      @message="#{I18n.t('controller_msg.start_approve')}"
+      if @doc.current_approver_id == current_user.person.id
+        @work_flow_info=WorkFlowInfo.new
+      end
     end
     respond_to do |format|
       format.js
