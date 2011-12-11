@@ -29,6 +29,7 @@ class RdCommunicate < ActiveRecord::Base
   validates_presence_of :currency_id
   validates_presence_of :rate
   validates_presence_of :project_id
+  validates_presence_of :invoice_date
   validates :invoice_type,:inclusion=>INVOICE_TYPE
   validate :invoice_date_valid
   def self.read_only_attr?(attr)
