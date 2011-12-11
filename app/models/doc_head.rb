@@ -189,7 +189,7 @@ class DocHead < ActiveRecord::Base
   end
 
   def self.read_only_attr?(attr)
-    %w(doc_no person_id total_amount).include?(attr)
+    %w(doc_no apply_date person_id total_amount).include?(attr)
   end
   #=====================================================
   #获得所有的审批流程
