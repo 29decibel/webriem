@@ -21,10 +21,7 @@ class RdCommunicate < ActiveRecord::Base
   belongs_to :dep
   belongs_to :doc_head, :class_name => "DocHead", :foreign_key => "doc_head_id"
 
-  validates_presence_of :place
   validates_presence_of :meal_date
-  validates_presence_of :people_count
-  validates_presence_of :person_names
   validates_presence_of :reason
   validates_presence_of :ori_amount
   validates_presence_of :currency_id
