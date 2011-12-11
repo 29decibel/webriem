@@ -11,6 +11,7 @@ class DocHead < ActiveRecord::Base
 
   before_save :set_afford_dep,:set_current_approver_id
   before_validation :set_doc_no
+  before_validation :secure_doc_head_exist,:on=>:create
 
   scope :by_person, lambda {|person_id| where("person_id=?",person_id)} 
   scope :processing, where("state='processing'")
@@ -789,6 +790,12 @@ class DocHead < ActiveRecord::Base
     end
   end
 
-
+  def secure_doc_head_exist
+    self.doc_meta_info.doc_relations.multi(true).each do |dr|
+      self.send(dr.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
+        row_data.doc_head = self
+      end
+    end
+  end
 
 end

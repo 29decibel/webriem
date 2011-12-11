@@ -53,6 +53,9 @@ class CommonRiem < ActiveRecord::Base
   end
 
   def invoice_date_valid
-    errors.add(:invoice_date,'发票时间不能早于报销时间10天以上') if (self.doc_head.apply_date-invoice_date) > 10.days
+    logger.info '##############################################################################################'
+    logger.info doc_head
+    logger.info '##############################################################################################'
+    errors.add(:invoice_date,'发票时间不能早于报销时间10天以上') if (self.doc_head.apply_date.to_time-invoice_date.to_time) > 10.days
   end
 end

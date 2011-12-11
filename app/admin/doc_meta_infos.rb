@@ -5,6 +5,7 @@ ActiveAdmin.register DocMetaInfo do
     column :name
     column :code
     column :display_name
+    default_actions
   end
 
   form do |f|

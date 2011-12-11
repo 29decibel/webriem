@@ -56,6 +56,6 @@ class RdCommunicate < ActiveRecord::Base
     self.apply_amount = self.rate * self.ori_amount
   end
   def invoice_date_valid
-    errors.add(:invoice_date,'发票时间不能早于报销时间10天以上') if (self.doc_head.apply_date-invoice_date) > 10.days
+    errors.add(:invoice_date,'发票时间不能早于报销时间10天以上') if (self.doc_head.apply_date.to_time-invoice_date.to_time) > 10.days
   end
 end
