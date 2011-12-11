@@ -2,6 +2,8 @@
 class RdCommunicate < ActiveRecord::Base
   include DocIndex
   include FeeType
+
+  INVOICE_TYPE = %w(机打 非机打)
   before_validation :set_apply_amount
 
   before_save :set_afford_dep
@@ -27,6 +29,8 @@ class RdCommunicate < ActiveRecord::Base
   validates_presence_of :currency_id
   validates_presence_of :rate
   validates_presence_of :project_id
+  validates :invoice_type,:inclusion=>INVOICE_TYPE
+  validate :invoice_date_valid
   def self.read_only_attr?(attr)
     %w(apply_amount fi_amount hr_amount).include?(attr)
   end
@@ -50,5 +54,8 @@ class RdCommunicate < ActiveRecord::Base
 
   def set_apply_amount
     self.apply_amount = self.rate * self.ori_amount
+  end
+  def invoice_date_valid
+    errors.add(:invoice_date,'发票时间不能早于报销时间10天以上') if (self.doc.apply_date-invoice_date) > 10.days
   end
 end

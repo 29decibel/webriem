@@ -823,6 +823,9 @@
         project_id: 项目
         work_date: 时间
       common_riem:
+        invoice_no: 发票号
+        invoice_type: 发票类型
+        invoice_date: 发票时间
         fee_id: "费用类型"
         dep_id: "费用承担部门"
         project_id: "项目"
@@ -936,6 +939,9 @@
         hr_amount: HR调整金额
         fi_amount: 财务调整金额
       rd_communicate:
+        invoice_no: 发票号
+        invoice_type: 发票类型
+        invoice_date: 发票时间
         dep_id: 部门
         project_id: 项目
         reason: 事由

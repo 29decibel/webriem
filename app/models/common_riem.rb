@@ -2,6 +2,7 @@
 class CommonRiem < ActiveRecord::Base
   include DocIndex
   include FeeType
+  INVOICE_TYPE = %w(机打 非机打)
   before_validation :set_apply_amount
   def set_apply_amount
     self.apply_amount = self.rate * self.ori_amount
@@ -32,6 +33,8 @@ class CommonRiem < ActiveRecord::Base
   validates_presence_of :currency_id
   validates_presence_of :rate
   validates_presence_of :ori_amount
+  validates :invoice_type,:inclusion=>INVOICE_TYPE
+  validate :invoice_date_valid
   def amount
     apply_amount
   end
@@ -47,5 +50,9 @@ class CommonRiem < ActiveRecord::Base
       return fc if fc
     end
     return fee_code_match
+  end
+
+  def invoice_date_valid
+    errors.add(:invoice_date,'发票时间不能早于报销时间10天以上') if (self.doc.apply_date-invoice_date) > 10.days
   end
 end

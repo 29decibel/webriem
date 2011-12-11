@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209035306) do
+ActiveRecord::Schema.define(:version => 20111211034223) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -139,6 +139,9 @@ ActiveRecord::Schema.define(:version => 20111209035306) do
     t.integer  "sequence"
     t.integer  "fee_id"
     t.integer  "dep_id"
+    t.string   'invoice_no'
+    t.date   'invoice_date'
+    t.string   'invoice_type'
     t.integer  "project_id"
     t.string   "description"
     t.integer  "currency_id"
@@ -650,6 +653,9 @@ ActiveRecord::Schema.define(:version => 20111209035306) do
     t.string   "place"
     t.integer  "people_count"
     t.string   "person_names"
+    t.string   'invoice_no'
+    t.date     'invoice_date'
+    t.string   'invoice_type'
     t.string   "reason"
     t.integer  "doc_head_id"
     t.decimal  "apply_amount", :precision => 16, :scale => 2, :default => 0
