@@ -736,6 +736,7 @@
         mark: 特殊标记
         total_amount: 申请总金额
       contract_doc:
+        contract_type: 合同类型
         name: 合同名称
         customer: 用户全称
         customer_industry: 行业归属
