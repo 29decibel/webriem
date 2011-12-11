@@ -1,6 +1,11 @@
 #coding: utf-8
 ActiveAdmin.register DocMetaInfo do
   menu :parent => '系统设置',:label=>'单据信息设置'
+  index do
+    column :name
+    column :code
+    column :display_name
+  end
 
   form do |f|
     f.inputs "基本信息" do
