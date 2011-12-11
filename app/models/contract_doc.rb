@@ -5,8 +5,11 @@ class ContractDoc < ActiveRecord::Base
 
   SOURCE = %w(直单 代理)
   DEPLOY_INFO = %w(北信源实施 代理方实施)
+  CONTRACT_TYPE = %w(产品到货验收合同 产品实施验收 运维服务合同 实施验收服务合同)
+
   validates :source,:inclusion => SOURCE
   validates :deploy_info,:inclusion => DEPLOY_INFO
+  validates :contract_type,:inclusion => CONTRACT_TYPE
 
   def customer_code
     if self.source=='直单'

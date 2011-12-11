@@ -1,5 +1,8 @@
 %tr
-  %td=doc.doc_type_name
+  %td
+    %span=doc.doc_type_name
+    -if doc.exceed_fee_rule?
+      %span.label.important 超
   %td=doc.apply_date
   %td=link_to doc.doc_no,doc_head_path(doc),:remote=>true
   %td 

@@ -37,14 +37,14 @@
         .form_area
           -doc.send(doc_relation.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
             -if row_data.respond_to?(:fee_type) and row_data.try(:fee_type)
-              -rule = FeeRule.where('fee_id=?',row_data.fee_type.id).order('priority').all.select{|r|r.match_factors?(current_user.person.factors)}.last
+              -rule = FeeRule.where('fee_id=?',row_data.fee_type.id).order('priority').all.select{|r|r.match_factors?(doc.person.factors)}.last
               -if rule
                 .alert-message
                   %p
                     %strong= rule.to_s
                   %p
                     ="您此项费用#{doc.apply_date.year}年#{doc.apply_date.month}月已经申请金额为￥"
-                    =current_amount = DocRow.year(doc.apply_date.year).month(doc.apply_date.month).with_fee(rule.fee).valid.with_person(current_user.person).sum(:changed_amount)
+                    =current_amount = DocRow.year(doc.apply_date.year).month(doc.apply_date.month).with_fee(rule.fee).valid.with_person(doc.person).sum(:changed_amount)
                     可申请金额为每月￥
                     =rule.amount-current_amount
                 -if current_amount>rule.amount

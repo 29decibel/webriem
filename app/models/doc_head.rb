@@ -135,6 +135,23 @@ class DocHead < ActiveRecord::Base
     get_total_amount {|resource| DocAmountChange.final_amount(resource)}
   end
 
+  def exceed_fee_rule?
+    exceed_rule = false
+    self.doc_meta_info.doc_relations.multi(true).each do |dr|
+      self.send(dr.doc_row_meta_info.name.underscore.pluralize).each do |row_data|
+        if row_data.respond_to?(:fee_type) and row_data.try(:fee_type)
+          rule = FeeRule.where('fee_id=?',row_data.fee_type.id).order('priority').all.select{|r|r.match_factors?(self.person.factors)}.last
+          next if !rule
+          current_amount = DocRow.year(self.apply_date.year).month(self.apply_date.month).with_fee(rule.fee).valid.with_person(self.person).sum(:changed_amount)
+          if current_amount>rule.amount
+            return true
+          end
+        end
+      end
+    end
+    exceed_rule
+  end
+
   def get_total_amount(&block)
     total = 0
     doc_meta_info.doc_relations.multi(true).map(&:doc_row_meta_info).compact.reject{|a|%w(ReimSplitDetail).include? a.name}.each do |dr_meta|
@@ -767,7 +784,9 @@ class DocHead < ActiveRecord::Base
   end
 
   def split_amount_equal_total_apply_amount
-    errors.add(:base,"分摊金额总和￥#{split_total_amount}不等于申请总金额￥#{total_apply_amount}") if split_total_amount!=total_apply_amount
+    if reim_split_details.count>0
+      errors.add(:base,"分摊金额总和￥#{split_total_amount}不等于申请总金额￥#{total_apply_amount}") if split_total_amount!=total_apply_amount
+    end
   end
 
 

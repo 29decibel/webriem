@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(:version => 20111209035306) do
   create_table :contract_docs,:force => true do |t|
     t.integer 'doc_head_id'
     t.integer 'vrv_project_id'
+    t.string  'contract_type'
     t.string  'name'
     t.string  'customer'
     t.string  "place"
