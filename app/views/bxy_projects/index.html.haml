@@ -8,6 +8,7 @@
     %th 客户
     %th 负责人
     %th 创建人
+    %th 登记时间
     %th
     %th
     %th
@@ -19,6 +20,7 @@
       %td= bxy_project.customer
       %td= bxy_project.contact_person
       %td= bxy_project.person.try(:name)
+      %td= bxy_project.created_at
       %td= link_to '查看', bxy_project
       %td= link_to '修改', edit_bxy_project_path(bxy_project)
       %td= link_to '删除', bxy_project, :confirm => '确定删除?', :method => :delete
