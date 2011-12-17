@@ -1,0 +1,7 @@
+.page-header
+  %h3 项目详细信息
+-%w(code name customer contact_person person_id).each do |cn|
+  =tb_show_field(@bxy_project,cn,:label_css=>'span2')
+.actions
+  = link_to '修改', edit_bxy_project_path(@bxy_project),:class=>'btn'
+  = link_to '返回', bxy_projects_path,:class=>'btn'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111211034223) do
+ActiveRecord::Schema.define(:version => 20111217122316) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -1391,6 +1391,16 @@ ActiveRecord::Schema.define(:version => 20111211034223) do
     t.string  'agent_address'
     t.string  'pay_info'
     t.string  'service_info'
+
+    t.timestamps
+  end
+
+  create_table :bxy_projects do |t|
+    t.string :name
+    t.string :code
+    t.string :customer
+    t.string :contact_person
+    t.integer :person_id
 
     t.timestamps
   end

@@ -1,5 +1,7 @@
 Webreim::Application.routes.draw do
 
+  resources :bxy_projects
+
   get "activity/recent"
 
   resources :doc_amount_changes

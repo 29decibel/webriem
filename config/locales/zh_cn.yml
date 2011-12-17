@@ -963,9 +963,10 @@
         amount: 总金额
       doc_extra:
         file: 选择上传的文件
-      vrv_project:
+      bxy_project:
         office_district: 总部归属
         name: 项目名称
+        contact_person: 负责人
         code: 项目编码
         customer: 客户全称
         place: 最终用户所在地
