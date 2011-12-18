@@ -350,6 +350,7 @@
         start_time: 开始时间
         end_time: 结束时间
       doc_meta_info:
+        attachments: 支持附件
         payable: 支持付款
         print_attrs: 打印字段
         support_vouch: 支持生成凭证
