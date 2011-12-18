@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111218010525) do
+ActiveRecord::Schema.define(:version => 20111218012351) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -316,6 +316,7 @@ ActiveRecord::Schema.define(:version => 20111218010525) do
     t.boolean  :support_vouch
     t.boolean  :payable,:default=>true
     t.string   "description"
+    t.boolean   "attachments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
