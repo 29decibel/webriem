@@ -104,6 +104,9 @@ class NormalDoc
     end
 
     pdf.move_down 10
+    pdf.text '*****请将填写发票号的发票粘贴在第一张*****',:size=>10
+
+    pdf.move_down 10
     pdf.text "本打印文档属于#{SystemConfig.value('company')||'OES'}内部资料",:size=>8
 
     pdf

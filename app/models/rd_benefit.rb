@@ -2,6 +2,7 @@
 class RdBenefit < ActiveRecord::Base
   include DocIndex
   include FeeType
+  include SensitiveWordValidation
   before_validation :set_apply_amount
   def set_apply_amount
     self.apply_amount = self.ori_amount / self.rate

@@ -2,6 +2,7 @@
 class RdCommunicate < ActiveRecord::Base
   include DocIndex
   include FeeType
+  include SensitiveWordValidation
 
   INVOICE_TYPE = %w(机打 非机打)
   before_validation :set_apply_amount
