@@ -10,6 +10,8 @@
     = render :partial=>"doc_actions",:locals=>{:doc_head=>doc}
   #doc_state_process
     = render :partial=>"doc_state_process",:locals=>{:doc=>doc}
+  .alert-message.warn{'style'=>'margin-top:15px;'}
+    %p 如果项目过滤不到，并为真实项目，请与部门经理联系。注意：请自行确认报销内容与真实项目业务一致。
   .page-header
     %h5= "#{I18n.t('common_attr.basic_info')}"
   .doc_head_infos
