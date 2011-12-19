@@ -12,13 +12,11 @@ class DocHeadsController < ApplicationController
   # GET /doc_heads.xml
   # the entry of all about 's filter and order by
   def index
-    #get the specific docs by the doc_type passed by querystring
-    #just get all docs of currenct person by test
-    @docs = DocHead.where("doc_type=?",params[:doc_type].to_i).all
-    @doc_type=params[:doc_type].to_i
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @docs }
+    @search = DocHead.on_board.search(params[:search])
+    @doc_heads = params[:search] ?  @search.all : []
+    respond_to do |wants|
+      wants.js
+      wants.html
     end
   end
 
@@ -357,6 +355,16 @@ class DocHeadsController < ApplicationController
     pdf = Prawn::Document.new
     pdf = NormalDoc.to_pdf(pdf,doc)
     send_data(pdf.render, :filename => "#{doc.doc_no}.pdf",:type => "application/pdf")
+  end
+
+  def update_invoice_no
+    @doc = DocHead.find(params[:doc_id])
+    resource_name=eval(params[:resource_name])
+    data = resource_name.find_by_id(params[:resource_id])
+    if data and data.respond_to?(:invoice_no)
+      data.update_attribute :invoice_no,params[:invoice_no]
+    end
+    render 'show'
   end
 
 end

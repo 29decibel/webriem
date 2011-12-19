@@ -84,6 +84,7 @@ Webreim::Application.routes.draw do
       get :batch_approve  
       get :mark
       get :export_to_xls
+      post :update_invoice_no
     end
   end
   resources :doc_rows

@@ -1,0 +1,10 @@
+.page-header
+  %h4 单据搜索
+.vrv_project_search_form
+  =form_for @search,:remote=>true do |f|
+    .clearfix.clear
+      =f.label I18n.t('activerecord.attributes.doc_head.doc_no')
+      .input
+        = f.text_field 'doc_no_like'
+    .actions
+      =f.submit '搜索',:class=>'btn'

@@ -56,6 +56,14 @@
                   =render "doc_amount_changes/index",:resource=>row_data
               -doc_relation.doc_row_attrs.each do |col|
                 =tb_show_field(row_data,col,:label_css=>'span2')
+              -if doc_relation.doc_row_attrs.include?('invoice_no')
+                =form_tag 'update_invoice_no',:class=>'reset_invoice_no',:remote=>true do |f|
+                  =hidden_field_tag 'resource_name',row_data.class.name
+                  =hidden_field_tag 'resource_id',row_data.id
+                  =hidden_field_tag 'doc_id',doc.id
+                  =text_field_tag :invoice_no
+                  =submit_tag '重置发票号',:class=>'btn'
+
   -if doc.work_flow_infos.count>0
     .page-header
       %h5 审批信息

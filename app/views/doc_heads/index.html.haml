@@ -1,5 +1,10 @@
-.form_title=我的单据
-.actions
-  = link_to "添加借款单", new_doc_head_path(:doc_type=>1),:remote=>true,:class=>"button2" 
-.doc_stage
-  = render "doc_list_item",:collection=>@docs 
+=render "search_form"
+.page-header
+  %h5 检索结果
+.search_result
+  =render "docs_table",:docs=>@doc_heads
+
+:javascript
+  $(function(){
+    $("table").tablesorter();
+  });

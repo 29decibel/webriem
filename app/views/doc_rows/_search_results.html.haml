@@ -7,6 +7,8 @@
     =link_to_function I18n.t('chart.apply_date_action'),'draw_by_apply_date()'
     =link_to_function I18n.t('chart.fee_action'),'draw_by_fee()'
   #chart
+  .page-header
+    %h4= "单据总数为#{@doc_rows.group_by(&:doc_no).count}"
   %table.zebra-striped.doc_row_search
     %thead
       %tr
@@ -18,15 +20,19 @@
         %th.header= sort_link @search, :apply_date,{},:remote=>true
         %th.header= sort_link @search, :apply_amount,{},:remote=>true
     %tbody
-      -@doc_rows.each do |dr|
+      -@doc_rows.group_by(&:doc_no).each do |doc_no,drs|
         %tr
-          %td=link_to dr.doc_no, doc_head_path(dr.doc_head_id),:remote=>true
-          %td= DocRowMetaInfo.find_by_name(dr.resource_type).display_name
-          %td=dr.dep.try :name
-          %td=dr.project.try :name
-          %td=dr.person.try :name
-          %td=dr.apply_date
-          %td="￥#{dr.apply_amount}"
+          %td{'colspan'=>7}
+            =link_to doc_no, doc_head_path(DocHead.find_by_doc_no(doc_no)),:remote=>true
+        -drs.each do |dr|
+          %tr
+            %td=''
+            %td= DocRowMetaInfo.find_by_name(dr.resource_type).display_name
+            %td=dr.dep.try :name
+            %td=dr.project.try :name
+            %td=dr.person.try :name
+            %td=dr.apply_date
+            %td="￥#{dr.apply_amount}"
 -else
   .empty_search_result= I18n.t('common_attr.empty_search_result')
 .clear
