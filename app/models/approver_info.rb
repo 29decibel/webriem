@@ -8,6 +8,7 @@ class ApproverInfo < ActiveRecord::Base
   scope :enabled,where('skip=false')
 
   before_create :set_person_select
+  after_save :auto_skip_no_person
 
   def dep
     @dep || (
@@ -69,5 +70,11 @@ class ApproverInfo < ActiveRecord::Base
       rule_fa[key.strip]=value.try(:strip)
     end 
     rule_fa
+  end
+
+  def auto_skip_no_person
+    if self.candidates.count==0 and !self.skip
+      self.update_attribute :skip,true
+    end
   end
 end

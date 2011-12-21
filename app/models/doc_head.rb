@@ -221,6 +221,7 @@ class DocHead < ActiveRecord::Base
     after_transition [:processing] => [:un_submit,:rejected] do |doc_head,transition|
       doc_head.approver_infos.delete_all
       doc_head.current_approver_info = nil
+      doc_head.current_approver_id = nil
       doc_head.save
     end
 
@@ -237,6 +238,7 @@ class DocHead < ActiveRecord::Base
     event :approve do
       transition [:processing] => :approved
     end
+
     event :pay do
       transition [:approved] => :paid
     end
@@ -289,6 +291,7 @@ class DocHead < ActiveRecord::Base
 
   # create a bunch of approver infos by every work_flow_step
   def set_approvers(user_selected=nil)
+    Rails.logger.info '------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
     if (work_flow and work_flow.work_flow_steps.count > 0)
       work_flow.work_flow_steps.each_with_index do |w,index|
         approver_info = approver_infos.build(:work_flow_step => w,:doc_head => self)
@@ -298,9 +301,27 @@ class DocHead < ActiveRecord::Base
       end #block end
     end
     Rails.logger.info self.approver_infos.count
-    if self.approver_infos.count>0
+    # only consider the good approver infos
+    nice_infos = self.approver_infos.enabled.all
+    if nice_infos.count>0
       Rails.logger.info '!!!!!!!!!!!!!!!!!!!!!'
-      self.current_approver_info = approver_infos.first
+      # begin the person after doc's person if exist
+      matched_approver_infos = nice_infos.select{|info| info.candidates.include?(self.person)}
+      if matched_approver_infos.count>0
+        index = nice_infos.index matched_approver_infos.first
+        Rails.logger.warn '~~~~~~~~~~~~~~~~~~~~~~~~~~~~ index is ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+        Rails.logger.info index
+        Rails.logger.info matched_approver_infos
+        if (index == (nice_infos.count-1))
+          self.errors.add(:base,'不能直接提交审批通过，请检查审批流')
+        else
+          self.current_approver_info = nice_infos[index+1]
+        end
+      else
+        self.current_approver_info = nice_infos.first
+      end
+      Rails.logger.info self.current_approver_info
+      Rails.logger.info '------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
       self.save
       Rails.logger.info self.errors.full_messages
     end
