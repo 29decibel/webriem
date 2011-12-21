@@ -51,4 +51,10 @@ namespace :data do
     models = %w(DocHead DocRow VrvProject ApproverInfo WorkFlowInfo VrvProjectVersion ImplementActivity) + DocRowMetaInfo.all.map(&:name)
     models.each {|m|eval(m).delete_all}
   end
+
+  desc "clear work flows"
+  task :clear_wfs => :environment do
+    WorkFlow.delete_all
+    WorkFlowStep.delete_all
+  end
 end
