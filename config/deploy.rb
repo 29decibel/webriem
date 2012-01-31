@@ -62,12 +62,13 @@ namespace :deploy do
   desc "Restart unicorn"
   task :restart do
     #run "cd #{deploy_to}/current && touch tmp/restart"
-    run "kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    #run "kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    run "touch #{deploy_to}/current/tmp/restart"
   end
 
   desc "update"
   task :update_data do
-    run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake data:clear_wfs"
+    #run "cd #{deploy_to}/current && RAILS_ENV=production bundle exec rake data:clear_wfs"
   end
 
 end
