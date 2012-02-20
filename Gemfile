@@ -36,7 +36,7 @@ gem 'inherited_resources'
 #gem "meta_search"
 gem "rack-pjax"
 
-gem 'resque', :require => "resque/server"
+gem "resque", "~> 1.20.0", :require => "resque/server"
 
 group :development do
   gem 'rails-dev-tweaks', '~> 0.5.1'
