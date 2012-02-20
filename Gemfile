@@ -12,6 +12,7 @@ end
 gem 'sass-rails', "  ~> 3.1.0"
 #gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git' 
 gem 'twitter-bootstrap-rails'
+gem 'auto_migrations',:git=>'git@github.com:29decibel/auto_migrations.git'
 
 gem "jquery-rails"
 gem "prawn",'0.8.4'

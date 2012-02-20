@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:29decibel/auto_migrations.git
+  revision: 8d12efe8b9a0cae1a1a8e5f931d290dafb73203a
+  specs:
+    auto_migrations (1.0.20080704)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -259,6 +265,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (= 0.3.4)
+  auto_migrations!
   capistrano
   carrierwave
   coffee-rails (~> 3.1.0)
