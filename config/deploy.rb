@@ -56,7 +56,7 @@ namespace :deploy do
 
   desc "update crontab"
   task :update_crontab do
-    run "cd #{deploy_to}/current && whenever --update-crontab"
+    run "cd #{deploy_to}/current && bundle exec whenever --update-crontab"
   end
 
   desc "Restart unicorn"
